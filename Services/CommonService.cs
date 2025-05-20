@@ -11,7 +11,10 @@ namespace Ritrama2025.Services
 
         public CommonService()
         {
-            StringConnex = @"Data Source=DATABASE-CENTER\RITRAMASRV01; Initial Catalog=RITRAMA2;User Id=Npino;Password=123;TrustServerCertificate=True;";
+            if (Program.Configuration != null)
+            {
+                StringConnex = Convert.ToString(Program.Configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value)!;
+            }
         }
         public async Task<List<RolloCortado>> GetDataRolloCortado(List<RolloCortado> lista)
         {

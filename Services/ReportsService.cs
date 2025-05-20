@@ -15,7 +15,10 @@ namespace Ritrama2025.Services
 
         public ReportsService()
         {
-            StringConnex = @"Data Source=DATABASE-CENTER\RITRAMASRV01; Initial Catalog=RITRAMA2;User Id=Npino;Password=123;TrustServerCertificate=True;";
+            if (Program.Configuration != null)
+            {
+                StringConnex = Convert.ToString(Program.Configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value)!;
+            }
         }
 
         public void ReporteConduce_conPrecio(string conduce, Form form,string ReportName,string TitleReport)
