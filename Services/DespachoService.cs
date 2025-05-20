@@ -31,7 +31,7 @@ namespace Ritrama2025.Services
 
         public DespachoService()
         {
-            StringConnex = @"Data Source=RITRAMASRV01; Initial Catalog=RITRAMA3;User Id=Npino;Password=123;TrustServerCertificate=True;";
+            StringConnex = @"Data Source=DATABASE-CENTER\RITRAMASRV01; Initial Catalog=RITRAMA2;User Id=Npino;Password=123;TrustServerCertificate=True;";
         }
 
         public void AddPaletDetailsDespacho(List<Paleta> paleta)

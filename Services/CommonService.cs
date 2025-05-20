@@ -11,7 +11,7 @@ namespace Ritrama2025.Services
 
         public CommonService()
         {
-            StringConnex = @"Data Source=RITRAMASRV01; Initial Catalog=RITRAMA3;User Id=Npino;Password=123;TrustServerCertificate=True;";
+            StringConnex = @"Data Source=DATABASE-CENTER\RITRAMASRV01; Initial Catalog=RITRAMA2;User Id=Npino;Password=123;TrustServerCertificate=True;";
         }
         public async Task<List<RolloCortado>> GetDataRolloCortado(List<RolloCortado> lista)
         {
