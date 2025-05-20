@@ -147,9 +147,7 @@ namespace Ritrama2025.Forms
                             string item = data[0];
                             RolloCortado rollo = new()
                             {
-                                UniqueCode = data[0],
-                                Paleta = data[1],
-                                
+                                UniqueCode = data[0], 
                             };
                             rollos.Add(rollo);
                         }
@@ -166,6 +164,9 @@ namespace Ritrama2025.Forms
             }
             //llenar la lista de rollo cortado.
             await servicio.GetDataRolloCortado(rollos);
+
+            rollos.RemoveAll(p => string.IsNullOrWhiteSpace(p.Product_Id));
+
             return rollos;
         }
         private static void AGREGAR_COLUMN_GRID(string name, int size, string title, string field_bd, DataGridView grid)

@@ -214,6 +214,13 @@ namespace Ritrama2025.Forms
         {
             FrmPickingDespacho frm_picking = new();
             frm_picking.ShowDialog();
+
+            if (frm_picking.Lista_Rollos.Count <= 0) 
+            {
+                return;     
+            }
+
+
             //actualizar el grid de detalle de rc (packing list)
             grid_rc.Columns.Clear();
             grid_rc.AutoGenerateColumns = false;
