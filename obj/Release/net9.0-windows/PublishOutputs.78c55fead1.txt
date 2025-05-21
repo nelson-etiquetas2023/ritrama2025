@@ -1,4 +1,5 @@
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Reports\RptConduceConPrecio.rdlc
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\appsettings.json
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Reports\Picking-List.rdlc
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Reports\RptConduceSinPrecio.rdlc
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Reports\RptDetalle-Paleta.rdlc
@@ -23,7 +24,12 @@ C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Microsoft.Extensi
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Microsoft.Extensions.Caching.Memory.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Microsoft.Extensions.Configuration.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Microsoft.Extensions.Configuration.Json.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Microsoft.Extensions.FileProviders.Physical.dll
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Microsoft.Extensions.FileSystemGlobbing.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Microsoft.Extensions.ObjectPool.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Microsoft.Extensions.Options.dll

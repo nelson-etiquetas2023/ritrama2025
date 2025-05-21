@@ -768,6 +768,7 @@
             grid_detalle_paletas.TabIndex = 36;
             grid_detalle_paletas.CellClick += Grid_detalle_paletas_CellClick;
             grid_detalle_paletas.CellEndEdit += Grid_detalle_paletas_CellEndEdit;
+            grid_detalle_paletas.CellValidating += Grid_detalle_paletas_CellValidating;
             // 
             // label15
             // 

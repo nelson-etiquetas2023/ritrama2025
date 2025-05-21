@@ -4,6 +4,7 @@ using Ritrama2025.Models;
 using Ritrama2025.Services;
 using Ritrama2025.Services.ExportData;
 using System.Data;
+using System.Windows.Forms;
 
 namespace Ritrama2025.Forms
 {
@@ -143,7 +144,7 @@ namespace Ritrama2025.Forms
             ParentRow.EndEdit();
 
             grid_rc.DataSource = "";
-            if (grid_rc.Rows.Count > 0) 
+            if (grid_rc.Rows.Count > 0)
             {
                 grid_rc.Rows.Clear();
             }
@@ -206,9 +207,9 @@ namespace Ritrama2025.Forms
             {
                 return;
             }
-            
+
             //descarga de los rollos caortados.
-            foreach (var item in frm_picking.Lista_Rollos) 
+            foreach (var item in frm_picking.Lista_Rollos)
             {
                 DataRowView row = (DataRowView)BsDetalleRC.AddNew()!;
                 row.BeginEdit();
@@ -232,7 +233,7 @@ namespace Ritrama2025.Forms
             grid_rc.DataSource = BsDetalleRC;
             grid_rc.Refresh();
 
-            foreach (var item in frm_picking.Lista_Items) 
+            foreach (var item in frm_picking.Lista_Items)
             {
                 DataRowView row = (DataRowView)BsItems.AddNew()!;
                 row.BeginEdit();
@@ -501,146 +502,170 @@ namespace Ritrama2025.Forms
                 MessageBox.Show("Debe agregar los renglones de los rollos costados...");
                 return;
             }
+            //validar los kilos de  la paleta.
+            foreach (DataGridViewRow Fila in grid_detalle_paletas.Rows) 
+            {
+                foreach (DataGridViewCell Celda in Fila.Cells) 
+                {
+                    if (Celda.ColumnIndex == 3) 
+                    {
+                        if (Convert.ToDecimal(Celda.Value) <= 0) 
+                        {
+                            MessageBox.Show("debe introducir los kilos netos de la paleta.");
+                            return;
+                        }
+                    }
+                    if (Celda.ColumnIndex == 4)
+                    {
+                        if (Convert.ToDecimal(Celda.Value) <= 0)
+                        {
+                            MessageBox.Show("debe introducir los kilos brutos de la paleta.");
+                            return;
+                        }
+                    }
+                }
+            }
+
 
 
             Despacho DocumentDespacho = new()
+            {
+                //Encabezado de despacho.
+                Numero = txt_numero.Text,
+                Fecha_despacho = Convert.ToDateTime(txt_fecha_despacho.Text),
+                Customer_Id = txt_custid.Text,
+                Customer_Name = txt_custname.Text,
+                Persona_Contact = txt_persondelivery.Text,
+                Vendor_Id = txt_vend_id.Text,
+                Vendor_Name = txt_vendorname.Text,
+                Transport_Id = txt_transport_id.Text,
+                Transport_Name = txt_transport_name.Text,
+                Chofer_Id = txt_chofer_id.Text,
+                Chofer_Name = txt_chofer_name.Text,
+                Camion_Id = txt_camion_id.Text,
+                Camion_Name = txt_camion_name.Text,
+                Tipo_Embalaje = txt_tipo_embalaje.Text,
+                Orden_Trabajo = txt_orden_trabajo.Text,
+                Orden_Compra = txt_orden_compra.Text,
+                Tipo_venta = txt_tipoventa.Text,
+                Total_Cantidad = Convert.ToInt32(txt_cant_total.Text),
+                Total_Msi = Convert.ToDecimal(txt_msi_total.Text),
+                Total_Pie = Convert.ToDecimal(txt_pie_total.Text),
+                Total_Kilos = Convert.ToDecimal(txt_kilos_total.Text),
+                SubTotal = Convert.ToDecimal(txt_subtotal.Text),
+                Porc_Itbis = Convert.ToDecimal(txt_porc_itbis.Text),
+                Monto_Itbis = Convert.ToDecimal(txt_itbis.Text),
+                Total_Despacho = Convert.ToDecimal(txt_totalmonto.Text),
+                Total_kilos_netos_palet = Convert.ToDecimal(txt_palet_kilo_neto.Text),
+                Total_kilos_brutos_palet = Convert.ToDecimal(txt_palet_kilo_bruto.Text),
+                //crear picking-list.
+                Detalle_RC = [],
+                //Items de despacho.
+                Items_Despacho = [],
+                //Detalle de paleta.
+                Detalle_Paleta = [],
+            };
+            //picking-list;
+            for (int i = 0; i <= grid_rc.Rows.Count - 1; i++)
+            {
+                RolloCortado Rollo = new()
                 {
-                    //Encabezado de despacho.
-                    Numero = txt_numero.Text,
-                    Fecha_despacho = Convert.ToDateTime(txt_fecha_despacho.Text),
-                    Customer_Id = txt_custid.Text,
-                    Customer_Name = txt_custname.Text,
-                    Persona_Contact = txt_persondelivery.Text,
-                    Vendor_Id = txt_vend_id.Text,
-                    Vendor_Name = txt_vendorname.Text,
-                    Transport_Id = txt_transport_id.Text,
-                    Transport_Name = txt_transport_name.Text,
-                    Chofer_Id = txt_chofer_id.Text,
-                    Chofer_Name = txt_chofer_name.Text,
-                    Camion_Id = txt_camion_id.Text,
-                    Camion_Name = txt_camion_name.Text,
-                    Tipo_Embalaje = txt_tipo_embalaje.Text,
-                    Orden_Trabajo = txt_orden_trabajo.Text,
-                    Orden_Compra = txt_orden_compra.Text,
-                    Tipo_venta = txt_tipoventa.Text,
-                    Total_Cantidad = Convert.ToInt32(txt_cant_total.Text),
-                    Total_Msi = Convert.ToDecimal(txt_msi_total.Text),
-                    Total_Pie = Convert.ToDecimal(txt_pie_total.Text),
-                    Total_Kilos = Convert.ToDecimal(txt_kilos_total.Text),
-                    SubTotal = Convert.ToDecimal(txt_subtotal.Text),
-                    Porc_Itbis = Convert.ToDecimal(txt_porc_itbis.Text),
-                    Monto_Itbis = Convert.ToDecimal(txt_itbis.Text),
-                    Total_Despacho = Convert.ToDecimal(txt_totalmonto.Text),
-                    Total_kilos_netos_palet = Convert.ToDecimal(txt_palet_kilo_neto.Text),
-                    Total_kilos_brutos_palet = Convert.ToDecimal(txt_palet_kilo_bruto.Text),
-                    //crear picking-list.
-                    Detalle_RC = [],
-                    //Items de despacho.
-                    Items_Despacho = [],
-                    //Detalle de paleta.
-                    Detalle_Paleta = [],
+                    Numero = DocumentDespacho.Numero,
+                    UniqueCode = Convert.ToString(grid_rc.Rows[i].Cells["unique_code"].Value) ?? string.Empty,
+                    Product_Id = Convert.ToString(grid_rc.Rows[i].Cells["product_id"].Value) ?? string.Empty,
+                    Product_Name = Convert.ToString(grid_rc.Rows[i].Cells["product_name"].Value) ?? string.Empty,
+                    RollNumber = Convert.ToInt16(grid_rc.Rows[i].Cells["roll_number"].Value),
+                    Width = Convert.ToDecimal(grid_rc.Rows[i].Cells["width"].Value),
+                    Length = Convert.ToDecimal(grid_rc.Rows[i].Cells["length"].Value),
+                    Msi = Convert.ToDecimal(grid_rc.Rows[i].Cells["msi"].Value),
+                    Splice = Convert.ToInt16(grid_rc.Rows[i].Cells["splice"].Value),
+                    Roll_Id = Convert.ToString(grid_rc.Rows[i].Cells["roll_id"].Value) ?? string.Empty,
+                    Cantidad_despacho = 0,
+                    Tipo = "n/a",
+                    Paleta = "0"
                 };
-                //picking-list;
-                for (int i = 0; i <= grid_rc.Rows.Count - 1; i++)
+                DocumentDespacho.Detalle_RC.Add(Rollo);
+            }
+            //item a despachar.
+            for (int i = 0; i <= grid_items.Rows.Count - 1; i++)
+            {
+                ItemsDespacho itemsDespacho = new()
                 {
-                    RolloCortado Rollo = new()
-                    {
-                        Numero = DocumentDespacho.Numero,
-                        UniqueCode = Convert.ToString(grid_rc.Rows[i].Cells["unique_code"].Value) ?? string.Empty,
-                        Product_Id = Convert.ToString(grid_rc.Rows[i].Cells["product_id"].Value) ?? string.Empty,
-                        Product_Name = Convert.ToString(grid_rc.Rows[i].Cells["product_name"].Value) ?? string.Empty,
-                        RollNumber = Convert.ToInt16(grid_rc.Rows[i].Cells["roll_number"].Value),
-                        Width = Convert.ToDecimal(grid_rc.Rows[i].Cells["width"].Value),
-                        Length = Convert.ToDecimal(grid_rc.Rows[i].Cells["length"].Value),
-                        Msi = Convert.ToDecimal(grid_rc.Rows[i].Cells["msi"].Value),
-                        Splice = Convert.ToInt16(grid_rc.Rows[i].Cells["splice"].Value),
-                        Roll_Id = Convert.ToString(grid_rc.Rows[i].Cells["roll_id"].Value) ?? string.Empty,
-                        Cantidad_despacho = 0,
-                        Tipo = "n/a",
-                        Paleta = "0"
-                    };
-                    DocumentDespacho.Detalle_RC.Add(Rollo);
-                }
-                //item a despachar.
-                for (int i = 0; i <= grid_items.Rows.Count - 1; i++)
-                {
-                    ItemsDespacho itemsDespacho = new()
-                    {
-                        Numero = DocumentDespacho.Numero,
-                        Product_id = Convert.ToString(grid_items.Rows[i].Cells["product_id"].Value) ?? string.Empty,
-                        Product_name = Convert.ToString(grid_items.Rows[i].Cells["product_name"].Value) ?? string.Empty,
-                        Cantidad = Convert.ToDecimal(grid_items.Rows[i].Cells["cant"].Value),
-                        Unid_id = "1",
-                        Unidad = Convert.ToString(grid_items.Rows[i].Cells["unidad"].Value) ?? string.Empty,
-                        Width = Convert.ToDecimal(grid_items.Rows[i].Cells["width"].Value),
-                        Lenght = Convert.ToDecimal(grid_items.Rows[i].Cells["lenght"].Value),
-                        Msi = Convert.ToDecimal(grid_items.Rows[i].Cells["msi"].Value),
-                        Total_PieLineal = Convert.ToDecimal(grid_items.Rows[i].Cells["total_pie_lin"].Value),
-                        Ratio = Convert.ToDecimal(grid_items.Rows[i].Cells["ratio"].Value),
-                        Kilo_Rollo = Convert.ToDecimal(grid_items.Rows[i].Cells["kilo_rollo"].Value),
-                        Kilo_Total = Convert.ToDecimal(grid_items.Rows[i].Cells["kilo_total"].Value),
-                        Precio = Convert.ToDecimal(grid_items.Rows[i].Cells["precio"].Value),
-                        Total_Renglon = Convert.ToDecimal(grid_items.Rows[i].Cells["total_renglon"].Value),
-                        Code_Person = "N/A",
-                        M2 = 0
-                    };
-                    DocumentDespacho.Items_Despacho.Add(itemsDespacho);
-                    //Guardar en base de datos el encxabezado del despacho.
+                    Numero = DocumentDespacho.Numero,
+                    Product_id = Convert.ToString(grid_items.Rows[i].Cells["product_id"].Value) ?? string.Empty,
+                    Product_name = Convert.ToString(grid_items.Rows[i].Cells["product_name"].Value) ?? string.Empty,
+                    Cantidad = Convert.ToDecimal(grid_items.Rows[i].Cells["cant"].Value),
+                    Unid_id = "1",
+                    Unidad = Convert.ToString(grid_items.Rows[i].Cells["unidad"].Value) ?? string.Empty,
+                    Width = Convert.ToDecimal(grid_items.Rows[i].Cells["width"].Value),
+                    Lenght = Convert.ToDecimal(grid_items.Rows[i].Cells["lenght"].Value),
+                    Msi = Convert.ToDecimal(grid_items.Rows[i].Cells["msi"].Value),
+                    Total_PieLineal = Convert.ToDecimal(grid_items.Rows[i].Cells["total_pie_lin"].Value),
+                    Ratio = Convert.ToDecimal(grid_items.Rows[i].Cells["ratio"].Value),
+                    Kilo_Rollo = Convert.ToDecimal(grid_items.Rows[i].Cells["kilo_rollo"].Value),
+                    Kilo_Total = Convert.ToDecimal(grid_items.Rows[i].Cells["kilo_total"].Value),
+                    Precio = Convert.ToDecimal(grid_items.Rows[i].Cells["precio"].Value),
+                    Total_Renglon = Convert.ToDecimal(grid_items.Rows[i].Cells["total_renglon"].Value),
+                    Code_Person = "N/A",
+                    M2 = 0
+                };
+                DocumentDespacho.Items_Despacho.Add(itemsDespacho);
+                //Guardar en base de datos el encxabezado del despacho.
 
-                }
-                //detalle paleta.
-                for (int i = 0; i <= grid_detalle_paletas.Rows.Count - 1; i++)
+            }
+            //detalle paleta.
+            for (int i = 0; i <= grid_detalle_paletas.Rows.Count - 1; i++)
+            {
+                Paleta palet = new()
                 {
-                    Paleta palet = new()
-                    {
-                        Numero = DocumentDespacho.Numero,
-                        Number_Palet = Convert.ToString(grid_detalle_paletas.Rows[i].Cells["number_palet"].Value) ?? string.Empty,
-                        Medida = Convert.ToString(grid_detalle_paletas.Rows[i].Cells["medida"].Value) ?? string.Empty,
-                        Contenido = Convert.ToString(grid_detalle_paletas.Rows[i].Cells["contenido"].Value) ?? string.Empty,
-                        Kilo_Neto = Convert.ToDecimal(grid_detalle_paletas.Rows[i].Cells["kilo_neto"].Value),
-                        Kilo_Bruto = Convert.ToDecimal(grid_detalle_paletas.Rows[i].Cells["kilo_bruto"].Value)
-                    };
-                    DocumentDespacho.Detalle_Paleta.Add(palet);
-                }
-                Service.AddDocumentDespacho(DocumentDespacho);
-                Service.AddPickingListDespacho(DocumentDespacho.Detalle_RC);
-                Service.AddItemsDespacho(DocumentDespacho.Items_Despacho);
-                Service.AddPaletDetailsDespacho(DocumentDespacho.Detalle_Paleta);
-                //cerrar el formulario a solo lectura.
-                txt_persondelivery.ReadOnly = true;
-                txt_fecha_despacho.Enabled = false;
-                txt_tipoventa.ReadOnly = true;
-                txt_tipo_embalaje.ReadOnly = true;
-                txt_orden_compra.ReadOnly = true;
-                txt_orden_trabajo.ReadOnly = true;
-                bot_camion.Enabled = false;
-                bot_chofer.Enabled = false;
-                bot_transporte.Enabled = false;
-                bot_add_palet.Enabled = false;
-                bot_delete_palet.Enabled = false;
-                bot_buscar_vendor.Enabled = false;
-                btn_buscar_customer.Enabled = false;
-                bot_picking.Enabled = false;
-                btn_exports.Enabled = true;
-                btn_label_print.Enabled = true;
-                bot_anular.Enabled = true;
-                grid_items.ReadOnly = true;
-                grid_rc.ReadOnly = true;
-                grid_detalle_paletas.ReadOnly = true;
+                    Numero = DocumentDespacho.Numero,
+                    Number_Palet = Convert.ToString(grid_detalle_paletas.Rows[i].Cells["number_palet"].Value) ?? string.Empty,
+                    Medida = Convert.ToString(grid_detalle_paletas.Rows[i].Cells["medida"].Value) ?? string.Empty,
+                    Contenido = Convert.ToString(grid_detalle_paletas.Rows[i].Cells["contenido"].Value) ?? string.Empty,
+                    Kilo_Neto = Convert.ToDecimal(grid_detalle_paletas.Rows[i].Cells["kilo_neto"].Value),
+                    Kilo_Bruto = Convert.ToDecimal(grid_detalle_paletas.Rows[i].Cells["kilo_bruto"].Value)
+                };
+                DocumentDespacho.Detalle_Paleta.Add(palet);
+            }
+            Service.AddDocumentDespacho(DocumentDespacho);
+            Service.AddPickingListDespacho(DocumentDespacho.Detalle_RC);
+            Service.AddItemsDespacho(DocumentDespacho.Items_Despacho);
+            Service.AddPaletDetailsDespacho(DocumentDespacho.Detalle_Paleta);
+            //cerrar el formulario a solo lectura.
+            txt_persondelivery.ReadOnly = true;
+            txt_fecha_despacho.Enabled = false;
+            txt_tipoventa.ReadOnly = true;
+            txt_tipo_embalaje.ReadOnly = true;
+            txt_orden_compra.ReadOnly = true;
+            txt_orden_trabajo.ReadOnly = true;
+            bot_camion.Enabled = false;
+            bot_chofer.Enabled = false;
+            bot_transporte.Enabled = false;
+            bot_add_palet.Enabled = false;
+            bot_delete_palet.Enabled = false;
+            bot_buscar_vendor.Enabled = false;
+            btn_buscar_customer.Enabled = false;
+            bot_picking.Enabled = false;
+            btn_exports.Enabled = true;
+            btn_label_print.Enabled = true;
+            bot_anular.Enabled = true;
+            grid_items.ReadOnly = true;
+            grid_rc.ReadOnly = true;
+            grid_detalle_paletas.ReadOnly = true;
 
-                bot_primero.Enabled = true;
-                bot_siguiente.Enabled = true;
-                bot_anterior.Enabled = true;
-                bot_ultimo.Enabled = true;
-                bot_nuevo.Enabled = true;
-                bot_grabar.Enabled = false;
-                bot_cancelar.Enabled = false;
-                bot_buscar.Enabled = true;
-                btn_reports.Enabled = true;
-                export_excel.Enabled = true;
-                //Defino las columnas de nuevo y establezco el datasource de lo9s grid.
-                DefColumnsGridRC();
-                DefColumnsGridItems();
+            bot_primero.Enabled = true;
+            bot_siguiente.Enabled = true;
+            bot_anterior.Enabled = true;
+            bot_ultimo.Enabled = true;
+            bot_nuevo.Enabled = true;
+            bot_grabar.Enabled = false;
+            bot_cancelar.Enabled = false;
+            bot_buscar.Enabled = true;
+            btn_reports.Enabled = true;
+            export_excel.Enabled = true;
+            //Defino las columnas de nuevo y establezco el datasource de lo9s grid.
+            DefColumnsGridRC();
+            DefColumnsGridItems();
         }
         private void Reporte_conduce_conprecio_Click(object sender, EventArgs e)
         {
@@ -769,7 +794,7 @@ namespace Ritrama2025.Forms
             txt_fecha_despacho.Enabled = false;
             txt_persondelivery.ReadOnly = true;
             txt_tipo_embalaje.ReadOnly = true;
-            txt_orden_trabajo.ReadOnly = true;  
+            txt_orden_trabajo.ReadOnly = true;
             txt_orden_compra.ReadOnly = true;
             txt_tipoventa.ReadOnly = true;
             bot_picking.Enabled = false;
@@ -783,10 +808,10 @@ namespace Ritrama2025.Forms
             DefColumnsGridRC();
             DefColumnsGridItems();
         }
-        private void DefColumnsGridRC() 
+        private void DefColumnsGridRC()
         {
             //Definicion de las columnas del grid de DetalleRC
-            grid_rc.Columns.Clear();    
+            grid_rc.Columns.Clear();
             grid_rc.AutoGenerateColumns = false;
             AGREGAR_COLUMN_GRID("unique_code", 70, "Unique Code", "unique_code", grid_rc);
             AGREGAR_COLUMN_GRID("product_id", 70, "Prod. Id.", "product_id", grid_rc);
@@ -802,7 +827,7 @@ namespace Ritrama2025.Forms
             AGREGAR_COLUMN_GRID("paleta", 70, "Paleta", "no_paleta", grid_rc);
             grid_rc.DataSource = BsDetalleRC;
         }
-        private void DefColumnsGridItems() 
+        private void DefColumnsGridItems()
         {
             grid_items.Columns.Clear();
             grid_items.AutoGenerateColumns = false;
@@ -822,6 +847,25 @@ namespace Ritrama2025.Forms
             AGREGAR_COLUMN_GRID("code_person", 70, "Code Person", "code_person", grid_items);
             AGREGAR_COLUMN_GRID("m2", 70, "Total M2", "m2", grid_items);
             grid_items.DataSource = BsItems;
+        }
+
+        private void Grid_detalle_paletas_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            // Lista de columnas que deseas validar (puede ser por índice o por nombre)
+            var columnasAValidar = new[] { "kilo_neto", "kilo_bruto" }; // nombres de columna
+
+            // Obtener el nombre de la columna actual
+            string columnName = grid_detalle_paletas.Columns[e.ColumnIndex].Name;
+
+            // Solo validar si la columna está en la lista
+            if (columnasAValidar.Contains(columnName))
+            {
+                if (!decimal.TryParse(e.FormattedValue!.ToString(), out decimal valor) || valor <= 0)
+                {
+                    MessageBox.Show($"El valor de la columna '{columnName}' debe ser mayor que cero.", "Valor inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    e.Cancel = true; // Cancela el cambio hasta que sea válido
+                }
+            }
         }
     }
 }
