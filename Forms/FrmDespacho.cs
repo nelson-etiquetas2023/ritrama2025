@@ -46,39 +46,13 @@ namespace Ritrama2025.Forms
             //Enlace Datos Grid Palet.
             BsPalet.DataSource = Bs;
             BsPalet.DataMember = "FK_DESPACHOS_PALET";
-            //Definicion de las columnas del grid de DetalleRC
-            grid_rc.AutoGenerateColumns = false;
-            AGREGAR_COLUMN_GRID("unique_code", 70, "Unique Code", "unique_code", grid_rc);
-            AGREGAR_COLUMN_GRID("product_id", 70, "Prod. Id.", "product_id", grid_rc);
-            AGREGAR_COLUMN_GRID("product_name", 250, "Product Name", "product_name", grid_rc);
-            AGREGAR_COLUMN_GRID("roll_number", 70, "Roll Number", "roll_number", grid_rc);
-            AGREGAR_COLUMN_GRID("width", 70, "Width", "width", grid_rc);
-            AGREGAR_COLUMN_GRID("length", 70, "Lenght", "lenght", grid_rc);
-            AGREGAR_COLUMN_GRID("msi", 70, "Msi", "msi", grid_rc);
-            AGREGAR_COLUMN_GRID("splice", 70, "Splice", "splice", grid_rc);
-            AGREGAR_COLUMN_GRID("cant_despacho", 80, "Cantidad Despacho", "cant_despacho", grid_rc);
-            AGREGAR_COLUMN_GRID("roll_id", 70, "Roll Id.", "roll_id", grid_rc);
-            AGREGAR_COLUMN_GRID("tipo", 70, "Tipo", "cant_despacho", grid_rc);
-            AGREGAR_COLUMN_GRID("paleta", 70, "Paleta", "no_paleta", grid_rc);
-            grid_rc.DataSource = BsDetalleRC;
+
+            //Definicion de las columnas del grid rollos cortados.
+            DefColumnsGridRC();
             //Definicion de las columnas del grid de Items.
-            grid_items.AutoGenerateColumns = false;
-            AGREGAR_COLUMN_GRID("product_id", 70, "Product Id.", "product_id", grid_items);
-            AGREGAR_COLUMN_GRID("product_name", 200, "Product Name", "product_name", grid_items);
-            AGREGAR_COLUMN_GRID("unid_id", 65, "Unidad", "unid_id", grid_items);
-            AGREGAR_COLUMN_GRID("cant", 60, "Cant.", "cant", grid_items);
-            AGREGAR_COLUMN_GRID("width", 65, "Width [Pulg]", "width", grid_items);
-            AGREGAR_COLUMN_GRID("lenght", 65, "Lenght [Pies]", "lenght", grid_items);
-            AGREGAR_COLUMN_GRID("msi", 70, "MSI", "msi", grid_items);
-            AGREGAR_COLUMN_GRID("total_pie_lin", 70, "Pie Lineales", "total_pie_lin", grid_items);
-            AGREGAR_COLUMN_GRID("ratio", 60, "Ratio", "ratio", grid_items);
-            AGREGAR_COLUMN_GRID("kilo_rollo", 70, "Kilo Rollo", "kilo_rollo", grid_items);
-            AGREGAR_COLUMN_GRID("kilo_total", 70, "Kilo Total", "kilo_total", grid_items);
-            AGREGAR_COLUMN_GRID("precio", 60, "Precio", "precio", grid_items);
-            AGREGAR_COLUMN_GRID("total_renglon", 70, "Total Renglon", "total_renglon", grid_items);
-            AGREGAR_COLUMN_GRID("code_person", 70, "Code Person", "code_person", grid_items);
-            AGREGAR_COLUMN_GRID("m2", 70, "Total M2", "m2", grid_items);
-            grid_items.DataSource = BsItems;
+            DefColumnsGridItems();
+
+
             //Definicion de las columnas del grid de Detalle de paleta.
             grid_detalle_paletas.AutoGenerateColumns = false;
             AGREGAR_COLUMN_GRID("number_palet", 70, "# Palet.", "number_palet", grid_detalle_paletas);
@@ -165,7 +139,20 @@ namespace Ritrama2025.Forms
         {
             ParentRow = (DataRowView)Bs.AddNew()!;
             ParentRow.BeginEdit();
-            txt_numero.Text = Service.GetNumberConsec();
+            ParentRow["numero"] = Service.GetNumberConsec();
+            ParentRow.EndEdit();
+
+            grid_rc.DataSource = "";
+            if (grid_rc.Rows.Count > 0) 
+            {
+                grid_rc.Rows.Clear();
+            }
+            grid_items.DataSource = "";
+            if (grid_items.Rows.Count > 0)
+            {
+                grid_items.Rows.Clear();
+            }
+
             txt_fecha_despacho.Enabled = true;
             txt_persondelivery.ReadOnly = false;
             txt_tipo_embalaje.ReadOnly = false;
@@ -215,56 +202,84 @@ namespace Ritrama2025.Forms
             FrmPickingDespacho frm_picking = new();
             frm_picking.ShowDialog();
 
-            if (frm_picking.Lista_Rollos.Count <= 0) 
+            if (frm_picking.Lista_Rollos.Count <= 0)
             {
-                return;     
+                return;
+            }
+            
+            //descarga de los rollos caortados.
+            foreach (var item in frm_picking.Lista_Rollos) 
+            {
+                DataRowView row = (DataRowView)BsDetalleRC.AddNew()!;
+                row.BeginEdit();
+                row["conduce"] = txt_numero.Text;
+                row["unique_code"] = item.UniqueCode;
+                row["product_id"] = item.Product_Id;
+                row["product_name"] = item.Product_Name;
+                row["roll_number"] = item.RollNumber;
+                row["width"] = item.Width;
+                row["lenght"] = item.Length;
+                row["msi"] = item.Msi;
+                row["splice"] = item.Splice;
+                row["roll_id"] = item.Roll_Id;
+                row["cant_despacho"] = item.Cantidad_despacho;
+                row["tipo"] = item.Tipo;
+                row["no_paleta"] = item.Paleta;
+                row.Row.SetParentRow(((DataRowView)Bs.Current!).Row, Ds.Relations["FK_DESPACHOS_DETALLERC"]);
+                row.EndEdit();
             }
 
+            grid_rc.DataSource = BsDetalleRC;
+            grid_rc.Refresh();
 
-            //actualizar el grid de detalle de rc (packing list)
-            grid_rc.Columns.Clear();
-            grid_rc.AutoGenerateColumns = false;
-            AGREGAR_COLUMN_GRID("uniquecode", 70, "Unique Code", "uniquecode", grid_rc);
-            AGREGAR_COLUMN_GRID("product_id", 80, "Product Id.", "product_id", grid_rc);
-            AGREGAR_COLUMN_GRID("product_name", 180, "Nombre del Producto", "product_name", grid_rc);
+            foreach (var item in frm_picking.Lista_Items) 
+            {
+                DataRowView row = (DataRowView)BsItems.AddNew()!;
+                row.BeginEdit();
+                row["product_id"] = item.Product_id;
+                row["product_name"] = item.Product_name;
+                row["unidad"] = "ROLLOS";
+                row["cant"] = item.Cantidad;
+                row["width"] = item.Width;
+                row["lenght"] = item.Lenght;
+                row["msi"] = item.Msi;
+                row["total_pie_lin"] = item.Total_PieLineal;
+                row["total_pie_lin"] = item.M2;
+            }
 
-            AGREGAR_COLUMN_GRID("RollNumber", 70, "Roll Number", "RollNumber", grid_rc);
-            AGREGAR_COLUMN_GRID("width", 80, "Width", "width", grid_rc);
-            AGREGAR_COLUMN_GRID("Length", 80, "Largo", "Length", grid_rc);
-            AGREGAR_COLUMN_GRID("msi", 80, "Msi", "msi", grid_rc);
-            AGREGAR_COLUMN_GRID("Splice", 70, "Splice", "Splice", grid_rc);
-            AGREGAR_COLUMN_GRID("roll_id", 72, "Roll Id.", "roll_id", grid_rc);
-            AGREGAR_COLUMN_GRID("code_person", 74, "Codigo Perso.", "code_person", grid_rc);
-            grid_rc.DataSource = frm_picking.Lista_Rollos;
-            //actualizar el grid de renglones a despachar.
-            grid_items.Columns.Clear();
-            grid_items.AutoGenerateColumns = false;
-            AGREGAR_COLUMN_GRID("product_id", 80, "Product Id.", "product_id", grid_items);
-            AGREGAR_COLUMN_GRID("product_name", 200, "Product Name", "product_name", grid_items);
-            AGREGAR_COLUMN_GRID("unidad", 70, "Unidad", "unidad", grid_items);
-            AGREGAR_COLUMN_GRID("cantidad", 70, "Cant.", "cantidad", grid_items);
-            AGREGAR_COLUMN_GRID("width", 70, "Width [Pulg]", "width", grid_items);
-            AGREGAR_COLUMN_GRID("lenght", 70, "Lenght [Pies]", "lenght", grid_items);
-            AGREGAR_COLUMN_GRID("msi", 70, "Msi", "msi", grid_items);
-            AGREGAR_COLUMN_GRID("pie_lin", 70, "Pie Lineales", "pie_lin", grid_items);
-            AGREGAR_COLUMN_GRID("ratio", 70, "Ratio", "ratio", grid_items);
-            AGREGAR_COLUMN_GRID("kilo_rollo", 70, "Kilo Rollo", "kilo_rollo", grid_items);
-            AGREGAR_COLUMN_GRID("kilo_total", 70, "Kilo Total", "kilo_total", grid_items);
-            AGREGAR_COLUMN_GRID("precio", 70, "Precio", "precio", grid_items);
-            AGREGAR_COLUMN_GRID("total_renglon", 150, "Total Renglon", "total_renglon", grid_items);
-            AGREGAR_COLUMN_GRID("m2", 80, "M2", "m2", grid_items);
-            grid_items.DataSource = frm_picking.Lista_Items;
+            grid_items.DataSource = BsItems;
+            grid_items.Refresh();
+
+            //descargar los items agrupados.           
+
+            //grid_items.Columns.Clear();
+            //grid_items.AutoGenerateColumns = false;
+            //AGREGAR_COLUMN_GRID("product_id", 80, "Product Id.", "product_id", grid_items);
+            //AGREGAR_COLUMN_GRID("product_name", 200, "Product Name", "product_name", grid_items);
+            //AGREGAR_COLUMN_GRID("unidad", 70, "Unidad", "unidad", grid_items);
+            //AGREGAR_COLUMN_GRID("cantidad", 70, "Cant.", "cantidad", grid_items);
+            //AGREGAR_COLUMN_GRID("width", 70, "Width [Pulg]", "width", grid_items);
+            //AGREGAR_COLUMN_GRID("lenght", 70, "Lenght [Pies]", "lenght", grid_items);
+            //AGREGAR_COLUMN_GRID("msi", 70, "Msi", "msi", grid_items);
+            //AGREGAR_COLUMN_GRID("pie_lin", 70, "Pie Lineales", "pie_lin", grid_items);
+            //AGREGAR_COLUMN_GRID("ratio", 70, "Ratio", "ratio", grid_items);
+            //AGREGAR_COLUMN_GRID("kilo_rollo", 70, "Kilo Rollo", "kilo_rollo", grid_items);
+            //AGREGAR_COLUMN_GRID("kilo_total", 70, "Kilo Total", "kilo_total", grid_items);
+            //AGREGAR_COLUMN_GRID("precio", 70, "Precio", "precio", grid_items);
+            //AGREGAR_COLUMN_GRID("total_renglon", 150, "Total Renglon", "total_renglon", grid_items);
+            //AGREGAR_COLUMN_GRID("m2", 80, "M2", "m2", grid_items);
+            //grid_items.DataSource = frm_picking.Lista_Items;
 
             //Calculo de los pies lineales.
             for (int i = 0; i <= grid_items.Rows.Count - 1; i++)
             {
                 //pie lineales
-                grid_items.Rows[i].Cells["pie_lin"].Value = Convert.ToDecimal(grid_items.Rows[i].Cells["lenght"].Value) * CONST_PIE_LINEALES;
+                grid_items.Rows[i].Cells["total_pie_lin"].Value = Convert.ToDecimal(grid_items.Rows[i].Cells["lenght"].Value) * CONST_PIE_LINEALES;
                 //Busqueda del ratio por producto.
                 grid_items.Rows[i].Cells["ratio"].Value = Service.GetRatioProductById(grid_items.Rows[i].Cells["product_id"].Value!.ToString()!);
                 //Calculo de la Columna Kilo-Rollo.
                 grid_items.Rows[i].Cells["kilo_rollo"].Value = (Convert.ToDecimal(grid_items.Rows[i].Cells["width"].Value) * Convert.ToDecimal(grid_items.Rows[i].Cells["lenght"].Value) * Convert.ToDecimal(grid_items.Rows[i].Cells["msi"].Value)) / 1000;
-                grid_items.Rows[i].Cells["kilo_total"].Value = Convert.ToDecimal(grid_items.Rows[i].Cells["kilo_rollo"].Value) * Convert.ToDecimal(grid_items.Rows[i].Cells["cantidad"].Value);
+                grid_items.Rows[i].Cells["kilo_total"].Value = Convert.ToDecimal(grid_items.Rows[i].Cells["kilo_rollo"].Value) * Convert.ToDecimal(grid_items.Rows[i].Cells["cant"].Value);
 
                 grid_items.Rows[i].Cells["precio"].Value = "0";
                 grid_items.Rows[i].Cells["total_renglon"].Value = "0";
@@ -347,11 +362,11 @@ namespace Ritrama2025.Forms
             decimal TotalKilosTotal = 0;
             for (int i = 0; i <= grid_items.Rows.Count - 1; i++)
             {
-                TotalCantitdad += Convert.ToInt32(grid_items.Rows[i].Cells["cantidad"].Value);
+                TotalCantitdad += Convert.ToInt32(grid_items.Rows[i].Cells["cant"].Value);
                 //TotalMsi += Convert.ToDecimal(grid_items.Rows[i].Cells["m2"].Value);
-                if (!string.IsNullOrEmpty(grid_items.Rows[i].Cells["pie_lin"].Value!.ToString()))
+                if (!string.IsNullOrEmpty(grid_items.Rows[i].Cells["total_pie_lin"].Value!.ToString()))
                 {
-                    TotalPieLin += Convert.ToDecimal(grid_items.Rows[i].Cells["pie_lin"].Value);
+                    TotalPieLin += Convert.ToDecimal(grid_items.Rows[i].Cells["total_pie_lin"].Value);
                 }
                 if (!string.IsNullOrEmpty(grid_items.Rows[i].Cells["kilo_rollo"].Value!.ToString()))
                 {
@@ -545,16 +560,15 @@ namespace Ritrama2025.Forms
                 RolloCortado Rollo = new()
                 {
                     Numero = DocumentDespacho.Numero,
-                    UniqueCode = Convert.ToString(grid_rc.Rows[i].Cells["uniquecode"].Value) ?? string.Empty,
+                    UniqueCode = Convert.ToString(grid_rc.Rows[i].Cells["unique_code"].Value) ?? string.Empty,
                     Product_Id = Convert.ToString(grid_rc.Rows[i].Cells["product_id"].Value) ?? string.Empty,
                     Product_Name = Convert.ToString(grid_rc.Rows[i].Cells["product_name"].Value) ?? string.Empty,
-                    RollNumber = Convert.ToInt16(grid_rc.Rows[i].Cells["RollNumber"].Value),
+                    RollNumber = Convert.ToInt16(grid_rc.Rows[i].Cells["roll_number"].Value),
                     Width = Convert.ToDecimal(grid_rc.Rows[i].Cells["width"].Value),
                     Length = Convert.ToDecimal(grid_rc.Rows[i].Cells["length"].Value),
                     Msi = Convert.ToDecimal(grid_rc.Rows[i].Cells["msi"].Value),
                     Splice = Convert.ToInt16(grid_rc.Rows[i].Cells["splice"].Value),
                     Roll_Id = Convert.ToString(grid_rc.Rows[i].Cells["roll_id"].Value) ?? string.Empty,
-                    Code_Person = Convert.ToString(grid_rc.Rows[i].Cells["code_person"].Value) ?? string.Empty,
                     Cantidad_despacho = 0,
                     Tipo = "n/a",
                     Paleta = "0"
@@ -569,20 +583,20 @@ namespace Ritrama2025.Forms
                     Numero = DocumentDespacho.Numero,
                     Product_id = Convert.ToString(grid_items.Rows[i].Cells["product_id"].Value) ?? string.Empty,
                     Product_name = Convert.ToString(grid_items.Rows[i].Cells["product_name"].Value) ?? string.Empty,
-                    Cantidad = Convert.ToDecimal(grid_items.Rows[i].Cells["cantidad"].Value),
+                    Cantidad = Convert.ToDecimal(grid_items.Rows[i].Cells["cant"].Value),
                     Unid_id = "1",
                     Unidad = Convert.ToString(grid_items.Rows[i].Cells["unidad"].Value) ?? string.Empty,
                     Width = Convert.ToDecimal(grid_items.Rows[i].Cells["width"].Value),
                     Lenght = Convert.ToDecimal(grid_items.Rows[i].Cells["lenght"].Value),
                     Msi = Convert.ToDecimal(grid_items.Rows[i].Cells["msi"].Value),
-                    Total_PieLineal = Convert.ToDecimal(grid_items.Rows[i].Cells["pie_lin"].Value),
+                    Total_PieLineal = Convert.ToDecimal(grid_items.Rows[i].Cells["total_pie_lin"].Value),
                     Ratio = Convert.ToDecimal(grid_items.Rows[i].Cells["ratio"].Value),
                     Kilo_Rollo = Convert.ToDecimal(grid_items.Rows[i].Cells["kilo_rollo"].Value),
                     Kilo_Total = Convert.ToDecimal(grid_items.Rows[i].Cells["kilo_total"].Value),
                     Precio = Convert.ToDecimal(grid_items.Rows[i].Cells["precio"].Value),
                     Total_Renglon = Convert.ToDecimal(grid_items.Rows[i].Cells["total_renglon"].Value),
                     Code_Person = "N/A",
-                    M2 = Convert.ToDecimal(grid_items.Rows[i].Cells["m2"].Value)
+                    M2 = 0
                 };
                 DocumentDespacho.Items_Despacho.Add(itemsDespacho);
                 //Guardar en base de datos el encxabezado del despacho.
@@ -638,8 +652,9 @@ namespace Ritrama2025.Forms
             bot_buscar.Enabled = true;
             btn_reports.Enabled = true;
             export_excel.Enabled = true;
-
-
+            //Defino las columnas de nuevo y establezco el datasource de lo9s grid.
+            DefColumnsGridRC();
+            DefColumnsGridItems();
         }
 
         private void Reporte_conduce_conprecio_Click(object sender, EventArgs e)
@@ -740,9 +755,60 @@ namespace Ritrama2025.Forms
             ExportDataService.ExportToExcel<Paleta>(detalle_paleta, "detalle_paleta.xlsx");
         }
 
-        private void btn_exports_ButtonClick(object sender, EventArgs e)
+        private void Btn_exports_ButtonClick(object sender, EventArgs e)
         {
 
         }
+
+        private void Bot_cancelar_Click(object sender, EventArgs e)
+        {
+            DataRowView FilaActual;
+            FilaActual = (DataRowView)Bs.Current!;
+            FilaActual.Row.Delete();
+            Bs.EndEdit();
+            Bs.Position = Bs.Count;
+        }
+        private void DefColumnsGridRC() 
+        {
+            //Definicion de las columnas del grid de DetalleRC
+            grid_rc.Columns.Clear();    
+            grid_rc.AutoGenerateColumns = false;
+            AGREGAR_COLUMN_GRID("unique_code", 70, "Unique Code", "unique_code", grid_rc);
+            AGREGAR_COLUMN_GRID("product_id", 70, "Prod. Id.", "product_id", grid_rc);
+            AGREGAR_COLUMN_GRID("product_name", 250, "Product Name", "product_name", grid_rc);
+            AGREGAR_COLUMN_GRID("roll_number", 70, "Roll Number", "roll_number", grid_rc);
+            AGREGAR_COLUMN_GRID("width", 70, "Width", "width", grid_rc);
+            AGREGAR_COLUMN_GRID("length", 70, "Lenght", "lenght", grid_rc);
+            AGREGAR_COLUMN_GRID("msi", 70, "Msi", "msi", grid_rc);
+            AGREGAR_COLUMN_GRID("splice", 70, "Splice", "splice", grid_rc);
+            AGREGAR_COLUMN_GRID("cant_despacho", 80, "Cantidad Despacho", "cant_despacho", grid_rc);
+            AGREGAR_COLUMN_GRID("roll_id", 70, "Roll Id.", "roll_id", grid_rc);
+            AGREGAR_COLUMN_GRID("tipo", 70, "Tipo", "cant_despacho", grid_rc);
+            AGREGAR_COLUMN_GRID("paleta", 70, "Paleta", "no_paleta", grid_rc);
+            grid_rc.DataSource = BsDetalleRC;
+        }
+        private void DefColumnsGridItems() 
+        {
+            grid_items.Columns.Clear();
+            grid_items.AutoGenerateColumns = false;
+            AGREGAR_COLUMN_GRID("product_id", 70, "Product Id.", "product_id", grid_items);
+            AGREGAR_COLUMN_GRID("product_name", 200, "Product Name", "product_name", grid_items);
+            AGREGAR_COLUMN_GRID("unidad", 70, "Unidad", "unidad", grid_items);
+            AGREGAR_COLUMN_GRID("cant", 60, "Cant.", "cant", grid_items);
+            AGREGAR_COLUMN_GRID("width", 65, "Width [Pulg]", "width", grid_items);
+            AGREGAR_COLUMN_GRID("lenght", 65, "Lenght [Pies]", "lenght", grid_items);
+            AGREGAR_COLUMN_GRID("msi", 70, "MSI", "msi", grid_items);
+            AGREGAR_COLUMN_GRID("total_pie_lin", 70, "Pie Lineales", "total_pie_lin", grid_items);
+            AGREGAR_COLUMN_GRID("ratio", 60, "Ratio", "ratio", grid_items);
+            AGREGAR_COLUMN_GRID("kilo_rollo", 70, "Kilo Rollo", "kilo_rollo", grid_items);
+            AGREGAR_COLUMN_GRID("kilo_total", 70, "Kilo Total", "kilo_total", grid_items);
+            AGREGAR_COLUMN_GRID("precio", 60, "Precio", "precio", grid_items);
+            AGREGAR_COLUMN_GRID("total_renglon", 70, "Total Renglon", "total_renglon", grid_items);
+            AGREGAR_COLUMN_GRID("code_person", 70, "Code Person", "code_person", grid_items);
+            AGREGAR_COLUMN_GRID("m2", 70, "Total M2", "m2", grid_items);
+            grid_items.DataSource = BsItems;
+        }
+
+
     }
 }

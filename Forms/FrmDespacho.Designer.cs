@@ -213,6 +213,7 @@
             bot_cancelar.Name = "bot_cancelar";
             bot_cancelar.Size = new Size(83, 30);
             bot_cancelar.Text = "Cancelar";
+            bot_cancelar.Click += Bot_cancelar_Click;
             // 
             // bot_buscar
             // 
@@ -272,7 +273,7 @@
             btn_exports.Name = "btn_exports";
             btn_exports.Size = new Size(94, 30);
             btn_exports.Text = "Exportar";
-            btn_exports.ButtonClick += btn_exports_ButtonClick;
+            btn_exports.ButtonClick += Btn_exports_ButtonClick;
             // 
             // export_excel
             // 
@@ -280,7 +281,7 @@
             export_excel.DropDownItems.AddRange(new ToolStripItem[] { rollosCortadosToolStripMenuItem, opc_exportdata_excel_detallepaleta });
             export_excel.Image = (Image)resources.GetObject("export_excel.Image");
             export_excel.Name = "export_excel";
-            export_excel.Size = new Size(182, 24);
+            export_excel.Size = new Size(181, 24);
             export_excel.Text = "Excel";
             export_excel.Click += Export_excel_Click;
             // 
@@ -304,7 +305,7 @@
             // 
             export_pdf.Image = (Image)resources.GetObject("export_pdf.Image");
             export_pdf.Name = "export_pdf";
-            export_pdf.Size = new Size(182, 24);
+            export_pdf.Size = new Size(181, 24);
             export_pdf.Text = "Documento PDF";
             export_pdf.Click += Export_pdf_Click;
             // 

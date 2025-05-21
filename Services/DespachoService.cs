@@ -336,7 +336,7 @@ namespace Ritrama2025.Services
                 {
                     Connection = conn,
                     CommandType = CommandType.Text,
-                    CommandText = "SELECT numero,a.product_id,cant,b.product_name,unid_id, width,lenght,msi,total_pie_lin,a.ratio,kilo_rollo,kilo_total,a.precio,total_renglon,code_person,m2 FROM item_despacho a LEFT JOIN producto b ON a.product_id=b.product_id "
+                    CommandText = "SELECT numero,a.product_id,cant,b.product_name,unid_id,unidad, width,lenght,msi,total_pie_lin,a.ratio,kilo_rollo,kilo_total,a.precio,total_renglon,code_person,m2 FROM item_despacho a LEFT JOIN producto b ON a.product_id=b.product_id "
                 };
                 SqlDataReader readerItems = await ComandoItems.ExecuteReaderAsync();
                 await readerItems.CloseAsync();
