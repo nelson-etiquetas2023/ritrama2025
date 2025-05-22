@@ -1,4 +1,5 @@
-﻿using Ritrama2025.Services;
+﻿using DocumentFormat.OpenXml.Drawing.Charts;
+using Ritrama2025.Services;
 using System.Data;
 
 
@@ -50,8 +51,15 @@ namespace Ritrama2025.Forms
             txt_operador_name.DataBindings.Add("Text", Bs, "nombre");
             txt_cust_id.DataBindings.Add("Text", Bs, "customer_id");
             txt_cust_name.DataBindings.Add("Text", Bs, "customer_name");
-
-
+            txt_resta_corte.DataBindings.Add("Text", Bs, "resta_entrada");
+            txt_largo_corte.DataBindings.Add("Text", Bs, "lenght_entrada");
+            txt_plus1.DataBindings.Add("Text", Bs, "plus1_pies");
+            txt_plus2.DataBindings.Add("Text", Bs, "plus2_pies");
+            txt_long_cortar.DataBindings.Add("Text", Bs, "longitud_cortar");
+            txt_cortes_ancho.DataBindings.Add("Text", Bs, "cortes_ancho");    
+            txt_vueltas1.DataBindings.Add("Text", Bs, "cortes_largo");
+            txt_rollos_cortar1.DataBindings.Add("Text", Bs, "cant_rollos");
+            txt_ancho_corte.DataBindings.Add("Text", Bs, "total_salida");
         }
 
         private void TextBox26_TextChanged(object sender, EventArgs e)
@@ -59,22 +67,22 @@ namespace Ritrama2025.Forms
 
         }
 
-        private void bot_primero_Click(object sender, EventArgs e)
+        private void Bot_primero_Click(object sender, EventArgs e)
         {
             Bs.Position = 0;
         }
 
-        private void bot_anterior_Click(object sender, EventArgs e)
+        private void Bot_anterior_Click(object sender, EventArgs e)
         {
             Bs.Position -= 1;
         }
 
-        private void bot_siguiente_Click(object sender, EventArgs e)
+        private void Bot_siguiente_Click(object sender, EventArgs e)
         {
             Bs.Position += 1;
         }
 
-        private void bot_ultimo_Click(object sender, EventArgs e)
+        private void Bot_ultimo_Click(object sender, EventArgs e)
         {
             Bs.Position = Bs.Count - 1;
         }

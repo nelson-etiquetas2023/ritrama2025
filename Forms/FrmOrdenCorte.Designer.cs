@@ -38,12 +38,12 @@
             bot_siguiente = new ToolStripButton();
             bot_ultimo = new ToolStripButton();
             bot_accion = new ToolStripDropDownButton();
-            crearOrdenToolStripMenuItem = new ToolStripMenuItem();
-            enviarAProduccionToolStripMenuItem = new ToolStripMenuItem();
-            etiquetarOrdenToolStripMenuItem = new ToolStripMenuItem();
-            aprobarOrdenToolStripMenuItem = new ToolStripMenuItem();
-            cerrarOrdenToolStripMenuItem = new ToolStripMenuItem();
-            modificarOrdenToolStripMenuItem = new ToolStripMenuItem();
+            opt_create_document = new ToolStripMenuItem();
+            opt_send_production = new ToolStripMenuItem();
+            opt_etiquetar_orden = new ToolStripMenuItem();
+            opt_aprobar_orden = new ToolStripMenuItem();
+            opt_cerrar_orden = new ToolStripMenuItem();
+            opt_modif_orden = new ToolStripMenuItem();
             toolStripButton1 = new ToolStripButton();
             bot_guardar = new ToolStripButton();
             bot_cancelar = new ToolStripButton();
@@ -219,7 +219,7 @@
             bot_primero.Name = "bot_primero";
             bot_primero.Size = new Size(80, 30);
             bot_primero.Text = "Primero";
-            bot_primero.Click += bot_primero_Click;
+            bot_primero.Click += Bot_primero_Click;
             // 
             // bot_anterior
             // 
@@ -230,7 +230,7 @@
             bot_anterior.Name = "bot_anterior";
             bot_anterior.Size = new Size(80, 30);
             bot_anterior.Text = "Anterior";
-            bot_anterior.Click += bot_anterior_Click;
+            bot_anterior.Click += Bot_anterior_Click;
             // 
             // bot_siguiente
             // 
@@ -242,7 +242,7 @@
             bot_siguiente.Size = new Size(80, 30);
             bot_siguiente.Text = "Siguiente";
             bot_siguiente.TextImageRelation = TextImageRelation.TextBeforeImage;
-            bot_siguiente.Click += bot_siguiente_Click;
+            bot_siguiente.Click += Bot_siguiente_Click;
             // 
             // bot_ultimo
             // 
@@ -254,11 +254,11 @@
             bot_ultimo.Size = new Size(80, 30);
             bot_ultimo.Text = "Ultimo";
             bot_ultimo.TextImageRelation = TextImageRelation.TextBeforeImage;
-            bot_ultimo.Click += bot_ultimo_Click;
+            bot_ultimo.Click += Bot_ultimo_Click;
             // 
             // bot_accion
             // 
-            bot_accion.DropDownItems.AddRange(new ToolStripItem[] { crearOrdenToolStripMenuItem, enviarAProduccionToolStripMenuItem, etiquetarOrdenToolStripMenuItem, aprobarOrdenToolStripMenuItem, cerrarOrdenToolStripMenuItem, modificarOrdenToolStripMenuItem });
+            bot_accion.DropDownItems.AddRange(new ToolStripItem[] { opt_create_document, opt_send_production, opt_etiquetar_orden, opt_aprobar_orden, opt_cerrar_orden, opt_modif_orden });
             bot_accion.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             bot_accion.Image = (Image)resources.GetObject("bot_accion.Image");
             bot_accion.ImageTransparentColor = Color.Magenta;
@@ -266,47 +266,47 @@
             bot_accion.Size = new Size(85, 30);
             bot_accion.Text = "Acciones";
             // 
-            // crearOrdenToolStripMenuItem
+            // opt_create_document
             // 
-            crearOrdenToolStripMenuItem.Image = Properties.Resources.create_24px;
-            crearOrdenToolStripMenuItem.Name = "crearOrdenToolStripMenuItem";
-            crearOrdenToolStripMenuItem.Size = new Size(182, 22);
-            crearOrdenToolStripMenuItem.Text = "Crear Orden";
+            opt_create_document.Image = Properties.Resources.create_24px;
+            opt_create_document.Name = "opt_create_document";
+            opt_create_document.Size = new Size(182, 22);
+            opt_create_document.Text = "Crear Orden";
             // 
-            // enviarAProduccionToolStripMenuItem
+            // opt_send_production
             // 
-            enviarAProduccionToolStripMenuItem.Image = Properties.Resources.automation_24px;
-            enviarAProduccionToolStripMenuItem.Name = "enviarAProduccionToolStripMenuItem";
-            enviarAProduccionToolStripMenuItem.Size = new Size(182, 22);
-            enviarAProduccionToolStripMenuItem.Text = "Enviar a Produccion";
+            opt_send_production.Image = Properties.Resources.automation_24px;
+            opt_send_production.Name = "opt_send_production";
+            opt_send_production.Size = new Size(182, 22);
+            opt_send_production.Text = "Enviar a Produccion";
             // 
-            // etiquetarOrdenToolStripMenuItem
+            // opt_etiquetar_orden
             // 
-            etiquetarOrdenToolStripMenuItem.Image = Properties.Resources.price_tag_24px;
-            etiquetarOrdenToolStripMenuItem.Name = "etiquetarOrdenToolStripMenuItem";
-            etiquetarOrdenToolStripMenuItem.Size = new Size(182, 22);
-            etiquetarOrdenToolStripMenuItem.Text = "Etiquetar Orden";
+            opt_etiquetar_orden.Image = Properties.Resources.price_tag_24px;
+            opt_etiquetar_orden.Name = "opt_etiquetar_orden";
+            opt_etiquetar_orden.Size = new Size(182, 22);
+            opt_etiquetar_orden.Text = "Etiquetar Orden";
             // 
-            // aprobarOrdenToolStripMenuItem
+            // opt_aprobar_orden
             // 
-            aprobarOrdenToolStripMenuItem.Image = (Image)resources.GetObject("aprobarOrdenToolStripMenuItem.Image");
-            aprobarOrdenToolStripMenuItem.Name = "aprobarOrdenToolStripMenuItem";
-            aprobarOrdenToolStripMenuItem.Size = new Size(182, 22);
-            aprobarOrdenToolStripMenuItem.Text = "Aprobar Orden";
+            opt_aprobar_orden.Image = (Image)resources.GetObject("opt_aprobar_orden.Image");
+            opt_aprobar_orden.Name = "opt_aprobar_orden";
+            opt_aprobar_orden.Size = new Size(182, 22);
+            opt_aprobar_orden.Text = "Aprobar Orden";
             // 
-            // cerrarOrdenToolStripMenuItem
+            // opt_cerrar_orden
             // 
-            cerrarOrdenToolStripMenuItem.Image = Properties.Resources.security_document_24px;
-            cerrarOrdenToolStripMenuItem.Name = "cerrarOrdenToolStripMenuItem";
-            cerrarOrdenToolStripMenuItem.Size = new Size(182, 22);
-            cerrarOrdenToolStripMenuItem.Text = "Cerrar Orden";
+            opt_cerrar_orden.Image = Properties.Resources.security_document_24px;
+            opt_cerrar_orden.Name = "opt_cerrar_orden";
+            opt_cerrar_orden.Size = new Size(182, 22);
+            opt_cerrar_orden.Text = "Cerrar Orden";
             // 
-            // modificarOrdenToolStripMenuItem
+            // opt_modif_orden
             // 
-            modificarOrdenToolStripMenuItem.Image = Properties.Resources.edit_24px;
-            modificarOrdenToolStripMenuItem.Name = "modificarOrdenToolStripMenuItem";
-            modificarOrdenToolStripMenuItem.Size = new Size(182, 22);
-            modificarOrdenToolStripMenuItem.Text = "Modificar Orden";
+            opt_modif_orden.Image = Properties.Resources.edit_24px;
+            opt_modif_orden.Name = "opt_modif_orden";
+            opt_modif_orden.Size = new Size(182, 22);
+            opt_modif_orden.Text = "Modificar Orden";
             // 
             // toolStripButton1
             // 
@@ -484,6 +484,7 @@
             // 
             txt_plus1.Location = new Point(374, 144);
             txt_plus1.Name = "txt_plus1";
+            txt_plus1.ReadOnly = true;
             txt_plus1.Size = new Size(38, 23);
             txt_plus1.TabIndex = 16;
             // 
@@ -500,6 +501,7 @@
             // 
             txt_menos1.Location = new Point(418, 144);
             txt_menos1.Name = "txt_menos1";
+            txt_menos1.ReadOnly = true;
             txt_menos1.Size = new Size(38, 23);
             txt_menos1.TabIndex = 18;
             // 
@@ -516,6 +518,7 @@
             // 
             textBox7.Location = new Point(462, 144);
             textBox7.Name = "textBox7";
+            textBox7.ReadOnly = true;
             textBox7.Size = new Size(100, 23);
             textBox7.TabIndex = 20;
             // 
@@ -625,6 +628,7 @@
             // 
             textBox15.Location = new Point(462, 215);
             textBox15.Name = "textBox15";
+            textBox15.ReadOnly = true;
             textBox15.Size = new Size(100, 23);
             textBox15.TabIndex = 38;
             // 
@@ -641,6 +645,7 @@
             // 
             txt_menos2.Location = new Point(418, 215);
             txt_menos2.Name = "txt_menos2";
+            txt_menos2.ReadOnly = true;
             txt_menos2.Size = new Size(38, 23);
             txt_menos2.TabIndex = 36;
             // 
@@ -657,6 +662,7 @@
             // 
             txt_plus2.Location = new Point(374, 215);
             txt_plus2.Name = "txt_plus2";
+            txt_plus2.ReadOnly = true;
             txt_plus2.Size = new Size(38, 23);
             txt_plus2.TabIndex = 34;
             // 
@@ -835,6 +841,7 @@
             // 
             txt_ancho_corte.Location = new Point(638, 110);
             txt_ancho_corte.Name = "txt_ancho_corte";
+            txt_ancho_corte.ReadOnly = true;
             txt_ancho_corte.Size = new Size(53, 23);
             txt_ancho_corte.TabIndex = 59;
             // 
@@ -852,6 +859,7 @@
             // 
             txt_largo_corte.Location = new Point(697, 110);
             txt_largo_corte.Name = "txt_largo_corte";
+            txt_largo_corte.ReadOnly = true;
             txt_largo_corte.Size = new Size(53, 23);
             txt_largo_corte.TabIndex = 61;
             // 
@@ -869,6 +877,7 @@
             // 
             txt_resta_corte.Location = new Point(756, 110);
             txt_resta_corte.Name = "txt_resta_corte";
+            txt_resta_corte.ReadOnly = true;
             txt_resta_corte.Size = new Size(53, 23);
             txt_resta_corte.TabIndex = 63;
             // 
@@ -954,6 +963,7 @@
             // 
             // btn_add_row_corte
             // 
+            btn_add_row_corte.Enabled = false;
             btn_add_row_corte.Image = (Image)resources.GetObject("btn_add_row_corte.Image");
             btn_add_row_corte.Location = new Point(889, 135);
             btn_add_row_corte.Name = "btn_add_row_corte";
@@ -965,6 +975,7 @@
             // 
             // txt_delete_row_corte
             // 
+            txt_delete_row_corte.Enabled = false;
             txt_delete_row_corte.Image = (Image)resources.GetObject("txt_delete_row_corte.Image");
             txt_delete_row_corte.Location = new Point(889, 173);
             txt_delete_row_corte.Name = "txt_delete_row_corte";
@@ -978,6 +989,7 @@
             // 
             txt_long_cortar.Location = new Point(889, 234);
             txt_long_cortar.Name = "txt_long_cortar";
+            txt_long_cortar.ReadOnly = true;
             txt_long_cortar.Size = new Size(100, 23);
             txt_long_cortar.TabIndex = 71;
             // 
@@ -994,6 +1006,7 @@
             // 
             txt_vueltas1.Location = new Point(889, 278);
             txt_vueltas1.Name = "txt_vueltas1";
+            txt_vueltas1.ReadOnly = true;
             txt_vueltas1.Size = new Size(100, 23);
             txt_vueltas1.TabIndex = 73;
             // 
@@ -1010,6 +1023,7 @@
             // 
             txt_vueltas2.Location = new Point(995, 278);
             txt_vueltas2.Name = "txt_vueltas2";
+            txt_vueltas2.ReadOnly = true;
             txt_vueltas2.Size = new Size(100, 23);
             txt_vueltas2.TabIndex = 74;
             // 
@@ -1017,6 +1031,7 @@
             // 
             txt_cortes_ancho.Location = new Point(889, 323);
             txt_cortes_ancho.Name = "txt_cortes_ancho";
+            txt_cortes_ancho.ReadOnly = true;
             txt_cortes_ancho.Size = new Size(100, 23);
             txt_cortes_ancho.TabIndex = 76;
             // 
@@ -1033,6 +1048,7 @@
             // 
             txt_rollos_cortar2.Location = new Point(995, 367);
             txt_rollos_cortar2.Name = "txt_rollos_cortar2";
+            txt_rollos_cortar2.ReadOnly = true;
             txt_rollos_cortar2.Size = new Size(100, 23);
             txt_rollos_cortar2.TabIndex = 79;
             // 
@@ -1040,6 +1056,7 @@
             // 
             txt_rollos_cortar1.Location = new Point(889, 367);
             txt_rollos_cortar1.Name = "txt_rollos_cortar1";
+            txt_rollos_cortar1.ReadOnly = true;
             txt_rollos_cortar1.Size = new Size(100, 23);
             txt_rollos_cortar1.TabIndex = 78;
             // 
@@ -1509,12 +1526,12 @@
         private DataGridViewTextBoxColumn Column4;
         private ToolStripButton bot_exportar;
         private ToolStripDropDownButton bot_accion;
-        private ToolStripMenuItem crearOrdenToolStripMenuItem;
-        private ToolStripMenuItem enviarAProduccionToolStripMenuItem;
-        private ToolStripMenuItem etiquetarOrdenToolStripMenuItem;
-        private ToolStripMenuItem aprobarOrdenToolStripMenuItem;
-        private ToolStripMenuItem cerrarOrdenToolStripMenuItem;
-        private ToolStripMenuItem modificarOrdenToolStripMenuItem;
+        private ToolStripMenuItem opt_create_document;
+        private ToolStripMenuItem opt_send_production;
+        private ToolStripMenuItem opt_etiquetar_orden;
+        private ToolStripMenuItem opt_aprobar_orden;
+        private ToolStripMenuItem opt_cerrar_orden;
+        private ToolStripMenuItem opt_modif_orden;
         private DataGridViewTextBoxColumn Column5;
         private DataGridViewTextBoxColumn Column6;
         private DataGridViewTextBoxColumn Column7;
