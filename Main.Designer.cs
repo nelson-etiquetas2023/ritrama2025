@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             panel1 = new Panel();
+            button4 = new Button();
+            button3 = new Button();
             button2 = new Button();
             button1 = new Button();
             bot_products = new Button();
@@ -43,6 +45,8 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.WindowFrame;
+            panel1.Controls.Add(button4);
+            panel1.Controls.Add(button3);
             panel1.Controls.Add(button2);
             panel1.Controls.Add(button1);
             panel1.Controls.Add(bot_products);
@@ -53,8 +57,38 @@
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(221, 536);
+            panel1.Size = new Size(221, 637);
             panel1.TabIndex = 0;
+            // 
+            // button4
+            // 
+            button4.Dock = DockStyle.Top;
+            button4.FlatAppearance.BorderSize = 0;
+            button4.FlatStyle = FlatStyle.Flat;
+            button4.Font = new Font("Segoe UI", 12.2264156F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button4.Image = (Image)resources.GetObject("button4.Image");
+            button4.Location = new Point(0, 560);
+            button4.Name = "button4";
+            button4.Size = new Size(221, 70);
+            button4.TabIndex = 9;
+            button4.Text = "Reportes";
+            button4.TextImageRelation = TextImageRelation.ImageBeforeText;
+            button4.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            button3.Dock = DockStyle.Top;
+            button3.FlatAppearance.BorderSize = 0;
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.Font = new Font("Segoe UI", 12.2264156F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button3.Image = (Image)resources.GetObject("button3.Image");
+            button3.Location = new Point(0, 490);
+            button3.Name = "button3";
+            button3.Size = new Size(221, 70);
+            button3.TabIndex = 8;
+            button3.Text = "Proveedores";
+            button3.TextImageRelation = TextImageRelation.ImageBeforeText;
+            button3.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
@@ -168,7 +202,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
-            ClientSize = new Size(935, 536);
+            ClientSize = new Size(935, 637);
             Controls.Add(panel1);
             Font = new Font("Segoe UI", 8.830189F);
             FormBorderStyle = FormBorderStyle.Fixed3D;
@@ -193,5 +227,7 @@
         private Button bot_despacho;
         private Button button2;
         private Button button1;
+        private Button button3;
+        private Button button4;
     }
 }

@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmOrdenCorte));
             panel1 = new Panel();
+            registros = new Label();
             label1 = new Label();
             toolStrip1 = new ToolStrip();
             bot_primero = new ToolStripButton();
@@ -43,6 +44,7 @@
             aprobarOrdenToolStripMenuItem = new ToolStripMenuItem();
             cerrarOrdenToolStripMenuItem = new ToolStripMenuItem();
             modificarOrdenToolStripMenuItem = new ToolStripMenuItem();
+            toolStripButton1 = new ToolStripButton();
             bot_guardar = new ToolStripButton();
             bot_cancelar = new ToolStripButton();
             bot_imprimir = new ToolStripButton();
@@ -50,7 +52,7 @@
             bot_etiquetar = new ToolStripButton();
             label2 = new Label();
             txt_numeroOC = new TextBox();
-            txt_fecha_emiion = new DateTimePicker();
+            txt_fecha_emision = new DateTimePicker();
             label3 = new Label();
             txt_fecha_produccion = new DateTimePicker();
             label4 = new Label();
@@ -68,13 +70,13 @@
             textBox7 = new TextBox();
             label10 = new Label();
             label11 = new Label();
-            textBox8 = new TextBox();
-            textBox9 = new TextBox();
-            txt_length2 = new TextBox();
-            textBox11 = new TextBox();
+            txt_real1_width = new TextBox();
+            txt_real1_length = new TextBox();
+            txt_matrest1_lenght = new TextBox();
+            txt_matrest1_width = new TextBox();
             label12 = new Label();
             txt_rollid_2 = new TextBox();
-            textBox13 = new TextBox();
+            txt_length2 = new TextBox();
             txt_width2 = new TextBox();
             btn_buscar_rollid2 = new Button();
             label13 = new Label();
@@ -85,10 +87,10 @@
             txt_plus2 = new TextBox();
             label16 = new Label();
             label17 = new Label();
-            textBox18 = new TextBox();
-            textBox19 = new TextBox();
-            textBox20 = new TextBox();
-            textBox21 = new TextBox();
+            txt_matrest2_lenght = new TextBox();
+            txt_matrest2_width = new TextBox();
+            txt_real2_length = new TextBox();
+            txt_real2_width = new TextBox();
             label18 = new Label();
             label19 = new Label();
             txt_product_id = new TextBox();
@@ -133,6 +135,17 @@
             label33 = new Label();
             tabPage1 = new TabPage();
             grid_items = new DataGridView();
+            Column5 = new DataGridViewTextBoxColumn();
+            Column6 = new DataGridViewTextBoxColumn();
+            Column7 = new DataGridViewTextBoxColumn();
+            Column8 = new DataGridViewTextBoxColumn();
+            Column9 = new DataGridViewTextBoxColumn();
+            Column10 = new DataGridViewTextBoxColumn();
+            Column11 = new DataGridViewTextBoxColumn();
+            Column12 = new DataGridViewTextBoxColumn();
+            Column13 = new DataGridViewTextBoxColumn();
+            Column14 = new DataGridViewTextBoxColumn();
+            Column15 = new DataGridViewComboBoxColumn();
             tabControl1 = new TabControl();
             chk_document_anul = new CheckBox();
             chk_orden_rebobinado = new CheckBox();
@@ -148,18 +161,6 @@
             label36 = new Label();
             btn_code_person = new Button();
             chk_unificar_rollos = new CheckBox();
-            Column5 = new DataGridViewTextBoxColumn();
-            Column6 = new DataGridViewTextBoxColumn();
-            Column7 = new DataGridViewTextBoxColumn();
-            Column8 = new DataGridViewTextBoxColumn();
-            Column9 = new DataGridViewTextBoxColumn();
-            Column10 = new DataGridViewTextBoxColumn();
-            Column11 = new DataGridViewTextBoxColumn();
-            Column12 = new DataGridViewTextBoxColumn();
-            Column13 = new DataGridViewTextBoxColumn();
-            Column14 = new DataGridViewTextBoxColumn();
-            Column15 = new DataGridViewComboBoxColumn();
-            registros = new Label();
             panel1.SuspendLayout();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)grid_cortes).BeginInit();
@@ -179,6 +180,16 @@
             panel1.Size = new Size(1105, 51);
             panel1.TabIndex = 0;
             // 
+            // registros
+            // 
+            registros.AutoSize = true;
+            registros.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            registros.Location = new Point(920, 15);
+            registros.Name = "registros";
+            registros.Size = new Size(161, 25);
+            registros.TabIndex = 96;
+            registros.Text = "Registros : 1/100";
+            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -192,7 +203,7 @@
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { bot_primero, bot_anterior, bot_siguiente, bot_ultimo, bot_accion, bot_guardar, bot_cancelar, bot_imprimir, bot_exportar, bot_etiquetar });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { bot_primero, bot_anterior, bot_siguiente, bot_ultimo, bot_accion, toolStripButton1, bot_guardar, bot_cancelar, bot_imprimir, bot_exportar, bot_etiquetar });
             toolStrip1.Location = new Point(0, 51);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1105, 33);
@@ -208,6 +219,7 @@
             bot_primero.Name = "bot_primero";
             bot_primero.Size = new Size(80, 30);
             bot_primero.Text = "Primero";
+            bot_primero.Click += bot_primero_Click;
             // 
             // bot_anterior
             // 
@@ -218,6 +230,7 @@
             bot_anterior.Name = "bot_anterior";
             bot_anterior.Size = new Size(80, 30);
             bot_anterior.Text = "Anterior";
+            bot_anterior.Click += bot_anterior_Click;
             // 
             // bot_siguiente
             // 
@@ -229,6 +242,7 @@
             bot_siguiente.Size = new Size(80, 30);
             bot_siguiente.Text = "Siguiente";
             bot_siguiente.TextImageRelation = TextImageRelation.TextBeforeImage;
+            bot_siguiente.Click += bot_siguiente_Click;
             // 
             // bot_ultimo
             // 
@@ -240,6 +254,7 @@
             bot_ultimo.Size = new Size(80, 30);
             bot_ultimo.Text = "Ultimo";
             bot_ultimo.TextImageRelation = TextImageRelation.TextBeforeImage;
+            bot_ultimo.Click += bot_ultimo_Click;
             // 
             // bot_accion
             // 
@@ -293,6 +308,16 @@
             modificarOrdenToolStripMenuItem.Size = new Size(182, 22);
             modificarOrdenToolStripMenuItem.Text = "Modificar Orden";
             // 
+            // toolStripButton1
+            // 
+            toolStripButton1.AutoSize = false;
+            toolStripButton1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
+            toolStripButton1.ImageTransparentColor = Color.Magenta;
+            toolStripButton1.Name = "toolStripButton1";
+            toolStripButton1.Size = new Size(80, 30);
+            toolStripButton1.Text = "Guardar";
+            // 
             // bot_guardar
             // 
             bot_guardar.AutoSize = false;
@@ -301,7 +326,7 @@
             bot_guardar.ImageTransparentColor = Color.Magenta;
             bot_guardar.Name = "bot_guardar";
             bot_guardar.Size = new Size(80, 30);
-            bot_guardar.Text = "Guardar";
+            bot_guardar.Text = "Buscar";
             // 
             // bot_cancelar
             // 
@@ -356,15 +381,17 @@
             // 
             txt_numeroOC.Location = new Point(12, 101);
             txt_numeroOC.Name = "txt_numeroOC";
+            txt_numeroOC.ReadOnly = true;
             txt_numeroOC.Size = new Size(100, 23);
             txt_numeroOC.TabIndex = 3;
             // 
-            // txt_fecha_emiion
+            // txt_fecha_emision
             // 
-            txt_fecha_emiion.Location = new Point(118, 101);
-            txt_fecha_emiion.Name = "txt_fecha_emiion";
-            txt_fecha_emiion.Size = new Size(216, 23);
-            txt_fecha_emiion.TabIndex = 4;
+            txt_fecha_emision.Enabled = false;
+            txt_fecha_emision.Location = new Point(118, 101);
+            txt_fecha_emision.Name = "txt_fecha_emision";
+            txt_fecha_emision.Size = new Size(216, 23);
+            txt_fecha_emision.TabIndex = 4;
             // 
             // label3
             // 
@@ -377,6 +404,7 @@
             // 
             // txt_fecha_produccion
             // 
+            txt_fecha_produccion.Enabled = false;
             txt_fecha_produccion.Location = new Point(340, 101);
             txt_fecha_produccion.Name = "txt_fecha_produccion";
             txt_fecha_produccion.Size = new Size(216, 23);
@@ -395,6 +423,7 @@
             // 
             txt_rollid_1.Location = new Point(12, 143);
             txt_rollid_1.Name = "txt_rollid_1";
+            txt_rollid_1.ReadOnly = true;
             txt_rollid_1.Size = new Size(100, 23);
             txt_rollid_1.TabIndex = 9;
             // 
@@ -409,6 +438,7 @@
             // 
             // btn_buscar_rollid1
             // 
+            btn_buscar_rollid1.Enabled = false;
             btn_buscar_rollid1.Location = new Point(118, 143);
             btn_buscar_rollid1.Name = "btn_buscar_rollid1";
             btn_buscar_rollid1.Size = new Size(38, 23);
@@ -420,6 +450,7 @@
             // 
             txt_width1.Location = new Point(162, 143);
             txt_width1.Name = "txt_width1";
+            txt_width1.ReadOnly = true;
             txt_width1.Size = new Size(100, 23);
             txt_width1.TabIndex = 12;
             // 
@@ -436,6 +467,7 @@
             // 
             txt_length1.Location = new Point(268, 143);
             txt_length1.Name = "txt_length1";
+            txt_length1.ReadOnly = true;
             txt_length1.Size = new Size(100, 23);
             txt_length1.TabIndex = 14;
             // 
@@ -505,33 +537,37 @@
             label11.TabIndex = 21;
             label11.Text = "Real Utilizado:";
             // 
-            // textBox8
+            // txt_real1_width
             // 
-            textBox8.Location = new Point(162, 167);
-            textBox8.Name = "textBox8";
-            textBox8.Size = new Size(100, 23);
-            textBox8.TabIndex = 22;
+            txt_real1_width.Location = new Point(162, 167);
+            txt_real1_width.Name = "txt_real1_width";
+            txt_real1_width.ReadOnly = true;
+            txt_real1_width.Size = new Size(100, 23);
+            txt_real1_width.TabIndex = 22;
             // 
-            // textBox9
+            // txt_real1_length
             // 
-            textBox9.Location = new Point(267, 167);
-            textBox9.Name = "textBox9";
-            textBox9.Size = new Size(100, 23);
-            textBox9.TabIndex = 23;
+            txt_real1_length.Location = new Point(267, 167);
+            txt_real1_length.Name = "txt_real1_length";
+            txt_real1_length.ReadOnly = true;
+            txt_real1_length.Size = new Size(100, 23);
+            txt_real1_length.TabIndex = 23;
             // 
-            // txt_length2
+            // txt_matrest1_lenght
             // 
-            txt_length2.Location = new Point(267, 191);
-            txt_length2.Name = "txt_length2";
-            txt_length2.Size = new Size(100, 23);
-            txt_length2.TabIndex = 25;
+            txt_matrest1_lenght.Location = new Point(267, 191);
+            txt_matrest1_lenght.Name = "txt_matrest1_lenght";
+            txt_matrest1_lenght.ReadOnly = true;
+            txt_matrest1_lenght.Size = new Size(100, 23);
+            txt_matrest1_lenght.TabIndex = 25;
             // 
-            // textBox11
+            // txt_matrest1_width
             // 
-            textBox11.Location = new Point(162, 191);
-            textBox11.Name = "textBox11";
-            textBox11.Size = new Size(100, 23);
-            textBox11.TabIndex = 24;
+            txt_matrest1_width.Location = new Point(162, 191);
+            txt_matrest1_width.Name = "txt_matrest1_width";
+            txt_matrest1_width.ReadOnly = true;
+            txt_matrest1_width.Size = new Size(100, 23);
+            txt_matrest1_width.TabIndex = 24;
             // 
             // label12
             // 
@@ -546,25 +582,29 @@
             // 
             txt_rollid_2.Location = new Point(12, 214);
             txt_rollid_2.Name = "txt_rollid_2";
+            txt_rollid_2.ReadOnly = true;
             txt_rollid_2.Size = new Size(100, 23);
             txt_rollid_2.TabIndex = 28;
             // 
-            // textBox13
+            // txt_length2
             // 
-            textBox13.Location = new Point(267, 215);
-            textBox13.Name = "textBox13";
-            textBox13.Size = new Size(100, 23);
-            textBox13.TabIndex = 30;
+            txt_length2.Location = new Point(267, 215);
+            txt_length2.Name = "txt_length2";
+            txt_length2.ReadOnly = true;
+            txt_length2.Size = new Size(100, 23);
+            txt_length2.TabIndex = 30;
             // 
             // txt_width2
             // 
             txt_width2.Location = new Point(162, 215);
             txt_width2.Name = "txt_width2";
+            txt_width2.ReadOnly = true;
             txt_width2.Size = new Size(100, 23);
             txt_width2.TabIndex = 29;
             // 
             // btn_buscar_rollid2
             // 
+            btn_buscar_rollid2.Enabled = false;
             btn_buscar_rollid2.Location = new Point(118, 214);
             btn_buscar_rollid2.Name = "btn_buscar_rollid2";
             btn_buscar_rollid2.Size = new Size(38, 23);
@@ -638,33 +678,37 @@
             label17.TabIndex = 44;
             label17.Text = "Material Restante:";
             // 
-            // textBox18
+            // txt_matrest2_lenght
             // 
-            textBox18.Location = new Point(267, 263);
-            textBox18.Name = "textBox18";
-            textBox18.Size = new Size(100, 23);
-            textBox18.TabIndex = 43;
+            txt_matrest2_lenght.Location = new Point(267, 263);
+            txt_matrest2_lenght.Name = "txt_matrest2_lenght";
+            txt_matrest2_lenght.ReadOnly = true;
+            txt_matrest2_lenght.Size = new Size(100, 23);
+            txt_matrest2_lenght.TabIndex = 43;
             // 
-            // textBox19
+            // txt_matrest2_width
             // 
-            textBox19.Location = new Point(162, 263);
-            textBox19.Name = "textBox19";
-            textBox19.Size = new Size(100, 23);
-            textBox19.TabIndex = 42;
+            txt_matrest2_width.Location = new Point(162, 263);
+            txt_matrest2_width.Name = "txt_matrest2_width";
+            txt_matrest2_width.ReadOnly = true;
+            txt_matrest2_width.Size = new Size(100, 23);
+            txt_matrest2_width.TabIndex = 42;
             // 
-            // textBox20
+            // txt_real2_length
             // 
-            textBox20.Location = new Point(267, 239);
-            textBox20.Name = "textBox20";
-            textBox20.Size = new Size(100, 23);
-            textBox20.TabIndex = 41;
+            txt_real2_length.Location = new Point(267, 239);
+            txt_real2_length.Name = "txt_real2_length";
+            txt_real2_length.ReadOnly = true;
+            txt_real2_length.Size = new Size(100, 23);
+            txt_real2_length.TabIndex = 41;
             // 
-            // textBox21
+            // txt_real2_width
             // 
-            textBox21.Location = new Point(161, 239);
-            textBox21.Name = "textBox21";
-            textBox21.Size = new Size(100, 23);
-            textBox21.TabIndex = 40;
+            txt_real2_width.Location = new Point(161, 239);
+            txt_real2_width.Name = "txt_real2_width";
+            txt_real2_width.ReadOnly = true;
+            txt_real2_width.Size = new Size(100, 23);
+            txt_real2_width.TabIndex = 40;
             // 
             // label18
             // 
@@ -754,7 +798,7 @@
             txt_cust_name.Name = "txt_cust_name";
             txt_cust_name.Size = new Size(354, 23);
             txt_cust_name.TabIndex = 55;
-            txt_cust_name.TextChanged += textBox26_TextChanged;
+            txt_cust_name.TextChanged += TextBox26_TextChanged;
             // 
             // label24
             // 
@@ -775,11 +819,11 @@
             // label25
             // 
             label25.AutoSize = true;
-            label25.Location = new Point(685, 77);
+            label25.Location = new Point(659, 77);
             label25.Name = "label25";
-            label25.Size = new Size(62, 15);
+            label25.Size = new Size(159, 15);
             label25.TabIndex = 57;
-            label25.Text = "ENTRADA ";
+            label25.Text = "DIMENSION DE LOS CORTES ";
             // 
             // txt_ancho_corte
             // 
@@ -1029,6 +1073,75 @@
             grid_items.Size = new Size(903, 176);
             grid_items.TabIndex = 0;
             // 
+            // Column5
+            // 
+            Column5.HeaderText = "#";
+            Column5.Name = "Column5";
+            Column5.Width = 40;
+            // 
+            // Column6
+            // 
+            Column6.HeaderText = "Product Id.";
+            Column6.Name = "Column6";
+            Column6.Width = 80;
+            // 
+            // Column7
+            // 
+            Column7.HeaderText = "Product Name";
+            Column7.Name = "Column7";
+            Column7.Width = 200;
+            // 
+            // Column8
+            // 
+            Column8.HeaderText = "Unique Code";
+            Column8.Name = "Column8";
+            Column8.Width = 80;
+            // 
+            // Column9
+            // 
+            Column9.HeaderText = "Ancho";
+            Column9.Name = "Column9";
+            Column9.Width = 60;
+            // 
+            // Column10
+            // 
+            Column10.HeaderText = "Largo";
+            Column10.Name = "Column10";
+            Column10.Width = 60;
+            // 
+            // Column11
+            // 
+            Column11.HeaderText = "Msi";
+            Column11.Name = "Column11";
+            Column11.Width = 60;
+            // 
+            // Column12
+            // 
+            Column12.HeaderText = "Splice";
+            Column12.Name = "Column12";
+            Column12.Width = 60;
+            // 
+            // Column13
+            // 
+            Column13.HeaderText = "Roll-Id";
+            Column13.Name = "Column13";
+            Column13.Width = 60;
+            // 
+            // Column14
+            // 
+            Column14.HeaderText = "Code Person";
+            Column14.Name = "Column14";
+            Column14.Width = 80;
+            // 
+            // Column15
+            // 
+            Column15.HeaderText = "Status";
+            Column15.Items.AddRange(new object[] { "Retenido", "OK" });
+            Column15.Name = "Column15";
+            Column15.Resizable = DataGridViewTriState.True;
+            Column15.SortMode = DataGridViewColumnSortMode.Automatic;
+            Column15.Width = 80;
+            // 
             // tabControl1
             // 
             tabControl1.Controls.Add(tabPage1);
@@ -1158,85 +1271,6 @@
             chk_unificar_rollos.Text = "Unificar Rollo";
             chk_unificar_rollos.UseVisualStyleBackColor = true;
             // 
-            // Column5
-            // 
-            Column5.HeaderText = "#";
-            Column5.Name = "Column5";
-            Column5.Width = 40;
-            // 
-            // Column6
-            // 
-            Column6.HeaderText = "Product Id.";
-            Column6.Name = "Column6";
-            Column6.Width = 80;
-            // 
-            // Column7
-            // 
-            Column7.HeaderText = "Product Name";
-            Column7.Name = "Column7";
-            Column7.Width = 200;
-            // 
-            // Column8
-            // 
-            Column8.HeaderText = "Unique Code";
-            Column8.Name = "Column8";
-            Column8.Width = 80;
-            // 
-            // Column9
-            // 
-            Column9.HeaderText = "Ancho";
-            Column9.Name = "Column9";
-            Column9.Width = 60;
-            // 
-            // Column10
-            // 
-            Column10.HeaderText = "Largo";
-            Column10.Name = "Column10";
-            Column10.Width = 60;
-            // 
-            // Column11
-            // 
-            Column11.HeaderText = "Msi";
-            Column11.Name = "Column11";
-            Column11.Width = 60;
-            // 
-            // Column12
-            // 
-            Column12.HeaderText = "Splice";
-            Column12.Name = "Column12";
-            Column12.Width = 60;
-            // 
-            // Column13
-            // 
-            Column13.HeaderText = "Roll-Id";
-            Column13.Name = "Column13";
-            Column13.Width = 60;
-            // 
-            // Column14
-            // 
-            Column14.HeaderText = "Code Person";
-            Column14.Name = "Column14";
-            Column14.Width = 80;
-            // 
-            // Column15
-            // 
-            Column15.HeaderText = "Status";
-            Column15.Items.AddRange(new object[] { "Retenido", "OK" });
-            Column15.Name = "Column15";
-            Column15.Resizable = DataGridViewTriState.True;
-            Column15.SortMode = DataGridViewColumnSortMode.Automatic;
-            Column15.Width = 80;
-            // 
-            // registros
-            // 
-            registros.AutoSize = true;
-            registros.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            registros.Location = new Point(920, 15);
-            registros.Name = "registros";
-            registros.Size = new Size(161, 25);
-            registros.TabIndex = 96;
-            registros.Text = "Registros : 1/100";
-            // 
             // FrmOrdenCorte
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1294,10 +1328,10 @@
             Controls.Add(label19);
             Controls.Add(txt_product_id);
             Controls.Add(label17);
-            Controls.Add(textBox18);
-            Controls.Add(textBox19);
-            Controls.Add(textBox20);
-            Controls.Add(textBox21);
+            Controls.Add(txt_matrest2_lenght);
+            Controls.Add(txt_matrest2_width);
+            Controls.Add(txt_real2_length);
+            Controls.Add(txt_real2_width);
             Controls.Add(label18);
             Controls.Add(textBox15);
             Controls.Add(label14);
@@ -1307,14 +1341,14 @@
             Controls.Add(label16);
             Controls.Add(label13);
             Controls.Add(btn_buscar_rollid2);
-            Controls.Add(textBox13);
+            Controls.Add(txt_length2);
             Controls.Add(txt_width2);
             Controls.Add(txt_rollid_2);
             Controls.Add(label12);
-            Controls.Add(txt_length2);
-            Controls.Add(textBox11);
-            Controls.Add(textBox9);
-            Controls.Add(textBox8);
+            Controls.Add(txt_matrest1_lenght);
+            Controls.Add(txt_matrest1_width);
+            Controls.Add(txt_real1_length);
+            Controls.Add(txt_real1_width);
             Controls.Add(label11);
             Controls.Add(textBox7);
             Controls.Add(label10);
@@ -1332,13 +1366,14 @@
             Controls.Add(label4);
             Controls.Add(txt_fecha_produccion);
             Controls.Add(label3);
-            Controls.Add(txt_fecha_emiion);
+            Controls.Add(txt_fecha_emision);
             Controls.Add(txt_numeroOC);
             Controls.Add(label2);
             Controls.Add(toolStrip1);
             Controls.Add(panel1);
             Name = "FrmOrdenCorte";
             Text = " ";
+            Load += FrmOrdenCorte_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             toolStrip1.ResumeLayout(false);
@@ -1358,7 +1393,7 @@
         private ToolStrip toolStrip1;
         private Label label2;
         private TextBox txt_numeroOC;
-        private DateTimePicker txt_fecha_emiion;
+        private DateTimePicker txt_fecha_emision;
         private Label label3;
         private DateTimePicker txt_fecha_produccion;
         private Label label4;
@@ -1376,13 +1411,13 @@
         private TextBox textBox7;
         private Label label10;
         private Label label11;
-        private TextBox textBox8;
-        private TextBox textBox9;
-        private TextBox txt_length2;
-        private TextBox textBox11;
+        private TextBox txt_real1_width;
+        private TextBox txt_real1_length;
+        private TextBox txt_matrest1_lenght;
+        private TextBox txt_matrest1_width;
         private Label label12;
         private TextBox txt_rollid_2;
-        private TextBox textBox13;
+        private TextBox txt_length2;
         private TextBox txt_width2;
         private Button btn_buscar_rollid2;
         private Label label13;
@@ -1393,10 +1428,10 @@
         private TextBox txt_plus2;
         private Label label16;
         private Label label17;
-        private TextBox textBox18;
-        private TextBox textBox19;
-        private TextBox textBox20;
-        private TextBox textBox21;
+        private TextBox txt_matrest2_lenght;
+        private TextBox txt_matrest2_width;
+        private TextBox txt_real2_length;
+        private TextBox txt_real2_width;
         private Label label18;
         private Label label19;
         private TextBox txt_product_id;
@@ -1484,5 +1519,6 @@
         private DataGridViewTextBoxColumn Column14;
         private DataGridViewComboBoxColumn Column15;
         private Label registros;
+        private ToolStripButton toolStripButton1;
     }
 }
