@@ -161,10 +161,11 @@
             bot_ordencorte.Text = "Orden Corte";
             bot_ordencorte.TextImageRelation = TextImageRelation.ImageBeforeText;
             bot_ordencorte.UseVisualStyleBackColor = true;
+            bot_ordencorte.Click += bot_ordencorte_Click;
             // 
             // Main
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(935, 536);

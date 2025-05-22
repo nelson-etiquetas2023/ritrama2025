@@ -93,6 +93,36 @@ namespace Ritrama2025.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap approved_delivery_24px {
+            get {
+                object obj = ResourceManager.GetObject("approved_delivery_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap automation_24px {
+            get {
+                object obj = ResourceManager.GetObject("automation_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap create_24px {
+            get {
+                object obj = ResourceManager.GetObject("create_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DATA_DOWNLOAD48 {
             get {
                 object obj = ResourceManager.GetObject("DATA_DOWNLOAD48", resourceCulture);
@@ -133,6 +163,26 @@ namespace Ritrama2025.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap double_left_48px {
+            get {
+                object obj = ResourceManager.GetObject("double_left_48px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap edit_24px {
+            get {
+                object obj = ResourceManager.GetObject("edit_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap LOGO {
             get {
                 object obj = ResourceManager.GetObject("LOGO", resourceCulture);
@@ -146,6 +196,16 @@ namespace Ritrama2025.Properties {
         internal static System.Drawing.Bitmap multiply_32px {
             get {
                 object obj = ResourceManager.GetObject("multiply_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap price_tag_24px {
+            get {
+                object obj = ResourceManager.GetObject("price_tag_24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -246,6 +306,16 @@ namespace Ritrama2025.Properties {
         internal static System.Drawing.Bitmap ROWDELETE48 {
             get {
                 object obj = ResourceManager.GetObject("ROWDELETE48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap security_document_24px {
+            get {
+                object obj = ResourceManager.GetObject("security_document_24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
