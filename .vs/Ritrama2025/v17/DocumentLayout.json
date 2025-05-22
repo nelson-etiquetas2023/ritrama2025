@@ -1,12 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Programacion\\Ritrama2025\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|c:\\programacion\\ritrama2025\\forms\\frmdespacho.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|solutionrelative:forms\\frmdespacho.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -65,40 +60,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "d46b590b-11c8-4e40-b43c-3dd26d070574",
-        "Display": 1,
-        "X": 201,
-        "Y": 102,
-        "Width": 1264,
-        "Height": 774,
-        "WindowState": 0
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "FrmDespacho.cs",
-              "DocumentMoniker": "C:\\Programacion\\Ritrama2025\\Forms\\FrmDespacho.cs",
-              "RelativeDocumentMoniker": "Forms\\FrmDespacho.cs",
-              "ToolTip": "C:\\Programacion\\Ritrama2025\\Forms\\FrmDespacho.cs",
-              "RelativeToolTip": "Forms\\FrmDespacho.cs",
-              "ViewState": "AgIAAGcAAAAAAAAAAAAYwHYAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-22T14:52:24.469Z",
-              "EditorCaption": ""
             }
           ]
         }

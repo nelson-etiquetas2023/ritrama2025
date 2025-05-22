@@ -44,6 +44,12 @@ namespace Ritrama2025.Forms
             txt_matrest1_lenght.DataBindings.Add("Text", Bs, "rest1_lenght");
             txt_matrest2_width.DataBindings.Add("Text", Bs, "rest2_width");
             txt_matrest2_lenght.DataBindings.Add("Text", Bs, "rest2_lenght");
+            txt_product_id.DataBindings.Add("Text", Bs, "product_id");
+            txt_product_name.DataBindings.Add("Text", Bs, "product_Name");
+            txt_operador_id.DataBindings.Add("Text", Bs, "id_operador");
+            txt_operador_name.DataBindings.Add("Text", Bs, "nombre");
+            txt_cust_id.DataBindings.Add("Text", Bs, "customer_id");
+            txt_cust_name.DataBindings.Add("Text", Bs, "customer_name");
 
 
         }

@@ -732,6 +732,7 @@
             // 
             txt_product_id.Location = new Point(12, 303);
             txt_product_id.Name = "txt_product_id";
+            txt_product_id.ReadOnly = true;
             txt_product_id.Size = new Size(100, 23);
             txt_product_id.TabIndex = 45;
             // 
@@ -739,6 +740,7 @@
             // 
             txt_product_name.Location = new Point(161, 303);
             txt_product_name.Name = "txt_product_name";
+            txt_product_name.ReadOnly = true;
             txt_product_name.Size = new Size(401, 23);
             txt_product_name.TabIndex = 47;
             // 
@@ -764,6 +766,7 @@
             // 
             txt_operador_id.Location = new Point(12, 347);
             txt_operador_id.Name = "txt_operador_id";
+            txt_operador_id.ReadOnly = true;
             txt_operador_id.Size = new Size(100, 23);
             txt_operador_id.TabIndex = 49;
             // 
@@ -780,6 +783,7 @@
             // 
             txt_operador_name.Location = new Point(162, 347);
             txt_operador_name.Name = "txt_operador_name";
+            txt_operador_name.ReadOnly = true;
             txt_operador_name.Size = new Size(354, 23);
             txt_operador_name.TabIndex = 51;
             // 
@@ -796,6 +800,7 @@
             // 
             txt_cust_name.Location = new Point(162, 391);
             txt_cust_name.Name = "txt_cust_name";
+            txt_cust_name.ReadOnly = true;
             txt_cust_name.Size = new Size(354, 23);
             txt_cust_name.TabIndex = 55;
             txt_cust_name.TextChanged += TextBox26_TextChanged;
@@ -813,6 +818,7 @@
             // 
             txt_cust_id.Location = new Point(12, 391);
             txt_cust_id.Name = "txt_cust_id";
+            txt_cust_id.ReadOnly = true;
             txt_cust_id.Size = new Size(100, 23);
             txt_cust_id.TabIndex = 53;
             // 
@@ -878,6 +884,7 @@
             // 
             // btn_buscar_customer
             // 
+            btn_buscar_customer.Enabled = false;
             btn_buscar_customer.Location = new Point(522, 391);
             btn_buscar_customer.Name = "btn_buscar_customer";
             btn_buscar_customer.Size = new Size(38, 23);
@@ -887,6 +894,7 @@
             // 
             // btn_buscar_operador
             // 
+            btn_buscar_operador.Enabled = false;
             btn_buscar_operador.Location = new Point(522, 347);
             btn_buscar_operador.Name = "btn_buscar_operador";
             btn_buscar_operador.Size = new Size(38, 23);
