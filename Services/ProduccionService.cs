@@ -10,7 +10,8 @@ namespace Ritrama2025.Services
         public DataSet Ds = new();
         public SqlDataAdapter DaMaster = new();
         public DataTable DtMaster = new();
-
+        public SqlDataAdapter DaCortes = new();
+        public DataTable DtCortes = new();
 
         public ProduccionService()
         {
@@ -38,13 +39,43 @@ namespace Ritrama2025.Services
                 await readerMaster.CloseAsync();
                 DaMaster.SelectCommand = ComandoMaster;
                 DaMaster.Fill(Ds, "DtMaster");
+                //2.- cargar la tabla de cortes.    
+                SqlCommand ComandoCortes = new()
+                {
+                    Connection = conn,
+                    CommandText = "select num,width,lenght,msi,orden,code_person from cortes",
+                    CommandType = CommandType.Text
+                };
+                SqlDataReader readerCortes = await ComandoCortes.ExecuteReaderAsync();
+                await readerCortes.CloseAsync();
+                DaCortes.SelectCommand = ComandoCortes;
+                DaCortes.Fill(Ds, "DtCortes");
             }
             catch (SqlException ex)
             {
                 ErrorMsg = ex.Message;
                 throw;
             }
+            SetRelaionsTables();
             return Ds;
+        }
+
+        public Boolean SetRelaionsTables() 
+        {
+            try
+            {
+                //Relacion entre master y Cortes.
+                DataColumn ParentCol0 = Ds.Tables["DtMaster"]!.Columns["numero"]!;
+                DataColumn ChildCol0 = Ds.Tables["DtCortes"]!.Columns["orden"]!;
+                DataRelation Despacho_Cortes = new("FK_ENCABEZADO_CORTES", ParentCol0, ChildCol0,false);
+                Ds.Relations.Add(Despacho_Cortes);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ErrorMsg = ex.Message;
+                return false;
+            }
         }
     }
 }

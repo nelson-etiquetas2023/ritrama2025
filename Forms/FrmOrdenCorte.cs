@@ -10,6 +10,8 @@ namespace Ritrama2025.Forms
         private readonly ProduccionService Service = new();
         DataSet Ds = new();
         readonly BindingSource Bs = [];
+        readonly BindingSource BsCortes = [];
+
 
         public FrmOrdenCorte()
         {
@@ -28,6 +30,51 @@ namespace Ritrama2025.Forms
             //Enlace a datos Encabezado.
             Bs.DataSource = Ds;
             Bs.DataMember = "DtMaster";
+            //Enlace a datos Encabezado de la Orden Corte.
+            HeaderBinding();
+            //Enlace a datos de Grid-Cortes.
+            BsCortes.DataSource = Bs;
+            BsCortes.DataMember = "FK_ENCABEZADO_CORTES";
+            
+            grid_cortes.AutoGenerateColumns = false;
+            ADD_COLUMN_GRID("it",25,"It.","num",grid_cortes);
+            ADD_COLUMN_GRID("width", 60, "Width", "width", grid_cortes);
+            ADD_COLUMN_GRID("lenght", 60, "Lenght", "lenght", grid_cortes);
+            ADD_COLUMN_GRID("msi", 60, "Msi", "msi", grid_cortes);
+            ADD_COLUMN_GRID("code_person", 80, "Code Person", "code_person", grid_cortes);
+
+            grid_cortes.DataSource = BsCortes;
+
+
+
+        }
+
+        private void TextBox26_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Bot_primero_Click(object sender, EventArgs e)
+        {
+            Bs.Position = 0;
+        }
+
+        private void Bot_anterior_Click(object sender, EventArgs e)
+        {
+            Bs.Position -= 1;
+        }
+
+        private void Bot_siguiente_Click(object sender, EventArgs e)
+        {
+            Bs.Position += 1;
+        }
+
+        private void Bot_ultimo_Click(object sender, EventArgs e)
+        {
+            Bs.Position = Bs.Count - 1;
+        }
+        private void HeaderBinding()
+        {
             txt_numeroOC.DataBindings.Add("Text", Bs, "numero");
             txt_fecha_emision.DataBindings.Add("Text", Bs, "fecha");
             txt_fecha_produccion.DataBindings.Add("Text", Bs, "fecha_produccion");
@@ -56,35 +103,26 @@ namespace Ritrama2025.Forms
             txt_plus1.DataBindings.Add("Text", Bs, "plus1_pies");
             txt_plus2.DataBindings.Add("Text", Bs, "plus2_pies");
             txt_long_cortar.DataBindings.Add("Text", Bs, "longitud_cortar");
-            txt_cortes_ancho.DataBindings.Add("Text", Bs, "cortes_ancho");    
+            txt_cortes_ancho.DataBindings.Add("Text", Bs, "cortes_ancho");
             txt_vueltas1.DataBindings.Add("Text", Bs, "cortes_largo");
             txt_rollos_cortar1.DataBindings.Add("Text", Bs, "cant_rollos");
             txt_ancho_corte.DataBindings.Add("Text", Bs, "total_salida");
         }
 
-        private void TextBox26_TextChanged(object sender, EventArgs e)
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
         }
-
-        private void Bot_primero_Click(object sender, EventArgs e)
+        private static void ADD_COLUMN_GRID(string name, int size, string title, string field_bd, DataGridView grid)
         {
-            Bs.Position = 0;
-        }
-
-        private void Bot_anterior_Click(object sender, EventArgs e)
-        {
-            Bs.Position -= 1;
-        }
-
-        private void Bot_siguiente_Click(object sender, EventArgs e)
-        {
-            Bs.Position += 1;
-        }
-
-        private void Bot_ultimo_Click(object sender, EventArgs e)
-        {
-            Bs.Position = Bs.Count - 1;
+            DataGridViewTextBoxColumn col = new()
+            {
+                Name = name,
+                Width = size,
+                HeaderText = title,
+                DataPropertyName = field_bd,
+            };
+            grid.Columns.Add(col);
         }
     }
 }

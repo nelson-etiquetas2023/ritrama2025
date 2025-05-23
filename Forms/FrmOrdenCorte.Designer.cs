@@ -114,11 +114,6 @@
             btn_buscar_customer = new Button();
             btn_buscar_operador = new Button();
             grid_cortes = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column16 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
             btn_generar_rollos = new Button();
             btn_add_row_corte = new Button();
             txt_delete_row_corte = new Button();
@@ -209,6 +204,7 @@
             toolStrip1.Size = new Size(1105, 33);
             toolStrip1.TabIndex = 1;
             toolStrip1.Text = "toolStrip1";
+            toolStrip1.ItemClicked += toolStrip1_ItemClicked;
             // 
             // bot_primero
             // 
@@ -913,49 +909,27 @@
             // 
             // grid_cortes
             // 
+            grid_cortes.AllowUserToAddRows = false;
+            grid_cortes.AllowUserToDeleteRows = false;
+            grid_cortes.AllowUserToResizeRows = false;
+            grid_cortes.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             grid_cortes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            grid_cortes.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column16, Column4 });
-            grid_cortes.Location = new Point(571, 136);
+            grid_cortes.Location = new Point(569, 136);
+            grid_cortes.MultiSelect = false;
             grid_cortes.Name = "grid_cortes";
-            grid_cortes.Size = new Size(312, 150);
+            grid_cortes.ReadOnly = true;
+            grid_cortes.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            grid_cortes.RowHeadersWidth = 32;
+            grid_cortes.ScrollBars = ScrollBars.Vertical;
+            grid_cortes.Size = new Size(353, 150);
             grid_cortes.TabIndex = 66;
-            // 
-            // Column1
-            // 
-            Column1.HeaderText = "It.";
-            Column1.Name = "Column1";
-            Column1.Width = 30;
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "Width";
-            Column2.Name = "Column2";
-            Column2.Width = 60;
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "Length";
-            Column3.Name = "Column3";
-            Column3.Width = 60;
-            // 
-            // Column16
-            // 
-            Column16.HeaderText = "Msi";
-            Column16.Name = "Column16";
-            Column16.Width = 60;
-            // 
-            // Column4
-            // 
-            Column4.HeaderText = "C/Personal";
-            Column4.Name = "Column4";
-            Column4.Width = 90;
             // 
             // btn_generar_rollos
             // 
             btn_generar_rollos.Image = (Image)resources.GetObject("btn_generar_rollos.Image");
-            btn_generar_rollos.Location = new Point(571, 292);
+            btn_generar_rollos.Location = new Point(569, 292);
             btn_generar_rollos.Name = "btn_generar_rollos";
-            btn_generar_rollos.Size = new Size(312, 52);
+            btn_generar_rollos.Size = new Size(353, 52);
             btn_generar_rollos.TabIndex = 67;
             btn_generar_rollos.Text = "Generar Rollos";
             btn_generar_rollos.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -965,7 +939,7 @@
             // 
             btn_add_row_corte.Enabled = false;
             btn_add_row_corte.Image = (Image)resources.GetObject("btn_add_row_corte.Image");
-            btn_add_row_corte.Location = new Point(889, 135);
+            btn_add_row_corte.Location = new Point(929, 135);
             btn_add_row_corte.Name = "btn_add_row_corte";
             btn_add_row_corte.Size = new Size(99, 38);
             btn_add_row_corte.TabIndex = 68;
@@ -977,7 +951,7 @@
             // 
             txt_delete_row_corte.Enabled = false;
             txt_delete_row_corte.Image = (Image)resources.GetObject("txt_delete_row_corte.Image");
-            txt_delete_row_corte.Location = new Point(889, 173);
+            txt_delete_row_corte.Location = new Point(929, 173);
             txt_delete_row_corte.Name = "txt_delete_row_corte";
             txt_delete_row_corte.Size = new Size(99, 38);
             txt_delete_row_corte.TabIndex = 69;
@@ -987,16 +961,16 @@
             // 
             // txt_long_cortar
             // 
-            txt_long_cortar.Location = new Point(889, 234);
+            txt_long_cortar.Location = new Point(929, 234);
             txt_long_cortar.Name = "txt_long_cortar";
             txt_long_cortar.ReadOnly = true;
-            txt_long_cortar.Size = new Size(100, 23);
+            txt_long_cortar.Size = new Size(86, 23);
             txt_long_cortar.TabIndex = 71;
             // 
             // label29
             // 
             label29.AutoSize = true;
-            label29.Location = new Point(889, 216);
+            label29.Location = new Point(929, 216);
             label29.Name = "label29";
             label29.Size = new Size(106, 15);
             label29.TabIndex = 70;
@@ -1004,16 +978,16 @@
             // 
             // txt_vueltas1
             // 
-            txt_vueltas1.Location = new Point(889, 278);
+            txt_vueltas1.Location = new Point(929, 278);
             txt_vueltas1.Name = "txt_vueltas1";
             txt_vueltas1.ReadOnly = true;
-            txt_vueltas1.Size = new Size(100, 23);
+            txt_vueltas1.Size = new Size(80, 23);
             txt_vueltas1.TabIndex = 73;
             // 
             // label30
             // 
             label30.AutoSize = true;
-            label30.Location = new Point(889, 260);
+            label30.Location = new Point(929, 260);
             label30.Name = "label30";
             label30.Size = new Size(86, 15);
             label30.TabIndex = 72;
@@ -1021,24 +995,24 @@
             // 
             // txt_vueltas2
             // 
-            txt_vueltas2.Location = new Point(995, 278);
+            txt_vueltas2.Location = new Point(1016, 279);
             txt_vueltas2.Name = "txt_vueltas2";
             txt_vueltas2.ReadOnly = true;
-            txt_vueltas2.Size = new Size(100, 23);
+            txt_vueltas2.Size = new Size(77, 23);
             txt_vueltas2.TabIndex = 74;
             // 
             // txt_cortes_ancho
             // 
-            txt_cortes_ancho.Location = new Point(889, 323);
+            txt_cortes_ancho.Location = new Point(929, 323);
             txt_cortes_ancho.Name = "txt_cortes_ancho";
             txt_cortes_ancho.ReadOnly = true;
-            txt_cortes_ancho.Size = new Size(100, 23);
+            txt_cortes_ancho.Size = new Size(86, 23);
             txt_cortes_ancho.TabIndex = 76;
             // 
             // label31
             // 
             label31.AutoSize = true;
-            label31.Location = new Point(889, 305);
+            label31.Location = new Point(929, 305);
             label31.Name = "label31";
             label31.Size = new Size(107, 15);
             label31.TabIndex = 75;
@@ -1046,24 +1020,24 @@
             // 
             // txt_rollos_cortar2
             // 
-            txt_rollos_cortar2.Location = new Point(995, 367);
+            txt_rollos_cortar2.Location = new Point(1021, 367);
             txt_rollos_cortar2.Name = "txt_rollos_cortar2";
             txt_rollos_cortar2.ReadOnly = true;
-            txt_rollos_cortar2.Size = new Size(100, 23);
+            txt_rollos_cortar2.Size = new Size(72, 23);
             txt_rollos_cortar2.TabIndex = 79;
             // 
             // txt_rollos_cortar1
             // 
-            txt_rollos_cortar1.Location = new Point(889, 367);
+            txt_rollos_cortar1.Location = new Point(929, 367);
             txt_rollos_cortar1.Name = "txt_rollos_cortar1";
             txt_rollos_cortar1.ReadOnly = true;
-            txt_rollos_cortar1.Size = new Size(100, 23);
+            txt_rollos_cortar1.Size = new Size(86, 23);
             txt_rollos_cortar1.TabIndex = 78;
             // 
             // label32
             // 
             label32.AutoSize = true;
-            label32.Location = new Point(889, 349);
+            label32.Location = new Point(929, 349);
             label32.Name = "label32";
             label32.Size = new Size(118, 15);
             label32.TabIndex = 77;
@@ -1289,7 +1263,7 @@
             // chk_unificar_rollos
             // 
             chk_unificar_rollos.AutoSize = true;
-            chk_unificar_rollos.Location = new Point(889, 397);
+            chk_unificar_rollos.Location = new Point(929, 397);
             chk_unificar_rollos.Name = "chk_unificar_rollos";
             chk_unificar_rollos.Size = new Size(97, 19);
             chk_unificar_rollos.TabIndex = 95;
@@ -1519,11 +1493,6 @@
         private ToolStripButton bot_guardar;
         private ToolStripButton bot_cancelar;
         private ToolStripButton bot_imprimir;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column16;
-        private DataGridViewTextBoxColumn Column4;
         private ToolStripButton bot_exportar;
         private ToolStripDropDownButton bot_accion;
         private ToolStripMenuItem opt_create_document;
