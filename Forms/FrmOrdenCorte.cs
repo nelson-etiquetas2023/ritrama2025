@@ -1,7 +1,5 @@
-﻿using DocumentFormat.OpenXml.Drawing.Charts;
-using Ritrama2025.Services;
+﻿using Ritrama2025.Services;
 using System.Data;
-
 
 namespace Ritrama2025.Forms
 {
@@ -11,13 +9,18 @@ namespace Ritrama2025.Forms
         DataSet Ds = new();
         readonly BindingSource Bs = [];
         readonly BindingSource BsCortes = [];
-
+        private readonly Color LineColor = Color.DarkGray;
+        public Pen pen1 = new (Color.Black, 4);
+        public Pen pen2 = new (Color.Black, 4);
+        public Pen pen3 = new (Color.Black, 4);
+        public Pen pen4 = new (Color.Black, 4);
+        int StepIndicator = 0;
 
         public FrmOrdenCorte()
         {
             InitializeComponent();
+            this.Paint += new PaintEventHandler(FrmOrdenCorte_Paint);            
         }
-
 
         private void FrmOrdenCorte_Load(object sender, EventArgs e)
         {
@@ -35,23 +38,13 @@ namespace Ritrama2025.Forms
             //Enlace a datos de Grid-Cortes.
             BsCortes.DataSource = Bs;
             BsCortes.DataMember = "FK_ENCABEZADO_CORTES";
-            
             grid_cortes.AutoGenerateColumns = false;
-            ADD_COLUMN_GRID("it",25,"It.","num",grid_cortes);
+            ADD_COLUMN_GRID("it", 25, "It.", "num", grid_cortes);
             ADD_COLUMN_GRID("width", 60, "Width", "width", grid_cortes);
             ADD_COLUMN_GRID("lenght", 60, "Lenght", "lenght", grid_cortes);
             ADD_COLUMN_GRID("msi", 60, "Msi", "msi", grid_cortes);
             ADD_COLUMN_GRID("code_person", 80, "Code Person", "code_person", grid_cortes);
-
             grid_cortes.DataSource = BsCortes;
-
-
-
-        }
-
-        private void TextBox26_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void Bot_primero_Click(object sender, EventArgs e)
@@ -109,7 +102,7 @@ namespace Ritrama2025.Forms
             txt_ancho_corte.DataBindings.Add("Text", Bs, "total_salida");
         }
 
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void ToolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
         }
@@ -123,6 +116,52 @@ namespace Ritrama2025.Forms
                 DataPropertyName = field_bd,
             };
             grid.Columns.Add(col);
+        }
+        private void FrmOrdenCorte_Paint(object? sender, PaintEventArgs e)
+        {
+            Graphics lin1 = e.Graphics;
+            Graphics lin2 = e.Graphics;
+            Graphics lin3 = e.Graphics;
+            Graphics lin4 = e.Graphics;
+            // Crear un Pen de color rojo y grosor 10
+            lin1.DrawLine(pen1, 200, 658, 240, 658);
+            lin2.DrawLine(pen2, 280, 658, 320, 658); 
+            lin3.DrawLine(pen3, 360, 658, 400, 658);
+            lin4.DrawLine(pen4, 440, 658, 480, 658);
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            StepIndicator++;
+            switch (StepIndicator)
+            {
+                case 1:
+                    pictureBox1.Image = imageList1.Images[0]; // Cambia la imagen del PictureBox
+                    break;
+                case 2:
+                    pictureBox1.Image = imageList1.Images[5]; // Cambia la imagen del PictureBox
+
+                    pictureBox2.Image = imageList1.Images[1]; // Cambia la imagen del PictureBox
+
+                    pen1.Color = Color.DarkGray;
+                    break;
+                case 3:
+                    pictureBox2.Image = imageList1.Images[6]; // Cambia la imagen del PictureBox
+                    pictureBox3.Image = imageList1.Images[2]; // Cambia la imagen del PictureBox
+                    pen2.Color = Color.DarkGray;
+                    break;
+                case 4:
+                    pictureBox3.Image = imageList1.Images[7]; // Cambia la imagen del PictureBox
+                    pictureBox4.Image = imageList1.Images[3]; // Cambia la imagen del PictureBox
+                    pen3.Color = Color.DarkGray;
+                    break;
+                case 5:
+                    pictureBox4.Image = imageList1.Images[8]; // Cambia la imagen del PictureBox
+                    pictureBox5.Image = imageList1.Images[4]; // Cambia la imagen del PictureBox
+                    pen4.Color = Color.DarkGray;
+                    break;
+            }
+            this.Invalidate(); // Redibuja el formulario para aplicar el nuevo color
         }
     }
 }

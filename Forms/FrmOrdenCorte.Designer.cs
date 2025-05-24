@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmOrdenCorte));
             panel1 = new Panel();
             registros = new Label();
@@ -144,11 +145,6 @@
             tabControl1 = new TabControl();
             chk_document_anul = new CheckBox();
             chk_orden_rebobinado = new CheckBox();
-            progress_step1 = new Panel();
-            progress_step2 = new Panel();
-            progress_step3 = new Panel();
-            progress_step4 = new Panel();
-            progress_step5 = new Panel();
             label34 = new Label();
             label_status = new Label();
             btn_vueltas = new Button();
@@ -156,12 +152,24 @@
             label36 = new Label();
             btn_code_person = new Button();
             chk_unificar_rollos = new CheckBox();
+            pictureBox1 = new PictureBox();
+            pictureBox2 = new PictureBox();
+            pictureBox3 = new PictureBox();
+            pictureBox4 = new PictureBox();
+            pictureBox5 = new PictureBox();
+            button1 = new Button();
+            imageList1 = new ImageList(components);
             panel1.SuspendLayout();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)grid_cortes).BeginInit();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)grid_items).BeginInit();
             tabControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -204,7 +212,7 @@
             toolStrip1.Size = new Size(1105, 33);
             toolStrip1.TabIndex = 1;
             toolStrip1.Text = "toolStrip1";
-            toolStrip1.ItemClicked += toolStrip1_ItemClicked;
+            toolStrip1.ItemClicked += ToolStrip1_ItemClicked;
             // 
             // bot_primero
             // 
@@ -805,7 +813,6 @@
             txt_cust_name.ReadOnly = true;
             txt_cust_name.Size = new Size(354, 23);
             txt_cust_name.TabIndex = 55;
-            txt_cust_name.TextChanged += TextBox26_TextChanged;
             // 
             // label24
             // 
@@ -1144,7 +1151,7 @@
             // tabControl1
             // 
             tabControl1.Controls.Add(tabPage1);
-            tabControl1.Location = new Point(12, 420);
+            tabControl1.Location = new Point(12, 417);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(920, 216);
@@ -1170,45 +1177,10 @@
             chk_orden_rebobinado.Text = "Orden Rebobinado";
             chk_orden_rebobinado.UseVisualStyleBackColor = true;
             // 
-            // progress_step1
-            // 
-            progress_step1.Location = new Point(161, 639);
-            progress_step1.Name = "progress_step1";
-            progress_step1.Size = new Size(34, 31);
-            progress_step1.TabIndex = 84;
-            // 
-            // progress_step2
-            // 
-            progress_step2.Location = new Point(201, 639);
-            progress_step2.Name = "progress_step2";
-            progress_step2.Size = new Size(34, 31);
-            progress_step2.TabIndex = 85;
-            // 
-            // progress_step3
-            // 
-            progress_step3.Location = new Point(241, 639);
-            progress_step3.Name = "progress_step3";
-            progress_step3.Size = new Size(34, 31);
-            progress_step3.TabIndex = 86;
-            // 
-            // progress_step4
-            // 
-            progress_step4.Location = new Point(281, 639);
-            progress_step4.Name = "progress_step4";
-            progress_step4.Size = new Size(34, 31);
-            progress_step4.TabIndex = 87;
-            // 
-            // progress_step5
-            // 
-            progress_step5.Location = new Point(321, 639);
-            progress_step5.Name = "progress_step5";
-            progress_step5.Size = new Size(34, 31);
-            progress_step5.TabIndex = 88;
-            // 
             // label34
             // 
             label34.AutoSize = true;
-            label34.Location = new Point(162, 673);
+            label34.Location = new Point(934, 450);
             label34.Name = "label34";
             label34.Size = new Size(111, 15);
             label34.TabIndex = 89;
@@ -1218,7 +1190,7 @@
             // 
             label_status.AutoSize = true;
             label_status.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label_status.Location = new Point(279, 673);
+            label_status.Location = new Point(934, 467);
             label_status.Name = "label_status";
             label_status.Size = new Size(62, 15);
             label_status.TabIndex = 90;
@@ -1270,11 +1242,94 @@
             chk_unificar_rollos.Text = "Unificar Rollo";
             chk_unificar_rollos.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(159, 637);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(40, 40);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 96;
+            pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Enabled = false;
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(241, 637);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(40, 40);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 97;
+            pictureBox2.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(321, 637);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(40, 40);
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox3.TabIndex = 98;
+            pictureBox3.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
+            pictureBox4.Location = new Point(400, 637);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(40, 40);
+            pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox4.TabIndex = 99;
+            pictureBox4.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
+            pictureBox5.Location = new Point(479, 637);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(40, 40);
+            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox5.TabIndex = 100;
+            pictureBox5.TabStop = false;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(940, 501);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 101;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += Button1_Click;
+            // 
+            // imageList1
+            // 
+            imageList1.ColorDepth = ColorDepth.Depth32Bit;
+            imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
+            imageList1.TransparentColor = Color.Transparent;
+            imageList1.Images.SetKeyName(0, "step1.png");
+            imageList1.Images.SetKeyName(1, "step2_active.png");
+            imageList1.Images.SetKeyName(2, "step3_active.png");
+            imageList1.Images.SetKeyName(3, "step4_active.png");
+            imageList1.Images.SetKeyName(4, "step5_active.png");
+            imageList1.Images.SetKeyName(5, "step1_deactivate.png");
+            imageList1.Images.SetKeyName(6, "step2_deactivate.png");
+            imageList1.Images.SetKeyName(7, "step3_deactive.png");
+            imageList1.Images.SetKeyName(8, "step4_deactive.png");
+            imageList1.Images.SetKeyName(9, "step5_deactive.png");
+            // 
             // FrmOrdenCorte
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1105, 692);
+            Controls.Add(button1);
+            Controls.Add(pictureBox5);
+            Controls.Add(pictureBox4);
+            Controls.Add(pictureBox3);
+            Controls.Add(pictureBox2);
+            Controls.Add(pictureBox1);
             Controls.Add(chk_unificar_rollos);
             Controls.Add(btn_code_person);
             Controls.Add(txt_code_person);
@@ -1282,11 +1337,6 @@
             Controls.Add(btn_vueltas);
             Controls.Add(label_status);
             Controls.Add(label34);
-            Controls.Add(progress_step5);
-            Controls.Add(progress_step4);
-            Controls.Add(progress_step3);
-            Controls.Add(progress_step2);
-            Controls.Add(progress_step1);
             Controls.Add(chk_orden_rebobinado);
             Controls.Add(chk_document_anul);
             Controls.Add(tabControl1);
@@ -1381,6 +1431,11 @@
             tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)grid_items).EndInit();
             tabControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1473,11 +1528,6 @@
         private DataGridView grid_items;
         private CheckBox chk_document_anul;
         private CheckBox chk_orden_rebobinado;
-        private Panel progress_step1;
-        private Panel progress_step2;
-        private Panel progress_step3;
-        private Panel progress_step4;
-        private Panel progress_step5;
         private Label label34;
         private Label label_status;
         private Button btn_vueltas;
@@ -1514,5 +1564,12 @@
         private DataGridViewComboBoxColumn Column15;
         private Label registros;
         private ToolStripButton toolStripButton1;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox3;
+        private PictureBox pictureBox4;
+        private PictureBox pictureBox5;
+        private Button button1;
+        private ImageList imageList1;
     }
 }
