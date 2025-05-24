@@ -148,6 +148,7 @@
             pictureBox5 = new PictureBox();
             button1 = new Button();
             imageList1 = new ImageList(components);
+            pictureBox6 = new PictureBox();
             panel1.SuspendLayout();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)grid_cortes).BeginInit();
@@ -159,17 +160,19 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = SystemColors.ControlLightLight;
+            panel1.Controls.Add(pictureBox6);
             panel1.Controls.Add(registros);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1105, 51);
+            panel1.Size = new Size(1105, 52);
             panel1.TabIndex = 0;
             // 
             // registros
@@ -196,7 +199,7 @@
             // toolStrip1
             // 
             toolStrip1.Items.AddRange(new ToolStripItem[] { bot_primero, bot_anterior, bot_siguiente, bot_ultimo, bot_accion, toolStripButton1, bot_guardar, bot_cancelar, bot_imprimir, bot_exportar, bot_etiquetar });
-            toolStrip1.Location = new Point(0, 51);
+            toolStrip1.Location = new Point(0, 52);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1105, 33);
             toolStrip1.TabIndex = 1;
@@ -264,6 +267,7 @@
             opt_create_document.Name = "opt_create_document";
             opt_create_document.Size = new Size(182, 22);
             opt_create_document.Text = "Crear Orden";
+            opt_create_document.Click += Opt_create_document_Click;
             // 
             // opt_send_production
             // 
@@ -437,6 +441,7 @@
             btn_buscar_rollid1.TabIndex = 10;
             btn_buscar_rollid1.Text = "...";
             btn_buscar_rollid1.UseVisualStyleBackColor = true;
+            btn_buscar_rollid1.Click += btn_buscar_rollid1_Click;
             // 
             // txt_width1
             // 
@@ -1245,6 +1250,15 @@
             imageList1.Images.SetKeyName(8, "step4_deactive.png");
             imageList1.Images.SetKeyName(9, "step5_deactive.png");
             // 
+            // pictureBox6
+            // 
+            pictureBox6.Image = Properties.Resources.product_management_48px;
+            pictureBox6.Location = new Point(333, 0);
+            pictureBox6.Name = "pictureBox6";
+            pictureBox6.Size = new Size(50, 48);
+            pictureBox6.TabIndex = 97;
+            pictureBox6.TabStop = false;
+            // 
             // FrmOrdenCorte
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1362,6 +1376,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1486,5 +1501,6 @@
         private PictureBox pictureBox5;
         private Button button1;
         private ImageList imageList1;
+        private PictureBox pictureBox6;
     }
 }

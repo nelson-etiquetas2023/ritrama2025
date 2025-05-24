@@ -1,5 +1,8 @@
 ﻿using Ritrama2025.Services;
+using System.Configuration;
 using System.Data;
+using Newtonsoft.Json;
+using Ritrama2025.Forms.Seleccion;
 
 namespace Ritrama2025.Forms
 {
@@ -11,17 +14,21 @@ namespace Ritrama2025.Forms
         readonly BindingSource BsCortes = [];
         readonly BindingSource BsRollos = [];
         private readonly Color LineColor = Color.DarkGray;
-        public Pen pen1 = new (Color.Black, 4);
-        public Pen pen2 = new (Color.Black, 4);
-        public Pen pen3 = new (Color.Black, 4);
-        public Pen pen4 = new (Color.Black, 4);
+        public Pen pen1 = new(Color.Black, 4);
+        public Pen pen2 = new(Color.Black, 4);
+        public Pen pen3 = new(Color.Black, 4);
+        public Pen pen4 = new(Color.Black, 4);
         int StepIndicator = 0;
+        DataRowView ParentRow = null!;
+
+
 
         public FrmOrdenCorte()
         {
             InitializeComponent();
-            this.Paint += new PaintEventHandler(FrmOrdenCorte_Paint);            
+            this.Paint += new PaintEventHandler(FrmOrdenCorte_Paint);
         }
+
 
         private void FrmOrdenCorte_Load(object sender, EventArgs e)
         {
@@ -143,7 +150,7 @@ namespace Ritrama2025.Forms
             Graphics lin4 = e.Graphics;
             // Crear un Pen de color rojo y grosor 10
             lin1.DrawLine(pen1, 200, 658, 240, 658);
-            lin2.DrawLine(pen2, 280, 658, 320, 658); 
+            lin2.DrawLine(pen2, 280, 658, 320, 658);
             lin3.DrawLine(pen3, 360, 658, 400, 658);
             lin4.DrawLine(pen4, 440, 658, 480, 658);
         }
@@ -180,6 +187,60 @@ namespace Ritrama2025.Forms
                     break;
             }
             this.Invalidate(); // Redibuja el formulario para aplicar el nuevo color
+        }
+
+        private void Opt_create_document_Click(object sender, EventArgs e)
+        {
+            ParentRow = (DataRowView)Bs.AddNew()!;
+            ParentRow.BeginEdit();
+            ParentRow["numero"] = "8900";
+            ParentRow.EndEdit();
+
+
+            txt_numeroOC.ReadOnly = false;
+            txt_fecha_emision.Enabled = true;
+            txt_fecha_produccion.Enabled = true;
+            txt_plus1.ReadOnly = false;
+            txt_menos1.ReadOnly = false;
+            btn_buscar_rollid1.Enabled = true;
+
+
+
+
+        }
+
+        private void btn_buscar_rollid1_Click(object sender, EventArgs e)
+        {
+            Frm_RollId frmrollid = new Frm_RollId();
+            frmrollid.ShowDialog();
+        }
+
+        private static void UpdateAppSettingJson<T>(string key, T value)
+        {
+            try
+            {
+                // Ruta del archivo appsettings.json en tiempo de desarrollo
+                string appSettingsPath = AppDomain.CurrentDomain.BaseDirectory + "appsettings.json";
+                string json = File.ReadAllText(appSettingsPath);
+                dynamic jsonObj = JsonConvert.DeserializeObject(json)!;
+                var sectionPath = key.Split(":")[0];
+                if (!string.IsNullOrEmpty(sectionPath))
+                {
+                    var keyPath = key.Split(":")[1];
+                    jsonObj[sectionPath][keyPath] = value;
+                }
+                else
+                {
+                    jsonObj[sectionPath] = value; // if no sectionpath just set the value
+                }
+                string output = JsonConvert.SerializeObject(jsonObj, Formatting.Indented);
+                File.WriteAllText(appSettingsPath, output);
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine("Error writing app settings");
+            }
+
         }
     }
 }

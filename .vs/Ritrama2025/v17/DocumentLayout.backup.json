@@ -1,7 +1,24 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Programacion\\Ritrama2025\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|c:\\programacion\\ritrama2025\\forms\\frmordencorte.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|solutionrelative:forms\\frmordencorte.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|c:\\programacion\\ritrama2025\\forms\\seleccion\\frm_rollid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|solutionrelative:forms\\seleccion\\frm_rollid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|c:\\programacion\\ritrama2025\\forms\\frmordencorte.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|solutionrelative:forms\\frmordencorte.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|c:\\programacion\\ritrama2025\\services\\reportsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|solutionrelative:services\\reportsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,6 +43,43 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3fd5e0cc-709a-4f8c-94c3-7f0f8dff5bb2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Frm_RollId.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Programacion\\Ritrama2025\\Forms\\Seleccion\\Frm_RollId.cs",
+              "RelativeDocumentMoniker": "Forms\\Seleccion\\Frm_RollId.cs",
+              "ToolTip": "C:\\Programacion\\Ritrama2025\\Forms\\Seleccion\\Frm_RollId.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Forms\\Seleccion\\Frm_RollId.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T17:14:22.461Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FrmOrdenCorte.cs",
+              "DocumentMoniker": "C:\\Programacion\\Ritrama2025\\Forms\\FrmOrdenCorte.cs",
+              "RelativeDocumentMoniker": "Forms\\FrmOrdenCorte.cs",
+              "ToolTip": "C:\\Programacion\\Ritrama2025\\Forms\\FrmOrdenCorte.cs*",
+              "RelativeToolTip": "Forms\\FrmOrdenCorte.cs*",
+              "ViewState": "AgIAAMcAAAAAAAAAAADgv9QAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T17:12:41.278Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FrmOrdenCorte.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Programacion\\Ritrama2025\\Forms\\FrmOrdenCorte.cs",
+              "RelativeDocumentMoniker": "Forms\\FrmOrdenCorte.cs",
+              "ToolTip": "C:\\Programacion\\Ritrama2025\\Forms\\FrmOrdenCorte.cs [Dise\u00F1o]*",
+              "RelativeToolTip": "Forms\\FrmOrdenCorte.cs [Dise\u00F1o]*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T17:12:37.624Z",
+              "EditorCaption": " [Dise\u00F1o]"
             }
           ]
         },
@@ -60,6 +114,40 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "20da60dc-0b15-4b9a-89b8-d15c578ed07b",
+        "Display": 1,
+        "X": 150,
+        "Y": 120,
+        "Width": 1241,
+        "Height": 922,
+        "WindowState": 0
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ReportsService.cs",
+              "DocumentMoniker": "C:\\Programacion\\Ritrama2025\\Services\\ReportsService.cs",
+              "RelativeDocumentMoniker": "Services\\ReportsService.cs",
+              "ToolTip": "C:\\Programacion\\Ritrama2025\\Services\\ReportsService.cs",
+              "RelativeToolTip": "Services\\ReportsService.cs",
+              "ViewState": "AgIAAJ4AAAAAAAAAAAAcwKsAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T14:42:32.321Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -243,6 +243,16 @@ namespace Ritrama2025.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap product_management_48px {
+            get {
+                object obj = ResourceManager.GetObject("product_management_48px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap registry_editor_32px {
             get {
                 object obj = ResourceManager.GetObject("registry_editor_32px", resourceCulture);
@@ -293,6 +303,16 @@ namespace Ritrama2025.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap roll_id {
+            get {
+                object obj = ResourceManager.GetObject("roll_id", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap rolls_32px {
             get {
                 object obj = ResourceManager.GetObject("rolls_32px", resourceCulture);
@@ -313,6 +333,16 @@ namespace Ritrama2025.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap search_16px {
+            get {
+                object obj = ResourceManager.GetObject("search_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap security_document_24px {
             get {
                 object obj = ResourceManager.GetObject("security_document_24px", resourceCulture);
@@ -326,6 +356,16 @@ namespace Ritrama2025.Properties {
         internal static System.Drawing.Bitmap step1 {
             get {
                 object obj = ResourceManager.GetObject("step1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap update_doc {
+            get {
+                object obj = ResourceManager.GetObject("update_doc", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
