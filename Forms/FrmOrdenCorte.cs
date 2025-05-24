@@ -9,6 +9,7 @@ namespace Ritrama2025.Forms
         DataSet Ds = new();
         readonly BindingSource Bs = [];
         readonly BindingSource BsCortes = [];
+        readonly BindingSource BsRollos = [];
         private readonly Color LineColor = Color.DarkGray;
         public Pen pen1 = new (Color.Black, 4);
         public Pen pen2 = new (Color.Black, 4);
@@ -45,6 +46,27 @@ namespace Ritrama2025.Forms
             ADD_COLUMN_GRID("msi", 60, "Msi", "msi", grid_cortes);
             ADD_COLUMN_GRID("code_person", 80, "Code Person", "code_person", grid_cortes);
             grid_cortes.DataSource = BsCortes;
+            //Enlace a datos de Grid-Rollos Cortados.
+            BsRollos.DataSource = Bs;
+            BsRollos.DataMember = "FK_MASTER_ROLLOS";
+            grid_items.AutoGenerateColumns = false;
+            ADD_COLUMN_GRID("number", 25, "#", "roll_number", grid_items);
+            ADD_COLUMN_GRID("product_id", 60, "Product Id", "product_id", grid_items);
+            ADD_COLUMN_GRID("product_name", 250, "Product Name", "product_name", grid_items);
+            ADD_COLUMN_GRID("unique_code", 60, "Unique Code", "unique_code", grid_items);
+            ADD_COLUMN_GRID("width", 70, "Width [Inch]", "width", grid_items);
+            ADD_COLUMN_GRID("large", 70, "Length [Pies]", "large", grid_items);
+            ADD_COLUMN_GRID("msi", 65, "MSI", "msi", grid_items);
+            ADD_COLUMN_GRID("splice", 55, "Splice", "splice", grid_items);
+            ADD_COLUMN_GRID("roll_id", 60, "Roll Id.", "roll_id", grid_items);
+            ADD_COLUMN_GRID("code_person", 60, "Code Person.", "code_person", grid_items);
+            ADD_COLUMN_GRID("status", 80, "Status", "status", grid_items);
+
+            grid_items.DataSource = BsRollos;
+
+
+
+
         }
 
         private void Bot_primero_Click(object sender, EventArgs e)
@@ -102,10 +124,6 @@ namespace Ritrama2025.Forms
             txt_ancho_corte.DataBindings.Add("Text", Bs, "total_salida");
         }
 
-        private void ToolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
         private static void ADD_COLUMN_GRID(string name, int size, string title, string field_bd, DataGridView grid)
         {
             DataGridViewTextBoxColumn col = new()

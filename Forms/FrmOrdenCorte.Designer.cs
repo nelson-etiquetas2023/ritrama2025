@@ -131,17 +131,6 @@
             label33 = new Label();
             tabPage1 = new TabPage();
             grid_items = new DataGridView();
-            Column5 = new DataGridViewTextBoxColumn();
-            Column6 = new DataGridViewTextBoxColumn();
-            Column7 = new DataGridViewTextBoxColumn();
-            Column8 = new DataGridViewTextBoxColumn();
-            Column9 = new DataGridViewTextBoxColumn();
-            Column10 = new DataGridViewTextBoxColumn();
-            Column11 = new DataGridViewTextBoxColumn();
-            Column12 = new DataGridViewTextBoxColumn();
-            Column13 = new DataGridViewTextBoxColumn();
-            Column14 = new DataGridViewTextBoxColumn();
-            Column15 = new DataGridViewComboBoxColumn();
             tabControl1 = new TabControl();
             chk_document_anul = new CheckBox();
             chk_orden_rebobinado = new CheckBox();
@@ -212,7 +201,6 @@
             toolStrip1.Size = new Size(1105, 33);
             toolStrip1.TabIndex = 1;
             toolStrip1.Text = "toolStrip1";
-            toolStrip1.ItemClicked += ToolStrip1_ItemClicked;
             // 
             // bot_primero
             // 
@@ -1072,81 +1060,19 @@
             // 
             // grid_items
             // 
+            grid_items.AllowUserToAddRows = false;
+            grid_items.AllowUserToDeleteRows = false;
+            grid_items.AllowUserToResizeRows = false;
+            grid_items.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             grid_items.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            grid_items.Columns.AddRange(new DataGridViewColumn[] { Column5, Column6, Column7, Column8, Column9, Column10, Column11, Column12, Column13, Column14, Column15 });
             grid_items.Location = new Point(3, 6);
+            grid_items.MultiSelect = false;
             grid_items.Name = "grid_items";
+            grid_items.ReadOnly = true;
+            grid_items.RowHeadersWidth = 34;
+            grid_items.ScrollBars = ScrollBars.Vertical;
             grid_items.Size = new Size(903, 176);
             grid_items.TabIndex = 0;
-            // 
-            // Column5
-            // 
-            Column5.HeaderText = "#";
-            Column5.Name = "Column5";
-            Column5.Width = 40;
-            // 
-            // Column6
-            // 
-            Column6.HeaderText = "Product Id.";
-            Column6.Name = "Column6";
-            Column6.Width = 80;
-            // 
-            // Column7
-            // 
-            Column7.HeaderText = "Product Name";
-            Column7.Name = "Column7";
-            Column7.Width = 200;
-            // 
-            // Column8
-            // 
-            Column8.HeaderText = "Unique Code";
-            Column8.Name = "Column8";
-            Column8.Width = 80;
-            // 
-            // Column9
-            // 
-            Column9.HeaderText = "Ancho";
-            Column9.Name = "Column9";
-            Column9.Width = 60;
-            // 
-            // Column10
-            // 
-            Column10.HeaderText = "Largo";
-            Column10.Name = "Column10";
-            Column10.Width = 60;
-            // 
-            // Column11
-            // 
-            Column11.HeaderText = "Msi";
-            Column11.Name = "Column11";
-            Column11.Width = 60;
-            // 
-            // Column12
-            // 
-            Column12.HeaderText = "Splice";
-            Column12.Name = "Column12";
-            Column12.Width = 60;
-            // 
-            // Column13
-            // 
-            Column13.HeaderText = "Roll-Id";
-            Column13.Name = "Column13";
-            Column13.Width = 60;
-            // 
-            // Column14
-            // 
-            Column14.HeaderText = "Code Person";
-            Column14.Name = "Column14";
-            Column14.Width = 80;
-            // 
-            // Column15
-            // 
-            Column15.HeaderText = "Status";
-            Column15.Items.AddRange(new object[] { "Retenido", "OK" });
-            Column15.Name = "Column15";
-            Column15.Resizable = DataGridViewTriState.True;
-            Column15.SortMode = DataGridViewColumnSortMode.Automatic;
-            Column15.Width = 80;
             // 
             // tabControl1
             // 
@@ -1245,7 +1171,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(159, 637);
+            pictureBox1.Location = new Point(161, 637);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(40, 40);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -1256,7 +1182,7 @@
             // 
             pictureBox2.Enabled = false;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(241, 637);
+            pictureBox2.Location = new Point(237, 637);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(40, 40);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -1266,7 +1192,7 @@
             // pictureBox3
             // 
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(321, 637);
+            pictureBox3.Location = new Point(319, 637);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(40, 40);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -1295,11 +1221,11 @@
             // 
             // button1
             // 
-            button1.Location = new Point(940, 501);
+            button1.Location = new Point(527, 642);
             button1.Name = "button1";
-            button1.Size = new Size(75, 23);
+            button1.Size = new Size(29, 23);
             button1.TabIndex = 101;
-            button1.Text = "button1";
+            button1.Text = "+";
             button1.UseVisualStyleBackColor = true;
             button1.Click += Button1_Click;
             // 
@@ -1551,17 +1477,6 @@
         private ToolStripMenuItem opt_aprobar_orden;
         private ToolStripMenuItem opt_cerrar_orden;
         private ToolStripMenuItem opt_modif_orden;
-        private DataGridViewTextBoxColumn Column5;
-        private DataGridViewTextBoxColumn Column6;
-        private DataGridViewTextBoxColumn Column7;
-        private DataGridViewTextBoxColumn Column8;
-        private DataGridViewTextBoxColumn Column9;
-        private DataGridViewTextBoxColumn Column10;
-        private DataGridViewTextBoxColumn Column11;
-        private DataGridViewTextBoxColumn Column12;
-        private DataGridViewTextBoxColumn Column13;
-        private DataGridViewTextBoxColumn Column14;
-        private DataGridViewComboBoxColumn Column15;
         private Label registros;
         private ToolStripButton toolStripButton1;
         private PictureBox pictureBox1;

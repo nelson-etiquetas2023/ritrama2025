@@ -12,6 +12,8 @@ namespace Ritrama2025.Services
         public DataTable DtMaster = new();
         public SqlDataAdapter DaCortes = new();
         public DataTable DtCortes = new();
+        public SqlDataAdapter DaRollos = new();
+        public DataTable DtRollos = new();
 
         public ProduccionService()
         {
@@ -20,7 +22,6 @@ namespace Ritrama2025.Services
                 StringConnex = Convert.ToString(Program.Configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value)!;
             }
         }
-
 
         public async Task<DataSet> LoadDataOC()
         {
@@ -50,6 +51,17 @@ namespace Ritrama2025.Services
                 await readerCortes.CloseAsync();
                 DaCortes.SelectCommand = ComandoCortes;
                 DaCortes.Fill(Ds, "DtCortes");
+                //3.- Cargar la Tabla de Rollos Cortados.
+                SqlCommand ComandoRollos = new()
+                {
+                    Connection = conn,
+                    CommandText = "SELECT numero,product_id,product_name,roll_number,unique_code,splice,width,large,msi,roll_id,code_person,status,disponible,width_c,lenght_c,ubic,ratio,fecha,rollid_oculto FROM rolls_details", 
+                    CommandType = CommandType.Text
+                };
+                SqlDataReader readerRollos = await ComandoRollos.ExecuteReaderAsync();
+                await readerRollos.CloseAsync();
+                DaRollos.SelectCommand = ComandoRollos;
+                DaRollos.Fill(Ds, "DtRollos");
             }
             catch (SqlException ex)
             {
@@ -69,6 +81,11 @@ namespace Ritrama2025.Services
                 DataColumn ChildCol0 = Ds.Tables["DtCortes"]!.Columns["orden"]!;
                 DataRelation Despacho_Cortes = new("FK_ENCABEZADO_CORTES", ParentCol0, ChildCol0,false);
                 Ds.Relations.Add(Despacho_Cortes);
+                //Relacion entre master y Rollos.
+                DataColumn ParentCol1 = Ds.Tables["DtMaster"]!.Columns["numero"]!;
+                DataColumn ChildCol1 = Ds.Tables["DtRollos"]!.Columns["numero"]!;
+                DataRelation Master_Rollos = new("FK_MASTER_ROLLOS", ParentCol1, ChildCol1);
+                Ds.Relations.Add(Master_Rollos);
                 return true;
             }
             catch (Exception ex)
