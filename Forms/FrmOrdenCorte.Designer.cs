@@ -441,7 +441,7 @@
             btn_buscar_rollid1.TabIndex = 10;
             btn_buscar_rollid1.Text = "...";
             btn_buscar_rollid1.UseVisualStyleBackColor = true;
-            btn_buscar_rollid1.Click += btn_buscar_rollid1_Click;
+            btn_buscar_rollid1.Click += Btn_buscar_rollid1_Click;
             // 
             // txt_width1
             // 

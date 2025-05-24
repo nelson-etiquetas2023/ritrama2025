@@ -21,14 +21,11 @@ namespace Ritrama2025.Forms
         int StepIndicator = 0;
         DataRowView ParentRow = null!;
 
-
-
         public FrmOrdenCorte()
         {
             InitializeComponent();
             this.Paint += new PaintEventHandler(FrmOrdenCorte_Paint);
         }
-
 
         private void FrmOrdenCorte_Load(object sender, EventArgs e)
         {
@@ -68,12 +65,7 @@ namespace Ritrama2025.Forms
             ADD_COLUMN_GRID("roll_id", 60, "Roll Id.", "roll_id", grid_items);
             ADD_COLUMN_GRID("code_person", 60, "Code Person.", "code_person", grid_items);
             ADD_COLUMN_GRID("status", 80, "Status", "status", grid_items);
-
             grid_items.DataSource = BsRollos;
-
-
-
-
         }
 
         private void Bot_primero_Click(object sender, EventArgs e)
@@ -196,22 +188,20 @@ namespace Ritrama2025.Forms
             ParentRow["numero"] = "8900";
             ParentRow.EndEdit();
 
-
             txt_numeroOC.ReadOnly = false;
             txt_fecha_emision.Enabled = true;
             txt_fecha_produccion.Enabled = true;
             txt_plus1.ReadOnly = false;
             txt_menos1.ReadOnly = false;
             btn_buscar_rollid1.Enabled = true;
-
-
-
-
         }
 
-        private void btn_buscar_rollid1_Click(object sender, EventArgs e)
+        private void Btn_buscar_rollid1_Click(object sender, EventArgs e)
         {
-            Frm_RollId frmrollid = new Frm_RollId();
+            Frm_RollId frmrollid = new()
+            {
+                DtRollid = Ds.Tables["DtRollid"]!
+            };
             frmrollid.ShowDialog();
         }
 

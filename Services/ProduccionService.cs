@@ -14,6 +14,8 @@ namespace Ritrama2025.Services
         public DataTable DtCortes = new();
         public SqlDataAdapter DaRollos = new();
         public DataTable DtRollos = new();
+        public SqlDataAdapter DaRollid = new();
+        public DataTable DtRollid = new();
 
         public ProduccionService()
         {
@@ -62,6 +64,17 @@ namespace Ritrama2025.Services
                 await readerRollos.CloseAsync();
                 DaRollos.SelectCommand = ComandoRollos;
                 DaRollos.Fill(Ds, "DtRollos");
+                // 4.- Carga de los Master en el Inventario.
+                SqlCommand ComandoRollid = new()
+                {
+                    Connection = conn,
+                    CommandText = "SELECT a.roll_id,a.part_number,b.product_name,a.master,a.graphics,a.resma,a.Width,lenght=a.lenght - a.lenght_c, disponible, fecha_pro, fecha_recep, splice, Ubicacion,'M' AS tipo_mov from MasterInic a LEFT JOIN producto b ON a.part_number = b.product_id where b.MasterRolls = 1 and a.disponible = 1",
+                    CommandType = CommandType.Text
+                };
+                SqlDataReader readerRollid = await ComandoRollid.ExecuteReaderAsync();
+                await readerRollid.CloseAsync();
+                DaRollid.SelectCommand = ComandoRollid;
+                DaRollid.Fill(Ds, "DtRollid");
             }
             catch (SqlException ex)
             {
