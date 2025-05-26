@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Ritrama2025.Forms;
+﻿using Ritrama2025.Forms;
 
 namespace Ritrama2025
 {
@@ -20,31 +11,54 @@ namespace Ritrama2025
 
         private void bot_despacho_Click(object sender, EventArgs e)
         {
-            FrmDespacho frmdespacho = new FrmDespacho()
-            {
-                MdiParent = this,
-                StartPosition = FormStartPosition.Manual,
-                Location = new Point { X = Location.X + 20, Y = Location.Y + 20 }
-            };
 
-            frmdespacho.Show();
+            OpenFormSingleInstance<FrmDespacho>("DESPACHO");
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
-
         }
 
         private void bot_ordencorte_Click(object sender, EventArgs e)
         {
-            FrmOrdenCorte frmOrdenCorte = new FrmOrdenCorte()
-            {
-                MdiParent = this,
-                StartPosition = FormStartPosition.Manual,
-                Location = new Point { X = Location.X + 20, Y = Location.Y + 20 }
-            };
+            OpenFormSingleInstance<FrmOrdenCorte>("OC");
+        }
 
-            frmOrdenCorte.Show();
+        private void OpenFormSingleInstance<T>(string nameForm) where T : Form, new()
+        {
+            var existingForm = Application.OpenForms.OfType<T>().FirstOrDefault();
+
+            if (existingForm != null)
+            {
+                // Si ya existe, lo trae al frente
+                existingForm.BringToFront();
+                if (existingForm.WindowState == FormWindowState.Minimized)
+                    existingForm.WindowState = FormWindowState.Normal;
+            }
+            else 
+            {
+                if (nameForm == "OC") 
+                {
+                    FrmOrdenCorte frmOrdenCorte = new FrmOrdenCorte()
+                    {
+                        MdiParent = this,
+                        StartPosition = FormStartPosition.Manual,
+                        Location = new Point { X = Location.X + 20, Y = Location.Y + 20 }
+                   
+                    };
+                    frmOrdenCorte.Show();
+                }
+                if (nameForm == "DESPACHO")
+                {
+                    FrmDespacho frmdespacho = new FrmDespacho()
+                    {
+                        MdiParent = this,
+                        StartPosition = FormStartPosition.Manual,
+                        Location = new Point { X = Location.X + 20, Y = Location.Y + 20 }
+                    };
+                    frmdespacho.Show();
+                }
+            }
         }
     }
 }

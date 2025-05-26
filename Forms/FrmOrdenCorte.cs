@@ -183,16 +183,46 @@ namespace Ritrama2025.Forms
 
         private void Opt_create_document_Click(object sender, EventArgs e)
         {
+            //1.- Inicialiozar el Documento de Orden de Corte.
             ParentRow = (DataRowView)Bs.AddNew()!;
             ParentRow.BeginEdit();
-            ParentRow["numero"] = "8900";
+            ParentRow["numero"] = "8902";
+            ParentRow["rollid_1"] = "0";
+            ParentRow["rollid_2"] = "0";
+            ParentRow["width_1"] = "0";
+            ParentRow["lenght_1"] = "0";
+            ParentRow["width_2"] = "0";
+            ParentRow["lenght_2"] = "0";
+            ParentRow["util1_real_width"] = "0";
+            ParentRow["util1_real_lenght"] = "0";
+            ParentRow["rest1_width"] = "0";
+            ParentRow["rest1_lenght"] = "0";
+            ParentRow["rest2_width"] = "0";
+            ParentRow["rest2_lenght"] = "0";
+            ParentRow["util2_real_width"] = "0";
+            ParentRow["util2_real_lenght"] = "0";
+            ParentRow["plus1_pies"] = "0";
+            ParentRow["plus2_pies"] = "0";
+            txt_menos1.Text = "0";
+            txt_real1.Text = "0";
+            txt_real2.Text = "0";
+            txt_plus1.Text = "0";
+            txt_menos2.Text = "0";
             ParentRow.EndEdit();
+            //Inicializar el Master 1 de la orden de corte.
 
+
+
+
+
+            //3.- Abrir los Textbox para editar los datos de la Orden de Corte.
             txt_numeroOC.ReadOnly = false;
             txt_fecha_emision.Enabled = true;
             txt_fecha_produccion.Enabled = true;
             txt_plus1.ReadOnly = false;
             txt_menos1.ReadOnly = false;
+            txt_plus2.ReadOnly = false;
+            txt_menos2.ReadOnly = false;
             btn_buscar_rollid1.Enabled = true;
         }
 
@@ -203,6 +233,13 @@ namespace Ritrama2025.Forms
                 DtRollid = Ds.Tables["DtRollid"]!
             };
             frmrollid.ShowDialog();
+            if (frmrollid.MasterRoll != null)
+            {
+                txt_rollid_1.Text = Convert.ToString(frmrollid.MasterRoll.Roll_Id);
+                txt_width1.Text = frmrollid.MasterRoll.Width.ToString("N2");
+                txt_length1.Text = frmrollid.MasterRoll.Length.ToString("N2");
+                txt_real1.Text = frmrollid.MasterRoll.Length.ToString("N2");
+            }
         }
 
         private static void UpdateAppSettingJson<T>(string key, T value)
@@ -231,6 +268,48 @@ namespace Ritrama2025.Forms
                 Console.WriteLine("Error writing app settings");
             }
 
+        }
+        private void UpdateValueRealLenghtMaster1()
+        {
+            if (txt_real1.Text != "")
+            {
+                double num = Convert.ToDouble(txt_length1.Text) - Convert.ToDouble(txt_menos1.Text) + Convert.ToDouble(txt_plus1.Text);
+                txt_real1.Text = num.ToString();
+            }
+
+        }
+
+        private void Txt_plus1_KeyUp(object sender, KeyEventArgs e)
+        {
+            UpdateValueRealLenghtMaster1();
+        }
+
+        private void Txt_menos1_KeyUp(object sender, KeyEventArgs e)
+        {
+            UpdateValueRealLenghtMaster1();
+        }
+        public static void ValidaSoloNumerosDec(KeyPressEventArgs k)
+        {
+            if (char.IsDigit(k.KeyChar))
+            {
+                k.Handled = false;
+            }
+            else if (char.IsSeparator(k.KeyChar))
+            {
+                k.Handled = false;
+            }
+            else if (char.IsControl(k.KeyChar))
+            {
+                k.Handled = false;
+            }
+            else if (k.KeyChar.ToString().Equals(".") || k.KeyChar.ToString().Equals(">") || k.KeyChar.ToString().Equals("<") || k.KeyChar.ToString().Equals("="))
+            {
+                k.Handled = false;
+            }
+            else
+            {
+                k.Handled = true;
+            }
         }
     }
 }

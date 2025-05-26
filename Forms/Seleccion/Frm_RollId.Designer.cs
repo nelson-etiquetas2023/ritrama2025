@@ -87,6 +87,7 @@
             GridItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             GridItems.Size = new Size(850, 217);
             GridItems.TabIndex = 2;
+            GridItems.CellMouseDoubleClick += GridItems_CellMouseDoubleClick;
             // 
             // CONTADOR_REGISTROS
             // 

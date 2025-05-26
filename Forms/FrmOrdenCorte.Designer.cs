@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmOrdenCorte));
             panel1 = new Panel();
+            pictureBox6 = new PictureBox();
             registros = new Label();
             label1 = new Label();
             toolStrip1 = new ToolStrip();
@@ -68,7 +69,7 @@
             label8 = new Label();
             txt_menos1 = new TextBox();
             label9 = new Label();
-            textBox7 = new TextBox();
+            txt_real1 = new TextBox();
             label10 = new Label();
             label11 = new Label();
             txt_real1_width = new TextBox();
@@ -81,7 +82,7 @@
             txt_width2 = new TextBox();
             btn_buscar_rollid2 = new Button();
             label13 = new Label();
-            textBox15 = new TextBox();
+            txt_real2 = new TextBox();
             label14 = new Label();
             txt_menos2 = new TextBox();
             label15 = new Label();
@@ -148,8 +149,8 @@
             pictureBox5 = new PictureBox();
             button1 = new Button();
             imageList1 = new ImageList(components);
-            pictureBox6 = new PictureBox();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)grid_cortes).BeginInit();
             tabPage1.SuspendLayout();
@@ -160,7 +161,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -174,6 +174,15 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1105, 52);
             panel1.TabIndex = 0;
+            // 
+            // pictureBox6
+            // 
+            pictureBox6.Image = Properties.Resources.product_management_48px;
+            pictureBox6.Location = new Point(333, 0);
+            pictureBox6.Name = "pictureBox6";
+            pictureBox6.Size = new Size(50, 48);
+            pictureBox6.TabIndex = 97;
+            pictureBox6.TabStop = false;
             // 
             // registros
             // 
@@ -417,6 +426,7 @@
             // 
             // txt_rollid_1
             // 
+            txt_rollid_1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_rollid_1.Location = new Point(12, 143);
             txt_rollid_1.Name = "txt_rollid_1";
             txt_rollid_1.ReadOnly = true;
@@ -445,6 +455,7 @@
             // 
             // txt_width1
             // 
+            txt_width1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_width1.Location = new Point(162, 143);
             txt_width1.Name = "txt_width1";
             txt_width1.ReadOnly = true;
@@ -462,6 +473,7 @@
             // 
             // txt_length1
             // 
+            txt_length1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_length1.Location = new Point(268, 143);
             txt_length1.Name = "txt_length1";
             txt_length1.ReadOnly = true;
@@ -479,11 +491,13 @@
             // 
             // txt_plus1
             // 
+            txt_plus1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_plus1.Location = new Point(374, 144);
             txt_plus1.Name = "txt_plus1";
             txt_plus1.ReadOnly = true;
             txt_plus1.Size = new Size(38, 23);
             txt_plus1.TabIndex = 16;
+            txt_plus1.KeyUp += Txt_plus1_KeyUp;
             // 
             // label8
             // 
@@ -496,11 +510,13 @@
             // 
             // txt_menos1
             // 
+            txt_menos1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_menos1.Location = new Point(418, 144);
             txt_menos1.Name = "txt_menos1";
             txt_menos1.ReadOnly = true;
             txt_menos1.Size = new Size(38, 23);
             txt_menos1.TabIndex = 18;
+            txt_menos1.KeyUp += Txt_menos1_KeyUp;
             // 
             // label9
             // 
@@ -511,13 +527,14 @@
             label9.TabIndex = 17;
             label9.Text = "-";
             // 
-            // textBox7
+            // txt_real1
             // 
-            textBox7.Location = new Point(462, 144);
-            textBox7.Name = "textBox7";
-            textBox7.ReadOnly = true;
-            textBox7.Size = new Size(100, 23);
-            textBox7.TabIndex = 20;
+            txt_real1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txt_real1.Location = new Point(462, 144);
+            txt_real1.Name = "txt_real1";
+            txt_real1.ReadOnly = true;
+            txt_real1.Size = new Size(100, 23);
+            txt_real1.TabIndex = 20;
             // 
             // label10
             // 
@@ -539,6 +556,7 @@
             // 
             // txt_real1_width
             // 
+            txt_real1_width.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_real1_width.Location = new Point(162, 167);
             txt_real1_width.Name = "txt_real1_width";
             txt_real1_width.ReadOnly = true;
@@ -547,6 +565,7 @@
             // 
             // txt_real1_length
             // 
+            txt_real1_length.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_real1_length.Location = new Point(267, 167);
             txt_real1_length.Name = "txt_real1_length";
             txt_real1_length.ReadOnly = true;
@@ -555,6 +574,7 @@
             // 
             // txt_matrest1_lenght
             // 
+            txt_matrest1_lenght.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_matrest1_lenght.Location = new Point(267, 191);
             txt_matrest1_lenght.Name = "txt_matrest1_lenght";
             txt_matrest1_lenght.ReadOnly = true;
@@ -563,6 +583,7 @@
             // 
             // txt_matrest1_width
             // 
+            txt_matrest1_width.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_matrest1_width.Location = new Point(162, 191);
             txt_matrest1_width.Name = "txt_matrest1_width";
             txt_matrest1_width.ReadOnly = true;
@@ -580,6 +601,7 @@
             // 
             // txt_rollid_2
             // 
+            txt_rollid_2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_rollid_2.Location = new Point(12, 214);
             txt_rollid_2.Name = "txt_rollid_2";
             txt_rollid_2.ReadOnly = true;
@@ -588,6 +610,7 @@
             // 
             // txt_length2
             // 
+            txt_length2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_length2.Location = new Point(267, 215);
             txt_length2.Name = "txt_length2";
             txt_length2.ReadOnly = true;
@@ -596,6 +619,7 @@
             // 
             // txt_width2
             // 
+            txt_width2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_width2.Location = new Point(162, 215);
             txt_width2.Name = "txt_width2";
             txt_width2.ReadOnly = true;
@@ -621,13 +645,14 @@
             label13.TabIndex = 32;
             label13.Text = "ID#2";
             // 
-            // textBox15
+            // txt_real2
             // 
-            textBox15.Location = new Point(462, 215);
-            textBox15.Name = "textBox15";
-            textBox15.ReadOnly = true;
-            textBox15.Size = new Size(100, 23);
-            textBox15.TabIndex = 38;
+            txt_real2.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txt_real2.Location = new Point(462, 215);
+            txt_real2.Name = "txt_real2";
+            txt_real2.ReadOnly = true;
+            txt_real2.Size = new Size(100, 24);
+            txt_real2.TabIndex = 38;
             // 
             // label14
             // 
@@ -640,6 +665,7 @@
             // 
             // txt_menos2
             // 
+            txt_menos2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_menos2.Location = new Point(418, 215);
             txt_menos2.Name = "txt_menos2";
             txt_menos2.ReadOnly = true;
@@ -657,6 +683,7 @@
             // 
             // txt_plus2
             // 
+            txt_plus2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_plus2.Location = new Point(374, 215);
             txt_plus2.Name = "txt_plus2";
             txt_plus2.ReadOnly = true;
@@ -683,6 +710,7 @@
             // 
             // txt_matrest2_lenght
             // 
+            txt_matrest2_lenght.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_matrest2_lenght.Location = new Point(267, 263);
             txt_matrest2_lenght.Name = "txt_matrest2_lenght";
             txt_matrest2_lenght.ReadOnly = true;
@@ -691,6 +719,7 @@
             // 
             // txt_matrest2_width
             // 
+            txt_matrest2_width.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_matrest2_width.Location = new Point(162, 263);
             txt_matrest2_width.Name = "txt_matrest2_width";
             txt_matrest2_width.ReadOnly = true;
@@ -699,6 +728,7 @@
             // 
             // txt_real2_length
             // 
+            txt_real2_length.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_real2_length.Location = new Point(267, 239);
             txt_real2_length.Name = "txt_real2_length";
             txt_real2_length.ReadOnly = true;
@@ -707,6 +737,7 @@
             // 
             // txt_real2_width
             // 
+            txt_real2_width.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_real2_width.Location = new Point(161, 239);
             txt_real2_width.Name = "txt_real2_width";
             txt_real2_width.ReadOnly = true;
@@ -1250,15 +1281,6 @@
             imageList1.Images.SetKeyName(8, "step4_deactive.png");
             imageList1.Images.SetKeyName(9, "step5_deactive.png");
             // 
-            // pictureBox6
-            // 
-            pictureBox6.Image = Properties.Resources.product_management_48px;
-            pictureBox6.Location = new Point(333, 0);
-            pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(50, 48);
-            pictureBox6.TabIndex = 97;
-            pictureBox6.TabStop = false;
-            // 
             // FrmOrdenCorte
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1322,7 +1344,7 @@
             Controls.Add(txt_real2_length);
             Controls.Add(txt_real2_width);
             Controls.Add(label18);
-            Controls.Add(textBox15);
+            Controls.Add(txt_real2);
             Controls.Add(label14);
             Controls.Add(txt_menos2);
             Controls.Add(label15);
@@ -1339,7 +1361,7 @@
             Controls.Add(txt_real1_length);
             Controls.Add(txt_real1_width);
             Controls.Add(label11);
-            Controls.Add(textBox7);
+            Controls.Add(txt_real1);
             Controls.Add(label10);
             Controls.Add(txt_menos1);
             Controls.Add(label9);
@@ -1365,6 +1387,7 @@
             Load += FrmOrdenCorte_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)grid_cortes).EndInit();
@@ -1376,7 +1399,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1403,7 +1425,7 @@
         private Label label8;
         private TextBox txt_menos1;
         private Label label9;
-        private TextBox textBox7;
+        private TextBox txt_real1;
         private Label label10;
         private Label label11;
         private TextBox txt_real1_width;
@@ -1416,7 +1438,7 @@
         private TextBox txt_width2;
         private Button btn_buscar_rollid2;
         private Label label13;
-        private TextBox textBox15;
+        private TextBox txt_real2;
         private Label label14;
         private TextBox txt_menos2;
         private Label label15;

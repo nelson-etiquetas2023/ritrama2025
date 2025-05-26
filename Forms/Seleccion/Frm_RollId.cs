@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.ComponentModel;
+using Ritrama2025.Models;
 
 
 namespace Ritrama2025.Forms.Seleccion
@@ -9,6 +10,8 @@ namespace Ritrama2025.Forms.Seleccion
         DataView Dv = new();
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DataTable DtRollid { get; set; } = null!;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public RolloCortado MasterRoll { get; set; } = null!;
         public Frm_RollId()
         {
             InitializeComponent();
@@ -84,6 +87,39 @@ namespace Ritrama2025.Forms.Seleccion
         private void Btn_buscar_Click(object sender, EventArgs e)
         {
             BuscarMasterIdData();
+        }
+
+        private void GridItems_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                // Ensure that the cell values are not null before accessing them
+                var rollIdValue = GridItems.Rows[e.RowIndex].Cells[0].Value?.ToString();
+                var productIdValue = GridItems.Rows[e.RowIndex].Cells[1].Value?.ToString();
+                var productNameValue = GridItems.Rows[e.RowIndex].Cells[2].Value?.ToString();
+                var widthValue = GridItems.Rows[e.RowIndex].Cells[3].Value;
+                var lengthValue = GridItems.Rows[e.RowIndex].Cells[4].Value;
+                //var msiValue = GridItems.Rows[e.RowIndex].Cells[5].Value;
+
+                if (rollIdValue != null && productIdValue != null && productNameValue != null &&
+                    widthValue != null && lengthValue != null)
+                {
+                    MasterRoll = new()
+                    {
+                        Roll_Id = rollIdValue,
+                        Product_Id = productIdValue,
+                        Product_Name = productNameValue,
+                        Width = Convert.ToDecimal(widthValue),
+                        Length = Convert.ToDecimal(lengthValue),
+                        //Msi = Convert.ToDecimal(msiValue),
+                    };
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Algunos valores de las celdas son nulos. Por favor, verifique los datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

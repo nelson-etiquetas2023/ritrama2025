@@ -43,6 +43,7 @@ C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Microsoft.Identit
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Microsoft.IdentityModel.Tokens.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Microsoft.SqlServer.Server.dll
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Newtonsoft.Json.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\RBush.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Microsoft.ReportViewer.Common.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Microsoft.ReportViewer.DataVisualization.dll
