@@ -800,6 +800,7 @@
             // 
             // txt_operador_id
             // 
+            txt_operador_id.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_operador_id.Location = new Point(12, 347);
             txt_operador_id.Name = "txt_operador_id";
             txt_operador_id.ReadOnly = true;
@@ -817,6 +818,7 @@
             // 
             // txt_operador_name
             // 
+            txt_operador_name.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_operador_name.Location = new Point(162, 347);
             txt_operador_name.Name = "txt_operador_name";
             txt_operador_name.ReadOnly = true;
@@ -834,6 +836,7 @@
             // 
             // txt_cust_name
             // 
+            txt_cust_name.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_cust_name.Location = new Point(162, 391);
             txt_cust_name.Name = "txt_cust_name";
             txt_cust_name.ReadOnly = true;
@@ -851,6 +854,7 @@
             // 
             // txt_cust_id
             // 
+            txt_cust_id.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_cust_id.Location = new Point(12, 391);
             txt_cust_id.Name = "txt_cust_id";
             txt_cust_id.ReadOnly = true;
@@ -929,6 +933,7 @@
             btn_buscar_customer.TabIndex = 64;
             btn_buscar_customer.Text = "...";
             btn_buscar_customer.UseVisualStyleBackColor = true;
+            btn_buscar_customer.Click += btn_buscar_customer_Click;
             // 
             // btn_buscar_operador
             // 
@@ -939,6 +944,7 @@
             btn_buscar_operador.TabIndex = 65;
             btn_buscar_operador.Text = "...";
             btn_buscar_operador.UseVisualStyleBackColor = true;
+            btn_buscar_operador.Click += btn_buscar_operador_Click;
             // 
             // grid_cortes
             // 

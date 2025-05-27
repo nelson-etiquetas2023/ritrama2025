@@ -61,6 +61,11 @@ namespace Ritrama2025.Forms.Seleccion
                 colname1 = "placas_id";
                 colname2 = "camion_name";
             }
+            if (Titulo == "Operadores")
+            {
+                colname1 = "id_operador";
+                colname2 = "nombre";
+            }
             EstilosGrid();
         }
         private void BuscarItems()

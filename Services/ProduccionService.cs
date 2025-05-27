@@ -16,6 +16,10 @@ namespace Ritrama2025.Services
         public DataTable DtRollos = new();
         public SqlDataAdapter DaRollid = new();
         public DataTable DtRollid = new();
+        public SqlDataAdapter DaOperator = new();
+        public DataTable DtOperator = new();
+        public SqlDataAdapter DaCustomer = new();
+        public DataTable DtCustomer = new();
 
         public ProduccionService()
         {
@@ -75,6 +79,28 @@ namespace Ritrama2025.Services
                 await readerRollid.CloseAsync();
                 DaRollid.SelectCommand = ComandoRollid;
                 DaRollid.Fill(Ds, "DtRollid");
+                //5.- Carga de los Rollos en el Operadores.
+                SqlCommand ComandoOperator = new()
+                {
+                    Connection = conn,
+                    CommandText = "SELECT id_operador,nombre,status FROM operadores",
+                    CommandType = CommandType.Text
+                };
+                SqlDataReader readerOperator = await ComandoOperator.ExecuteReaderAsync();
+                await readerOperator.CloseAsync();
+                DaOperator.SelectCommand = ComandoOperator;
+                DaOperator.Fill(Ds, "DtOperator");
+                //6.- Carga de los Customer.
+                SqlCommand ComandoCust= new()
+                {
+                    Connection = conn,
+                    CommandText = "SELECT customer_id,customer_name FROM customer",
+                    CommandType = CommandType.Text
+                };
+                SqlDataReader readerCust = await ComandoCust.ExecuteReaderAsync();
+                await readerCust.CloseAsync();
+                DaCustomer.SelectCommand = ComandoCust;
+                DaCustomer.Fill(Ds, "DtCustomer");
             }
             catch (SqlException ex)
             {

@@ -3,7 +3,6 @@ using Ritrama2025.Forms.Seleccion;
 using Ritrama2025.Services;
 using System.Configuration;
 using System.Data;
-using System.Windows.Forms;
 
 namespace Ritrama2025.Forms
 {
@@ -390,16 +389,38 @@ namespace Ritrama2025.Forms
                 txt_real1_length.Text = num2.ToString("N2");
             }
         }
-        private void CalcularMatRestante1() 
+        private void CalcularMatRestante1()
         {
-            double num = (Convert.ToDouble(txt_width1.Text)- Convert.ToDouble(txt_real1_width.Text));
+            double num = (Convert.ToDouble(txt_width1.Text) - Convert.ToDouble(txt_real1_width.Text));
 
             double num2 = (Convert.ToDouble(txt_length1.Text) - Convert.ToDouble(txt_real1_length.Text));
 
-            txt_matrest1_width.Text =   num.ToString("N2");
+            txt_matrest1_width.Text = num.ToString("N2");
             txt_matrest1_lenght.Text = num2.ToString("N2");
         }
 
+        private void btn_buscar_operador_Click(object sender, EventArgs e)
+        {
+            FrmSeleccion SelOperator = new()
+            {
+                DtItems = Ds.Tables["DtOperator"]!,
+                Titulo = "Operadores",
+            };
+            SelOperator.ShowDialog();
+            txt_operador_id.Text = SelOperator.Id;
+            txt_operador_name.Text = SelOperator.Description;
+        }
 
+        private void btn_buscar_customer_Click(object sender, EventArgs e)
+        {
+            FrmSeleccion SelCust = new()
+            {
+                DtItems = Ds.Tables["DtCustomer"]!,
+                Titulo = "Clientes",
+            };
+            SelCust.ShowDialog();
+            txt_cust_id.Text = SelCust.Id;
+            txt_cust_name.Text = SelCust.Description;
+        }
     }
 }
