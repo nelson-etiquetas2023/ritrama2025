@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Ritrama2025.Forms.Otros;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
 
 namespace Ritrama2025.Forms.Seleccion
 {
@@ -114,6 +109,44 @@ namespace Ritrama2025.Forms.Seleccion
             Id = Grid_Items.Rows[e.RowIndex].Cells[0].Value!.ToString()!;
             Description = Grid_Items.Rows[e.RowIndex].Cells[1].Value!.ToString()!;
             this.Close();
+        }
+
+        private void btn_add_new_Click(object sender, EventArgs e)
+        {
+            if (Titulo == "Transporte") 
+            {
+                Frm_AddNew frmNew = new()
+                {
+                    TitleForm = "Agregar Transportes",
+                    Dt = DtItems,
+                    NombreEntidad = "Transporte"
+
+                };
+                frmNew.ShowDialog();
+                DtItems = frmNew.Dt;
+            }
+            if (Titulo == "Chofer") 
+            {
+                Frm_AddNew frmNew = new()
+                {
+                    TitleForm = "Agregar Choferes",
+                    Dt = DtItems,
+                    NombreEntidad = "Chofer"
+                };
+                frmNew.ShowDialog();
+                DtItems = frmNew.Dt;
+            }
+            if (Titulo == "Camion") 
+            {
+                Frm_AddNew frmNew = new()
+                {
+                    TitleForm = "Agregar Camiones",
+                    Dt = DtItems,
+                    NombreEntidad = "Camion"
+                };
+                frmNew.ShowDialog();
+                DtItems = frmNew.Dt;
+            }
         }
     }
 }

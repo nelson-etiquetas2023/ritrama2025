@@ -127,11 +127,11 @@
   <data name="ROWDELETE48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\ROWDELETE48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="update_doc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\update_doc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="rolls_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\rolls_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="price_tag_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\price_tag_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="add_file_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\add_file_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -169,6 +169,9 @@
   <data name="double_left_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\double_left_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="product_management_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\product_management_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="DATA_READ481" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\DATA_READ48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -202,13 +205,13 @@
   <data name="DATA_READ48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\DATA_READ48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="update_doc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\update_doc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="price_tag_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\price_tag_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="approved_delivery_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\approved_delivery_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="product_management_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\product_management_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Plus_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\Plus_16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

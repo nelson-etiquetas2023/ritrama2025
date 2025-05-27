@@ -179,7 +179,7 @@
             bot_despacho.Text = "Despacho";
             bot_despacho.TextImageRelation = TextImageRelation.ImageBeforeText;
             bot_despacho.UseVisualStyleBackColor = true;
-            bot_despacho.Click += bot_despacho_Click;
+            bot_despacho.Click += Bot_despacho_Click;
             // 
             // bot_ordencorte
             // 
@@ -195,7 +195,7 @@
             bot_ordencorte.Text = "Orden Corte";
             bot_ordencorte.TextImageRelation = TextImageRelation.ImageBeforeText;
             bot_ordencorte.UseVisualStyleBackColor = true;
-            bot_ordencorte.Click += bot_ordencorte_Click;
+            bot_ordencorte.Click += Bot_ordencorte_Click;
             // 
             // Main
             // 

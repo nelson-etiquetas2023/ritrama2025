@@ -1,4 +1,5 @@
 ﻿using Ritrama2025.Forms;
+using Ritrama2025.Services;
 
 namespace Ritrama2025
 {
@@ -9,7 +10,7 @@ namespace Ritrama2025
             InitializeComponent();
         }
 
-        private void bot_despacho_Click(object sender, EventArgs e)
+        private void Bot_despacho_Click(object sender, EventArgs e)
         {
 
             OpenFormSingleInstance<FrmDespacho>("DESPACHO");
@@ -19,7 +20,7 @@ namespace Ritrama2025
         {
         }
 
-        private void bot_ordencorte_Click(object sender, EventArgs e)
+        private void Bot_ordencorte_Click(object sender, EventArgs e)
         {
             OpenFormSingleInstance<FrmOrdenCorte>("OC");
         }
@@ -35,22 +36,21 @@ namespace Ritrama2025
                 if (existingForm.WindowState == FormWindowState.Minimized)
                     existingForm.WindowState = FormWindowState.Normal;
             }
-            else 
+            else
             {
-                if (nameForm == "OC") 
+                if (nameForm == "OC")
                 {
-                    FrmOrdenCorte frmOrdenCorte = new FrmOrdenCorte()
+                    FrmOrdenCorte frmOrdenCorte = new()
                     {
                         MdiParent = this,
                         StartPosition = FormStartPosition.Manual,
                         Location = new Point { X = Location.X + 20, Y = Location.Y + 20 }
-                   
                     };
                     frmOrdenCorte.Show();
                 }
                 if (nameForm == "DESPACHO")
                 {
-                    FrmDespacho frmdespacho = new FrmDespacho()
+                    FrmDespacho frmdespacho = new()
                     {
                         MdiParent = this,
                         StartPosition = FormStartPosition.Manual,
@@ -59,6 +59,6 @@ namespace Ritrama2025
                     frmdespacho.Show();
                 }
             }
-        }
+        }     
     }
 }

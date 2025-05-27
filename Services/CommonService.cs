@@ -58,6 +58,73 @@ namespace Ritrama2025.Services
                 }
             }
             return lista;
-        }   
+        }
+        public void SaveTransportEntity(string Id, string Name)
+        {
+            using SqlConnection conn = new(StringConnex);
+            SqlCommand comando = new()
+            {
+                Connection = conn,
+                CommandType = CommandType.Text,
+                CommandText = "INSERT INTO transporte (transport_id, transport_name) VALUES (@p1, @p2)"
+            };
+            comando.Parameters.Add(new SqlParameter("@p1", SqlDbType.NVarChar) { Value = Id });
+            comando.Parameters.Add(new SqlParameter("@p2", SqlDbType.NVarChar) { Value = Name });
+
+            try
+            {
+                conn.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                ErrorMsg = ex.Message;
+                MessageBox.Show("Error al guardar la entidad de transporte: " + ErrorMsg);
+            }
+        }
+        public void SaveChoferEntity(string Id, string Name)
+        {
+            using SqlConnection conn = new(StringConnex);
+            SqlCommand comando = new()
+            {
+                Connection = conn,
+                CommandType = CommandType.Text,
+                CommandText = "INSERT INTO chofer (chofer_id, chofer_name) VALUES (@p1, @p2)"
+            };
+            comando.Parameters.Add(new SqlParameter("@p1", SqlDbType.NVarChar) { Value = Id });
+            comando.Parameters.Add(new SqlParameter("@p2", SqlDbType.NVarChar) { Value = Name });
+            try
+            {
+                conn.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                ErrorMsg = ex.Message;
+                MessageBox.Show("Error al guardar la entidad de chofer: " + ErrorMsg);
+            }
+        }
+        public void SaveCamionEntity(string Id, string Name)
+        {
+            using SqlConnection conn = new(StringConnex);
+            SqlCommand comando = new()
+            {
+                Connection = conn,
+                CommandType = CommandType.Text,
+                CommandText = "INSERT INTO camion (placas_id, camion_name) VALUES (@p1, @p2)"
+            };
+            comando.Parameters.Add(new SqlParameter("@p1", SqlDbType.NVarChar) { Value = Id });
+            comando.Parameters.Add(new SqlParameter("@p2", SqlDbType.NVarChar) { Value = Name });
+            try
+            {
+                conn.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                ErrorMsg = ex.Message;
+                MessageBox.Show("Error al guardar la entidad de camion: " + ErrorMsg);
+            }
+        }
     }
 }

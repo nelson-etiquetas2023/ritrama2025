@@ -1,8 +1,9 @@
-﻿using Ritrama2025.Services;
+﻿using Newtonsoft.Json;
+using Ritrama2025.Forms.Seleccion;
+using Ritrama2025.Services;
 using System.Configuration;
 using System.Data;
-using Newtonsoft.Json;
-using Ritrama2025.Forms.Seleccion;
+using System.Windows.Forms;
 
 namespace Ritrama2025.Forms
 {
@@ -20,6 +21,7 @@ namespace Ritrama2025.Forms
         public Pen pen4 = new(Color.Black, 4);
         int StepIndicator = 0;
         DataRowView ParentRow = null!;
+        DataRowView ChildRowCortes = null!;
 
         public FrmOrdenCorte()
         {
@@ -209,10 +211,26 @@ namespace Ritrama2025.Forms
             txt_plus1.Text = "0";
             txt_menos2.Text = "0";
             ParentRow.EndEdit();
-            //Inicializar el Master 1 de la orden de corte.
+            //Crear la Dimension de los Cortes.
+            for (int i = 0; i < 5; i++)
+            {
+                ChildRowCortes = (DataRowView)BsCortes.AddNew()!;
+                ChildRowCortes.BeginEdit();
+                ChildRowCortes["num"] = i + 1;
+                ChildRowCortes["width"] = "0";
+                ChildRowCortes["lenght"] = "0";
+                ChildRowCortes["msi"] = "0";
+                ChildRowCortes["code_person"] = "S/N";
+                ChildRowCortes.EndEdit();
+            }
 
-
-
+            grid_cortes.ReadOnly = false;
+            btn_add_row_corte.Enabled = true;
+            btn_delete_row_corte.Enabled = true;
+            txt_long_cortar.ReadOnly = false;
+            txt_vueltas1.ReadOnly = false;
+            btn_buscar_operador.Enabled = true;
+            btn_buscar_customer.Enabled = true;
 
 
             //3.- Abrir los Textbox para editar los datos de la Orden de Corte.
@@ -239,6 +257,8 @@ namespace Ritrama2025.Forms
                 txt_width1.Text = frmrollid.MasterRoll.Width.ToString("N2");
                 txt_length1.Text = frmrollid.MasterRoll.Length.ToString("N2");
                 txt_real1.Text = frmrollid.MasterRoll.Length.ToString("N2");
+                txt_product_id.Text = frmrollid.MasterRoll.Product_Id;
+                txt_product_name.Text = frmrollid.MasterRoll.Product_Name;
             }
         }
 
@@ -311,5 +331,75 @@ namespace Ritrama2025.Forms
                 k.Handled = true;
             }
         }
+
+        private void Btn_buscar_rollid2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Btn_delete_row_corte_Click(object sender, EventArgs e)
+        {
+            if (grid_cortes.SelectedRows.Count > 0)
+            {
+                foreach (DataGridViewRow row in grid_cortes.SelectedRows)
+                {
+                    grid_cortes.Rows.Remove(row);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Por favor, seleccione una fila para eliminar.", "Advertencia",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void Txt_long_cortar_KeyUp(object sender, KeyEventArgs e)
+        {
+            for (int i = 0; i <= grid_cortes.Rows.Count - 1; i++)
+            {
+                grid_cortes.Rows[i].Cells["lenght"].Value = txt_long_cortar.Text;
+                grid_cortes.Rows[i].Cells["msi"].Value = Convert.ToDouble(grid_cortes.Rows[i].Cells["width"].Value) * Convert.ToDouble(grid_cortes.Rows[i].Cells["lenght"].Value) * R.CONSTANTES.FACTOR_CALCULO_MSI;
+                txt_cortes_ancho.Text = grid_cortes.Rows.Count.ToString();
+                CalcularRealUtil1();
+                CalcularMatRestante1();
+
+            }
+
+        }
+
+        private void Txt_vueltas1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txt_vueltas1.Text) && !string.IsNullOrEmpty(txt_cortes_ancho.Text))
+            {
+                double num = Convert.ToDouble(txt_cortes_ancho.Text) * Convert.ToDouble(txt_vueltas1.Text);
+                txt_rollos_cortar1.Text = num.ToString();
+            }
+        }
+        private void CalcularRealUtil1()
+        {
+            double num = 0.0;
+            double num2 = 0.0;
+            for (int i = 0; i <= grid_cortes.Rows.Count - 1; i++)
+            {
+                // Fixing CS1001, CS1002, and CS1525 by using the correct method name and syntax
+                num += Convert.ToDouble(grid_cortes.Rows[i].Cells["width"].Value);
+                num2 += Convert.ToDouble(grid_cortes.Rows[i].Cells["lenght"].Value);
+                // Fixing the incomplete line for updating txt_real1_width
+                txt_real1_width.Text = num.ToString("N2");
+                txt_real1_length.Text = num2.ToString("N2");
+            }
+        }
+        private void CalcularMatRestante1() 
+        {
+            double num = (Convert.ToDouble(txt_width1.Text)- Convert.ToDouble(txt_real1_width.Text));
+
+            double num2 = (Convert.ToDouble(txt_length1.Text) - Convert.ToDouble(txt_real1_length.Text));
+
+            txt_matrest1_width.Text =   num.ToString("N2");
+            txt_matrest1_lenght.Text = num2.ToString("N2");
+        }
+
+
     }
 }

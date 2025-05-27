@@ -118,7 +118,7 @@
             grid_cortes = new DataGridView();
             btn_generar_rollos = new Button();
             btn_add_row_corte = new Button();
-            txt_delete_row_corte = new Button();
+            btn_delete_row_corte = new Button();
             txt_long_cortar = new TextBox();
             label29 = new Label();
             txt_vueltas1 = new TextBox();
@@ -764,6 +764,7 @@
             // 
             // txt_product_id
             // 
+            txt_product_id.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_product_id.Location = new Point(12, 303);
             txt_product_id.Name = "txt_product_id";
             txt_product_id.ReadOnly = true;
@@ -772,6 +773,7 @@
             // 
             // txt_product_name
             // 
+            txt_product_name.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_product_name.Location = new Point(161, 303);
             txt_product_name.Name = "txt_product_name";
             txt_product_name.ReadOnly = true;
@@ -942,11 +944,12 @@
             // 
             grid_cortes.AllowUserToAddRows = false;
             grid_cortes.AllowUserToDeleteRows = false;
+            grid_cortes.AllowUserToOrderColumns = true;
+            grid_cortes.AllowUserToResizeColumns = false;
             grid_cortes.AllowUserToResizeRows = false;
             grid_cortes.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             grid_cortes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             grid_cortes.Location = new Point(569, 136);
-            grid_cortes.MultiSelect = false;
             grid_cortes.Name = "grid_cortes";
             grid_cortes.ReadOnly = true;
             grid_cortes.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
@@ -957,12 +960,14 @@
             // 
             // btn_generar_rollos
             // 
+            btn_generar_rollos.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_generar_rollos.Image = (Image)resources.GetObject("btn_generar_rollos.Image");
             btn_generar_rollos.Location = new Point(569, 292);
             btn_generar_rollos.Name = "btn_generar_rollos";
             btn_generar_rollos.Size = new Size(353, 52);
             btn_generar_rollos.TabIndex = 67;
-            btn_generar_rollos.Text = "Generar Rollos";
+            btn_generar_rollos.Text = "GENERAR ROLLOS CORTADOS";
+            btn_generar_rollos.TextAlign = ContentAlignment.MiddleRight;
             btn_generar_rollos.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_generar_rollos.UseVisualStyleBackColor = true;
             // 
@@ -978,25 +983,28 @@
             btn_add_row_corte.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_add_row_corte.UseVisualStyleBackColor = true;
             // 
-            // txt_delete_row_corte
+            // btn_delete_row_corte
             // 
-            txt_delete_row_corte.Enabled = false;
-            txt_delete_row_corte.Image = (Image)resources.GetObject("txt_delete_row_corte.Image");
-            txt_delete_row_corte.Location = new Point(929, 173);
-            txt_delete_row_corte.Name = "txt_delete_row_corte";
-            txt_delete_row_corte.Size = new Size(99, 38);
-            txt_delete_row_corte.TabIndex = 69;
-            txt_delete_row_corte.Text = "Borrar";
-            txt_delete_row_corte.TextImageRelation = TextImageRelation.ImageBeforeText;
-            txt_delete_row_corte.UseVisualStyleBackColor = true;
+            btn_delete_row_corte.Enabled = false;
+            btn_delete_row_corte.Image = (Image)resources.GetObject("btn_delete_row_corte.Image");
+            btn_delete_row_corte.Location = new Point(929, 173);
+            btn_delete_row_corte.Name = "btn_delete_row_corte";
+            btn_delete_row_corte.Size = new Size(99, 38);
+            btn_delete_row_corte.TabIndex = 69;
+            btn_delete_row_corte.Text = "Borrar";
+            btn_delete_row_corte.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_delete_row_corte.UseVisualStyleBackColor = true;
+            btn_delete_row_corte.Click += Btn_delete_row_corte_Click;
             // 
             // txt_long_cortar
             // 
+            txt_long_cortar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_long_cortar.Location = new Point(929, 234);
             txt_long_cortar.Name = "txt_long_cortar";
             txt_long_cortar.ReadOnly = true;
             txt_long_cortar.Size = new Size(86, 23);
             txt_long_cortar.TabIndex = 71;
+            txt_long_cortar.KeyUp += Txt_long_cortar_KeyUp;
             // 
             // label29
             // 
@@ -1009,11 +1017,13 @@
             // 
             // txt_vueltas1
             // 
+            txt_vueltas1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_vueltas1.Location = new Point(929, 278);
             txt_vueltas1.Name = "txt_vueltas1";
             txt_vueltas1.ReadOnly = true;
             txt_vueltas1.Size = new Size(80, 23);
             txt_vueltas1.TabIndex = 73;
+            txt_vueltas1.KeyUp += Txt_vueltas1_KeyUp;
             // 
             // label30
             // 
@@ -1034,6 +1044,7 @@
             // 
             // txt_cortes_ancho
             // 
+            txt_cortes_ancho.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_cortes_ancho.Location = new Point(929, 323);
             txt_cortes_ancho.Name = "txt_cortes_ancho";
             txt_cortes_ancho.ReadOnly = true;
@@ -1059,6 +1070,7 @@
             // 
             // txt_rollos_cortar1
             // 
+            txt_rollos_cortar1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_rollos_cortar1.Location = new Point(929, 367);
             txt_rollos_cortar1.Name = "txt_rollos_cortar1";
             txt_rollos_cortar1.ReadOnly = true;
@@ -1313,7 +1325,7 @@
             Controls.Add(label30);
             Controls.Add(txt_long_cortar);
             Controls.Add(label29);
-            Controls.Add(txt_delete_row_corte);
+            Controls.Add(btn_delete_row_corte);
             Controls.Add(btn_add_row_corte);
             Controls.Add(btn_generar_rollos);
             Controls.Add(grid_cortes);
@@ -1474,7 +1486,7 @@
         private DataGridView grid_cortes;
         private Button btn_generar_rollos;
         private Button btn_add_row_corte;
-        private Button txt_delete_row_corte;
+        private Button btn_delete_row_corte;
         private TextBox txt_long_cortar;
         private Label label29;
         private TextBox txt_vueltas1;
