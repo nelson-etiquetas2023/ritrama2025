@@ -121,9 +121,7 @@
             btn_delete_row_corte = new Button();
             txt_long_cortar = new TextBox();
             label29 = new Label();
-            txt_vueltas1 = new TextBox();
             label30 = new Label();
-            txt_vueltas2 = new TextBox();
             txt_cortes_ancho = new TextBox();
             label31 = new Label();
             txt_rollos_cortar2 = new TextBox();
@@ -149,6 +147,8 @@
             pictureBox5 = new PictureBox();
             button1 = new Button();
             imageList1 = new ImageList(components);
+            label37 = new Label();
+            txt_vueltas1 = new NumericUpDown();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             toolStrip1.SuspendLayout();
@@ -161,6 +161,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txt_vueltas1).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -172,7 +173,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1105, 52);
+            panel1.Size = new Size(1105, 55);
             panel1.TabIndex = 0;
             // 
             // pictureBox6
@@ -180,7 +181,7 @@
             pictureBox6.Image = Properties.Resources.product_management_48px;
             pictureBox6.Location = new Point(333, 0);
             pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(50, 48);
+            pictureBox6.Size = new Size(50, 51);
             pictureBox6.TabIndex = 97;
             pictureBox6.TabStop = false;
             // 
@@ -188,7 +189,7 @@
             // 
             registros.AutoSize = true;
             registros.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            registros.Location = new Point(920, 15);
+            registros.Location = new Point(920, 16);
             registros.Name = "registros";
             registros.Size = new Size(161, 25);
             registros.TabIndex = 96;
@@ -199,7 +200,7 @@
             label1.AutoSize = true;
             label1.BackColor = SystemColors.ControlLightLight;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(393, 9);
+            label1.Location = new Point(393, 10);
             label1.Name = "label1";
             label1.Size = new Size(258, 32);
             label1.TabIndex = 0;
@@ -207,8 +208,9 @@
             // 
             // toolStrip1
             // 
+            toolStrip1.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             toolStrip1.Items.AddRange(new ToolStripItem[] { bot_primero, bot_anterior, bot_siguiente, bot_ultimo, bot_accion, toolStripButton1, bot_guardar, bot_cancelar, bot_imprimir, bot_exportar, bot_etiquetar });
-            toolStrip1.Location = new Point(0, 52);
+            toolStrip1.Location = new Point(0, 55);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1105, 33);
             toolStrip1.TabIndex = 1;
@@ -217,7 +219,7 @@
             // bot_primero
             // 
             bot_primero.AutoSize = false;
-            bot_primero.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            bot_primero.Font = new Font("Tahoma", 9.75F);
             bot_primero.Image = Properties.Resources.double_left_48px;
             bot_primero.ImageTransparentColor = Color.Magenta;
             bot_primero.Name = "bot_primero";
@@ -228,7 +230,7 @@
             // bot_anterior
             // 
             bot_anterior.AutoSize = false;
-            bot_anterior.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            bot_anterior.Font = new Font("Tahoma", 9.75F);
             bot_anterior.Image = (Image)resources.GetObject("bot_anterior.Image");
             bot_anterior.ImageTransparentColor = Color.Magenta;
             bot_anterior.Name = "bot_anterior";
@@ -239,7 +241,7 @@
             // bot_siguiente
             // 
             bot_siguiente.AutoSize = false;
-            bot_siguiente.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            bot_siguiente.Font = new Font("Tahoma", 9.75F);
             bot_siguiente.Image = (Image)resources.GetObject("bot_siguiente.Image");
             bot_siguiente.ImageTransparentColor = Color.Magenta;
             bot_siguiente.Name = "bot_siguiente";
@@ -251,7 +253,7 @@
             // bot_ultimo
             // 
             bot_ultimo.AutoSize = false;
-            bot_ultimo.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            bot_ultimo.Font = new Font("Tahoma", 9.75F);
             bot_ultimo.Image = (Image)resources.GetObject("bot_ultimo.Image");
             bot_ultimo.ImageTransparentColor = Color.Magenta;
             bot_ultimo.Name = "bot_ultimo";
@@ -263,60 +265,60 @@
             // bot_accion
             // 
             bot_accion.DropDownItems.AddRange(new ToolStripItem[] { opt_create_document, opt_send_production, opt_etiquetar_orden, opt_aprobar_orden, opt_cerrar_orden, opt_modif_orden });
-            bot_accion.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            bot_accion.Font = new Font("Tahoma", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             bot_accion.Image = (Image)resources.GetObject("bot_accion.Image");
             bot_accion.ImageTransparentColor = Color.Magenta;
             bot_accion.Name = "bot_accion";
-            bot_accion.Size = new Size(85, 30);
+            bot_accion.Size = new Size(86, 30);
             bot_accion.Text = "Acciones";
             // 
             // opt_create_document
             // 
             opt_create_document.Image = Properties.Resources.create_24px;
             opt_create_document.Name = "opt_create_document";
-            opt_create_document.Size = new Size(182, 22);
-            opt_create_document.Text = "Crear Orden";
+            opt_create_document.Size = new Size(213, 22);
+            opt_create_document.Text = "Crear Nuevo Documento";
             opt_create_document.Click += Opt_create_document_Click;
             // 
             // opt_send_production
             // 
             opt_send_production.Image = Properties.Resources.automation_24px;
             opt_send_production.Name = "opt_send_production";
-            opt_send_production.Size = new Size(182, 22);
+            opt_send_production.Size = new Size(213, 22);
             opt_send_production.Text = "Enviar a Produccion";
             // 
             // opt_etiquetar_orden
             // 
             opt_etiquetar_orden.Image = Properties.Resources.price_tag_24px;
             opt_etiquetar_orden.Name = "opt_etiquetar_orden";
-            opt_etiquetar_orden.Size = new Size(182, 22);
+            opt_etiquetar_orden.Size = new Size(213, 22);
             opt_etiquetar_orden.Text = "Etiquetar Orden";
             // 
             // opt_aprobar_orden
             // 
             opt_aprobar_orden.Image = (Image)resources.GetObject("opt_aprobar_orden.Image");
             opt_aprobar_orden.Name = "opt_aprobar_orden";
-            opt_aprobar_orden.Size = new Size(182, 22);
+            opt_aprobar_orden.Size = new Size(213, 22);
             opt_aprobar_orden.Text = "Aprobar Orden";
             // 
             // opt_cerrar_orden
             // 
             opt_cerrar_orden.Image = Properties.Resources.security_document_24px;
             opt_cerrar_orden.Name = "opt_cerrar_orden";
-            opt_cerrar_orden.Size = new Size(182, 22);
+            opt_cerrar_orden.Size = new Size(213, 22);
             opt_cerrar_orden.Text = "Cerrar Orden";
             // 
             // opt_modif_orden
             // 
             opt_modif_orden.Image = Properties.Resources.edit_24px;
             opt_modif_orden.Name = "opt_modif_orden";
-            opt_modif_orden.Size = new Size(182, 22);
+            opt_modif_orden.Size = new Size(213, 22);
             opt_modif_orden.Text = "Modificar Orden";
             // 
             // toolStripButton1
             // 
             toolStripButton1.AutoSize = false;
-            toolStripButton1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            toolStripButton1.Font = new Font("Tahoma", 9.75F);
             toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
             toolStripButton1.ImageTransparentColor = Color.Magenta;
             toolStripButton1.Name = "toolStripButton1";
@@ -326,7 +328,7 @@
             // bot_guardar
             // 
             bot_guardar.AutoSize = false;
-            bot_guardar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            bot_guardar.Font = new Font("Tahoma", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             bot_guardar.Image = (Image)resources.GetObject("bot_guardar.Image");
             bot_guardar.ImageTransparentColor = Color.Magenta;
             bot_guardar.Name = "bot_guardar";
@@ -336,7 +338,7 @@
             // bot_cancelar
             // 
             bot_cancelar.AutoSize = false;
-            bot_cancelar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            bot_cancelar.Font = new Font("Tahoma", 9.75F);
             bot_cancelar.Image = (Image)resources.GetObject("bot_cancelar.Image");
             bot_cancelar.ImageTransparentColor = Color.Magenta;
             bot_cancelar.Name = "bot_cancelar";
@@ -346,7 +348,7 @@
             // bot_imprimir
             // 
             bot_imprimir.AutoSize = false;
-            bot_imprimir.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            bot_imprimir.Font = new Font("Tahoma", 9.75F);
             bot_imprimir.Image = (Image)resources.GetObject("bot_imprimir.Image");
             bot_imprimir.ImageTransparentColor = Color.Magenta;
             bot_imprimir.Name = "bot_imprimir";
@@ -356,7 +358,7 @@
             // bot_exportar
             // 
             bot_exportar.AutoSize = false;
-            bot_exportar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            bot_exportar.Font = new Font("Tahoma", 9.75F);
             bot_exportar.Image = (Image)resources.GetObject("bot_exportar.Image");
             bot_exportar.ImageTransparentColor = Color.Magenta;
             bot_exportar.Name = "bot_exportar";
@@ -366,7 +368,7 @@
             // bot_etiquetar
             // 
             bot_etiquetar.AutoSize = false;
-            bot_etiquetar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            bot_etiquetar.Font = new Font("Tahoma", 9.75F);
             bot_etiquetar.Image = (Image)resources.GetObject("bot_etiquetar.Image");
             bot_etiquetar.ImageTransparentColor = Color.Magenta;
             bot_etiquetar.Name = "bot_etiquetar";
@@ -376,15 +378,15 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 83);
+            label2.Location = new Point(12, 89);
             label2.Name = "label2";
-            label2.Size = new Size(74, 15);
+            label2.Size = new Size(78, 16);
             label2.TabIndex = 2;
             label2.Text = "Numero OC:";
             // 
             // txt_numeroOC
             // 
-            txt_numeroOC.Location = new Point(12, 101);
+            txt_numeroOC.Location = new Point(12, 108);
             txt_numeroOC.Name = "txt_numeroOC";
             txt_numeroOC.ReadOnly = true;
             txt_numeroOC.Size = new Size(100, 23);
@@ -393,7 +395,7 @@
             // txt_fecha_emision
             // 
             txt_fecha_emision.Enabled = false;
-            txt_fecha_emision.Location = new Point(118, 101);
+            txt_fecha_emision.Location = new Point(118, 108);
             txt_fecha_emision.Name = "txt_fecha_emision";
             txt_fecha_emision.Size = new Size(216, 23);
             txt_fecha_emision.TabIndex = 4;
@@ -401,16 +403,16 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(118, 83);
+            label3.Location = new Point(118, 89);
             label3.Name = "label3";
-            label3.Size = new Size(61, 15);
+            label3.Size = new Size(67, 16);
             label3.TabIndex = 5;
             label3.Text = "Fecha OC:";
             // 
             // txt_fecha_produccion
             // 
             txt_fecha_produccion.Enabled = false;
-            txt_fecha_produccion.Location = new Point(340, 101);
+            txt_fecha_produccion.Location = new Point(340, 108);
             txt_fecha_produccion.Name = "txt_fecha_produccion";
             txt_fecha_produccion.Size = new Size(216, 23);
             txt_fecha_produccion.TabIndex = 6;
@@ -418,16 +420,16 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(340, 83);
+            label4.Location = new Point(340, 89);
             label4.Name = "label4";
-            label4.Size = new Size(105, 15);
+            label4.Size = new Size(112, 16);
             label4.TabIndex = 7;
             label4.Text = "Fecha Produccion:";
             // 
             // txt_rollid_1
             // 
             txt_rollid_1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_rollid_1.Location = new Point(12, 143);
+            txt_rollid_1.Location = new Point(12, 153);
             txt_rollid_1.Name = "txt_rollid_1";
             txt_rollid_1.ReadOnly = true;
             txt_rollid_1.Size = new Size(100, 23);
@@ -436,18 +438,18 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(12, 125);
+            label5.Location = new Point(12, 133);
             label5.Name = "label5";
-            label5.Size = new Size(31, 15);
+            label5.Size = new Size(35, 16);
             label5.TabIndex = 8;
             label5.Text = "ID#1";
             // 
             // btn_buscar_rollid1
             // 
             btn_buscar_rollid1.Enabled = false;
-            btn_buscar_rollid1.Location = new Point(118, 143);
+            btn_buscar_rollid1.Location = new Point(118, 153);
             btn_buscar_rollid1.Name = "btn_buscar_rollid1";
-            btn_buscar_rollid1.Size = new Size(38, 23);
+            btn_buscar_rollid1.Size = new Size(38, 25);
             btn_buscar_rollid1.TabIndex = 10;
             btn_buscar_rollid1.Text = "...";
             btn_buscar_rollid1.UseVisualStyleBackColor = true;
@@ -456,7 +458,7 @@
             // txt_width1
             // 
             txt_width1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_width1.Location = new Point(162, 143);
+            txt_width1.Location = new Point(162, 153);
             txt_width1.Name = "txt_width1";
             txt_width1.ReadOnly = true;
             txt_width1.Size = new Size(100, 23);
@@ -465,16 +467,16 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(162, 125);
+            label6.Location = new Point(162, 133);
             label6.Name = "label6";
-            label6.Size = new Size(82, 15);
+            label6.Size = new Size(87, 16);
             label6.TabIndex = 11;
             label6.Text = "Width [INCH]:";
             // 
             // txt_length1
             // 
             txt_length1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_length1.Location = new Point(268, 143);
+            txt_length1.Location = new Point(268, 153);
             txt_length1.Name = "txt_length1";
             txt_length1.ReadOnly = true;
             txt_length1.Size = new Size(100, 23);
@@ -483,54 +485,56 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(268, 125);
+            label7.Location = new Point(268, 133);
             label7.Name = "label7";
-            label7.Size = new Size(80, 15);
+            label7.Size = new Size(90, 16);
             label7.TabIndex = 13;
             label7.Text = "Lenght [PIES]:";
             // 
             // txt_plus1
             // 
             txt_plus1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_plus1.Location = new Point(374, 144);
+            txt_plus1.Location = new Point(374, 154);
             txt_plus1.Name = "txt_plus1";
             txt_plus1.ReadOnly = true;
             txt_plus1.Size = new Size(38, 23);
             txt_plus1.TabIndex = 16;
+            txt_plus1.TextChanged += Txt_plus1_TextChanged;
             txt_plus1.KeyUp += Txt_plus1_KeyUp;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(374, 126);
+            label8.Location = new Point(374, 134);
             label8.Name = "label8";
-            label8.Size = new Size(15, 15);
+            label8.Size = new Size(15, 16);
             label8.TabIndex = 15;
             label8.Text = "+";
             // 
             // txt_menos1
             // 
             txt_menos1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_menos1.Location = new Point(418, 144);
+            txt_menos1.Location = new Point(418, 154);
             txt_menos1.Name = "txt_menos1";
             txt_menos1.ReadOnly = true;
             txt_menos1.Size = new Size(38, 23);
             txt_menos1.TabIndex = 18;
+            txt_menos1.TextChanged += Txt_menos1_TextChanged;
             txt_menos1.KeyUp += Txt_menos1_KeyUp;
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(418, 126);
+            label9.Location = new Point(418, 134);
             label9.Name = "label9";
-            label9.Size = new Size(12, 15);
+            label9.Size = new Size(12, 16);
             label9.TabIndex = 17;
             label9.Text = "-";
             // 
             // txt_real1
             // 
             txt_real1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_real1.Location = new Point(462, 144);
+            txt_real1.Location = new Point(462, 154);
             txt_real1.Name = "txt_real1";
             txt_real1.ReadOnly = true;
             txt_real1.Size = new Size(100, 23);
@@ -539,25 +543,25 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(462, 126);
+            label10.Location = new Point(462, 134);
             label10.Name = "label10";
-            label10.Size = new Size(65, 15);
+            label10.Size = new Size(77, 16);
             label10.TabIndex = 19;
             label10.Text = "Real [PIES]:";
             // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(75, 170);
+            label11.Location = new Point(75, 181);
             label11.Name = "label11";
-            label11.Size = new Size(81, 15);
+            label11.Size = new Size(89, 16);
             label11.TabIndex = 21;
             label11.Text = "Real Utilizado:";
             // 
             // txt_real1_width
             // 
             txt_real1_width.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_real1_width.Location = new Point(162, 167);
+            txt_real1_width.Location = new Point(162, 178);
             txt_real1_width.Name = "txt_real1_width";
             txt_real1_width.ReadOnly = true;
             txt_real1_width.Size = new Size(100, 23);
@@ -566,7 +570,7 @@
             // txt_real1_length
             // 
             txt_real1_length.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_real1_length.Location = new Point(267, 167);
+            txt_real1_length.Location = new Point(267, 178);
             txt_real1_length.Name = "txt_real1_length";
             txt_real1_length.ReadOnly = true;
             txt_real1_length.Size = new Size(100, 23);
@@ -575,7 +579,7 @@
             // txt_matrest1_lenght
             // 
             txt_matrest1_lenght.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_matrest1_lenght.Location = new Point(267, 191);
+            txt_matrest1_lenght.Location = new Point(267, 204);
             txt_matrest1_lenght.Name = "txt_matrest1_lenght";
             txt_matrest1_lenght.ReadOnly = true;
             txt_matrest1_lenght.Size = new Size(100, 23);
@@ -584,7 +588,7 @@
             // txt_matrest1_width
             // 
             txt_matrest1_width.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_matrest1_width.Location = new Point(162, 191);
+            txt_matrest1_width.Location = new Point(162, 204);
             txt_matrest1_width.Name = "txt_matrest1_width";
             txt_matrest1_width.ReadOnly = true;
             txt_matrest1_width.Size = new Size(100, 23);
@@ -593,16 +597,16 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(55, 194);
+            label12.Location = new Point(55, 207);
             label12.Name = "label12";
-            label12.Size = new Size(101, 15);
+            label12.Size = new Size(112, 16);
             label12.TabIndex = 26;
             label12.Text = "Material Restante:";
             // 
             // txt_rollid_2
             // 
             txt_rollid_2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_rollid_2.Location = new Point(12, 214);
+            txt_rollid_2.Location = new Point(12, 228);
             txt_rollid_2.Name = "txt_rollid_2";
             txt_rollid_2.ReadOnly = true;
             txt_rollid_2.Size = new Size(100, 23);
@@ -611,7 +615,7 @@
             // txt_length2
             // 
             txt_length2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_length2.Location = new Point(267, 215);
+            txt_length2.Location = new Point(267, 229);
             txt_length2.Name = "txt_length2";
             txt_length2.ReadOnly = true;
             txt_length2.Size = new Size(100, 23);
@@ -620,7 +624,7 @@
             // txt_width2
             // 
             txt_width2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_width2.Location = new Point(162, 215);
+            txt_width2.Location = new Point(162, 229);
             txt_width2.Name = "txt_width2";
             txt_width2.ReadOnly = true;
             txt_width2.Size = new Size(100, 23);
@@ -629,9 +633,9 @@
             // btn_buscar_rollid2
             // 
             btn_buscar_rollid2.Enabled = false;
-            btn_buscar_rollid2.Location = new Point(118, 214);
+            btn_buscar_rollid2.Location = new Point(118, 228);
             btn_buscar_rollid2.Name = "btn_buscar_rollid2";
-            btn_buscar_rollid2.Size = new Size(38, 23);
+            btn_buscar_rollid2.Size = new Size(38, 25);
             btn_buscar_rollid2.TabIndex = 31;
             btn_buscar_rollid2.Text = "...";
             btn_buscar_rollid2.UseVisualStyleBackColor = true;
@@ -639,16 +643,16 @@
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(12, 196);
+            label13.Location = new Point(12, 209);
             label13.Name = "label13";
-            label13.Size = new Size(31, 15);
+            label13.Size = new Size(35, 16);
             label13.TabIndex = 32;
             label13.Text = "ID#2";
             // 
             // txt_real2
             // 
             txt_real2.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_real2.Location = new Point(462, 215);
+            txt_real2.Location = new Point(462, 229);
             txt_real2.Name = "txt_real2";
             txt_real2.ReadOnly = true;
             txt_real2.Size = new Size(100, 24);
@@ -657,61 +661,63 @@
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new Point(462, 197);
+            label14.Location = new Point(462, 210);
             label14.Name = "label14";
-            label14.Size = new Size(65, 15);
+            label14.Size = new Size(77, 16);
             label14.TabIndex = 37;
             label14.Text = "Real [PIES]:";
             // 
             // txt_menos2
             // 
             txt_menos2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_menos2.Location = new Point(418, 215);
+            txt_menos2.Location = new Point(418, 229);
             txt_menos2.Name = "txt_menos2";
             txt_menos2.ReadOnly = true;
             txt_menos2.Size = new Size(38, 23);
             txt_menos2.TabIndex = 36;
+            txt_menos2.TextChanged += Txt_menos2_TextChanged;
             // 
             // label15
             // 
             label15.AutoSize = true;
-            label15.Location = new Point(418, 197);
+            label15.Location = new Point(418, 210);
             label15.Name = "label15";
-            label15.Size = new Size(12, 15);
+            label15.Size = new Size(12, 16);
             label15.TabIndex = 35;
             label15.Text = "-";
             // 
             // txt_plus2
             // 
             txt_plus2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_plus2.Location = new Point(374, 215);
+            txt_plus2.Location = new Point(374, 229);
             txt_plus2.Name = "txt_plus2";
             txt_plus2.ReadOnly = true;
             txt_plus2.Size = new Size(38, 23);
             txt_plus2.TabIndex = 34;
+            txt_plus2.TextChanged += Txt_plus2_TextChanged;
             // 
             // label16
             // 
             label16.AutoSize = true;
-            label16.Location = new Point(374, 197);
+            label16.Location = new Point(374, 210);
             label16.Name = "label16";
-            label16.Size = new Size(15, 15);
+            label16.Size = new Size(15, 16);
             label16.TabIndex = 33;
             label16.Text = "+";
             // 
             // label17
             // 
             label17.AutoSize = true;
-            label17.Location = new Point(55, 266);
+            label17.Location = new Point(55, 284);
             label17.Name = "label17";
-            label17.Size = new Size(101, 15);
+            label17.Size = new Size(112, 16);
             label17.TabIndex = 44;
             label17.Text = "Material Restante:";
             // 
             // txt_matrest2_lenght
             // 
             txt_matrest2_lenght.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_matrest2_lenght.Location = new Point(267, 263);
+            txt_matrest2_lenght.Location = new Point(267, 281);
             txt_matrest2_lenght.Name = "txt_matrest2_lenght";
             txt_matrest2_lenght.ReadOnly = true;
             txt_matrest2_lenght.Size = new Size(100, 23);
@@ -720,7 +726,7 @@
             // txt_matrest2_width
             // 
             txt_matrest2_width.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_matrest2_width.Location = new Point(162, 263);
+            txt_matrest2_width.Location = new Point(162, 281);
             txt_matrest2_width.Name = "txt_matrest2_width";
             txt_matrest2_width.ReadOnly = true;
             txt_matrest2_width.Size = new Size(100, 23);
@@ -729,7 +735,7 @@
             // txt_real2_length
             // 
             txt_real2_length.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_real2_length.Location = new Point(267, 239);
+            txt_real2_length.Location = new Point(267, 255);
             txt_real2_length.Name = "txt_real2_length";
             txt_real2_length.ReadOnly = true;
             txt_real2_length.Size = new Size(100, 23);
@@ -738,7 +744,7 @@
             // txt_real2_width
             // 
             txt_real2_width.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_real2_width.Location = new Point(161, 239);
+            txt_real2_width.Location = new Point(161, 255);
             txt_real2_width.Name = "txt_real2_width";
             txt_real2_width.ReadOnly = true;
             txt_real2_width.Size = new Size(100, 23);
@@ -747,25 +753,25 @@
             // label18
             // 
             label18.AutoSize = true;
-            label18.Location = new Point(74, 242);
+            label18.Location = new Point(74, 258);
             label18.Name = "label18";
-            label18.Size = new Size(81, 15);
+            label18.Size = new Size(89, 16);
             label18.TabIndex = 39;
             label18.Text = "Real Utilizado:";
             // 
             // label19
             // 
             label19.AutoSize = true;
-            label19.Location = new Point(12, 285);
+            label19.Location = new Point(12, 304);
             label19.Name = "label19";
-            label19.Size = new Size(65, 15);
+            label19.Size = new Size(69, 16);
             label19.TabIndex = 46;
             label19.Text = "Product Id.";
             // 
             // txt_product_id
             // 
             txt_product_id.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_product_id.Location = new Point(12, 303);
+            txt_product_id.Location = new Point(12, 323);
             txt_product_id.Name = "txt_product_id";
             txt_product_id.ReadOnly = true;
             txt_product_id.Size = new Size(100, 23);
@@ -774,7 +780,7 @@
             // txt_product_name
             // 
             txt_product_name.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_product_name.Location = new Point(161, 303);
+            txt_product_name.Location = new Point(161, 323);
             txt_product_name.Name = "txt_product_name";
             txt_product_name.ReadOnly = true;
             txt_product_name.Size = new Size(401, 23);
@@ -783,25 +789,25 @@
             // label20
             // 
             label20.AutoSize = true;
-            label20.Location = new Point(161, 289);
+            label20.Location = new Point(161, 308);
             label20.Name = "label20";
-            label20.Size = new Size(84, 15);
+            label20.Size = new Size(87, 16);
             label20.TabIndex = 48;
             label20.Text = "Product Name";
             // 
             // label21
             // 
             label21.AutoSize = true;
-            label21.Location = new Point(12, 329);
+            label21.Location = new Point(12, 351);
             label21.Name = "label21";
-            label21.Size = new Size(39, 15);
+            label21.Size = new Size(42, 16);
             label21.TabIndex = 50;
             label21.Text = "Op. Id";
             // 
             // txt_operador_id
             // 
             txt_operador_id.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_operador_id.Location = new Point(12, 347);
+            txt_operador_id.Location = new Point(12, 370);
             txt_operador_id.Name = "txt_operador_id";
             txt_operador_id.ReadOnly = true;
             txt_operador_id.Size = new Size(100, 23);
@@ -810,16 +816,16 @@
             // label22
             // 
             label22.AutoSize = true;
-            label22.Location = new Point(162, 333);
+            label22.Location = new Point(162, 355);
             label22.Name = "label22";
-            label22.Size = new Size(92, 15);
+            label22.Size = new Size(98, 16);
             label22.TabIndex = 52;
             label22.Text = "Operador Name";
             // 
             // txt_operador_name
             // 
             txt_operador_name.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_operador_name.Location = new Point(162, 347);
+            txt_operador_name.Location = new Point(162, 370);
             txt_operador_name.Name = "txt_operador_name";
             txt_operador_name.ReadOnly = true;
             txt_operador_name.Size = new Size(354, 23);
@@ -828,16 +834,16 @@
             // label23
             // 
             label23.AutoSize = true;
-            label23.Location = new Point(162, 377);
+            label23.Location = new Point(162, 402);
             label23.Name = "label23";
-            label23.Size = new Size(94, 15);
+            label23.Size = new Size(99, 16);
             label23.TabIndex = 56;
             label23.Text = "Customer Name";
             // 
             // txt_cust_name
             // 
             txt_cust_name.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_cust_name.Location = new Point(162, 391);
+            txt_cust_name.Location = new Point(162, 417);
             txt_cust_name.Name = "txt_cust_name";
             txt_cust_name.ReadOnly = true;
             txt_cust_name.Size = new Size(354, 23);
@@ -846,16 +852,16 @@
             // label24
             // 
             label24.AutoSize = true;
-            label24.Location = new Point(12, 373);
+            label24.Location = new Point(12, 398);
             label24.Name = "label24";
-            label24.Size = new Size(50, 15);
+            label24.Size = new Size(55, 16);
             label24.TabIndex = 54;
             label24.Text = "Cust. Id.";
             // 
             // txt_cust_id
             // 
             txt_cust_id.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_cust_id.Location = new Point(12, 391);
+            txt_cust_id.Location = new Point(12, 417);
             txt_cust_id.Name = "txt_cust_id";
             txt_cust_id.ReadOnly = true;
             txt_cust_id.Size = new Size(100, 23);
@@ -864,15 +870,15 @@
             // label25
             // 
             label25.AutoSize = true;
-            label25.Location = new Point(659, 77);
+            label25.Location = new Point(659, 87);
             label25.Name = "label25";
-            label25.Size = new Size(159, 15);
+            label25.Size = new Size(175, 16);
             label25.TabIndex = 57;
             label25.Text = "DIMENSION DE LOS CORTES ";
             // 
             // txt_ancho_corte
             // 
-            txt_ancho_corte.Location = new Point(638, 110);
+            txt_ancho_corte.Location = new Point(638, 117);
             txt_ancho_corte.Name = "txt_ancho_corte";
             txt_ancho_corte.ReadOnly = true;
             txt_ancho_corte.Size = new Size(53, 23);
@@ -882,7 +888,7 @@
             // 
             label26.AutoSize = true;
             label26.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label26.Location = new Point(638, 92);
+            label26.Location = new Point(638, 102);
             label26.Name = "label26";
             label26.Size = new Size(52, 15);
             label26.TabIndex = 58;
@@ -890,7 +896,7 @@
             // 
             // txt_largo_corte
             // 
-            txt_largo_corte.Location = new Point(697, 110);
+            txt_largo_corte.Location = new Point(697, 117);
             txt_largo_corte.Name = "txt_largo_corte";
             txt_largo_corte.ReadOnly = true;
             txt_largo_corte.Size = new Size(53, 23);
@@ -900,7 +906,7 @@
             // 
             label27.AutoSize = true;
             label27.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label27.Location = new Point(697, 92);
+            label27.Location = new Point(697, 102);
             label27.Name = "label27";
             label27.Size = new Size(50, 15);
             label27.TabIndex = 60;
@@ -908,7 +914,7 @@
             // 
             // txt_resta_corte
             // 
-            txt_resta_corte.Location = new Point(756, 110);
+            txt_resta_corte.Location = new Point(756, 117);
             txt_resta_corte.Name = "txt_resta_corte";
             txt_resta_corte.ReadOnly = true;
             txt_resta_corte.Size = new Size(53, 23);
@@ -918,7 +924,7 @@
             // 
             label28.AutoSize = true;
             label28.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label28.Location = new Point(756, 92);
+            label28.Location = new Point(756, 102);
             label28.Name = "label28";
             label28.Size = new Size(45, 15);
             label28.TabIndex = 62;
@@ -927,24 +933,24 @@
             // btn_buscar_customer
             // 
             btn_buscar_customer.Enabled = false;
-            btn_buscar_customer.Location = new Point(522, 391);
+            btn_buscar_customer.Location = new Point(522, 417);
             btn_buscar_customer.Name = "btn_buscar_customer";
-            btn_buscar_customer.Size = new Size(38, 23);
+            btn_buscar_customer.Size = new Size(38, 25);
             btn_buscar_customer.TabIndex = 64;
             btn_buscar_customer.Text = "...";
             btn_buscar_customer.UseVisualStyleBackColor = true;
-            btn_buscar_customer.Click += btn_buscar_customer_Click;
+            btn_buscar_customer.Click += Btn_buscar_customer_Click;
             // 
             // btn_buscar_operador
             // 
             btn_buscar_operador.Enabled = false;
-            btn_buscar_operador.Location = new Point(522, 347);
+            btn_buscar_operador.Location = new Point(522, 370);
             btn_buscar_operador.Name = "btn_buscar_operador";
-            btn_buscar_operador.Size = new Size(38, 23);
+            btn_buscar_operador.Size = new Size(38, 25);
             btn_buscar_operador.TabIndex = 65;
             btn_buscar_operador.Text = "...";
             btn_buscar_operador.UseVisualStyleBackColor = true;
-            btn_buscar_operador.Click += btn_buscar_operador_Click;
+            btn_buscar_operador.Click += Btn_buscar_operador_Click;
             // 
             // grid_cortes
             // 
@@ -955,35 +961,37 @@
             grid_cortes.AllowUserToResizeRows = false;
             grid_cortes.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             grid_cortes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            grid_cortes.Location = new Point(569, 136);
+            grid_cortes.Location = new Point(569, 145);
             grid_cortes.Name = "grid_cortes";
             grid_cortes.ReadOnly = true;
             grid_cortes.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             grid_cortes.RowHeadersWidth = 32;
             grid_cortes.ScrollBars = ScrollBars.Vertical;
-            grid_cortes.Size = new Size(353, 150);
+            grid_cortes.Size = new Size(353, 160);
             grid_cortes.TabIndex = 66;
+            grid_cortes.CellEndEdit += Grid_cortes_CellEndEdit;
             // 
             // btn_generar_rollos
             // 
             btn_generar_rollos.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_generar_rollos.Image = (Image)resources.GetObject("btn_generar_rollos.Image");
-            btn_generar_rollos.Location = new Point(569, 292);
+            btn_generar_rollos.Location = new Point(569, 311);
             btn_generar_rollos.Name = "btn_generar_rollos";
-            btn_generar_rollos.Size = new Size(353, 52);
+            btn_generar_rollos.Size = new Size(353, 55);
             btn_generar_rollos.TabIndex = 67;
             btn_generar_rollos.Text = "GENERAR ROLLOS CORTADOS";
             btn_generar_rollos.TextAlign = ContentAlignment.MiddleRight;
             btn_generar_rollos.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_generar_rollos.UseVisualStyleBackColor = true;
+            btn_generar_rollos.Click += Btn_generar_rollos_Click;
             // 
             // btn_add_row_corte
             // 
             btn_add_row_corte.Enabled = false;
             btn_add_row_corte.Image = (Image)resources.GetObject("btn_add_row_corte.Image");
-            btn_add_row_corte.Location = new Point(929, 135);
+            btn_add_row_corte.Location = new Point(929, 144);
             btn_add_row_corte.Name = "btn_add_row_corte";
-            btn_add_row_corte.Size = new Size(99, 38);
+            btn_add_row_corte.Size = new Size(99, 41);
             btn_add_row_corte.TabIndex = 68;
             btn_add_row_corte.Text = "Agregar";
             btn_add_row_corte.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -993,9 +1001,9 @@
             // 
             btn_delete_row_corte.Enabled = false;
             btn_delete_row_corte.Image = (Image)resources.GetObject("btn_delete_row_corte.Image");
-            btn_delete_row_corte.Location = new Point(929, 173);
+            btn_delete_row_corte.Location = new Point(929, 185);
             btn_delete_row_corte.Name = "btn_delete_row_corte";
-            btn_delete_row_corte.Size = new Size(99, 38);
+            btn_delete_row_corte.Size = new Size(99, 41);
             btn_delete_row_corte.TabIndex = 69;
             btn_delete_row_corte.Text = "Borrar";
             btn_delete_row_corte.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -1005,53 +1013,36 @@
             // txt_long_cortar
             // 
             txt_long_cortar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_long_cortar.Location = new Point(929, 234);
+            txt_long_cortar.Location = new Point(929, 250);
             txt_long_cortar.Name = "txt_long_cortar";
             txt_long_cortar.ReadOnly = true;
             txt_long_cortar.Size = new Size(86, 23);
             txt_long_cortar.TabIndex = 71;
+            txt_long_cortar.TextChanged += Txt_long_cortar_TextChanged;
             txt_long_cortar.KeyUp += Txt_long_cortar_KeyUp;
             // 
             // label29
             // 
             label29.AutoSize = true;
-            label29.Location = new Point(929, 216);
+            label29.Location = new Point(929, 230);
             label29.Name = "label29";
-            label29.Size = new Size(106, 15);
+            label29.Size = new Size(115, 16);
             label29.TabIndex = 70;
             label29.Text = "Longitud a Cortar :";
-            // 
-            // txt_vueltas1
-            // 
-            txt_vueltas1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_vueltas1.Location = new Point(929, 278);
-            txt_vueltas1.Name = "txt_vueltas1";
-            txt_vueltas1.ReadOnly = true;
-            txt_vueltas1.Size = new Size(80, 23);
-            txt_vueltas1.TabIndex = 73;
-            txt_vueltas1.KeyUp += Txt_vueltas1_KeyUp;
             // 
             // label30
             // 
             label30.AutoSize = true;
-            label30.Location = new Point(929, 260);
+            label30.Location = new Point(929, 277);
             label30.Name = "label30";
-            label30.Size = new Size(86, 15);
+            label30.Size = new Size(100, 16);
             label30.TabIndex = 72;
             label30.Text = "Vueltas : [ID#1]";
-            // 
-            // txt_vueltas2
-            // 
-            txt_vueltas2.Location = new Point(1016, 279);
-            txt_vueltas2.Name = "txt_vueltas2";
-            txt_vueltas2.ReadOnly = true;
-            txt_vueltas2.Size = new Size(77, 23);
-            txt_vueltas2.TabIndex = 74;
             // 
             // txt_cortes_ancho
             // 
             txt_cortes_ancho.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_cortes_ancho.Location = new Point(929, 323);
+            txt_cortes_ancho.Location = new Point(929, 345);
             txt_cortes_ancho.Name = "txt_cortes_ancho";
             txt_cortes_ancho.ReadOnly = true;
             txt_cortes_ancho.Size = new Size(86, 23);
@@ -1060,15 +1051,15 @@
             // label31
             // 
             label31.AutoSize = true;
-            label31.Location = new Point(929, 305);
+            label31.Location = new Point(929, 325);
             label31.Name = "label31";
-            label31.Size = new Size(107, 15);
+            label31.Size = new Size(117, 16);
             label31.TabIndex = 75;
             label31.Text = "Cortes a lo Ancho :";
             // 
             // txt_rollos_cortar2
             // 
-            txt_rollos_cortar2.Location = new Point(1021, 367);
+            txt_rollos_cortar2.Location = new Point(1021, 391);
             txt_rollos_cortar2.Name = "txt_rollos_cortar2";
             txt_rollos_cortar2.ReadOnly = true;
             txt_rollos_cortar2.Size = new Size(72, 23);
@@ -1077,7 +1068,7 @@
             // txt_rollos_cortar1
             // 
             txt_rollos_cortar1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_rollos_cortar1.Location = new Point(929, 367);
+            txt_rollos_cortar1.Location = new Point(929, 391);
             txt_rollos_cortar1.Name = "txt_rollos_cortar1";
             txt_rollos_cortar1.ReadOnly = true;
             txt_rollos_cortar1.Size = new Size(86, 23);
@@ -1086,28 +1077,28 @@
             // label32
             // 
             label32.AutoSize = true;
-            label32.Location = new Point(929, 349);
+            label32.Location = new Point(929, 372);
             label32.Name = "label32";
-            label32.Size = new Size(118, 15);
+            label32.Size = new Size(134, 16);
             label32.TabIndex = 77;
             label32.Text = "Total Rollos a Cortar :";
             // 
             // label33
             // 
             label33.AutoSize = true;
-            label33.Location = new Point(995, 259);
+            label33.Location = new Point(995, 276);
             label33.Name = "label33";
-            label33.Size = new Size(86, 15);
+            label33.Size = new Size(100, 16);
             label33.TabIndex = 80;
             label33.Text = "Vueltas : [ID#2]";
             // 
             // tabPage1
             // 
             tabPage1.Controls.Add(grid_items);
-            tabPage1.Location = new Point(4, 24);
+            tabPage1.Location = new Point(4, 25);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(912, 188);
+            tabPage1.Size = new Size(912, 201);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Rollos Cortados";
             tabPage1.UseVisualStyleBackColor = true;
@@ -1125,24 +1116,24 @@
             grid_items.ReadOnly = true;
             grid_items.RowHeadersWidth = 34;
             grid_items.ScrollBars = ScrollBars.Vertical;
-            grid_items.Size = new Size(903, 176);
+            grid_items.Size = new Size(903, 188);
             grid_items.TabIndex = 0;
             // 
             // tabControl1
             // 
             tabControl1.Controls.Add(tabPage1);
-            tabControl1.Location = new Point(12, 417);
+            tabControl1.Location = new Point(12, 445);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(920, 216);
+            tabControl1.Size = new Size(920, 230);
             tabControl1.TabIndex = 81;
             // 
             // chk_document_anul
             // 
             chk_document_anul.AutoSize = true;
-            chk_document_anul.Location = new Point(12, 639);
+            chk_document_anul.Location = new Point(12, 682);
             chk_document_anul.Name = "chk_document_anul";
-            chk_document_anul.Size = new Size(137, 19);
+            chk_document_anul.Size = new Size(140, 20);
             chk_document_anul.TabIndex = 82;
             chk_document_anul.Text = "Documento Anulado";
             chk_document_anul.UseVisualStyleBackColor = true;
@@ -1150,9 +1141,9 @@
             // chk_orden_rebobinado
             // 
             chk_orden_rebobinado.AutoSize = true;
-            chk_orden_rebobinado.Location = new Point(12, 664);
+            chk_orden_rebobinado.Location = new Point(12, 708);
             chk_orden_rebobinado.Name = "chk_orden_rebobinado";
-            chk_orden_rebobinado.Size = new Size(126, 19);
+            chk_orden_rebobinado.Size = new Size(132, 20);
             chk_orden_rebobinado.TabIndex = 83;
             chk_orden_rebobinado.Text = "Orden Rebobinado";
             chk_orden_rebobinado.UseVisualStyleBackColor = true;
@@ -1160,9 +1151,9 @@
             // label34
             // 
             label34.AutoSize = true;
-            label34.Location = new Point(934, 450);
+            label34.Location = new Point(934, 480);
             label34.Name = "label34";
-            label34.Size = new Size(111, 15);
+            label34.Size = new Size(120, 16);
             label34.TabIndex = 89;
             label34.Text = "Status Documento :";
             // 
@@ -1170,7 +1161,7 @@
             // 
             label_status.AutoSize = true;
             label_status.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label_status.Location = new Point(934, 467);
+            label_status.Location = new Point(934, 498);
             label_status.Name = "label_status";
             label_status.Size = new Size(62, 15);
             label_status.TabIndex = 90;
@@ -1179,9 +1170,9 @@
             // btn_vueltas
             // 
             btn_vueltas.Image = (Image)resources.GetObject("btn_vueltas.Image");
-            btn_vueltas.Location = new Point(650, 637);
+            btn_vueltas.Location = new Point(650, 679);
             btn_vueltas.Name = "btn_vueltas";
-            btn_vueltas.Size = new Size(100, 48);
+            btn_vueltas.Size = new Size(100, 51);
             btn_vueltas.TabIndex = 91;
             btn_vueltas.Text = "Vueltas";
             btn_vueltas.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -1189,7 +1180,7 @@
             // 
             // txt_code_person
             // 
-            txt_code_person.Location = new Point(755, 660);
+            txt_code_person.Location = new Point(755, 704);
             txt_code_person.Name = "txt_code_person";
             txt_code_person.Size = new Size(127, 23);
             txt_code_person.TabIndex = 93;
@@ -1197,17 +1188,17 @@
             // label36
             // 
             label36.AutoSize = true;
-            label36.Location = new Point(755, 642);
+            label36.Location = new Point(755, 685);
             label36.Name = "label36";
-            label36.Size = new Size(128, 15);
+            label36.Size = new Size(138, 16);
             label36.TabIndex = 92;
             label36.Text = "Codigo Personalizado :";
             // 
             // btn_code_person
             // 
-            btn_code_person.Location = new Point(884, 660);
+            btn_code_person.Location = new Point(884, 704);
             btn_code_person.Name = "btn_code_person";
-            btn_code_person.Size = new Size(38, 25);
+            btn_code_person.Size = new Size(38, 27);
             btn_code_person.TabIndex = 94;
             btn_code_person.Text = "...";
             btn_code_person.UseVisualStyleBackColor = true;
@@ -1215,9 +1206,9 @@
             // chk_unificar_rollos
             // 
             chk_unificar_rollos.AutoSize = true;
-            chk_unificar_rollos.Location = new Point(929, 397);
+            chk_unificar_rollos.Location = new Point(929, 423);
             chk_unificar_rollos.Name = "chk_unificar_rollos";
-            chk_unificar_rollos.Size = new Size(97, 19);
+            chk_unificar_rollos.Size = new Size(101, 20);
             chk_unificar_rollos.TabIndex = 95;
             chk_unificar_rollos.Text = "Unificar Rollo";
             chk_unificar_rollos.UseVisualStyleBackColor = true;
@@ -1225,9 +1216,9 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(161, 637);
+            pictureBox1.Location = new Point(161, 679);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(40, 40);
+            pictureBox1.Size = new Size(40, 43);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 96;
             pictureBox1.TabStop = false;
@@ -1236,9 +1227,9 @@
             // 
             pictureBox2.Enabled = false;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(237, 637);
+            pictureBox2.Location = new Point(207, 679);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(40, 40);
+            pictureBox2.Size = new Size(40, 43);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 97;
             pictureBox2.TabStop = false;
@@ -1246,9 +1237,9 @@
             // pictureBox3
             // 
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(319, 637);
+            pictureBox3.Location = new Point(253, 679);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(40, 40);
+            pictureBox3.Size = new Size(40, 43);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 98;
             pictureBox3.TabStop = false;
@@ -1256,9 +1247,9 @@
             // pictureBox4
             // 
             pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
-            pictureBox4.Location = new Point(400, 637);
+            pictureBox4.Location = new Point(299, 679);
             pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(40, 40);
+            pictureBox4.Size = new Size(40, 43);
             pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox4.TabIndex = 99;
             pictureBox4.TabStop = false;
@@ -1266,18 +1257,18 @@
             // pictureBox5
             // 
             pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(479, 637);
+            pictureBox5.Location = new Point(345, 679);
             pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(40, 40);
+            pictureBox5.Size = new Size(40, 43);
             pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox5.TabIndex = 100;
             pictureBox5.TabStop = false;
             // 
             // button1
             // 
-            button1.Location = new Point(527, 642);
+            button1.Location = new Point(391, 692);
             button1.Name = "button1";
-            button1.Size = new Size(29, 23);
+            button1.Size = new Size(29, 25);
             button1.TabIndex = 101;
             button1.Text = "+";
             button1.UseVisualStyleBackColor = true;
@@ -1299,11 +1290,31 @@
             imageList1.Images.SetKeyName(8, "step4_deactive.png");
             imageList1.Images.SetKeyName(9, "step5_deactive.png");
             // 
+            // label37
+            // 
+            label37.AutoSize = true;
+            label37.Location = new Point(1021, 252);
+            label37.Name = "label37";
+            label37.Size = new Size(43, 16);
+            label37.TabIndex = 103;
+            label37.Text = "[PIES]";
+            // 
+            // txt_vueltas1
+            // 
+            txt_vueltas1.Font = new Font("Tahoma", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txt_vueltas1.Location = new Point(929, 297);
+            txt_vueltas1.Name = "txt_vueltas1";
+            txt_vueltas1.Size = new Size(99, 23);
+            txt_vueltas1.TabIndex = 104;
+            txt_vueltas1.ValueChanged += Txt_vueltas1_ValueChanged_1;
+            txt_vueltas1.KeyUp += Txt_vueltas1_KeyUp_1;
             // FrmOrdenCorte
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(7F, 16F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1105, 692);
+            ClientSize = new Size(1105, 738);
+            Controls.Add(txt_vueltas1);
+            Controls.Add(label37);
             Controls.Add(button1);
             Controls.Add(pictureBox5);
             Controls.Add(pictureBox4);
@@ -1326,8 +1337,6 @@
             Controls.Add(label32);
             Controls.Add(txt_cortes_ancho);
             Controls.Add(label31);
-            Controls.Add(txt_vueltas2);
-            Controls.Add(txt_vueltas1);
             Controls.Add(label30);
             Controls.Add(txt_long_cortar);
             Controls.Add(label29);
@@ -1400,6 +1409,7 @@
             Controls.Add(label2);
             Controls.Add(toolStrip1);
             Controls.Add(panel1);
+            Font = new Font("Tahoma", 9.75F);
             Name = "FrmOrdenCorte";
             Text = " ";
             Load += FrmOrdenCorte_Load;
@@ -1417,6 +1427,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txt_vueltas1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1495,9 +1506,8 @@
         private Button btn_delete_row_corte;
         private TextBox txt_long_cortar;
         private Label label29;
-        private TextBox txt_vueltas1;
+        
         private Label label30;
-        private TextBox txt_vueltas2;
         private TextBox txt_cortes_ancho;
         private Label label31;
         private TextBox txt_rollos_cortar2;
@@ -1542,5 +1552,7 @@
         private Button button1;
         private ImageList imageList1;
         private PictureBox pictureBox6;
+        private Label label37;
+        private NumericUpDown txt_vueltas1;
     }
 }
