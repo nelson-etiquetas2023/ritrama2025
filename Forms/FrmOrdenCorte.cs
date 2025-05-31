@@ -618,6 +618,13 @@ namespace Ritrama2025.Forms
                 Plus2_pies = Convert.ToDecimal(txt_plus2.Text),
                 Tipo_Mov1 ="",
                 Tipo_Mov2 ="",
+                Rollo_unificado = chk_unificar_rollos.Checked,
+                Lenght_entrada = 0,
+                Real_usado_r1 = 0,
+                Real_usado_r2 = 0,
+                Restante_rollid1 = txt_matrest1_lenght.Text,
+                Restante_rollid2 = txt_matrest2_lenght.Text
+
             };
             Service.GuardarEncabezadoOrdenCorte(orden);
 

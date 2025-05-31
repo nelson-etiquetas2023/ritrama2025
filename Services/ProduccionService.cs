@@ -143,7 +143,7 @@ namespace Ritrama2025.Services
                 SqlCommand comando = new()
                 {
                     Connection = conn,
-                    CommandText = "INSERT INTO orden_corte (numero,fecha,fecha_produccion,product_id,rollid_1,width_1,lenght_1,rollid_2,width_2,lenght_2,anulada,procesado,status,tot_inch_ancho,longitud_cortar,cortes_ancho,cortes_largo,cant_rollos,decartable1_pies,lenght_master_real,util1_real_width,util1_real_lenght,descartable2_pies" + ",util2_real_width,util2_real_lenght,lenght_master_real2,rest1_width,rest1_lenght,rest2_width,rest2_lenght,cant_rollos2,cortes_largo2,step,lastupdate,fecha_autorize,toautorize,notes,closedocument,tipo_mov1,tipo_mov2,plus1_pies,plus2_pies) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27,@p28,@p29,@p30,@p31,@p32,@p33,@p34,@p35,@p36,@p37,@p38,@p39,@p40,@p41,@p42)",
+                    CommandText = "INSERT INTO orden_corte (numero,fecha,fecha_produccion,product_id,rollid_1,width_1,lenght_1,rollid_2,width_2,lenght_2,anulada,procesado,status,tot_inch_ancho,longitud_cortar,cortes_ancho,cortes_largo,cant_rollos,decartable1_pies,lenght_master_real,util1_real_width,util1_real_lenght,descartable2_pies" + ",util2_real_width,util2_real_lenght,lenght_master_real2,rest1_width,rest1_lenght,rest2_width,rest2_lenght,cant_rollos2,cortes_largo2,step,lastupdate,fecha_autorize,toautorize,notes,closedocument,tipo_mov1,tipo_mov2,plus1_pies,plus2_pies,id_operador,customer_id,rollo_unificado,length_entrada,real_usado_r1,real_usado_r2,restante_rollid1,restante_rollid2,resta_entrada,total_salida,lenght_entrada) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27,@p28,@p29,@p30,@p31,@p32,@p33,@p34,@p35,@p36,@p37,@p38,@p39,@p40,@p41,@p42,@p43,@p44,@p45,@p46,@p47,@p48,@p49,@p50,@p51,@p52,@p53)",
                     CommandType = CommandType.Text
                 };
                 conn.Open();
@@ -189,6 +189,19 @@ namespace Ritrama2025.Services
                 comando.Parameters.AddWithValue("@p40", OrdenCorte.Tipo_Mov2);
                 comando.Parameters.AddWithValue("@p41", OrdenCorte.Plus1_pies);
                 comando.Parameters.AddWithValue("@p42", OrdenCorte.Plus2_pies);
+                comando.Parameters.AddWithValue("@p43", OrdenCorte.Id_operador);
+                comando.Parameters.AddWithValue("@p44", OrdenCorte.Customer_Id);
+                comando.Parameters.AddWithValue("@p45", OrdenCorte.Rollo_unificado);
+                comando.Parameters.AddWithValue("@p46", OrdenCorte.Lenght_entrada);
+                comando.Parameters.AddWithValue("@p47", OrdenCorte.Real_usado_r1);
+                comando.Parameters.AddWithValue("@p48", OrdenCorte.Real_usado_r2);
+                comando.Parameters.AddWithValue("@p49", OrdenCorte.Restante_rollid1);
+                comando.Parameters.AddWithValue("@p50", OrdenCorte.Restante_rollid2);
+                comando.Parameters.AddWithValue("@p51", 0);
+                comando.Parameters.AddWithValue("@p52", 0);
+                comando.Parameters.AddWithValue("@p53", 0);
+
+
                 comando.ExecuteNonQuery();
                 MessageBox.Show("La orden se guardo correctamente");
             }
