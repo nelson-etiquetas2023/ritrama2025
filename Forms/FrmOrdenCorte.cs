@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Ritrama2025.Forms.Seleccion;
+using Ritrama2025.Models;
 using Ritrama2025.Services;
 using System.Configuration;
 using System.Data;
-using System.Windows.Forms;
 
 namespace Ritrama2025.Forms
 {
@@ -14,12 +14,6 @@ namespace Ritrama2025.Forms
         readonly BindingSource Bs = [];
         readonly BindingSource BsCortes = [];
         readonly BindingSource BsRollos = [];
-        //private readonly Color LineColor = Color.DarkGray;
-        //public Pen pen1 = new(Color.Black, 4);
-        //public Pen pen2 = new(Color.Black, 4);
-        //public Pen pen3 = new(Color.Black, 4);
-        //public Pen pen4 = new(Color.Black, 4);
-        //int StepIndicator = 0;
         DataRowView ParentRow = null!;
         DataRowView ChildRowCortes = null!;
         DataRowView RollosCortados = null!;
@@ -27,7 +21,6 @@ namespace Ritrama2025.Forms
         public FrmOrdenCorte()
         {
             InitializeComponent();
-            this.Paint += new PaintEventHandler(FrmOrdenCorte_Paint);
         }
 
         private void FrmOrdenCorte_Load(object sender, EventArgs e)
@@ -61,16 +54,14 @@ namespace Ritrama2025.Forms
             ADD_COLUMN_GRID("product_id", 60, "Product Id", "product_id", grid_items);
             ADD_COLUMN_GRID("product_name", 250, "Product Name", "product_name", grid_items);
             ADD_COLUMN_GRID("unique_code", 60, "Unique Code", "unique_code", grid_items);
-            ADD_COLUMN_GRID("width", 65, "Width [Inch]", "width", grid_items);
-            ADD_COLUMN_GRID("large", 65, "Length [Pies]", "large", grid_items);
-            ADD_COLUMN_GRID("msi", 60, "MSI", "msi", grid_items);
-            ADD_COLUMN_GRID("splice", 45, "Splice", "splice", grid_items);
-            ADD_COLUMN_GRID("roll_id", 65, "Roll Id.", "roll_id", grid_items);
-            ADD_COLUMN_GRID("code_person", 60, "Code Person.", "code_person", grid_items);
+            ADD_COLUMN_GRID("width", 75, "Width [Inch]", "width", grid_items);
+            ADD_COLUMN_GRID("large", 75, "Length [Pies]", "large", grid_items);
+            ADD_COLUMN_GRID("msi", 75, "MSI", "msi", grid_items);
+            ADD_COLUMN_GRID("splice", 50, "Splice", "splice", grid_items);
+            ADD_COLUMN_GRID("roll_id", 75, "Roll Id.", "roll_id", grid_items);
+            ADD_COLUMN_GRID("code_person", 75, "Code Person.", "code_person", grid_items);
             ADD_COLUMN_GRID("status", 80, "Status", "status", grid_items);
             grid_items.DataSource = BsRollos;
-
-
         }
 
         private void Bot_primero_Click(object sender, EventArgs e)
@@ -139,53 +130,6 @@ namespace Ritrama2025.Forms
             };
             grid.Columns.Add(col);
         }
-        private void FrmOrdenCorte_Paint(object? sender, PaintEventArgs e)
-        {
-            //{
-            //    Graphics lin1 = e.Graphics;
-            //    Graphics lin2 = e.Graphics;
-            //    Graphics lin3 = e.Graphics;
-            //    Graphics lin4 = e.Graphics;
-            //    // Crear un Pen de color rojo y grosor 10
-            //    lin1.DrawLine(pen1, 200, 658, 240, 658);
-            //    lin2.DrawLine(pen2, 280, 658, 320, 658);
-            //    lin3.DrawLine(pen3, 360, 658, 400, 658);
-            //    lin4.DrawLine(pen4, 440, 658, 480, 658);
-        }
-
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            //StepIndicator++;
-            //switch (StepIndicator)
-            //{
-            //    case 1:
-            //        pictureBox1.Image = imageList1.Images[0]; // Cambia la imagen del PictureBox
-            //        break;
-            //    case 2:
-            //        pictureBox1.Image = imageList1.Images[5]; // Cambia la imagen del PictureBox
-
-            //        pictureBox2.Image = imageList1.Images[1]; // Cambia la imagen del PictureBox
-
-            //        pen1.Color = Color.DarkGray;
-            //        break;
-            //    case 3:
-            //        pictureBox2.Image = imageList1.Images[6]; // Cambia la imagen del PictureBox
-            //        pictureBox3.Image = imageList1.Images[2]; // Cambia la imagen del PictureBox
-            //        pen2.Color = Color.DarkGray;
-            //        break;
-            //    case 4:
-            //        pictureBox3.Image = imageList1.Images[7]; // Cambia la imagen del PictureBox
-            //        pictureBox4.Image = imageList1.Images[3]; // Cambia la imagen del PictureBox
-            //        pen3.Color = Color.DarkGray;
-            //        break;
-            //    case 5:
-            //        pictureBox4.Image = imageList1.Images[8]; // Cambia la imagen del PictureBox
-            //        pictureBox5.Image = imageList1.Images[4]; // Cambia la imagen del PictureBox
-            //        pen4.Color = Color.DarkGray;
-            //        break;
-            //}
-            //this.Invalidate(); // Redibuja el formulario para aplicar el nuevo color
-        }
 
         private void Opt_create_document_Click(object sender, EventArgs e)
         {
@@ -213,13 +157,13 @@ namespace Ritrama2025.Forms
             ParentRow["cortes_ancho"] = "0";
             ParentRow["cortes_largo"] = "0";
             ParentRow["cant_rollos"] = "0";
-
+            ParentRow["cant_rollos2"] = "0";
             txt_menos1.Text = "0";
             txt_real1.Text = "0";
             txt_real2.Text = "0";
             txt_plus1.Text = "0";
             txt_menos2.Text = "0";
-
+            txt_rollos_cortar2.Text = "0";
             ParentRow.EndEdit();
             //Crear la Dimension de los Cortes.
             for (int i = 0; i < 5; i++)
@@ -233,7 +177,6 @@ namespace Ritrama2025.Forms
                 ChildRowCortes["code_person"] = "S/N";
                 ChildRowCortes.EndEdit();
             }
-
             grid_cortes.ReadOnly = false;
             btn_add_row_corte.Enabled = true;
             btn_delete_row_corte.Enabled = true;
@@ -241,8 +184,6 @@ namespace Ritrama2025.Forms
             txt_vueltas1.ReadOnly = false;
             btn_buscar_operador.Enabled = true;
             btn_buscar_customer.Enabled = true;
-
-
             //3.- Abrir los Textbox para editar los datos de la Orden de Corte.
             txt_numeroOC.ReadOnly = false;
             txt_fecha_emision.Enabled = true;
@@ -269,6 +210,7 @@ namespace Ritrama2025.Forms
                 txt_real1.Text = frmrollid.MasterRoll.Length.ToString("N2");
                 txt_product_id.Text = frmrollid.MasterRoll.Product_Id;
                 txt_product_name.Text = frmrollid.MasterRoll.Product_Name;
+                checkList_pasos_orden.SetItemChecked(0, true);
             }
         }
 
@@ -372,15 +314,13 @@ namespace Ritrama2025.Forms
                 grid_cortes.Rows[i].Cells["lenght"].Value = txt_long_cortar.Text;
                 grid_cortes.Rows[i].Cells["msi"].Value = Convert.ToDouble(grid_cortes.Rows[i].Cells["width"].Value) * Convert.ToDouble(grid_cortes.Rows[i].Cells["lenght"].Value) * R.CONSTANTES.FACTOR_CALCULO_MSI;
                 txt_cortes_ancho.Text = grid_cortes.Rows.Count.ToString();
-                CalcularRealUtil1();
-                CalcularMatRestante1();
                 CalcularConsumosLenght();
             }
             if (grid_items.Rows.Count > 0)
             {
                 BorrarRollosCortadosHijos();
             }
-
+            ACTUALIZAR_ROLLID_1();
         }
 
         private void Txt_vueltas1_KeyUp(object sender, KeyEventArgs e)
@@ -393,30 +333,20 @@ namespace Ritrama2025.Forms
             CalcularConsumosLenght();
         }
 
-        private void CalcularRealUtil1()
+        private void ACTUALIZAR_ROLLID_1()
         {
-            double num = 0.0;
-            double num2 = 0.0;
-            for (int i = 0; i <= grid_cortes.Rows.Count - 1; i++)
+            //Actualiza lo real consumido del RollId 1
+            txt_real1_width.Text = txt_ancho_corte.Text;
+            txt_real1_length.Text = txt_largo_corte.Text;
+            txt_matrest1_width.Text = txt_width1.Text;
+            if (txt_real1_length.Text == "")
             {
-                // Fixing CS1001, CS1002, and CS1525 by using the correct method name and syntax
-                num += Convert.ToDouble(grid_cortes.Rows[i].Cells["width"].Value);
-                num2 += Convert.ToDouble(grid_cortes.Rows[i].Cells["lenght"].Value);
-                // Fixing the incomplete line for updating txt_real1_width
-                txt_real1_width.Text = num.ToString("N2");
-                txt_real1_length.Text = num2.ToString("N2");
+                txt_real1_length.Text = "0";
             }
-        }
-        private void CalcularMatRestante1()
-        {
-            double num = (Convert.ToDouble(txt_width1.Text) - Convert.ToDouble(txt_real1_width.Text));
-
-            double num2 = (Convert.ToDouble(txt_length1.Text) - Convert.ToDouble(txt_real1_length.Text));
-
-            txt_matrest1_width.Text = num.ToString("N2");
+            //Actualiza el material restante del RollId 1
+            double num2 = Convert.ToDouble(txt_length1.Text) - Convert.ToDouble(txt_real1_length.Text);
             txt_matrest1_lenght.Text = num2.ToString("N2");
         }
-
         private void Btn_buscar_operador_Click(object sender, EventArgs e)
         {
             FrmSeleccion SelOperator = new()
@@ -442,6 +372,12 @@ namespace Ritrama2025.Forms
         }
         private void GENERAR_ROLLOS_CORTADOS()
         {
+            //VERIFICA SI EXISTEN ROLLOS ANTERIORES PARA BORRARLOS Y VOLVER A GENERARLOS.
+            if (grid_items.Rows.Count > 0)
+            {
+                BorrarRollosCortadosHijos();
+            }
+            //CALCULO DE ROLLOS CORTADOS.
             int vueltas = Convert.ToInt32(txt_vueltas1.Text);
             int numcortes = (grid_cortes.Rows.Count);
             int renglon = 1;
@@ -467,6 +403,12 @@ namespace Ritrama2025.Forms
                     renglon += 1;
                 }
             }
+            if (grid_items.Rows.Count > 0)
+            {
+                grid_items.Focus();
+                grid_items.Rows[0].Selected = true;
+                grid_items.CurrentCell = grid_items.Rows[0].Cells[0];
+            }
         }
 
         private void Btn_generar_rollos_Click(object sender, EventArgs e)
@@ -476,6 +418,7 @@ namespace Ritrama2025.Forms
 
         private void Grid_cortes_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            //CALCULAR LA SUMATORIA DE WIDTH DE LOS CORTES 
             int num = 0;
             for (int i = 0; i <= grid_cortes.Rows.Count - 1; i++)
             {
@@ -484,6 +427,8 @@ namespace Ritrama2025.Forms
             }
             //calcular los cortes a lo ancho
             txt_cortes_ancho.Text = grid_cortes.Rows.Count.ToString();
+            //ACTUALIZAR ROLLID_1
+            ACTUALIZAR_ROLLID_1();
         }
 
         private void Txt_vueltas1_TextChanged(object sender, EventArgs e)
@@ -544,7 +489,7 @@ namespace Ritrama2025.Forms
                 txt_vueltas1.Text = "0";
             }
 
-            if (grid_items.Rows.Count > 0) 
+            if (grid_items.Rows.Count > 0)
             {
                 BorrarRollosCortadosHijos();
             }
@@ -564,6 +509,7 @@ namespace Ritrama2025.Forms
             {
                 BorrarRollosCortadosHijos();
             }
+            ACTUALIZAR_ROLLID_1();
         }
         private void CalcularConsumosLenght()
         {
@@ -581,6 +527,7 @@ namespace Ritrama2025.Forms
             {
                 BorrarRollosCortadosHijos();
             }
+            ACTUALIZAR_ROLLID_1();
 
         }
         private void CALCULAR_TOTAL_ROLLOS_CORTAR()
@@ -607,11 +554,83 @@ namespace Ritrama2025.Forms
 
             // Actualizar el DataGridView
             BsRollos.EndEdit();
-
-            // Si usas un DataAdapter, aquí iría la actualización a la base de datos
-            // dataAdapterDetalle.Update(dataSet, "TablaDetalle");
         }
 
+        private void Grid_cortes_Leave(object sender, EventArgs e)
+        {
+            if (grid_cortes.Rows.Count > 0)
+            {
+                checkList_pasos_orden.SetItemChecked(1, true);
+            }
+            else
+            {
+                checkList_pasos_orden.SetItemChecked(1, false);
+            }
+        }
+        private void CREATE_HEADER_ORDEN()
+        {
+            Orden orden = new()
+            {
+                Numero = Convert.ToInt32(txt_numeroOC.Text),
+                Fecha = Convert.ToDateTime(txt_fecha_emision.Text),
+                Fecha_produccion = Convert.ToDateTime(txt_fecha_produccion.Text),
+                Rollid_1 = txt_rollid_1.Text,
+                Width_1 = Convert.ToDecimal(txt_width1.Text),
+                Lenght_1 = Convert.ToDecimal(txt_length1.Text),
+                Util1_Real_Width = Convert.ToDouble(txt_real1_width.Text),
+                Util1_real_Lenght = Convert.ToDouble(txt_real1_length.Text),
+                Rest1_width = Convert.ToDouble(txt_matrest1_width.Text),
+                Rest1_lenght = Convert.ToDouble(txt_matrest1_lenght.Text),
+                Rollid_2 = txt_rollid_2.Text,
+                Width_2 = Convert.ToDecimal(txt_width2.Text),
+                Lenght_2 = Convert.ToDecimal(txt_length2.Text),
+                Util2_Real_Width = Convert.ToDouble(txt_real2_width.Text),
+                Util2_real_Lenght = Convert.ToDouble(txt_real2_length.Text),
+                Rest2_width = Convert.ToDouble(txt_matrest2_width.Text),
+                Rest2_lenght = Convert.ToDouble(txt_matrest2_lenght.Text),
+                Product_id = txt_product_id.Text,
+                Product_name = txt_product_name.Text,
+                Id_operador = txt_operador_id.Text,
+                Nombre_operador = txt_operador_name.Text,
+                Customer_Id = txt_cust_id.Text,
+                Customer_Name = txt_cust_name.Text,
+                Longitud_Cortar = Convert.ToDouble(txt_long_cortar.Text),
+                Cortes_Largo = Convert.ToInt32(txt_vueltas1.Value),
+                Cortes_Largo2 = Convert.ToInt32(txt_vueltas2.Value),
+                Cortes_Ancho = Convert.ToInt32(txt_cortes_ancho.Text),
+                Cantidad_Rollos = Convert.ToInt32(txt_rollos_cortar1.Text),
+                Cantidad_Rollos2 = Convert.ToInt32(txt_rollos_cortar2.Text),
+                Anulada = false,
+                Procesado = false,
+                Status = 1,
+                Descartable1_pies = 0,
+                Descartable2_pies = 0,
+                Total_Inch_Ancho = Convert.ToDouble(txt_ancho_corte.Text),
+                Lenght_Master_Real = Convert.ToDouble(txt_real1.Text),
+                Master_lenght2_Real = Convert.ToDouble(txt_real2.Text),
+                LastUpdate = DateTime.Now,
+                FechaAutorize = DateTime.Now,
+                Step = 1,
+                ToAutorize = "",
+                Note = "",
+                CloseDocument=false,
+                Plus1_pies = Convert.ToDecimal(txt_plus1.Text),
+                Plus2_pies = Convert.ToDecimal(txt_plus2.Text),
+                Tipo_Mov1 ="",
+                Tipo_Mov2 ="",
+            };
+            Service.GuardarEncabezadoOrdenCorte(orden);
 
+        }
+
+        private void Bot_guardar_Click(object sender, EventArgs e)
+        {
+            CREATE_HEADER_ORDEN();
+        }
+
+        private void ToolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }

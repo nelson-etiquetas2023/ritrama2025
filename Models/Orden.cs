@@ -38,7 +38,7 @@ namespace Ritrama2025.Models
         public bool Anulada { get; set; }
         public bool Procesado { get; set; }
         public int Status { get; set; }
-        public double Inch_Ancho { get; set; }
+        public double Total_Inch_Ancho { get; set; }
         public double Longitud_Cortar { get; set; }
         public int Cortes_Ancho { get; set; } 
         public int Cortes_Largo { get; set; }
@@ -52,9 +52,21 @@ namespace Ritrama2025.Models
         public double Real_usado_r2 { get; set; }
         public bool Rollo_unificado { get; set; }
         public string Id_operador { get; set; } = null!;
+        public string Nombre_operador { get; set; } = null!;
         public string Rollid_oculto { get; set; } = null!;
         public string Restante_rollid1 { get; set; } = null!;
         public string Restante_rollid2 { get; set; } = null!;
+        public string Customer_Id { get; set; } = null!;
+        public string Customer_Name { get; set; } = null!;
+        public double Lenght_Master_Real { get; set; }
+        public int Step { get; set; }
+        public DateTime FechaAutorize { get; set; }
+        public string ToAutorize { get; set; } = null!;
+        public string Note { get; set; } = null!;
+        public bool CloseDocument { get; set; }
+
+
+
     }
 }
 
