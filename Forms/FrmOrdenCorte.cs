@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
+using Ritrama2025.Forms.Otros;
 using Ritrama2025.Forms.Seleccion;
 using Ritrama2025.Models;
 using Ritrama2025.Services;
+using Ritrama2025.Services.ExportData;
 using System.Configuration;
 using System.Data;
 
@@ -10,6 +12,8 @@ namespace Ritrama2025.Forms
     public partial class FrmOrdenCorte : Form
     {
         private readonly ProduccionService Service = new();
+        private readonly ExportDataService exportDataService = new();
+        private readonly ReportsService reportService = new();
         DataSet Ds = new();
         readonly BindingSource Bs = [];
         readonly BindingSource BsCortes = [];
@@ -34,6 +38,7 @@ namespace Ritrama2025.Forms
             //Enlace a datos Encabezado.
             Bs.DataSource = Ds;
             Bs.DataMember = "DtMaster";
+            Bs.Sort = "numero DESC";
             //Enlace a datos Encabezado de la Orden Corte.
             HeaderBinding();
             //Enlace a datos de Grid-Cortes.
@@ -41,16 +46,16 @@ namespace Ritrama2025.Forms
             BsCortes.DataMember = "FK_ENCABEZADO_CORTES";
             grid_cortes.AutoGenerateColumns = false;
             ADD_COLUMN_GRID("it", 25, "It.", "num", grid_cortes);
-            ADD_COLUMN_GRID("width", 60, "Width [INCH]", "width", grid_cortes);
-            ADD_COLUMN_GRID("lenght", 60, "Lenght [PIES]", "lenght", grid_cortes);
-            ADD_COLUMN_GRID("msi", 60, "Msi", "msi", grid_cortes);
-            ADD_COLUMN_GRID("code_person", 80, "Code Person", "code_person", grid_cortes);
+            ADD_COLUMN_GRID("width", 75, "Width [INCH]", "width", grid_cortes);
+            ADD_COLUMN_GRID("lenght", 75, "Lenght [PIES]", "lenght", grid_cortes);
+            ADD_COLUMN_GRID("msi", 75, "Msi", "msi", grid_cortes);
+            ADD_COLUMN_GRID("code_person", 85, "Code Person", "code_person", grid_cortes);
             grid_cortes.DataSource = BsCortes;
             //Enlace a datos de Grid-Rollos Cortados.
             BsRollos.DataSource = Bs;
             BsRollos.DataMember = "FK_MASTER_ROLLOS";
             grid_items.AutoGenerateColumns = false;
-            ADD_COLUMN_GRID("number", 25, "#", "roll_number", grid_items);
+            ADD_COLUMN_GRID("roll_number", 25, "#", "roll_number", grid_items);
             ADD_COLUMN_GRID("product_id", 60, "Product Id", "product_id", grid_items);
             ADD_COLUMN_GRID("product_name", 250, "Product Name", "product_name", grid_items);
             ADD_COLUMN_GRID("unique_code", 60, "Unique Code", "unique_code", grid_items);
@@ -62,26 +67,36 @@ namespace Ritrama2025.Forms
             ADD_COLUMN_GRID("code_person", 75, "Code Person.", "code_person", grid_items);
             ADD_COLUMN_GRID("status", 80, "Status", "status", grid_items);
             grid_items.DataSource = BsRollos;
+            UpdateStepIndicator();
+            ContadorRegistros();
         }
 
         private void Bot_primero_Click(object sender, EventArgs e)
         {
-            Bs.Position = 0;
+            Bs.Position = Bs.Count - 1;
+            UpdateStepIndicator();
+            ContadorRegistros();
         }
 
         private void Bot_anterior_Click(object sender, EventArgs e)
         {
-            Bs.Position -= 1;
+            Bs.Position += 1;
+            UpdateStepIndicator();
+            ContadorRegistros();
         }
 
         private void Bot_siguiente_Click(object sender, EventArgs e)
         {
-            Bs.Position += 1;
+            Bs.Position -= 1;
+            UpdateStepIndicator();
+            ContadorRegistros();
         }
 
         private void Bot_ultimo_Click(object sender, EventArgs e)
         {
-            Bs.Position = Bs.Count - 1;
+            Bs.Position = 0;
+            UpdateStepIndicator();
+            ContadorRegistros();
         }
         private void HeaderBinding()
         {
@@ -114,9 +129,10 @@ namespace Ritrama2025.Forms
             txt_plus2.DataBindings.Add("Text", Bs, "plus2_pies");
             txt_long_cortar.DataBindings.Add("Text", Bs, "longitud_cortar");
             txt_cortes_ancho.DataBindings.Add("Text", Bs, "cortes_ancho");
-            //txt_vueltas1.DataBindings.Add("Text", Bs, "cortes_largo");
+            txt_vueltas1.DataBindings.Add("Text", Bs, "cortes_largo");
             txt_rollos_cortar1.DataBindings.Add("Text", Bs, "cant_rollos");
             txt_ancho_corte.DataBindings.Add("Text", Bs, "total_salida");
+            txt_step.DataBindings.Add("Text", Bs, "step");
         }
 
         private static void ADD_COLUMN_GRID(string name, int size, string title, string field_bd, DataGridView grid)
@@ -136,7 +152,7 @@ namespace Ritrama2025.Forms
             //1.- Inicialiozar el Documento de Orden de Corte.
             ParentRow = (DataRowView)Bs.AddNew()!;
             ParentRow.BeginEdit();
-            ParentRow["numero"] = "8902";
+            ParentRow["numero"] = Service.BuscarConsecOC();
             ParentRow["rollid_1"] = "0";
             ParentRow["rollid_2"] = "0";
             ParentRow["width_1"] = "0";
@@ -185,7 +201,6 @@ namespace Ritrama2025.Forms
             btn_buscar_operador.Enabled = true;
             btn_buscar_customer.Enabled = true;
             //3.- Abrir los Textbox para editar los datos de la Orden de Corte.
-            txt_numeroOC.ReadOnly = false;
             txt_fecha_emision.Enabled = true;
             txt_fecha_produccion.Enabled = true;
             txt_plus1.ReadOnly = false;
@@ -193,6 +208,24 @@ namespace Ritrama2025.Forms
             txt_plus2.ReadOnly = false;
             txt_menos2.ReadOnly = false;
             btn_buscar_rollid1.Enabled = true;
+            //Menu opciones
+            bot_primero.Enabled = false;
+            bot_siguiente.Enabled = false;
+            bot_ultimo.Enabled = false;
+            bot_anterior.Enabled = false;
+            bot_accion.Enabled = false;
+            bot_imprimir.Enabled = false;
+            bot_etiquetar.Enabled = false;
+            bot_exportar.Enabled = false;
+            bot_buscar.Enabled = false;
+            bot_guardar.Enabled = true;
+            bot_cancelar.Enabled = true;
+            //Controles del Formulario.
+            btn_generar_rollos.Enabled = true;
+            btn_add_row_corte.Enabled = true;
+            btn_delete_row_corte.Enabled = true;
+            txt_vueltas1.Enabled = true;
+            UpdateStepIndicator();
         }
 
         private void Btn_buscar_rollid1_Click(object sender, EventArgs e)
@@ -342,7 +375,14 @@ namespace Ritrama2025.Forms
             if (txt_real1_length.Text == "")
             {
                 txt_real1_length.Text = "0";
+
             }
+            if (txt_length1.Text == "")
+            {
+                txt_length1.Text = "0";
+
+            }
+
             //Actualiza el material restante del RollId 1
             double num2 = Convert.ToDouble(txt_length1.Text) - Convert.ToDouble(txt_real1_length.Text);
             txt_matrest1_lenght.Text = num2.ToString("N2");
@@ -481,7 +521,6 @@ namespace Ritrama2025.Forms
             }
         }
 
-
         private void Txt_vueltas1_ValueChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txt_vueltas1.Text))
@@ -532,6 +571,10 @@ namespace Ritrama2025.Forms
         }
         private void CALCULAR_TOTAL_ROLLOS_CORTAR()
         {
+            if (txt_cortes_ancho.Text == "")
+            {
+                txt_cortes_ancho.Text = "0";
+            }
             //Multiplicacion de las vueltas x los cortes son los rollos totales a producir.
             int num = Convert.ToInt32(txt_vueltas1.Value) * Convert.ToInt32(txt_cortes_ancho.Text);
             txt_rollos_cortar1.Text = num.ToString();
@@ -613,11 +656,11 @@ namespace Ritrama2025.Forms
                 Step = 1,
                 ToAutorize = "",
                 Note = "",
-                CloseDocument=false,
+                CloseDocument = false,
                 Plus1_pies = Convert.ToDecimal(txt_plus1.Text),
                 Plus2_pies = Convert.ToDecimal(txt_plus2.Text),
-                Tipo_Mov1 ="",
-                Tipo_Mov2 ="",
+                Tipo_Mov1 = "",
+                Tipo_Mov2 = "",
                 Rollo_unificado = chk_unificar_rollos.Checked,
                 Lenght_entrada = 0,
                 Real_usado_r1 = 0,
@@ -630,14 +673,374 @@ namespace Ritrama2025.Forms
 
         }
 
+        private void CREATE_CORTES()
+        {
+            List<Corte> cortes = [];
+            for (int i = 0; i <= grid_cortes.Rows.Count - 1; i++)
+            {
+                var codePersonValue = grid_cortes.Rows[i].Cells["code_person"].Value;
+                string codePerson = codePersonValue?.ToString() ?? string.Empty; // Ensure no null reference
+
+                Corte corte = new()
+                {
+                    Numero = i + 1,
+                    Width = Convert.ToDouble(grid_cortes.Rows[i].Cells["width"].Value),
+                    Length = Convert.ToDouble(grid_cortes.Rows[i].Cells["lenght"].Value),
+                    Msi = Convert.ToDouble(grid_cortes.Rows[i].Cells["msi"].Value),
+                    Orden = Convert.ToInt32(txt_numeroOC.Text),
+                    CodePerson = codePerson // Safely assign the value
+                };
+                cortes.Add(corte);
+            }
+            Service.GuardarCortes(cortes);
+        }
+
+        private void CREATE_DETALLE_ORDEN()
+        {
+            List<RolloCortado> detalle = [];
+            for (int i = 0; i <= grid_items.Rows.Count - 1; i++)
+            {
+                var rollNumberValue = grid_items.Rows[i].Cells["roll_number"].Value;
+                var uniqueCodeValue = grid_items.Rows[i].Cells["unique_code"].Value;
+                var productIdValue = grid_items.Rows[i].Cells["product_id"].Value;
+                var productNameValue = grid_items.Rows[i].Cells["product_name"].Value;
+                var widthValue = grid_items.Rows[i].Cells["width"].Value;
+                var lengthValue = grid_items.Rows[i].Cells["large"].Value;
+                var msiValue = grid_items.Rows[i].Cells["msi"].Value;
+                var spliceValue = grid_items.Rows[i].Cells["splice"].Value;
+                var rollIdValue = grid_items.Rows[i].Cells["roll_id"].Value;
+                var codePersonValue = grid_items.Rows[i].Cells["code_person"].Value;
+
+
+                RolloCortado rollo = new()
+                {
+                    Numero = txt_numeroOC.Text?.ToString() ?? string.Empty,
+                    UniqueCode = uniqueCodeValue?.ToString() ?? string.Empty,
+                    Product_Id = productIdValue?.ToString() ?? string.Empty,
+                    Product_Name = productNameValue?.ToString() ?? string.Empty,
+                    RollNumber = rollNumberValue != null ? Convert.ToInt32(rollNumberValue) : 0,
+                    Width = widthValue != null ? Convert.ToDecimal(widthValue) : 0,
+                    Length = lengthValue != null ? Convert.ToDecimal(lengthValue) : 0,
+                    Msi = msiValue != null ? Convert.ToDecimal(msiValue) : 0,
+                    Splice = spliceValue != null ? Convert.ToInt32(spliceValue) : 0,
+                    Roll_Id = rollIdValue?.ToString() ?? string.Empty,
+                    Cantidad_despacho = 0,
+                    Cantidad = 0,
+                    Tipo = "CORTADO",
+                    Paleta = string.Empty,
+                    Code_Person = codePersonValue?.ToString() ?? string.Empty,
+                    Ubicacion = ".",
+                    Status = "OK.",
+                };
+                detalle.Add(rollo);
+            }
+
+            Service.GuardarRollos(detalle);
+        }
+
         private void Bot_guardar_Click(object sender, EventArgs e)
         {
             CREATE_HEADER_ORDEN();
+            CREATE_CORTES();
+            CREATE_DETALLE_ORDEN();
+            //Actualizar el consecutivo de la Orden de Corte den la Base de Datos.
+            string UpdateConsecBd = (Convert.ToInt32(txt_numeroOC.Text) + 1).ToString();
+            Service.UpdateConsecOC(UpdateConsecBd);
+            //Menu opciones
+            bot_primero.Enabled = true;
+            bot_siguiente.Enabled = true;
+            bot_ultimo.Enabled = true;
+            bot_anterior.Enabled = true;
+            bot_accion.Enabled = true;
+            bot_imprimir.Enabled = true;
+            bot_etiquetar.Enabled = true;
+            bot_exportar.Enabled = true;
+            bot_buscar.Enabled = true;
+            bot_guardar.Enabled = false;
+            bot_cancelar.Enabled = false;
+            //controles del formulario.
+            txt_fecha_emision.Enabled = false;
+            txt_fecha_produccion.Enabled = false;
+            txt_plus1.ReadOnly = true;
+            txt_plus2.ReadOnly = true;
+            txt_menos1.ReadOnly = true;
+            txt_menos2.ReadOnly = true;
+            btn_buscar_customer.Enabled = false;
+            btn_buscar_rollid1.Enabled = false;
+            btn_buscar_rollid2.Enabled = false;
+            btn_buscar_operador.Enabled = false;
+            btn_generar_rollos.Enabled = false;
+            grid_cortes.ReadOnly = true;
+            btn_add_row_corte.Enabled = false;
+            btn_delete_row_corte.Enabled = false;
+            txt_vueltas1.Enabled = false;
+            txt_largo_corte.Enabled = false;
+            txt_long_cortar.ReadOnly = true;
+        }
+        private void ContadorRegistros()
+        {
+            registros.Text = "Registros: " + (Bs.Position + 1) + "/" + Bs.Count.ToString();
         }
 
-        private void ToolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void InitStepIndicator()
         {
+            labelstep1.Visible = false;
+            pictureBox1.Image = imageList1.Images[5];
+            labelstep2.Visible = false;
+            pictureBox2.Image = imageList1.Images[6];
+            labelstep3.Visible = false;
+            pictureBox3.Image = imageList1.Images[7];
+            labelstep4.Visible = false;
+            pictureBox4.Image = imageList1.Images[8];
+            labelstep5.Visible = false;
+            pictureBox5.Image = imageList1.Images[9];
+        }
 
+        private void UpdateOptionMenuAction(bool b1, bool b2, bool b3, bool b4, bool b5)
+        {
+            opt_send_production.Enabled = b1;
+            opt_etiquetar_orden.Enabled = b2;
+            opt_aprobar_orden.Enabled = b3;
+            opt_cerrar_orden.Enabled = b4;
+            opt_modif_orden.Enabled = b5;
+        }
+
+        private void UpdateStepIndicator()
+        {
+            if (txt_step.Text == string.Empty) return;
+            int opt = Convert.ToInt32(txt_step.Text);
+
+            if (opt == 1)
+            {
+                InitStepIndicator();
+                labelstep1.Visible = true;
+                pictureBox1.Image = imageList1.Images[0];
+                UpdateOptionMenuAction(true, true, true, true, true);
+            }
+            if (opt == 2)
+            {
+                InitStepIndicator();
+                labelstep2.Visible = true;
+                pictureBox2.Image = imageList1.Images[1];
+                UpdateOptionMenuAction(false, true, true, true, true);
+            }
+            if (opt == 3)
+            {
+                InitStepIndicator();
+                labelstep3.Visible = true;
+                pictureBox3.Image = imageList1.Images[2];
+                UpdateOptionMenuAction(false, false, true, true, true);
+            }
+            if (opt == 4)
+            {
+                //Aprobado.
+                InitStepIndicator();
+
+                labelstep4.Visible = true;
+                pictureBox4.Image = imageList1.Images[3];
+                UpdateOptionMenuAction(false, false, false, true, true);
+            }
+            if (opt == 5)
+            {
+                //Aprobado.
+                InitStepIndicator();
+                labelstep5.Visible = true;
+                pictureBox5.Image = imageList1.Images[4];
+                UpdateOptionMenuAction(false, false, false, false, false);
+            }
+        }
+        private void StateProductionOC()
+        {
+            //se actualiza en la Base de Datos
+            Service.UpdateStatusDocumentOC(2, txt_numeroOC.Text);
+            //se actualiza en la UI del Sistema.
+            DataRowView FilaActual;
+            FilaActual = (DataRowView)Bs.Current!;
+            FilaActual["step"] = 2;
+            Bs.EndEdit();
+            UpdateStepIndicator();
+            MessageBox.Show("Se ha cambiado el estatus del documento a PRODUCCION...");
+        }
+
+        private void Opt_send_production_Click(object sender, EventArgs e)
+        {
+            StateProductionOC();
+        }
+        private void EtiquetarOrdenCorte()
+        {
+            //se actualiza en la Base de Datos el step del documento
+            Service.UpdateStatusDocumentOC(3, txt_numeroOC.Text);
+            //actualiza la ui del textbox de step-indicator
+            DataRowView FilaActual;
+            FilaActual = (DataRowView)Bs.Current!;
+            FilaActual["step"] = 3;
+            Bs.EndEdit();
+            //se actualiza el unique code
+            if (Bs.Current == null) return;
+            // Obtener la fila maestra actual como DataRowView
+            DataRowView rowMaestro = (DataRowView)Bs.Current;
+            // Obtener todas las filas hijas relacionadas
+            DataRow[] filasHijas = rowMaestro.Row.GetChildRows("FK_MASTER_ROLLOS");
+            int numero_unico = Service.BuscarUniqueCodeConsec();
+            //acvtualiza la ui del datagrid items rollos cortados
+            List<RolloCortado> rolls = [];
+            foreach (DataRow item in filasHijas)
+            {
+                RolloCortado rollo = new();
+                item.BeginEdit();
+                numero_unico += 1;
+                item["unique_code"] = "RC" + Convert.ToString(numero_unico);
+                item.EndEdit();
+                rollo.Numero = txt_numeroOC.Text;
+                rollo.RollNumber = Convert.ToInt32(item["roll_number"]);
+                rollo.UniqueCode = item["unique_code"].ToString()!;
+                rolls.Add(rollo);
+            }
+
+            //se actualizan los rollos cortados en la BD con los unique code nuevos
+            Service.UpdateUniqueCodeRollosCortados(rolls);
+
+            //actualiza el consecutivo de codigo unico
+            Service.UpdateUniqueCodeBD(numero_unico.ToString());
+            //actualiza la ui del indicator
+            UpdateStepIndicator();
+            //se crea el txt de los rollos cortados.
+            exportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden());
+
+            MessageBox.Show("Se ha Etiquetado la Orden de Corte...");
+        }
+
+        private void Opt_etiquetar_orden_Click(object sender, EventArgs e)
+        {
+            EtiquetarOrdenCorte();
+        }
+
+        public DataRow[] BuscarItemsDetailsOrden()
+        {
+            DataRowView rowMaestro = (DataRowView)Bs.Current!;
+            return rowMaestro.Row.GetChildRows("FK_MASTER_ROLLOS");
+        }
+
+        private void Btn_generar_txt_Click(object sender, EventArgs e)
+        {
+            exportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden());
+        }
+
+        private void Bot_exportar_Click(object sender, EventArgs e)
+        {
+            List<RolloCortado> rollosCortados = CREATE_ROLLOS_CORTADOS();
+            exportDataService.ExportToExcel<RolloCortado>(rollosCortados, "RollosCortados.xlsx");
+        }
+
+        private List<RolloCortado> CREATE_ROLLOS_CORTADOS()
+        {
+            List<RolloCortado> Lista_Rollos = [];
+            //picking-list;
+            for (int i = 0; i <= grid_items.Rows.Count - 1; i++)
+            {
+                RolloCortado Rollo = new()
+                {
+                    RollNumber = Convert.ToInt16(grid_items.Rows[i].Cells["Roll_Number"].Value),
+                    Product_Id = Convert.ToString(grid_items.Rows[i].Cells["product_id"].Value) ?? string.Empty,
+                    Product_Name = Convert.ToString(grid_items.Rows[i].Cells["product_name"].Value) ?? string.Empty,
+                    UniqueCode = Convert.ToString(grid_items.Rows[i].Cells["unique_code"].Value) ?? string.Empty,
+                    Width = Convert.ToDecimal(grid_items.Rows[i].Cells["width"].Value),
+                    Length = Convert.ToDecimal(grid_items.Rows[i].Cells["large"].Value),
+                    Msi = Convert.ToDecimal(grid_items.Rows[i].Cells["msi"].Value),
+                    Splice = Convert.ToInt16(grid_items.Rows[i].Cells["splice"].Value),
+                    Roll_Id = Convert.ToString(grid_items.Rows[i].Cells["roll_id"].Value) ?? string.Empty,
+                    Code_Person = Convert.ToString(grid_items.Rows[i].Cells["code_person"].Value) ?? string.Empty,
+                };
+                Lista_Rollos.Add(Rollo);
+            }
+            return Lista_Rollos;
+        }
+
+        private void Opt_aprobar_orden_Click(object sender, EventArgs e)
+        {
+            //cargar el formulario de aprobacion
+            Frm_AprobarOC form = new()
+            {
+                NumeroOC = txt_numeroOC.Text,
+                TypeAction = "WRITE"
+            };
+            form.ShowDialog();
+            //se actualiza en la Base de Datos
+            Service.UpdateStatusDocumentOC(4, txt_numeroOC.Text);
+            //actualiza la ui del textbox de step-indicator
+            DataRowView FilaActual;
+            FilaActual = (DataRowView)Bs.Current!;
+            FilaActual["step"] = 4;
+            Bs.EndEdit();
+            UpdateStepIndicator();
+        }
+
+        private void Btn_datosDocAprob_Click(object sender, EventArgs e)
+        {
+            int opt = Convert.ToInt32(txt_step.Text);
+            if (opt < 4)
+            {
+                MessageBox.Show("el documento no esta aprobado...");
+                return;
+            }
+            Frm_AprobarOC form = new()
+            {
+                NumeroOC = txt_numeroOC.Text,
+                TypeAction = "READ"
+            };
+            form.ShowDialog();
+        }
+
+        private void Opt_cerrar_orden_Click(object sender, EventArgs e)
+        {
+            DialogResult resultado = MessageBox.Show("¿Realmente desea Cerrar la Orden de Corte", "Advertencia...", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.Yes)
+            {
+                //se actualiza en la Base de Datos.
+                Service.UpdateStatusDocumentOC(5, txt_numeroOC.Text);
+                //actualiza la ui del textbox de step-indicator.
+                UpdateUIStepIndicator(5);
+                //actualizar el control de Step Indicator.
+                UpdateStepIndicator();
+            }
+        }
+        private void UpdateUIStepIndicator(int step)
+        {
+            DataRowView FilaActual;
+            FilaActual = (DataRowView)Bs.Current!;
+            FilaActual["step"] = step;
+            Bs.EndEdit();
+        }
+
+        private void Btn_buscar_orden_Click(object sender, EventArgs e)
+        {
+            Frm_oneparameter frmBuscar = new()
+            {
+                //MdiParent = (Form)this.Parent!,
+                StartPosition = StartPosition = FormStartPosition.Manual,
+                Location = new Point { X = Location.X + 300, Y = Location.Y + 150 }
+            };
+            frmBuscar.ShowDialog();
+            if (frmBuscar.Parameter != null)
+            {
+                int busqueda = Bs.Find("numero", frmBuscar.Parameter);
+                if (busqueda > 0)
+                {
+                    Bs.Position = busqueda;
+                    UpdateStepIndicator();
+                    ContadorRegistros();
+                }
+                else
+                {
+                    MessageBox.Show("No se encontro la orden de corte...", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+
+        private void Bot_imprimir_Click(object sender, EventArgs e)
+        {
+            reportService.Reporte_OrdenCorte(txt_numeroOC.Text,this,R.REPORT_NAME.REPORT_OC,R.REPORT_TITLE.REPORT_OC);
         }
     }
 }

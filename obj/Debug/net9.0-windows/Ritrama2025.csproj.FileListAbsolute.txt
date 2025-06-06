@@ -173,3 +173,7 @@ C:\Programacion\Ritrama2025\bin\Debug\net9.0-windows\Microsoft.Extensions.Loggin
 C:\Programacion\Ritrama2025\bin\Debug\net9.0-windows\Microsoft.Extensions.Logging.EventLog.dll
 C:\Programacion\Ritrama2025\bin\Debug\net9.0-windows\Microsoft.Extensions.Logging.EventSource.dll
 C:\Programacion\Ritrama2025\bin\Debug\net9.0-windows\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Otros.Frm_AprobarOC.resources
+C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Otros.Frm_oneparameter.resources
+C:\Programacion\Ritrama2025\bin\Debug\net9.0-windows\Reports\Production\ReporteOC.rdlc
+C:\Programacion\Ritrama2025\bin\Debug\net9.0-windows\Reports\Production\DsProduccion.xsd

@@ -24,12 +24,11 @@ namespace Ritrama2025.Services
 
         public ProduccionService()
         {
-            if (Program.Configuration != null) 
+            if (Program.Configuration != null)
             {
                 StringConnex = Convert.ToString(Program.Configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value)!;
             }
         }
-
         public async Task<DataSet> LoadDataOC()
         {
             try
@@ -39,7 +38,7 @@ namespace Ritrama2025.Services
                 SqlCommand ComandoMaster = new()
                 {
                     Connection = conn,
-                    CommandText = "SELECT numero,fecha,fecha_produccion,a.product_id,b.product_Name,rollid_1,width_1,lenght_1,rollid_2,width_2,lenght_2,util1_real_width,util1_real_lenght,util2_real_width,util2_real_lenght,rest1_width,rest1_lenght,rest2_width,rest2_lenght,a.id_operador,c.nombre,a.customer_id,d.customer_name,tot_inch_ancho,lenght_entrada,resta_entrada,total_salida,plus1_pies,plus2_pies,longitud_cortar,cortes_ancho,cortes_largo,cant_rollos,cant_rollos2 FROM orden_corte a LEFT JOIN producto b ON a.product_id = b.product_id LEFT JOIN operadores c ON a.id_operador = c.id_operador LEFT JOIN customer d ON a.customer_id = d.customer_id ORDER BY numero DESC",
+                    CommandText = "SELECT numero,fecha,fecha_produccion,a.product_id,b.product_Name,rollid_1,width_1,lenght_1,rollid_2,width_2,lenght_2,util1_real_width,util1_real_lenght,util2_real_width,util2_real_lenght,rest1_width,rest1_lenght,rest2_width,rest2_lenght,a.id_operador,c.nombre,a.customer_id,d.customer_name,tot_inch_ancho,lenght_entrada,resta_entrada,total_salida,plus1_pies,plus2_pies,longitud_cortar,cortes_ancho,cortes_largo,cant_rollos,cant_rollos2,step FROM orden_corte a LEFT JOIN producto b ON a.product_id = b.product_id LEFT JOIN operadores c ON a.id_operador = c.id_operador LEFT JOIN customer d ON a.customer_id = d.customer_id ORDER BY numero DESC",
                     CommandType = CommandType.Text
                 };
                 await conn.OpenAsync();
@@ -62,7 +61,7 @@ namespace Ritrama2025.Services
                 SqlCommand ComandoRollos = new()
                 {
                     Connection = conn,
-                    CommandText = "SELECT numero,product_id,product_name,roll_number,unique_code,splice,width,large,msi,roll_id,code_person,status,disponible,width_c,lenght_c,ubic,ratio,fecha,rollid_oculto FROM rolls_details", 
+                    CommandText = "SELECT numero,product_id,product_name,roll_number,unique_code,splice,width,large,msi,roll_id,code_person,status,disponible,width_c,lenght_c,ubic,ratio,fecha,rollid_oculto FROM rolls_details ORDER BY roll_number ASC",
                     CommandType = CommandType.Text
                 };
                 SqlDataReader readerRollos = await ComandoRollos.ExecuteReaderAsync();
@@ -92,7 +91,7 @@ namespace Ritrama2025.Services
                 DaOperator.SelectCommand = ComandoOperator;
                 DaOperator.Fill(Ds, "DtOperator");
                 //6.- Carga de los Customer.
-                SqlCommand ComandoCust= new()
+                SqlCommand ComandoCust = new()
                 {
                     Connection = conn,
                     CommandText = "SELECT customer_id,customer_name FROM customer",
@@ -111,15 +110,14 @@ namespace Ritrama2025.Services
             SetRelaionsTables();
             return Ds;
         }
-
-        public Boolean SetRelaionsTables() 
+        public Boolean SetRelaionsTables()
         {
             try
             {
                 //Relacion entre master y Cortes.
                 DataColumn ParentCol0 = Ds.Tables["DtMaster"]!.Columns["numero"]!;
                 DataColumn ChildCol0 = Ds.Tables["DtCortes"]!.Columns["orden"]!;
-                DataRelation Despacho_Cortes = new("FK_ENCABEZADO_CORTES", ParentCol0, ChildCol0,false);
+                DataRelation Despacho_Cortes = new("FK_ENCABEZADO_CORTES", ParentCol0, ChildCol0, false);
                 Ds.Relations.Add(Despacho_Cortes);
                 //Relacion entre master y Rollos.
                 DataColumn ParentCol1 = Ds.Tables["DtMaster"]!.Columns["numero"]!;
@@ -134,7 +132,6 @@ namespace Ritrama2025.Services
                 return false;
             }
         }
-
         public void GuardarEncabezadoOrdenCorte(Orden OrdenCorte)
         {
             try
@@ -200,15 +197,224 @@ namespace Ritrama2025.Services
                 comando.Parameters.AddWithValue("@p51", 0);
                 comando.Parameters.AddWithValue("@p52", 0);
                 comando.Parameters.AddWithValue("@p53", 0);
-
-
                 comando.ExecuteNonQuery();
-                MessageBox.Show("La orden se guardo correctamente");
             }
             catch (SqlException ex)
             {
                 MessageBox.Show("error al guardar el encabezado de la orden " + ex.Message);
             }
         }
+        public void GuardarCortes(List<Corte> cortes)
+        {
+            try
+            {
+                SqlConnection conn = new(StringConnex);
+                conn.Open();
+                foreach (var corte in cortes)
+                {
+                    SqlCommand comando = new()
+                    {
+                        Connection = conn,
+                        CommandText = "INSERT INTO cortes (num,width,lenght,msi,orden,code_person) VALUES(@p1,@p2,@p3,@p4,@p5,@p6)",
+                        CommandType = CommandType.Text
+                    };
+                    comando.Parameters.AddWithValue("@p1", corte.Numero);
+                    comando.Parameters.AddWithValue("@p2", corte.Width);
+                    comando.Parameters.AddWithValue("@p3", corte.Length);
+                    comando.Parameters.AddWithValue("@p4", corte.Msi);
+                    comando.Parameters.AddWithValue("@p5", corte.Orden);
+                    comando.Parameters.AddWithValue("@p6", corte.CodePerson);
+                    comando.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("error al guardar los cortes " + ex.Message);
+            }
+
+
+        }
+        public void GuardarRollos(List<RolloCortado> rollos)
+        {
+            try
+            {
+                SqlConnection conn = new(StringConnex);
+                conn.Open();
+                foreach (var roll in rollos)
+                {
+                    SqlCommand comando = new()
+                    {
+                        Connection = conn,
+                        CommandText = "INSERT INTO rolls_details (product_id,product_name,roll_number,unique_code,splice,width,large,msi,roll_id,code_person,status,disponible,ubic,numero) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14)",
+                        CommandType = CommandType.Text
+                    };
+                    comando.Parameters.AddWithValue("@p1", roll.Product_Id);
+                    comando.Parameters.AddWithValue("@p2", roll.Product_Name);
+                    comando.Parameters.AddWithValue("@p3", roll.RollNumber);
+                    comando.Parameters.AddWithValue("@p4", roll.UniqueCode);
+                    comando.Parameters.AddWithValue("@p5", roll.Splice);
+                    comando.Parameters.AddWithValue("@p6", roll.Width);
+                    comando.Parameters.AddWithValue("@p7", roll.Length);
+                    comando.Parameters.AddWithValue("@p8", roll.Msi);
+                    comando.Parameters.AddWithValue("@p9", roll.Roll_Id);
+                    comando.Parameters.AddWithValue("@p10", roll.Code_Person);
+                    comando.Parameters.AddWithValue("@p11", roll.Status);
+                    comando.Parameters.AddWithValue("@p12", true);
+                    comando.Parameters.AddWithValue("@p13", roll.Ubicacion);
+                    comando.Parameters.AddWithValue("@p14", roll.Numero);
+                    comando.ExecuteNonQuery();
+                }
+                MessageBox.Show("La Orden de Corte se guardo correctamente...");
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("error al guardar los rollos " + ex.Message);
+            }
+        }
+        public int BuscarUniqueCodeConsec()
+        {
+            int Consec;
+            try
+            {
+                SqlConnection conn = new(StringConnex);
+                conn.Open();
+                SqlCommand comando = new()
+                {
+                    Connection = conn,
+                    CommandText = "select par1 from control where filter='UC'",
+                    CommandType = CommandType.Text
+                };
+                Consec = Convert.ToInt32(comando.ExecuteScalar());
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar el Unique-Code de la Orden Corte" + ex.Message);
+                throw;
+            }
+            return Consec;
+        }
+        public int BuscarConsecOC()
+        {
+            int Consec;
+            try
+            {
+                SqlConnection conn = new(StringConnex);
+                conn.Open();
+                SqlCommand comando = new()
+                {
+                    Connection = conn,
+                    CommandText = "select par1 from control where filter='COC'",
+                    CommandType = CommandType.Text
+                };
+                Consec = Convert.ToInt32(comando.ExecuteScalar());
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar el consecutivo de la Orden Corte" + ex.Message);
+                throw;
+            }
+            return Consec;
+        }
+        public bool UpdateConsecOC(string consec)
+        {
+            try
+            {
+                SqlConnection conn = new(StringConnex);
+                conn.Open();
+                SqlCommand comando = new()
+                {
+                    Connection = conn,
+                    CommandText = "update control set par1=@p1 where filter='COC'",
+                    CommandType = CommandType.Text
+                };
+                SqlParameter p1 = new("@p1", consec);
+                comando.Parameters.Add(p1);
+                comando.ExecuteNonQuery();
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Error al actualizar el consecutivo de la orden de corte. Codigo de Error : " + ex.Message);
+                return false;
+            }
+        }
+        public bool UpdateStatusDocumentOC(int stepchange, string oc)
+        {
+            try
+            {
+                SqlConnection conn = new(StringConnex);
+                conn.Open();
+                SqlCommand comando = new()
+                {
+                    Connection = conn,
+                    CommandText = "update orden_corte set step=@p2 where numero=@p1",
+                    CommandType = CommandType.Text
+                };
+                SqlParameter p1 = new("@p1", oc);
+                SqlParameter p2 = new("@p2", stepchange);
+                comando.Parameters.Add(p1);
+                comando.Parameters.Add(p2);
+                comando.ExecuteNonQuery();
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Error al actualizar el estatus del documento. codigo error: " + ex.Message);
+                return false;
+            }
+
+        }
+        public bool UpdateUniqueCodeBD(string consec)
+        {
+            try
+            {
+                SqlConnection conn = new(StringConnex);
+                conn.Open();
+                SqlCommand comando = new()
+                {
+                    Connection = conn,
+                    CommandText = "update control set par1=@p1 where filter='UC'",
+                    CommandType = CommandType.Text
+                };
+                SqlParameter p1 = new("@p1", consec);
+                comando.Parameters.Add(p1);
+                comando.ExecuteNonQuery();
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Error al actualizar el UNIQUE CODE de los rollos cortados. Codigo de Error : " + ex.Message);
+                return false;
+            }
+        }
+        public void UpdateUniqueCodeRollosCortados(List<RolloCortado> rollos) 
+        {
+            try
+            {
+                SqlConnection conn = new(StringConnex);
+                conn.Open();
+                foreach (var roll in rollos)
+                {
+                    SqlCommand comando = new()
+                    {
+                        Connection = conn,
+                        CommandText = "update rolls_details set unique_code=@p2 where roll_number=@p1 and numero=@p3",
+                        CommandType = CommandType.Text
+                    };
+                    comando.Parameters.AddWithValue("@p1", roll.RollNumber);
+                    comando.Parameters.AddWithValue("@p2", roll.UniqueCode);
+                    comando.Parameters.AddWithValue("@p3", roll.Numero);
+                    comando.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("error al guardar los codigo unicos de los rollos" + ex.Message);
+            }
+        }
+
+       
     }
 }

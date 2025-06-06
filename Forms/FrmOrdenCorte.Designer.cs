@@ -49,11 +49,11 @@
             opt_cerrar_orden = new ToolStripMenuItem();
             opt_modif_orden = new ToolStripMenuItem();
             bot_guardar = new ToolStripButton();
-            bot_buscar = new ToolStripButton();
             bot_cancelar = new ToolStripButton();
             bot_imprimir = new ToolStripButton();
             bot_exportar = new ToolStripButton();
             bot_etiquetar = new ToolStripButton();
+            bot_buscar = new ToolStripButton();
             label2 = new Label();
             txt_numeroOC = new TextBox();
             txt_fecha_emision = new DateTimePicker();
@@ -145,13 +145,21 @@
             pictureBox3 = new PictureBox();
             pictureBox4 = new PictureBox();
             pictureBox5 = new PictureBox();
-            button1 = new Button();
             imageList1 = new ImageList(components);
             label37 = new Label();
             txt_vueltas1 = new NumericUpDown();
             checkList_pasos_orden = new CheckedListBox();
             label34 = new Label();
             txt_vueltas2 = new NumericUpDown();
+            txt_step = new TextBox();
+            labelstep1 = new Label();
+            labelstep2 = new Label();
+            labelstep3 = new Label();
+            btn_generar_txt = new Button();
+            labelstep4 = new Label();
+            labelstep5 = new Label();
+            btn_datosDocAprob = new Button();
+            btn_buscar_orden = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             toolStrip1.SuspendLayout();
@@ -213,13 +221,12 @@
             // toolStrip1
             // 
             toolStrip1.Font = new Font("Microsoft Sans Serif", 11.25F);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { bot_primero, bot_anterior, bot_siguiente, bot_ultimo, bot_accion, bot_guardar, bot_buscar, bot_cancelar, bot_imprimir, bot_exportar, bot_etiquetar });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { bot_primero, bot_anterior, bot_siguiente, bot_ultimo, bot_accion, bot_guardar, bot_cancelar, bot_imprimir, bot_exportar, bot_etiquetar, bot_buscar });
             toolStrip1.Location = new Point(0, 62);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1263, 33);
             toolStrip1.TabIndex = 1;
             toolStrip1.Text = "toolStrip1";
-            toolStrip1.ItemClicked += ToolStrip1_ItemClicked;
             // 
             // bot_primero
             // 
@@ -291,6 +298,7 @@
             opt_send_production.Name = "opt_send_production";
             opt_send_production.Size = new Size(242, 22);
             opt_send_production.Text = "Enviar a Produccion";
+            opt_send_production.Click += Opt_send_production_Click;
             // 
             // opt_etiquetar_orden
             // 
@@ -298,6 +306,7 @@
             opt_etiquetar_orden.Name = "opt_etiquetar_orden";
             opt_etiquetar_orden.Size = new Size(242, 22);
             opt_etiquetar_orden.Text = "Etiquetar Orden";
+            opt_etiquetar_orden.Click += Opt_etiquetar_orden_Click;
             // 
             // opt_aprobar_orden
             // 
@@ -305,6 +314,7 @@
             opt_aprobar_orden.Name = "opt_aprobar_orden";
             opt_aprobar_orden.Size = new Size(242, 22);
             opt_aprobar_orden.Text = "Aprobar Orden";
+            opt_aprobar_orden.Click += Opt_aprobar_orden_Click;
             // 
             // opt_cerrar_orden
             // 
@@ -312,6 +322,7 @@
             opt_cerrar_orden.Name = "opt_cerrar_orden";
             opt_cerrar_orden.Size = new Size(242, 22);
             opt_cerrar_orden.Text = "Cerrar Orden";
+            opt_cerrar_orden.Click += Opt_cerrar_orden_Click;
             // 
             // opt_modif_orden
             // 
@@ -323,6 +334,7 @@
             // bot_guardar
             // 
             bot_guardar.AutoSize = false;
+            bot_guardar.Enabled = false;
             bot_guardar.Font = new Font("Microsoft Sans Serif", 11.25F);
             bot_guardar.Image = (Image)resources.GetObject("bot_guardar.Image");
             bot_guardar.ImageTransparentColor = Color.Magenta;
@@ -331,25 +343,16 @@
             bot_guardar.Text = "Guardar";
             bot_guardar.Click += Bot_guardar_Click;
             // 
-            // bot_buscar
-            // 
-            bot_buscar.AutoSize = false;
-            bot_buscar.Font = new Font("Microsoft Sans Serif", 11.25F);
-            bot_buscar.Image = (Image)resources.GetObject("bot_buscar.Image");
-            bot_buscar.ImageTransparentColor = Color.Magenta;
-            bot_buscar.Name = "bot_buscar";
-            bot_buscar.Size = new Size(80, 30);
-            bot_buscar.Text = "Buscar";
-            // 
             // bot_cancelar
             // 
             bot_cancelar.AutoSize = false;
+            bot_cancelar.Enabled = false;
             bot_cancelar.Font = new Font("Microsoft Sans Serif", 11.25F);
             bot_cancelar.Image = (Image)resources.GetObject("bot_cancelar.Image");
             bot_cancelar.ImageTransparentColor = Color.Magenta;
             bot_cancelar.Name = "bot_cancelar";
             bot_cancelar.Size = new Size(80, 30);
-            bot_cancelar.Text = "Cancelar";
+            bot_cancelar.Text = "Cancel";
             // 
             // bot_imprimir
             // 
@@ -360,6 +363,7 @@
             bot_imprimir.Name = "bot_imprimir";
             bot_imprimir.Size = new Size(80, 30);
             bot_imprimir.Text = "Imprimir";
+            bot_imprimir.Click += Bot_imprimir_Click;
             // 
             // bot_exportar
             // 
@@ -368,8 +372,9 @@
             bot_exportar.Image = (Image)resources.GetObject("bot_exportar.Image");
             bot_exportar.ImageTransparentColor = Color.Magenta;
             bot_exportar.Name = "bot_exportar";
-            bot_exportar.Size = new Size(80, 30);
-            bot_exportar.Text = "Exportar";
+            bot_exportar.Size = new Size(100, 30);
+            bot_exportar.Text = "Excel";
+            bot_exportar.Click += Bot_exportar_Click;
             // 
             // bot_etiquetar
             // 
@@ -380,6 +385,16 @@
             bot_etiquetar.Name = "bot_etiquetar";
             bot_etiquetar.Size = new Size(80, 30);
             bot_etiquetar.Text = "Etiquetar";
+            // 
+            // bot_buscar
+            // 
+            bot_buscar.AutoSize = false;
+            bot_buscar.Font = new Font("Microsoft Sans Serif", 11.25F);
+            bot_buscar.Image = (Image)resources.GetObject("bot_buscar.Image");
+            bot_buscar.ImageTransparentColor = Color.Magenta;
+            bot_buscar.Name = "bot_buscar";
+            bot_buscar.Size = new Size(80, 30);
+            bot_buscar.Text = "Buscar";
             // 
             // label2
             // 
@@ -393,7 +408,7 @@
             // 
             // txt_numeroOC
             // 
-            txt_numeroOC.Font = new Font("Noto Sans", 9.75F);
+            txt_numeroOC.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_numeroOC.Location = new Point(14, 122);
             txt_numeroOC.Name = "txt_numeroOC";
             txt_numeroOC.ReadOnly = true;
@@ -404,7 +419,7 @@
             // 
             txt_fecha_emision.Enabled = false;
             txt_fecha_emision.Font = new Font("Noto Sans", 9.75F);
-            txt_fecha_emision.Location = new Point(135, 122);
+            txt_fecha_emision.Location = new Point(185, 122);
             txt_fecha_emision.Name = "txt_fecha_emision";
             txt_fecha_emision.Size = new Size(274, 25);
             txt_fecha_emision.TabIndex = 4;
@@ -413,7 +428,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Noto Sans", 9.75F);
-            label3.Location = new Point(135, 100);
+            label3.Location = new Point(185, 100);
             label3.Name = "label3";
             label3.Size = new Size(68, 18);
             label3.TabIndex = 5;
@@ -423,7 +438,7 @@
             // 
             txt_fecha_produccion.Enabled = false;
             txt_fecha_produccion.Font = new Font("Noto Sans", 9.75F);
-            txt_fecha_produccion.Location = new Point(416, 122);
+            txt_fecha_produccion.Location = new Point(466, 122);
             txt_fecha_produccion.Name = "txt_fecha_produccion";
             txt_fecha_produccion.Size = new Size(266, 25);
             txt_fecha_produccion.TabIndex = 6;
@@ -432,7 +447,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Noto Sans", 9.75F);
-            label4.Location = new Point(416, 100);
+            label4.Location = new Point(466, 100);
             label4.Name = "label4";
             label4.Size = new Size(118, 18);
             label4.TabIndex = 7;
@@ -471,7 +486,7 @@
             // 
             // txt_width1
             // 
-            txt_width1.Font = new Font("Noto Sans", 9.75F);
+            txt_width1.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_width1.Location = new Point(185, 172);
             txt_width1.Name = "txt_width1";
             txt_width1.ReadOnly = true;
@@ -490,7 +505,7 @@
             // 
             // txt_length1
             // 
-            txt_length1.Font = new Font("Noto Sans", 9.75F);
+            txt_length1.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_length1.Location = new Point(306, 172);
             txt_length1.Name = "txt_length1";
             txt_length1.ReadOnly = true;
@@ -897,7 +912,7 @@
             // 
             label25.AutoSize = true;
             label25.Font = new Font("Noto Sans", 8.25F);
-            label25.Location = new Point(753, 98);
+            label25.Location = new Point(800, 98);
             label25.Name = "label25";
             label25.Size = new Size(158, 15);
             label25.TabIndex = 57;
@@ -906,7 +921,7 @@
             // txt_ancho_corte
             // 
             txt_ancho_corte.Font = new Font("Noto Sans", 9.75F);
-            txt_ancho_corte.Location = new Point(729, 132);
+            txt_ancho_corte.Location = new Point(776, 132);
             txt_ancho_corte.Name = "txt_ancho_corte";
             txt_ancho_corte.ReadOnly = true;
             txt_ancho_corte.Size = new Size(60, 25);
@@ -916,7 +931,7 @@
             // 
             label26.AutoSize = true;
             label26.Font = new Font("Noto Sans", 8.25F);
-            label26.Location = new Point(729, 115);
+            label26.Location = new Point(776, 115);
             label26.Name = "label26";
             label26.Size = new Size(49, 15);
             label26.TabIndex = 58;
@@ -925,7 +940,7 @@
             // txt_largo_corte
             // 
             txt_largo_corte.Font = new Font("Noto Sans", 9.75F);
-            txt_largo_corte.Location = new Point(797, 132);
+            txt_largo_corte.Location = new Point(844, 132);
             txt_largo_corte.Name = "txt_largo_corte";
             txt_largo_corte.ReadOnly = true;
             txt_largo_corte.Size = new Size(60, 25);
@@ -935,7 +950,7 @@
             // 
             label27.AutoSize = true;
             label27.Font = new Font("Noto Sans", 8.25F);
-            label27.Location = new Point(797, 115);
+            label27.Location = new Point(844, 115);
             label27.Name = "label27";
             label27.Size = new Size(47, 15);
             label27.TabIndex = 60;
@@ -944,7 +959,7 @@
             // txt_resta_corte
             // 
             txt_resta_corte.Font = new Font("Noto Sans", 9.75F);
-            txt_resta_corte.Location = new Point(864, 132);
+            txt_resta_corte.Location = new Point(911, 132);
             txt_resta_corte.Name = "txt_resta_corte";
             txt_resta_corte.ReadOnly = true;
             txt_resta_corte.Size = new Size(60, 25);
@@ -954,7 +969,7 @@
             // 
             label28.AutoSize = true;
             label28.Font = new Font("Noto Sans", 8.25F);
-            label28.Location = new Point(864, 115);
+            label28.Location = new Point(911, 115);
             label28.Name = "label28";
             label28.Size = new Size(42, 15);
             label28.TabIndex = 62;
@@ -992,6 +1007,8 @@
             grid_cortes.AllowUserToResizeColumns = false;
             grid_cortes.AllowUserToResizeRows = false;
             grid_cortes.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            grid_cortes.BorderStyle = BorderStyle.None;
+            grid_cortes.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
             grid_cortes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Window;
@@ -1001,24 +1018,24 @@
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
             grid_cortes.DefaultCellStyle = dataGridViewCellStyle1;
-            grid_cortes.Location = new Point(650, 163);
+            grid_cortes.Location = new Point(676, 163);
             grid_cortes.Name = "grid_cortes";
             grid_cortes.ReadOnly = true;
-            grid_cortes.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            grid_cortes.RowHeadersWidth = 32;
+            grid_cortes.RowHeadersWidth = 28;
             grid_cortes.ScrollBars = ScrollBars.Vertical;
-            grid_cortes.Size = new Size(403, 180);
+            grid_cortes.Size = new Size(377, 180);
             grid_cortes.TabIndex = 66;
             grid_cortes.CellEndEdit += Grid_cortes_CellEndEdit;
             grid_cortes.Leave += Grid_cortes_Leave;
             // 
             // btn_generar_rollos
             // 
+            btn_generar_rollos.Enabled = false;
             btn_generar_rollos.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_generar_rollos.Image = (Image)resources.GetObject("btn_generar_rollos.Image");
-            btn_generar_rollos.Location = new Point(650, 350);
+            btn_generar_rollos.Location = new Point(676, 350);
             btn_generar_rollos.Name = "btn_generar_rollos";
-            btn_generar_rollos.Size = new Size(403, 62);
+            btn_generar_rollos.Size = new Size(377, 62);
             btn_generar_rollos.TabIndex = 67;
             btn_generar_rollos.Text = "GENERAR ROLLOS CORTADOS";
             btn_generar_rollos.TextAlign = ContentAlignment.MiddleRight;
@@ -1305,15 +1322,6 @@
             pictureBox5.TabIndex = 100;
             pictureBox5.TabStop = false;
             // 
-            // button1
-            // 
-            button1.Location = new Point(447, 778);
-            button1.Name = "button1";
-            button1.Size = new Size(33, 28);
-            button1.TabIndex = 101;
-            button1.Text = "+";
-            button1.UseVisualStyleBackColor = true;
-            // 
             // imageList1
             // 
             imageList1.ColorDepth = ColorDepth.Depth32Bit;
@@ -1342,7 +1350,8 @@
             // 
             // txt_vueltas1
             // 
-            txt_vueltas1.Font = new Font("Noto Sans", 9.75F);
+            txt_vueltas1.Enabled = false;
+            txt_vueltas1.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_vueltas1.Location = new Point(1063, 333);
             txt_vueltas1.Name = "txt_vueltas1";
             txt_vueltas1.Size = new Size(73, 25);
@@ -1372,23 +1381,132 @@
             // 
             // txt_vueltas2
             // 
+            txt_vueltas2.Enabled = false;
             txt_vueltas2.Font = new Font("Noto Sans", 9.75F);
             txt_vueltas2.Location = new Point(1142, 333);
             txt_vueltas2.Name = "txt_vueltas2";
             txt_vueltas2.Size = new Size(70, 25);
             txt_vueltas2.TabIndex = 108;
             // 
+            // txt_step
+            // 
+            txt_step.BorderStyle = BorderStyle.None;
+            txt_step.Font = new Font("Noto Sans", 9.75F);
+            txt_step.Location = new Point(1071, 729);
+            txt_step.Name = "txt_step";
+            txt_step.ReadOnly = true;
+            txt_step.Size = new Size(166, 18);
+            txt_step.TabIndex = 109;
+            // 
+            // labelstep1
+            // 
+            labelstep1.AutoSize = true;
+            labelstep1.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelstep1.Location = new Point(180, 810);
+            labelstep1.Name = "labelstep1";
+            labelstep1.Size = new Size(53, 18);
+            labelstep1.TabIndex = 110;
+            labelstep1.Text = "creado";
+            labelstep1.Visible = false;
+            // 
+            // labelstep2
+            // 
+            labelstep2.AutoSize = true;
+            labelstep2.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelstep2.Location = new Point(223, 810);
+            labelstep2.Name = "labelstep2";
+            labelstep2.Size = new Size(82, 18);
+            labelstep2.TabIndex = 111;
+            labelstep2.Text = "produccion";
+            labelstep2.Visible = false;
+            // 
+            // labelstep3
+            // 
+            labelstep3.AutoSize = true;
+            labelstep3.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelstep3.Location = new Point(274, 810);
+            labelstep3.Name = "labelstep3";
+            labelstep3.Size = new Size(81, 18);
+            labelstep3.TabIndex = 112;
+            labelstep3.Text = "etiquetado";
+            labelstep3.Visible = false;
+            // 
+            // btn_generar_txt
+            // 
+            btn_generar_txt.Image = Properties.Resources.search_property_24px;
+            btn_generar_txt.Location = new Point(1071, 639);
+            btn_generar_txt.Name = "btn_generar_txt";
+            btn_generar_txt.Size = new Size(166, 39);
+            btn_generar_txt.TabIndex = 113;
+            btn_generar_txt.Text = "GENERAR TXT";
+            btn_generar_txt.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_generar_txt.UseVisualStyleBackColor = true;
+            btn_generar_txt.Click += Btn_generar_txt_Click;
+            // 
+            // labelstep4
+            // 
+            labelstep4.AutoSize = true;
+            labelstep4.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelstep4.Location = new Point(332, 810);
+            labelstep4.Name = "labelstep4";
+            labelstep4.Size = new Size(70, 18);
+            labelstep4.TabIndex = 114;
+            labelstep4.Text = "aprobado";
+            labelstep4.Visible = false;
+            // 
+            // labelstep5
+            // 
+            labelstep5.AutoSize = true;
+            labelstep5.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelstep5.Location = new Point(389, 810);
+            labelstep5.Name = "labelstep5";
+            labelstep5.Size = new Size(59, 18);
+            labelstep5.TabIndex = 115;
+            labelstep5.Text = "cerrado";
+            labelstep5.Visible = false;
+            // 
+            // btn_datosDocAprob
+            // 
+            btn_datosDocAprob.Image = Properties.Resources.search_property_24px;
+            btn_datosDocAprob.Location = new Point(1071, 684);
+            btn_datosDocAprob.Name = "btn_datosDocAprob";
+            btn_datosDocAprob.Size = new Size(166, 39);
+            btn_datosDocAprob.TabIndex = 116;
+            btn_datosDocAprob.Text = "DATOS APROB.";
+            btn_datosDocAprob.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_datosDocAprob.UseVisualStyleBackColor = true;
+            btn_datosDocAprob.Click += Btn_datosDocAprob_Click;
+            // 
+            // btn_buscar_orden
+            // 
+            btn_buscar_orden.Font = new Font("Noto Sans", 9.75F);
+            btn_buscar_orden.Location = new Point(134, 122);
+            btn_buscar_orden.Name = "btn_buscar_orden";
+            btn_buscar_orden.Size = new Size(43, 28);
+            btn_buscar_orden.TabIndex = 117;
+            btn_buscar_orden.Text = "...";
+            btn_buscar_orden.UseVisualStyleBackColor = true;
+            btn_buscar_orden.Click += Btn_buscar_orden_Click;
+            // 
             // FrmOrdenCorte
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1263, 830);
+            ClientSize = new Size(1263, 843);
+            Controls.Add(btn_buscar_orden);
+            Controls.Add(btn_datosDocAprob);
+            Controls.Add(labelstep5);
+            Controls.Add(labelstep4);
+            Controls.Add(btn_generar_txt);
+            Controls.Add(labelstep3);
+            Controls.Add(labelstep2);
+            Controls.Add(labelstep1);
+            Controls.Add(txt_step);
             Controls.Add(txt_vueltas2);
             Controls.Add(label34);
             Controls.Add(checkList_pasos_orden);
             Controls.Add(txt_vueltas1);
             Controls.Add(label37);
-            Controls.Add(button1);
             Controls.Add(pictureBox5);
             Controls.Add(pictureBox4);
             Controls.Add(pictureBox3);
@@ -1619,7 +1737,6 @@
         private PictureBox pictureBox3;
         private PictureBox pictureBox4;
         private PictureBox pictureBox5;
-        private Button button1;
         private ImageList imageList1;
         private PictureBox pictureBox6;
         private Label label37;
@@ -1627,5 +1744,14 @@
         private CheckedListBox checkList_pasos_orden;
         private Label label34;
         private NumericUpDown txt_vueltas2;
+        private TextBox txt_step;
+        private Label labelstep1;
+        private Label labelstep2;
+        private Label labelstep3;
+        private Button btn_generar_txt;
+        private Label labelstep4;
+        private Label labelstep5;
+        private Button btn_datosDocAprob;
+        private Button btn_buscar_orden;
     }
 }

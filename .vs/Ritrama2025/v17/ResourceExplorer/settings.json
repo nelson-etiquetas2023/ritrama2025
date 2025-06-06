@@ -1,1 +1,25 @@
-{"ShowEmptyProjects":false,"CustomColumnOrderings":{"name":0,"type":1,"neutral-value":2,"neutral-comment":3},"ShowValidationErrors":true,"SelectedResourceGroupsByProjectFilePath":{"C:\\Programacion\\Ritrama2025\\Ritrama2025.csproj":["C:\\Programacion\\Ritrama2025\\Forms\\FrmPickingDespacho.resx"]},"VisibleColumnKeys":["name","neutral-value","neutral-comment"]}
+{
+  "ShowEmptyProjects": false,
+  "SelectedGroups": [
+    "C:\\Programacion\\Ritrama2025\\Forms\\Seleccion\\Frm_RollId.resx",
+    "C:\\Programacion\\Ritrama2025\\Forms\\Otros\\Frm_descriptionPalet.resx",
+    "C:\\Programacion\\Ritrama2025\\Forms\\Otros\\Frm_AddNew.resx"
+  ],
+  "ExpandedProjects": [
+    "C:\\Programacion\\Ritrama2025\\Ritrama2025.csproj"
+  ],
+  "EnableSpellChecker": true,
+  "ColumnOrder": [
+    "name",
+    "file-path",
+    "file-name",
+    "type",
+    "neutral-value",
+    "neutral-comment"
+  ],
+  "VisibleColumnKeys": [
+    "name",
+    "neutral-comment",
+    "neutral-value"
+  ]
+}

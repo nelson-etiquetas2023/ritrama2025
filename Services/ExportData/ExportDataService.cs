@@ -1,6 +1,8 @@
 ﻿using ClosedXML.Excel;
+using System.Data;
 using System.Diagnostics;
 using System.Reflection;
+
 
 
 namespace Ritrama2025.Services.ExportData
@@ -11,7 +13,7 @@ namespace Ritrama2025.Services.ExportData
         {
             if (data == null || data.Count == 0)
             {
-                throw new ArgumentException("La coleccion de datos no puede ser vacia.", nameof(data));
+                throw new ArgumentException("La coleccion de datos no puede ser vacia para exportar a excel.", nameof(data));
             }
             using var workbook = new XLWorkbook();
             var worksheet = workbook.Worksheets.Add(typeof(T).Name);
@@ -23,7 +25,9 @@ namespace Ritrama2025.Services.ExportData
             // 1. Escribir encabezados
             for (int col = 0; col < properties.Length; col++)
             {
+               
                 worksheet.Cell(1, col + 1).Value = properties[col].Name;
+                
                 // Opcional: dar formato de negrita
                 worksheet.Cell(1, col + 1).Style.Font.Bold = true;
             }
@@ -42,6 +46,7 @@ namespace Ritrama2025.Services.ExportData
 
             // 3. Autoajustar ancho de columnas
             worksheet.Columns().AdjustToContents();
+          
             string filePath = Path.Combine(Environment.CurrentDirectory, FileName);
             // 4. Guardar el archivo
             workbook.SaveAs(filePath);
@@ -62,6 +67,49 @@ namespace Ritrama2025.Services.ExportData
                 MessageBox.Show($"No se pudo abrir el archivo automáticamente: {ex.Message}");
             }
             return true;
+        }
+
+        public bool ExportTxtFormatRollosCortados(DataRow[] rollos)
+        {
+            try
+            {
+                string carpetaDestino = Path.Combine(Application.StartupPath, "Archivos");
+                if (!Directory.Exists(carpetaDestino))
+                {
+                    Directory.CreateDirectory(carpetaDestino);
+                }
+                string ArchivoPath = Path.Combine(carpetaDestino, "Datos.txt");
+                using (StreamWriter sr = new(ArchivoPath))
+                {
+                    foreach (DataRow item in rollos)
+                    {
+                        string productid = item["product_id"].ToString()!.Trim();
+                        string uniquecode = item["unique_code"].ToString()!.Trim();
+                        string width = item["width"].ToString()!.Trim();
+                        string lenght = item["large"].ToString()!.Trim();
+                        string msi = item["msi"].ToString()!.Trim();
+                        string splice = item["splice"].ToString()!.Trim();
+                        string rollid = item["roll_id"].ToString()!.Trim();
+                        string codeperson = item["code_person"].ToString()!.Trim();
+                        string status = item["status"].ToString()!.Trim();
+                        string linea = $"{item["roll_number"]},{productid},{item["product_name"]},{uniquecode},{width},{lenght},{msi},{splice},{rollid},{codeperson},{status}";
+                        sr.WriteLine(linea);
+                    }
+                }
+                //abri el archivo con el programa predeterminado.
+                var psi = new ProcessStartInfo
+                {
+                    FileName = ArchivoPath,
+                    UseShellExecute = true
+                };
+                Process.Start(psi);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al crear el txt de rollos cortados...: " + ex.Message);
+                return false;
+            } 
         }
     }
 }

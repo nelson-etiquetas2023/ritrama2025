@@ -16,7 +16,13 @@
     <Compile Update="Forms\Otros\Frm_AddNew.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\Otros\Frm_AprobarOC.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\Otros\Frm_descriptionPalet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Otros\frm_oneparameter.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\Otros\ReportsViewer.cs">
@@ -36,5 +42,8 @@
     <None Update="Reports\DsConduce.xsd">
       <SubType>Designer</SubType>
     </None>
+    <EmbeddedResource Update="Reports\Production\DsProduccion.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

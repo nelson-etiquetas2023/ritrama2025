@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Ritrama2025.Models;
 using System.Data;
+using System.Drawing.Imaging.Effects;
 
 namespace Ritrama2025.Services
 {
@@ -125,6 +126,69 @@ namespace Ritrama2025.Services
                 ErrorMsg = ex.Message;
                 MessageBox.Show("Error al guardar la entidad de camion: " + ErrorMsg);
             }
+        }
+        public bool DocumentCheckWriteOC(DocumentCheckOC doc)
+        {
+            try
+            {
+                SqlConnection conn = new(StringConnex);
+                conn.Open();
+                SqlCommand comando = new()
+                {
+                    Connection = conn,
+                    CommandType = CommandType.Text,
+                    CommandText = "update orden_corte set PersonCheck=@p2,Orden_Servicio=@p3,Orden_Trabajo=@p4,notes=@p5,Fecha_Autorize=@p6 where numero=@p1"
+                };
+                comando.Parameters.AddWithValue("@p1", doc.OrdenCorte);
+                comando.Parameters.AddWithValue("@p2", doc.PersonCheck);
+                comando.Parameters.AddWithValue("@p3", doc.Orden_Servicio);
+                comando.Parameters.AddWithValue("@p4", doc.Orden_Trabajo);
+                comando.Parameters.AddWithValue("@p5", doc.Observaciones);
+                comando.Parameters.AddWithValue("@p6", doc.FechaCheck);
+                comando.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al tratar de aprobar el documento de orden de corte...: codigo error :" + ex.Message);
+                return false;
+            }
+        }
+        public DocumentCheckOC DocumentCheckReadOC(string oc) 
+        {
+            DocumentCheckOC document = new();
+            
+            try
+            {
+                using SqlConnection conn = new(StringConnex);
+                conn.Open();
+                SqlCommand comando = new()
+                {
+                    Connection = conn,
+                    CommandType = CommandType.Text,
+                    CommandText = "select PersonCheck,Orden_Servicio,Orden_Trabajo,notes,Fecha_Autorize from orden_corte where numero=@p1"
+                };
+                comando.Parameters.AddWithValue("@p1", oc);
+                SqlDataReader dr = comando.ExecuteReader();
+                while (dr.Read()) 
+                {
+                    document = new() 
+                    {
+                        PersonCheck = dr.GetString(dr.GetOrdinal("PersonCheck")),
+                        Orden_Servicio = dr.GetString(dr.GetOrdinal("Orden_Servicio")),
+                        Orden_Trabajo = dr.GetString(dr.GetOrdinal("Orden_Trabajo")),
+                        Observaciones = dr.GetString(dr.GetOrdinal("notes")),
+                        FechaCheck = dr.GetDateTime(dr.GetOrdinal("Fecha_Autorize"))
+                    };
+                }
+                return document;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al tratar de leer el documento aprobado de orden de corte...: codigo error :" + ex.Message);
+                return document;   
+            }
+
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.Data.SqlClient;
 using Microsoft.Reporting.WinForms;
 using Ritrama2025.Forms.Otros;
 using Ritrama2025.Reports;
@@ -21,6 +22,74 @@ namespace Ritrama2025.Services
             }
         }
 
+        public void Reporte_OrdenCorte(string numeroOC,Form form,string ReportName,string TitleReport) 
+        {
+            DataTable dt = new();
+            try
+            {
+                //Catga de los datos
+                
+                using (SqlConnection conn = new(StringConnex))
+                {
+                    SqlCommand comando = new()
+                    {
+                        Connection = conn,
+                        CommandType = CommandType.Text,
+                        CommandText = "select numero,fecha,fecha_produccion,product_id from orden_corte where numero=@numero_oc"
+                    };
+                    conn.Open();
+                    comando.Parameters.Add(new SqlParameter("@numero_oc", SqlDbType.NVarChar) { Value = numeroOC });
+                    comando.ExecuteNonQuery();
+                 
+                    SqlDataAdapter da = new(comando);
+                    da.Fill(dt);
+                }
+                //Creacion del reporte.
+                try
+                {
+                    ReportsViewer report = new()
+                    {
+                        Text = TitleReport,
+                        Width = 1130,
+                        Height = 780,
+                        MdiParent = form.MdiParent,
+                        StartPosition = FormStartPosition.CenterScreen
+                        
+                    };
+                    report.reportViewer1.ProcessingMode = ProcessingMode.Local;
+                    report.reportViewer1.LocalReport.ReportPath = GetPathApplication(ReportName,R.PATH_REPORTS.REPORTS_PRODUCTION);
+                    //configuracion de la pagina.
+                    PageSettings pageSettings = new()
+                    {
+                        PaperSize = new PaperSize("Letter", 1100, 850), //A4-carta.
+                        Landscape = true,
+                        Margins = new Margins(0,0,0,0),
+                    };
+                    report.reportViewer1.SetPageSettings(pageSettings);
+                    //parametros del reporte.
+                    ReportParameter[] param = [new ReportParameter("numero_oc", numeroOC)];
+                    
+                    //Configura el origen de los datos.
+
+                    ReportDataSource rds = new("Dataset1",dt);
+                    report.reportViewer1.LocalReport.DataSources.Clear();
+                    report.reportViewer1.LocalReport.DataSources.Add(rds);
+
+
+                    report.reportViewer1.LocalReport.SetParameters(param);
+                    report.reportViewer1.Refresh();
+                    report.Show();
+                }
+                catch (ReportViewerException ex)
+                {
+                    MessageBox.Show("Error al cargar el reporte. codigo error: " + ex.Message);   
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al generar el reporte de la orden de corte...codigo error: " + ex.Message);
+            }
+        }
         public void ReporteConduce_conPrecio(string conduce, Form form,string ReportName,string TitleReport)
         {
             DataSet ds = new();
@@ -53,7 +122,7 @@ namespace Ritrama2025.Services
                 MdiParent = form.MdiParent,
             };
             reports.reportViewer1.ProcessingMode = ProcessingMode.Local;
-            reports.reportViewer1.LocalReport.ReportPath = GetPathApplication(ReportName);
+            reports.reportViewer1.LocalReport.ReportPath = GetPathApplication(ReportName,R.PATH_REPORTS.REPORTS_DESPACHO);
             //creo un objeto del tipo PageSettings para configurar la pagina a imprimir.
             PageSettings pageSettings = new()
             {
@@ -103,7 +172,7 @@ namespace Ritrama2025.Services
             };
             string ReportName = "Picking-List.rdlc";
             reports.reportViewer1.ProcessingMode = ProcessingMode.Local;
-            reports.reportViewer1.LocalReport.ReportPath = GetPathApplication(ReportName);
+            reports.reportViewer1.LocalReport.ReportPath = GetPathApplication(ReportName, R.PATH_REPORTS.REPORTS_DESPACHO);
             //creo un objeto del tipo PageSettings para configurar la pagina a imprimir.
             PageSettings pageSettings = new()
             {
@@ -150,7 +219,7 @@ namespace Ritrama2025.Services
             };
             string ReportName = "RptDetalle-Paleta.rdlc";
             reports.reportViewer1.ProcessingMode = ProcessingMode.Local;
-            reports.reportViewer1.LocalReport.ReportPath = GetPathApplication(ReportName);
+            reports.reportViewer1.LocalReport.ReportPath = GetPathApplication(ReportName, R.PATH_REPORTS.REPORTS_DESPACHO);
             //creo un objeto del tipo PageSettings para configurar la pagina a imprimir.
             PageSettings pageSettings = new()
             {
@@ -167,10 +236,10 @@ namespace Ritrama2025.Services
             reports.reportViewer1.RefreshReport();
             reports.Show();
         }
-        private static string GetPathApplication(string ReportName) 
+        private static string GetPathApplication(string ReportName,string folderNameReport) 
         {
             string AppDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string ReportsFolder = Path.Combine(AppDirectory, "Reports");
+            string ReportsFolder = Path.Combine(AppDirectory, folderNameReport);
             if (!Directory.Exists(ReportsFolder)) 
             {
                 Directory.CreateDirectory(ReportsFolder);

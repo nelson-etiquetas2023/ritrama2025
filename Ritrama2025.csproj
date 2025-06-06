@@ -7,9 +7,19 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Reports\Production\DsProduccion.xsd" />
+    <None Remove="Reports\Production\ReporteOC.rdlc" />
     <None Remove="Reports\RptConduceConPrecio.rdlc" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\Production\DsProduccion.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DsProduccion.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Production\ReporteOC.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\RptConduceConPrecio.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -34,6 +44,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>DsConduce.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Production\DsProduccion.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DsProduccion.xsd</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -8,7 +8,7 @@ namespace Ritrama2025.Models
         public double Length { get; set; }
         public double Msi { get; set; }
         public double Orden { get; set; }
-        public double CodePerson { get; set; }
+        public string CodePerson { get; set; } = null!;
 
 
 

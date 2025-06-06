@@ -41,7 +41,7 @@ namespace Ritrama2025.Models
 
         public string Ubic { get; set; } = null!;
 
-        public string rollid_oculto { get; set; } = null!;
+        public string Rollid_oculto { get; set; } = null!;
 
         public string No_paleta { get; set; } = null!;
     }

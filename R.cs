@@ -19,5 +19,19 @@ namespace Ritrama2025
 
             public const double FACTOR_MM_PULGADAS = 0.0393701;
         }
+        public class PATH_REPORTS 
+        {
+            public const string REPORTS_DESPACHO = @"Reports";
+            public const string REPORTS_PRODUCTION = @"Reports\Production\";
+        }
+        public class REPORT_NAME 
+        {
+            public const string REPORT_OC = @"ReporteOC.rdlc";
+        }
+        public class REPORT_TITLE 
+        {
+            public const string REPORT_OC = @"REPORTE DE ORDEN DE CORTE.";
+        }
+        
     }
 }

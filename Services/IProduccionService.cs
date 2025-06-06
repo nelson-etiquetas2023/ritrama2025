@@ -7,5 +7,8 @@ namespace Ritrama2025.Services
     {
         Task<DataSet> LoadDataOC();
         void GuardarEncabezadoOrdenCorte(Orden OrdenCorte);
+        void GuardarCortes(List<Corte> cortes);
+        void GuardarRollos(List<RolloCortado> rollos);
+        bool UpdateStatusDocumentOC(int stepchange,string oc);
     }
 }
