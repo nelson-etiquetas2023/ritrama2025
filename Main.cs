@@ -25,6 +25,11 @@ namespace Ritrama2025
             OpenFormSingleInstance<FrmOrdenCorte>("OC");
         }
 
+        private void bot_recepciones_Click(object sender, EventArgs e)
+        {
+            OpenFormSingleInstance<FrmMateriaPrima>("MT");
+        }
+
         private void OpenFormSingleInstance<T>(string nameForm) where T : Form, new()
         {
             var existingForm = Application.OpenForms.OfType<T>().FirstOrDefault();
@@ -58,7 +63,17 @@ namespace Ritrama2025
                     };
                     frmdespacho.Show();
                 }
+                if (nameForm == "MT")
+                {
+                    FrmMateriaPrima formMT = new()
+                    {
+                        MdiParent = this,
+                        StartPosition = FormStartPosition.Manual,
+                        Location = new Point { X = Location.X + 20, Y = Location.Y + 20 }
+                    };
+                    formMT.Show();
+                }
             }
-        }     
+        }
     }
 }
