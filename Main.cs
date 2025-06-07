@@ -25,7 +25,7 @@ namespace Ritrama2025
             OpenFormSingleInstance<FrmOrdenCorte>("OC");
         }
 
-        private void bot_recepciones_Click(object sender, EventArgs e)
+        private void Bot_recepciones_Click(object sender, EventArgs e)
         {
             OpenFormSingleInstance<FrmMateriaPrima>("MT");
         }

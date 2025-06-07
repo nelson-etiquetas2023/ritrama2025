@@ -35,49 +35,49 @@
             toolStripButton3 = new ToolStripButton();
             toolStripButton4 = new ToolStripButton();
             label1 = new Label();
-            textBox1 = new TextBox();
+            txt_numeroOrden = new TextBox();
             label2 = new Label();
-            dateTimePicker1 = new DateTimePicker();
-            textBox2 = new TextBox();
+            txt_fecha_recepcion = new DateTimePicker();
+            txt_prov_Id = new TextBox();
             label3 = new Label();
-            textBox3 = new TextBox();
-            button1 = new Button();
-            textBox4 = new TextBox();
-            textBox5 = new TextBox();
+            txt_nombre_prov = new TextBox();
+            btn_ProvBuscar = new Button();
+            txt_transport_name = new TextBox();
+            txt_transport_id = new TextBox();
             label4 = new Label();
-            button2 = new Button();
-            textBox6 = new TextBox();
+            btn_TransportBuscar = new Button();
+            txt_OrdenCompra = new TextBox();
             label5 = new Label();
-            textBox7 = new TextBox();
+            txt_recepcionista = new TextBox();
             label6 = new Label();
-            button3 = new Button();
-            textBox8 = new TextBox();
+            btn_RecepBuscar = new Button();
+            txt_guia = new TextBox();
             label7 = new Label();
             groupBox1 = new GroupBox();
-            radioButton2 = new RadioButton();
-            radioButton1 = new RadioButton();
+            rad_DocumentProcess = new RadioButton();
+            rad_OrdenAbierta = new RadioButton();
             GridItems = new DataGridView();
-            richTextBox1 = new RichTextBox();
+            txt_notas = new RichTextBox();
             label8 = new Label();
-            textBox9 = new TextBox();
+            txt_total_cantidad = new TextBox();
             label9 = new Label();
-            button4 = new Button();
-            button5 = new Button();
-            textBox10 = new TextBox();
+            btn_addRows = new Button();
+            btn_deleteRows = new Button();
+            txt_lote = new TextBox();
             label10 = new Label();
-            textBox11 = new TextBox();
+            txt_embarque = new TextBox();
             label11 = new Label();
-            dateTimePicker2 = new DateTimePicker();
+            txt_fecha_produccion = new DateTimePicker();
             label12 = new Label();
-            button6 = new Button();
+            btn_OrdenBuscar = new Button();
             panel1 = new Panel();
             label14 = new Label();
             pictureBox6 = new PictureBox();
             label13 = new Label();
-            checkBox1 = new CheckBox();
-            textBox12 = new TextBox();
+            chk_ = new CheckBox();
+            txt_data_document = new TextBox();
             label15 = new Label();
-            button7 = new Button();
+            btn_AppMovil = new Button();
             toolStrip1.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)GridItems).BeginInit();
@@ -139,13 +139,13 @@
             label1.TabIndex = 1;
             label1.Text = "Numero Orden :";
             // 
-            // textBox1
+            // txt_numeroOrden
             // 
-            textBox1.Location = new Point(12, 123);
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new Size(160, 23);
-            textBox1.TabIndex = 2;
+            txt_numeroOrden.Location = new Point(12, 123);
+            txt_numeroOrden.Name = "txt_numeroOrden";
+            txt_numeroOrden.ReadOnly = true;
+            txt_numeroOrden.Size = new Size(160, 23);
+            txt_numeroOrden.TabIndex = 2;
             // 
             // label2
             // 
@@ -156,21 +156,21 @@
             label2.TabIndex = 3;
             label2.Text = "Fecha Recepcion :";
             // 
-            // dateTimePicker1
+            // txt_fecha_recepcion
             // 
-            dateTimePicker1.Enabled = false;
-            dateTimePicker1.Location = new Point(12, 170);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(217, 23);
-            dateTimePicker1.TabIndex = 4;
+            txt_fecha_recepcion.Enabled = false;
+            txt_fecha_recepcion.Location = new Point(12, 170);
+            txt_fecha_recepcion.Name = "txt_fecha_recepcion";
+            txt_fecha_recepcion.Size = new Size(217, 23);
+            txt_fecha_recepcion.TabIndex = 4;
             // 
-            // textBox2
+            // txt_prov_Id
             // 
-            textBox2.Location = new Point(459, 123);
-            textBox2.Name = "textBox2";
-            textBox2.ReadOnly = true;
-            textBox2.Size = new Size(64, 23);
-            textBox2.TabIndex = 6;
+            txt_prov_Id.Location = new Point(459, 123);
+            txt_prov_Id.Name = "txt_prov_Id";
+            txt_prov_Id.ReadOnly = true;
+            txt_prov_Id.Size = new Size(64, 23);
+            txt_prov_Id.TabIndex = 6;
             // 
             // label3
             // 
@@ -181,38 +181,38 @@
             label3.TabIndex = 5;
             label3.Text = "Datos del Proveedor :";
             // 
-            // textBox3
+            // txt_nombre_prov
             // 
-            textBox3.Location = new Point(529, 123);
-            textBox3.Name = "textBox3";
-            textBox3.ReadOnly = true;
-            textBox3.Size = new Size(318, 23);
-            textBox3.TabIndex = 7;
+            txt_nombre_prov.Location = new Point(529, 123);
+            txt_nombre_prov.Name = "txt_nombre_prov";
+            txt_nombre_prov.ReadOnly = true;
+            txt_nombre_prov.Size = new Size(318, 23);
+            txt_nombre_prov.TabIndex = 7;
             // 
-            // button1
+            // btn_ProvBuscar
             // 
-            button1.Location = new Point(853, 123);
-            button1.Name = "button1";
-            button1.Size = new Size(46, 23);
-            button1.TabIndex = 8;
-            button1.Text = "...";
-            button1.UseVisualStyleBackColor = true;
+            btn_ProvBuscar.Location = new Point(853, 123);
+            btn_ProvBuscar.Name = "btn_ProvBuscar";
+            btn_ProvBuscar.Size = new Size(46, 23);
+            btn_ProvBuscar.TabIndex = 8;
+            btn_ProvBuscar.Text = "...";
+            btn_ProvBuscar.UseVisualStyleBackColor = true;
             // 
-            // textBox4
+            // txt_transport_name
             // 
-            textBox4.Location = new Point(529, 172);
-            textBox4.Name = "textBox4";
-            textBox4.ReadOnly = true;
-            textBox4.Size = new Size(318, 23);
-            textBox4.TabIndex = 11;
+            txt_transport_name.Location = new Point(529, 172);
+            txt_transport_name.Name = "txt_transport_name";
+            txt_transport_name.ReadOnly = true;
+            txt_transport_name.Size = new Size(318, 23);
+            txt_transport_name.TabIndex = 11;
             // 
-            // textBox5
+            // txt_transport_id
             // 
-            textBox5.Location = new Point(459, 173);
-            textBox5.Name = "textBox5";
-            textBox5.ReadOnly = true;
-            textBox5.Size = new Size(64, 23);
-            textBox5.TabIndex = 10;
+            txt_transport_id.Location = new Point(459, 173);
+            txt_transport_id.Name = "txt_transport_id";
+            txt_transport_id.ReadOnly = true;
+            txt_transport_id.Size = new Size(64, 23);
+            txt_transport_id.TabIndex = 10;
             // 
             // label4
             // 
@@ -223,22 +223,22 @@
             label4.TabIndex = 9;
             label4.Text = "Transportista :";
             // 
-            // button2
+            // btn_TransportBuscar
             // 
-            button2.Location = new Point(853, 172);
-            button2.Name = "button2";
-            button2.Size = new Size(46, 23);
-            button2.TabIndex = 12;
-            button2.Text = "...";
-            button2.UseVisualStyleBackColor = true;
+            btn_TransportBuscar.Location = new Point(853, 172);
+            btn_TransportBuscar.Name = "btn_TransportBuscar";
+            btn_TransportBuscar.Size = new Size(46, 23);
+            btn_TransportBuscar.TabIndex = 12;
+            btn_TransportBuscar.Text = "...";
+            btn_TransportBuscar.UseVisualStyleBackColor = true;
             // 
-            // textBox6
+            // txt_OrdenCompra
             // 
-            textBox6.Location = new Point(235, 123);
-            textBox6.Name = "textBox6";
-            textBox6.ReadOnly = true;
-            textBox6.Size = new Size(217, 23);
-            textBox6.TabIndex = 14;
+            txt_OrdenCompra.Location = new Point(235, 123);
+            txt_OrdenCompra.Name = "txt_OrdenCompra";
+            txt_OrdenCompra.ReadOnly = true;
+            txt_OrdenCompra.Size = new Size(217, 23);
+            txt_OrdenCompra.TabIndex = 14;
             // 
             // label5
             // 
@@ -249,13 +249,13 @@
             label5.TabIndex = 13;
             label5.Text = "Orden de Compra :";
             // 
-            // textBox7
+            // txt_recepcionista
             // 
-            textBox7.Location = new Point(397, 232);
-            textBox7.Name = "textBox7";
-            textBox7.ReadOnly = true;
-            textBox7.Size = new Size(168, 23);
-            textBox7.TabIndex = 16;
+            txt_recepcionista.Location = new Point(397, 232);
+            txt_recepcionista.Name = "txt_recepcionista";
+            txt_recepcionista.ReadOnly = true;
+            txt_recepcionista.Size = new Size(168, 23);
+            txt_recepcionista.TabIndex = 16;
             // 
             // label6
             // 
@@ -266,22 +266,22 @@
             label6.TabIndex = 15;
             label6.Text = "Recepcionista :";
             // 
-            // button3
+            // btn_RecepBuscar
             // 
-            button3.Location = new Point(567, 233);
-            button3.Name = "button3";
-            button3.Size = new Size(46, 23);
-            button3.TabIndex = 17;
-            button3.Text = "...";
-            button3.UseVisualStyleBackColor = true;
+            btn_RecepBuscar.Location = new Point(567, 233);
+            btn_RecepBuscar.Name = "btn_RecepBuscar";
+            btn_RecepBuscar.Size = new Size(46, 23);
+            btn_RecepBuscar.TabIndex = 17;
+            btn_RecepBuscar.Text = "...";
+            btn_RecepBuscar.UseVisualStyleBackColor = true;
             // 
-            // textBox8
+            // txt_guia
             // 
-            textBox8.Location = new Point(12, 232);
-            textBox8.Name = "textBox8";
-            textBox8.ReadOnly = true;
-            textBox8.Size = new Size(123, 23);
-            textBox8.TabIndex = 19;
+            txt_guia.Location = new Point(12, 232);
+            txt_guia.Name = "txt_guia";
+            txt_guia.ReadOnly = true;
+            txt_guia.Size = new Size(123, 23);
+            txt_guia.TabIndex = 19;
             // 
             // label7
             // 
@@ -294,8 +294,8 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(radioButton2);
-            groupBox1.Controls.Add(radioButton1);
+            groupBox1.Controls.Add(rad_DocumentProcess);
+            groupBox1.Controls.Add(rad_OrdenAbierta);
             groupBox1.Location = new Point(740, 201);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(159, 68);
@@ -303,27 +303,27 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Estado del Documento";
             // 
-            // radioButton2
+            // rad_DocumentProcess
             // 
-            radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(8, 38);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(146, 19);
-            radioButton2.TabIndex = 1;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "Documento Procesado";
-            radioButton2.UseVisualStyleBackColor = true;
+            rad_DocumentProcess.AutoSize = true;
+            rad_DocumentProcess.Location = new Point(8, 38);
+            rad_DocumentProcess.Name = "rad_DocumentProcess";
+            rad_DocumentProcess.Size = new Size(146, 19);
+            rad_DocumentProcess.TabIndex = 1;
+            rad_DocumentProcess.TabStop = true;
+            rad_DocumentProcess.Text = "Documento Procesado";
+            rad_DocumentProcess.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // rad_OrdenAbierta
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(8, 22);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(99, 19);
-            radioButton1.TabIndex = 0;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Orden Abierta";
-            radioButton1.UseVisualStyleBackColor = true;
+            rad_OrdenAbierta.AutoSize = true;
+            rad_OrdenAbierta.Location = new Point(8, 22);
+            rad_OrdenAbierta.Name = "rad_OrdenAbierta";
+            rad_OrdenAbierta.Size = new Size(99, 19);
+            rad_OrdenAbierta.TabIndex = 0;
+            rad_OrdenAbierta.TabStop = true;
+            rad_OrdenAbierta.Text = "Orden Abierta";
+            rad_OrdenAbierta.UseVisualStyleBackColor = true;
             // 
             // GridItems
             // 
@@ -333,14 +333,14 @@
             GridItems.Size = new Size(1033, 216);
             GridItems.TabIndex = 21;
             // 
-            // richTextBox1
+            // txt_notas
             // 
-            richTextBox1.Location = new Point(12, 522);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.ReadOnly = true;
-            richTextBox1.Size = new Size(440, 122);
-            richTextBox1.TabIndex = 22;
-            richTextBox1.Text = "";
+            txt_notas.Location = new Point(12, 522);
+            txt_notas.Name = "txt_notas";
+            txt_notas.ReadOnly = true;
+            txt_notas.Size = new Size(440, 122);
+            txt_notas.TabIndex = 22;
+            txt_notas.Text = "";
             // 
             // label8
             // 
@@ -351,13 +351,13 @@
             label8.TabIndex = 23;
             label8.Text = "Notas del Documento";
             // 
-            // textBox9
+            // txt_total_cantidad
             // 
-            textBox9.Location = new Point(899, 504);
-            textBox9.Name = "textBox9";
-            textBox9.ReadOnly = true;
-            textBox9.Size = new Size(146, 23);
-            textBox9.TabIndex = 25;
+            txt_total_cantidad.Location = new Point(899, 504);
+            txt_total_cantidad.Name = "txt_total_cantidad";
+            txt_total_cantidad.ReadOnly = true;
+            txt_total_cantidad.Size = new Size(146, 23);
+            txt_total_cantidad.TabIndex = 25;
             // 
             // label9
             // 
@@ -368,31 +368,31 @@
             label9.TabIndex = 24;
             label9.Text = "Total Cantidad : ";
             // 
-            // button4
+            // btn_addRows
             // 
-            button4.Location = new Point(1051, 275);
-            button4.Name = "button4";
-            button4.Size = new Size(94, 23);
-            button4.TabIndex = 26;
-            button4.Text = "Agregar";
-            button4.UseVisualStyleBackColor = true;
+            btn_addRows.Location = new Point(1051, 275);
+            btn_addRows.Name = "btn_addRows";
+            btn_addRows.Size = new Size(94, 23);
+            btn_addRows.TabIndex = 26;
+            btn_addRows.Text = "Agregar";
+            btn_addRows.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // btn_deleteRows
             // 
-            button5.Location = new Point(1051, 304);
-            button5.Name = "button5";
-            button5.Size = new Size(94, 23);
-            button5.TabIndex = 27;
-            button5.Text = "Borrar";
-            button5.UseVisualStyleBackColor = true;
+            btn_deleteRows.Location = new Point(1051, 304);
+            btn_deleteRows.Name = "btn_deleteRows";
+            btn_deleteRows.Size = new Size(94, 23);
+            btn_deleteRows.TabIndex = 27;
+            btn_deleteRows.Text = "Borrar";
+            btn_deleteRows.UseVisualStyleBackColor = true;
             // 
-            // textBox10
+            // txt_lote
             // 
-            textBox10.Location = new Point(141, 232);
-            textBox10.Name = "textBox10";
-            textBox10.ReadOnly = true;
-            textBox10.Size = new Size(123, 23);
-            textBox10.TabIndex = 29;
+            txt_lote.Location = new Point(141, 232);
+            txt_lote.Name = "txt_lote";
+            txt_lote.ReadOnly = true;
+            txt_lote.Size = new Size(123, 23);
+            txt_lote.TabIndex = 29;
             // 
             // label10
             // 
@@ -403,14 +403,14 @@
             label10.TabIndex = 28;
             label10.Text = "Numero Lote :";
             // 
-            // textBox11
+            // txt_embarque
             // 
-            textBox11.Location = new Point(268, 232);
-            textBox11.Name = "textBox11";
-            textBox11.ReadOnly = true;
-            textBox11.Size = new Size(123, 23);
-            textBox11.TabIndex = 31;
-            textBox11.UseWaitCursor = true;
+            txt_embarque.Location = new Point(268, 232);
+            txt_embarque.Name = "txt_embarque";
+            txt_embarque.ReadOnly = true;
+            txt_embarque.Size = new Size(123, 23);
+            txt_embarque.TabIndex = 31;
+            txt_embarque.UseWaitCursor = true;
             // 
             // label11
             // 
@@ -422,13 +422,13 @@
             label11.Text = "Numero Embarque :";
             label11.UseWaitCursor = true;
             // 
-            // dateTimePicker2
+            // txt_fecha_produccion
             // 
-            dateTimePicker2.Enabled = false;
-            dateTimePicker2.Location = new Point(235, 173);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(217, 23);
-            dateTimePicker2.TabIndex = 33;
+            txt_fecha_produccion.Enabled = false;
+            txt_fecha_produccion.Location = new Point(235, 173);
+            txt_fecha_produccion.Name = "txt_fecha_produccion";
+            txt_fecha_produccion.Size = new Size(217, 23);
+            txt_fecha_produccion.TabIndex = 33;
             // 
             // label12
             // 
@@ -439,14 +439,14 @@
             label12.TabIndex = 32;
             label12.Text = "Fecha Produccion :";
             // 
-            // button6
+            // btn_OrdenBuscar
             // 
-            button6.Location = new Point(178, 122);
-            button6.Name = "button6";
-            button6.Size = new Size(46, 23);
-            button6.TabIndex = 34;
-            button6.Text = "...";
-            button6.UseVisualStyleBackColor = true;
+            btn_OrdenBuscar.Location = new Point(178, 122);
+            btn_OrdenBuscar.Name = "btn_OrdenBuscar";
+            btn_OrdenBuscar.Size = new Size(46, 23);
+            btn_OrdenBuscar.TabIndex = 34;
+            btn_OrdenBuscar.Text = "...";
+            btn_OrdenBuscar.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -490,23 +490,23 @@
             label13.TabIndex = 0;
             label13.Text = "RECEPCION DE MATERIA PRIMA";
             // 
-            // checkBox1
+            // chk_
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(908, 625);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(137, 19);
-            checkBox1.TabIndex = 37;
-            checkBox1.Text = "Documento Anulado";
-            checkBox1.UseVisualStyleBackColor = true;
+            chk_.AutoSize = true;
+            chk_.Location = new Point(908, 625);
+            chk_.Name = "chk_";
+            chk_.Size = new Size(137, 19);
+            chk_.TabIndex = 37;
+            chk_.Text = "Documento Anulado";
+            chk_.UseVisualStyleBackColor = true;
             // 
-            // textBox12
+            // txt_data_document
             // 
-            textBox12.Location = new Point(899, 533);
-            textBox12.Name = "textBox12";
-            textBox12.ReadOnly = true;
-            textBox12.Size = new Size(146, 23);
-            textBox12.TabIndex = 39;
+            txt_data_document.Location = new Point(899, 533);
+            txt_data_document.Name = "txt_data_document";
+            txt_data_document.ReadOnly = true;
+            txt_data_document.Size = new Size(146, 23);
+            txt_data_document.TabIndex = 39;
             // 
             // label15
             // 
@@ -517,58 +517,58 @@
             label15.TabIndex = 38;
             label15.Text = "Datos cierre Documento :";
             // 
-            // button7
+            // btn_AppMovil
             // 
-            button7.Location = new Point(1051, 105);
-            button7.Name = "button7";
-            button7.Size = new Size(94, 23);
-            button7.TabIndex = 40;
-            button7.Text = "App Movil";
-            button7.UseVisualStyleBackColor = true;
+            btn_AppMovil.Location = new Point(1051, 105);
+            btn_AppMovil.Name = "btn_AppMovil";
+            btn_AppMovil.Size = new Size(94, 23);
+            btn_AppMovil.TabIndex = 40;
+            btn_AppMovil.Text = "App Movil";
+            btn_AppMovil.UseVisualStyleBackColor = true;
             // 
             // FrmMateriaPrima
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1157, 656);
-            Controls.Add(button7);
-            Controls.Add(textBox12);
+            Controls.Add(btn_AppMovil);
+            Controls.Add(txt_data_document);
             Controls.Add(label15);
-            Controls.Add(checkBox1);
+            Controls.Add(chk_);
             Controls.Add(panel1);
-            Controls.Add(button6);
-            Controls.Add(dateTimePicker2);
+            Controls.Add(btn_OrdenBuscar);
+            Controls.Add(txt_fecha_produccion);
             Controls.Add(label12);
-            Controls.Add(textBox11);
+            Controls.Add(txt_embarque);
             Controls.Add(label11);
-            Controls.Add(textBox10);
+            Controls.Add(txt_lote);
             Controls.Add(label10);
-            Controls.Add(button5);
-            Controls.Add(button4);
-            Controls.Add(textBox9);
+            Controls.Add(btn_deleteRows);
+            Controls.Add(btn_addRows);
+            Controls.Add(txt_total_cantidad);
             Controls.Add(label9);
             Controls.Add(label8);
-            Controls.Add(richTextBox1);
+            Controls.Add(txt_notas);
             Controls.Add(GridItems);
             Controls.Add(groupBox1);
-            Controls.Add(textBox8);
+            Controls.Add(txt_guia);
             Controls.Add(label7);
-            Controls.Add(button3);
-            Controls.Add(textBox7);
+            Controls.Add(btn_RecepBuscar);
+            Controls.Add(txt_recepcionista);
             Controls.Add(label6);
-            Controls.Add(textBox6);
+            Controls.Add(txt_OrdenCompra);
             Controls.Add(label5);
-            Controls.Add(button2);
-            Controls.Add(textBox4);
-            Controls.Add(textBox5);
+            Controls.Add(btn_TransportBuscar);
+            Controls.Add(txt_transport_name);
+            Controls.Add(txt_transport_id);
             Controls.Add(label4);
-            Controls.Add(button1);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
+            Controls.Add(btn_ProvBuscar);
+            Controls.Add(txt_nombre_prov);
+            Controls.Add(txt_prov_Id);
             Controls.Add(label3);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(txt_fecha_recepcion);
             Controls.Add(label2);
-            Controls.Add(textBox1);
+            Controls.Add(txt_numeroOrden);
             Controls.Add(label1);
             Controls.Add(toolStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -595,48 +595,48 @@
         private ToolStripButton toolStripButton3;
         private ToolStripButton toolStripButton4;
         private Label label1;
-        private TextBox textBox1;
+        private TextBox txt_numeroOrden;
         private Label label2;
-        private DateTimePicker dateTimePicker1;
-        private TextBox textBox2;
+        private DateTimePicker txt_fecha_recepcion;
+        private TextBox txt_prov_Id;
         private Label label3;
-        private TextBox textBox3;
-        private Button button1;
-        private TextBox textBox4;
-        private TextBox textBox5;
+        private TextBox txt_nombre_prov;
+        private Button btn_ProvBuscar;
+        private TextBox txt_transport_name;
+        private TextBox txt_transport_id;
         private Label label4;
-        private Button button2;
-        private TextBox textBox6;
+        private Button btn_TransportBuscar;
+        private TextBox txt_OrdenCompra;
         private Label label5;
-        private TextBox textBox7;
+        private TextBox txt_recepcionista;
         private Label label6;
-        private Button button3;
-        private TextBox textBox8;
+        private Button btn_RecepBuscar;
+        private TextBox txt_guia;
         private Label label7;
         private GroupBox groupBox1;
-        private RadioButton radioButton2;
-        private RadioButton radioButton1;
+        private RadioButton rad_DocumentProcess;
+        private RadioButton rad_OrdenAbierta;
         private DataGridView GridItems;
-        private RichTextBox richTextBox1;
+        private RichTextBox txt_notas;
         private Label label8;
-        private TextBox textBox9;
+        private TextBox txt_total_cantidad;
         private Label label9;
-        private Button button4;
-        private Button button5;
-        private TextBox textBox10;
+        private Button btn_addRows;
+        private Button btn_deleteRows;
+        private TextBox txt_lote;
         private Label label10;
-        private TextBox textBox11;
+        private TextBox txt_embarque;
         private Label label11;
-        private DateTimePicker dateTimePicker2;
+        private DateTimePicker txt_fecha_produccion;
         private Label label12;
-        private Button button6;
+        private Button btn_OrdenBuscar;
         private Panel panel1;
         private PictureBox pictureBox6;
         private Label label13;
         private Label label14;
-        private CheckBox checkBox1;
-        private TextBox textBox12;
+        private CheckBox chk_;
+        private TextBox txt_data_document;
         private Label label15;
-        private Button button7;
+        private Button btn_AppMovil;
     }
 }

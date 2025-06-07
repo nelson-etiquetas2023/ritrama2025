@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Ritrama2025.Services.MateriaPrima;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
 
 namespace Ritrama2025.Forms
 {
     public partial class FrmMateriaPrima : Form
     {
+        readonly ServiceMateriaPrima servicio = new();
+        public DataSet Ds = new();
+        readonly BindingSource Bs = [];
+
+
         public FrmMateriaPrima()
         {
             InitializeComponent();
@@ -19,6 +18,29 @@ namespace Ritrama2025.Forms
 
         private void FrmMateriaPrima_Load(object sender, EventArgs e)
         {
+            //carga los datos de la base dfe datos.
+            var task = Task.Run(async () =>
+            {
+                return await servicio.LoadData(); 
+            });
+            Ds = task.Result;
+            //Configuracion del BindingSource.
+            Bs.DataSource = Ds;
+            Bs.DataMember = "DtMateria";
+            Bs.Sort = "numero DESC";
+
+
+
+
+            //define las columnas del grid.
+            StyleGridColumns();
+            //trabajar con los enlaces a datos.
+            txt_numeroOrden.DataBindings.Add("Text", Bs, "numero");
+        }
+
+        private void StyleGridColumns() 
+        {
+            GridItems.AutoGenerateColumns = false;
             //Configurar las columnas del detalle de los productos.
             ADD_COLUMN_GRID("product_id", 70, "Product Id.", "product_id", GridItems);
             ADD_COLUMN_GRID("product_name", 200, "Product Name.", "product_name", GridItems);
@@ -33,6 +55,7 @@ namespace Ritrama2025.Forms
             ADD_COLUMN_GRID("cantidad", 65, "Cantidad Pedido", "cantidad", GridItems);
             ADD_COLUMN_GRID("cant_real", 65, "Cantidad Real", "cant_real", GridItems);
         }
+
         private static void ADD_COLUMN_GRID(string name, int size, string title, string field_bd, DataGridView grid)
         {
             DataGridViewTextBoxColumn col = new()

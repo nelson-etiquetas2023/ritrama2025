@@ -149,7 +149,7 @@
             bot_recepciones.Text = "Recepciones";
             bot_recepciones.TextImageRelation = TextImageRelation.ImageBeforeText;
             bot_recepciones.UseVisualStyleBackColor = true;
-            bot_recepciones.Click += bot_recepciones_Click;
+            bot_recepciones.Click += Bot_recepciones_Click;
             // 
             // bot_inventario
             // 
