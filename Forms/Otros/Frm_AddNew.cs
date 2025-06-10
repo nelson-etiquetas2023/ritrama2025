@@ -18,51 +18,53 @@ namespace Ritrama2025.Forms.Otros
             InitializeComponent();
 
         }
-        CommonService service = new();
+        readonly CommonService service = new();
         private void Frm_AddNew_Load(object sender, EventArgs e)
         {
             Titulo.Text = TitleForm;
         }
 
-        private void btn_save_Click(object sender, EventArgs e)
+        private void Btn_save_Click(object sender, EventArgs e)
         {
             try
             {
                 if (NombreEntidad == "Transporte")
                 {
-                    int Consec = Dt.Rows.Count + 1;
+                    Guid ConsecGuid = Guid.NewGuid();
+                    string Consecutivo = ConsecGuid.ToString();
+
                     DataRow dr = Dt.NewRow();
-                    dr["transport_id"] = Consec.ToString();
-                    dr["transport_name"] = txt_name.Text;
+                    dr["transport_id"] = Consecutivo.ToString();
+                    dr["transport_name"] = txt_name.Text.ToUpper();
                     Dt.Rows.Add(dr);
                     //Guardar en Base de Datos.
-                    service.SaveTransportEntity(Consec.ToString(), txt_name.Text);
+                    service.SaveTransportEntity(Consecutivo.ToString(), txt_name.Text.ToUpper());
                     this.Close();
                 }
                 if (NombreEntidad == "Chofer")
                 {
-                    int Consec = Dt.Rows.Count + 1;
+                    Guid ConsecGuid = Guid.NewGuid();
+                    string Consecutivo = ConsecGuid.ToString();
                     DataRow dr = Dt.NewRow();
-                    dr["chofer_id"] = Consec.ToString();
-                    dr["chofer_name"] = txt_name.Text;
+                    dr["chofer_id"] = Consecutivo.ToString();
+                    dr["chofer_name"] = txt_name.Text.ToUpper();
                     Dt.Rows.Add(dr);
                     //Guardar en Base de Datos.
-                    service.SaveChoferEntity(Consec.ToString(), txt_name.Text);
+                    service.SaveChoferEntity(Consecutivo.ToString(), txt_name.Text.ToUpper());
                     this.Close();
                 }
                 if (NombreEntidad == "Camion")
                 {
-                    int Consec = Dt.Rows.Count + 1;
+                    Guid ConsecGuid = Guid.NewGuid();
+                    string Consecutivo = ConsecGuid.ToString();
                     DataRow dr = Dt.NewRow();
-                    dr["placas_id"] = Consec.ToString();
-                    dr["camion_name"] = txt_name.Text;
+                    dr["placas_id"] = Consecutivo.ToString();
+                    dr["camion_name"] = txt_name.Text.ToUpper();
                     Dt.Rows.Add(dr);
                     //Guardar en Base de Datos.
-                    service.SaveCamionEntity(Consec.ToString(), txt_name.Text);
+                    service.SaveCamionEntity(Consecutivo.ToString(), txt_name.Text.ToUpper());
                     this.Close();
                 }
-
-
             }
             catch (SqlException Ex)
             {
@@ -70,7 +72,7 @@ namespace Ritrama2025.Forms.Otros
             }
         }
 
-        private void btn_cancel_Click(object sender, EventArgs e)
+        private void Btn_cancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }

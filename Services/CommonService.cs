@@ -83,6 +83,73 @@ namespace Ritrama2025.Services
                 MessageBox.Show("Error al guardar la entidad de transporte: " + ErrorMsg);
             }
         }
+
+        public void DeleteTransportEntity(string Id)
+        {
+            using SqlConnection conn = new(StringConnex);
+            SqlCommand comando = new()
+            {
+                Connection = conn,
+                CommandType = CommandType.Text,
+                CommandText = "DELETE FROM transporte WHERE transport_id=@p1"
+            };
+            comando.Parameters.Add(new SqlParameter("@p1", SqlDbType.NVarChar) { Value = Id });
+            try
+            {
+                conn.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                ErrorMsg = ex.Message;
+                MessageBox.Show("Error al eliminar la entidad de transporte: " + ErrorMsg);
+            }
+        }
+
+        public void DeleteChoferEntity(string Id)
+        {
+            using SqlConnection conn = new(StringConnex);
+            SqlCommand comando = new()
+            {
+                Connection = conn,
+                CommandType = CommandType.Text,
+                CommandText = "DELETE FROM chofer WHERE chofer_id=@p1"
+            };
+            comando.Parameters.Add(new SqlParameter("@p1", SqlDbType.NVarChar) { Value = Id });
+            try
+            {
+                conn.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                ErrorMsg = ex.Message;
+                MessageBox.Show("Error al eliminar la entidad de chofer: " + ErrorMsg);
+            }
+        }
+
+        public void DeleteCamionEntity(string Id)
+        {
+            using SqlConnection conn = new(StringConnex);
+            SqlCommand comando = new()
+            {
+                Connection = conn,
+                CommandType = CommandType.Text,
+                CommandText = "DELETE FROM camion WHERE placas_id=@p1"
+            };
+            comando.Parameters.Add(new SqlParameter("@p1", SqlDbType.NVarChar) { Value = Id });
+            try
+            {
+                conn.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                ErrorMsg = ex.Message;
+                MessageBox.Show("Error al eliminar la entidad de camion: " + ErrorMsg);
+            }
+        }
+
         public void SaveChoferEntity(string Id, string Name)
         {
             using SqlConnection conn = new(StringConnex);

@@ -1,4 +1,5 @@
 ﻿using Ritrama2025.Forms.Otros;
+using Ritrama2025.Services;
 using System.ComponentModel;
 using System.Data;
 
@@ -11,6 +12,8 @@ namespace Ritrama2025.Forms.Seleccion
         {
             InitializeComponent();
         }
+        readonly CommonService service = new();
+
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DataTable DtItems { get; set; } = null!;
 
@@ -116,9 +119,9 @@ namespace Ritrama2025.Forms.Seleccion
             this.Close();
         }
 
-        private void btn_add_new_Click(object sender, EventArgs e)
+        private void Btn_add_new_Click(object sender, EventArgs e)
         {
-            if (Titulo == "Transporte") 
+            if (Titulo == "Transporte")
             {
                 Frm_AddNew frmNew = new()
                 {
@@ -130,7 +133,7 @@ namespace Ritrama2025.Forms.Seleccion
                 frmNew.ShowDialog();
                 DtItems = frmNew.Dt;
             }
-            if (Titulo == "Chofer") 
+            if (Titulo == "Chofer")
             {
                 Frm_AddNew frmNew = new()
                 {
@@ -141,7 +144,7 @@ namespace Ritrama2025.Forms.Seleccion
                 frmNew.ShowDialog();
                 DtItems = frmNew.Dt;
             }
-            if (Titulo == "Camion") 
+            if (Titulo == "Camion")
             {
                 Frm_AddNew frmNew = new()
                 {
@@ -151,6 +154,35 @@ namespace Ritrama2025.Forms.Seleccion
                 };
                 frmNew.ShowDialog();
                 DtItems = frmNew.Dt;
+            }
+        }
+
+        private void Btn_delete_row_Click(object sender, EventArgs e)
+        {
+            //procedimiento para eliminar un registro seleccionado.
+            if (MessageBox.Show("Desea Eliminar este registro (S/N)","Confirmar",MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) 
+            {
+                //se actualiza la ui de la aplicación.
+                DataRowView row = Dv[Grid_Items.CurrentRow!.Index];
+                
+                if(Titulo == "Transporte")
+                {
+                    string id = row["transport_id"].ToString()!;
+                    service.DeleteTransportEntity(id);
+                }
+                if (Titulo == "Chofer") 
+                {
+                    string id = row["chofer_id"].ToString()!;
+                    service.DeleteChoferEntity(id);
+                }
+                if (Titulo == "Camion") 
+                {
+                    string id = row["placas_id"].ToString()!;
+                    service.DeleteCamionEntity(id);
+                }
+                //borro solo al final.
+                DtItems.Rows.Remove(row.Row);
+                DtItems.AcceptChanges();
             }
         }
     }

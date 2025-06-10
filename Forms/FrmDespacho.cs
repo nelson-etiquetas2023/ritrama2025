@@ -73,10 +73,10 @@ namespace Ritrama2025.Forms
             txt_camion_id.DataBindings.Add("Text", Bs, "placas_id");
             txt_camion_name.DataBindings.Add("Text", Bs, "camion");
             txt_vend_id.DataBindings.Add("Text", Bs, "vendor_id");
-            txt_tipo_embalaje.DataBindings.Add("Text", Bs, "packing");
+            cbo_embalaje.DataBindings.Add("Text", Bs, "packing");
             txt_orden_trabajo.DataBindings.Add("Text", Bs, "orden_trabajo");
             txt_orden_compra.DataBindings.Add("Text", Bs, "orden_compra");
-            txt_tipoventa.DataBindings.Add("Text", Bs, "tipo_venta");
+            cbo_tipoVenta.DataBindings.Add("Text", Bs, "tipo_venta");
             txt_subtotal.DataBindings.Add("Text", Bs, "subtotal");
             txt_porc_itbis.DataBindings.Add("Text", Bs, "porc_itbis");
             txt_itbis.DataBindings.Add("Text", Bs, "itbis");
@@ -141,7 +141,6 @@ namespace Ritrama2025.Forms
             ParentRow.BeginEdit();
             ParentRow["numero"] = Service.GetNumberConsec();
             ParentRow.EndEdit();
-
             grid_rc.DataSource = "";
             if (grid_rc.Rows.Count > 0)
             {
@@ -152,14 +151,12 @@ namespace Ritrama2025.Forms
             {
                 grid_items.Rows.Clear();
             }
-
             txt_fecha_despacho.Enabled = true;
             txt_persondelivery.ReadOnly = false;
-            txt_tipo_embalaje.ReadOnly = false;
+            cbo_embalaje.Enabled = true;
+            cbo_tipoVenta.Enabled = true;
             txt_orden_trabajo.ReadOnly = false;
             txt_orden_compra.ReadOnly = false;
-            txt_tipoventa.ReadOnly = false;
-
             txt_subtotal.Text = "0";
             txt_itbis.Text = "0";
             txt_totalmonto.Text = "0";
@@ -474,7 +471,7 @@ namespace Ritrama2025.Forms
                 MessageBox.Show("Debe introducir los datos del vendedor...");
                 return;
             }
-            if (txt_tipo_embalaje.Text == string.Empty)
+            if (cbo_embalaje.Text == string.Empty)
             {
                 MessageBox.Show("Debe introducir el tipo de embalaje...");
                 return;
@@ -489,12 +486,10 @@ namespace Ritrama2025.Forms
                 MessageBox.Show("Debe introducir el numero de la orden de compra...");
                 return;
             }
-            if (txt_tipoventa.Text == string.Empty)
+            if (cbo_tipoVenta.Text == string.Empty)
             {
                 MessageBox.Show("Debe introducir el tipo de venta");
                 return;
-
-                //validar los renglones.
             }
             if (grid_rc.Rows.Count <= 0)
             {
@@ -543,10 +538,10 @@ namespace Ritrama2025.Forms
                 Chofer_Name = txt_chofer_name.Text,
                 Camion_Id = txt_camion_id.Text,
                 Camion_Name = txt_camion_name.Text,
-                Tipo_Embalaje = txt_tipo_embalaje.Text,
+                Tipo_Embalaje = cbo_embalaje.Text,
                 Orden_Trabajo = txt_orden_trabajo.Text,
                 Orden_Compra = txt_orden_compra.Text,
-                Tipo_venta = txt_tipoventa.Text,
+                Tipo_venta = cbo_tipoVenta.Text,
                 Total_Cantidad = Convert.ToInt32(txt_cant_total.Text),
                 Total_Msi = Convert.ToDecimal(txt_msi_total.Text),
                 Total_Pie = Convert.ToDecimal(txt_pie_total.Text),
@@ -633,8 +628,8 @@ namespace Ritrama2025.Forms
             //cerrar el formulario a solo lectura.
             txt_persondelivery.ReadOnly = true;
             txt_fecha_despacho.Enabled = false;
-            txt_tipoventa.ReadOnly = true;
-            txt_tipo_embalaje.ReadOnly = true;
+            cbo_tipoVenta.Enabled = false;
+            cbo_embalaje.Enabled = false;
             txt_orden_compra.ReadOnly = true;
             txt_orden_trabajo.ReadOnly = true;
             bot_camion.Enabled = false;
@@ -792,10 +787,10 @@ namespace Ritrama2025.Forms
             bot_anular.Enabled = true;
             txt_fecha_despacho.Enabled = false;
             txt_persondelivery.ReadOnly = true;
-            txt_tipo_embalaje.ReadOnly = true;
+            //txt_tipo_embalaje.ReadOnly = true;
             txt_orden_trabajo.ReadOnly = true;
             txt_orden_compra.ReadOnly = true;
-            txt_tipoventa.ReadOnly = true;
+            //txt_tipoventa.ReadOnly = true;
             bot_picking.Enabled = false;
             bot_camion.Enabled = false;
             bot_chofer.Enabled = false;

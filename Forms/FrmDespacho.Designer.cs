@@ -76,13 +76,11 @@
             txt_vendorname = new TextBox();
             label10 = new Label();
             bot_buscar_vendor = new Button();
-            txt_tipo_embalaje = new TextBox();
             label11 = new Label();
             txt_orden_trabajo = new TextBox();
             label12 = new Label();
             txt_orden_compra = new TextBox();
             label13 = new Label();
-            txt_tipoventa = new TextBox();
             label14 = new Label();
             bot_picking = new Button();
             tabControl1 = new TabControl();
@@ -119,6 +117,10 @@
             txt_chofer_name = new TextBox();
             txt_transport_name = new TextBox();
             txt_camion_name = new TextBox();
+            cbo_embalaje = new ComboBox();
+            cbo_tipoVenta = new ComboBox();
+            button1 = new Button();
+            button2 = new Button();
             toolStrip1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -595,16 +597,6 @@
             bot_buscar_vendor.UseVisualStyleBackColor = true;
             bot_buscar_vendor.Click += Bot_buscar_vendor_Click;
             // 
-            // txt_tipo_embalaje
-            // 
-            txt_tipo_embalaje.Font = new Font("Segoe UI", 10.18868F);
-            txt_tipo_embalaje.Location = new Point(859, 109);
-            txt_tipo_embalaje.Margin = new Padding(3, 4, 3, 4);
-            txt_tipo_embalaje.Name = "txt_tipo_embalaje";
-            txt_tipo_embalaje.ReadOnly = true;
-            txt_tipo_embalaje.Size = new Size(268, 26);
-            txt_tipo_embalaje.TabIndex = 27;
-            // 
             // label11
             // 
             label11.AutoSize = true;
@@ -654,16 +646,6 @@
             label13.Size = new Size(91, 15);
             label13.TabIndex = 30;
             label13.Text = "Orden Compra:";
-            // 
-            // txt_tipoventa
-            // 
-            txt_tipoventa.Font = new Font("Segoe UI", 10.18868F);
-            txt_tipoventa.Location = new Point(859, 214);
-            txt_tipoventa.Margin = new Padding(3, 4, 3, 4);
-            txt_tipoventa.Name = "txt_tipoventa";
-            txt_tipoventa.ReadOnly = true;
-            txt_tipoventa.Size = new Size(268, 26);
-            txt_tipoventa.TabIndex = 33;
             // 
             // label14
             // 
@@ -1056,11 +1038,57 @@
             txt_camion_name.Size = new Size(208, 26);
             txt_camion_name.TabIndex = 66;
             // 
+            // cbo_embalaje
+            // 
+            cbo_embalaje.Enabled = false;
+            cbo_embalaje.FormattingEnabled = true;
+            cbo_embalaje.Items.AddRange(new object[] { "Wrapping", "Tarima", "Palet", "Tarima + Palet" });
+            cbo_embalaje.Location = new Point(859, 106);
+            cbo_embalaje.Name = "cbo_embalaje";
+            cbo_embalaje.Size = new Size(268, 27);
+            cbo_embalaje.TabIndex = 67;
+            // 
+            // cbo_tipoVenta
+            // 
+            cbo_tipoVenta.Enabled = false;
+            cbo_tipoVenta.FormattingEnabled = true;
+            cbo_tipoVenta.Items.AddRange(new object[] { "Venta Local", "Traspaso" });
+            cbo_tipoVenta.Location = new Point(859, 212);
+            cbo_tipoVenta.Name = "cbo_tipoVenta";
+            cbo_tipoVenta.Size = new Size(268, 27);
+            cbo_tipoVenta.TabIndex = 68;
+            // 
+            // button1
+            // 
+            button1.Enabled = false;
+            button1.Location = new Point(1133, 104);
+            button1.Margin = new Padding(3, 4, 3, 4);
+            button1.Name = "button1";
+            button1.Size = new Size(45, 29);
+            button1.TabIndex = 69;
+            button1.Text = "...";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Enabled = false;
+            button2.Location = new Point(1133, 211);
+            button2.Margin = new Padding(3, 4, 3, 4);
+            button2.Name = "button2";
+            button2.Size = new Size(45, 29);
+            button2.TabIndex = 70;
+            button2.Text = "...";
+            button2.UseVisualStyleBackColor = true;
+            // 
             // FrmDespacho
             // 
             AutoScaleDimensions = new SizeF(8F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1238, 915);
+            Controls.Add(button2);
+            Controls.Add(button1);
+            Controls.Add(cbo_tipoVenta);
+            Controls.Add(cbo_embalaje);
             Controls.Add(txt_camion_name);
             Controls.Add(txt_transport_name);
             Controls.Add(txt_chofer_name);
@@ -1092,13 +1120,11 @@
             Controls.Add(grid_detalle_paletas);
             Controls.Add(tabControl1);
             Controls.Add(bot_picking);
-            Controls.Add(txt_tipoventa);
             Controls.Add(label14);
             Controls.Add(txt_orden_compra);
             Controls.Add(label13);
             Controls.Add(txt_orden_trabajo);
             Controls.Add(label12);
-            Controls.Add(txt_tipo_embalaje);
             Controls.Add(label11);
             Controls.Add(bot_buscar_vendor);
             Controls.Add(txt_vendorname);
@@ -1182,13 +1208,11 @@
         private TextBox txt_vendorname;
         private Label label10;
         private Button bot_buscar_vendor;
-        private TextBox txt_tipo_embalaje;
         private Label label11;
         private TextBox txt_orden_trabajo;
         private Label label12;
         private TextBox txt_orden_compra;
         private Label label13;
-        private TextBox txt_tipoventa;
         private Label label14;
         private Button bot_picking;
         private TabControl tabControl1;
@@ -1238,5 +1262,9 @@
         private ToolStripButton btn_close_document;
         private ToolStripMenuItem rollosCortadosToolStripMenuItem;
         private ToolStripMenuItem opc_exportdata_excel_detallepaleta;
+        private ComboBox cbo_embalaje;
+        private ComboBox cbo_tipoVenta;
+        private Button button1;
+        private Button button2;
     }
 }

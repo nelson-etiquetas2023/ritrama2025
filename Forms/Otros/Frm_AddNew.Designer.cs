@@ -59,7 +59,7 @@
             btn_save.TabIndex = 2;
             btn_save.Text = "Guardar";
             btn_save.UseVisualStyleBackColor = true;
-            btn_save.Click += btn_save_Click;
+            btn_save.Click += Btn_save_Click;
             // 
             // btn_cancel
             // 
@@ -69,7 +69,7 @@
             btn_cancel.TabIndex = 3;
             btn_cancel.Text = "Cancelar";
             btn_cancel.UseVisualStyleBackColor = true;
-            btn_cancel.Click += btn_cancel_Click;
+            btn_cancel.Click += Btn_cancel_Click;
             // 
             // Titulo
             // 

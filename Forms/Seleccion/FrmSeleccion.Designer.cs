@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSeleccion));
             Grid_Items = new DataGridView();
             txt_buscar = new TextBox();
             bot_buscar = new Button();
@@ -37,6 +38,7 @@
             ra_id = new RadioButton();
             Numero_reg = new Label();
             panel1 = new Panel();
+            btn_delete_row = new Button();
             btn_add_new = new Button();
             titleform = new Label();
             label2 = new Label();
@@ -135,6 +137,7 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.ButtonShadow;
+            panel1.Controls.Add(btn_delete_row);
             panel1.Controls.Add(btn_add_new);
             panel1.Controls.Add(titleform);
             panel1.Location = new Point(0, -1);
@@ -142,17 +145,29 @@
             panel1.Size = new Size(504, 74);
             panel1.TabIndex = 6;
             // 
+            // btn_delete_row
+            // 
+            btn_delete_row.Image = (Image)resources.GetObject("btn_delete_row.Image");
+            btn_delete_row.Location = new Point(368, 42);
+            btn_delete_row.Name = "btn_delete_row";
+            btn_delete_row.Size = new Size(119, 23);
+            btn_delete_row.TabIndex = 2;
+            btn_delete_row.Text = "Borrar Registro";
+            btn_delete_row.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_delete_row.UseVisualStyleBackColor = true;
+            btn_delete_row.Click += Btn_delete_row_Click;
+            // 
             // btn_add_new
             // 
-            btn_add_new.Image = Properties.Resources.Plus_16px;
-            btn_add_new.Location = new Point(368, 36);
+            btn_add_new.Image = (Image)resources.GetObject("btn_add_new.Image");
+            btn_add_new.Location = new Point(368, 13);
             btn_add_new.Name = "btn_add_new";
             btn_add_new.Size = new Size(119, 23);
             btn_add_new.TabIndex = 1;
             btn_add_new.Text = "Agregar Nuevo";
             btn_add_new.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_add_new.UseVisualStyleBackColor = true;
-            btn_add_new.Click += btn_add_new_Click;
+            btn_add_new.Click += Btn_add_new_Click;
             // 
             // titleform
             // 
@@ -213,5 +228,6 @@
         private Label titleform;
         private Label label2;
         private Button btn_add_new;
+        private Button btn_delete_row;
     }
 }
