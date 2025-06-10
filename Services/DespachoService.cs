@@ -433,7 +433,7 @@ namespace Ritrama2025.Services
                 // Relacion entre Despachos y transportista
                 DataColumn ParentCol5 = Ds.Tables["DtTransport"]!.Columns["transport_id"]!;
                 DataColumn ChildCol5 = Ds.Tables["DtMasterDespachos"]!.Columns["transport_id"]!;
-                DataRelation Despacho_Transport = new("FK_DESPACHOS_TRANSPORT", ParentCol5, ChildCol5);
+                DataRelation Despacho_Transport = new("FK_DESPACHOS_TRANSPORT", ParentCol5, ChildCol5,false);
                 Ds.Relations.Add(Despacho_Transport);
                 Ds.Tables["DtMasterDespachos"]!.Columns.Add("transport_name", Type.GetType("System.String")!, "parent(FK_DESPACHOS_TRANSPORT).transport_name");
 

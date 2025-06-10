@@ -21,6 +21,7 @@ namespace Ritrama2025.Forms
         DataRowView ParentRowPalet = null!;
         public readonly decimal porc_itbis = 18.00m;
         const decimal CONST_PIE_LINEALES = 0.012m;
+        const decimal CONST_MSI = 83.33333333333333m;
         public FrmDespacho()
         {
             InitializeComponent();
@@ -250,13 +251,18 @@ namespace Ritrama2025.Forms
             //Calculo de los pies lineales.
             for (int i = 0; i <= grid_items.Rows.Count - 1; i++)
             {
-                //pie lineales
-                grid_items.Rows[i].Cells["total_pie_lin"].Value = Convert.ToDecimal(grid_items.Rows[i].Cells["lenght"].Value) * CONST_PIE_LINEALES;
+                decimal ancho = Convert.ToDecimal(grid_items.Rows[i].Cells["width"].Value);
+                decimal largo = Convert.ToDecimal(grid_items.Rows[i].Cells["lenght"].Value);
+                int cantidad = Convert.ToInt32(grid_items.Rows[i].Cells["cant"].Value);
+                decimal total_msi_cant_up = (ancho * largo * cantidad);
+                //CALCULO DEL MSI RENGLON
+                grid_items.Rows[i].Cells["msi"].Value = Math.Round( (total_msi_cant_up / CONST_MSI),14,MidpointRounding.AwayFromZero);
+                grid_items.Rows[i].Cells["total_pie_lin"].Value = "0";
                 //Busqueda del ratio por producto.
-                grid_items.Rows[i].Cells["ratio"].Value = Service.GetRatioProductById(grid_items.Rows[i].Cells["product_id"].Value!.ToString()!);
+                grid_items.Rows[i].Cells["ratio"].Value = "0";
                 //Calculo de la Columna Kilo-Rollo.
-                grid_items.Rows[i].Cells["kilo_rollo"].Value = (Convert.ToDecimal(grid_items.Rows[i].Cells["width"].Value) * Convert.ToDecimal(grid_items.Rows[i].Cells["lenght"].Value) * Convert.ToDecimal(grid_items.Rows[i].Cells["msi"].Value)) / 1000;
-                grid_items.Rows[i].Cells["kilo_total"].Value = Convert.ToDecimal(grid_items.Rows[i].Cells["kilo_rollo"].Value) * Convert.ToDecimal(grid_items.Rows[i].Cells["cant"].Value);
+                grid_items.Rows[i].Cells["kilo_rollo"].Value = "0";
+                grid_items.Rows[i].Cells["kilo_total"].Value = "0";
 
                 grid_items.Rows[i].Cells["precio"].Value = "0";
                 grid_items.Rows[i].Cells["total_renglon"].Value = "0";
@@ -544,14 +550,14 @@ namespace Ritrama2025.Forms
                 Tipo_venta = cbo_tipoVenta.Text,
                 Total_Cantidad = Convert.ToInt32(txt_cant_total.Text),
                 Total_Msi = Convert.ToDecimal(txt_msi_total.Text),
-                Total_Pie = Convert.ToDecimal(txt_pie_total.Text),
-                Total_Kilos = Convert.ToDecimal(txt_kilos_total.Text),
-                SubTotal = Convert.ToDecimal(txt_subtotal.Text),
-                Porc_Itbis = Convert.ToDecimal(txt_porc_itbis.Text),
-                Monto_Itbis = Convert.ToDecimal(txt_itbis.Text),
-                Total_Despacho = Convert.ToDecimal(txt_totalmonto.Text),
-                Total_kilos_netos_palet = Convert.ToDecimal(txt_palet_kilo_neto.Text),
-                Total_kilos_brutos_palet = Convert.ToDecimal(txt_palet_kilo_bruto.Text),
+                Total_Pie = 0,
+                Total_Kilos = 0,
+                SubTotal = 0,
+                Porc_Itbis = 0,
+                Monto_Itbis = 0,
+                Total_Despacho = 0,
+                Total_kilos_netos_palet = 0,
+                Total_kilos_brutos_palet = 0,
                 //crear picking-list.
                 Detalle_RC = [],
                 //Items de despacho.
