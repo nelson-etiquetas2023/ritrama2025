@@ -38,6 +38,11 @@ namespace Ritrama2025
             OpenFormSingleInstance<FrmMateriaPrima>("MT");
         }
 
+        private void Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         private void OpenFormSingleInstance<T>(string nameForm) where T : Form, new()
         {
             var existingForm = Application.OpenForms.OfType<T>().FirstOrDefault();
@@ -130,7 +135,41 @@ namespace Ritrama2025
         [Description("¨Parametros de Conexion de la base de datos")]
         public ConnectionSettings DatabaseConnection { get; set; } = new ConnectionSettings();
 
+        [Category("Datos del Servidor")]
+        [DisplayName("Nombre del Servidor")]
+        [Description("Nombre del Servidor pincipal de la aplicacion")]
+        public string NameServer { get; set; } = "RITRAMASRV01";
+        [Category("Datos del Servidor")]
+        [DisplayName("Cuenta")]
+        [Description("Cuenta Sql server")]
+        public string Login { get; set; } = "Npino";
+        [Category("Datos del Servidor")]
+        [DisplayName("Contraseña")]
+        [Description("Password de administrador sql-server")]
+        public string PassWord { get; set; } = "123";
+        [Category("Datos del Servidor")]
+        [DisplayName("Nombre de la Base de Datos")]
+        [Description("Nombre de la Base de datos de la aplicación")]
+        public string Database { get; set; } = "RITRAMA3";
 
+        [Category("Constantes")]
+        [DisplayName("Calcular MSI")]
+        [Description("Factor necesario para calcular los msi, la formala es: Ancho * Largo * cantidad entre 83.3333333333333 [Son 14 Decimales]")]
+
+        public Double CONST_MSI { get; set; } = 83.33333333333333;
+
+        [Category("Version App.")]
+        [DisplayName("Numero Compilacion:")]
+        [Description("Datos principalaes de compilacion de la aplicacion de escritorio")]
+        public string Version { get; set; } = "1.1";
+        [Category("Version App.")]
+        [DisplayName("Fecha Compilación")]
+        [Description("Fecha y Compilacion de la aplicación.")]
+        public string Compilation_date { get; set; } = "12-06-2025 : 11:03 a.m.";
+        [Category("Version App.")]
+        [DisplayName("FrameWork:")]
+        [Description("Versión .Net")]
+        public string VersionNet { get; set; } = ".NetCore 9";
     }
     [TypeConverter(typeof(ExpandableObjectConverter))]
     public class ConnectionSettings

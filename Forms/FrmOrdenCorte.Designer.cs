@@ -160,6 +160,9 @@
             labelstep5 = new Label();
             btn_datosDocAprob = new Button();
             btn_buscar_orden = new Button();
+            chk_desperdicio1 = new CheckBox();
+            checkBox1 = new CheckBox();
+            chk_generartxt_rc = new CheckBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             toolStrip1.SuspendLayout();
@@ -696,7 +699,7 @@
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new Point(528, 236);
+            label14.Location = new Point(528, 240);
             label14.Name = "label14";
             label14.Size = new Size(76, 18);
             label14.TabIndex = 37;
@@ -715,7 +718,7 @@
             // label15
             // 
             label15.AutoSize = true;
-            label15.Location = new Point(478, 236);
+            label15.Location = new Point(478, 240);
             label15.Name = "label15";
             label15.Size = new Size(12, 18);
             label15.TabIndex = 35;
@@ -734,7 +737,7 @@
             // label16
             // 
             label16.AutoSize = true;
-            label16.Location = new Point(427, 236);
+            label16.Location = new Point(427, 242);
             label16.Name = "label16";
             label16.Size = new Size(15, 18);
             label16.TabIndex = 33;
@@ -1392,7 +1395,7 @@
             // 
             txt_step.BorderStyle = BorderStyle.None;
             txt_step.Font = new Font("Noto Sans", 9.75F);
-            txt_step.Location = new Point(1071, 729);
+            txt_step.Location = new Point(1063, 804);
             txt_step.Name = "txt_step";
             txt_step.ReadOnly = true;
             txt_step.Size = new Size(166, 18);
@@ -1468,7 +1471,7 @@
             // btn_datosDocAprob
             // 
             btn_datosDocAprob.Image = Properties.Resources.search_property_24px;
-            btn_datosDocAprob.Location = new Point(1071, 684);
+            btn_datosDocAprob.Location = new Point(1071, 721);
             btn_datosDocAprob.Name = "btn_datosDocAprob";
             btn_datosDocAprob.Size = new Size(166, 39);
             btn_datosDocAprob.TabIndex = 116;
@@ -1488,11 +1491,44 @@
             btn_buscar_orden.UseVisualStyleBackColor = true;
             btn_buscar_orden.Click += Btn_buscar_orden_Click;
             // 
+            // chk_desperdicio1
+            // 
+            chk_desperdicio1.AutoSize = true;
+            chk_desperdicio1.Location = new Point(427, 225);
+            chk_desperdicio1.Name = "chk_desperdicio1";
+            chk_desperdicio1.Size = new Size(97, 22);
+            chk_desperdicio1.TabIndex = 118;
+            chk_desperdicio1.Text = "Desperdicio";
+            chk_desperdicio1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(425, 319);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(97, 22);
+            checkBox1.TabIndex = 119;
+            checkBox1.Text = "Desperdicio";
+            checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // chk_generartxt_rc
+            // 
+            chk_generartxt_rc.AutoSize = true;
+            chk_generartxt_rc.Location = new Point(1092, 683);
+            chk_generartxt_rc.Name = "chk_generartxt_rc";
+            chk_generartxt_rc.Size = new Size(117, 22);
+            chk_generartxt_rc.TabIndex = 120;
+            chk_generartxt_rc.Text = "Solo con los RC";
+            chk_generartxt_rc.UseVisualStyleBackColor = true;
+            // 
             // FrmOrdenCorte
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1263, 843);
+            Controls.Add(chk_generartxt_rc);
+            Controls.Add(checkBox1);
+            Controls.Add(chk_desperdicio1);
             Controls.Add(btn_buscar_orden);
             Controls.Add(btn_datosDocAprob);
             Controls.Add(labelstep5);
@@ -1753,5 +1789,8 @@
         private Label labelstep5;
         private Button btn_datosDocAprob;
         private Button btn_buscar_orden;
+        private CheckBox chk_desperdicio1;
+        private CheckBox checkBox1;
+        private CheckBox chk_generartxt_rc;
     }
 }

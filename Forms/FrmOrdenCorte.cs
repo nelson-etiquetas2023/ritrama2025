@@ -149,6 +149,7 @@ namespace Ritrama2025.Forms
 
         private void Opt_create_document_Click(object sender, EventArgs e)
         {
+            Bs.Sort = "";
             //1.- Inicialiozar el Documento de Orden de Corte.
             ParentRow = (DataRowView)Bs.AddNew()!;
             ParentRow.BeginEdit();
@@ -226,6 +227,7 @@ namespace Ritrama2025.Forms
             btn_delete_row_corte.Enabled = true;
             txt_vueltas1.Enabled = true;
             UpdateStepIndicator();
+            
         }
 
         private void Btn_buscar_rollid1_Click(object sender, EventArgs e)
@@ -776,6 +778,7 @@ namespace Ritrama2025.Forms
             txt_vueltas1.Enabled = false;
             txt_largo_corte.Enabled = false;
             txt_long_cortar.ReadOnly = true;
+           
         }
         private void ContadorRegistros()
         {
@@ -905,7 +908,7 @@ namespace Ritrama2025.Forms
             //actualiza la ui del indicator
             UpdateStepIndicator();
             //se crea el txt de los rollos cortados.
-            exportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden());
+            exportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(),chk_generartxt_rc.Checked);
 
             MessageBox.Show("Se ha Etiquetado la Orden de Corte...");
         }
@@ -923,7 +926,8 @@ namespace Ritrama2025.Forms
 
         private void Btn_generar_txt_Click(object sender, EventArgs e)
         {
-            exportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden());
+            
+            exportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(),chk_generartxt_rc.Checked);
         }
 
         private void Bot_exportar_Click(object sender, EventArgs e)

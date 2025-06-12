@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             panel1 = new Panel();
+            panel_foto = new Panel();
+            lbl_user_name = new Label();
+            pictureBox1 = new PictureBox();
             button4 = new Button();
             button3 = new Button();
             button2 = new Button();
@@ -40,11 +43,14 @@
             bot_despacho = new Button();
             bot_ordencorte = new Button();
             panel1.SuspendLayout();
+            panel_foto.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = SystemColors.WindowFrame;
+            panel1.Controls.Add(panel_foto);
             panel1.Controls.Add(button4);
             panel1.Controls.Add(button3);
             panel1.Controls.Add(button2);
@@ -57,8 +63,42 @@
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(221, 637);
+            panel1.Size = new Size(221, 924);
             panel1.TabIndex = 0;
+            panel1.Paint += Panel1_Paint;
+            // 
+            // panel_foto
+            // 
+            panel_foto.BorderStyle = BorderStyle.FixedSingle;
+            panel_foto.Controls.Add(lbl_user_name);
+            panel_foto.Controls.Add(pictureBox1);
+            panel_foto.Dock = DockStyle.Bottom;
+            panel_foto.Location = new Point(0, 720);
+            panel_foto.Name = "panel_foto";
+            panel_foto.Size = new Size(221, 204);
+            panel_foto.TabIndex = 10;
+            // 
+            // lbl_user_name
+            // 
+            lbl_user_name.Dock = DockStyle.Top;
+            lbl_user_name.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_user_name.Location = new Point(0, 0);
+            lbl_user_name.Name = "lbl_user_name";
+            lbl_user_name.Size = new Size(219, 18);
+            lbl_user_name.TabIndex = 11;
+            lbl_user_name.Text = "Usuario : Nelson Pino";
+            lbl_user_name.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Dock = DockStyle.Fill;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(219, 202);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
             // 
             // button4
             // 
@@ -203,7 +243,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
-            ClientSize = new Size(935, 637);
+            ClientSize = new Size(935, 924);
             Controls.Add(panel1);
             Font = new Font("Segoe UI", 8.830189F);
             FormBorderStyle = FormBorderStyle.Fixed3D;
@@ -215,6 +255,8 @@
             WindowState = FormWindowState.Maximized;
             Load += Main_Load;
             panel1.ResumeLayout(false);
+            panel_foto.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -230,5 +272,8 @@
         private Button button1;
         private Button button3;
         private Button button4;
+        private Panel panel_foto;
+        private PictureBox pictureBox1;
+        private Label lbl_user_name;
     }
 }

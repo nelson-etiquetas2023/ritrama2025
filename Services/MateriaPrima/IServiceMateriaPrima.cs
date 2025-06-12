@@ -5,8 +5,11 @@ namespace Ritrama2025.Services.MateriaPrima
 {
     public interface IServiceMateriaPrima
     {
+        Task LoadProductsAsync();
         Task LoadTableHeaderMateriaPrima();
-        bool LoadTableDetailsMateriaPrima();
+        Task LoadTableDetailsMateriaPrima();
+        Task LoadTableProveedores();
+        Task LoadTableTransportista();
         bool SetRelationsMateria();
         bool AddOrdenMateriaPrima(OrdenRecepcion orden);
         bool UpdateOrdenMateriaPrima(string orden);

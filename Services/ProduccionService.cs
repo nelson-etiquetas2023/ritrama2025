@@ -68,7 +68,7 @@ namespace Ritrama2025.Services
                 await readerRollos.CloseAsync();
                 DaRollos.SelectCommand = ComandoRollos;
                 DaRollos.Fill(Ds, "DtRollos");
-                // 4.- Carga de los Master en el Inventario.
+                // 4.- Carga de los Master en el Inventario [ROLL-ID].
                 SqlCommand ComandoRollid = new()
                 {
                     Connection = conn,
@@ -413,8 +413,6 @@ namespace Ritrama2025.Services
             {
                 MessageBox.Show("error al guardar los codigo unicos de los rollos" + ex.Message);
             }
-        }
-
-       
+        }  
     }
 }

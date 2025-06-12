@@ -130,14 +130,11 @@
   <data name="ROWDELETE48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\ROWDELETE48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="update_doc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\update_doc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="rolls_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\rolls_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="price_tag_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\price_tag_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="orden_servicio_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\orden_servicio_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="add_file_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\add_file_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -166,6 +163,9 @@
   <data name="roll_id" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\roll_id.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icons8_cancel_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8_cancel_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="security_document_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\security_document_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -193,6 +193,9 @@
   <data name="product_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\product_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="orden_trabajo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\orden_trabajo.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="administrative_tools_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\administrative_tools_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -208,8 +211,8 @@
   <data name="DATA_RESERVA48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\DATA_RESERVA48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="orden_trabajo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\orden_trabajo.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="orden_servicio_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\orden_servicio_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="add_to_clipboard_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\add_to_clipboard_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -226,13 +229,13 @@
   <data name="DATA_READ48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\DATA_READ48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="update_doc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\update_doc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="price_tag_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\price_tag_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="approved_delivery_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\approved_delivery_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8_cancel_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8_cancel_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="add_user_group_man_man_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\add_user_group_man_man_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -69,7 +69,7 @@ namespace Ritrama2025.Services.ExportData
             return true;
         }
 
-        public bool ExportTxtFormatRollosCortados(DataRow[] rollos)
+        public bool ExportTxtFormatRollosCortados(DataRow[] rollos,bool solorc)
         {
             try
             {
@@ -83,17 +83,27 @@ namespace Ritrama2025.Services.ExportData
                 {
                     foreach (DataRow item in rollos)
                     {
-                        string productid = item["product_id"].ToString()!.Trim();
-                        string uniquecode = item["unique_code"].ToString()!.Trim();
-                        string width = item["width"].ToString()!.Trim();
-                        string lenght = item["large"].ToString()!.Trim();
-                        string msi = item["msi"].ToString()!.Trim();
-                        string splice = item["splice"].ToString()!.Trim();
-                        string rollid = item["roll_id"].ToString()!.Trim();
-                        string codeperson = item["code_person"].ToString()!.Trim();
-                        string status = item["status"].ToString()!.Trim();
-                        string linea = $"{item["roll_number"]},{productid},{item["product_name"]},{uniquecode},{width},{lenght},{msi},{splice},{rollid},{codeperson},{status}";
-                        sr.WriteLine(linea);
+                        if (solorc)
+                        {
+                            string codeperson = item["unique_code"].ToString()!.Trim();
+                            string linea = $"{item["unique_code"]}"; 
+                            sr.WriteLine(linea);
+                        }
+                        else 
+                        {
+                            string productid = item["product_id"].ToString()!.Trim();
+                            string uniquecode = item["unique_code"].ToString()!.Trim();
+                            string width = item["width"].ToString()!.Trim();
+                            string lenght = item["large"].ToString()!.Trim();
+                            string msi = item["msi"].ToString()!.Trim();
+                            string splice = item["splice"].ToString()!.Trim();
+                            string rollid = item["roll_id"].ToString()!.Trim();
+                            string codeperson = item["code_person"].ToString()!.Trim();
+                            string status = item["status"].ToString()!.Trim();
+                            string linea = $"{item["roll_number"]},{productid},{item["product_name"]},{uniquecode},{width},{lenght},{msi},{splice},{rollid},{codeperson},{status}";
+                            sr.WriteLine(linea);
+                        }
+                        
                     }
                 }
                 //abri el archivo con el programa predeterminado.

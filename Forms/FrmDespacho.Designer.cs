@@ -528,11 +528,11 @@
             // txt_camion_id
             // 
             txt_camion_id.Font = new Font("Segoe UI", 10.18868F);
-            txt_camion_id.Location = new Point(73, 245);
+            txt_camion_id.Location = new Point(100, 245);
             txt_camion_id.Margin = new Padding(3, 4, 3, 4);
             txt_camion_id.Name = "txt_camion_id";
             txt_camion_id.ReadOnly = true;
-            txt_camion_id.Size = new Size(65, 26);
+            txt_camion_id.Size = new Size(38, 26);
             txt_camion_id.TabIndex = 19;
             // 
             // label8
