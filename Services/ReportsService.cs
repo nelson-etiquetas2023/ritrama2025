@@ -16,10 +16,10 @@ namespace Ritrama2025.Services
 
         public ReportsService()
         {
-            if (Program.Configuration != null)
-            {
-                StringConnex = Convert.ToString(Program.Configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value)!;
-            }
+            //if (Program.Configuration != null)
+            //{
+            //    StringConnex = Convert.ToString(Program.Configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value)!;
+            //}
         }
 
         public void Reporte_OrdenCorte(string numeroOC,Form form,string ReportName,string TitleReport) 

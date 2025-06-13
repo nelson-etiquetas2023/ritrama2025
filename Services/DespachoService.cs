@@ -1,4 +1,6 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using Ritrama2025.Models;
 using System.Data;
 
@@ -8,6 +10,8 @@ namespace Ritrama2025.Services
     {
         public string StringConnex { get; set; } = null!;
         public string ErrorMsg { get; set; } = null!;
+        public IConfiguration Config { get; }
+
         private readonly List<Despacho> lista = [];
         public DataSet Ds = new();
         public DataTable DtMasterDespachos = new();
@@ -29,12 +33,15 @@ namespace Ritrama2025.Services
         public DataTable DtCamion = new();
         public SqlDataAdapter DaCamion = new();
 
-        public DespachoService()
+        public DespachoService(IConfiguration Config)
         {
-            if (Program.Configuration != null) 
+            this.Config = Config ?? throw new ArgumentNullException(nameof(Config)); 
+            if (Config != null) 
             {
-                StringConnex = Convert.ToString(Program.Configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value)!;
+                StringConnex = Convert.ToString(Config.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value)!;
             }
+
+           
         }
 
         public void AddPaletDetailsDespacho(List<Paleta> paleta)

@@ -12,7 +12,7 @@ namespace Ritrama2025.Forms.Seleccion
         {
             InitializeComponent();
         }
-        readonly CommonService service = new();
+        //readonly CommonService service = new();
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DataTable DtItems { get; set; } = null!;
@@ -168,17 +168,17 @@ namespace Ritrama2025.Forms.Seleccion
                 if(Titulo == "Transporte")
                 {
                     string id = row["transport_id"].ToString()!;
-                    service.DeleteTransportEntity(id);
+                    //service.DeleteTransportEntity(id);
                 }
                 if (Titulo == "Chofer") 
                 {
                     string id = row["chofer_id"].ToString()!;
-                    service.DeleteChoferEntity(id);
+                    //service.DeleteChoferEntity(id);
                 }
                 if (Titulo == "Camion") 
                 {
                     string id = row["placas_id"].ToString()!;
-                    service.DeleteCamionEntity(id);
+                    //service.DeleteCamionEntity(id);
                 }
                 //borro solo al final.
                 DtItems.Rows.Remove(row.Row);

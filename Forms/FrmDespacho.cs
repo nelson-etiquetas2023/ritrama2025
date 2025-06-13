@@ -1,4 +1,5 @@
-﻿using Ritrama2025.Forms.Otros;
+﻿using Microsoft.Extensions.Configuration;
+using Ritrama2025.Forms.Otros;
 using Ritrama2025.Forms.Seleccion;
 using Ritrama2025.Models;
 using Ritrama2025.Services;
@@ -9,7 +10,10 @@ namespace Ritrama2025.Forms
 {
     public partial class FrmDespacho : Form
     {
-        private readonly DespachoService Service = new();
+        private readonly IConfiguration Config;
+
+        private readonly IDespachoService Service;
+
         private readonly ReportsService ReportsService = new();
         private readonly ExportDataService ExportDataService = new();
         DataSet Ds = new();
@@ -22,9 +26,14 @@ namespace Ritrama2025.Forms
         public readonly decimal porc_itbis = 18.00m;
         const decimal CONST_PIE_LINEALES = 0.012m;
         const decimal CONST_MSI = 83.33333333333333m;
-        public FrmDespacho()
+
+        
+
+        public FrmDespacho(IConfiguration Config,IDespachoService Service)
         {
             InitializeComponent();
+            this.Config = Config ?? throw new ArgumentNullException(nameof(Config));
+            this.Service = Service ?? throw new ArgumentNullException(nameof(Service));
         }
 
         private void Despacho_Load(object sender, EventArgs e)
@@ -629,7 +638,7 @@ namespace Ritrama2025.Forms
             }
             Service.AddDocumentDespacho(DocumentDespacho);
             Service.AddPickingListDespacho(DocumentDespacho.Detalle_RC);
-            Service.AddItemsDespacho(DocumentDespacho.Items_Despacho);
+            //Service.AddItemsDespacho(DocumentDespacho.Items_Despacho);
             Service.AddPaletDetailsDespacho(DocumentDespacho.Detalle_Paleta);
             //cerrar el formulario a solo lectura.
             txt_persondelivery.ReadOnly = true;

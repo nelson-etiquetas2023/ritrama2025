@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using Ritrama2025.Models;
 using System.Data;
 using System.Drawing.Imaging.Effects;
@@ -10,11 +11,13 @@ namespace Ritrama2025.Services
         public string StringConnex { get; set; } = null!;
         public string ErrorMsg { get; set; } = null!;
 
-        public CommonService()
+        public IConfiguration Config { get; set; }
+        public CommonService(IConfiguration Config)
         {
-            if (Program.Configuration != null)
+            this.Config = Config;
+            if (Config != null)
             {
-                StringConnex = Convert.ToString(Program.Configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value)!;
+                StringConnex = Convert.ToString(Config.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value)!;
             }
         }
         public async Task<List<RolloCortado>> GetDataRolloCortado(List<RolloCortado> lista)

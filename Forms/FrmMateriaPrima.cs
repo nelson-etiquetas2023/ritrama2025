@@ -1,17 +1,22 @@
-﻿using Ritrama2025.Services.MateriaPrima;
+﻿using Microsoft.Extensions.Configuration;
+using Ritrama2025.Services.CommonData;
+using Ritrama2025.Services.MateriaPrima;
 using System.Data;
 
 namespace Ritrama2025.Forms
 {
     public partial class FrmMateriaPrima : Form
     {
-        readonly ServiceMateriaPrima servicio = new();
+        public readonly IServiceMateriaPrima Services;
         public DataSet Ds = new();
         readonly BindingSource Bs = [];
         readonly BindingSource BsDetalle = [];
-        public FrmMateriaPrima()
+
+     
+        public FrmMateriaPrima(IServiceMateriaPrima Services)
         {
-            InitializeComponent();
+            InitializeComponent();     
+            this.Services = Services;
         }
 
         private void FrmMateriaPrima_Load(object sender, EventArgs e)
@@ -34,7 +39,7 @@ namespace Ritrama2025.Forms
             //carga los datos de la base dfe datos.
             var task = Task.Run(async () =>
             {
-                return await servicio.LoadData();
+                return await Services.LoadData();
             });
             Ds = task.Result;
         }

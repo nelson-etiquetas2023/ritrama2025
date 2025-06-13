@@ -28,7 +28,7 @@ namespace Ritrama2025.Forms
 
         private void FrmPickingDespacho_Load(object sender, EventArgs e)
         {
-            servicio = new CommonService();
+            //servicio = new CommonService();
         }
 
         private void Button2_Click(object sender, EventArgs e)

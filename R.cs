@@ -1,6 +1,4 @@
 ﻿
-using System.Reflection.Metadata;
-
 namespace Ritrama2025
 {
     public static class R
@@ -40,10 +38,24 @@ namespace Ritrama2025
 
             public readonly static string SELECT_QUERY_PRODUCTS = "SELECT product_id,product_name,product_descrip,product_ref,codebar,category_id,masterRolls,rollo_cortado,resmas,graphics,anulado,precio,code_rc,ratio FROM producto";
 
+            public readonly static string SELECT_QUERY_MP_MASTER = "select numero,fecha_recepcion,fecha_pro,prov_id,orden_compra,persona_respons,notas,status,transport_id,guia_import,lote,doc_embarque,estado,total_cantidad,fecha_hora_close,anulado from OrdenMateria";
+
+            public readonly static string SELECT_QUERY_MP_DETAILS = "select product_id,cant_pedido,cant_real,width,length,msi,rollid,splice,ubicacion,core from ItemsMateria";
+
         }
         public static class ERROR_MESSAGE_SYSTEM 
         {
             public static readonly string ERROR_LOAD_PRODUCTS = "error al cargar los productos en el modulo de materia prima. error code: ";
+
+            public static readonly string ERROR_LOAD_MP_MASTER = "error al cargar la tabla de encabezado de recepciones de materia prima. error code: ";
+            public static readonly string ERROR_MP_DETAILS = "error al cargar la tabla de detalle de recepciones de materia prima. error code: ";
+            public static readonly string ERROR_MP_PROVEEDORES = "error al cargar la tabla de proveedores en el modulo de la materia prima. error code: ";
+
+            public static readonly string ERROR_MP_TRANSPORT = "error al cargar la tabla de proveedores. error code: ";
+        }
+        public static class  COMMAND
+        {
+            public static readonly string CREATE_QUERY_PRODUCTS = "";
         }
     }
 }

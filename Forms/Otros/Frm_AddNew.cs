@@ -18,7 +18,7 @@ namespace Ritrama2025.Forms.Otros
             InitializeComponent();
 
         }
-        readonly CommonService service = new();
+        //readonly CommonService service = new();
         private void Frm_AddNew_Load(object sender, EventArgs e)
         {
             Titulo.Text = TitleForm;
@@ -38,7 +38,7 @@ namespace Ritrama2025.Forms.Otros
                     dr["transport_name"] = txt_name.Text.ToUpper();
                     Dt.Rows.Add(dr);
                     //Guardar en Base de Datos.
-                    service.SaveTransportEntity(Consecutivo.ToString(), txt_name.Text.ToUpper());
+                    //service.SaveTransportEntity(Consecutivo.ToString(), txt_name.Text.ToUpper());
                     this.Close();
                 }
                 if (NombreEntidad == "Chofer")
@@ -50,7 +50,7 @@ namespace Ritrama2025.Forms.Otros
                     dr["chofer_name"] = txt_name.Text.ToUpper();
                     Dt.Rows.Add(dr);
                     //Guardar en Base de Datos.
-                    service.SaveChoferEntity(Consecutivo.ToString(), txt_name.Text.ToUpper());
+                    //service.SaveChoferEntity(Consecutivo.ToString(), txt_name.Text.ToUpper());
                     this.Close();
                 }
                 if (NombreEntidad == "Camion")
@@ -62,7 +62,7 @@ namespace Ritrama2025.Forms.Otros
                     dr["camion_name"] = txt_name.Text.ToUpper();
                     Dt.Rows.Add(dr);
                     //Guardar en Base de Datos.
-                    service.SaveCamionEntity(Consecutivo.ToString(), txt_name.Text.ToUpper());
+                    //service.SaveCamionEntity(Consecutivo.ToString(), txt_name.Text.ToUpper());
                     this.Close();
                 }
             }

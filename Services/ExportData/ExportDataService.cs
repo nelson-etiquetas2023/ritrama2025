@@ -3,8 +3,6 @@ using System.Data;
 using System.Diagnostics;
 using System.Reflection;
 
-
-
 namespace Ritrama2025.Services.ExportData
 {
     public class ExportDataService : IExportDataService
@@ -68,7 +66,6 @@ namespace Ritrama2025.Services.ExportData
             }
             return true;
         }
-
         public bool ExportTxtFormatRollosCortados(DataRow[] rollos,bool solorc)
         {
             try

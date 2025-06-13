@@ -1,11 +1,16 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using Ritrama2025.Models;
+using Ritrama2025.Services.CommonData;
 using System.Data;
 
 namespace Ritrama2025.Services.MateriaPrima
 {
     public class ServiceMateriaPrima : IServiceMateriaPrima
     {
+      
+        public IConfiguration Config { get; }
+        private readonly IServiceCommonData ServiceData;
         public string StringConnex { get; set; } = null!;
         public DataSet Ds = new();
         public SqlDataAdapter DaMateria = new();
@@ -18,13 +23,18 @@ namespace Ritrama2025.Services.MateriaPrima
         public DataTable DtTransport = new();
         public SqlDataAdapter DaProducts = new();
         public DataTable DtProducts = new();
+        
 
-        public ServiceMateriaPrima()
+        public ServiceMateriaPrima(IConfiguration Config, IServiceCommonData ServiceData)
         {
-            if (Program.Configuration != null)
+            this.Config = Config;
+            //Carga el string de Connexion de la aplicacion.
+            if (Config != null)
             {
-                StringConnex = Convert.ToString(Program.Configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value)!;
+                StringConnex = Convert.ToString(Config.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value)!;
             }
+            //Injecta el servicio de datos.
+            this.ServiceData = ServiceData;
         }
         public async Task<DataSet> LoadData() 
         {
@@ -32,109 +42,90 @@ namespace Ritrama2025.Services.MateriaPrima
             await LoadTableDetailsMateriaPrima();
             await LoadTableProveedores();
             await LoadTableTransportista();
-            await LoadProductsAsync();
+            await LoadProducts();
             return Ds;
         }
-        private class ObjectQuery()
-        {
-            public string Query { get; set; } = null!;
-            public string message { get; set; } = null!;
-            public SqlDataAdapter Adapter { get; set; } = new();
-            public string DataTableName { get; set; } = null!;
-        }
-        private ObjectQuery CreateObjectProduct()
-        {
-            return new ObjectQuery()
-            {
-                Query = R.SQL_STRING_QUERY.SELECT_QUERY_PRODUCTS,
-                message = R.ERROR_MESSAGE_SYSTEM.ERROR_LOAD_PRODUCTS,
-                Adapter = DaProducts,
-                DataTableName = "DtProducts"
-            };
-        }
-        private ObjectQuery CreateObjectQuery(ObjectQuery objectquery)
-        {
-            return new ObjectQuery()
-            {
-                Query = objectquery.Query,
-                message = objectquery.message,
-                Adapter = objectquery.Adapter,
-                DataTableName = objectquery.DataTableName
-            };
-        }
-        private async Task LoadTable(ObjectQuery objectQuery) 
-        {
-            try
-            {
-                using SqlConnection connection = new(StringConnex);
-                await connection.OpenAsync();
-                using SqlCommand comando = new()
-                {
-                    Connection = connection,
-                    CommandText = objectQuery.Query,
-                    CommandType = CommandType.Text
-                };
-                await comando.ExecuteNonQueryAsync();
-                objectQuery.Adapter.SelectCommand = comando;
-                objectQuery.Adapter.Fill(Ds, objectQuery.DataTableName);
-                await connection.CloseAsync();
 
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(objectQuery.message + ex.Message);
-            }
-        }
-        public async Task LoadProductsAsync()
-        {
-            await LoadTable(CreateObjectQuery(CreateObjectProduct()));
-        }
-        public async Task LoadTableDetailsMateriaPrima() 
-        {
-            try
-            {
-                using SqlConnection connection = new(StringConnex);
-                await connection.OpenAsync();
-                SqlCommand comando = new()
-                {
-                    Connection = connection,
-                    CommandText = "select product_id,cant_pedido,cant_real,width,length,msi,rollid,splice,ubicacion,core from ItemsMateria",
-                    CommandType = CommandType.Text
-                };
-                await comando.ExecuteNonQueryAsync();
-                DaDetalle.SelectCommand = comando;
-                DaDetalle.Fill(Ds, "DtDetalle");
-                await connection.CloseAsync();
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show("error al cargar la tabla de detalle de recepciones de materia prima. error code: " + ex.Message);
 
-            }
-        }
         public async Task LoadTableHeaderMateriaPrima()
         {
-            try
+            await ServiceData.LoadTable(QUERY_COMMANDS("master"));
+        }
+        public async Task LoadTableDetailsMateriaPrima()
+        {
+            await ServiceData.LoadTable(QUERY_COMMANDS("details"));
+        }
+        public async Task LoadProducts()
+        {
+            await ServiceData.LoadTable(QUERY_COMMANDS("products"));
+        }
+      
+        public async Task LoadTableProveedores()
+        {
+            await ServiceData.LoadTable(QUERY_COMMANDS("prov"));
+        }
+        public async Task LoadTableTransportista()
+        {
+          await ServiceData.LoadTable(QUERY_COMMANDS("transport"));
+        }
+        private ObjectQuery QUERY_COMMANDS(string table)
+        {
+            switch (table)
             {
-                using SqlConnection connection = new(StringConnex);
-                await connection.OpenAsync();
-                SqlCommand comando = new()
-                {
-                    Connection = connection,
-                    CommandText = "select numero,fecha_recepcion,fecha_pro,prov_id,orden_compra,persona_respons,notas,status,transport_id,guia_import,lote,doc_embarque,estado,total_cantidad,fecha_hora_close,anulado from OrdenMateria",
-                    CommandType = CommandType.Text
-                };
-                await comando.ExecuteNonQueryAsync();
-                DaMateria.SelectCommand = comando;
-                DaMateria.Fill(Ds, "DtMateria");
-                await connection.CloseAsync(); 
-                
+                case "products":
+                        return new ObjectQuery()
+                        {
+                            Query = R.SQL_STRING_QUERY.SELECT_QUERY_PRODUCTS,
+                            Message = R.ERROR_MESSAGE_SYSTEM.ERROR_LOAD_PRODUCTS,
+                            Adapter = DaProducts,
+                            DataTableName = "Dtproducts",
+                            DataSet = Ds
+                        };
+                case "master":     
+                    return new ObjectQuery()
+                    {
+                            Query = R.SQL_STRING_QUERY.SELECT_QUERY_MP_MASTER,
+                            Message = R.ERROR_MESSAGE_SYSTEM.ERROR_LOAD_MP_MASTER,
+                            Adapter = DaMateria,
+                            DataTableName = "DtMateria",
+                            DataSet = Ds
+                    };
+                case "details":
+                    return new ObjectQuery()
+                    {
+                        Query = R.SQL_STRING_QUERY.SELECT_QUERY_MP_DETAILS,
+                        Message = R.ERROR_MESSAGE_SYSTEM.ERROR_MP_DETAILS,
+                        Adapter = DaDetalle,
+                        DataTableName = "DtDetalle",
+                        DataSet = Ds
+                    };
+                case "prov":
+                    return new ObjectQuery()
+                    {
+                        Query = R.SQL_STRING_QUERY.SELECT_QUERY_PROVEEDORES,
+                        Message = R.ERROR_MESSAGE_SYSTEM.ERROR_MP_PROVEEDORES,
+                        Adapter = DaProvider,
+                        DataTableName = "DtProvider",
+                        DataSet = Ds
+                    };
+                case "transport":
+                    return new ObjectQuery()
+                    {
+                        Query = R.SQL_STRING_QUERY.SELECT_QUERY_TRANSPORTISTA ,
+                        Message = R.ERROR_MESSAGE_SYSTEM.ERROR_MP_TRANSPORT,
+                        Adapter = DaTransport,
+                        DataTableName = "DtTransport",
+                        DataSet = Ds
+                    };
+                default:
+                    {
+                        throw new ArgumentException($"Invalid table name at create object query : {table}");
+                    }
             }
-            catch (SqlException ex)
-            {
-                MessageBox.Show("error al cargar la tabla de encabezado de recepciones de materia prima. error code: " + ex.Message);
-                
-            }
+        }
+        public bool SetRelationsMateria()
+        {
+            throw new NotImplementedException();
         }
         public bool LoadConsecOrdenMateria()
         {
@@ -148,10 +139,7 @@ namespace Ritrama2025.Services.MateriaPrima
         {
             throw new NotImplementedException();
         }
-        public bool SetRelationsMateria()
-        {
-            throw new NotImplementedException();
-        }
+      
         public bool UpdateConsecOrdenMateria()
         {
             throw new NotImplementedException();
@@ -159,54 +147,6 @@ namespace Ritrama2025.Services.MateriaPrima
         public bool UpdateOrdenMateriaPrima(string orden)
         {
             throw new NotImplementedException();
-        }
-        public async Task LoadTableProveedores()
-        {
-            try
-            {
-                using SqlConnection connection = new(StringConnex);
-                await connection.OpenAsync();
-                SqlCommand comando = new()
-                {
-                    Connection = connection,
-                    CommandText = R.SQL_STRING_QUERY.SELECT_QUERY_PROVEEDORES,
-                    CommandType = CommandType.Text
-                };
-                await comando.ExecuteNonQueryAsync();
-                DaProvider.SelectCommand = comando;
-                DaProvider.Fill(Ds, "DtProvider");
-                await connection.CloseAsync();
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show("error al cargar la tabla de proveedores. error code: " + ex.Message);
-
-            }
-        }
-        public async Task LoadTableTransportista()
-        {
-            try
-            {
-                using SqlConnection connection = new(StringConnex);
-                await connection.OpenAsync();
-                SqlCommand comando = new()
-                {
-                    Connection = connection,
-                    CommandText = R.SQL_STRING_QUERY.SELECT_QUERY_TRANSPORTISTA,
-                    CommandType = CommandType.Text
-                };
-                await comando.ExecuteNonQueryAsync();
-                DaTransport.SelectCommand = comando;
-                DaTransport.Fill(Ds, "DtTransport");
-                await connection.CloseAsync();
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show("error al cargar la tabla de proveedores. error code: " + ex.Message);
-
-            }
-        }
-
-        
+        }     
     }
 }

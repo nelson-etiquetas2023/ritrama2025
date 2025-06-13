@@ -1,11 +1,13 @@
 ﻿
 using Ritrama2025.Models;
+using System.Data;
 
 namespace Ritrama2025.Services.MateriaPrima
 {
     public interface IServiceMateriaPrima
     {
-        Task LoadProductsAsync();
+        Task<DataSet> LoadData();
+        Task LoadProducts();
         Task LoadTableHeaderMateriaPrima();
         Task LoadTableDetailsMateriaPrima();
         Task LoadTableProveedores();

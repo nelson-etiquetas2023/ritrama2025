@@ -24,10 +24,10 @@ namespace Ritrama2025.Services
 
         public ProduccionService()
         {
-            if (Program.Configuration != null)
-            {
-                StringConnex = Convert.ToString(Program.Configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value)!;
-            }
+            //if (Program.Configuration != null)
+            //{
+            //    StringConnex = Convert.ToString(Program.Configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value)!;
+            //}
         }
         public async Task<DataSet> LoadDataOC()
         {

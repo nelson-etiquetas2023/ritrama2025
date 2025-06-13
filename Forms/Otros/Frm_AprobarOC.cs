@@ -10,7 +10,7 @@ namespace Ritrama2025.Forms.Otros
         public string NumeroOC { get; set; } = null!;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string TypeAction { get; set; } = null!;
-        readonly CommonService servicio = new();
+        //readonly CommonService servicio = new();
         public Frm_AprobarOC()
         {
             InitializeComponent();
@@ -30,12 +30,12 @@ namespace Ritrama2025.Forms.Otros
                 bot_cancel.Enabled = false;
                 bot_documentCheck.Enabled = false;
                 chk_closeOrden.Enabled = false;
-                DocumentCheckOC doc = servicio.DocumentCheckReadOC(NumeroOC);
-                txt_comentarios.Text = doc.Observaciones;
-                txt_person.Text = doc.PersonCheck;
-                txt_OrdenServicio.Text = doc.Orden_Servicio;
-                txt_OrdenTrabajo.Text = doc.Orden_Trabajo;
-                label_datetime.Text = "Este Documento se Aprtobo: " + doc.FechaCheck.ToString();
+                //DocumentCheckOC doc = servicio.DocumentCheckReadOC(NumeroOC);
+                //txt_comentarios.Text = doc.Observaciones;
+                //txt_person.Text = doc.PersonCheck;
+                //txt_OrdenServicio.Text = doc.Orden_Servicio;
+                //txt_OrdenTrabajo.Text = doc.Orden_Trabajo;
+                //label_datetime.Text = "Este Documento se Aprtobo: " + doc.FechaCheck.ToString();
             }
 
             
@@ -67,7 +67,7 @@ namespace Ritrama2025.Forms.Otros
                 Observaciones = txt_comentarios.Text,
                 FechaCheck = DateTime.Now
             };
-            servicio.DocumentCheckWriteOC(document);
+            //servicio.DocumentCheckWriteOC(document);
             this.Close();
         }
     }
