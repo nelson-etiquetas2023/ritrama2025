@@ -5,6 +5,7 @@ using Ritrama2025.Models;
 using Ritrama2025.Services;
 using Ritrama2025.Services.ExportData;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace Ritrama2025.Forms
 {
@@ -44,74 +45,82 @@ namespace Ritrama2025.Forms
                 return await Service.LoadDataDespachos();
             });
             Ds = task.Result;
-            //Enlace a datos Encabezado.
-            Bs.DataSource = Ds;
-            Bs.DataMember = "DtMasterDespachos";
-            //Enlace Datos DetalleRC.
-            BsDetalleRC.DataSource = Bs;
-            BsDetalleRC.DataMember = "FK_DESPACHOS_DETALLERC";
-            //Enlace Datos Items.
-            BsItems.DataSource = Bs;
-            BsItems.DataMember = "FK_DESPACHOS_ITEMS";
-            //Enlace Datos Grid Palet.
-            BsPalet.DataSource = Bs;
-            BsPalet.DataMember = "FK_DESPACHOS_PALET";
 
-            //Definicion de las columnas del grid rollos cortados.
-            DefColumnsGridRC();
-            //Definicion de las columnas del grid de Items.
-            DefColumnsGridItems();
-
-
-            //Definicion de las columnas del grid de Detalle de paleta.
-            grid_detalle_paletas.AutoGenerateColumns = false;
-            AGREGAR_COLUMN_GRID("number_palet", 70, "# Palet.", "number_palet", grid_detalle_paletas);
-            AGREGAR_COLUMN_GRID("medida", 70, "Medida", "medida", grid_detalle_paletas);
-            AGREGAR_COLUMN_GRID("contenido", 200, "Contenido", "contenido", grid_detalle_paletas);
-            AGREGAR_COLUMN_GRID("kilo_neto", 70, "Kilo Neto", "kilo_neto", grid_detalle_paletas);
-            AGREGAR_COLUMN_GRID("kilo_bruto", 70, "Kilo Bruto", "kilo_bruto", grid_detalle_paletas);
-            grid_detalle_paletas.DataSource = BsPalet;
-            //Binding Forms
-            txt_numero.DataBindings.Add("Text", Bs, "numero");
-            txt_fecha_despacho.DataBindings.Add("Text", Bs, "fecha");
-            txt_persondelivery.DataBindings.Add("Text", Bs, "person_contact");
-            txt_custid.DataBindings.Add("Text", Bs, "customer_id");
-            txt_transport_id.DataBindings.Add("Text", Bs, "transport_id");
-            txt_transport_name.DataBindings.Add("Text", Bs, "transporte");
-            txt_chofer_id.DataBindings.Add("Text", Bs, "chofer_id");
-            txt_chofer_name.DataBindings.Add("Text", Bs, "chofer");
-            txt_camion_id.DataBindings.Add("Text", Bs, "placas_id");
-            txt_camion_name.DataBindings.Add("Text", Bs, "camion");
-            txt_vend_id.DataBindings.Add("Text", Bs, "vendor_id");
-            cbo_embalaje.DataBindings.Add("Text", Bs, "packing");
-            txt_orden_trabajo.DataBindings.Add("Text", Bs, "orden_trabajo");
-            txt_orden_compra.DataBindings.Add("Text", Bs, "orden_compra");
-            cbo_tipoVenta.DataBindings.Add("Text", Bs, "tipo_venta");
-            txt_subtotal.DataBindings.Add("Text", Bs, "subtotal");
-            txt_porc_itbis.DataBindings.Add("Text", Bs, "porc_itbis");
-            txt_itbis.DataBindings.Add("Text", Bs, "itbis");
-            txt_totalmonto.DataBindings.Add("Text", Bs, "total$rd");
-            txt_custname.DataBindings.Add("Text", Bs, "customer_name");
-            txt_vendorname.DataBindings.Add("Text", Bs, "vendor_name");
-            txt_cant_total.DataBindings.Add("Text", Bs, "total_cantidad");
-            txt_msi_total.DataBindings.Add("Text", Bs, "total_msi");
-            txt_pie_total.DataBindings.Add("Text", Bs, "total_pie");
-            txt_kilos_total.DataBindings.Add("Text", Bs, "total_kilos");
-            txt_palet_kilo_neto.DataBindings.Add("Text", Bs, "total_kilos_netos_palet");
-            txt_palet_kilo_bruto.DataBindings.Add("Text", Bs, "total_kilos_brutos_palet");
-            //agregar la columna.
-            DataGridViewButtonColumn ColumnButton = new()
+            if (Ds.Tables.Count > 0) 
             {
-                Name = "btn_description",
-                HeaderText = "Accion",
-                Text = "...",
-                UseColumnTextForButtonValue = true,
-                Width = 60,
-            };
-            grid_detalle_paletas.Columns.Add(ColumnButton);
-            grid_detalle_paletas.Columns["btn_description"]!.DisplayIndex = 3;
-            //IR AL FINAL DE LA BASE DE DATOS LA ULTIMA ORDEN DE DESPACHO.
-            Bs.Position = Bs.Count - 1;
+                //Enlace a datos Encabezado.
+                Bs.DataSource = Ds;
+                Bs.DataMember = "DtMasterDespachos";
+                //Enlace Datos DetalleRC.
+                BsDetalleRC.DataSource = Bs;
+                BsDetalleRC.DataMember = "FK_DESPACHOS_DETALLERC";
+                //Enlace Datos Items.
+                BsItems.DataSource = Bs;
+                BsItems.DataMember = "FK_DESPACHOS_ITEMS";
+                //Enlace Datos Grid Palet.
+                BsPalet.DataSource = Bs;
+                BsPalet.DataMember = "FK_DESPACHOS_PALET";
+
+                //Definicion de las columnas del grid rollos cortados.
+                DefColumnsGridRC();
+                //Definicion de las columnas del grid de Items.
+                DefColumnsGridItems();
+                //Definicion de las columnas del grid de Detalle de paleta.
+                grid_detalle_paletas.AutoGenerateColumns = false;
+                AGREGAR_COLUMN_GRID("number_palet", 70, "# Palet.", "number_palet", grid_detalle_paletas);
+                AGREGAR_COLUMN_GRID("medida", 70, "Medida", "medida", grid_detalle_paletas);
+                AGREGAR_COLUMN_GRID("contenido", 200, "Contenido", "contenido", grid_detalle_paletas);
+                AGREGAR_COLUMN_GRID("kilo_neto", 70, "Kilo Neto", "kilo_neto", grid_detalle_paletas);
+                AGREGAR_COLUMN_GRID("kilo_bruto", 70, "Kilo Bruto", "kilo_bruto", grid_detalle_paletas);
+                grid_detalle_paletas.DataSource = BsPalet;
+                //Binding Forms
+                txt_numero.DataBindings.Add("Text", Bs, "numero");
+                txt_fecha_despacho.DataBindings.Add("Text", Bs, "fecha");
+                txt_persondelivery.DataBindings.Add("Text", Bs, "person_contact");
+                txt_custid.DataBindings.Add("Text", Bs, "customer_id");
+                txt_transport_id.DataBindings.Add("Text", Bs, "transport_id");
+                txt_transport_name.DataBindings.Add("Text", Bs, "transporte");
+                txt_chofer_id.DataBindings.Add("Text", Bs, "chofer_id");
+                txt_chofer_name.DataBindings.Add("Text", Bs, "chofer");
+                txt_camion_id.DataBindings.Add("Text", Bs, "placas_id");
+                txt_camion_name.DataBindings.Add("Text", Bs, "camion");
+                txt_vend_id.DataBindings.Add("Text", Bs, "vendor_id");
+                cbo_embalaje.DataBindings.Add("Text", Bs, "packing");
+                txt_orden_trabajo.DataBindings.Add("Text", Bs, "orden_trabajo");
+                txt_orden_compra.DataBindings.Add("Text", Bs, "orden_compra");
+                cbo_tipoVenta.DataBindings.Add("Text", Bs, "tipo_venta");
+                txt_subtotal.DataBindings.Add("Text", Bs, "subtotal");
+                txt_porc_itbis.DataBindings.Add("Text", Bs, "porc_itbis");
+                txt_itbis.DataBindings.Add("Text", Bs, "itbis");
+                txt_totalmonto.DataBindings.Add("Text", Bs, "total$rd");
+                txt_custname.DataBindings.Add("Text", Bs, "customer_name");
+                txt_vendorname.DataBindings.Add("Text", Bs, "vendor_name");
+                txt_cant_total.DataBindings.Add("Text", Bs, "total_cantidad");
+                txt_msi_total.DataBindings.Add("Text", Bs, "total_msi");
+                txt_pie_total.DataBindings.Add("Text", Bs, "total_pie");
+                txt_kilos_total.DataBindings.Add("Text", Bs, "total_kilos");
+                txt_palet_kilo_neto.DataBindings.Add("Text", Bs, "total_kilos_netos_palet");
+                txt_palet_kilo_bruto.DataBindings.Add("Text", Bs, "total_kilos_brutos_palet");
+                //agregar la columna.
+                DataGridViewButtonColumn ColumnButton = new()
+                {
+                    Name = "btn_description",
+                    HeaderText = "Accion",
+                    Text = "...",
+                    UseColumnTextForButtonValue = true,
+                    Width = 60,
+                };
+                grid_detalle_paletas.Columns.Add(ColumnButton);
+                grid_detalle_paletas.Columns["btn_description"]!.DisplayIndex = 3;
+                //IR AL FINAL DE LA BASE DE DATOS LA ULTIMA ORDEN DE DESPACHO.
+                Bs.Position = Bs.Count - 1;
+            }
+
+
+            
+
+
+            
         }
 
         private void Bot_primero_Click(object sender, EventArgs e)

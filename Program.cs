@@ -2,10 +2,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Ritrama2025.Forms;
+using Ritrama2025.Helpers;
 using Ritrama2025.Services;
 using Ritrama2025.Services.CommonData;
 using Ritrama2025.Services.MateriaPrima;
 using Ritrama2025.Services.ServiceLocator;
+
 
 namespace Ritrama2025
 {
@@ -32,10 +34,13 @@ namespace Ritrama2025
                     service.AddScoped<IProduccionService, ProduccionService>();
                     service.AddScoped<IDespachoService, DespachoService>();
                     service.AddScoped<IReportsService, ReportsService>();
+                    service.AddSingleton<FormManager>();
                     //injecccion de dependencias de los formularios.
-                    service.AddScoped<Main>();
-                    service.AddScoped<FrmMateriaPrima>();
-
+                    service.AddSingleton<Main>();
+                    service.AddTransient<FrmMateriaPrima>();
+                    service.AddTransient<FrmDespacho>();
+                    service.AddTransient<FrmCodeBarLabel>();
+                    service.AddTransient<FrmOrdenCorte>();
                 }).Build();
 
             ServiceLocator.Init(host.Services);

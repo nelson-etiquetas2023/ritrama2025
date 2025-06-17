@@ -40,7 +40,7 @@ namespace Ritrama2025
 
             public readonly static string SELECT_QUERY_MP_MASTER = "select numero,fecha_recepcion,fecha_pro,prov_id,orden_compra,persona_respons,notas,status,transport_id,guia_import,lote,doc_embarque,estado,total_cantidad,fecha_hora_close,anulado from OrdenMateria";
 
-            public readonly static string SELECT_QUERY_MP_DETAILS = "select product_id,cant_pedido,cant_real,width,length,msi,rollid,splice,ubicacion,core from ItemsMateria";
+            public readonly static string SELECT_QUERY_MP_DETAILS = "select numero,product_id,cant_pedido,cant_real,width,length,msi,rollid,splice,ubicacion,core from ItemsMateria";
 
         }
         public static class ERROR_MESSAGE_SYSTEM 

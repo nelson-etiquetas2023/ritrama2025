@@ -12,7 +12,7 @@ namespace Ritrama2025.Services.MateriaPrima
         Task LoadTableDetailsMateriaPrima();
         Task LoadTableProveedores();
         Task LoadTableTransportista();
-        bool SetRelationsMateria();
+        Task SetRelationsTables();
         bool AddOrdenMateriaPrima(OrdenRecepcion orden);
         bool UpdateOrdenMateriaPrima(string orden);
         bool CloseOrdenMateriaPrima(string orden);

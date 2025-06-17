@@ -38,11 +38,31 @@ namespace Ritrama2025.Services.MateriaPrima
         }
         public async Task<DataSet> LoadData() 
         {
+            //limpiar el dataset cualdo se carga el form varias veces.
+            if (Ds.Tables.Count > 0)
+            {
+                DataTable tabla = Ds.Tables["DtMateria"]!;
+
+                // Eliminar todas las restricciones del master
+                var tempConstraints = tabla.Constraints.Cast<Constraint>().ToList();
+                foreach (var constraint in tempConstraints)
+                {
+                    tabla.Constraints.Remove(constraint);
+                }
+                //eliminar las relaciones
+                Ds.Relations.Clear();
+                Ds.Tables.Clear();
+                Ds.Clear();
+                Ds.AcceptChanges();
+            }
+
+
             await LoadTableHeaderMateriaPrima();
             await LoadTableDetailsMateriaPrima();
             await LoadTableProveedores();
             await LoadTableTransportista();
             await LoadProducts();
+            await SetRelationsTables();
             return Ds;
         }
 
@@ -123,10 +143,35 @@ namespace Ritrama2025.Services.MateriaPrima
                     }
             }
         }
-        public bool SetRelationsMateria()
+        public async Task SetRelationsTables()
         {
-            throw new NotImplementedException();
+            await Task.Run(() =>
+            {
+                CreateRelation();
+            });
         }
+
+        private void CreateRelation() 
+        {
+            //relacion master-details.
+            DataColumn ParentCol0 = Ds.Tables["DtMateria"]!.Columns["numero"]!;
+            DataColumn ChildCol0 = Ds.Tables["DtDetalle"]!.Columns["numero"]!;
+            DataRelation master_details = new("MASTER_DETAILS", ParentCol0, ChildCol0, false);
+            Ds.Relations.Add(master_details);
+            //relacion details-products.
+            DataColumn ParentCol1 = Ds.Tables["Dtproducts"]!.Columns["product_id"]!;
+            DataColumn ChildCol1 = Ds.Tables["DtDetalle"]!.Columns["product_id"]!;
+            DataRelation details_products = new("DETAILS_PRODUCTS", ParentCol1, ChildCol1, false);
+            Ds.Relations.Add(details_products);
+            Ds.Tables["DtDetalle"]!.Columns.Add("product_name", Type.GetType("System.String")!, "parent(DETAILS_PRODUCTS).Product_Name");
+            //relacion provedores-master.
+            //DataColumn ParentCol2 = Ds.Tables["Dtprovider"]!.Columns["proveedor_id"]!;
+            //DataColumn ChildCol2 = Ds.Tables["DtMateria"]!.Columns["prov_id"]!;
+            //DataRelation master_provider = new("MASTER_DETAILS", ParentCol2, ChildCol2, false);
+            //Ds.Relations.Add(master_provider);
+            //Ds.Tables["DtMateria"]!.Columns.Add("product_name", Type.GetType("System.String")!, "parent(DETAILS_PRODUCTS).Product_Name");
+        }
+       
         public bool LoadConsecOrdenMateria()
         {
             return true;

@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             panel1 = new Panel();
+            OPC_MENU_LABELS = new Button();
             panel_foto = new Panel();
             lbl_user_name = new Label();
             pictureBox1 = new PictureBox();
@@ -50,6 +51,7 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.WindowFrame;
+            panel1.Controls.Add(OPC_MENU_LABELS);
             panel1.Controls.Add(panel_foto);
             panel1.Controls.Add(button4);
             panel1.Controls.Add(button3);
@@ -65,6 +67,22 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(221, 924);
             panel1.TabIndex = 0;
+            // 
+            // OPC_MENU_LABELS
+            // 
+            OPC_MENU_LABELS.Dock = DockStyle.Top;
+            OPC_MENU_LABELS.FlatAppearance.BorderSize = 0;
+            OPC_MENU_LABELS.FlatStyle = FlatStyle.Flat;
+            OPC_MENU_LABELS.Font = new Font("Segoe UI", 12.2264156F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            OPC_MENU_LABELS.Image = (Image)resources.GetObject("OPC_MENU_LABELS.Image");
+            OPC_MENU_LABELS.Location = new Point(0, 630);
+            OPC_MENU_LABELS.Name = "OPC_MENU_LABELS";
+            OPC_MENU_LABELS.Size = new Size(221, 70);
+            OPC_MENU_LABELS.TabIndex = 12;
+            OPC_MENU_LABELS.Text = "Etiquetas";
+            OPC_MENU_LABELS.TextImageRelation = TextImageRelation.ImageBeforeText;
+            OPC_MENU_LABELS.UseVisualStyleBackColor = true;
+            OPC_MENU_LABELS.Click += OPC_MENU_LABELS_Click;
             // 
             // panel_foto
             // 
@@ -274,5 +292,6 @@
         private Panel panel_foto;
         private PictureBox pictureBox1;
         private Label lbl_user_name;
+        private Button OPC_MENU_LABELS;
     }
 }

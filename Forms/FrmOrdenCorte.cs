@@ -11,7 +11,7 @@ namespace Ritrama2025.Forms
 {
     public partial class FrmOrdenCorte : Form
     {
-        private readonly ProduccionService Service = new();
+        private readonly IProduccionService Service = null!;
         private readonly ExportDataService exportDataService = new();
         private readonly ReportsService reportService = new();
         DataSet Ds = new();
@@ -22,9 +22,10 @@ namespace Ritrama2025.Forms
         DataRowView ChildRowCortes = null!;
         DataRowView RollosCortados = null!;
 
-        public FrmOrdenCorte()
+        public FrmOrdenCorte(IProduccionService service)
         {
             InitializeComponent();
+            Service = service;
         }
 
         private void FrmOrdenCorte_Load(object sender, EventArgs e)

@@ -8,12 +8,13 @@ namespace Ritrama2025.Services
 {
     public class DespachoService : IDespachoService
     {
+        public DataSet Ds = new();
         public string StringConnex { get; set; } = null!;
         public string ErrorMsg { get; set; } = null!;
         public IConfiguration Config { get; }
 
         private readonly List<Despacho> lista = [];
-        public DataSet Ds = new();
+        
         public DataTable DtMasterDespachos = new();
         public SqlDataAdapter DaMasterDespachos = new();
         public DataTable DtClientes = new();
@@ -292,19 +293,38 @@ namespace Ritrama2025.Services
         {
             try
             {
+                //limpiar el dataset cualdo se carga el form varias veces.
+                if (Ds.Tables.Count > 0) 
+                {
+                    DataTable tabla = Ds.Tables["DtMasterDespachos"]!;
+
+                    // Eliminar todas las restricciones del master
+                    var tempConstraints = tabla.Constraints.Cast<Constraint>().ToList();
+                    foreach (var constraint in tempConstraints)
+                    {
+                        tabla.Constraints.Remove(constraint);
+                    }
+                    //eliminar las relaciones
+                    Ds.Relations.Clear();
+                    Ds.Tables.Clear();
+                    Ds.Clear();
+                    Ds.AcceptChanges();
+                }
+    
                 using SqlConnection conn = new(StringConnex);
                 //1.- Carga del Encabezado de Despacho
-                SqlCommand ComandoMaster = new()
+                using SqlCommand ComandoMaster = new()
                 {
                     Connection = conn,
                     CommandType = CommandType.Text,
                     CommandText = "SELECT numero,fecha,customer_id,person_contact,transporte,chofer,camion,vendor_id,packing,orden_trabajo,orden_compra,tipo_venta,subtotal,porc_itbis,itbis,total$rd,transport_id,chofer_id,placas_id,total_cantidad,total_msi,total_pie,total_kilos,subtotal,total_kilos_netos_palet,total_kilos_brutos_palet FROM despacho"
                 };
                 await conn.OpenAsync();
-                SqlDataReader readerMaster = await ComandoMaster.ExecuteReaderAsync();
+                using SqlDataReader readerMaster = await ComandoMaster.ExecuteReaderAsync();
                 await readerMaster.CloseAsync();
                 DaMasterDespachos.SelectCommand = ComandoMaster;
                 DaMasterDespachos.Fill(Ds, "DtMasterDespachos");
+              
                 //2.- Carga de Clientes.
                 SqlCommand ComandoClientes = new()
                 {
@@ -393,6 +413,8 @@ namespace Ritrama2025.Services
                 await readerCamion.CloseAsync();
                 DaCamion.SelectCommand = ComandoCamion;
                 DaCamion.Fill(Ds, "DtCamion");
+                Ds.EnforceConstraints = true;
+
 
 
                 RelationDataset();
@@ -429,13 +451,13 @@ namespace Ritrama2025.Services
                 DataColumn ParentCol3 = Ds.Tables["DtMasterDespachos"]!.Columns["numero"]!;
                 DataColumn ChildCol3 = Ds.Tables["DtItems"]!.Columns["numero"]!;
                 DataRelation Despacho_Items = new("FK_DESPACHOS_ITEMS",
-                    ParentCol3, ChildCol3);
+                    ParentCol3, ChildCol3,false);
                 Ds.Relations.Add(Despacho_Items);
                 //Relacion entre master y detalle de palet.
                 DataColumn ParentCol4 = Ds.Tables["DtMasterDespachos"]!.Columns["numero"]!;
                 DataColumn ChildCol4 = Ds.Tables["DtPalet"]!.Columns["numero"]!;
                 DataRelation Despacho_Palet = new("FK_DESPACHOS_PALET",
-                   ParentCol4, ChildCol4);
+                   ParentCol4, ChildCol4,false);
                 Ds.Relations.Add(Despacho_Palet);
                 // Relacion entre Despachos y transportista
                 DataColumn ParentCol5 = Ds.Tables["DtTransport"]!.Columns["transport_id"]!;

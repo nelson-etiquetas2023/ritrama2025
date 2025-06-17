@@ -1,19 +1,23 @@
-﻿using Microsoft.Extensions.Configuration;
-using Ritrama2025.Forms;
-using Ritrama2025.Services.MateriaPrima;
+﻿using Ritrama2025.Forms;
 using System.ComponentModel;
 using Ritrama2025.Services.ServiceLocator;
+using System.Runtime.CompilerServices;
+using Microsoft.Extensions.DependencyInjection;
+using Ritrama2025.Helpers;
 
 
 namespace Ritrama2025
 {
     public partial class Main : Form
     {
-        public Main()
-        {
-            InitializeComponent(); 
-        }
+        private readonly FormManager _formManager;
         
+        public Main(FormManager formManager)
+        {
+            InitializeComponent();
+            _formManager = formManager;
+        }
+
         private void Main_Load(object sender, EventArgs e)
         {
             CREATE_PROPERTY_GRID();
@@ -31,21 +35,28 @@ namespace Ritrama2025
 
         private void Bot_despacho_Click(object sender, EventArgs e)
         {
+            _formManager.ShowForm<FrmDespacho>(this);
             
         }
 
         private void Bot_ordencorte_Click(object sender, EventArgs e)
         {
-            
-            
+            _formManager.ShowForm<FrmOrdenCorte>(this);
         }
 
         private void Bot_recepciones_Click(object sender, EventArgs e)
         {
-            var FormMateria = ServiceLocator.Get<FrmMateriaPrima>();
-            FormMateria.ShowDialog();
+            _formManager.ShowForm<FrmMateriaPrima>(this);
+        }
+
+        private void OPC_MENU_LABELS_Click(object sender, EventArgs e)
+        {
+            var FormCodeBar = ServiceLocator.Get<FrmCodeBarLabel>();
+            FormCodeBar.MdiParent = this;
+            FormCodeBar.Show();
         }
     }
+
     public class Configuration
     {
         [Category("Apariencia")]

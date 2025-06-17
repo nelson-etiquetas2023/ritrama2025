@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Ritrama2025.Services.CommonData;
-using Ritrama2025.Services.MateriaPrima;
+﻿using Ritrama2025.Services.MateriaPrima;
 using System.Data;
 
 namespace Ritrama2025.Forms
@@ -36,6 +34,7 @@ namespace Ritrama2025.Forms
         }
         private void LoadDataAsync() 
         {
+
             //carga los datos de la base dfe datos.
             var task = Task.Run(async () =>
             {

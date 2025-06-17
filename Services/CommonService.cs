@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using Ritrama2025.Models;
 using System.Data;
-using System.Drawing.Imaging.Effects;
 
 namespace Ritrama2025.Services
 {

@@ -4,6 +4,9 @@
     <_LastSelectedProfileId>C:\Programacion\Ritrama2025\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="Forms\FrmCodeBarLabel.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\FrmDespacho.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -45,6 +48,9 @@
     <None Update="Reports\DsConduce.xsd">
       <SubType>Designer</SubType>
     </None>
+    <EmbeddedResource Update="Forms\FrmOrdenCorte.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Update="Reports\Production\DsProduccion.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>

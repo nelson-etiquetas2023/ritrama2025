@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using Ritrama2025.Models;
 using System.Data;
 
@@ -6,6 +7,9 @@ namespace Ritrama2025.Services
 {
     public class ProduccionService : IProduccionService
     {
+        public IConfiguration Config { get; } = null!;
+
+
         public string StringConnex { get; set; } = null!;
         public string ErrorMsg { get; set; } = null!;
         public DataSet Ds = new();
@@ -22,17 +26,35 @@ namespace Ritrama2025.Services
         public SqlDataAdapter DaCustomer = new();
         public DataTable DtCustomer = new();
 
-        public ProduccionService()
+        public ProduccionService(IConfiguration config)
         {
-            //if (Program.Configuration != null)
-            //{
-            //    StringConnex = Convert.ToString(Program.Configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value)!;
-            //}
+            Config = config;
+            if (Config != null)
+            {
+                StringConnex = Convert.ToString(Config.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value)!;
+            }
         }
         public async Task<DataSet> LoadDataOC()
         {
             try
             {
+                //limpiar el dataset para segundas cargas.
+                if (Ds.Tables.Count > 0)
+                {
+                    DataTable tabla = Ds.Tables["DtMaster"]!;
+
+                    // Eliminar todas las restricciones del master
+                    var tempConstraints = tabla.Constraints.Cast<Constraint>().ToList();
+                    foreach (var constraint in tempConstraints)
+                    {
+                        tabla.Constraints.Remove(constraint);
+                    }
+                    //eliminar las relaciones
+                    Ds.Relations.Clear();
+                    Ds.Tables.Clear();
+                    Ds.Clear();
+                    Ds.AcceptChanges();
+                }
                 //1.- cargar la tabla de encabezado de las Ordenes de Corte.
                 using SqlConnection conn = new(StringConnex);
                 SqlCommand ComandoMaster = new()
@@ -413,6 +435,6 @@ namespace Ritrama2025.Services
             {
                 MessageBox.Show("error al guardar los codigo unicos de los rollos" + ex.Message);
             }
-        }  
+        }
     }
 }
