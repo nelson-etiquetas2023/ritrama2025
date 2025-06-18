@@ -1,5 +1,10 @@
-﻿using System.Text;
+﻿using System.Net;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using UniPRT.Sdk.Comm;
+using UniPRT.Sdk.Settings;
+using Windows.ApplicationModel.AppService;
 using Zebra.Sdk.Comm;
 using Zebra.Sdk.Printer.Discovery;
 
@@ -65,7 +70,7 @@ namespace Ritrama2025.Forms
             Connection thePrinterConn = null!;
             try
             {
-                    thePrinterConn = ConnectionBuilder.Build($"USB:{usbDriverName}");
+                thePrinterConn = ConnectionBuilder.Build($"USB:{usbDriverName}");
                 thePrinterConn.Open();
 
                 string zplFinal;
@@ -94,5 +99,126 @@ namespace Ritrama2025.Forms
                 thePrinterConn?.Close();
             }
         }
+
+
+
+        #region TscPrinters
+        private static void MainSettingsTscPrinters()
+        {
+            IComm   ptrComm;
+            ptrComm = new UniPRT.Sdk.Comm.TcpConnection("192.168.1.50", UniPRT.Sdk.Comm.TcpConnection.DEFAULT_MGMT_PORT);
+            ptrComm.Open();
+            Console.WriteLine(Environment.NewLine + "Reading some settings..." + Environment.NewLine);
+            ReadSomeSettingsTscPrinters(ptrComm);
+        }
+
+        private static void ReadSomeSettingsTscPrinters(IComm ptrComm)
+        {
+            try
+            {
+                if (null != ptrComm)
+                {
+                    if (!ptrComm.Connected)
+                    {
+                        MessageBox.Show("Error: no connection");
+                        return;
+                    }
+                    SettingsReadWrite mysetting = new(ptrComm);
+                    // Read individual settings if needed
+                    Console.WriteLine($"LCD Units: '{mysetting.GetValue("LCD.LabelUnits")}'");
+                    Console.WriteLine($"Printer Resolution : '{mysetting.GetValue("Printer.Head.DPI-d")}'");
+                    Console.WriteLine($"LCD Language: '{mysetting.GetValue("LCD.Languaje")}'");
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show($"Error: {err}");
+                throw;
+            }
+        }
+
+        #endregion
+
+        #region CodigoCommon
+        private async void PreviewLabel(string zpl)
+        {
+            if (string.IsNullOrWhiteSpace(zpl))
+            {
+                MessageBox.Show("Ingrese contenido ZPL para previsualizar.");
+                return;
+            }
+
+
+            try
+            {
+                Image? etiqueta = await Task.Run(() => ObtenerImagenZplDesdeLabelary(zpl));
+
+                if (etiqueta != null)
+                {
+                    previewLabels.Image = etiqueta;
+                }
+                else
+                {
+                    MessageBox.Show("Error al obtener la vista previa: ");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar vista previa:" + ex.Message);
+
+            }
+        }
+
+        private static async Task<Image?> ObtenerImagenZplDesdeLabelary(string zpl)
+        {
+            if (string.IsNullOrWhiteSpace(zpl))
+            {
+                MessageBox.Show("El ZPL está vacío.");
+                return null;
+            }
+
+            using var client = new HttpClient();
+
+            var request = new HttpRequestMessage(HttpMethod.Post, "http://api.labelary.com/v1/printers/8dpmm/labels/4x6/0/")
+            {
+                Content = new StringContent(zpl, Encoding.UTF8, "text/plain")
+            };
+
+            request.Headers.Accept.Clear();
+            request.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("image/png"));
+
+            var response = await client.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                using var stream = await response.Content.ReadAsStreamAsync();
+                return Image.FromStream(stream);
+            }
+            else
+            {
+                string detalle = await response.Content.ReadAsStringAsync();
+                MessageBox.Show($"Error {response.StatusCode}: {detalle}", "Labelary");
+                return null;
+            }
+        }
+        #endregion
+
+
+        private async void Btn_PreviewLabels_Click(object sender, EventArgs e)
+        {
+            string zplfile = "^XA^FO50,50^ADN,36,20^FDHola Mundo!^FS^XZ";
+
+            var task = Task.Run(() => ObtenerImagenZplDesdeLabelary(zplfile));
+
+            var img = await task;
+
+
+
+            if (img != null)
+            {
+                previewLabels.Image = img;
+            }
+        }
     }
 }
+

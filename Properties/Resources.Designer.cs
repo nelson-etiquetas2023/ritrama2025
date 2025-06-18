@@ -223,6 +223,16 @@ namespace Ritrama2025.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap job_seeker_50px {
+            get {
+                object obj = ResourceManager.GetObject("job_seeker_50px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap LOGO {
             get {
                 object obj = ResourceManager.GetObject("LOGO", resourceCulture);
@@ -286,6 +296,16 @@ namespace Ritrama2025.Properties {
         internal static System.Drawing.Bitmap print_48px {
             get {
                 object obj = ResourceManager.GetObject("print_48px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap print_48px1 {
+            get {
+                object obj = ResourceManager.GetObject("print_48px1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

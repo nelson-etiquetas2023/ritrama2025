@@ -28,6 +28,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="UniPRT.Sdk" Version="1.0.0" />
     <PackageReference Include="Zebra.Printer.SDK" Version="3.0.3337" />
     <PackageReference Include="ClosedXML" Version="0.105.0" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />

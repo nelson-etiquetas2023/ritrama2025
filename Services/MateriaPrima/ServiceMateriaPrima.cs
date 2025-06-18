@@ -55,8 +55,6 @@ namespace Ritrama2025.Services.MateriaPrima
                 Ds.Clear();
                 Ds.AcceptChanges();
             }
-
-
             await LoadTableHeaderMateriaPrima();
             await LoadTableDetailsMateriaPrima();
             await LoadTableProveedores();
@@ -165,13 +163,19 @@ namespace Ritrama2025.Services.MateriaPrima
             Ds.Relations.Add(details_products);
             Ds.Tables["DtDetalle"]!.Columns.Add("product_name", Type.GetType("System.String")!, "parent(DETAILS_PRODUCTS).Product_Name");
             //relacion provedores-master.
-            //DataColumn ParentCol2 = Ds.Tables["Dtprovider"]!.Columns["proveedor_id"]!;
-            //DataColumn ChildCol2 = Ds.Tables["DtMateria"]!.Columns["prov_id"]!;
-            //DataRelation master_provider = new("MASTER_DETAILS", ParentCol2, ChildCol2, false);
-            //Ds.Relations.Add(master_provider);
-            //Ds.Tables["DtMateria"]!.Columns.Add("product_name", Type.GetType("System.String")!, "parent(DETAILS_PRODUCTS).Product_Name");
+            DataColumn ParentCol2 = Ds.Tables["Dtprovider"]!.Columns["proveedor_id"]!;
+            DataColumn ChildCol2 = Ds.Tables["DtMateria"]!.Columns["prov_id"]!;
+            DataRelation master_provider = new("MASTER_PROVIDER", ParentCol2, ChildCol2, false);
+            Ds.Relations.Add(master_provider);
+            Ds.Tables["DtMateria"]!.Columns.Add("proveedor_name", Type.GetType("System.String")!, "parent(MASTER_PROVIDER).Proveedor_Name");
+            //relacion transportista-master.
+            DataColumn ParentCol3 = Ds.Tables["DtTransport"]!.Columns["transport_id"]!;
+            DataColumn ChildCol3 = Ds.Tables["DtMateria"]!.Columns["transport_id"]!;
+            DataRelation master_transport = new("MASTER_TRANSPORT", ParentCol3, ChildCol3, false);
+            Ds.Relations.Add(master_transport);
+            Ds.Tables["DtMateria"]!.Columns.Add("transport_name", Type.GetType("System.String")!, "parent(MASTER_TRANSPORT).Transport_Name");
         }
-       
+
         public bool LoadConsecOrdenMateria()
         {
             return true;

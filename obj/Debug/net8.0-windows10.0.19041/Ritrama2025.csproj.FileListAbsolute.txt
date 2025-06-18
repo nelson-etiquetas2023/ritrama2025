@@ -204,3 +204,12 @@ C:\Programacion\Ritrama2025\obj\Debug\net8.0-windows10.0.19041\Ritrama2025.pdb
 C:\Programacion\Ritrama2025\obj\Debug\net8.0-windows10.0.19041\Ritrama2025.genruntimeconfig.cache
 C:\Programacion\Ritrama2025\obj\Debug\net8.0-windows10.0.19041\ref\Ritrama2025.dll
 C:\Programacion\Ritrama2025\obj\Debug\net8.0-windows10.0.19041\Ritrama2025.Forms.FrmCodeBarLabel.resources
+C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\DataMatrix.NetCore.dll
+C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\InTheHand.Net.Bluetooth.dll
+C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\LibUsbDotNet.LibUsbDotNet.dll
+C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\Comm.dll
+C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\Discovery.dll
+C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\Json.dll
+C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\LabelMaker.dll
+C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\UniPRTSdk.dll
+C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\Utilities.dll

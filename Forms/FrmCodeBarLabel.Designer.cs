@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            richTextBox1 = new RichTextBox();
             btn_buscar_printer = new Button();
             textBox1 = new TextBox();
             textBox2 = new TextBox();
@@ -38,55 +37,68 @@
             rad_label1 = new RadioButton();
             rad_label2 = new RadioButton();
             rad_label3 = new RadioButton();
+            label2 = new Label();
+            label3 = new Label();
+            groupBox1 = new GroupBox();
+            grp_marca_printer = new GroupBox();
+            rad_zebra = new RadioButton();
+            radioButton3 = new RadioButton();
+            previewLabels = new PictureBox();
+            label4 = new Label();
+            btn_PreviewLabels = new Button();
             ((System.ComponentModel.ISupportInitialize)numero_copias).BeginInit();
+            groupBox1.SuspendLayout();
+            grp_marca_printer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)previewLabels).BeginInit();
             SuspendLayout();
-            // 
-            // richTextBox1
-            // 
-            richTextBox1.Location = new Point(12, 12);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(302, 96);
-            richTextBox1.TabIndex = 0;
-            richTextBox1.Text = "";
             // 
             // btn_buscar_printer
             // 
-            btn_buscar_printer.Location = new Point(12, 172);
+            btn_buscar_printer.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_buscar_printer.Image = Properties.Resources.job_seeker_50px;
+            btn_buscar_printer.ImageAlign = ContentAlignment.TopCenter;
+            btn_buscar_printer.Location = new Point(12, 12);
             btn_buscar_printer.Name = "btn_buscar_printer";
-            btn_buscar_printer.Size = new Size(302, 23);
+            btn_buscar_printer.Size = new Size(302, 66);
             btn_buscar_printer.TabIndex = 1;
             btn_buscar_printer.Text = "Buscar Printer Instaladas local";
+            btn_buscar_printer.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_buscar_printer.UseVisualStyleBackColor = true;
             btn_buscar_printer.Click += Btn_buscar_printer_Click;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(12, 114);
+            textBox1.Font = new Font("Noto Sans", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox1.Location = new Point(486, 37);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(302, 23);
+            textBox1.Size = new Size(302, 25);
             textBox1.TabIndex = 2;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(12, 143);
+            textBox2.Font = new Font("Noto Sans", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox2.Location = new Point(486, 87);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(302, 23);
+            textBox2.Size = new Size(302, 24);
             textBox2.TabIndex = 3;
             // 
             // btn_send_printer_usb
             // 
-            btn_send_printer_usb.Location = new Point(12, 201);
+            btn_send_printer_usb.Font = new Font("Noto Sans", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_send_printer_usb.Image = Properties.Resources.print_48px1;
+            btn_send_printer_usb.Location = new Point(12, 84);
             btn_send_printer_usb.Name = "btn_send_printer_usb";
-            btn_send_printer_usb.Size = new Size(302, 23);
+            btn_send_printer_usb.Size = new Size(302, 66);
             btn_send_printer_usb.TabIndex = 4;
             btn_send_printer_usb.Text = "Enviar ZPL impresora USB local";
+            btn_send_printer_usb.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_send_printer_usb.UseVisualStyleBackColor = true;
             btn_send_printer_usb.Click += Button1_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 243);
+            label1.Location = new Point(12, 160);
             label1.Name = "label1";
             label1.Size = new Size(112, 15);
             label1.TabIndex = 5;
@@ -94,7 +106,7 @@
             // 
             // numero_copias
             // 
-            numero_copias.Location = new Point(130, 241);
+            numero_copias.Location = new Point(12, 178);
             numero_copias.Name = "numero_copias";
             numero_copias.Size = new Size(120, 23);
             numero_copias.TabIndex = 6;
@@ -103,7 +115,7 @@
             // rad_label1
             // 
             rad_label1.AutoSize = true;
-            rad_label1.Location = new Point(12, 320);
+            rad_label1.Location = new Point(6, 24);
             rad_label1.Name = "rad_label1";
             rad_label1.Size = new Size(79, 19);
             rad_label1.TabIndex = 7;
@@ -114,7 +126,7 @@
             // rad_label2
             // 
             rad_label2.AutoSize = true;
-            rad_label2.Location = new Point(12, 345);
+            rad_label2.Location = new Point(6, 49);
             rad_label2.Name = "rad_label2";
             rad_label2.Size = new Size(79, 19);
             rad_label2.TabIndex = 8;
@@ -125,7 +137,7 @@
             // rad_label3
             // 
             rad_label3.AutoSize = true;
-            rad_label3.Location = new Point(12, 370);
+            rad_label3.Location = new Point(6, 74);
             rad_label3.Name = "rad_label3";
             rad_label3.Size = new Size(79, 19);
             rad_label3.TabIndex = 9;
@@ -133,32 +145,132 @@
             rad_label3.Text = "Formato 3";
             rad_label3.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Noto Sans", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(486, 19);
+            label2.Name = "label2";
+            label2.Size = new Size(235, 18);
+            label2.TabIndex = 10;
+            label2.Text = "Nombre de la Impresora Selecionadea";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Noto Sans", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Location = new Point(486, 66);
+            label3.Name = "label3";
+            label3.Size = new Size(131, 18);
+            label3.TabIndex = 11;
+            label3.Text = "Cadena de Conexion";
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(rad_label3);
+            groupBox1.Controls.Add(rad_label1);
+            groupBox1.Controls.Add(rad_label2);
+            groupBox1.Location = new Point(12, 319);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(129, 119);
+            groupBox1.TabIndex = 12;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Formatos";
+            // 
+            // grp_marca_printer
+            // 
+            grp_marca_printer.Controls.Add(rad_zebra);
+            grp_marca_printer.Controls.Add(radioButton3);
+            grp_marca_printer.Location = new Point(147, 319);
+            grp_marca_printer.Name = "grp_marca_printer";
+            grp_marca_printer.Size = new Size(129, 119);
+            grp_marca_printer.TabIndex = 13;
+            grp_marca_printer.TabStop = false;
+            grp_marca_printer.Text = "Marca Printer";
+            // 
+            // rad_zebra
+            // 
+            rad_zebra.AutoSize = true;
+            rad_zebra.Location = new Point(6, 24);
+            rad_zebra.Name = "rad_zebra";
+            rad_zebra.Size = new Size(55, 19);
+            rad_zebra.TabIndex = 7;
+            rad_zebra.TabStop = true;
+            rad_zebra.Text = "Zebra";
+            rad_zebra.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            radioButton3.AutoSize = true;
+            radioButton3.Location = new Point(6, 49);
+            radioButton3.Name = "radioButton3";
+            radioButton3.Size = new Size(41, 19);
+            radioButton3.TabIndex = 8;
+            radioButton3.TabStop = true;
+            radioButton3.Text = "Tsc";
+            radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // previewLabels
+            // 
+            previewLabels.Location = new Point(486, 138);
+            previewLabels.Name = "previewLabels";
+            previewLabels.Size = new Size(302, 300);
+            previewLabels.TabIndex = 14;
+            previewLabels.TabStop = false;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Noto Sans", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Location = new Point(486, 118);
+            label4.Name = "label4";
+            label4.Size = new Size(139, 18);
+            label4.TabIndex = 15;
+            label4.Text = "Preview de la Etiqueta";
+            // 
+            // btn_PreviewLabels
+            // 
+            btn_PreviewLabels.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_PreviewLabels.Location = new Point(382, 138);
+            btn_PreviewLabels.Name = "btn_PreviewLabels";
+            btn_PreviewLabels.Size = new Size(98, 101);
+            btn_PreviewLabels.TabIndex = 16;
+            btn_PreviewLabels.Text = "Preview";
+            btn_PreviewLabels.UseVisualStyleBackColor = true;
+            btn_PreviewLabels.Click += Btn_PreviewLabels_Click;
+            // 
             // FrmCodeBarLabel
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(rad_label3);
-            Controls.Add(rad_label2);
-            Controls.Add(rad_label1);
+            Controls.Add(btn_PreviewLabels);
+            Controls.Add(label4);
+            Controls.Add(previewLabels);
+            Controls.Add(grp_marca_printer);
+            Controls.Add(groupBox1);
+            Controls.Add(label3);
+            Controls.Add(label2);
             Controls.Add(numero_copias);
             Controls.Add(label1);
             Controls.Add(btn_send_printer_usb);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
             Controls.Add(btn_buscar_printer);
-            Controls.Add(richTextBox1);
             Name = "FrmCodeBarLabel";
             Text = "Configuracion de Etiquetas de Codigo de Barras";
             Load += FrmCodeBarLabel_Load;
             ((System.ComponentModel.ISupportInitialize)numero_copias).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            grp_marca_printer.ResumeLayout(false);
+            grp_marca_printer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)previewLabels).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private RichTextBox richTextBox1;
         private Button btn_buscar_printer;
         private TextBox textBox1;
         private TextBox textBox2;
@@ -168,5 +280,14 @@
         private RadioButton rad_label1;
         private RadioButton rad_label2;
         private RadioButton rad_label3;
+        private Label label2;
+        private Label label3;
+        private GroupBox groupBox1;
+        private GroupBox grp_marca_printer;
+        private RadioButton rad_zebra;
+        private RadioButton radioButton3;
+        private PictureBox previewLabels;
+        private Label label4;
+        private Button btn_PreviewLabels;
     }
 }
