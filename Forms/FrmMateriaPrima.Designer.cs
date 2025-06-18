@@ -59,7 +59,6 @@
             groupBox1 = new GroupBox();
             rad_DocumentProcess = new RadioButton();
             rad_OrdenAbierta = new RadioButton();
-            GridItems = new DataGridView();
             txt_notas = new RichTextBox();
             label8 = new Label();
             txt_total_cantidad = new TextBox();
@@ -81,11 +80,12 @@
             txt_data_document = new TextBox();
             label15 = new Label();
             btn_AppMovil = new Button();
+            GridItems = new DataGridView();
             toolStrip1.SuspendLayout();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)GridItems).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)GridItems).BeginInit();
             SuspendLayout();
             // 
             // toolStrip1
@@ -106,6 +106,7 @@
             btn_primero.Name = "btn_primero";
             btn_primero.Size = new Size(75, 30);
             btn_primero.Text = "Primero";
+            btn_primero.Click += Btn_primero_Click;
             // 
             // btn_anterior
             // 
@@ -115,6 +116,7 @@
             btn_anterior.Name = "btn_anterior";
             btn_anterior.Size = new Size(75, 30);
             btn_anterior.Text = "Anterior";
+            btn_anterior.Click += Btn_anterior_Click;
             // 
             // btn_siguiente
             // 
@@ -123,6 +125,7 @@
             btn_siguiente.Name = "btn_siguiente";
             btn_siguiente.Size = new Size(76, 41);
             btn_siguiente.Text = "Siguiente";
+            btn_siguiente.Click += Btn_siguiente_Click;
             // 
             // btn_ultimo
             // 
@@ -132,6 +135,7 @@
             btn_ultimo.Name = "btn_ultimo";
             btn_ultimo.Size = new Size(75, 30);
             btn_ultimo.Text = "Ultimo";
+            btn_ultimo.Click += Btn_ultimo_Click;
             // 
             // btn_create
             // 
@@ -145,6 +149,7 @@
             // btn_cancel
             // 
             btn_cancel.AutoSize = false;
+            btn_cancel.Enabled = false;
             btn_cancel.Image = (Image)resources.GetObject("btn_cancel.Image");
             btn_cancel.ImageTransparentColor = Color.Magenta;
             btn_cancel.Name = "btn_cancel";
@@ -154,6 +159,7 @@
             // btn_save
             // 
             btn_save.AutoSize = false;
+            btn_save.Enabled = false;
             btn_save.Image = (Image)resources.GetObject("btn_save.Image");
             btn_save.ImageTransparentColor = Color.Magenta;
             btn_save.Name = "btn_save";
@@ -225,6 +231,7 @@
             // 
             // btn_ProvBuscar
             // 
+            btn_ProvBuscar.Enabled = false;
             btn_ProvBuscar.Location = new Point(975, 148);
             btn_ProvBuscar.Margin = new Padding(3, 4, 3, 4);
             btn_ProvBuscar.Name = "btn_ProvBuscar";
@@ -262,6 +269,7 @@
             // 
             // btn_TransportBuscar
             // 
+            btn_TransportBuscar.Enabled = false;
             btn_TransportBuscar.Location = new Point(975, 203);
             btn_TransportBuscar.Margin = new Padding(3, 4, 3, 4);
             btn_TransportBuscar.Name = "btn_TransportBuscar";
@@ -308,7 +316,8 @@
             // 
             // btn_RecepBuscar
             // 
-            btn_RecepBuscar.Location = new Point(648, 280);
+            btn_RecepBuscar.Enabled = false;
+            btn_RecepBuscar.Location = new Point(651, 275);
             btn_RecepBuscar.Margin = new Padding(3, 4, 3, 4);
             btn_RecepBuscar.Name = "btn_RecepBuscar";
             btn_RecepBuscar.Size = new Size(53, 28);
@@ -338,7 +347,7 @@
             // 
             groupBox1.Controls.Add(rad_DocumentProcess);
             groupBox1.Controls.Add(rad_OrdenAbierta);
-            groupBox1.Location = new Point(846, 660);
+            groupBox1.Location = new Point(527, 690);
             groupBox1.Margin = new Padding(3, 4, 3, 4);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(3, 4, 3, 4);
@@ -370,23 +379,6 @@
             rad_OrdenAbierta.TabStop = true;
             rad_OrdenAbierta.Text = "Orden Abierta";
             rad_OrdenAbierta.UseVisualStyleBackColor = true;
-            // 
-            // GridItems
-            // 
-            GridItems.AllowUserToAddRows = false;
-            GridItems.AllowUserToDeleteRows = false;
-            GridItems.AllowUserToResizeRows = false;
-            GridItems.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            GridItems.CellBorderStyle = DataGridViewCellBorderStyle.RaisedVertical;
-            GridItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            GridItems.Location = new Point(14, 330);
-            GridItems.Margin = new Padding(3, 4, 3, 4);
-            GridItems.MultiSelect = false;
-            GridItems.Name = "GridItems";
-            GridItems.ReadOnly = true;
-            GridItems.RowHeadersWidth = 32;
-            GridItems.Size = new Size(1014, 259);
-            GridItems.TabIndex = 21;
             // 
             // txt_notas
             // 
@@ -427,7 +419,8 @@
             // 
             // btn_addRows
             // 
-            btn_addRows.Location = new Point(1034, 330);
+            btn_addRows.Enabled = false;
+            btn_addRows.Location = new Point(1034, 310);
             btn_addRows.Margin = new Padding(3, 4, 3, 4);
             btn_addRows.Name = "btn_addRows";
             btn_addRows.Size = new Size(107, 28);
@@ -437,7 +430,8 @@
             // 
             // btn_deleteRows
             // 
-            btn_deleteRows.Location = new Point(1034, 365);
+            btn_deleteRows.Enabled = false;
+            btn_deleteRows.Location = new Point(1034, 346);
             btn_deleteRows.Margin = new Padding(3, 4, 3, 4);
             btn_deleteRows.Name = "btn_deleteRows";
             btn_deleteRows.Size = new Size(107, 28);
@@ -503,6 +497,7 @@
             // 
             // btn_OrdenBuscar
             // 
+            btn_OrdenBuscar.Enabled = false;
             btn_OrdenBuscar.Location = new Point(203, 146);
             btn_OrdenBuscar.Margin = new Padding(3, 4, 3, 4);
             btn_OrdenBuscar.Name = "btn_OrdenBuscar";
@@ -558,7 +553,7 @@
             // chk_anulado
             // 
             chk_anulado.AutoSize = true;
-            chk_anulado.Location = new Point(855, 750);
+            chk_anulado.Location = new Point(877, 716);
             chk_anulado.Margin = new Padding(3, 4, 3, 4);
             chk_anulado.Name = "chk_anulado";
             chk_anulado.Size = new Size(151, 22);
@@ -586,6 +581,7 @@
             // 
             // btn_AppMovil
             // 
+            btn_AppMovil.Enabled = false;
             btn_AppMovil.Location = new Point(1029, 148);
             btn_AppMovil.Margin = new Padding(3, 4, 3, 4);
             btn_AppMovil.Name = "btn_AppMovil";
@@ -594,11 +590,23 @@
             btn_AppMovil.Text = "App Movil";
             btn_AppMovil.UseVisualStyleBackColor = true;
             // 
+            // GridItems
+            // 
+            GridItems.AllowUserToAddRows = false;
+            GridItems.AllowUserToDeleteRows = false;
+            GridItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            GridItems.Location = new Point(14, 310);
+            GridItems.Name = "GridItems";
+            GridItems.ReadOnly = true;
+            GridItems.Size = new Size(1014, 260);
+            GridItems.TabIndex = 41;
+            // 
             // FrmMateriaPrima
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1156, 787);
+            Controls.Add(GridItems);
             Controls.Add(btn_AppMovil);
             Controls.Add(txt_data_document);
             Controls.Add(label15);
@@ -617,7 +625,6 @@
             Controls.Add(label9);
             Controls.Add(label8);
             Controls.Add(txt_notas);
-            Controls.Add(GridItems);
             Controls.Add(groupBox1);
             Controls.Add(txt_guia);
             Controls.Add(label7);
@@ -649,10 +656,10 @@
             toolStrip1.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)GridItems).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)GridItems).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -686,7 +693,6 @@
         private GroupBox groupBox1;
         private RadioButton rad_DocumentProcess;
         private RadioButton rad_OrdenAbierta;
-        private DataGridView GridItems;
         private RichTextBox txt_notas;
         private Label label8;
         private TextBox txt_total_cantidad;
@@ -711,5 +717,6 @@
         private ToolStripButton btn_ultimo;
         private ToolStripButton btn_create;
         private ToolStripButton btn_cancel;
+        private DataGridView GridItems;
     }
 }
