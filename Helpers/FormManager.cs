@@ -7,7 +7,7 @@ namespace Ritrama2025.Helpers
     {
         private static readonly Dictionary<Type, Form> _forms = [];
 
-        public T ShowForm<T>(Form mdiParent) where T : Form
+        public static T ShowForm<T>(Form mdiParent) where T : Form
         {
             var type = typeof(T);
 

@@ -3,9 +3,9 @@ using Microsoft.Extensions.Configuration;
 using Ritrama2025.Models;
 using System.Data;
 
-namespace Ritrama2025.Services
+namespace Ritrama2025.Services.CommonService
 {
-    public class CommonService
+    public class CommonService : ICommonService
     {
         public string StringConnex { get; set; } = null!;
         public string ErrorMsg { get; set; } = null!;
@@ -85,7 +85,6 @@ namespace Ritrama2025.Services
                 MessageBox.Show("Error al guardar la entidad de transporte: " + ErrorMsg);
             }
         }
-
         public void DeleteTransportEntity(string Id)
         {
             using SqlConnection conn = new(StringConnex);
@@ -107,51 +106,6 @@ namespace Ritrama2025.Services
                 MessageBox.Show("Error al eliminar la entidad de transporte: " + ErrorMsg);
             }
         }
-
-        public void DeleteChoferEntity(string Id)
-        {
-            using SqlConnection conn = new(StringConnex);
-            SqlCommand comando = new()
-            {
-                Connection = conn,
-                CommandType = CommandType.Text,
-                CommandText = "DELETE FROM chofer WHERE chofer_id=@p1"
-            };
-            comando.Parameters.Add(new SqlParameter("@p1", SqlDbType.NVarChar) { Value = Id });
-            try
-            {
-                conn.Open();
-                comando.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {
-                ErrorMsg = ex.Message;
-                MessageBox.Show("Error al eliminar la entidad de chofer: " + ErrorMsg);
-            }
-        }
-
-        public void DeleteCamionEntity(string Id)
-        {
-            using SqlConnection conn = new(StringConnex);
-            SqlCommand comando = new()
-            {
-                Connection = conn,
-                CommandType = CommandType.Text,
-                CommandText = "DELETE FROM camion WHERE placas_id=@p1"
-            };
-            comando.Parameters.Add(new SqlParameter("@p1", SqlDbType.NVarChar) { Value = Id });
-            try
-            {
-                conn.Open();
-                comando.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {
-                ErrorMsg = ex.Message;
-                MessageBox.Show("Error al eliminar la entidad de camion: " + ErrorMsg);
-            }
-        }
-
         public void SaveChoferEntity(string Id, string Name)
         {
             using SqlConnection conn = new(StringConnex);
@@ -172,6 +126,27 @@ namespace Ritrama2025.Services
             {
                 ErrorMsg = ex.Message;
                 MessageBox.Show("Error al guardar la entidad de chofer: " + ErrorMsg);
+            }
+        }
+        public void DeleteChoferEntity(string Id)
+        {
+            using SqlConnection conn = new(StringConnex);
+            SqlCommand comando = new()
+            {
+                Connection = conn,
+                CommandType = CommandType.Text,
+                CommandText = "DELETE FROM chofer WHERE chofer_id=@p1"
+            };
+            comando.Parameters.Add(new SqlParameter("@p1", SqlDbType.NVarChar) { Value = Id });
+            try
+            {
+                conn.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                ErrorMsg = ex.Message;
+                MessageBox.Show("Error al eliminar la entidad de chofer: " + ErrorMsg);
             }
         }
         public void SaveCamionEntity(string Id, string Name)
@@ -196,6 +171,100 @@ namespace Ritrama2025.Services
                 MessageBox.Show("Error al guardar la entidad de camion: " + ErrorMsg);
             }
         }
+        public void DeleteCamionEntity(string Id)
+        {
+            using SqlConnection conn = new(StringConnex);
+            SqlCommand comando = new()
+            {
+                Connection = conn,
+                CommandType = CommandType.Text,
+                CommandText = "DELETE FROM camion WHERE placas_id=@p1"
+            };
+            comando.Parameters.Add(new SqlParameter("@p1", SqlDbType.NVarChar) { Value = Id });
+            try
+            {
+                conn.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                ErrorMsg = ex.Message;
+                MessageBox.Show("Error al eliminar la entidad de camion: " + ErrorMsg);
+            }
+        }
+        public void SaveProvaiderEntity(string Id, string Name)
+        {
+            using SqlConnection conn = new(StringConnex);
+            SqlCommand comando = new()
+            {
+                Connection = conn,
+                CommandType = CommandType.Text,
+                CommandText = "INSERT INTO provider (proveedor_id, proveedor_name,unidad_master_1,unidad_master_2,phone,direccion,email,anulado) VALUES (@p1, @p2, 0, 0, 'sn','','',0)"
+            };
+            comando.Parameters.Add(new SqlParameter("@p1", SqlDbType.NVarChar) { Value = Id });
+            comando.Parameters.Add(new SqlParameter("@p2", SqlDbType.NVarChar) { Value = Name });
+            try
+            {
+                conn.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                ErrorMsg = ex.Message;
+                MessageBox.Show("Error al guardar la entidad de proveedor: " + ErrorMsg);
+            }
+        }
+
+        public void DeleteProvaiderEntity(string Id)
+        {
+            using SqlConnection conn = new(StringConnex);
+            SqlCommand comando = new()
+            {
+                Connection = conn,
+                CommandType = CommandType.Text,
+                CommandText = "DELETE FROM provider WHERE proveedor_id=@p1"
+            };
+            comando.Parameters.Add(new SqlParameter("@p1", SqlDbType.NVarChar) { Value = Id });
+            try
+            {
+                conn.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                ErrorMsg = ex.Message;
+                MessageBox.Show("Error al eliminar la entidad de proveedor: " + ErrorMsg);
+            }
+        }
+
+        public void SavePersonEntity(string Id, string Name)
+        {
+            using SqlConnection conn = new(StringConnex);
+            SqlCommand comando = new()
+            {
+                Connection = conn,
+                CommandType = CommandType.Text,
+                CommandText = "INSERT INTO person (person_id, person_name) VALUES (@p1, @p2)"
+            };
+            comando.Parameters.Add(new SqlParameter("@p1", SqlDbType.NVarChar) { Value = Id });
+            comando.Parameters.Add(new SqlParameter("@p2", SqlDbType.NVarChar) { Value = Name });
+            try
+            {
+                conn.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                ErrorMsg = ex.Message;
+                MessageBox.Show("Error al guardar la entidad de persona: " + ErrorMsg);
+            }
+        }
+
+        public void DeletePersonEntity(string Id)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool DocumentCheckWriteOC(DocumentCheckOC doc)
         {
             try
@@ -259,5 +328,7 @@ namespace Ritrama2025.Services
             }
 
         }
+
+
     }
 }

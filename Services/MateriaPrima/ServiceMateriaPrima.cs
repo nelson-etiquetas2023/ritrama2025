@@ -22,6 +22,8 @@ namespace Ritrama2025.Services.MateriaPrima
         public DataTable DtTransport = new();
         public SqlDataAdapter DaProducts = new();
         public DataTable DtProducts = new();
+        public SqlDataAdapter DaPerson = new();
+        public DataTable DtPerson = new();
 
         public readonly Dictionary<string, (string query, string message, SqlDataAdapter adapter, string dataTableName)> mapTables;
 
@@ -43,7 +45,8 @@ namespace Ritrama2025.Services.MateriaPrima
                 ["details"] = (R.SQL_STRING_QUERY.SELECT_QUERY_MP_DETAILS, R.ERROR_MESSAGE_SYSTEM.ERROR_MP_DETAILS, DaDetalle, "DtDetalle"),
                 ["products"] = (R.SQL_STRING_QUERY.SELECT_QUERY_PRODUCTS, R.ERROR_MESSAGE_SYSTEM.ERROR_LOAD_PRODUCTS, DaProducts, "Dtproducts"),
                 ["prov"] = (R.SQL_STRING_QUERY.SELECT_QUERY_PROVEEDORES, R.ERROR_MESSAGE_SYSTEM.ERROR_MP_PROVEEDORES, DaProvider, "DtProvider"),
-                ["transport"] = (R.SQL_STRING_QUERY.SELECT_QUERY_TRANSPORTISTA, R.ERROR_MESSAGE_SYSTEM.ERROR_MP_TRANSPORT, DaTransport, "DtTransport")
+                ["transport"] = (R.SQL_STRING_QUERY.SELECT_QUERY_TRANSPORTISTA, R.ERROR_MESSAGE_SYSTEM.ERROR_MP_TRANSPORT, DaTransport, "DtTransport"),
+                ["person"] = (R.SQL_STRING_QUERY.SELECT_QUERY_PERSON,R.ERROR_MESSAGE_SYSTEM.ERROR_LOAD_PERSON,DaPerson,"DtPerson") 
             };
         }
 
@@ -60,6 +63,7 @@ namespace Ritrama2025.Services.MateriaPrima
             await LoadTableProveedores();
             await LoadTableTransportista();
             await LoadProducts();
+            await LoadPerson();
             await SetRelationsTables();
             return Ds;
         }
@@ -68,6 +72,7 @@ namespace Ritrama2025.Services.MateriaPrima
         public async Task LoadProducts() => await LoadTableByName("products");
         public async Task LoadTableProveedores() => await LoadTableByName("prov");
         public async Task LoadTableTransportista() => await LoadTableByName("transport");
+        public async Task LoadPerson() => await LoadTableByName("person");
         private ObjectQuery QUERY_COMMANDS(string table)
         {
             if (!mapTables.TryGetValue(table, out var props))
@@ -99,7 +104,7 @@ namespace Ritrama2025.Services.MateriaPrima
             Ds.Tables["DtDetalle"]!.Columns.Add("product_name", Type.GetType("System.String")!, "parent(DETAILS_PRODUCTS).Product_Name");
             //relacion provedores-master.
             DataColumn ParentCol2 = Ds.Tables["Dtprovider"]!.Columns["proveedor_id"]!;
-            DataColumn ChildCol2 = Ds.Tables["DtMateria"]!.Columns["prov_id"]!;
+            DataColumn ChildCol2 = Ds.Tables["DtMateria"]!.Columns["proveedor_id"]!;
             DataRelation master_provider = new("MASTER_PROVIDER", ParentCol2, ChildCol2, false);
             Ds.Relations.Add(master_provider);
             Ds.Tables["DtMateria"]!.Columns.Add("proveedor_name", Type.GetType("System.String")!, "parent(MASTER_PROVIDER).Proveedor_Name");
@@ -109,15 +114,21 @@ namespace Ritrama2025.Services.MateriaPrima
             DataRelation master_transport = new("MASTER_TRANSPORT", ParentCol3, ChildCol3, false);
             Ds.Relations.Add(master_transport);
             Ds.Tables["DtMateria"]!.Columns.Add("transport_name", Type.GetType("System.String")!, "parent(MASTER_TRANSPORT).Transport_Name");
+            //relacion transportista-master.
+            DataColumn ParentCol4 = Ds.Tables["DtPerson"]!.Columns["person_id"]!;
+            DataColumn ChildCol4 = Ds.Tables["DtMateria"]!.Columns["person_id"]!;
+            DataRelation master_person = new("MASTER_PERSON", ParentCol4, ChildCol4, false);
+            Ds.Relations.Add(master_person);
+            Ds.Tables["DtMateria"]!.Columns.Add("person_name", Type.GetType("System.String")!, "parent(MASTER_PERSON).Person_Name");
             // relacion master-details.
             DataColumn ParentCol0 = Ds.Tables["Dtmateria"]!.Columns["numero"]!;
             DataColumn ChildCol0 = Ds.Tables["DtDetalle"]!.Columns["numero"]!;
             DataRelation master_details = new("FK_MASTER_DETAILS", ParentCol0, ChildCol0, false);
             Ds.Relations.Add(master_details);
         }
-        public bool LoadConsecOrdenMateria()
+        public int LoadConsecOrdenMateria(string filtro)
         {
-            return true;
+            return ServiceData.GetConsecutive(filtro);
         }
         public bool AddOrdenMateriaPrima(OrdenRecepcion orden)
         {

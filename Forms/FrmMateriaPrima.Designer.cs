@@ -51,7 +51,7 @@
             btn_TransportBuscar = new Button();
             txt_OrdenCompra = new TextBox();
             label5 = new Label();
-            txt_recepcionista = new TextBox();
+            txt_person_name = new TextBox();
             label6 = new Label();
             btn_RecepBuscar = new Button();
             txt_guia = new TextBox();
@@ -67,7 +67,6 @@
             btn_deleteRows = new Button();
             txt_lote = new TextBox();
             label10 = new Label();
-            txt_embarque = new TextBox();
             label11 = new Label();
             txt_fecha_produccion = new DateTimePicker();
             label12 = new Label();
@@ -81,6 +80,8 @@
             label15 = new Label();
             btn_AppMovil = new Button();
             GridItems = new DataGridView();
+            txt_person_id = new TextBox();
+            txt_embarque = new TextBox();
             toolStrip1.SuspendLayout();
             groupBox1.SuspendLayout();
             panel1.SuspendLayout();
@@ -97,6 +98,7 @@
             toolStrip1.Size = new Size(1156, 44);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
+            toolStrip1.ItemClicked += ToolStrip1_ItemClicked;
             // 
             // btn_primero
             // 
@@ -144,7 +146,8 @@
             btn_create.ImageTransparentColor = Color.Magenta;
             btn_create.Name = "btn_create";
             btn_create.Size = new Size(75, 30);
-            btn_create.Text = "Crear";
+            btn_create.Text = "Nuevo";
+            btn_create.Click += Btn_create_Click;
             // 
             // btn_cancel
             // 
@@ -239,6 +242,7 @@
             btn_ProvBuscar.TabIndex = 8;
             btn_ProvBuscar.Text = "...";
             btn_ProvBuscar.UseVisualStyleBackColor = true;
+            btn_ProvBuscar.Click += Btn_ProvBuscar_Click;
             // 
             // txt_transport_name
             // 
@@ -277,6 +281,7 @@
             btn_TransportBuscar.TabIndex = 12;
             btn_TransportBuscar.Text = "...";
             btn_TransportBuscar.UseVisualStyleBackColor = true;
+            btn_TransportBuscar.Click += Btn_TransportBuscar_Click;
             // 
             // txt_OrdenCompra
             // 
@@ -296,19 +301,19 @@
             label5.TabIndex = 13;
             label5.Text = "Orden de Compra :";
             // 
-            // txt_recepcionista
+            // txt_person_name
             // 
-            txt_recepcionista.Location = new Point(454, 278);
-            txt_recepcionista.Margin = new Padding(3, 4, 3, 4);
-            txt_recepcionista.Name = "txt_recepcionista";
-            txt_recepcionista.ReadOnly = true;
-            txt_recepcionista.Size = new Size(191, 25);
-            txt_recepcionista.TabIndex = 16;
+            txt_person_name.Location = new Point(623, 277);
+            txt_person_name.Margin = new Padding(3, 4, 3, 4);
+            txt_person_name.Name = "txt_person_name";
+            txt_person_name.ReadOnly = true;
+            txt_person_name.Size = new Size(191, 25);
+            txt_person_name.TabIndex = 16;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(454, 257);
+            label6.Location = new Point(536, 257);
             label6.Name = "label6";
             label6.Size = new Size(97, 18);
             label6.TabIndex = 15;
@@ -317,13 +322,14 @@
             // btn_RecepBuscar
             // 
             btn_RecepBuscar.Enabled = false;
-            btn_RecepBuscar.Location = new Point(651, 275);
+            btn_RecepBuscar.Location = new Point(820, 275);
             btn_RecepBuscar.Margin = new Padding(3, 4, 3, 4);
             btn_RecepBuscar.Name = "btn_RecepBuscar";
             btn_RecepBuscar.Size = new Size(53, 28);
             btn_RecepBuscar.TabIndex = 17;
             btn_RecepBuscar.Text = "...";
             btn_RecepBuscar.UseVisualStyleBackColor = true;
+            btn_RecepBuscar.Click += Btn_RecepBuscar_Click;
             // 
             // txt_guia
             // 
@@ -420,23 +426,28 @@
             // btn_addRows
             // 
             btn_addRows.Enabled = false;
+            btn_addRows.Image = (Image)resources.GetObject("btn_addRows.Image");
             btn_addRows.Location = new Point(1034, 310);
             btn_addRows.Margin = new Padding(3, 4, 3, 4);
             btn_addRows.Name = "btn_addRows";
-            btn_addRows.Size = new Size(107, 28);
+            btn_addRows.Size = new Size(107, 41);
             btn_addRows.TabIndex = 26;
             btn_addRows.Text = "Agregar";
+            btn_addRows.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_addRows.UseVisualStyleBackColor = true;
+            btn_addRows.Click += Btn_addRows_Click;
             // 
             // btn_deleteRows
             // 
             btn_deleteRows.Enabled = false;
-            btn_deleteRows.Location = new Point(1034, 346);
+            btn_deleteRows.Image = (Image)resources.GetObject("btn_deleteRows.Image");
+            btn_deleteRows.Location = new Point(1034, 359);
             btn_deleteRows.Margin = new Padding(3, 4, 3, 4);
             btn_deleteRows.Name = "btn_deleteRows";
-            btn_deleteRows.Size = new Size(107, 28);
+            btn_deleteRows.Size = new Size(107, 41);
             btn_deleteRows.TabIndex = 27;
             btn_deleteRows.Text = "Borrar";
+            btn_deleteRows.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_deleteRows.UseVisualStyleBackColor = true;
             // 
             // txt_lote
@@ -456,16 +467,6 @@
             label10.Size = new Size(95, 18);
             label10.TabIndex = 28;
             label10.Text = "Numero Lote :";
-            // 
-            // txt_embarque
-            // 
-            txt_embarque.Location = new Point(306, 278);
-            txt_embarque.Margin = new Padding(3, 4, 3, 4);
-            txt_embarque.Name = "txt_embarque";
-            txt_embarque.ReadOnly = true;
-            txt_embarque.Size = new Size(140, 25);
-            txt_embarque.TabIndex = 31;
-            txt_embarque.UseWaitCursor = true;
             // 
             // label11
             // 
@@ -601,11 +602,30 @@
             GridItems.Size = new Size(1014, 260);
             GridItems.TabIndex = 41;
             // 
+            // txt_person_id
+            // 
+            txt_person_id.Location = new Point(536, 278);
+            txt_person_id.Margin = new Padding(3, 4, 3, 4);
+            txt_person_id.Name = "txt_person_id";
+            txt_person_id.ReadOnly = true;
+            txt_person_id.Size = new Size(80, 25);
+            txt_person_id.TabIndex = 42;
+            // 
+            // txt_embarque
+            // 
+            txt_embarque.Location = new Point(307, 279);
+            txt_embarque.Name = "txt_embarque";
+            txt_embarque.ReadOnly = true;
+            txt_embarque.Size = new Size(129, 25);
+            txt_embarque.TabIndex = 43;
+            // 
             // FrmMateriaPrima
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1156, 787);
+            Controls.Add(txt_embarque);
+            Controls.Add(txt_person_id);
             Controls.Add(GridItems);
             Controls.Add(btn_AppMovil);
             Controls.Add(txt_data_document);
@@ -615,7 +635,6 @@
             Controls.Add(btn_OrdenBuscar);
             Controls.Add(txt_fecha_produccion);
             Controls.Add(label12);
-            Controls.Add(txt_embarque);
             Controls.Add(label11);
             Controls.Add(txt_lote);
             Controls.Add(label10);
@@ -629,7 +648,7 @@
             Controls.Add(txt_guia);
             Controls.Add(label7);
             Controls.Add(btn_RecepBuscar);
-            Controls.Add(txt_recepcionista);
+            Controls.Add(txt_person_name);
             Controls.Add(label6);
             Controls.Add(txt_OrdenCompra);
             Controls.Add(label5);
@@ -685,7 +704,7 @@
         private Button btn_TransportBuscar;
         private TextBox txt_OrdenCompra;
         private Label label5;
-        private TextBox txt_recepcionista;
+        private TextBox txt_person_name;
         private Label label6;
         private Button btn_RecepBuscar;
         private TextBox txt_guia;
@@ -701,7 +720,6 @@
         private Button btn_deleteRows;
         private TextBox txt_lote;
         private Label label10;
-        private TextBox txt_embarque;
         private Label label11;
         private DateTimePicker txt_fecha_produccion;
         private Label label12;
@@ -718,5 +736,7 @@
         private ToolStripButton btn_create;
         private ToolStripButton btn_cancel;
         private DataGridView GridItems;
+        private TextBox txt_person_id;
+        private TextBox txt_embarque;
     }
 }

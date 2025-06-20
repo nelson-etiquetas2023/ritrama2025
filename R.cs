@@ -32,15 +32,17 @@ namespace Ritrama2025
         }
         public static class SQL_STRING_QUERY 
         {
-            public readonly static string SELECT_QUERY_PROVEEDORES  = "SELECT Proveedor_ID,Proveedor_Name,Preveedor_phone,Preveedor_Dir,Preveedor_email,anulado,unidad_master_1,unidad_master_2  FROM provider";
+            public readonly static string SELECT_QUERY_PROVEEDORES  = "SELECT Proveedor_ID,Proveedor_Name,phone,direccion,email,anulado,unidad_master_1,unidad_master_2  FROM provider";
 
             public readonly static string SELECT_QUERY_TRANSPORTISTA = "SELECT transport_id,transport_name FROM transporte";
 
             public readonly static string SELECT_QUERY_PRODUCTS = "SELECT product_id,product_name,product_descrip,product_ref,codebar,category_id,masterRolls,rollo_cortado,resmas,graphics,anulado,precio,code_rc,ratio FROM producto";
 
-            public readonly static string SELECT_QUERY_MP_MASTER = "select numero,fecha_recepcion,fecha_pro,prov_id,orden_compra,persona_respons,notas,status,transport_id,guia_import,lote,doc_embarque,estado,total_cantidad,fecha_hora_close,anulado from OrdenMateria";
+            public readonly static string SELECT_QUERY_MP_MASTER = "select numero,fecha_recepcion,fecha_pro,proveedor_id,orden_compra,persona_respons,notas,status,transport_id,guia_import,lote,doc_embarque,estado,total_cantidad,fecha_hora_close,anulado,person_id from OrdenMateria";
 
             public readonly static string SELECT_QUERY_MP_DETAILS = "select numero,product_id,type,cant_pedido,cant_real,width,length,msi,rollid,splice,ubicacion,core from ItemsMateria";
+
+            public readonly static string SELECT_QUERY_PERSON = "SELECT person_id, person_name FROM person";
 
         }
         public static class ERROR_MESSAGE_SYSTEM 
@@ -52,6 +54,8 @@ namespace Ritrama2025
             public static readonly string ERROR_MP_PROVEEDORES = "error al cargar la tabla de proveedores en el modulo de la materia prima. error code: ";
 
             public static readonly string ERROR_MP_TRANSPORT = "error al cargar la tabla de proveedores. error code: ";
+            public static readonly string ERROR_LOAD_PERSON = "error al cargar la tabla de PERSON. error code: ";
+
         }
         public static class  COMMAND
         {

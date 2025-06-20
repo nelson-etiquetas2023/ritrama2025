@@ -35,18 +35,18 @@ namespace Ritrama2025
 
         private void Bot_despacho_Click(object sender, EventArgs e)
         {
-            _formManager.ShowForm<FrmDespacho>(this);
+            FormManager.ShowForm<FrmDespacho>(this);
             
         }
 
         private void Bot_ordencorte_Click(object sender, EventArgs e)
         {
-            _formManager.ShowForm<FrmOrdenCorte>(this);
+            FormManager.ShowForm<FrmOrdenCorte>(this);
         }
 
         private void Bot_recepciones_Click(object sender, EventArgs e)
         {
-            _formManager.ShowForm<FrmMateriaPrima>(this);
+            FormManager.ShowForm<FrmMateriaPrima>(this);
         }
 
         private void OPC_MENU_LABELS_Click(object sender, EventArgs e)

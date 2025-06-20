@@ -1,5 +1,6 @@
 ﻿using Ritrama2025.Forms.Otros;
-using Ritrama2025.Services;
+using Ritrama2025.Services.CommonService;
+using Ritrama2025.Services.ServiceLocator;
 using System.ComponentModel;
 using System.Data;
 
@@ -8,6 +9,20 @@ namespace Ritrama2025.Forms.Seleccion
 {
     public partial class FrmSeleccion : Form
     {
+        private static readonly Dictionary<string, (String IdCol, string DesCol)> Columnas = new() 
+        {
+            ["clientes"] = ("customer_id", "customer_name"),
+            ["vendedores"] = ("vendor_id", "vendor_name"),
+            ["Transporte"] = ("transport_id", "transport_name"),
+            ["chofer"] = ("chofer_id", "chofer_name"),
+            ["camion"] = ("placas_id", "camion_name"),
+            ["operadores"] = ("id_operador", "nombre"),
+            ["Proveedor"] = ("proveedor_id", "proveedor_name"),
+            ["Persona"] = ("person_id", "person_name"),
+            ["Producto"] = ("product_id","product_name")
+        };
+        readonly ICommonService service = ServiceLocator.Get<ICommonService>();
+
         public FrmSeleccion()
         {
             InitializeComponent();
@@ -39,36 +54,12 @@ namespace Ritrama2025.Forms.Seleccion
             Numero_reg.Text = Convert.ToString(Dv.Count) + " Registro Encontrados";
             titleform.Text = Titulo;
             bot_buscar.Focus();
-            if (Titulo == "Clientes")
+            if (Columnas.TryGetValue(Titulo,out var cols)) 
             {
-                colname1 = "customer_id";
-                colname2 = "customer_name";
+                colname1 = cols.IdCol;
+                colname2 = cols.DesCol;
             }
-            if (Titulo == "Vendedores")
-            {
-                colname1 = "vendor_id";
-                colname2 = "vendor_name";
-            }
-            if (Titulo == "Transporte")
-            {
-                colname1 = "transport_id";
-                colname2 = "transport_name";
-            }
-            if (Titulo == "Chofer")
-            {
-                colname1 = "chofer_id";
-                colname2 = "chofer_name";
-            }
-            if (Titulo == "Camion")
-            {
-                colname1 = "placas_id";
-                colname2 = "camion_name";
-            }
-            if (Titulo == "Operadores")
-            {
-                colname1 = "id_operador";
-                colname2 = "nombre";
-            }
+
             EstilosGrid();
         }
         private void BuscarItems()
@@ -121,39 +112,16 @@ namespace Ritrama2025.Forms.Seleccion
 
         private void Btn_add_new_Click(object sender, EventArgs e)
         {
-            if (Titulo == "Transporte")
+            if (Titulo is "Transporte" or "chofer" or "camion" or "Proveedor" or "Persona" or "Producto" ) 
             {
-                Frm_AddNew frmNew = new()
+                var fromNew = new Frm_AddNew()
                 {
-                    TitleForm = "Agregar Transportes",
+                    TitleForm = $"Agregar {Titulo}",
                     Dt = DtItems,
-                    NombreEntidad = "Transporte"
-
+                    NombreEntidad = Titulo
                 };
-                frmNew.ShowDialog();
-                DtItems = frmNew.Dt;
-            }
-            if (Titulo == "Chofer")
-            {
-                Frm_AddNew frmNew = new()
-                {
-                    TitleForm = "Agregar Choferes",
-                    Dt = DtItems,
-                    NombreEntidad = "Chofer"
-                };
-                frmNew.ShowDialog();
-                DtItems = frmNew.Dt;
-            }
-            if (Titulo == "Camion")
-            {
-                Frm_AddNew frmNew = new()
-                {
-                    TitleForm = "Agregar Camiones",
-                    Dt = DtItems,
-                    NombreEntidad = "Camion"
-                };
-                frmNew.ShowDialog();
-                DtItems = frmNew.Dt;
+                fromNew.ShowDialog();
+                DtItems = fromNew.Dt;
             }
         }
 
@@ -168,17 +136,22 @@ namespace Ritrama2025.Forms.Seleccion
                 if(Titulo == "Transporte")
                 {
                     string id = row["transport_id"].ToString()!;
-                    //service.DeleteTransportEntity(id);
+                    service.DeleteTransportEntity(id);
                 }
                 if (Titulo == "Chofer") 
                 {
                     string id = row["chofer_id"].ToString()!;
-                    //service.DeleteChoferEntity(id);
+                    service.DeleteChoferEntity(id);
                 }
                 if (Titulo == "Camion") 
                 {
                     string id = row["placas_id"].ToString()!;
-                    //service.DeleteCamionEntity(id);
+                    service.DeleteCamionEntity(id);
+                }
+                if (Titulo == "Proveedor")
+                {
+                    string id = row["proveedor_id"].ToString()!;
+                    service.DeleteProvaiderEntity(id);
                 }
                 //borro solo al final.
                 DtItems.Rows.Remove(row.Row);

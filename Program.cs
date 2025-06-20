@@ -7,6 +7,7 @@ using Ritrama2025.Services;
 using Ritrama2025.Services.CommonData;
 using Ritrama2025.Services.MateriaPrima;
 using Ritrama2025.Services.ServiceLocator;
+using Ritrama2025.Services.CommonService;
 
 
 namespace Ritrama2025
@@ -34,6 +35,7 @@ namespace Ritrama2025
                     service.AddScoped<IProduccionService, ProduccionService>();
                     service.AddScoped<IDespachoService, DespachoService>();
                     service.AddScoped<IReportsService, ReportsService>();
+                    service.AddScoped<ICommonService, CommonService>();
                     service.AddSingleton<FormManager>();
                     //injecccion de dependencias de los formularios.
                     service.AddSingleton<Main>();

@@ -1,4 +1,5 @@
-﻿using Ritrama2025.Services.MateriaPrima;
+﻿using Ritrama2025.Forms.Seleccion;
+using Ritrama2025.Services.MateriaPrima;
 using System.Data;
 
 namespace Ritrama2025.Forms
@@ -9,7 +10,8 @@ namespace Ritrama2025.Forms
         public DataSet Ds = new();
         readonly BindingSource Bs = [];
         readonly BindingSource BsDetalle = [];
-
+        private DataRowView ParentRow = null!;
+        private DataRowView ChildsRows = null!;
 
         public FrmMateriaPrima(IServiceMateriaPrima Services)
         {
@@ -35,7 +37,7 @@ namespace Ritrama2025.Forms
             GridItems.AutoGenerateColumns = false;
             ADD_COLUMN_GRID("product_id", 70, "Product Id.", "product_id", GridItems);
             ADD_COLUMN_GRID("product_name", 200, "Product Name.", "product_name", GridItems);
-            ADD_COLUMN_GRID("type", 70, "Tipo", "type", GridItems);
+            ADD_COLUMN_GRID("product_type", 70, "Tipo", "type", GridItems);
             ADD_COLUMN_GRID("width", 75, "Width [Inch.]", "width", GridItems);
             ADD_COLUMN_GRID("length", 75, "Length [Pies]", "length", GridItems);
             ADD_COLUMN_GRID("msi", 75, "Msi", "msi", GridItems);
@@ -64,11 +66,11 @@ namespace Ritrama2025.Forms
             //trabajar con los enlaces a datos.
             txt_numeroOrden.DataBindings.Add("Text", Bs, "numero");
             txt_OrdenCompra.DataBindings.Add("Text", Bs, "orden_compra");
-            txt_prov_Id.DataBindings.Add("Text", Bs, "prov_id");
+            txt_prov_Id.DataBindings.Add("Text", Bs, "proveedor_id");
             txt_nombre_prov.DataBindings.Add("Text", Bs, "proveedor_name");
             txt_fecha_produccion.DataBindings.Add("Text", Bs, "fecha_pro");
             txt_fecha_recepcion.DataBindings.Add("Text", Bs, "fecha_recepcion");
-            txt_recepcionista.DataBindings.Add("Text", Bs, "persona_respons");
+            txt_person_name.DataBindings.Add("Text", Bs, "persona_respons");
             txt_transport_id.DataBindings.Add("Text", Bs, "transport_id");
             txt_transport_name.DataBindings.Add("Text", Bs, "transport_name");
             txt_guia.DataBindings.Add("Text", Bs, "guia_import");
@@ -128,6 +130,97 @@ namespace Ritrama2025.Forms
         private void Btn_primero_Click(object sender, EventArgs e)
         {
             Bs.Position = 0;
+        }
+
+        private void ToolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void Btn_create_Click(object sender, EventArgs e)
+        {
+            chk_anulado.DataBindings.Clear();
+            ParentRow = (DataRowView)Bs.AddNew();
+            ParentRow.BeginEdit();
+            ParentRow["numero"] = 1002;
+            ParentRow.EndEdit();
+            txt_OrdenCompra.ReadOnly = false;
+            btn_ProvBuscar.Enabled = true;
+            btn_TransportBuscar.Enabled = true;
+            btn_RecepBuscar.Enabled = true;
+            txt_fecha_produccion.Enabled = true;
+            txt_fecha_recepcion.Enabled = true;
+            txt_guia.ReadOnly = false;
+            txt_lote.ReadOnly = false;
+            txt_embarque.ReadOnly = false;
+            txt_notas.ReadOnly = false;
+            btn_addRows.Enabled = true;
+            btn_deleteRows.Enabled = true;
+        }
+
+        private void Btn_ProvBuscar_Click(object sender, EventArgs e)
+        {
+            FrmSeleccion SelVendor = new()
+            {
+                DtItems = Ds.Tables["DtProvider"]!,
+                Titulo = "Proveedor"
+            };
+            SelVendor.ShowDialog();
+            txt_prov_Id.Text = SelVendor.Id;
+            txt_nombre_prov.Text = SelVendor.Description;
+        }
+
+        private void Btn_TransportBuscar_Click(object sender, EventArgs e)
+        {
+
+            FrmSeleccion SelTransport = new()
+            {
+                DtItems = Ds.Tables["DtTransport"]!,
+                Titulo = "Transporte"
+            };
+            SelTransport.ShowDialog();
+            txt_transport_id.Text = SelTransport.Id;
+            txt_transport_name.Text = SelTransport.Description;
+        }
+
+        private void Btn_RecepBuscar_Click(object sender, EventArgs e)
+        {
+            FrmSeleccion SelPerson = new()
+            {
+                DtItems = Ds.Tables["DtPerson"]!,
+                Titulo = "Persona"
+            };
+            SelPerson.ShowDialog();
+            txt_person_id.Text = SelPerson.Id;
+            txt_person_name.Text = SelPerson.Description;
+        }
+
+        private void Btn_addRows_Click(object sender, EventArgs e)
+        {
+            FrmProductsInsert frmInsertRows = new() 
+            {
+                DtItems = Ds.Tables["DtProducts"]!,
+                Titulo ="Producto"
+            };
+            frmInsertRows.ShowDialog();
+            //Insertar el row en el GridItems.
+            if (frmInsertRows.Producto != null) 
+            {
+                ChildsRows = (DataRowView)BsDetalle.AddNew();
+                ChildsRows.BeginEdit();
+                ChildsRows["numero"] = txt_numeroOrden.Text;
+                ChildsRows["product_id"] = frmInsertRows.Producto.Product_Id;
+                ChildsRows["product_name"] = frmInsertRows.Producto.Product_Name;
+                ChildsRows["type"] = frmInsertRows.Producto.Product_Type;
+                ChildsRows["width"] = frmInsertRows.Producto.Width;
+                ChildsRows["length"] = frmInsertRows.Producto.Length;
+                ChildsRows["msi"] = frmInsertRows.Producto.Msi;
+                ChildsRows["rollid"] = frmInsertRows.Producto.Rollid;
+                ChildsRows.Row.SetParentRow(((DataRowView)Bs.Current).Row, Ds.Relations["FK_MASTER_DETAILS"]);
+                ChildsRows.EndEdit();
+            }
+
+
         }
     }
 }

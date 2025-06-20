@@ -174,7 +174,7 @@
             titleform.AutoSize = true;
             titleform.Font = new Font("JetBrains Mono ExtraBold", 23.7735825F, FontStyle.Bold, GraphicsUnit.Point, 0);
             titleform.ImageAlign = ContentAlignment.MiddleLeft;
-            titleform.Location = new Point(60, 19);
+            titleform.Location = new Point(28, 19);
             titleform.Name = "titleform";
             titleform.Size = new Size(133, 43);
             titleform.TabIndex = 0;

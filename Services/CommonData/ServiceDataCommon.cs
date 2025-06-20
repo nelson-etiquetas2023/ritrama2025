@@ -62,5 +62,29 @@ namespace Ritrama2025.Services.CommonData
                 MessageBox.Show(objectQuery.Message + ex.Message);
             }
         }
+
+        public int GetConsecutive(string filtro)
+        {
+            int Consec = 0;
+            try
+            {
+                using SqlConnection conn = new(StringConnex);
+                conn.Open();
+                using SqlCommand comando = new()
+                {
+                    Connection = conn,
+                    CommandText = "select par1 from control where filter=@p1",
+                    CommandType = CommandType.Text
+                };
+                comando.Parameters.AddWithValue("@p1", filtro);
+                Consec = Convert.ToInt32(comando.ExecuteScalar());
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al calcular el consecutivo..." + ex.Message);
+            }
+            return Consec;
+        }
     }
 }

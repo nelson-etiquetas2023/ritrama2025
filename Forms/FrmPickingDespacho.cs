@@ -1,7 +1,7 @@
-﻿using Ritrama2025.Services;
-using Ritrama2025.Models;
+﻿using Ritrama2025.Models;
 using System.Transactions;
 using System.ComponentModel;
+using Ritrama2025.Services.CommonService;
 
 namespace Ritrama2025.Forms
 {
@@ -34,10 +34,10 @@ namespace Ritrama2025.Forms
         private void Button2_Click(object sender, EventArgs e)
         {
 
-            Lista_Rollos.RemoveAll((RolloCortado r) => r.Cantidad >= 0);
-            Lista_Graphics.RemoveAll((Recepcion r) => r.Palet_cant >= 0m);
-            Lista_Hojas.RemoveAll((Recepcion r) => r.Palet_cant >= 0m);
-            Lista_Master.RemoveAll((Recepcion r) => r.Palet_cant >= 0m);
+            Lista_Rollos.RemoveAll(r => r.Cantidad >= 0);
+            Lista_Graphics.RemoveAll(r => r.Palet_cant >= 0m);
+            Lista_Hojas.RemoveAll(r => r.Palet_cant >= 0m);
+            Lista_Master.RemoveAll(r => r.Palet_cant >= 0m);
 
             OpenFileDialog openFileDialog = new()
             {
