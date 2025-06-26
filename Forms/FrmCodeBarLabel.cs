@@ -1,10 +1,6 @@
-﻿using System.Net;
+﻿using System.Drawing.Printing;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
-using UniPRT.Sdk.Comm;
-using UniPRT.Sdk.Settings;
-using Windows.ApplicationModel.AppService;
 using Zebra.Sdk.Comm;
 using Zebra.Sdk.Printer.Discovery;
 
@@ -23,10 +19,31 @@ namespace Ritrama2025.Forms
 
         private void FrmCodeBarLabel_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void Btn_buscar_printer_Click(object sender, EventArgs e)
+        {
+            if (rad_zebra.Checked) 
+            {
+                DiscoveryPrinterZebra();
+            }
+            if (rad_TSC.Checked) 
+            {
+                DiscoveryPrinterTsc();   
+            }
+        }
+        private void DiscoveryPrinterTsc() 
+        {
+            cbo_printer.Items.Clear();
+            foreach (string impresora in PrinterSettings.InstalledPrinters)
+            {
+                cbo_printer.Items.Add(impresora);
+            }
+            if (cbo_printer.Items.Count > 0)
+                cbo_printer.SelectedIndex = 0;
+        }
+        private void DiscoveryPrinterZebra() 
         {
             try
             {
@@ -45,8 +62,32 @@ namespace Ritrama2025.Forms
                 MessageBox.Show($"Errror discovering local printers: {ex.Message}");
             }
         }
-
         private void Button1_Click(object sender, EventArgs e)
+        {
+            if (rad_zebra.Checked) 
+            {
+                PrintZebraLabel();
+            }
+            if (rad_TSC.Checked)
+            {
+                PrintTscLabel(
+            
+);
+            }
+        }
+        private void PrintTscLabel()
+        {
+            if(cbo_printer.SelectedItem!.ToString() == string.Empty) MessageBox.Show("Seleccione una impresora TSC");
+
+            byte[] LabelTSPL = Encoding.UTF8.GetBytes("SIZE 50 mm,30 mm\r\nGAP 2 mm,0\r\nCLS\r\n" +
+                                                      "TEXT 10,10,\"FONT001\",0,1,1,\"Hola Mundo\"\r\n" +
+                                                      "PRINT 1\r\n");
+            
+
+
+
+        }
+        private void PrintZebraLabel() 
         {
             if (rad_label1.Checked)
             {
@@ -103,39 +144,10 @@ namespace Ritrama2025.Forms
 
 
         #region TscPrinters
-        private static void MainSettingsTscPrinters()
-        {
-            IComm   ptrComm;
-            ptrComm = new UniPRT.Sdk.Comm.TcpConnection("192.168.1.50", UniPRT.Sdk.Comm.TcpConnection.DEFAULT_MGMT_PORT);
-            ptrComm.Open();
-            Console.WriteLine(Environment.NewLine + "Reading some settings..." + Environment.NewLine);
-            ReadSomeSettingsTscPrinters(ptrComm);
-        }
+      
+       
 
-        private static void ReadSomeSettingsTscPrinters(IComm ptrComm)
-        {
-            try
-            {
-                if (null != ptrComm)
-                {
-                    if (!ptrComm.Connected)
-                    {
-                        MessageBox.Show("Error: no connection");
-                        return;
-                    }
-                    SettingsReadWrite mysetting = new(ptrComm);
-                    // Read individual settings if needed
-                    Console.WriteLine($"LCD Units: '{mysetting.GetValue("LCD.LabelUnits")}'");
-                    Console.WriteLine($"Printer Resolution : '{mysetting.GetValue("Printer.Head.DPI-d")}'");
-                    Console.WriteLine($"LCD Language: '{mysetting.GetValue("LCD.Languaje")}'");
-                }
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show($"Error: {err}");
-                throw;
-            }
-        }
+       
 
         #endregion
 

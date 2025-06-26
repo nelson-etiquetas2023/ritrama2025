@@ -98,7 +98,7 @@
             toolStrip1.Size = new Size(1156, 44);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
-            toolStrip1.ItemClicked += ToolStrip1_ItemClicked;
+            
             // 
             // btn_primero
             // 
@@ -168,6 +168,7 @@
             btn_save.Name = "btn_save";
             btn_save.Size = new Size(75, 30);
             btn_save.Text = "Guardar";
+            btn_save.Click += Btn_save_Click;
             // 
             // label1
             // 

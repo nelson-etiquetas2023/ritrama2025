@@ -27,7 +27,6 @@ namespace Ritrama2025.Services.MateriaPrima
 
         public readonly Dictionary<string, (string query, string message, SqlDataAdapter adapter, string dataTableName)> mapTables;
 
-
         public ServiceMateriaPrima(IConfiguration Config, IServiceCommonData ServiceData)
         {
             this.Config = Config;
@@ -49,12 +48,10 @@ namespace Ritrama2025.Services.MateriaPrima
                 ["person"] = (R.SQL_STRING_QUERY.SELECT_QUERY_PERSON,R.ERROR_MESSAGE_SYSTEM.ERROR_LOAD_PERSON,DaPerson,"DtPerson") 
             };
         }
-
         public async Task LoadTableByName(string tableName)
         {
             await ServiceData.LoadTable(QUERY_COMMANDS(tableName));
         }
-
         public async Task<DataSet> LoadData()
         {
             LimpiarDataSet();
@@ -165,6 +162,75 @@ namespace Ritrama2025.Services.MateriaPrima
                 Ds.Tables.Clear();
                 Ds.Clear();
                 Ds.AcceptChanges();
+            }
+        }
+
+        public bool GuardarOrden(OrdenMP orden)
+        {
+            using SqlConnection conn = new(StringConnex);
+            conn.Open();
+            using var transaction = conn.BeginTransaction();
+            try
+            {
+                //Guardo el header de la Orden
+                using SqlCommand comando = new() 
+                {
+                    Connection = conn,
+                    Transaction = transaction,  
+                    CommandType = CommandType.Text,
+                    CommandText = "INSERT INTO OrdenMateria (numero,fecha_pro,fecha_recepcion,orden_compra,proveedor_id,persona_respons,notas,transport_id,guia_import,lote,doc_embarque,anulado,status,total_cantidad,person_id,estado,fecha_hora_close) VALUES (@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17)"
+                };
+                comando.Parameters.AddWithValue("@p1", orden.Numero);
+                comando.Parameters.AddWithValue("@p2", orden.Fecha_Produccion);
+                comando.Parameters.AddWithValue("@p3", orden.Fecha_Recepcion);
+                comando.Parameters.AddWithValue("@p4", orden.Orden_Compra);
+                comando.Parameters.AddWithValue("@p5", orden.Proveedor_id);
+                comando.Parameters.AddWithValue("@p6", orden.Person_Name);
+                comando.Parameters.AddWithValue("@p7", orden.Notas);
+                comando.Parameters.AddWithValue("@p8", orden.Transport_id);
+                comando.Parameters.AddWithValue("@p9", orden.Guia);
+                comando.Parameters.AddWithValue("@p10", orden.Lote);
+                comando.Parameters.AddWithValue("@p11", orden.Numero_Embarque);
+                comando.Parameters.AddWithValue("@p12", false);
+                comando.Parameters.AddWithValue("@p13", 0);
+                comando.Parameters.AddWithValue("@p14", 0);
+                comando.Parameters.AddWithValue("@p15", orden.Person_Id);
+                comando.Parameters.AddWithValue("@p16", "open");
+                comando.Parameters.AddWithValue("@p17", DateTime.Now);
+                comando.ExecuteNonQuery();
+
+                //guardar el detalle de la orden.
+                foreach (var item in orden.Items)
+                {
+                    SqlCommand comandoItems = new()
+                    {
+                        Connection = conn,
+                        Transaction = transaction,
+                        CommandText = "INSERT INTO ItemsMateria (numero,product_id,type,cant_pedido,cant_real,width,length,msi,rollid,splice,ubicacion,core) VALUES (@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12)"
+                    };
+                    comandoItems.Parameters.AddWithValue("@p1", orden.Numero);
+                    comandoItems.Parameters.AddWithValue("@p2", item.Product_Id);
+                    comandoItems.Parameters.AddWithValue("@p3", "master");
+                    comandoItems.Parameters.AddWithValue("@p4", item.Cantidad_Pedido);
+                    comandoItems.Parameters.AddWithValue("@p5", item.Cantidad_Real);
+                    comandoItems.Parameters.AddWithValue("@p6", item.Width);
+                    comandoItems.Parameters.AddWithValue("@p7", item.Length);
+                    comandoItems.Parameters.AddWithValue("@p8", item.Msi);
+                    comandoItems.Parameters.AddWithValue("@p9", item.RollId);
+                    comandoItems.Parameters.AddWithValue("@p10", item.Splice);
+                    comandoItems.Parameters.AddWithValue("@p11", item.Ubicacion);
+                    comandoItems.Parameters.AddWithValue("@p12", item.Core);
+                    comandoItems.ExecuteNonQuery();
+                }
+                transaction.Commit();
+                MessageBox.Show("se guardo correctamente...");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback(); 
+                MessageBox.Show("error al tratar de grabar la orden..."+ex);
+                return false;
             }
         }
     }

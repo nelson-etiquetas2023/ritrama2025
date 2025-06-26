@@ -42,10 +42,11 @@
             groupBox1 = new GroupBox();
             grp_marca_printer = new GroupBox();
             rad_zebra = new RadioButton();
-            radioButton3 = new RadioButton();
+            rad_TSC = new RadioButton();
             previewLabels = new PictureBox();
             label4 = new Label();
             btn_PreviewLabels = new Button();
+            cbo_printer = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)numero_copias).BeginInit();
             groupBox1.SuspendLayout();
             grp_marca_printer.SuspendLayout();
@@ -180,7 +181,7 @@
             // grp_marca_printer
             // 
             grp_marca_printer.Controls.Add(rad_zebra);
-            grp_marca_printer.Controls.Add(radioButton3);
+            grp_marca_printer.Controls.Add(rad_TSC);
             grp_marca_printer.Location = new Point(147, 319);
             grp_marca_printer.Name = "grp_marca_printer";
             grp_marca_printer.Size = new Size(129, 119);
@@ -199,16 +200,16 @@
             rad_zebra.Text = "Zebra";
             rad_zebra.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // rad_TSC
             // 
-            radioButton3.AutoSize = true;
-            radioButton3.Location = new Point(6, 49);
-            radioButton3.Name = "radioButton3";
-            radioButton3.Size = new Size(41, 19);
-            radioButton3.TabIndex = 8;
-            radioButton3.TabStop = true;
-            radioButton3.Text = "Tsc";
-            radioButton3.UseVisualStyleBackColor = true;
+            rad_TSC.AutoSize = true;
+            rad_TSC.Location = new Point(6, 49);
+            rad_TSC.Name = "rad_TSC";
+            rad_TSC.Size = new Size(41, 19);
+            rad_TSC.TabIndex = 8;
+            rad_TSC.TabStop = true;
+            rad_TSC.Text = "Tsc";
+            rad_TSC.UseVisualStyleBackColor = true;
             // 
             // previewLabels
             // 
@@ -239,11 +240,20 @@
             btn_PreviewLabels.UseVisualStyleBackColor = true;
             btn_PreviewLabels.Click += Btn_PreviewLabels_Click;
             // 
+            // cbo_printer
+            // 
+            cbo_printer.FormattingEnabled = true;
+            cbo_printer.Location = new Point(12, 207);
+            cbo_printer.Name = "cbo_printer";
+            cbo_printer.Size = new Size(302, 23);
+            cbo_printer.TabIndex = 17;
+            // 
             // FrmCodeBarLabel
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(cbo_printer);
             Controls.Add(btn_PreviewLabels);
             Controls.Add(label4);
             Controls.Add(previewLabels);
@@ -285,9 +295,10 @@
         private GroupBox groupBox1;
         private GroupBox grp_marca_printer;
         private RadioButton rad_zebra;
-        private RadioButton radioButton3;
+        private RadioButton rad_TSC;
         private PictureBox previewLabels;
         private Label label4;
         private Button btn_PreviewLabels;
+        private ComboBox cbo_printer;
     }
 }

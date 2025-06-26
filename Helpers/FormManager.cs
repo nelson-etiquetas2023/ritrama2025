@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Ritrama2025.Services.ServiceLocator;
+﻿using Ritrama2025.Services.ServiceLocator;
 
 namespace Ritrama2025.Helpers
 {

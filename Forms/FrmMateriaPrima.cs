@@ -1,6 +1,9 @@
 ﻿using Ritrama2025.Forms.Seleccion;
+using Ritrama2025.Models;
 using Ritrama2025.Services.MateriaPrima;
+using System;
 using System.Data;
+
 
 namespace Ritrama2025.Forms
 {
@@ -44,8 +47,8 @@ namespace Ritrama2025.Forms
             ADD_COLUMN_GRID("rollid", 70, "Roll-Id.", "rollid", GridItems);
             ADD_COLUMN_GRID("splice", 65, "Splice", "splice", GridItems);
             ADD_COLUMN_GRID("core", 65, "Core", "core", GridItems);
-            ADD_COLUMN_GRID("ubic", 70, "Ubica.", "ubicacion", GridItems);
-            ADD_COLUMN_GRID("cantidad", 65, "Cantidad Pedido", "cantidad", GridItems);
+            ADD_COLUMN_GRID("ubicacion", 70, "Ubica.", "ubicacion", GridItems);
+            ADD_COLUMN_GRID("cant_pedido", 65, "Cantidad Pedido", "cant_pedido", GridItems);
             ADD_COLUMN_GRID("cant_real", 65, "Cantidad Real", "cant_real", GridItems);
             GridItems.DataSource = BsDetalle;
 
@@ -87,16 +90,6 @@ namespace Ritrama2025.Forms
             //Configurar las columnas del detalle de los productos.
             ADD_COLUMN_GRID("product_id", 70, "Product Id.", "product_id", GridItems);
             ADD_COLUMN_GRID("product_name", 200, "Product Name.", "product_name", GridItems);
-
-            //ADD_COLUMN_GRID("width", 75, "Width [Inch.]", "width", GridItems);
-            //ADD_COLUMN_GRID("length", 75, "Length [Pies]", "length", GridItems);
-            //ADD_COLUMN_GRID("msi", 75, "Msi", "msi", GridItems);
-            //ADD_COLUMN_GRID("rollid", 70, "Roll-Id.", "rollid", GridItems);
-            //ADD_COLUMN_GRID("ubic", 70, "Ubica.", "ucib", GridItems);
-            //ADD_COLUMN_GRID("splice", 65, "Splice", "splice", GridItems);
-            //ADD_COLUMN_GRID("core", 65, "Core", "core", GridItems);
-            //ADD_COLUMN_GRID("cantidad", 65, "Cantidad Pedido", "cantidad", GridItems);
-            //ADD_COLUMN_GRID("cant_real", 65, "Cantidad Real", "cant_real", GridItems);
             GridItems.DataSource = BsDetalle;
         }
 
@@ -132,17 +125,13 @@ namespace Ritrama2025.Forms
             Bs.Position = 0;
         }
 
-        private void ToolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
         private void Btn_create_Click(object sender, EventArgs e)
         {
             chk_anulado.DataBindings.Clear();
             ParentRow = (DataRowView)Bs.AddNew();
             ParentRow.BeginEdit();
-            ParentRow["numero"] = 1002;
+            ParentRow["numero"] = 1004;
+            ParentRow["total_cantidad"] = 0;
             ParentRow.EndEdit();
             txt_OrdenCompra.ReadOnly = false;
             btn_ProvBuscar.Enabled = true;
@@ -156,6 +145,15 @@ namespace Ritrama2025.Forms
             txt_notas.ReadOnly = false;
             btn_addRows.Enabled = true;
             btn_deleteRows.Enabled = true;
+            btn_save.Enabled = true;
+            btn_cancel.Enabled = true;
+            btn_siguiente.Enabled = false;
+            btn_anterior.Enabled = false;
+            btn_primero.Enabled = false;
+            btn_ultimo.Enabled = false;
+            btn_create.Enabled = false;
+
+
         }
 
         private void Btn_ProvBuscar_Click(object sender, EventArgs e)
@@ -197,14 +195,14 @@ namespace Ritrama2025.Forms
 
         private void Btn_addRows_Click(object sender, EventArgs e)
         {
-            FrmProductsInsert frmInsertRows = new() 
+            FrmProductsInsert frmInsertRows = new()
             {
                 DtItems = Ds.Tables["DtProducts"]!,
-                Titulo ="Producto"
+                Titulo = "Producto"
             };
             frmInsertRows.ShowDialog();
             //Insertar el row en el GridItems.
-            if (frmInsertRows.Producto != null) 
+            if (frmInsertRows.Producto != null)
             {
                 ChildsRows = (DataRowView)BsDetalle.AddNew();
                 ChildsRows.BeginEdit();
@@ -216,11 +214,82 @@ namespace Ritrama2025.Forms
                 ChildsRows["length"] = frmInsertRows.Producto.Length;
                 ChildsRows["msi"] = frmInsertRows.Producto.Msi;
                 ChildsRows["rollid"] = frmInsertRows.Producto.Rollid;
+                ChildsRows["splice"] = frmInsertRows.Producto.Splice;
+                ChildsRows["core"] = frmInsertRows.Producto.Core;
+                ChildsRows["ubicacion"] = frmInsertRows.Producto.Ubic;
+                ChildsRows["cant_pedido"] = frmInsertRows.Producto.Cant;
+                ChildsRows["cant_real"] = 0;
+
+
+
                 ChildsRows.Row.SetParentRow(((DataRowView)Bs.Current).Row, Ds.Relations["FK_MASTER_DETAILS"]);
                 ChildsRows.EndEdit();
             }
 
 
+        }
+
+        private void Btn_save_Click(object sender, EventArgs e)
+        {
+           Services.GuardarOrden(CREATE_ORDEN_OBJECT());
+        }
+
+        private OrdenMP CREATE_ORDEN_OBJECT() 
+        {
+            //Header.
+            OrdenMP Orden = new()
+            {
+                Numero = txt_numeroOrden.Text,
+                Fecha_Recepcion = Convert.ToDateTime(txt_fecha_recepcion.Text),
+                Fecha_Produccion = Convert.ToDateTime(txt_fecha_produccion.Text),
+                Orden_Compra = txt_OrdenCompra.Text,
+                Proveedor_id = Guid.Parse(txt_prov_Id.Text),
+                Proveedor_name = txt_nombre_prov.Text,
+                Transport_id = Guid.Parse(txt_transport_id.Text),
+                Transport_name = txt_transport_name.Text,
+                Guia = txt_guia.Text,
+                Lote = txt_lote.Text,
+                Numero_Embarque = txt_embarque.Text,
+                Person_Id = Guid.Parse(txt_person_id.Text),
+                Person_Name = txt_person_name.Text,
+                Notas = txt_notas.Text,
+                Renglones = Convert.ToInt32(txt_total_cantidad.Text)
+            };
+            //Items.
+            foreach (DataGridViewRow Item in GridItems.Rows)
+            {
+
+                var ProductId = Item.Cells["product_id"].Value;
+                var ProductName = Item.Cells["product_name"].Value;
+                var Product_Type = Item.Cells["product_type"].Value;
+                var WidthMaster = Convert.ToDouble(Item.Cells["width"].Value);
+                var LengthMaster = Convert.ToDouble(Item.Cells["length"].Value);
+                var MsiMaster = Convert.ToDouble(Item.Cells["msi"].Value);
+                var RollId = Item.Cells["rollid"].Value.ToString()!;
+                var Splice = Convert.ToInt16(Item.Cells["splice"].Value);
+                var Core = Convert.ToDouble(Item.Cells["core"].Value);
+                var Ubicacion = Item.Cells["ubicacion"].Value.ToString()!;
+                var Cantidad_Pedido = Convert.ToInt32(Item.Cells["cant_pedido"].Value);
+                var Cantidad_Real = Convert.ToInt32(Item.Cells["cant_real"].Value);
+                Orden.Items.Add(new OrdenDetailsMP
+                {
+                    Numero = txt_numeroOrden.Text,
+                    Product_Id = ProductId.ToString()!,
+                    Product_Name = ProductName.ToString()!,
+                    Product_Type = Product_Type.ToString()!,
+                    Width = WidthMaster,
+                    Length = LengthMaster,
+                    Msi = MsiMaster,
+                    RollId = RollId,
+                    Splice = Splice,
+                    Core = Core,
+                    Ubicacion = Ubicacion,
+                    Cantidad_Pedido = Cantidad_Pedido,
+                    Cantidad_Real = Cantidad_Real
+                });
+            }
+
+            return Orden;
         }
     }
 }
