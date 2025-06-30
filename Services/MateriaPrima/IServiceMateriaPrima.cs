@@ -19,5 +19,7 @@ namespace Ritrama2025.Services.MateriaPrima
         int LoadConsecOrdenMateria(string filtro);
         bool UpdateConsecOrdenMateria();
         bool GuardarOrden(OrdenMP orden);
+        int LoadConsecOrden(string filtro);
+        bool UpdateConsecOrden(string NumConsec);
     }
 }

@@ -1,8 +1,12 @@
-﻿using Ritrama2025.Forms.Seleccion;
+﻿using ClosedXML.Excel;
+using Ritrama2025.Forms.Seleccion;
 using Ritrama2025.Models;
 using Ritrama2025.Services.MateriaPrima;
 using System;
 using System.Data;
+using System.Diagnostics;
+using Ritrama2025.Forms.Otros;
+
 
 
 namespace Ritrama2025.Forms
@@ -27,6 +31,12 @@ namespace Ritrama2025.Forms
             LoadDataAsync();
             BindDataSource();
             BindingControls();
+            RefreshDocument();
+        }
+        private void RefreshDocument()
+        {
+            label_counter_rows.Text = $"Registros: {Bs.Count}";
+            Bs.Sort = "numero DESC";
         }
         private void BindDataSource()
         {
@@ -43,7 +53,7 @@ namespace Ritrama2025.Forms
             ADD_COLUMN_GRID("product_type", 70, "Tipo", "type", GridItems);
             ADD_COLUMN_GRID("width", 75, "Width [Inch.]", "width", GridItems);
             ADD_COLUMN_GRID("length", 75, "Length [Pies]", "length", GridItems);
-            ADD_COLUMN_GRID("msi", 75, "Msi", "msi", GridItems);
+            ADD_COLUMN_GRID("msi", 60, "Msi", "msi", GridItems);
             ADD_COLUMN_GRID("rollid", 70, "Roll-Id.", "rollid", GridItems);
             ADD_COLUMN_GRID("splice", 65, "Splice", "splice", GridItems);
             ADD_COLUMN_GRID("core", 65, "Core", "core", GridItems);
@@ -80,9 +90,9 @@ namespace Ritrama2025.Forms
             txt_lote.DataBindings.Add("Text", Bs, "lote");
             txt_embarque.DataBindings.Add("Text", Bs, "doc_embarque");
             txt_total_cantidad.DataBindings.Add("Text", Bs, "total_cantidad");
-            txt_data_document.DataBindings.Add("Text", Bs, "fecha_hora_close");
             txt_notas.DataBindings.Add("Text", Bs, "notas");
             chk_anulado.DataBindings.Add("Checked", Bs, "anulado");
+            txt_person_id.DataBindings.Add("Text", Bs, "person_id");
         }
         private void StyleGridColumns()
         {
@@ -107,32 +117,38 @@ namespace Ritrama2025.Forms
 
         private void Btn_siguiente_Click(object sender, EventArgs e)
         {
-            Bs.Position++;
+            Bs.Position--;
         }
 
         private void Btn_anterior_Click(object sender, EventArgs e)
         {
-            Bs.Position--;
+            Bs.Position++;
         }
 
         private void Btn_ultimo_Click(object sender, EventArgs e)
         {
-            Bs.Position = Bs.Count - 1;
+            Bs.Position = 0;
         }
 
         private void Btn_primero_Click(object sender, EventArgs e)
         {
-            Bs.Position = 0;
+            Bs.Position = Bs.Count - 1;
         }
 
         private void Btn_create_Click(object sender, EventArgs e)
         {
+            Bs.Sort = "";
             chk_anulado.DataBindings.Clear();
             ParentRow = (DataRowView)Bs.AddNew();
             ParentRow.BeginEdit();
-            ParentRow["numero"] = 1004;
+            ParentRow["numero"] = Services.LoadConsecOrden("CMP");
             ParentRow["total_cantidad"] = 0;
             ParentRow.EndEdit();
+            AbrirFormulario();
+
+        }
+        private void AbrirFormulario()
+        {
             txt_OrdenCompra.ReadOnly = false;
             btn_ProvBuscar.Enabled = true;
             btn_TransportBuscar.Enabled = true;
@@ -152,8 +168,10 @@ namespace Ritrama2025.Forms
             btn_primero.Enabled = false;
             btn_ultimo.Enabled = false;
             btn_create.Enabled = false;
-
-
+            txt_notas.BackColor = Color.White;
+            txt_notas.ReadOnly = false;
+            btn_LoadRows.Enabled = true;
+            btn_template.Enabled = true;
         }
 
         private void Btn_ProvBuscar_Click(object sender, EventArgs e)
@@ -224,17 +242,37 @@ namespace Ritrama2025.Forms
 
                 ChildsRows.Row.SetParentRow(((DataRowView)Bs.Current).Row, Ds.Relations["FK_MASTER_DETAILS"]);
                 ChildsRows.EndEdit();
+                ContarFilas();
+
             }
+        }
 
-
+        private void ContarFilas()
+        {
+            int filas = GridItems.Rows.Count;
+            txt_total_cantidad.Text = filas.ToString();
         }
 
         private void Btn_save_Click(object sender, EventArgs e)
         {
-           Services.GuardarOrden(CREATE_ORDEN_OBJECT());
+            Services.GuardarOrden(CREATE_ORDEN_OBJECT());
+            int ProxConsec = Convert.ToInt16(txt_numeroOrden.Text) + 1;
+            Services.UpdateConsecOrden(ProxConsec.ToString());
+            btn_primero.Enabled = true;
+            btn_ultimo.Enabled = true;
+            btn_siguiente.Enabled = true;
+            btn_anterior.Enabled = true;
+            btn_save.Enabled = false;
+            btn_cancel.Enabled = false;
+            btn_create.Enabled = true;
+            btn_addRows.Enabled = false;
+            btn_deleteRows.Enabled = false;
+            btn_template.Enabled = false;
+            btn_LoadRows.Enabled = false;
+            RefreshDocument();
         }
 
-        private OrdenMP CREATE_ORDEN_OBJECT() 
+        private OrdenMP CREATE_ORDEN_OBJECT()
         {
             //Header.
             OrdenMP Orden = new()
@@ -252,8 +290,9 @@ namespace Ritrama2025.Forms
                 Numero_Embarque = txt_embarque.Text,
                 Person_Id = Guid.Parse(txt_person_id.Text),
                 Person_Name = txt_person_name.Text,
-                Notas = txt_notas.Text,
-                Renglones = Convert.ToInt32(txt_total_cantidad.Text)
+                Notas = txt_notas.Text + Environment.NewLine + "Documento de Materia Prima Creado: " + Environment.NewLine + DateTime.Now,
+                Renglones = Convert.ToInt32(txt_total_cantidad.Text),
+
             };
             //Items.
             foreach (DataGridViewRow Item in GridItems.Rows)
@@ -290,6 +329,132 @@ namespace Ritrama2025.Forms
             }
 
             return Orden;
+        }
+
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            DataRowView FilaActual;
+            FilaActual = (DataRowView)Bs.Current;
+            FilaActual.Row.Delete();
+            Bs.EndEdit();
+            Bs.Position = Bs.Count;
+            // Cerrar el formulario.
+            btn_primero.Enabled = true;
+            btn_siguiente.Enabled = true;
+            btn_anterior.Enabled = true;
+            btn_ultimo.Enabled = true;
+            btn_create.Enabled = true;
+            btn_save.Enabled = false;
+            btn_cancel.Enabled = false;
+            txt_fecha_produccion.Enabled = false;
+            txt_fecha_recepcion.Enabled = false;
+            txt_OrdenCompra.ReadOnly = true;
+            txt_guia.ReadOnly = true;
+            txt_lote.ReadOnly = true;
+            txt_embarque.ReadOnly = true;
+            btn_ProvBuscar.Enabled = false;
+            btn_TransportBuscar.Enabled = false;
+            btn_RecepBuscar.Enabled = false;
+            GridItems.ReadOnly = true;
+        }
+
+        private void btn_template_Click(object sender, EventArgs e)
+        {
+            using var workbook = new XLWorkbook();
+            var worksheet = workbook.Worksheets.Add("TemplateMateriaPrima");
+            string filePath = Path.Combine(Environment.CurrentDirectory, "Template");
+            var col1 = worksheet.Column(1);
+            col1.Style.NumberFormat.Format = "@";
+            col1.Width = 20; // Ajustar el ancho de la columna
+            var col2 = worksheet.Column(2);
+            col2.Width = 20; // Ajustar el ancho de la columna
+            worksheet.Cell(1, 1).Value = "Product. Id.";
+            worksheet.Cell(1, 2).Value = "Product Name";
+            worksheet.Cell(1, 3).Value = "Tipo";
+            worksheet.Column(3).Width = 20;
+            worksheet.Cell(1, 4).Value = "Width";
+            worksheet.Cell(1, 5).Value = "Length";
+            worksheet.Cell(1, 6).Value = "Msi";
+            worksheet.Cell(1, 7).Value = "Core";
+            worksheet.Cell(1, 8).Value = "Slipce";
+            worksheet.Cell(1, 9).Value = "Roll-Id";
+            worksheet.Columns().AdjustToContents();
+            workbook.SaveAs(filePath + ".xlsx");
+            var psi = new ProcessStartInfo
+            {
+                FileName = filePath + ".xlsx",      // Abre con la app por defecto (.xlsx → Excel)
+                UseShellExecute = true     // Necesario en .NET Core/5+ para usar la asociación de ficheros
+            };
+            try
+            {
+                Process.Start(psi);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"No se pudo abrir el archivo automáticamente: {ex.Message}");
+            }
+        }
+
+        private void btn_LoadRows_Click(object sender, EventArgs e)
+        {
+            string filePath = Path.Combine(Environment.CurrentDirectory, "Template.xlsx");
+            using var workbook = new XLWorkbook(filePath);
+            var worksheet = workbook.Worksheet(1);
+            //Empiezo en la fila 2 por los encabezados.
+            var filas = worksheet.Rows().Skip(1);
+            foreach (var fila in filas)
+            {
+                if (fila.Cell(1).Value.ToString() == string.Empty) continue; //Si la celda esta vacia, no la agrego.
+                ChildsRows = (DataRowView)BsDetalle.AddNew();
+                ChildsRows.BeginEdit();
+                ChildsRows["numero"] = txt_numeroOrden.Text;
+                ChildsRows["product_id"] = fila.Cell(1).Value.ToString()!;
+                ChildsRows["product_name"] = fila.Cell(2).Value.ToString()!;
+                ChildsRows["type"] = fila.Cell(3).Value.ToString()!;
+                ChildsRows["width"] = fila.Cell(4).GetValue<double>();
+                ChildsRows["length"] = fila.Cell(5).GetValue<double>();
+                ChildsRows["msi"] = fila.Cell(6).GetValue<double>();
+                ChildsRows["core"] = fila.Cell(7).GetValue<double>();
+                ChildsRows["splice"] = fila.Cell(8).GetValue<int>();
+                ChildsRows["rollid"] = fila.Cell(9).Value.ToString()!;
+                ChildsRows["ubicacion"] = "SU";
+                ChildsRows["cant_pedido"] = 1;
+                ChildsRows["cant_real"] = 0;
+                ChildsRows.Row.SetParentRow(((DataRowView)Bs.Current).Row, Ds.Relations["FK_MASTER_DETAILS"]);
+                ChildsRows.EndEdit();
+            }
+            if (GridItems.Rows.Count > 0)
+            {
+                GridItems.ClearSelection(); // Limpia selección previa
+                GridItems.Rows[0].Selected = true; // Selecciona la primera fila
+                GridItems.CurrentCell = GridItems.Rows[0].Cells[0]; // Mueve el foco
+                ContarFilas();
+            }
+        }
+
+        private void btn_OrdenBuscar_Click(object sender, EventArgs e)
+        {
+            Frm_oneparameter frmbuscar = new()
+            {
+                StartPosition = StartPosition = FormStartPosition.Manual,
+                Location = new Point(this.Location.X + 300, this.Location.Y + 150)
+            };
+            frmbuscar.ShowDialog();
+            if (frmbuscar.Parameter != null) 
+            {
+                int busqueda = Bs.Find("numero", frmbuscar.Parameter);
+                if (busqueda > 0)
+                {
+                    Bs.Position = busqueda;
+                    RefreshDocument();
+                }
+                else 
+                {
+                    MessageBox.Show("No se encontro el numero del documento...","Advertencia",
+                        MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                }
+            }
+           
         }
     }
 }

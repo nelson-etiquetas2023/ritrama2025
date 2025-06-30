@@ -9,6 +9,7 @@ namespace Ritrama2025.Forms.Seleccion
         public DataTable DtItems { get; set; } = null!;
         public string Titulo { get; set; } = string.Empty;
         public ProductMAP Producto { get; set; } = new ProductMAP();
+        public string TypeProduct { get; set; } = "";
         public FrmProductsInsert()
         {
             InitializeComponent();
@@ -24,22 +25,59 @@ namespace Ritrama2025.Forms.Seleccion
             frmSelectProducts.ShowDialog();
             txt_productid.Text = frmSelectProducts.Id;
             txt_productname.Text = frmSelectProducts.Description;
+
+            switch (frmSelectProducts.Tipo)
+            {
+                case "Master":
+                    rad_master.Checked = true;
+                    rad_hojas.Checked = false;
+                    rad_graphics.Checked = false;
+                    rad_rolloCortado.Checked = false;
+                    TypeProduct = "Master";
+                    break;
+                case "Resma":
+                    rad_master.Checked = false;
+                    rad_hojas.Checked = true;
+                    rad_graphics.Checked = false;
+                    rad_rolloCortado.Checked = false;
+                    TypeProduct = "Resma";
+                    break;
+                case "Graphics":
+                    rad_master.Checked = false;
+                    rad_hojas.Checked = false;
+                    rad_graphics.Checked = true;
+                    rad_rolloCortado.Checked = false;
+                    TypeProduct = "Graphics";
+                    break;
+                case "Rollo Cortado":
+                    rad_master.Checked = false;
+                    rad_hojas.Checked = false;
+                    rad_graphics.Checked = false;
+                    rad_rolloCortado.Checked = true;
+                    TypeProduct = "Rollo Cortado";
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void FrmProductsInsert_Load(object sender, EventArgs e)
         {
-            txt_cant.Text = "0";
+            txt_cant.Text = "1";
             txt_width.Text = "0";
             txt_msi.Text = "0";
             txt_lenght.Text = "0";
             txt_splice.Text = "0";
-            rad_master.Checked = true;
+            txt_core.Text = "0";
+           
         }
         private void CALCULAR_MSI()
         {
+            if (txt_width.Text == "" || txt_lenght.Text == "") return;
+
             double width = Convert.ToDouble(txt_width.Text);
             double lenght = Convert.ToDouble(txt_lenght.Text);
-            double msi = ((width * lenght) / R.CONSTANTES.FACTOR_CALCULO_MSI);
+            double msi = ((width * lenght) * R.CONSTANTES.FACTOR_CALCULO_MSI);
             txt_msi.Text = msi.ToString();
         }
 
@@ -60,7 +98,7 @@ namespace Ritrama2025.Forms.Seleccion
             {
                 Product_Id = txt_productid.Text,
                 Product_Name = txt_productname.Text,
-                Product_Type = rad_master.Checked ? "Master" : "",
+                Product_Type = TypeProduct,
                 Width = Convert.ToDouble(txt_width.Text),
                 Length = Convert.ToDouble(txt_lenght.Text),
                 Msi = Convert.ToDouble(txt_msi.Text),

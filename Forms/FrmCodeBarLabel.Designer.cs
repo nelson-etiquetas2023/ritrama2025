@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCodeBarLabel));
             btn_buscar_printer = new Button();
             textBox1 = new TextBox();
             textBox2 = new TextBox();
@@ -47,6 +48,7 @@
             label4 = new Label();
             btn_PreviewLabels = new Button();
             cbo_printer = new ComboBox();
+            btn_ServicePrintThermal = new Button();
             ((System.ComponentModel.ISupportInitialize)numero_copias).BeginInit();
             groupBox1.SuspendLayout();
             grp_marca_printer.SuspendLayout();
@@ -99,7 +101,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 160);
+            label1.Location = new Point(18, 321);
             label1.Name = "label1";
             label1.Size = new Size(112, 15);
             label1.TabIndex = 5;
@@ -107,7 +109,7 @@
             // 
             // numero_copias
             // 
-            numero_copias.Location = new Point(12, 178);
+            numero_copias.Location = new Point(18, 339);
             numero_copias.Name = "numero_copias";
             numero_copias.Size = new Size(120, 23);
             numero_copias.TabIndex = 6;
@@ -171,7 +173,7 @@
             groupBox1.Controls.Add(rad_label3);
             groupBox1.Controls.Add(rad_label1);
             groupBox1.Controls.Add(rad_label2);
-            groupBox1.Location = new Point(12, 319);
+            groupBox1.Location = new Point(12, 396);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(129, 119);
             groupBox1.TabIndex = 12;
@@ -182,7 +184,7 @@
             // 
             grp_marca_printer.Controls.Add(rad_zebra);
             grp_marca_printer.Controls.Add(rad_TSC);
-            grp_marca_printer.Location = new Point(147, 319);
+            grp_marca_printer.Location = new Point(147, 396);
             grp_marca_printer.Name = "grp_marca_printer";
             grp_marca_printer.Size = new Size(129, 119);
             grp_marca_printer.TabIndex = 13;
@@ -213,9 +215,9 @@
             // 
             // previewLabels
             // 
-            previewLabels.Location = new Point(486, 138);
+            previewLabels.Location = new Point(486, 244);
             previewLabels.Name = "previewLabels";
-            previewLabels.Size = new Size(302, 300);
+            previewLabels.Size = new Size(302, 194);
             previewLabels.TabIndex = 14;
             previewLabels.TabStop = false;
             // 
@@ -223,7 +225,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Noto Sans", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(486, 118);
+            label4.Location = new Point(486, 221);
             label4.Name = "label4";
             label4.Size = new Size(139, 18);
             label4.TabIndex = 15;
@@ -232,9 +234,9 @@
             // btn_PreviewLabels
             // 
             btn_PreviewLabels.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn_PreviewLabels.Location = new Point(382, 138);
+            btn_PreviewLabels.Location = new Point(486, 151);
             btn_PreviewLabels.Name = "btn_PreviewLabels";
-            btn_PreviewLabels.Size = new Size(98, 101);
+            btn_PreviewLabels.Size = new Size(189, 67);
             btn_PreviewLabels.TabIndex = 16;
             btn_PreviewLabels.Text = "Preview";
             btn_PreviewLabels.UseVisualStyleBackColor = true;
@@ -243,16 +245,30 @@
             // cbo_printer
             // 
             cbo_printer.FormattingEnabled = true;
-            cbo_printer.Location = new Point(12, 207);
+            cbo_printer.Location = new Point(18, 368);
             cbo_printer.Name = "cbo_printer";
             cbo_printer.Size = new Size(302, 23);
             cbo_printer.TabIndex = 17;
+            // 
+            // btn_ServicePrintThermal
+            // 
+            btn_ServicePrintThermal.Font = new Font("Noto Sans", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_ServicePrintThermal.Image = (Image)resources.GetObject("btn_ServicePrintThermal.Image");
+            btn_ServicePrintThermal.Location = new Point(12, 156);
+            btn_ServicePrintThermal.Name = "btn_ServicePrintThermal";
+            btn_ServicePrintThermal.Size = new Size(302, 66);
+            btn_ServicePrintThermal.TabIndex = 18;
+            btn_ServicePrintThermal.Text = "Probar Servicio de Impresion";
+            btn_ServicePrintThermal.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_ServicePrintThermal.UseVisualStyleBackColor = true;
+            btn_ServicePrintThermal.Click += Btn_ServicePrintThermal_Click;
             // 
             // FrmCodeBarLabel
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 525);
+            Controls.Add(btn_ServicePrintThermal);
             Controls.Add(cbo_printer);
             Controls.Add(btn_PreviewLabels);
             Controls.Add(label4);
@@ -300,5 +316,6 @@
         private Label label4;
         private Button btn_PreviewLabels;
         private ComboBox cbo_printer;
+        private Button btn_ServicePrintThermal;
     }
 }

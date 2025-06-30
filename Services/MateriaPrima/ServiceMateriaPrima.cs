@@ -193,7 +193,7 @@ namespace Ritrama2025.Services.MateriaPrima
                 comando.Parameters.AddWithValue("@p11", orden.Numero_Embarque);
                 comando.Parameters.AddWithValue("@p12", false);
                 comando.Parameters.AddWithValue("@p13", 0);
-                comando.Parameters.AddWithValue("@p14", 0);
+                comando.Parameters.AddWithValue("@p14", orden.Renglones);
                 comando.Parameters.AddWithValue("@p15", orden.Person_Id);
                 comando.Parameters.AddWithValue("@p16", "open");
                 comando.Parameters.AddWithValue("@p17", DateTime.Now);
@@ -210,7 +210,7 @@ namespace Ritrama2025.Services.MateriaPrima
                     };
                     comandoItems.Parameters.AddWithValue("@p1", orden.Numero);
                     comandoItems.Parameters.AddWithValue("@p2", item.Product_Id);
-                    comandoItems.Parameters.AddWithValue("@p3", "master");
+                    comandoItems.Parameters.AddWithValue("@p3", item.Product_Type);
                     comandoItems.Parameters.AddWithValue("@p4", item.Cantidad_Pedido);
                     comandoItems.Parameters.AddWithValue("@p5", item.Cantidad_Real);
                     comandoItems.Parameters.AddWithValue("@p6", item.Width);
@@ -230,6 +230,54 @@ namespace Ritrama2025.Services.MateriaPrima
             {
                 transaction.Rollback(); 
                 MessageBox.Show("error al tratar de grabar la orden..."+ex);
+                return false;
+            }
+        }
+
+        public int LoadConsecOrden(string filtro)
+        {
+            int Consec = 0;
+            try
+            {
+                using SqlConnection conn = new(StringConnex);
+                conn.Open();
+                using SqlCommand comando = new()
+                {
+                    Connection = conn,
+                    CommandText = "select par1 from control where filter=@p1",
+                    CommandType = CommandType.Text
+                };
+                comando.Parameters.AddWithValue("@p1", filtro);
+                Consec = Convert.ToInt32(comando.ExecuteScalar());
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al calcular el consecutivo..." + ex.Message);
+            }
+            return Consec;
+        }
+
+        public bool UpdateConsecOrden(string NumConsec)
+        {
+            try
+            {
+                SqlConnection conn = new(StringConnex);
+                conn.Open();
+                SqlCommand comando = new()
+                {
+                    Connection = conn,
+                    CommandText = "update control set par1=@p1 where filter='CMP'",
+                    CommandType = CommandType.Text
+                };
+                SqlParameter p1 = new("@p1", NumConsec);
+                comando.Parameters.Add(p1);
+                comando.ExecuteNonQuery();
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Error al actualizar el consecutivo de la orden MATERIA PRIMA. Codigo de Error : " + ex.Message);
                 return false;
             }
         }

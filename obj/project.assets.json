@@ -93,18 +93,6 @@
           }
         }
       },
-      "DataMatrix.NetCore/0.4.2": {
-        "type": "package",
-        "dependencies": {
-          "System.Drawing.Common": "5.0.2"
-        },
-        "compile": {
-          "lib/net5.0/DataMatrix.NetCore.dll": {}
-        },
-        "runtime": {
-          "lib/net5.0/DataMatrix.NetCore.dll": {}
-        }
-      },
       "DocumentFormat.OpenXml/3.1.1": {
         "type": "package",
         "dependencies": {
@@ -163,19 +151,6 @@
           }
         }
       },
-      "InTheHand.Net.Bluetooth/4.1.40": {
-        "type": "package",
-        "compile": {
-          "lib/net7.0-windows7.0/InTheHand.Net.Bluetooth.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-windows7.0/InTheHand.Net.Bluetooth.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "Lextm.SharpSnmpLib/12.5.5": {
         "type": "package",
         "compile": {
@@ -186,22 +161,6 @@
         "runtime": {
           "lib/net6.0/SharpSnmpLib.dll": {
             "related": ".pdb;.xml"
-          }
-        }
-      },
-      "LibUsbDotNet/2.2.29": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Win32.Registry": "4.5.0"
-        },
-        "compile": {
-          "lib/netcoreapp2.0/LibUsbDotNet.LibUsbDotNet.dll": {
-            "related": ".pdb"
-          }
-        },
-        "runtime": {
-          "lib/netcoreapp2.0/LibUsbDotNet.LibUsbDotNet.dll": {
-            "related": ".pdb"
           }
         }
       },
@@ -1232,7 +1191,7 @@
           }
         }
       },
-      "Microsoft.NETCore.Platforms/2.0.0": {
+      "Microsoft.NETCore.Platforms/1.1.1": {
         "type": "package",
         "compile": {
           "lib/netstandard1.0/_._": {}
@@ -1263,28 +1222,16 @@
           }
         }
       },
-      "Microsoft.Win32.Registry/4.5.0": {
+      "Microsoft.Win32.Primitives/4.3.0": {
         "type": "package",
         "dependencies": {
-          "System.Security.AccessControl": "4.5.0",
-          "System.Security.Principal.Windows": "4.5.0"
+          "Microsoft.NETCore.Platforms": "1.1.0",
+          "Microsoft.NETCore.Targets": "1.1.0",
+          "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard2.0/Microsoft.Win32.Registry.dll": {
+          "ref/netstandard1.3/_._": {
             "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.Win32.Registry.dll": {}
-        },
-        "runtimeTargets": {
-          "runtimes/unix/lib/netstandard2.0/Microsoft.Win32.Registry.dll": {
-            "assetType": "runtime",
-            "rid": "unix"
-          },
-          "runtimes/win/lib/netstandard2.0/Microsoft.Win32.Registry.dll": {
-            "assetType": "runtime",
-            "rid": "win"
           }
         }
       },
@@ -1518,7 +1465,7 @@
           "System.Security.Cryptography.ProtectedData": "8.0.0"
         },
         "compile": {
-          "lib/net8.0/System.Configuration.ConfigurationManager.dll": {
+          "lib/net8.0/_._": {
             "related": ".xml"
           }
         },
@@ -1997,25 +1944,24 @@
           "ref/netcoreapp1.1/_._": {}
         }
       },
-      "System.Security.AccessControl/4.5.0": {
+      "System.Security.Claims/4.3.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "2.0.0",
-          "System.Security.Principal.Windows": "4.5.0"
+          "System.Collections": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Security.Principal": "4.3.0"
         },
         "compile": {
-          "ref/netstandard2.0/System.Security.AccessControl.dll": {
+          "ref/netstandard1.3/_._": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard2.0/System.Security.AccessControl.dll": {}
-        },
-        "runtimeTargets": {
-          "runtimes/win/lib/netcoreapp2.0/System.Security.AccessControl.dll": {
-            "assetType": "runtime",
-            "rid": "win"
-          }
+          "lib/netstandard1.3/System.Security.Claims.dll": {}
         }
       },
       "System.Security.Cryptography.Pkcs/8.0.1": {
@@ -2075,25 +2021,49 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "System.Security.Principal.Windows/4.5.0": {
+      "System.Security.Principal/4.3.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "2.0.0"
+          "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard2.0/System.Security.Principal.Windows.dll": {
+          "ref/netstandard1.0/_._": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard2.0/System.Security.Principal.Windows.dll": {}
+          "lib/netstandard1.0/System.Security.Principal.dll": {}
+        }
+      },
+      "System.Security.Principal.Windows/4.3.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "1.1.0",
+          "Microsoft.Win32.Primitives": "4.3.0",
+          "System.Collections": "4.3.0",
+          "System.Diagnostics.Debug": "4.3.0",
+          "System.Reflection": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Runtime.Handles": "4.3.0",
+          "System.Runtime.InteropServices": "4.3.0",
+          "System.Security.Claims": "4.3.0",
+          "System.Security.Principal": "4.3.0",
+          "System.Text.Encoding": "4.3.0",
+          "System.Threading": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.3/_._": {
+            "related": ".xml"
+          }
         },
         "runtimeTargets": {
-          "runtimes/unix/lib/netcoreapp2.0/System.Security.Principal.Windows.dll": {
+          "runtimes/unix/lib/netstandard1.3/System.Security.Principal.Windows.dll": {
             "assetType": "runtime",
             "rid": "unix"
           },
-          "runtimes/win/lib/netcoreapp2.0/System.Security.Principal.Windows.dll": {
+          "runtimes/win/lib/netstandard1.3/System.Security.Principal.Windows.dll": {
             "assetType": "runtime",
             "rid": "win"
           }
@@ -2323,32 +2293,6 @@
           "lib/netcoreapp2.1/_._": {}
         }
       },
-      "UniPRT.Sdk/1.0.0": {
-        "type": "package",
-        "dependencies": {
-          "DataMatrix.NetCore": "0.4.2",
-          "InTheHand.Net.Bluetooth": "4.1.40",
-          "LibUsbDotNet": "2.2.29",
-          "Newtonsoft.Json": "13.0.1",
-          "System.Configuration.ConfigurationManager": "8.0.0-preview.5.23280.8"
-        },
-        "compile": {
-          "lib/net5.0/Comm.dll": {},
-          "lib/net5.0/Discovery.dll": {},
-          "lib/net5.0/Json.dll": {},
-          "lib/net5.0/LabelMaker.dll": {},
-          "lib/net5.0/UniPRTSdk.dll": {},
-          "lib/net5.0/Utilities.dll": {}
-        },
-        "runtime": {
-          "lib/net5.0/Comm.dll": {},
-          "lib/net5.0/Discovery.dll": {},
-          "lib/net5.0/Json.dll": {},
-          "lib/net5.0/LabelMaker.dll": {},
-          "lib/net5.0/UniPRTSdk.dll": {},
-          "lib/net5.0/Utilities.dll": {}
-        }
-      },
       "Zebra.Printer.SDK/3.0.3337": {
         "type": "package",
         "dependencies": {
@@ -2487,22 +2431,6 @@
         "lib/netstandard2.1/Csv.xml"
       ]
     },
-    "DataMatrix.NetCore/0.4.2": {
-      "sha512": "ELosO1rbFZLgjw0XAYbKQPextwt2d4lX/0cCqJeaalscn6xGUapJ3bLow9Dyamlv+4hPtt/KUfA8oN451Iv5UQ==",
-      "type": "package",
-      "path": "datamatrix.netcore/0.4.2",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "datamatrix.netcore.0.4.2.nupkg.sha512",
-        "datamatrix.netcore.nuspec",
-        "lib/net461/DataMatrix.NetCore.dll",
-        "lib/net5.0/DataMatrix.NetCore.dll",
-        "lib/netcoreapp3.1/DataMatrix.NetCore.dll",
-        "lib/netstandard2.0/DataMatrix.NetCore.dll",
-        "lib/netstandard2.1/DataMatrix.NetCore.dll"
-      ]
-    },
     "DocumentFormat.OpenXml/3.1.1": {
       "sha512": "2z9QBzeTLNNKWM9SaOSDMegfQk/7hDuElOsmF77pKZMkFRP/GHA/W/4yOAQD9kn15N/FsFxHn3QVYkatuZghiA==",
       "type": "package",
@@ -2596,52 +2524,6 @@
         "logo-nuget.png"
       ]
     },
-    "InTheHand.Net.Bluetooth/4.1.40": {
-      "sha512": "Hx0NqU4M/r/jMp/TGk5RTfCW9CAUYpI4eMWiNbw18E/ClBeHDW3FU0PV6d9SgT4XAUKQtGjok2ByKu1lp3q7pQ==",
-      "type": "package",
-      "path": "inthehand.net.bluetooth/4.1.40",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "32feet-package-icon.png",
-        "README.md",
-        "inthehand.net.bluetooth.4.1.40.nupkg.sha512",
-        "inthehand.net.bluetooth.nuspec",
-        "lib/monoandroid10.0/InTheHand.Net.Bluetooth.dll",
-        "lib/monoandroid10.0/InTheHand.Net.Bluetooth.xml",
-        "lib/net461/InTheHand.Net.Bluetooth.dll",
-        "lib/net461/InTheHand.Net.Bluetooth.xml",
-        "lib/net6.0-android31.0/InTheHand.Net.Bluetooth.dll",
-        "lib/net6.0-android31.0/InTheHand.Net.Bluetooth.xml",
-        "lib/net6.0-ios16.1/InTheHand.Net.Bluetooth.dll",
-        "lib/net6.0-ios16.1/InTheHand.Net.Bluetooth.xml",
-        "lib/net6.0-windows10.0.22000/InTheHand.Net.Bluetooth.dll",
-        "lib/net6.0-windows10.0.22000/InTheHand.Net.Bluetooth.xml",
-        "lib/net6.0-windows7.0/InTheHand.Net.Bluetooth.dll",
-        "lib/net6.0-windows7.0/InTheHand.Net.Bluetooth.xml",
-        "lib/net6.0/InTheHand.Net.Bluetooth.dll",
-        "lib/net6.0/InTheHand.Net.Bluetooth.xml",
-        "lib/net7.0-android33.0/InTheHand.Net.Bluetooth.dll",
-        "lib/net7.0-android33.0/InTheHand.Net.Bluetooth.xml",
-        "lib/net7.0-ios16.1/InTheHand.Net.Bluetooth.dll",
-        "lib/net7.0-ios16.1/InTheHand.Net.Bluetooth.xml",
-        "lib/net7.0-windows10.0.22000/InTheHand.Net.Bluetooth.dll",
-        "lib/net7.0-windows10.0.22000/InTheHand.Net.Bluetooth.xml",
-        "lib/net7.0-windows7.0/InTheHand.Net.Bluetooth.dll",
-        "lib/net7.0-windows7.0/InTheHand.Net.Bluetooth.xml",
-        "lib/net7.0/InTheHand.Net.Bluetooth.dll",
-        "lib/net7.0/InTheHand.Net.Bluetooth.xml",
-        "lib/netstandard2.0/InTheHand.Net.Bluetooth.dll",
-        "lib/netstandard2.0/InTheHand.Net.Bluetooth.xml",
-        "lib/netstandard2.1/InTheHand.Net.Bluetooth.dll",
-        "lib/netstandard2.1/InTheHand.Net.Bluetooth.xml",
-        "lib/uap10.0.16299/InTheHand.Net.Bluetooth.dll",
-        "lib/uap10.0.16299/InTheHand.Net.Bluetooth.pri",
-        "lib/uap10.0.16299/InTheHand.Net.Bluetooth.xml",
-        "lib/xamarinios10/InTheHand.Net.Bluetooth.dll",
-        "lib/xamarinios10/InTheHand.Net.Bluetooth.xml"
-      ]
-    },
     "Lextm.SharpSnmpLib/12.5.5": {
       "sha512": "Bq4p+KIeqwT0ALm4W8+ifCVG5quo9CdbHlM2m/Ig/SfpyMoynLhFAMVHEZlxt1N3MHm6sJvNIpk2+D8Q9gnZ1Q==",
       "type": "package",
@@ -2657,25 +2539,6 @@
         "lib/net6.0/SharpSnmpLib.dll",
         "lib/net6.0/SharpSnmpLib.pdb",
         "lib/net6.0/SharpSnmpLib.xml"
-      ]
-    },
-    "LibUsbDotNet/2.2.29": {
-      "sha512": "kYXcaTDhoJlZP7yuh3yuBTYQxzw1p+QXpJnGRkdtGMq7Vy7NTD/DzBLnZR72gL7HEQUz+mpyRpq+ZOySwQb4Zw==",
-      "type": "package",
-      "path": "libusbdotnet/2.2.29",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net45/LibUsbDotNet.LibUsbDotNet.dll",
-        "lib/net45/LibUsbDotNet.LibUsbDotNet.pdb",
-        "lib/netcoreapp2.0/LibUsbDotNet.LibUsbDotNet.dll",
-        "lib/netcoreapp2.0/LibUsbDotNet.LibUsbDotNet.pdb",
-        "lib/netstandard1.6/LibUsbDotNet.LibUsbDotNet.dll",
-        "lib/netstandard1.6/LibUsbDotNet.LibUsbDotNet.pdb",
-        "lib/netstandard2.0/LibUsbDotNet.LibUsbDotNet.dll",
-        "lib/netstandard2.0/LibUsbDotNet.LibUsbDotNet.pdb",
-        "libusbdotnet.2.2.29.nupkg.sha512",
-        "libusbdotnet.nuspec"
       ]
     },
     "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
@@ -4657,21 +4520,19 @@
         "microsoft.identitymodel.tokens.nuspec"
       ]
     },
-    "Microsoft.NETCore.Platforms/2.0.0": {
-      "sha512": "VdLJOCXhZaEMY7Hm2GKiULmn7IEPFE4XC5LPSfBVCUIA8YLZVh846gtfBJalsPQF2PlzdD7ecX7DZEulJ402ZQ==",
+    "Microsoft.NETCore.Platforms/1.1.1": {
+      "sha512": "TMBuzAHpTenGbGgk0SMTwyEkyijY/Eae4ZGsFNYJvAr/LDn1ku3Etp3FPxChmDp5HHF3kzJuoaa08N0xjqAJfQ==",
       "type": "package",
-      "path": "microsoft.netcore.platforms/2.0.0",
+      "path": "microsoft.netcore.platforms/1.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
-        "microsoft.netcore.platforms.2.0.0.nupkg.sha512",
+        "microsoft.netcore.platforms.1.1.1.nupkg.sha512",
         "microsoft.netcore.platforms.nuspec",
-        "runtime.json",
-        "useSharedDesignerContext.txt",
-        "version.txt"
+        "runtime.json"
       ]
     },
     "Microsoft.NETCore.Targets/1.1.3": {
@@ -4707,44 +4568,42 @@
         "microsoft.sqlserver.server.nuspec"
       ]
     },
-    "Microsoft.Win32.Registry/4.5.0": {
-      "sha512": "+FWlwd//+Tt56316p00hVePBCouXyEzT86Jb3+AuRotTND0IYn0OO3obs1gnQEs/txEnt+rF2JBGLItTG+Be6A==",
+    "Microsoft.Win32.Primitives/4.3.0": {
+      "sha512": "9ZQKCWxH7Ijp9BfahvL2Zyf1cJIk8XYLF6Yjzr2yi0b2cOut/HQ31qf1ThHAgCc3WiZMdnWcfJCgN82/0UunxA==",
       "type": "package",
-      "path": "microsoft.win32.registry/4.5.0",
+      "path": "microsoft.win32.primitives/4.3.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "lib/net46/Microsoft.Win32.Registry.dll",
-        "lib/net461/Microsoft.Win32.Registry.dll",
-        "lib/netstandard1.3/Microsoft.Win32.Registry.dll",
-        "lib/netstandard2.0/Microsoft.Win32.Registry.dll",
-        "microsoft.win32.registry.4.5.0.nupkg.sha512",
-        "microsoft.win32.registry.nuspec",
-        "ref/net46/Microsoft.Win32.Registry.dll",
-        "ref/net461/Microsoft.Win32.Registry.dll",
-        "ref/net461/Microsoft.Win32.Registry.xml",
-        "ref/netstandard1.3/Microsoft.Win32.Registry.dll",
-        "ref/netstandard1.3/Microsoft.Win32.Registry.xml",
-        "ref/netstandard1.3/de/Microsoft.Win32.Registry.xml",
-        "ref/netstandard1.3/es/Microsoft.Win32.Registry.xml",
-        "ref/netstandard1.3/fr/Microsoft.Win32.Registry.xml",
-        "ref/netstandard1.3/it/Microsoft.Win32.Registry.xml",
-        "ref/netstandard1.3/ja/Microsoft.Win32.Registry.xml",
-        "ref/netstandard1.3/ko/Microsoft.Win32.Registry.xml",
-        "ref/netstandard1.3/ru/Microsoft.Win32.Registry.xml",
-        "ref/netstandard1.3/zh-hans/Microsoft.Win32.Registry.xml",
-        "ref/netstandard1.3/zh-hant/Microsoft.Win32.Registry.xml",
-        "ref/netstandard2.0/Microsoft.Win32.Registry.dll",
-        "ref/netstandard2.0/Microsoft.Win32.Registry.xml",
-        "runtimes/unix/lib/netstandard2.0/Microsoft.Win32.Registry.dll",
-        "runtimes/win/lib/net46/Microsoft.Win32.Registry.dll",
-        "runtimes/win/lib/net461/Microsoft.Win32.Registry.dll",
-        "runtimes/win/lib/netstandard1.3/Microsoft.Win32.Registry.dll",
-        "runtimes/win/lib/netstandard2.0/Microsoft.Win32.Registry.dll",
-        "useSharedDesignerContext.txt",
-        "version.txt"
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net46/Microsoft.Win32.Primitives.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "microsoft.win32.primitives.4.3.0.nupkg.sha512",
+        "microsoft.win32.primitives.nuspec",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net46/Microsoft.Win32.Primitives.dll",
+        "ref/netstandard1.3/Microsoft.Win32.Primitives.dll",
+        "ref/netstandard1.3/Microsoft.Win32.Primitives.xml",
+        "ref/netstandard1.3/de/Microsoft.Win32.Primitives.xml",
+        "ref/netstandard1.3/es/Microsoft.Win32.Primitives.xml",
+        "ref/netstandard1.3/fr/Microsoft.Win32.Primitives.xml",
+        "ref/netstandard1.3/it/Microsoft.Win32.Primitives.xml",
+        "ref/netstandard1.3/ja/Microsoft.Win32.Primitives.xml",
+        "ref/netstandard1.3/ko/Microsoft.Win32.Primitives.xml",
+        "ref/netstandard1.3/ru/Microsoft.Win32.Primitives.xml",
+        "ref/netstandard1.3/zh-hans/Microsoft.Win32.Primitives.xml",
+        "ref/netstandard1.3/zh-hant/Microsoft.Win32.Primitives.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._"
       ]
     },
     "Microsoft.Win32.SystemEvents/9.0.1": {
@@ -6724,46 +6583,43 @@
         "system.runtime.interopservices.nuspec"
       ]
     },
-    "System.Security.AccessControl/4.5.0": {
-      "sha512": "vW8Eoq0TMyz5vAG/6ce483x/CP83fgm4SJe5P8Tb1tZaobcvPrbMEL7rhH1DRdrYbbb6F0vq3OlzmK0Pkwks5A==",
+    "System.Security.Claims/4.3.0": {
+      "sha512": "P/+BR/2lnc4PNDHt/TPBAWHVMLMRHsyYZbU1NphW4HIWzCggz8mJbTQQ3MKljFE7LS3WagmVFuBgoLcFzYXlkA==",
       "type": "package",
-      "path": "system.security.accesscontrol/4.5.0",
+      "path": "system.security.claims/4.3.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "lib/net46/System.Security.AccessControl.dll",
-        "lib/net461/System.Security.AccessControl.dll",
-        "lib/netstandard1.3/System.Security.AccessControl.dll",
-        "lib/netstandard2.0/System.Security.AccessControl.dll",
-        "lib/uap10.0.16299/_._",
-        "ref/net46/System.Security.AccessControl.dll",
-        "ref/net461/System.Security.AccessControl.dll",
-        "ref/net461/System.Security.AccessControl.xml",
-        "ref/netstandard1.3/System.Security.AccessControl.dll",
-        "ref/netstandard1.3/System.Security.AccessControl.xml",
-        "ref/netstandard1.3/de/System.Security.AccessControl.xml",
-        "ref/netstandard1.3/es/System.Security.AccessControl.xml",
-        "ref/netstandard1.3/fr/System.Security.AccessControl.xml",
-        "ref/netstandard1.3/it/System.Security.AccessControl.xml",
-        "ref/netstandard1.3/ja/System.Security.AccessControl.xml",
-        "ref/netstandard1.3/ko/System.Security.AccessControl.xml",
-        "ref/netstandard1.3/ru/System.Security.AccessControl.xml",
-        "ref/netstandard1.3/zh-hans/System.Security.AccessControl.xml",
-        "ref/netstandard1.3/zh-hant/System.Security.AccessControl.xml",
-        "ref/netstandard2.0/System.Security.AccessControl.dll",
-        "ref/netstandard2.0/System.Security.AccessControl.xml",
-        "ref/uap10.0.16299/_._",
-        "runtimes/win/lib/net46/System.Security.AccessControl.dll",
-        "runtimes/win/lib/net461/System.Security.AccessControl.dll",
-        "runtimes/win/lib/netcoreapp2.0/System.Security.AccessControl.dll",
-        "runtimes/win/lib/netstandard1.3/System.Security.AccessControl.dll",
-        "runtimes/win/lib/uap10.0.16299/_._",
-        "system.security.accesscontrol.4.5.0.nupkg.sha512",
-        "system.security.accesscontrol.nuspec",
-        "useSharedDesignerContext.txt",
-        "version.txt"
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net46/System.Security.Claims.dll",
+        "lib/netstandard1.3/System.Security.Claims.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net46/System.Security.Claims.dll",
+        "ref/netstandard1.3/System.Security.Claims.dll",
+        "ref/netstandard1.3/System.Security.Claims.xml",
+        "ref/netstandard1.3/de/System.Security.Claims.xml",
+        "ref/netstandard1.3/es/System.Security.Claims.xml",
+        "ref/netstandard1.3/fr/System.Security.Claims.xml",
+        "ref/netstandard1.3/it/System.Security.Claims.xml",
+        "ref/netstandard1.3/ja/System.Security.Claims.xml",
+        "ref/netstandard1.3/ko/System.Security.Claims.xml",
+        "ref/netstandard1.3/ru/System.Security.Claims.xml",
+        "ref/netstandard1.3/zh-hans/System.Security.Claims.xml",
+        "ref/netstandard1.3/zh-hant/System.Security.Claims.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.security.claims.4.3.0.nupkg.sha512",
+        "system.security.claims.nuspec"
       ]
     },
     "System.Security.Cryptography.Pkcs/8.0.1": {
@@ -6868,23 +6724,76 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "System.Security.Principal.Windows/4.5.0": {
-      "sha512": "U77HfRXlZlOeIXd//Yoj6Jnk8AXlbeisf1oq1os+hxOGVnuG+lGSfGqTwTZBoORFF6j/0q7HXIl8cqwQ9aUGqQ==",
+    "System.Security.Principal/4.3.0": {
+      "sha512": "I1tkfQlAoMM2URscUtpcRo/hX0jinXx6a/KUtEQoz3owaYwl3qwsO8cbzYVVnjxrzxjHo3nJC+62uolgeGIS9A==",
       "type": "package",
-      "path": "system.security.principal.windows/4.5.0",
+      "path": "system.security.principal/4.3.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/netcore50/System.Security.Principal.dll",
+        "lib/netstandard1.0/System.Security.Principal.dll",
+        "lib/portable-net45+win8+wp8+wpa81/_._",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/netcore50/System.Security.Principal.dll",
+        "ref/netcore50/System.Security.Principal.xml",
+        "ref/netcore50/de/System.Security.Principal.xml",
+        "ref/netcore50/es/System.Security.Principal.xml",
+        "ref/netcore50/fr/System.Security.Principal.xml",
+        "ref/netcore50/it/System.Security.Principal.xml",
+        "ref/netcore50/ja/System.Security.Principal.xml",
+        "ref/netcore50/ko/System.Security.Principal.xml",
+        "ref/netcore50/ru/System.Security.Principal.xml",
+        "ref/netcore50/zh-hans/System.Security.Principal.xml",
+        "ref/netcore50/zh-hant/System.Security.Principal.xml",
+        "ref/netstandard1.0/System.Security.Principal.dll",
+        "ref/netstandard1.0/System.Security.Principal.xml",
+        "ref/netstandard1.0/de/System.Security.Principal.xml",
+        "ref/netstandard1.0/es/System.Security.Principal.xml",
+        "ref/netstandard1.0/fr/System.Security.Principal.xml",
+        "ref/netstandard1.0/it/System.Security.Principal.xml",
+        "ref/netstandard1.0/ja/System.Security.Principal.xml",
+        "ref/netstandard1.0/ko/System.Security.Principal.xml",
+        "ref/netstandard1.0/ru/System.Security.Principal.xml",
+        "ref/netstandard1.0/zh-hans/System.Security.Principal.xml",
+        "ref/netstandard1.0/zh-hant/System.Security.Principal.xml",
+        "ref/portable-net45+win8+wp8+wpa81/_._",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.security.principal.4.3.0.nupkg.sha512",
+        "system.security.principal.nuspec"
+      ]
+    },
+    "System.Security.Principal.Windows/4.3.0": {
+      "sha512": "HVL1rvqYtnRCxFsYag/2le/ZfKLK4yMw79+s6FmKXbSCNN0JeAhrYxnRAHFoWRa0dEojsDcbBSpH3l22QxAVyw==",
+      "type": "package",
+      "path": "system.security.principal.windows/4.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
         "lib/net46/System.Security.Principal.Windows.dll",
-        "lib/net461/System.Security.Principal.Windows.dll",
-        "lib/netstandard1.3/System.Security.Principal.Windows.dll",
-        "lib/netstandard2.0/System.Security.Principal.Windows.dll",
-        "lib/uap10.0.16299/_._",
         "ref/net46/System.Security.Principal.Windows.dll",
-        "ref/net461/System.Security.Principal.Windows.dll",
-        "ref/net461/System.Security.Principal.Windows.xml",
         "ref/netstandard1.3/System.Security.Principal.Windows.dll",
         "ref/netstandard1.3/System.Security.Principal.Windows.xml",
         "ref/netstandard1.3/de/System.Security.Principal.Windows.xml",
@@ -6896,19 +6805,11 @@
         "ref/netstandard1.3/ru/System.Security.Principal.Windows.xml",
         "ref/netstandard1.3/zh-hans/System.Security.Principal.Windows.xml",
         "ref/netstandard1.3/zh-hant/System.Security.Principal.Windows.xml",
-        "ref/netstandard2.0/System.Security.Principal.Windows.dll",
-        "ref/netstandard2.0/System.Security.Principal.Windows.xml",
-        "ref/uap10.0.16299/_._",
-        "runtimes/unix/lib/netcoreapp2.0/System.Security.Principal.Windows.dll",
+        "runtimes/unix/lib/netstandard1.3/System.Security.Principal.Windows.dll",
         "runtimes/win/lib/net46/System.Security.Principal.Windows.dll",
-        "runtimes/win/lib/net461/System.Security.Principal.Windows.dll",
-        "runtimes/win/lib/netcoreapp2.0/System.Security.Principal.Windows.dll",
         "runtimes/win/lib/netstandard1.3/System.Security.Principal.Windows.dll",
-        "runtimes/win/lib/uap10.0.16299/_._",
-        "system.security.principal.windows.4.5.0.nupkg.sha512",
-        "system.security.principal.windows.nuspec",
-        "useSharedDesignerContext.txt",
-        "version.txt"
+        "system.security.principal.windows.4.3.0.nupkg.sha512",
+        "system.security.principal.windows.nuspec"
       ]
     },
     "System.ServiceModel.Http/8.1.0": {
@@ -7444,25 +7345,6 @@
         "version.txt"
       ]
     },
-    "UniPRT.Sdk/1.0.0": {
-      "sha512": "s+Ws7Mbj4wczqw0xVu2EAC5Ld36zYhJCZcjMl0lS0SzVNv5LLl/1risSYw00scMQxdS+WBkDgrD9KfFrimk4/Q==",
-      "type": "package",
-      "path": "uniprt.sdk/1.0.0",
-      "files": [
-        ".nupkg.metadata",
-        "License.txt",
-        "LogoAutoId.png",
-        "lib/net5.0/Comm.dll",
-        "lib/net5.0/Discovery.dll",
-        "lib/net5.0/Json.dll",
-        "lib/net5.0/LabelMaker.dll",
-        "lib/net5.0/UniPRTSdk.dll",
-        "lib/net5.0/Utilities.dll",
-        "readme.txt",
-        "uniprt.sdk.1.0.0.nupkg.sha512",
-        "uniprt.sdk.nuspec"
-      ]
-    },
     "Zebra.Printer.SDK/3.0.3337": {
       "sha512": "kALMUcfac0OLxyxgwpE5p/SkfDk9s12eWpcz/rCp+ymgPqsfoGMcptX+t32NLrykAAGkBcJW+Vm/qf+KfxdcaQ==",
       "type": "package",
@@ -7503,12 +7385,11 @@
       "Microsoft.Extensions.Hosting >= 9.0.6",
       "Newtonsoft.Json >= 13.0.3",
       "ReportViewerCore.WinForms >= 15.1.26",
-      "UniPRT.Sdk >= 1.0.0",
       "Zebra.Printer.SDK >= 3.0.3337"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\siste\\.nuget\\packages\\": {},
+    "C:\\Users\\Nelson\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
@@ -7517,14 +7398,14 @@
       "projectUniqueName": "C:\\Programacion\\Ritrama2025\\Ritrama2025.csproj",
       "projectName": "Ritrama2025",
       "projectPath": "C:\\Programacion\\Ritrama2025\\Ritrama2025.csproj",
-      "packagesPath": "C:\\Users\\siste\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Nelson\\.nuget\\packages\\",
       "outputPath": "C:\\Programacion\\Ritrama2025\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\siste\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Nelson\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -7534,7 +7415,6 @@
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
-        "C:\\Programacion\\Ritrama2025\\Paquetes": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -7590,10 +7470,6 @@
           "ReportViewerCore.WinForms": {
             "target": "Package",
             "version": "[15.1.26, )"
-          },
-          "UniPRT.Sdk": {
-            "target": "Package",
-            "version": "[1.0.0, )"
           },
           "Zebra.Printer.SDK": {
             "target": "Package",

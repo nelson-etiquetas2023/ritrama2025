@@ -9,17 +9,17 @@ namespace Ritrama2025.Forms.Seleccion
 {
     public partial class FrmSeleccion : Form
     {
-        private static readonly Dictionary<string, (String IdCol, string DesCol)> Columnas = new() 
+        private static readonly Dictionary<string, (String IdCol, string DesCol, string TypeCol)> Columnas = new() 
         {
-            ["clientes"] = ("customer_id", "customer_name"),
-            ["vendedores"] = ("vendor_id", "vendor_name"),
-            ["Transporte"] = ("transport_id", "transport_name"),
-            ["chofer"] = ("chofer_id", "chofer_name"),
-            ["camion"] = ("placas_id", "camion_name"),
-            ["operadores"] = ("id_operador", "nombre"),
-            ["Proveedor"] = ("proveedor_id", "proveedor_name"),
-            ["Persona"] = ("person_id", "person_name"),
-            ["Producto"] = ("product_id","product_name")
+            ["clientes"] = ("customer_id", "customer_name",""),
+            ["vendedores"] = ("vendor_id", "vendor_name",""),
+            ["Transporte"] = ("transport_id", "transport_name",""),
+            ["chofer"] = ("chofer_id", "chofer_name",""),
+            ["camion"] = ("placas_id", "camion_name",""),
+            ["operadores"] = ("id_operador", "nombre",""),
+            ["Proveedor"] = ("proveedor_id", "proveedor_name",""),
+            ["Persona"] = ("person_id", "person_name",""),
+            ["Producto"] = ("product_id","product_name","tipo")
         };
         readonly ICommonService service = ServiceLocator.Get<ICommonService>();
 
@@ -40,10 +40,12 @@ namespace Ritrama2025.Forms.Seleccion
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Titulo { get; set; } = null!;
+        public string Tipo { get; set; } = null!;
 
         DataView Dv = new();
         string colname1 = null!;
         string colname2 = null!;
+        string colname3 = null!;
 
         private void Seleccion_Load(object sender, EventArgs e)
         {
@@ -58,8 +60,11 @@ namespace Ritrama2025.Forms.Seleccion
             {
                 colname1 = cols.IdCol;
                 colname2 = cols.DesCol;
+                if (Titulo == "Producto") 
+                {
+                  colname3 = cols.TypeCol;
+                }
             }
-
             EstilosGrid();
         }
         private void BuscarItems()
@@ -79,7 +84,7 @@ namespace Ritrama2025.Forms.Seleccion
             DataGridViewTextBoxColumn col1 = new()
             {
                 Name = colname1,
-                Width = 80,
+                Width = 70,
                 HeaderText = "Código",
                 DataPropertyName = colname1
             };
@@ -87,11 +92,22 @@ namespace Ritrama2025.Forms.Seleccion
             DataGridViewTextBoxColumn col2 = new()
             {
                 Name = colname2,
-                Width = 320,
+                Width = 280,
                 HeaderText = "Descripción",
                 DataPropertyName = colname2
             };
             Grid_Items.Columns.Add(col2);
+            if (Titulo == "Producto") 
+            {
+                DataGridViewTextBoxColumn col3 = new()
+                {
+                    Name = colname3,
+                    Width = 70,
+                    HeaderText = "Tipo",
+                    DataPropertyName = colname3,
+                };
+                Grid_Items.Columns.Add(col3);
+            }
         }
 
         private void Bot_buscar_Click(object sender, EventArgs e)
@@ -107,6 +123,8 @@ namespace Ritrama2025.Forms.Seleccion
             }
             Id = Grid_Items.Rows[e.RowIndex].Cells[0].Value!.ToString()!;
             Description = Grid_Items.Rows[e.RowIndex].Cells[1].Value!.ToString()!;
+            if(Titulo == "Producto") Tipo = Grid_Items.Rows[e.RowIndex].Cells[2].Value!.ToString()!;
+
             this.Close();
         }
 

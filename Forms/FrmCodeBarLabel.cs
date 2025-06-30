@@ -1,6 +1,10 @@
-﻿using System.Drawing.Printing;
+﻿using Ritrama2025.Models;
+using System.Drawing.Printing;
+using System.IO.Pipes;
 using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
+using Windows.Media.Protection.PlayReady;
 using Zebra.Sdk.Comm;
 using Zebra.Sdk.Printer.Discovery;
 
@@ -19,21 +23,21 @@ namespace Ritrama2025.Forms
 
         private void FrmCodeBarLabel_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void Btn_buscar_printer_Click(object sender, EventArgs e)
         {
-            if (rad_zebra.Checked) 
+            if (rad_zebra.Checked)
             {
                 DiscoveryPrinterZebra();
             }
-            if (rad_TSC.Checked) 
+            if (rad_TSC.Checked)
             {
-                DiscoveryPrinterTsc();   
+                DiscoveryPrinterTsc();
             }
         }
-        private void DiscoveryPrinterTsc() 
+        private void DiscoveryPrinterTsc()
         {
             cbo_printer.Items.Clear();
             foreach (string impresora in PrinterSettings.InstalledPrinters)
@@ -43,7 +47,7 @@ namespace Ritrama2025.Forms
             if (cbo_printer.Items.Count > 0)
                 cbo_printer.SelectedIndex = 0;
         }
-        private void DiscoveryPrinterZebra() 
+        private void DiscoveryPrinterZebra()
         {
             try
             {
@@ -64,30 +68,30 @@ namespace Ritrama2025.Forms
         }
         private void Button1_Click(object sender, EventArgs e)
         {
-            if (rad_zebra.Checked) 
+            if (rad_zebra.Checked)
             {
                 PrintZebraLabel();
             }
             if (rad_TSC.Checked)
             {
                 PrintTscLabel(
-            
+
 );
             }
         }
         private void PrintTscLabel()
         {
-            if(cbo_printer.SelectedItem!.ToString() == string.Empty) MessageBox.Show("Seleccione una impresora TSC");
+            if (cbo_printer.SelectedItem!.ToString() == string.Empty) MessageBox.Show("Seleccione una impresora TSC");
 
-            byte[] LabelTSPL = Encoding.UTF8.GetBytes("SIZE 50 mm,30 mm\r\nGAP 2 mm,0\r\nCLS\r\n" +
-                                                      "TEXT 10,10,\"FONT001\",0,1,1,\"Hola Mundo\"\r\n" +
-                                                      "PRINT 1\r\n");
-            
+            //byte[] LabelTSPL = Encoding.UTF8.GetBytes("SIZE 50 mm,30 mm\r\nGAP 2 mm,0\r\nCLS\r\n" +
+                                                     // "TEXT 10,10,\"FONT001\",0,1,1,\"Hola Mundo\"\r\n" +
+                                                      //"PRINT 1\r\n");
+
 
 
 
         }
-        private void PrintZebraLabel() 
+        private void PrintZebraLabel()
         {
             if (rad_label1.Checked)
             {
@@ -144,10 +148,10 @@ namespace Ritrama2025.Forms
 
 
         #region TscPrinters
-      
-       
 
-       
+
+
+
 
         #endregion
 
@@ -231,6 +235,53 @@ namespace Ritrama2025.Forms
                 previewLabels.Image = img;
             }
         }
+
+        private async void Btn_ServicePrintThermal_Click(object sender, EventArgs e)
+        {
+            var orden = new OrdenEtiquetaCompleta
+            {
+                Impresora = "TSC TE244",
+                NumeroDePaginas = 2,
+                CopiasPorEtiqueta = 1,
+                FormatoTSPL = "! 0 200 200 210 1\nTEXT 10 10 0 3 1 1 CODIGO: {Codigo}\nTEXT 10 40 0 3 1 1 DESC: {Descripcion}\nTEXT 10 70 0 3 1 1 LOTE: {Lote}\nTEXT 10 100 0 3 1 1 FECHA: {Fecha}\nPRINT\n",
+                DatosPorEtiqueta =
+                [
+                    new() { Codigo = "P001", Descripcion = "Producto A", Lote = "L123", Fecha = "2025-06-25", Cantidad = 1 },
+                    new() { Codigo = "P002", Descripcion = "Producto B", Lote = "L456", Fecha = "2025-06-25", Cantidad = 1 }
+                ]
+            };
+
+            using var clientPrint = new NamedPipeClientStream(".", "PrintThermalPipe", PipeDirection.Out);
+            await clientPrint.ConnectAsync(3000);
+            
+            
+            var json = JsonSerializer.Serialize(orden);
+            byte[] buffer = Encoding.UTF8.GetBytes(json);
+
+            await clientPrint.WriteAsync(buffer, 0, buffer.Length);
+
+
+        }
+
+    }
+    public class OrdenEtiquetaCompleta
+    {
+        public string Impresora { get; set; } = "TSC TE244";
+        public int NumeroDePaginas { get; set; }
+        public int CopiasPorEtiqueta { get; set; } = 1;
+
+        public string FormatoTSPL { get; set; } = ""; // plantilla base con placeholders
+        public List<DatosEtiqueta> DatosPorEtiqueta { get; set; } = [];
+
+
+    }
+    public class DatosEtiqueta
+    {
+        public string Codigo { get; set; } = "";
+        public string Descripcion { get; set; } = "";
+        public string Lote { get; set; } = "";
+        public string Fecha { get; set; } = "";
+        public int Cantidad { get; set; } = 1;
     }
 }
 

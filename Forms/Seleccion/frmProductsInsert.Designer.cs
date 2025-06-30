@@ -170,7 +170,7 @@
             groupBox1.Margin = new Padding(3, 4, 3, 4);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(3, 4, 3, 4);
-            groupBox1.Size = new Size(229, 155);
+            groupBox1.Size = new Size(229, 129);
             groupBox1.TabIndex = 43;
             groupBox1.TabStop = false;
             groupBox1.Text = "Tipo Product";
@@ -178,19 +178,19 @@
             // rad_hojas
             // 
             rad_hojas.AutoSize = true;
-            rad_hojas.Location = new Point(25, 116);
+            rad_hojas.Location = new Point(25, 82);
             rad_hojas.Margin = new Padding(3, 4, 3, 4);
             rad_hojas.Name = "rad_hojas";
-            rad_hojas.Size = new Size(60, 22);
+            rad_hojas.Size = new Size(66, 22);
             rad_hojas.TabIndex = 3;
             rad_hojas.TabStop = true;
-            rad_hojas.Text = "Hojas";
+            rad_hojas.Text = "Resma";
             rad_hojas.UseVisualStyleBackColor = true;
             // 
             // rad_graphics
             // 
             rad_graphics.AutoSize = true;
-            rad_graphics.Location = new Point(25, 86);
+            rad_graphics.Location = new Point(25, 62);
             rad_graphics.Margin = new Padding(3, 4, 3, 4);
             rad_graphics.Name = "rad_graphics";
             rad_graphics.Size = new Size(78, 22);
@@ -202,7 +202,7 @@
             // rad_rolloCortado
             // 
             rad_rolloCortado.AutoSize = true;
-            rad_rolloCortado.Location = new Point(25, 56);
+            rad_rolloCortado.Location = new Point(25, 44);
             rad_rolloCortado.Margin = new Padding(3, 4, 3, 4);
             rad_rolloCortado.Name = "rad_rolloCortado";
             rad_rolloCortado.Size = new Size(108, 22);

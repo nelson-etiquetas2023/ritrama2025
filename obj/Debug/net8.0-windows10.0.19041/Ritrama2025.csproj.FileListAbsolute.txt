@@ -36,14 +36,11 @@ C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\Azure.Identity.dl
 C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\ClosedXML.dll
 C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\ClosedXML.Parser.dll
 C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\Csv.dll
-C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\DataMatrix.NetCore.dll
 C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\DocumentFormat.OpenXml.dll
 C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\DocumentFormat.OpenXml.Framework.dll
 C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\ExcelNumberFormat.dll
 C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\FluentFTP.dll
-C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\InTheHand.Net.Bluetooth.dll
 C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\SharpSnmpLib.dll
-C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\LibUsbDotNet.LibUsbDotNet.dll
 C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\Microsoft.Bcl.Cryptography.dll
 C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\Microsoft.CodeAnalysis.dll
@@ -119,12 +116,6 @@ C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\System.ServiceMod
 C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\System.ServiceModel.dll
 C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\System.Text.Encodings.Web.dll
 C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\System.Text.Json.dll
-C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\Comm.dll
-C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\Discovery.dll
-C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\Json.dll
-C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\LabelMaker.dll
-C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\UniPRTSdk.dll
-C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\Utilities.dll
 C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\SdkApi.Core.dll
 C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\SdkApi.Desktop.Usb.dll
 C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\SdkApi.Desktop.dll
