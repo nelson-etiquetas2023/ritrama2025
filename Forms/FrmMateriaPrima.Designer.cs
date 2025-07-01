@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMateriaPrima));
             toolStrip1 = new ToolStrip();
             btn_primero = new ToolStripButton();
             btn_anterior = new ToolStripButton();
-            toolStripButton3 = new ToolStripButton();
             btn_siguiente = new ToolStripButton();
             btn_ultimo = new ToolStripButton();
             btn_create = new ToolStripButton();
@@ -62,8 +62,7 @@
             btn_RecepBuscar = new Button();
             txt_guia = new TextBox();
             label7 = new Label();
-            rad_DocumentProcess = new RadioButton();
-            rad_OrdenAbierta = new RadioButton();
+            rad_CloseDoc = new RadioButton();
             txt_notas = new RichTextBox();
             label8 = new Label();
             txt_total_cantidad = new TextBox();
@@ -88,16 +87,19 @@
             label16 = new Label();
             btn_template = new Button();
             btn_LoadRows = new Button();
+            Pic_DocumentClose = new PictureBox();
+            Imagenes = new ImageList(components);
             toolStrip1.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)GridItems).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Pic_DocumentClose).BeginInit();
             SuspendLayout();
             // 
             // toolStrip1
             // 
             toolStrip1.AutoSize = false;
-            toolStrip1.Items.AddRange(new ToolStripItem[] { btn_primero, btn_anterior, toolStripButton3, btn_siguiente, btn_ultimo, btn_create, btn_cancel, btn_save, btn_CloseDoc, btn_AnularDoc, btn_SearchDoc, btn_printDoc, btn_ExportDoc });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { btn_primero, btn_anterior, btn_siguiente, btn_ultimo, btn_create, btn_cancel, btn_save, btn_CloseDoc, btn_AnularDoc, btn_SearchDoc, btn_printDoc, btn_ExportDoc });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1156, 44);
@@ -125,15 +127,6 @@
             btn_anterior.Size = new Size(75, 40);
             btn_anterior.Text = "Anterior";
             btn_anterior.Click += Btn_anterior_Click;
-            // 
-            // toolStripButton3
-            // 
-            toolStripButton3.Font = new Font("Noto Sans", 9.75F);
-            toolStripButton3.Image = (Image)resources.GetObject("toolStripButton3.Image");
-            toolStripButton3.ImageTransparentColor = Color.Magenta;
-            toolStripButton3.Name = "toolStripButton3";
-            toolStripButton3.Size = new Size(84, 41);
-            toolStripButton3.Text = "Siguiente";
             // 
             // btn_siguiente
             // 
@@ -200,6 +193,7 @@
             btn_CloseDoc.Name = "btn_CloseDoc";
             btn_CloseDoc.Size = new Size(75, 40);
             btn_CloseDoc.Text = "Close";
+            btn_CloseDoc.Click += btn_CloseDoc_Click;
             // 
             // btn_AnularDoc
             // 
@@ -276,6 +270,7 @@
             // 
             // txt_prov_Id
             // 
+            txt_prov_Id.Enabled = false;
             txt_prov_Id.Location = new Point(525, 148);
             txt_prov_Id.Margin = new Padding(3, 4, 3, 4);
             txt_prov_Id.Name = "txt_prov_Id";
@@ -326,6 +321,7 @@
             // 
             // txt_transport_id
             // 
+            txt_transport_id.Enabled = false;
             txt_transport_id.Location = new Point(527, 204);
             txt_transport_id.Margin = new Padding(3, 4, 3, 4);
             txt_transport_id.Name = "txt_transport_id";
@@ -376,7 +372,7 @@
             // txt_person_name
             // 
             txt_person_name.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_person_name.Location = new Point(623, 277);
+            txt_person_name.Location = new Point(612, 277);
             txt_person_name.Margin = new Padding(3, 4, 3, 4);
             txt_person_name.Name = "txt_person_name";
             txt_person_name.ReadOnly = true;
@@ -386,7 +382,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(536, 257);
+            label6.Location = new Point(525, 257);
             label6.Name = "label6";
             label6.Size = new Size(106, 18);
             label6.TabIndex = 15;
@@ -395,10 +391,10 @@
             // btn_RecepBuscar
             // 
             btn_RecepBuscar.Enabled = false;
-            btn_RecepBuscar.Location = new Point(820, 275);
+            btn_RecepBuscar.Location = new Point(809, 275);
             btn_RecepBuscar.Margin = new Padding(3, 4, 3, 4);
             btn_RecepBuscar.Name = "btn_RecepBuscar";
-            btn_RecepBuscar.Size = new Size(53, 28);
+            btn_RecepBuscar.Size = new Size(46, 28);
             btn_RecepBuscar.TabIndex = 9;
             btn_RecepBuscar.Text = "...";
             btn_RecepBuscar.UseVisualStyleBackColor = true;
@@ -423,29 +419,18 @@
             label7.TabIndex = 18;
             label7.Text = "Guia de Importacion :";
             // 
-            // rad_DocumentProcess
+            // rad_CloseDoc
             // 
-            rad_DocumentProcess.AutoSize = true;
-            rad_DocumentProcess.Location = new Point(937, 285);
-            rad_DocumentProcess.Margin = new Padding(3, 4, 3, 4);
-            rad_DocumentProcess.Name = "rad_DocumentProcess";
-            rad_DocumentProcess.Size = new Size(78, 22);
-            rad_DocumentProcess.TabIndex = 1;
-            rad_DocumentProcess.TabStop = true;
-            rad_DocumentProcess.Text = "Cerrrada";
-            rad_DocumentProcess.UseVisualStyleBackColor = true;
-            // 
-            // rad_OrdenAbierta
-            // 
-            rad_OrdenAbierta.AutoSize = true;
-            rad_OrdenAbierta.Location = new Point(937, 268);
-            rad_OrdenAbierta.Margin = new Padding(3, 4, 3, 4);
-            rad_OrdenAbierta.Name = "rad_OrdenAbierta";
-            rad_OrdenAbierta.Size = new Size(69, 22);
-            rad_OrdenAbierta.TabIndex = 0;
-            rad_OrdenAbierta.TabStop = true;
-            rad_OrdenAbierta.Text = "Abierta";
-            rad_OrdenAbierta.UseVisualStyleBackColor = true;
+            rad_CloseDoc.AutoSize = true;
+            rad_CloseDoc.Enabled = false;
+            rad_CloseDoc.Location = new Point(880, 278);
+            rad_CloseDoc.Margin = new Padding(3, 4, 3, 4);
+            rad_CloseDoc.Name = "rad_CloseDoc";
+            rad_CloseDoc.Size = new Size(148, 22);
+            rad_CloseDoc.TabIndex = 0;
+            rad_CloseDoc.TabStop = true;
+            rad_CloseDoc.Text = "Documento Cerrado";
+            rad_CloseDoc.UseVisualStyleBackColor = true;
             // 
             // txt_notas
             // 
@@ -652,7 +637,8 @@
             // 
             // txt_person_id
             // 
-            txt_person_id.Location = new Point(536, 278);
+            txt_person_id.Enabled = false;
+            txt_person_id.Location = new Point(525, 278);
             txt_person_id.Margin = new Padding(3, 4, 3, 4);
             txt_person_id.Name = "txt_person_id";
             txt_person_id.ReadOnly = true;
@@ -672,7 +658,7 @@
             // 
             label16.AutoSize = true;
             label16.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label16.Location = new Point(934, 246);
+            label16.Location = new Point(877, 256);
             label16.Name = "label16";
             label16.Size = new Size(101, 18);
             label16.TabIndex = 43;
@@ -706,17 +692,35 @@
             btn_LoadRows.UseVisualStyleBackColor = true;
             btn_LoadRows.Click += btn_LoadRows_Click;
             // 
+            // Pic_DocumentClose
+            // 
+            Pic_DocumentClose.Image = (Image)resources.GetObject("Pic_DocumentClose.Image");
+            Pic_DocumentClose.Location = new Point(1049, 203);
+            Pic_DocumentClose.Name = "Pic_DocumentClose";
+            Pic_DocumentClose.Size = new Size(50, 50);
+            Pic_DocumentClose.SizeMode = PictureBoxSizeMode.AutoSize;
+            Pic_DocumentClose.TabIndex = 46;
+            Pic_DocumentClose.TabStop = false;
+            // 
+            // Imagenes
+            // 
+            Imagenes.ColorDepth = ColorDepth.Depth32Bit;
+            Imagenes.ImageStream = (ImageListStreamer)resources.GetObject("Imagenes.ImageStream");
+            Imagenes.TransparentColor = Color.Transparent;
+            Imagenes.Images.SetKeyName(0, "DocumentOpen.png");
+            Imagenes.Images.SetKeyName(1, "DocumentClose.png");
+            // 
             // FrmMateriaPrima
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1156, 787);
+            Controls.Add(Pic_DocumentClose);
             Controls.Add(btn_LoadRows);
             Controls.Add(btn_template);
             Controls.Add(label16);
-            Controls.Add(rad_DocumentProcess);
             Controls.Add(txt_embarque);
-            Controls.Add(rad_OrdenAbierta);
+            Controls.Add(rad_CloseDoc);
             Controls.Add(txt_person_id);
             Controls.Add(GridItems);
             Controls.Add(btn_AppMovil);
@@ -766,6 +770,7 @@
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ((System.ComponentModel.ISupportInitialize)GridItems).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Pic_DocumentClose).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -796,8 +801,7 @@
         private Button btn_RecepBuscar;
         private TextBox txt_guia;
         private Label label7;
-        private RadioButton rad_DocumentProcess;
-        private RadioButton rad_OrdenAbierta;
+        private RadioButton rad_CloseDoc;
         private RichTextBox txt_notas;
         private Label label8;
         private TextBox txt_total_cantidad;
@@ -826,10 +830,11 @@
         private Button btn_template;
         private Button btn_LoadRows;
         private ToolStripButton btn_CloseDoc;
-        private ToolStripButton toolStripButton3;
         private ToolStripButton btn_ExportDoc;
         private ToolStripButton btn_AnularDoc;
         private ToolStripButton btn_SearchDoc;
         private ToolStripButton btn_printDoc;
+        private PictureBox Pic_DocumentClose;
+        private ImageList Imagenes;
     }
 }

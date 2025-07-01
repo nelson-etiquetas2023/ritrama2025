@@ -37,7 +37,7 @@ namespace Ritrama2025.Models
         public string Product_name { get; set; } = null!;
         public bool Anulada { get; set; }
         public bool Procesado { get; set; }
-        public int Status { get; set; }
+        public bool CloseDocument { get; set; }
         public double Total_Inch_Ancho { get; set; }
         public double Longitud_Cortar { get; set; }
         public int Cortes_Ancho { get; set; } 
@@ -63,10 +63,6 @@ namespace Ritrama2025.Models
         public DateTime FechaAutorize { get; set; }
         public string ToAutorize { get; set; } = null!;
         public string Note { get; set; } = null!;
-        public bool CloseDocument { get; set; }
-
-
-
     }
 }
 

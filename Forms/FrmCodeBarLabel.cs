@@ -1,10 +1,9 @@
-﻿using Ritrama2025.Models;
-using System.Drawing.Printing;
+﻿using System.Drawing.Printing;
 using System.IO.Pipes;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
-using Windows.Media.Protection.PlayReady;
+
 using Zebra.Sdk.Comm;
 using Zebra.Sdk.Printer.Discovery;
 
@@ -238,44 +237,30 @@ namespace Ritrama2025.Forms
 
         private async void Btn_ServicePrintThermal_Click(object sender, EventArgs e)
         {
-            var orden = new OrdenEtiquetaCompleta
+            try
             {
-                Impresora = "TSC TE244",
-                NumeroDePaginas = 2,
-                CopiasPorEtiqueta = 1,
-                FormatoTSPL = "! 0 200 200 210 1\nTEXT 10 10 0 3 1 1 CODIGO: {Codigo}\nTEXT 10 40 0 3 1 1 DESC: {Descripcion}\nTEXT 10 70 0 3 1 1 LOTE: {Lote}\nTEXT 10 100 0 3 1 1 FECHA: {Fecha}\nPRINT\n",
-                DatosPorEtiqueta =
-                [
-                    new() { Codigo = "P001", Descripcion = "Producto A", Lote = "L123", Fecha = "2025-06-25", Cantidad = 1 },
-                    new() { Codigo = "P002", Descripcion = "Producto B", Lote = "L456", Fecha = "2025-06-25", Cantidad = 1 }
-                ]
-            };
-
-            using var clientPrint = new NamedPipeClientStream(".", "PrintThermalPipe", PipeDirection.Out);
-            await clientPrint.ConnectAsync(3000);
-            
-            
-            var json = JsonSerializer.Serialize(orden);
-            byte[] buffer = Encoding.UTF8.GetBytes(json);
-
-            await clientPrint.WriteAsync(buffer, 0, buffer.Length);
-
-
+                var label = new Etiqueta
+                {
+                    Codigo = "123456789",
+                    Descripcion = "Queso Llanero Palmizulia 1Kg.",
+                    Lote = "1158",
+                    Fecha = "15-08-2025",
+                    Cantidad = 300
+                };
+                using var cliente = new NamedPipeClientStream(".", "TestPipe", PipeDirection.Out);
+                await cliente.ConnectAsync(5000); // Espera hasta 5 segundos para conectarse.
+                string json = JsonSerializer.Serialize(label);
+                using var writer = new StreamWriter(cliente, Encoding.UTF8) { AutoFlush = true };
+                await writer.WriteLineAsync(json);
+                MessageBox.Show("JSON enviado correctamente:\n\n" + json);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al enviar JSON: " + ex.Message);
+            }
         }
-
     }
-    public class OrdenEtiquetaCompleta
-    {
-        public string Impresora { get; set; } = "TSC TE244";
-        public int NumeroDePaginas { get; set; }
-        public int CopiasPorEtiqueta { get; set; } = 1;
-
-        public string FormatoTSPL { get; set; } = ""; // plantilla base con placeholders
-        public List<DatosEtiqueta> DatosPorEtiqueta { get; set; } = [];
-
-
-    }
-    public class DatosEtiqueta
+    public class Etiqueta
     {
         public string Codigo { get; set; } = "";
         public string Descripcion { get; set; } = "";

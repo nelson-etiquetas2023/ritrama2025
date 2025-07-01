@@ -162,7 +162,7 @@ namespace Ritrama2025.Services
                 SqlCommand comando = new()
                 {
                     Connection = conn,
-                    CommandText = "INSERT INTO orden_corte (numero,fecha,fecha_produccion,product_id,rollid_1,width_1,lenght_1,rollid_2,width_2,lenght_2,anulada,procesado,status,tot_inch_ancho,longitud_cortar,cortes_ancho,cortes_largo,cant_rollos,decartable1_pies,lenght_master_real,util1_real_width,util1_real_lenght,descartable2_pies" + ",util2_real_width,util2_real_lenght,lenght_master_real2,rest1_width,rest1_lenght,rest2_width,rest2_lenght,cant_rollos2,cortes_largo2,step,lastupdate,fecha_autorize,toautorize,notes,closedocument,tipo_mov1,tipo_mov2,plus1_pies,plus2_pies,id_operador,customer_id,rollo_unificado,length_entrada,real_usado_r1,real_usado_r2,restante_rollid1,restante_rollid2,resta_entrada,total_salida,lenght_entrada) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27,@p28,@p29,@p30,@p31,@p32,@p33,@p34,@p35,@p36,@p37,@p38,@p39,@p40,@p41,@p42,@p43,@p44,@p45,@p46,@p47,@p48,@p49,@p50,@p51,@p52,@p53)",
+                    CommandText = "INSERT INTO orden_corte (numero,fecha,fecha_produccion,product_id,rollid_1,width_1,lenght_1,rollid_2,width_2,lenght_2,anulada,procesado,CloseDocument,tot_inch_ancho,longitud_cortar,cortes_ancho,cortes_largo,cant_rollos,decartable1_pies,lenght_master_real,util1_real_width,util1_real_lenght,descartable2_pies" + ",util2_real_width,util2_real_lenght,lenght_master_real2,rest1_width,rest1_lenght,rest2_width,rest2_lenght,cant_rollos2,cortes_largo2,step,lastupdate,fecha_autorize,toautorize,notes,closedocument,tipo_mov1,tipo_mov2,plus1_pies,plus2_pies,id_operador,customer_id,rollo_unificado,length_entrada,real_usado_r1,real_usado_r2,restante_rollid1,restante_rollid2,resta_entrada,total_salida,lenght_entrada) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27,@p28,@p29,@p30,@p31,@p32,@p33,@p34,@p35,@p36,@p37,@p38,@p39,@p40,@p41,@p42,@p43,@p44,@p45,@p46,@p47,@p48,@p49,@p50,@p51,@p52,@p53)",
                     CommandType = CommandType.Text
                 };
                 conn.Open();
@@ -178,7 +178,7 @@ namespace Ritrama2025.Services
                 comando.Parameters.AddWithValue("@p10", OrdenCorte.Lenght_2);
                 comando.Parameters.AddWithValue("@p11", OrdenCorte.Anulada);
                 comando.Parameters.AddWithValue("@p12", OrdenCorte.Procesado);
-                comando.Parameters.AddWithValue("@p13", OrdenCorte.Status);
+                comando.Parameters.AddWithValue("@p13", OrdenCorte.CloseDocument);
                 comando.Parameters.AddWithValue("@p14", OrdenCorte.Total_Inch_Ancho);
                 comando.Parameters.AddWithValue("@p15", OrdenCorte.Longitud_Cortar);
                 comando.Parameters.AddWithValue("@p16", OrdenCorte.Cortes_Ancho);

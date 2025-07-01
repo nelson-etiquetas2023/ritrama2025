@@ -18,6 +18,7 @@ namespace Ritrama2025.Models
         public string Person_Name { get; set; } = null!;
         public string Notas { get; set; } = null!;
         public int Renglones { get; set; }
+        public bool CloseDocument { get; set; }
         public List<OrdenDetailsMP> Items { get; set; } = [];
     }
 }

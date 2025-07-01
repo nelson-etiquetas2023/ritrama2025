@@ -37,6 +37,7 @@ namespace Ritrama2025.Forms
         {
             label_counter_rows.Text = $"Registros: {Bs.Count}";
             Bs.Sort = "numero DESC";
+            Pic_DocumentClose.Image = !rad_CloseDoc.Checked ? Imagenes.Images["DocumentOpen.png"] : Imagenes.Images["DocumentClose.png"];
         }
         private void BindDataSource()
         {
@@ -91,8 +92,11 @@ namespace Ritrama2025.Forms
             txt_embarque.DataBindings.Add("Text", Bs, "doc_embarque");
             txt_total_cantidad.DataBindings.Add("Text", Bs, "total_cantidad");
             txt_notas.DataBindings.Add("Text", Bs, "notas");
-            chk_anulado.DataBindings.Add("Checked", Bs, "anulado");
+
             txt_person_id.DataBindings.Add("Text", Bs, "person_id");
+            rad_CloseDoc.DataBindings.Add("Checked", Bs, "CloseDocument");
+            chk_anulado.DataBindings.Add("Checked", Bs, "anulado");
+
         }
         private void StyleGridColumns()
         {
@@ -118,31 +122,38 @@ namespace Ritrama2025.Forms
         private void Btn_siguiente_Click(object sender, EventArgs e)
         {
             Bs.Position--;
+            RefreshDocument();
         }
 
         private void Btn_anterior_Click(object sender, EventArgs e)
         {
             Bs.Position++;
+            RefreshDocument();
         }
 
         private void Btn_ultimo_Click(object sender, EventArgs e)
         {
             Bs.Position = 0;
+            RefreshDocument();
         }
 
         private void Btn_primero_Click(object sender, EventArgs e)
         {
             Bs.Position = Bs.Count - 1;
+            RefreshDocument();
         }
 
         private void Btn_create_Click(object sender, EventArgs e)
         {
             Bs.Sort = "";
             chk_anulado.DataBindings.Clear();
+            rad_CloseDoc.DataBindings.Clear();
+            rad_CloseDoc.Checked = false;
             ParentRow = (DataRowView)Bs.AddNew();
             ParentRow.BeginEdit();
             ParentRow["numero"] = Services.LoadConsecOrden("CMP");
             ParentRow["total_cantidad"] = 0;
+            ParentRow["CloseDocument"] = false;
             ParentRow.EndEdit();
             AbrirFormulario();
 
@@ -172,6 +183,12 @@ namespace Ritrama2025.Forms
             txt_notas.ReadOnly = false;
             btn_LoadRows.Enabled = true;
             btn_template.Enabled = true;
+            btn_CloseDoc.Enabled = false;
+            btn_AnularDoc.Enabled = false;
+            btn_OrdenBuscar.Enabled = false;
+            btn_printDoc.Enabled = false;
+            btn_ExportDoc.Enabled = false;
+            btn_SearchDoc.Enabled= false;
         }
 
         private void Btn_ProvBuscar_Click(object sender, EventArgs e)
@@ -269,6 +286,11 @@ namespace Ritrama2025.Forms
             btn_deleteRows.Enabled = false;
             btn_template.Enabled = false;
             btn_LoadRows.Enabled = false;
+            btn_CloseDoc.Enabled = true;
+            btn_AnularDoc.Enabled = true;
+            btn_SearchDoc.Enabled = true;
+            btn_printDoc.Enabled = true;
+            btn_ExportDoc.Enabled = true;
             RefreshDocument();
         }
 
@@ -290,8 +312,10 @@ namespace Ritrama2025.Forms
                 Numero_Embarque = txt_embarque.Text,
                 Person_Id = Guid.Parse(txt_person_id.Text),
                 Person_Name = txt_person_name.Text,
+                CloseDocument = false,
                 Notas = txt_notas.Text + Environment.NewLine + "Documento de Materia Prima Creado: " + Environment.NewLine + DateTime.Now,
                 Renglones = Convert.ToInt32(txt_total_cantidad.Text),
+
 
             };
             //Items.
@@ -356,6 +380,7 @@ namespace Ritrama2025.Forms
             btn_TransportBuscar.Enabled = false;
             btn_RecepBuscar.Enabled = false;
             GridItems.ReadOnly = true;
+            RefreshDocument();
         }
 
         private void btn_template_Click(object sender, EventArgs e)
@@ -440,7 +465,7 @@ namespace Ritrama2025.Forms
                 Location = new Point(this.Location.X + 300, this.Location.Y + 150)
             };
             frmbuscar.ShowDialog();
-            if (frmbuscar.Parameter != null) 
+            if (frmbuscar.Parameter != null)
             {
                 int busqueda = Bs.Find("numero", frmbuscar.Parameter);
                 if (busqueda > 0)
@@ -448,13 +473,58 @@ namespace Ritrama2025.Forms
                     Bs.Position = busqueda;
                     RefreshDocument();
                 }
-                else 
+                else
                 {
-                    MessageBox.Show("No se encontro el numero del documento...","Advertencia",
-                        MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                    MessageBox.Show("No se encontro el numero del documento...", "Advertencia",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-           
+
+        }
+
+        private void btn_CloseDoc_Click(object sender, EventArgs e)
+        {
+            CerrarDocumentoOrder();
+        }
+
+        private void CerrarDocumentoOrder()
+        {
+
+            if (rad_CloseDoc.Checked) 
+            {
+                MessageBox.Show("El Documento ya se encuentra cerrado.", "Advertencia",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult result = MessageBox.Show("Deseas Cerrar este Documento (S/N)???", "Confrmar Cierre",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                Services.CloseOrder(txt_numeroOrden.Text);
+                var doc = (DataRowView)Bs.Current;
+                doc.BeginEdit();
+                doc["CloseDocument"] = true;
+                doc.EndEdit();
+                doc.Row.AcceptChanges();
+                RefreshDocument();
+                //Actualizo los logs del documento en el campo notas
+                string user = "-> Npino - Departamento de Sistema";
+                string dataClose = $"Documento cerrado por: " + user + Environment.NewLine +
+                                  "Fecha de Cierre: " + DateTime.Now + Environment.NewLine;
+
+                Services.UpDateLogsNotes(txt_numeroOrden.Text,dataClose);
+
+            }
+            else if (result == DialogResult.No)
+            {
+                //enviar mensaje al log de windows
+            }
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

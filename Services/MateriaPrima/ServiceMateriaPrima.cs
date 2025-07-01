@@ -178,7 +178,7 @@ namespace Ritrama2025.Services.MateriaPrima
                     Connection = conn,
                     Transaction = transaction,  
                     CommandType = CommandType.Text,
-                    CommandText = "INSERT INTO OrdenMateria (numero,fecha_pro,fecha_recepcion,orden_compra,proveedor_id,persona_respons,notas,transport_id,guia_import,lote,doc_embarque,anulado,status,total_cantidad,person_id,estado,fecha_hora_close) VALUES (@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17)"
+                    CommandText = "INSERT INTO OrdenMateria (numero,fecha_pro,fecha_recepcion,orden_compra,proveedor_id,persona_respons,notas,transport_id,guia_import,lote,doc_embarque,anulado,CloseDocument,total_cantidad,person_id,estado,fecha_hora_close) VALUES (@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17)"
                 };
                 comando.Parameters.AddWithValue("@p1", orden.Numero);
                 comando.Parameters.AddWithValue("@p2", orden.Fecha_Produccion);
@@ -192,7 +192,7 @@ namespace Ritrama2025.Services.MateriaPrima
                 comando.Parameters.AddWithValue("@p10", orden.Lote);
                 comando.Parameters.AddWithValue("@p11", orden.Numero_Embarque);
                 comando.Parameters.AddWithValue("@p12", false);
-                comando.Parameters.AddWithValue("@p13", 0);
+                comando.Parameters.AddWithValue("@p13", orden.CloseDocument);
                 comando.Parameters.AddWithValue("@p14", orden.Renglones);
                 comando.Parameters.AddWithValue("@p15", orden.Person_Id);
                 comando.Parameters.AddWithValue("@p16", "open");
@@ -278,6 +278,57 @@ namespace Ritrama2025.Services.MateriaPrima
             catch (SqlException ex)
             {
                 MessageBox.Show("Error al actualizar el consecutivo de la orden MATERIA PRIMA. Codigo de Error : " + ex.Message);
+                return false;
+            }
+        }
+
+        public bool CloseOrder(string orden)
+        {
+            try
+            {
+                SqlConnection conn = new(StringConnex);
+                conn.Open();
+                SqlCommand comando = new()
+                {
+                    Connection = conn,
+                    CommandText = "update OrdenMateria SET CloseDocument=1 where numero=@p1",
+                    CommandType = CommandType.Text
+                };
+                SqlParameter p1 = new("@p1", orden);
+                comando.Parameters.Add(p1);
+                comando.ExecuteNonQuery();
+                MessageBox.Show("Orden cerrada correctamente.");
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Error al tratar de cerrar el documento...[Codigo de Error:]" + ex.Message);
+                return false;
+            }
+        }
+
+        public bool UpDateLogsNotes(string orden, string logText)
+        {
+            try
+            {
+                SqlConnection conn = new(StringConnex);
+                conn.Open();
+                SqlCommand comando = new()
+                {
+                    Connection = conn,
+                    CommandText = "update OrdenMateria SET notas = CONCAT(ISNULL(notas,''),CHAR(13),CHAR(10),@p2) where numero=@p1",
+                    CommandType = CommandType.Text
+                };
+                SqlParameter p1 = new("@p1", orden);
+                SqlParameter p2 = new("@p2", logText);
+                comando.Parameters.Add(p1);
+                comando.Parameters.Add(p2);
+                comando.ExecuteNonQuery();
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Error al tratar de actualizar los logs del documentos...[Codigo de Error:]" + ex.Message);
                 return false;
             }
         }

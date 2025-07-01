@@ -1,7 +1,24 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Programacion\\Ritrama2025\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|c:\\programacion\\ritrama2025\\services\\materiaprima\\servicemateriaprima.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|solutionrelative:services\\materiaprima\\servicemateriaprima.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|c:\\programacion\\ritrama2025\\forms\\frmmateriaprima.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|solutionrelative:forms\\frmmateriaprima.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|c:\\programacion\\ritrama2025\\forms\\frmmateriaprima.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|solutionrelative:forms\\frmmateriaprima.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|c:\\programacion\\ritrama2025\\services\\materiaprima\\iservicemateriaprima.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|solutionrelative:services\\materiaprima\\iservicemateriaprima.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
@@ -9,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,6 +55,57 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{f4fc5ff1-28ef-4b04-ad02-6b298310ccc7}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ServiceMateriaPrima.cs",
+              "DocumentMoniker": "C:\\Programacion\\Ritrama2025\\Services\\MateriaPrima\\ServiceMateriaPrima.cs",
+              "RelativeDocumentMoniker": "Services\\MateriaPrima\\ServiceMateriaPrima.cs",
+              "ToolTip": "C:\\Programacion\\Ritrama2025\\Services\\MateriaPrima\\ServiceMateriaPrima.cs",
+              "RelativeToolTip": "Services\\MateriaPrima\\ServiceMateriaPrima.cs",
+              "ViewState": "AgIAABwBAAAAAAAAAAAAAD4BAABrAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-01T18:32:45.135Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IServiceMateriaPrima.cs",
+              "DocumentMoniker": "C:\\Programacion\\Ritrama2025\\Services\\MateriaPrima\\IServiceMateriaPrima.cs",
+              "RelativeDocumentMoniker": "Services\\MateriaPrima\\IServiceMateriaPrima.cs",
+              "ToolTip": "C:\\Programacion\\Ritrama2025\\Services\\MateriaPrima\\IServiceMateriaPrima.cs",
+              "RelativeToolTip": "Services\\MateriaPrima\\IServiceMateriaPrima.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAADwvxgAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-01T18:31:48.019Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FrmMateriaPrima.cs",
+              "DocumentMoniker": "C:\\Programacion\\Ritrama2025\\Forms\\FrmMateriaPrima.cs",
+              "RelativeDocumentMoniker": "Forms\\FrmMateriaPrima.cs",
+              "ToolTip": "C:\\Programacion\\Ritrama2025\\Forms\\FrmMateriaPrima.cs",
+              "RelativeToolTip": "Forms\\FrmMateriaPrima.cs",
+              "ViewState": "AgIAAO4BAAAAAAAAAIA2wP8BAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-01T17:20:28.869Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FrmMateriaPrima.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Programacion\\Ritrama2025\\Forms\\FrmMateriaPrima.cs",
+              "RelativeDocumentMoniker": "Forms\\FrmMateriaPrima.cs",
+              "ToolTip": "C:\\Programacion\\Ritrama2025\\Forms\\FrmMateriaPrima.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Forms\\FrmMateriaPrima.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-01T15:03:06.054Z",
+              "EditorCaption": " [Dise\u00F1o]"
             }
           ]
         },
@@ -48,16 +116,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:5:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
-            }
-          ]
-        },
-        {
-          "DockedHeight": 200,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
             }
           ]
         }
