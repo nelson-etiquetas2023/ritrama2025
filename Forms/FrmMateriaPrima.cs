@@ -2,7 +2,6 @@
 using Ritrama2025.Forms.Seleccion;
 using Ritrama2025.Models;
 using Ritrama2025.Services.MateriaPrima;
-using System;
 using System.Data;
 using System.Diagnostics;
 using Ritrama2025.Forms.Otros;
@@ -19,6 +18,7 @@ namespace Ritrama2025.Forms
         readonly BindingSource BsDetalle = [];
         private DataRowView ParentRow = null!;
         private DataRowView ChildsRows = null!;
+        string EditMode = "READ";
 
         public FrmMateriaPrima(IServiceMateriaPrima Services)
         {
@@ -37,7 +37,30 @@ namespace Ritrama2025.Forms
         {
             label_counter_rows.Text = $"Registros: {Bs.Count}";
             Bs.Sort = "numero DESC";
-            Pic_DocumentClose.Image = !rad_CloseDoc.Checked ? Imagenes.Images["DocumentOpen.png"] : Imagenes.Images["DocumentClose.png"];
+            string basePath = AppContext.BaseDirectory;
+            string ruta = Path.Combine(basePath, "Images");
+
+            string estado = !chk_DocumentClose.Checked ? "abierto" : "cerrado";
+            if (chk_anulado.Checked) estado = "anulado";
+
+
+
+
+
+
+
+            switch (estado)
+            {
+                case "abierto":
+                    Pic_Document.Image = Image.FromFile(ruta + @"\open_document.png");
+                    break;
+                case "cerrado":
+                    Pic_Document.Image = Image.FromFile(ruta + @"\close_document.png");
+                    break;
+                case "anulado":
+                    Pic_Document.Image = Image.FromFile(ruta + @"\anulado_documento.png");
+                    break;
+            }
         }
         private void BindDataSource()
         {
@@ -94,7 +117,7 @@ namespace Ritrama2025.Forms
             txt_notas.DataBindings.Add("Text", Bs, "notas");
 
             txt_person_id.DataBindings.Add("Text", Bs, "person_id");
-            rad_CloseDoc.DataBindings.Add("Checked", Bs, "CloseDocument");
+            chk_DocumentClose.DataBindings.Add("Checked", Bs, "CloseDocument");
             chk_anulado.DataBindings.Add("Checked", Bs, "anulado");
 
         }
@@ -145,10 +168,11 @@ namespace Ritrama2025.Forms
 
         private void Btn_create_Click(object sender, EventArgs e)
         {
+            EditMode = "ADDNEW";
             Bs.Sort = "";
             chk_anulado.DataBindings.Clear();
-            rad_CloseDoc.DataBindings.Clear();
-            rad_CloseDoc.Checked = false;
+            chk_DocumentClose.DataBindings.Clear();
+            chk_DocumentClose.Checked = false;
             ParentRow = (DataRowView)Bs.AddNew();
             ParentRow.BeginEdit();
             ParentRow["numero"] = Services.LoadConsecOrden("CMP");
@@ -156,6 +180,10 @@ namespace Ritrama2025.Forms
             ParentRow["CloseDocument"] = false;
             ParentRow.EndEdit();
             AbrirFormulario();
+            string basePath = AppContext.BaseDirectory;
+            string ruta = Path.Combine(basePath, "Images");
+            Pic_Document.Image = Image.FromFile(ruta + @"\add_document.png");
+
 
         }
         private void AbrirFormulario()
@@ -188,7 +216,7 @@ namespace Ritrama2025.Forms
             btn_OrdenBuscar.Enabled = false;
             btn_printDoc.Enabled = false;
             btn_ExportDoc.Enabled = false;
-            btn_SearchDoc.Enabled= false;
+            btn_SearchDoc.Enabled = false;
         }
 
         private void Btn_ProvBuscar_Click(object sender, EventArgs e)
@@ -272,6 +300,19 @@ namespace Ritrama2025.Forms
 
         private void Btn_save_Click(object sender, EventArgs e)
         {
+            if (EditMode == "ADDNEW")
+            {
+                SAVE_NEW();
+            }
+            else if (EditMode == "UPDATE")
+            {
+                SAVE_UPDATE();
+            }
+        }
+
+        private void SAVE_NEW()
+        {
+            EditMode = "EDIT";
             Services.GuardarOrden(CREATE_ORDEN_OBJECT());
             int ProxConsec = Convert.ToInt16(txt_numeroOrden.Text) + 1;
             Services.UpdateConsecOrden(ProxConsec.ToString());
@@ -292,6 +333,10 @@ namespace Ritrama2025.Forms
             btn_printDoc.Enabled = true;
             btn_ExportDoc.Enabled = true;
             RefreshDocument();
+        }
+        private void SAVE_UPDATE()
+        {
+
         }
 
         private OrdenMP CREATE_ORDEN_OBJECT()
@@ -490,7 +535,7 @@ namespace Ritrama2025.Forms
         private void CerrarDocumentoOrder()
         {
 
-            if (rad_CloseDoc.Checked) 
+            if (chk_DocumentClose.Checked)
             {
                 MessageBox.Show("El Documento ya se encuentra cerrado.", "Advertencia",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -513,7 +558,7 @@ namespace Ritrama2025.Forms
                 string dataClose = $"Documento cerrado por: " + user + Environment.NewLine +
                                   "Fecha de Cierre: " + DateTime.Now + Environment.NewLine;
 
-                Services.UpDateLogsNotes(txt_numeroOrden.Text,dataClose);
+                Services.UpDateLogsNotes(txt_numeroOrden.Text, dataClose);
 
             }
             else if (result == DialogResult.No)
@@ -525,6 +570,60 @@ namespace Ritrama2025.Forms
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btn_AnularDoc_Click(object sender, EventArgs e)
+        {
+            if (chk_anulado.Checked)
+            {
+                MessageBox.Show("El Documento ya esta anulado...", "Advertencia",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult result = MessageBox.Show("Deseas Anular este Documento (S/N)???", "Confrmar Cierre",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                Services.AnularOrden(txt_numeroOrden.Text);
+                var doc = (DataRowView)Bs.Current;
+                doc.BeginEdit();
+                doc["Anulado"] = true;
+                doc.EndEdit();
+                doc.Row.AcceptChanges();
+                RefreshDocument();
+                //Actualizo los logs del documento en el campo notas
+                string user = "-> Npino - Departamento de Sistema";
+                string dataClose = $"Documento Anulado por: " + user + Environment.NewLine +
+                                  "Fecha de en que el documento se anulo: " + DateTime.Now + Environment.NewLine;
+
+                Services.UpDateLogsNotes(txt_numeroOrden.Text, dataClose);
+
+            }
+
+        }
+        private void chk_anulado_Click(object sender, EventArgs e)
+        {
+            // Cancelar cambio manualmente
+            chk_anulado.Checked = !chk_anulado.Checked;
+        }
+
+        private void chk_anulado_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Prevenir cambio con teclado
+            e.Handled = true;
+        }
+
+        private void chk_DocumentClose_Click(object sender, EventArgs e)
+        {
+            // Cancelar cambio manualmente
+            chk_DocumentClose.Checked = !chk_DocumentClose.Checked;
+        }
+
+        private void chk_DocumentClose_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Prevenir cambio con teclado
+            e.Handled = true;
         }
     }
 }

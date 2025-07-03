@@ -247,12 +247,28 @@ namespace Ritrama2025.Forms
                     Fecha = "15-08-2025",
                     Cantidad = 300
                 };
-                using var cliente = new NamedPipeClientStream(".", "TestPipe", PipeDirection.Out);
-                await cliente.ConnectAsync(5000); // Espera hasta 5 segundos para conectarse.
-                string json = JsonSerializer.Serialize(label);
+                using var cliente = new NamedPipeClientStream(".", "TestPipe", PipeDirection.InOut);
+                await cliente.ConnectAsync(5000); // Espera hasta 5 segundos para conectarse.  
+
                 using var writer = new StreamWriter(cliente, Encoding.UTF8) { AutoFlush = true };
-                await writer.WriteLineAsync(json);
-                MessageBox.Show("JSON enviado correctamente:\n\n" + json);
+                using var reader = new StreamReader(cliente);
+
+                await writer.WriteLineAsync("ping");
+                string? respuesta = await reader.ReadLineAsync(); // Cambiar el tipo a `string?` para manejar valores nulos.  
+
+                if (respuesta is null)
+                {
+                    MessageBox.Show("No se recibió respuesta del servidor.");
+                    return;
+                }
+                else if (respuesta == "act")
+                {
+                    MessageBox.Show("Conexion activa y respuesta de servidor recibido...");
+                    return;
+                }
+
+                //string json = JsonSerializer.Serialize(label);
+                //MessageBox.Show("JSON enviado correctamente:\n\n" + json);
             }
             catch (Exception ex)
             {

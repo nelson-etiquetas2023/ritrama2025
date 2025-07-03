@@ -51,6 +51,9 @@
     <None Update="Reports\DsConduce.xsd">
       <SubType>Designer</SubType>
     </None>
+    <EmbeddedResource Update="Forms\FrmMateriaPrima.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Update="Forms\FrmOrdenCorte.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMateriaPrima));
             toolStrip1 = new ToolStrip();
             btn_primero = new ToolStripButton();
@@ -62,7 +61,6 @@
             btn_RecepBuscar = new Button();
             txt_guia = new TextBox();
             label7 = new Label();
-            rad_CloseDoc = new RadioButton();
             txt_notas = new RichTextBox();
             label8 = new Label();
             txt_total_cantidad = new TextBox();
@@ -87,13 +85,13 @@
             label16 = new Label();
             btn_template = new Button();
             btn_LoadRows = new Button();
-            Pic_DocumentClose = new PictureBox();
-            Imagenes = new ImageList(components);
+            Pic_Document = new PictureBox();
+            chk_DocumentClose = new CheckBox();
             toolStrip1.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)GridItems).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)Pic_DocumentClose).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Pic_Document).BeginInit();
             SuspendLayout();
             // 
             // toolStrip1
@@ -203,6 +201,7 @@
             btn_AnularDoc.Name = "btn_AnularDoc";
             btn_AnularDoc.Size = new Size(67, 41);
             btn_AnularDoc.Text = "Anular";
+            btn_AnularDoc.Click += btn_AnularDoc_Click;
             // 
             // btn_SearchDoc
             // 
@@ -419,19 +418,6 @@
             label7.TabIndex = 18;
             label7.Text = "Guia de Importacion :";
             // 
-            // rad_CloseDoc
-            // 
-            rad_CloseDoc.AutoSize = true;
-            rad_CloseDoc.Enabled = false;
-            rad_CloseDoc.Location = new Point(880, 278);
-            rad_CloseDoc.Margin = new Padding(3, 4, 3, 4);
-            rad_CloseDoc.Name = "rad_CloseDoc";
-            rad_CloseDoc.Size = new Size(148, 22);
-            rad_CloseDoc.TabIndex = 0;
-            rad_CloseDoc.TabStop = true;
-            rad_CloseDoc.Text = "Documento Cerrado";
-            rad_CloseDoc.UseVisualStyleBackColor = true;
-            // 
             // txt_notas
             // 
             txt_notas.BackColor = SystemColors.ActiveBorder;
@@ -612,6 +598,8 @@
             chk_anulado.TabIndex = 37;
             chk_anulado.Text = "Documento Anulado";
             chk_anulado.UseVisualStyleBackColor = true;
+            chk_anulado.Click += chk_anulado_Click;
+            chk_anulado.KeyDown += chk_anulado_KeyDown;
             // 
             // btn_AppMovil
             // 
@@ -692,35 +680,39 @@
             btn_LoadRows.UseVisualStyleBackColor = true;
             btn_LoadRows.Click += btn_LoadRows_Click;
             // 
-            // Pic_DocumentClose
+            // Pic_Document
             // 
-            Pic_DocumentClose.Image = (Image)resources.GetObject("Pic_DocumentClose.Image");
-            Pic_DocumentClose.Location = new Point(1049, 203);
-            Pic_DocumentClose.Name = "Pic_DocumentClose";
-            Pic_DocumentClose.Size = new Size(50, 50);
-            Pic_DocumentClose.SizeMode = PictureBoxSizeMode.AutoSize;
-            Pic_DocumentClose.TabIndex = 46;
-            Pic_DocumentClose.TabStop = false;
+            Pic_Document.Image = (Image)resources.GetObject("Pic_Document.Image");
+            Pic_Document.Location = new Point(1049, 203);
+            Pic_Document.Name = "Pic_Document";
+            Pic_Document.Size = new Size(50, 50);
+            Pic_Document.SizeMode = PictureBoxSizeMode.AutoSize;
+            Pic_Document.TabIndex = 46;
+            Pic_Document.TabStop = false;
             // 
-            // Imagenes
+            // chk_DocumentClose
             // 
-            Imagenes.ColorDepth = ColorDepth.Depth32Bit;
-            Imagenes.ImageStream = (ImageListStreamer)resources.GetObject("Imagenes.ImageStream");
-            Imagenes.TransparentColor = Color.Transparent;
-            Imagenes.Images.SetKeyName(0, "DocumentOpen.png");
-            Imagenes.Images.SetKeyName(1, "DocumentClose.png");
+            chk_DocumentClose.AutoSize = true;
+            chk_DocumentClose.Location = new Point(878, 280);
+            chk_DocumentClose.Name = "chk_DocumentClose";
+            chk_DocumentClose.Size = new Size(149, 22);
+            chk_DocumentClose.TabIndex = 47;
+            chk_DocumentClose.Text = "Documento Cerrado";
+            chk_DocumentClose.UseVisualStyleBackColor = true;
+            chk_DocumentClose.Click += chk_DocumentClose_Click;
+            chk_DocumentClose.KeyDown += chk_DocumentClose_KeyDown;
             // 
             // FrmMateriaPrima
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1156, 787);
-            Controls.Add(Pic_DocumentClose);
+            Controls.Add(chk_DocumentClose);
+            Controls.Add(Pic_Document);
             Controls.Add(btn_LoadRows);
             Controls.Add(btn_template);
             Controls.Add(label16);
             Controls.Add(txt_embarque);
-            Controls.Add(rad_CloseDoc);
             Controls.Add(txt_person_id);
             Controls.Add(GridItems);
             Controls.Add(btn_AppMovil);
@@ -770,7 +762,7 @@
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ((System.ComponentModel.ISupportInitialize)GridItems).EndInit();
-            ((System.ComponentModel.ISupportInitialize)Pic_DocumentClose).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Pic_Document).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -801,7 +793,6 @@
         private Button btn_RecepBuscar;
         private TextBox txt_guia;
         private Label label7;
-        private RadioButton rad_CloseDoc;
         private RichTextBox txt_notas;
         private Label label8;
         private TextBox txt_total_cantidad;
@@ -834,7 +825,7 @@
         private ToolStripButton btn_AnularDoc;
         private ToolStripButton btn_SearchDoc;
         private ToolStripButton btn_printDoc;
-        private PictureBox Pic_DocumentClose;
-        private ImageList Imagenes;
+        private PictureBox Pic_Document;
+        private CheckBox chk_DocumentClose;
     }
 }

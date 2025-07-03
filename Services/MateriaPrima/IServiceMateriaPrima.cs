@@ -23,5 +23,6 @@ namespace Ritrama2025.Services.MateriaPrima
         bool UpdateConsecOrden(string NumConsec);
         bool CloseOrder(string orden);
         bool UpDateLogsNotes(string orden, string logText);
+        bool AnularOrden(string orden);
     }
 }

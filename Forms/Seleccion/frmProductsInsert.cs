@@ -69,7 +69,8 @@ namespace Ritrama2025.Forms.Seleccion
             txt_lenght.Text = "0";
             txt_splice.Text = "0";
             txt_core.Text = "0";
-           
+            txt_ubic.Text = "SU";
+            txt_rollid.Text = "0";  
         }
         private void CALCULAR_MSI()
         {

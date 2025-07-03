@@ -45,7 +45,7 @@ namespace Ritrama2025.Services.MateriaPrima
                 ["products"] = (R.SQL_STRING_QUERY.SELECT_QUERY_PRODUCTS, R.ERROR_MESSAGE_SYSTEM.ERROR_LOAD_PRODUCTS, DaProducts, "Dtproducts"),
                 ["prov"] = (R.SQL_STRING_QUERY.SELECT_QUERY_PROVEEDORES, R.ERROR_MESSAGE_SYSTEM.ERROR_MP_PROVEEDORES, DaProvider, "DtProvider"),
                 ["transport"] = (R.SQL_STRING_QUERY.SELECT_QUERY_TRANSPORTISTA, R.ERROR_MESSAGE_SYSTEM.ERROR_MP_TRANSPORT, DaTransport, "DtTransport"),
-                ["person"] = (R.SQL_STRING_QUERY.SELECT_QUERY_PERSON,R.ERROR_MESSAGE_SYSTEM.ERROR_LOAD_PERSON,DaPerson,"DtPerson") 
+                ["person"] = (R.SQL_STRING_QUERY.SELECT_QUERY_PERSON, R.ERROR_MESSAGE_SYSTEM.ERROR_LOAD_PERSON, DaPerson, "DtPerson")
             };
         }
         public async Task LoadTableByName(string tableName)
@@ -173,10 +173,10 @@ namespace Ritrama2025.Services.MateriaPrima
             try
             {
                 //Guardo el header de la Orden
-                using SqlCommand comando = new() 
+                using SqlCommand comando = new()
                 {
                     Connection = conn,
-                    Transaction = transaction,  
+                    Transaction = transaction,
                     CommandType = CommandType.Text,
                     CommandText = "INSERT INTO OrdenMateria (numero,fecha_pro,fecha_recepcion,orden_compra,proveedor_id,persona_respons,notas,transport_id,guia_import,lote,doc_embarque,anulado,CloseDocument,total_cantidad,person_id,estado,fecha_hora_close) VALUES (@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17)"
                 };
@@ -228,8 +228,8 @@ namespace Ritrama2025.Services.MateriaPrima
             }
             catch (Exception ex)
             {
-                transaction.Rollback(); 
-                MessageBox.Show("error al tratar de grabar la orden..."+ex);
+                transaction.Rollback();
+                MessageBox.Show("error al tratar de grabar la orden..." + ex);
                 return false;
             }
         }
@@ -282,6 +282,32 @@ namespace Ritrama2025.Services.MateriaPrima
             }
         }
 
+        public bool AnularOrden(string orden)
+        {
+            try
+            {
+                SqlConnection conn = new(StringConnex);
+                conn.Open();
+                SqlCommand comando = new()
+                {
+                    Connection = conn,
+                    CommandText = "update OrdenMateria SET Anulado=1 where numero=@p1",
+                    CommandType = CommandType.Text
+                };
+                SqlParameter p1 = new("@p1", orden);
+                comando.Parameters.Add(p1);
+                comando.ExecuteNonQuery();
+                MessageBox.Show("Orden Anulada correctamente.");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al tratar de Anular el documento...[Codigo de Error:]" + ex.Message);
+                return false;
+            }
+        }
+
+
         public bool CloseOrder(string orden)
         {
             try
@@ -332,5 +358,5 @@ namespace Ritrama2025.Services.MateriaPrima
                 return false;
             }
         }
-    }
+    }      
 }

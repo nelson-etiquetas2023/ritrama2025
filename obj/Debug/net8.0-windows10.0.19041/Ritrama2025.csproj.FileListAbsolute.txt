@@ -206,3 +206,7 @@ C:\Programacion\Ritrama2025\obj\Debug\net8.0-windows10.0.19041\Ritrama2025.genru
 C:\Programacion\Ritrama2025\obj\Debug\net8.0-windows10.0.19041\ref\Ritrama2025.dll
 C:\Programacion\Ritrama2025\obj\Debug\net8.0-windows10.0.19041\Ritrama2025.Forms.Seleccion.frmProductsInsert.resources
 C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\Paquetes\TSCLIB.dll
+C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\Images\ANULADO_DOCUMENTO.png
+C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\Images\OPEN_DOCUMENT.png
+C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\Images\CLOSE_DOCUMENT.png
+C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\Images\ADD_DOCUMENT.png
