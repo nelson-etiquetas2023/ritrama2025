@@ -211,6 +211,7 @@
             btn_SearchDoc.Name = "btn_SearchDoc";
             btn_SearchDoc.Size = new Size(68, 41);
             btn_SearchDoc.Text = "Buscar";
+            btn_SearchDoc.Click += btn_SearchDoc_Click;
             // 
             // btn_printDoc
             // 

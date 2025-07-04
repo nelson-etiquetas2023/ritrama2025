@@ -5,6 +5,7 @@ using Ritrama2025.Services.MateriaPrima;
 using System.Data;
 using System.Diagnostics;
 using Ritrama2025.Forms.Otros;
+using Ritrama2025.Forms.Buscadores;
 
 
 
@@ -624,6 +625,27 @@ namespace Ritrama2025.Forms
         {
             // Prevenir cambio con teclado
             e.Handled = true;
+        }
+
+        private void btn_SearchDoc_Click(object sender, EventArgs e)
+        {
+            FrmBuscador_OrdenesMP frm_busqueda = new();
+            frm_busqueda.DtItems = Ds.Tables["Dtmateria"]!;
+            frm_busqueda.ShowDialog();
+            if (frm_busqueda.Orden != null)
+            {
+                int busqueda = Bs.Find("numero", frm_busqueda.Orden);
+                if (busqueda > 0)
+                {
+                    Bs.Position = busqueda;
+                    RefreshDocument();
+                }
+                else
+                {
+                    MessageBox.Show("No se encontro el numero del documento...", "Advertencia",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
         }
     }
 }
