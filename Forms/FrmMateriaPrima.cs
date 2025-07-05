@@ -1,11 +1,13 @@
 ﻿using ClosedXML.Excel;
+using Ritrama2025.Forms.Buscadores;
+using Ritrama2025.Forms.Otros;
 using Ritrama2025.Forms.Seleccion;
 using Ritrama2025.Models;
+using Ritrama2025.Services;
+using Ritrama2025.Services.ExportData;
 using Ritrama2025.Services.MateriaPrima;
 using System.Data;
 using System.Diagnostics;
-using Ritrama2025.Forms.Otros;
-using Ritrama2025.Forms.Buscadores;
 
 
 
@@ -14,6 +16,9 @@ namespace Ritrama2025.Forms
     public partial class FrmMateriaPrima : Form
     {
         public readonly IServiceMateriaPrima Services;
+        public readonly IExportDataService ExportDataService;
+        public readonly IReportsService ReportService; 
+
         public DataSet Ds = new();
         readonly BindingSource Bs = [];
         readonly BindingSource BsDetalle = [];
@@ -21,10 +26,12 @@ namespace Ritrama2025.Forms
         private DataRowView ChildsRows = null!;
         string EditMode = "READ";
 
-        public FrmMateriaPrima(IServiceMateriaPrima Services)
+        public FrmMateriaPrima(IServiceMateriaPrima Services, IExportDataService exportDataService,IReportsService reportService)
         {
             InitializeComponent();
             this.Services = Services;
+            this.ExportDataService = exportDataService;
+            this.ReportService = reportService;
         }
 
         private void FrmMateriaPrima_Load(object sender, EventArgs e)
@@ -43,12 +50,6 @@ namespace Ritrama2025.Forms
 
             string estado = !chk_DocumentClose.Checked ? "abierto" : "cerrado";
             if (chk_anulado.Checked) estado = "anulado";
-
-
-
-
-
-
 
             switch (estado)
             {
@@ -174,18 +175,18 @@ namespace Ritrama2025.Forms
             chk_anulado.DataBindings.Clear();
             chk_DocumentClose.DataBindings.Clear();
             chk_DocumentClose.Checked = false;
+            chk_anulado.Checked = false;
             ParentRow = (DataRowView)Bs.AddNew();
             ParentRow.BeginEdit();
             ParentRow["numero"] = Services.LoadConsecOrden("CMP");
             ParentRow["total_cantidad"] = 0;
             ParentRow["CloseDocument"] = false;
+            ParentRow["Anulado"] = false;
             ParentRow.EndEdit();
             AbrirFormulario();
             string basePath = AppContext.BaseDirectory;
             string ruta = Path.Combine(basePath, "Images");
             Pic_Document.Image = Image.FromFile(ruta + @"\add_document.png");
-
-
         }
         private void AbrirFormulario()
         {
@@ -301,6 +302,46 @@ namespace Ritrama2025.Forms
 
         private void Btn_save_Click(object sender, EventArgs e)
         {
+            if (txt_OrdenCompra.Text == "")
+            {
+                MessageBox.Show("Introduzca un valor para la orden de compra...");
+                return;
+            }
+            if (txt_prov_Id.Text == "")
+            {
+                MessageBox.Show("Introduzca un valor para el proveedor...");
+                return;
+            }
+            if (txt_transport_id.Text == "")
+            {
+                MessageBox.Show("Introduzca un valor para el transportista...");
+                return;
+            }
+            if (txt_person_id.Text == "")
+            {
+                MessageBox.Show("Introduzca un valor para el recepcionista...");
+                return;
+            }
+            if (txt_guia.Text == "")
+            {
+                MessageBox.Show("Introduzca un valor para la guia de importaion...");
+                return;
+            }
+            if (txt_embarque.Text == "")
+            {
+                MessageBox.Show("Introduzca un valor para el numero de embarque...");
+                return;
+            }
+            if (txt_lote.Text == "")
+            {
+                MessageBox.Show("Introduzca un valor para el numero de lote...");
+                return;
+            }
+            if (GridItems.Rows.Count == 0)
+            {
+                MessageBox.Show("Debe registras algunos productos para poder grabar la orden...");
+                return;
+            }
             if (EditMode == "ADDNEW")
             {
                 SAVE_NEW();
@@ -646,6 +687,59 @@ namespace Ritrama2025.Forms
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
+        }
+
+        private void btn_deleteRows_Click(object sender, EventArgs e)
+        {
+            if (GridItems.CurrentRow == null)
+            {
+                MessageBox.Show("No hay ninguna fila seleccionada.", "aviso", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
+            var row = (DataRowView)GridItems.CurrentRow.DataBoundItem;
+            if (MessageBox.Show($"Eliminar el producto con Id = {row["product_id"]}?", "Confirmar Borrado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+
+            row.Delete();
+            Bs.EndEdit();
+
+
+        }
+
+        private void btn_ExportDoc_Click(object sender, EventArgs e)
+        {
+            List<OrdenDetailsMP> Ordenes = CREATE_LIST_PRODUCTS();
+            ExportDataService.ExportToExcel<OrdenDetailsMP>(Ordenes, "ordenes_mp.xlsx");
+        }
+        private List<OrdenDetailsMP> CREATE_LIST_PRODUCTS()
+        {
+            List<OrdenDetailsMP> Ordenes = [];
+            for (int i = 0; i <= GridItems.Rows.Count - 1; i++)
+            {
+                OrdenDetailsMP orden = new()
+                {
+                    Numero = txt_numeroOrden.Text.ToString(),
+                    Product_Id = Convert.ToString(GridItems.Rows[i].Cells["product_id"].Value)!,
+                    Product_Name = Convert.ToString(GridItems.Rows[i].Cells["product_name"].Value)!,
+                    Product_Type = Convert.ToString(GridItems.Rows[i].Cells["product_type"].Value)!,
+                    Width = Convert.ToDouble(GridItems.Rows[i].Cells["width"].Value)!,
+                    Length = Convert.ToDouble(GridItems.Rows[i].Cells["length"].Value)!,
+                    Msi = Convert.ToDouble(GridItems.Rows[i].Cells["msi"].Value)!,
+                    RollId = Convert.ToString(GridItems.Rows[i].Cells["rollid"].Value)!,
+                    Splice = Convert.ToInt16(GridItems.Rows[i].Cells["splice"].Value)!,
+                    Core = Convert.ToInt16(GridItems.Rows[i].Cells["core"].Value)!,
+                    Ubicacion = Convert.ToString(GridItems.Rows[i].Cells["ubicacion"].Value)!,
+                    Cantidad_Pedido = Convert.ToInt16(GridItems.Rows[i].Cells["cant_pedido"].Value)!,
+                    Cantidad_Real = Convert.ToInt16(GridItems.Rows[i].Cells["cant_real"].Value)!
+                };
+                Ordenes.Add(orden);
+            }
+            return Ordenes;
+        }
+
+        private void btn_printDoc_Click(object sender, EventArgs e)
+        {
+            ReportService.Reporte_Orden_MatPrima(txt_numeroOrden.Text,this,"RptImportFormat.rdlc","ORDEN DE RECEPCION DE MATERIA PRIMA");
         }
     }
 }

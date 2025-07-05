@@ -6,14 +6,15 @@ using Ritrama2025.Services;
 using Ritrama2025.Services.ExportData;
 using System.Configuration;
 using System.Data;
+using System.Resources;
 
 namespace Ritrama2025.Forms
 {
     public partial class FrmOrdenCorte : Form
     {
-        private readonly IProduccionService Service = null!;
-        private readonly ExportDataService exportDataService = new();
-        private readonly ReportsService reportService = new();
+        private readonly IProduccionService Service;
+        private readonly IExportDataService ExportDataService;
+        private readonly IReportsService ReportService;
         DataSet Ds = new();
         readonly BindingSource Bs = [];
         readonly BindingSource BsCortes = [];
@@ -22,10 +23,12 @@ namespace Ritrama2025.Forms
         DataRowView ChildRowCortes = null!;
         DataRowView RollosCortados = null!;
 
-        public FrmOrdenCorte(IProduccionService service)
+        public FrmOrdenCorte(IProduccionService service,IExportDataService exportService,IReportsService reportService)
         {
             InitializeComponent();
             Service = service;
+            ExportDataService = exportService;
+            ReportService = reportService;
         }
 
         private void FrmOrdenCorte_Load(object sender, EventArgs e)
@@ -788,15 +791,15 @@ namespace Ritrama2025.Forms
         private void InitStepIndicator()
         {
             labelstep1.Visible = false;
-            pictureBox1.Image = imageList1.Images[5];
+            pictureBox1.Image = Properties.Resources.step1_deactivate;
             labelstep2.Visible = false;
-            pictureBox2.Image = imageList1.Images[6];
+            pictureBox2.Image = Properties.Resources.step2_deactivate;
             labelstep3.Visible = false;
-            pictureBox3.Image = imageList1.Images[7];
+            pictureBox3.Image = Properties.Resources.step3_deactive;
             labelstep4.Visible = false;
-            pictureBox4.Image = imageList1.Images[8];
+            pictureBox4.Image = Properties.Resources.step4_deactive;
             labelstep5.Visible = false;
-            pictureBox5.Image = imageList1.Images[9];
+            pictureBox5.Image = Properties.Resources.step5_deactive;
         }
 
         private void UpdateOptionMenuAction(bool b1, bool b2, bool b3, bool b4, bool b5)
@@ -817,21 +820,21 @@ namespace Ritrama2025.Forms
             {
                 InitStepIndicator();
                 labelstep1.Visible = true;
-                pictureBox1.Image = imageList1.Images[0];
+                pictureBox1.Image = Properties.Resources.step1;
                 UpdateOptionMenuAction(true, true, true, true, true);
             }
             if (opt == 2)
             {
                 InitStepIndicator();
                 labelstep2.Visible = true;
-                pictureBox2.Image = imageList1.Images[1];
+                pictureBox2.Image = Properties.Resources.step2_active;
                 UpdateOptionMenuAction(false, true, true, true, true);
             }
             if (opt == 3)
             {
                 InitStepIndicator();
                 labelstep3.Visible = true;
-                pictureBox3.Image = imageList1.Images[2];
+                pictureBox3.Image = Properties.Resources.step3_active;
                 UpdateOptionMenuAction(false, false, true, true, true);
             }
             if (opt == 4)
@@ -840,7 +843,7 @@ namespace Ritrama2025.Forms
                 InitStepIndicator();
 
                 labelstep4.Visible = true;
-                pictureBox4.Image = imageList1.Images[3];
+                pictureBox4.Image = Properties.Resources.step4_active;
                 UpdateOptionMenuAction(false, false, false, true, true);
             }
             if (opt == 5)
@@ -848,7 +851,7 @@ namespace Ritrama2025.Forms
                 //Aprobado.
                 InitStepIndicator();
                 labelstep5.Visible = true;
-                pictureBox5.Image = imageList1.Images[4];
+                pictureBox5.Image = Properties.Resources.step5_active;
                 UpdateOptionMenuAction(false, false, false, false, false);
             }
         }
@@ -908,7 +911,7 @@ namespace Ritrama2025.Forms
             //actualiza la ui del indicator
             UpdateStepIndicator();
             //se crea el txt de los rollos cortados.
-            exportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(),chk_generartxt_rc.Checked);
+            ExportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(),chk_generartxt_rc.Checked);
 
             MessageBox.Show("Se ha Etiquetado la Orden de Corte...");
         }
@@ -927,13 +930,13 @@ namespace Ritrama2025.Forms
         private void Btn_generar_txt_Click(object sender, EventArgs e)
         {
             
-            exportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(),chk_generartxt_rc.Checked);
+            ExportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(),chk_generartxt_rc.Checked);
         }
 
         private void Bot_exportar_Click(object sender, EventArgs e)
         {
             List<RolloCortado> rollosCortados = CREATE_ROLLOS_CORTADOS();
-            exportDataService.ExportToExcel<RolloCortado>(rollosCortados, "RollosCortados.xlsx");
+            ExportDataService.ExportToExcel<RolloCortado>(rollosCortados, "RollosCortados.xlsx");
         }
 
         private List<RolloCortado> CREATE_ROLLOS_CORTADOS()
@@ -1044,7 +1047,7 @@ namespace Ritrama2025.Forms
 
         private void Bot_imprimir_Click(object sender, EventArgs e)
         {
-            reportService.Reporte_OrdenCorte(txt_numeroOC.Text,this,R.REPORT_NAME.REPORT_OC,R.REPORT_TITLE.REPORT_OC);
+            //ReportService.Reporte_OrdenCorte(txt_numeroOC.Text,this,R.REPORT_NAME.REPORT_OC,R.REPORT_TITLE.REPORT_OC);
         }
     }
 }

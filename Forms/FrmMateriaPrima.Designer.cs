@@ -221,6 +221,7 @@
             btn_printDoc.Name = "btn_printDoc";
             btn_printDoc.Size = new Size(80, 41);
             btn_printDoc.Text = "Imprimir";
+            btn_printDoc.Click += btn_printDoc_Click;
             // 
             // btn_ExportDoc
             // 
@@ -230,6 +231,7 @@
             btn_ExportDoc.Name = "btn_ExportDoc";
             btn_ExportDoc.Size = new Size(80, 41);
             btn_ExportDoc.Text = "Exportar";
+            btn_ExportDoc.Click += btn_ExportDoc_Click;
             // 
             // label1
             // 
@@ -384,9 +386,9 @@
             label6.AutoSize = true;
             label6.Location = new Point(525, 257);
             label6.Name = "label6";
-            label6.Size = new Size(106, 18);
+            label6.Size = new Size(146, 18);
             label6.TabIndex = 15;
-            label6.Text = "Persona Recibe :";
+            label6.Text = "Persona Recepcionista:";
             // 
             // btn_RecepBuscar
             // 
@@ -485,6 +487,7 @@
             btn_deleteRows.Text = "Borrar";
             btn_deleteRows.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_deleteRows.UseVisualStyleBackColor = true;
+            btn_deleteRows.Click += btn_deleteRows_Click;
             // 
             // txt_lote
             // 

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmOrdenCorte));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
@@ -145,7 +144,6 @@
             pictureBox3 = new PictureBox();
             pictureBox4 = new PictureBox();
             pictureBox5 = new PictureBox();
-            imageList1 = new ImageList(components);
             label37 = new Label();
             txt_vueltas1 = new NumericUpDown();
             checkList_pasos_orden = new CheckedListBox();
@@ -1325,22 +1323,6 @@
             pictureBox5.TabIndex = 100;
             pictureBox5.TabStop = false;
             // 
-            // imageList1
-            // 
-            imageList1.ColorDepth = ColorDepth.Depth32Bit;
-            imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
-            imageList1.TransparentColor = Color.Transparent;
-            imageList1.Images.SetKeyName(0, "step1.png");
-            imageList1.Images.SetKeyName(1, "step2_active.png");
-            imageList1.Images.SetKeyName(2, "step3_active.png");
-            imageList1.Images.SetKeyName(3, "step4_active.png");
-            imageList1.Images.SetKeyName(4, "step5_active.png");
-            imageList1.Images.SetKeyName(5, "step1_deactivate.png");
-            imageList1.Images.SetKeyName(6, "step2_deactivate.png");
-            imageList1.Images.SetKeyName(7, "step3_deactive.png");
-            imageList1.Images.SetKeyName(8, "step4_deactive.png");
-            imageList1.Images.SetKeyName(9, "step5_deactive.png");
-            // 
             // label37
             // 
             label37.AutoSize = true;
@@ -1773,7 +1755,6 @@
         private PictureBox pictureBox3;
         private PictureBox pictureBox4;
         private PictureBox pictureBox5;
-        private ImageList imageList1;
         private PictureBox pictureBox6;
         private Label label37;
         private NumericUpDown txt_vueltas1;

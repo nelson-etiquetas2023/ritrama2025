@@ -5,17 +5,14 @@ using Ritrama2025.Models;
 using Ritrama2025.Services;
 using Ritrama2025.Services.ExportData;
 using System.Data;
-using System.Threading.Tasks;
 
 namespace Ritrama2025.Forms
 {
     public partial class FrmDespacho : Form
     {
         private readonly IConfiguration Config;
-
         private readonly IDespachoService Service;
-
-        private readonly ReportsService ReportsService = new();
+        private readonly IReportsService ReportService;
         private readonly ExportDataService ExportDataService = new();
         DataSet Ds = new();
         readonly BindingSource Bs = [];
@@ -30,11 +27,12 @@ namespace Ritrama2025.Forms
 
         
 
-        public FrmDespacho(IConfiguration Config,IDespachoService Service)
+public FrmDespacho(IConfiguration Config, IDespachoService Service, IReportsService reportService)
         {
             InitializeComponent();
             this.Config = Config ?? throw new ArgumentNullException(nameof(Config));
             this.Service = Service ?? throw new ArgumentNullException(nameof(Service));
+            this.ReportService = reportService ?? throw new ArgumentNullException(nameof(reportService));
         }
 
         private void Despacho_Load(object sender, EventArgs e)
@@ -690,7 +688,7 @@ namespace Ritrama2025.Forms
             if (this.Parent != null)
             {
                 var TitleReport = "REPORTE DE CONDUCE CON PRECIO.";
-                ReportsService.ReporteConduce_conPrecio(txt_numero.Text, this, "RptConduceConPrecio.rdlc", TitleReport);
+                ReportService.ReporteConduce_conPrecio(txt_numero.Text, this, "RptConduceConPrecio.rdlc", TitleReport);
             }
         }
 
@@ -699,18 +697,18 @@ namespace Ritrama2025.Forms
             if (this.Parent != null)
             {
                 var TitleReport = "REPORTE DE CONDUCE SIN PRECIO.";
-                ReportsService.ReporteCondece_sinPrecio(txt_numero.Text, this, "RptConduceSinPrecio.rdlc", TitleReport);
+                ReportService.ReporteCondece_sinPrecio(txt_numero.Text, this, "RptConduceSinPrecio.rdlc", TitleReport);
             }
         }
 
         private void Reporte_picking_list_Click(object sender, EventArgs e)
         {
-            ReportsService.Reporte_PackingList(txt_numero.Text, this);
+            ReportService.Reporte_PackingList(txt_numero.Text, this);
         }
 
         private void Reporte_detalle_paleta_Click(object sender, EventArgs e)
         {
-            ReportsService.Reporte_DetallePaleta(txt_numero.Text, this);
+            ReportService.Reporte_DetallePaleta(txt_numero.Text, this);
         }
 
         private void Export_excel_Click(object sender, EventArgs e)

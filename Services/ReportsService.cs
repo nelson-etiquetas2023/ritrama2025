@@ -1,28 +1,96 @@
-﻿using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Reporting.WinForms;
 using Ritrama2025.Forms.Otros;
-using Ritrama2025.Reports;
 using System.Data;
 using System.Drawing.Printing;
-using System.Windows.Forms;
 
 namespace Ritrama2025.Services
 {
     public class ReportsService : IReportsService
     {
+        public IConfiguration Config { get; }
         public string StringConnex { get; set; } = "";
         public string MessageError { get; set; } = "";
 
-        public ReportsService()
+        public ReportsService(IConfiguration Config)
         {
-            //if (Program.Configuration != null)
-            //{
-            //    StringConnex = Convert.ToString(Program.Configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value)!;
-            //}
+            this.Config = Config;
+            if (Config != null)
+            {
+                StringConnex = Convert.ToString(Config.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value)!;
+            }
         }
 
-        public void Reporte_OrdenCorte(string numeroOC,Form form,string ReportName,string TitleReport) 
+        public void Reporte_Orden_MatPrima(string Orden,Form Form,string ReportName,string TitleReport) 
+        {
+            DataTable dt = new();
+            try
+            {
+                using (SqlConnection conn = new(StringConnex))
+                {
+                    SqlCommand comando = new()
+                    {
+                        Connection = conn,
+                        CommandType = CommandType.Text,
+                        CommandText = "select a.numero,fecha_recepcion,fecha_pro,orden_compra,persona_respons,guia_import,doc_embarque,closeDocument," +
+                        "lote,c.proveedor_name,d.transport_name,total_cantidad,b.product_id,e.product_name,b.width,b.length,b.msi,b.rollid,b.splice,b.ubicacion,b.type,b.core,B.cant_pedido,b.cant_real,a.notas from OrdenMateria a left join itemsMateria b on a.numero=b.numero " +
+                            "left join provider c on a.proveedor_id = c.proveedor_id LEFT JOIN transporte d ON a.transport_id = d.transport_id LEFT JOIN producto e ON b.product_id = e.product_id where a.numero=@p1"
+                    };
+                    conn.Open();
+                    comando.Parameters.Add(new SqlParameter("@p1", SqlDbType.NVarChar) { Value = Orden });
+                    comando.ExecuteNonQuery();
+
+                    SqlDataAdapter da = new(comando);
+                    da.Fill(dt);
+                }
+                try
+                {
+                    ReportsViewer report = new()
+                    {
+                        Text = TitleReport,
+                        Width = 1130,
+                        Height = 780,
+                        MdiParent = Form.MdiParent,
+                        StartPosition = FormStartPosition.CenterScreen
+
+                    };
+                    report.reportViewer1.ProcessingMode = ProcessingMode.Local;
+                    report.reportViewer1.LocalReport.ReportPath = GetPathApplication(ReportName, R.PATH_REPORTS.REPORTS_DESPACHO);
+                    //configuracion de la pagina.
+                    //PageSettings pageSettings = new()
+                    //{
+                    //    PaperSize = new PaperSize("Letter", 1100, 850), //A4-carta.
+                    //    Landscape = true,
+                    //    Margins = new Margins(0, 0, 0, 0),
+                    //};
+                    //report.reportViewer1.SetPageSettings(pageSettings);
+                    //parametros del reporte.
+                    ReportParameter param = new ReportParameter("Orden_MatPrima", Orden);
+
+                    //Configura el origen de los datos.
+
+                    ReportDataSource rds = new("DsImportacion", dt);
+                    report.reportViewer1.LocalReport.DataSources.Clear();
+                    report.reportViewer1.LocalReport.DataSources.Add(rds);
+
+
+                    report.reportViewer1.LocalReport.SetParameters(param);
+                    report.reportViewer1.RefreshReport();
+                    report.Show();
+                }
+                catch (ReportViewerException ex)
+                {
+                    MessageBox.Show("Error al cargar el reporte de orden recepcion materia prima. codigo error: " + ex.Message);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al generar el reporte de la orden de corte...codigo error: " + ex.Message);
+            }
+        }
+
+        public void Reporte_Orden_Corte(string numeroOC,Form form,string ReportName,string TitleReport) 
         {
             DataTable dt = new();
             try

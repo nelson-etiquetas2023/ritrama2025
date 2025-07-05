@@ -211,3 +211,5 @@ C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\Images\OPEN_DOCUM
 C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\Images\CLOSE_DOCUMENT.png
 C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\Images\ADD_DOCUMENT.png
 C:\Programacion\Ritrama2025\obj\Debug\net8.0-windows10.0.19041\Ritrama2025.Forms.Buscadores.FrmBuscador_OrdenesMP.resources
+C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\Reports\RptImportFormat.rdlc
+C:\Programacion\Ritrama2025\bin\Debug\net8.0-windows10.0.19041\Reports\RptOrdenCorte.rdlc
