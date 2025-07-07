@@ -284,6 +284,7 @@
             bot_accion.Name = "bot_accion";
             bot_accion.Size = new Size(98, 30);
             bot_accion.Text = "Acciones";
+            bot_accion.Click += bot_accion_Click;
             // 
             // opt_create_document
             // 

@@ -16,7 +16,7 @@ namespace Ritrama2025.Forms.Seleccion
             ["Transporte"] = ("transport_id", "transport_name",""),
             ["chofer"] = ("chofer_id", "chofer_name",""),
             ["camion"] = ("placas_id", "camion_name",""),
-            ["operadores"] = ("id_operador", "nombre",""),
+            ["operadores"] = ("operador_id", "nombre",""),
             ["Proveedor"] = ("proveedor_id", "proveedor_name",""),
             ["Persona"] = ("person_id", "person_name",""),
             ["Producto"] = ("product_id","product_name","tipo")
@@ -130,7 +130,7 @@ namespace Ritrama2025.Forms.Seleccion
 
         private void Btn_add_new_Click(object sender, EventArgs e)
         {
-            if (Titulo is "Transporte" or "chofer" or "camion" or "Proveedor" or "Persona" or "Producto" ) 
+            if (Titulo is "Transporte" or "chofer" or "camion" or "Proveedor" or "Persona" or "Producto" or "operadores" or "clientes" ) 
             {
                 var fromNew = new Frm_AddNew()
                 {

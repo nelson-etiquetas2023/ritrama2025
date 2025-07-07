@@ -225,6 +225,7 @@
             bot_buscar.Name = "bot_buscar";
             bot_buscar.Size = new Size(71, 30);
             bot_buscar.Text = "Buscar";
+            bot_buscar.Click += bot_buscar_Click;
             // 
             // btn_reports
             // 

@@ -51,12 +51,12 @@ namespace Ritrama2025.Models
         public double Real_usado_r1 { get; set; }
         public double Real_usado_r2 { get; set; }
         public bool Rollo_unificado { get; set; }
-        public string Id_operador { get; set; } = null!;
+        public Guid operador_id { get; set; }
         public string Nombre_operador { get; set; } = null!;
         public string Rollid_oculto { get; set; } = null!;
         public string Restante_rollid1 { get; set; } = null!;
         public string Restante_rollid2 { get; set; } = null!;
-        public string Customer_Id { get; set; } = null!;
+        public Guid Customer_Id { get; set; }
         public string Customer_Name { get; set; } = null!;
         public double Lenght_Master_Real { get; set; }
         public int Step { get; set; }

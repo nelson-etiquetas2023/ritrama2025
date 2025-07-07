@@ -12,5 +12,6 @@ namespace Ritrama2025.Services
         void AddDocumentDespacho(Despacho document);
         void AddPickingListDespacho(List<RolloCortado> PickingList);
         void AddPaletDetailsDespacho(List<Paleta> paleta);
+        public void AddItemsDespacho(List<ItemsDespacho> items);
     }
 }

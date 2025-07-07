@@ -23,7 +23,7 @@ namespace Ritrama2025.Forms
         DataRowView ChildRowCortes = null!;
         DataRowView RollosCortados = null!;
 
-        public FrmOrdenCorte(IProduccionService service,IExportDataService exportService,IReportsService reportService)
+        public FrmOrdenCorte(IProduccionService service, IExportDataService exportService, IReportsService reportService)
         {
             InitializeComponent();
             Service = service;
@@ -123,7 +123,7 @@ namespace Ritrama2025.Forms
             txt_matrest2_lenght.DataBindings.Add("Text", Bs, "rest2_lenght");
             txt_product_id.DataBindings.Add("Text", Bs, "product_id");
             txt_product_name.DataBindings.Add("Text", Bs, "product_Name");
-            txt_operador_id.DataBindings.Add("Text", Bs, "id_operador");
+            txt_operador_id.DataBindings.Add("Text", Bs, "operador_id");
             txt_operador_name.DataBindings.Add("Text", Bs, "nombre");
             txt_cust_id.DataBindings.Add("Text", Bs, "customer_id");
             txt_cust_name.DataBindings.Add("Text", Bs, "customer_name");
@@ -230,8 +230,9 @@ namespace Ritrama2025.Forms
             btn_add_row_corte.Enabled = true;
             btn_delete_row_corte.Enabled = true;
             txt_vueltas1.Enabled = true;
+            txt_step.Text="1";
             UpdateStepIndicator();
-            
+
         }
 
         private void Btn_buscar_rollid1_Click(object sender, EventArgs e)
@@ -398,7 +399,7 @@ namespace Ritrama2025.Forms
             FrmSeleccion SelOperator = new()
             {
                 DtItems = Ds.Tables["DtOperator"]!,
-                Titulo = "Operadores",
+                Titulo = "operadores",
             };
             SelOperator.ShowDialog();
             txt_operador_id.Text = SelOperator.Id;
@@ -410,7 +411,7 @@ namespace Ritrama2025.Forms
             FrmSeleccion SelCust = new()
             {
                 DtItems = Ds.Tables["DtCustomer"]!,
-                Titulo = "Clientes",
+                Titulo = "clientes",
             };
             SelCust.ShowDialog();
             txt_cust_id.Text = SelCust.Id;
@@ -639,9 +640,9 @@ namespace Ritrama2025.Forms
                 Rest2_lenght = Convert.ToDouble(txt_matrest2_lenght.Text),
                 Product_id = txt_product_id.Text,
                 Product_name = txt_product_name.Text,
-                Id_operador = txt_operador_id.Text,
+                operador_id = Guid.Parse(txt_operador_id.Text),
                 Nombre_operador = txt_operador_name.Text,
-                Customer_Id = txt_cust_id.Text,
+                Customer_Id = Guid.Parse(txt_cust_id.Text),
                 Customer_Name = txt_cust_name.Text,
                 Longitud_Cortar = Convert.ToDouble(txt_long_cortar.Text),
                 Cortes_Largo = Convert.ToInt32(txt_vueltas1.Value),
@@ -781,7 +782,7 @@ namespace Ritrama2025.Forms
             txt_vueltas1.Enabled = false;
             txt_largo_corte.Enabled = false;
             txt_long_cortar.ReadOnly = true;
-           
+
         }
         private void ContadorRegistros()
         {
@@ -911,7 +912,7 @@ namespace Ritrama2025.Forms
             //actualiza la ui del indicator
             UpdateStepIndicator();
             //se crea el txt de los rollos cortados.
-            ExportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(),chk_generartxt_rc.Checked);
+            ExportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(), chk_generartxt_rc.Checked);
 
             MessageBox.Show("Se ha Etiquetado la Orden de Corte...");
         }
@@ -929,8 +930,8 @@ namespace Ritrama2025.Forms
 
         private void Btn_generar_txt_Click(object sender, EventArgs e)
         {
-            
-            ExportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(),chk_generartxt_rc.Checked);
+
+            ExportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(), chk_generartxt_rc.Checked);
         }
 
         private void Bot_exportar_Click(object sender, EventArgs e)
@@ -1047,7 +1048,12 @@ namespace Ritrama2025.Forms
 
         private void Bot_imprimir_Click(object sender, EventArgs e)
         {
-            //ReportService.Reporte_OrdenCorte(txt_numeroOC.Text,this,R.REPORT_NAME.REPORT_OC,R.REPORT_TITLE.REPORT_OC);
+            ReportService.Reporte_Orden_Corte(txt_numeroOC.Text, this, R.REPORT_NAME.REPORT_OC, R.REPORT_TITLE.REPORT_OC);
+        }
+
+        private void bot_accion_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

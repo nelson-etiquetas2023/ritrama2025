@@ -24,7 +24,7 @@ namespace Ritrama2025
         }
         public class REPORT_NAME 
         {
-            public const string REPORT_OC = @"ReporteOC.rdlc";
+            public const string REPORT_OC = @"RptOrdenCorte.rdlc";
         }
         public class REPORT_TITLE 
         {

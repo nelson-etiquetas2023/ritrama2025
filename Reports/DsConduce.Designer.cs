@@ -2930,6 +2930,32 @@ namespace Ritrama2025.Reports {
             
             private global::System.Data.DataColumn columnfecha_produccion;
             
+            private global::System.Data.DataColumn columnproduct_id;
+            
+            private global::System.Data.DataColumn columnproduct_name;
+            
+            private global::System.Data.DataColumn columnunique_code;
+            
+            private global::System.Data.DataColumn columnroll_number;
+            
+            private global::System.Data.DataColumn columnsplice;
+            
+            private global::System.Data.DataColumn columnwidth;
+            
+            private global::System.Data.DataColumn columnlarge;
+            
+            private global::System.Data.DataColumn columnmsi;
+            
+            private global::System.Data.DataColumn columnroll_id;
+            
+            private global::System.Data.DataColumn columncode_person;
+            
+            private global::System.Data.DataColumn columnstatus;
+            
+            private global::System.Data.DataColumn columnoperador;
+            
+            private global::System.Data.DataColumn columncustomer_name;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public orden_corteDataTable() {
@@ -2991,6 +3017,110 @@ namespace Ritrama2025.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn product_idColumn {
+                get {
+                    return this.columnproduct_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn product_nameColumn {
+                get {
+                    return this.columnproduct_name;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn unique_codeColumn {
+                get {
+                    return this.columnunique_code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn roll_numberColumn {
+                get {
+                    return this.columnroll_number;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn spliceColumn {
+                get {
+                    return this.columnsplice;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn widthColumn {
+                get {
+                    return this.columnwidth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn largeColumn {
+                get {
+                    return this.columnlarge;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn msiColumn {
+                get {
+                    return this.columnmsi;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn roll_idColumn {
+                get {
+                    return this.columnroll_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn code_personColumn {
+                get {
+                    return this.columncode_person;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn statusColumn {
+                get {
+                    return this.columnstatus;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn operadorColumn {
+                get {
+                    return this.columnoperador;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn customer_nameColumn {
+                get {
+                    return this.columncustomer_name;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -3026,12 +3156,41 @@ namespace Ritrama2025.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public orden_corteRow Addorden_corteRow(int numero, System.DateTime fecha, System.DateTime fecha_produccion) {
+            public orden_corteRow Addorden_corteRow(
+                        int numero, 
+                        System.DateTime fecha, 
+                        System.DateTime fecha_produccion, 
+                        string product_id, 
+                        string product_name, 
+                        string unique_code, 
+                        int roll_number, 
+                        int splice, 
+                        decimal width, 
+                        decimal large, 
+                        decimal msi, 
+                        string roll_id, 
+                        string code_person, 
+                        string status, 
+                        string operador, 
+                        string customer_name) {
                 orden_corteRow roworden_corteRow = ((orden_corteRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         numero,
                         fecha,
-                        fecha_produccion};
+                        fecha_produccion,
+                        product_id,
+                        product_name,
+                        unique_code,
+                        roll_number,
+                        splice,
+                        width,
+                        large,
+                        msi,
+                        roll_id,
+                        code_person,
+                        status,
+                        operador,
+                        customer_name};
                 roworden_corteRow.ItemArray = columnValuesArray;
                 this.Rows.Add(roworden_corteRow);
                 return roworden_corteRow;
@@ -3064,6 +3223,19 @@ namespace Ritrama2025.Reports {
                 this.columnnumero = base.Columns["numero"];
                 this.columnfecha = base.Columns["fecha"];
                 this.columnfecha_produccion = base.Columns["fecha_produccion"];
+                this.columnproduct_id = base.Columns["product_id"];
+                this.columnproduct_name = base.Columns["product_name"];
+                this.columnunique_code = base.Columns["unique_code"];
+                this.columnroll_number = base.Columns["roll_number"];
+                this.columnsplice = base.Columns["splice"];
+                this.columnwidth = base.Columns["width"];
+                this.columnlarge = base.Columns["large"];
+                this.columnmsi = base.Columns["msi"];
+                this.columnroll_id = base.Columns["roll_id"];
+                this.columncode_person = base.Columns["code_person"];
+                this.columnstatus = base.Columns["status"];
+                this.columnoperador = base.Columns["operador"];
+                this.columncustomer_name = base.Columns["customer_name"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3075,11 +3247,45 @@ namespace Ritrama2025.Reports {
                 base.Columns.Add(this.columnfecha);
                 this.columnfecha_produccion = new global::System.Data.DataColumn("fecha_produccion", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfecha_produccion);
+                this.columnproduct_id = new global::System.Data.DataColumn("product_id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnproduct_id);
+                this.columnproduct_name = new global::System.Data.DataColumn("product_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnproduct_name);
+                this.columnunique_code = new global::System.Data.DataColumn("unique_code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnunique_code);
+                this.columnroll_number = new global::System.Data.DataColumn("roll_number", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnroll_number);
+                this.columnsplice = new global::System.Data.DataColumn("splice", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsplice);
+                this.columnwidth = new global::System.Data.DataColumn("width", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnwidth);
+                this.columnlarge = new global::System.Data.DataColumn("large", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnlarge);
+                this.columnmsi = new global::System.Data.DataColumn("msi", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmsi);
+                this.columnroll_id = new global::System.Data.DataColumn("roll_id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnroll_id);
+                this.columncode_person = new global::System.Data.DataColumn("code_person", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncode_person);
+                this.columnstatus = new global::System.Data.DataColumn("status", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstatus);
+                this.columnoperador = new global::System.Data.DataColumn("operador", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnoperador);
+                this.columncustomer_name = new global::System.Data.DataColumn("customer_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncustomer_name);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnnumero}, true));
                 this.columnnumero.AllowDBNull = false;
                 this.columnnumero.Unique = true;
                 this.columnfecha.AllowDBNull = false;
+                this.columnproduct_id.MaxLength = 25;
+                this.columnproduct_name.MaxLength = 200;
+                this.columnunique_code.MaxLength = 50;
+                this.columnroll_id.MaxLength = 50;
+                this.columncode_person.MaxLength = 60;
+                this.columnstatus.MaxLength = 50;
+                this.columnoperador.MaxLength = 50;
+                this.columncustomer_name.MaxLength = 200;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5584,6 +5790,214 @@ namespace Ritrama2025.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string product_id {
+                get {
+                    try {
+                        return ((string)(this[this.tableorden_corte.product_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'product_id\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.product_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string product_name {
+                get {
+                    try {
+                        return ((string)(this[this.tableorden_corte.product_nameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'product_name\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.product_nameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string unique_code {
+                get {
+                    try {
+                        return ((string)(this[this.tableorden_corte.unique_codeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'unique_code\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.unique_codeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int roll_number {
+                get {
+                    try {
+                        return ((int)(this[this.tableorden_corte.roll_numberColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'roll_number\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.roll_numberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int splice {
+                get {
+                    try {
+                        return ((int)(this[this.tableorden_corte.spliceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'splice\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.spliceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal width {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableorden_corte.widthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'width\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.widthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal large {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableorden_corte.largeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'large\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.largeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal msi {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableorden_corte.msiColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'msi\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.msiColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string roll_id {
+                get {
+                    try {
+                        return ((string)(this[this.tableorden_corte.roll_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'roll_id\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.roll_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string code_person {
+                get {
+                    try {
+                        return ((string)(this[this.tableorden_corte.code_personColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'code_person\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.code_personColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string status {
+                get {
+                    try {
+                        return ((string)(this[this.tableorden_corte.statusColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'status\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.statusColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string operador {
+                get {
+                    try {
+                        return ((string)(this[this.tableorden_corte.operadorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'operador\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.operadorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string customer_name {
+                get {
+                    try {
+                        return ((string)(this[this.tableorden_corte.customer_nameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'customer_name\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.customer_nameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Isfecha_produccionNull() {
                 return this.IsNull(this.tableorden_corte.fecha_produccionColumn);
             }
@@ -5592,6 +6006,162 @@ namespace Ritrama2025.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setfecha_produccionNull() {
                 this[this.tableorden_corte.fecha_produccionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isproduct_idNull() {
+                return this.IsNull(this.tableorden_corte.product_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setproduct_idNull() {
+                this[this.tableorden_corte.product_idColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isproduct_nameNull() {
+                return this.IsNull(this.tableorden_corte.product_nameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setproduct_nameNull() {
+                this[this.tableorden_corte.product_nameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isunique_codeNull() {
+                return this.IsNull(this.tableorden_corte.unique_codeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setunique_codeNull() {
+                this[this.tableorden_corte.unique_codeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isroll_numberNull() {
+                return this.IsNull(this.tableorden_corte.roll_numberColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setroll_numberNull() {
+                this[this.tableorden_corte.roll_numberColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsspliceNull() {
+                return this.IsNull(this.tableorden_corte.spliceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetspliceNull() {
+                this[this.tableorden_corte.spliceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IswidthNull() {
+                return this.IsNull(this.tableorden_corte.widthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetwidthNull() {
+                this[this.tableorden_corte.widthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IslargeNull() {
+                return this.IsNull(this.tableorden_corte.largeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetlargeNull() {
+                this[this.tableorden_corte.largeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsmsiNull() {
+                return this.IsNull(this.tableorden_corte.msiColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetmsiNull() {
+                this[this.tableorden_corte.msiColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isroll_idNull() {
+                return this.IsNull(this.tableorden_corte.roll_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setroll_idNull() {
+                this[this.tableorden_corte.roll_idColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Iscode_personNull() {
+                return this.IsNull(this.tableorden_corte.code_personColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setcode_personNull() {
+                this[this.tableorden_corte.code_personColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsstatusNull() {
+                return this.IsNull(this.tableorden_corte.statusColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetstatusNull() {
+                this[this.tableorden_corte.statusColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsoperadorNull() {
+                return this.IsNull(this.tableorden_corte.operadorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetoperadorNull() {
+                this[this.tableorden_corte.operadorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Iscustomer_nameNull() {
+                return this.IsNull(this.tableorden_corte.customer_nameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setcustomer_nameNull() {
+                this[this.tableorden_corte.customer_nameColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -6739,6 +7309,19 @@ WHERE (a.numero = @Orden_MatPrima)";
             tableMapping.ColumnMappings.Add("numero", "numero");
             tableMapping.ColumnMappings.Add("fecha", "fecha");
             tableMapping.ColumnMappings.Add("fecha_produccion", "fecha_produccion");
+            tableMapping.ColumnMappings.Add("product_id", "product_id");
+            tableMapping.ColumnMappings.Add("product_name", "product_name");
+            tableMapping.ColumnMappings.Add("unique_code", "unique_code");
+            tableMapping.ColumnMappings.Add("roll_number", "roll_number");
+            tableMapping.ColumnMappings.Add("splice", "splice");
+            tableMapping.ColumnMappings.Add("width", "width");
+            tableMapping.ColumnMappings.Add("large", "large");
+            tableMapping.ColumnMappings.Add("msi", "msi");
+            tableMapping.ColumnMappings.Add("roll_id", "roll_id");
+            tableMapping.ColumnMappings.Add("code_person", "code_person");
+            tableMapping.ColumnMappings.Add("status", "status");
+            tableMapping.ColumnMappings.Add("operador", "operador");
+            tableMapping.ColumnMappings.Add("customer_name", "customer_name");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -6756,11 +7339,17 @@ WHERE (a.numero = @Orden_MatPrima)";
             this._commandCollection = new global::Microsoft.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::Microsoft.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT a.numero, a.fecha, a.fecha_produccion\r\nFROM orden_corte AS a LEFT OUTER JO" +
-                "IN\r\n    rolls_details AS b ON a.numero = b.numero\r\nWHERE (a.numero = @oc)";
+            this._commandCollection[0].CommandText = @"SELECT a.numero, a.fecha, a.fecha_produccion,a.product_id,c.product_name,b.unique_code,b.roll_number,b.splice,b.width,b.large,b.msi,b.roll_id,b.code_person,b.status,d.nombre as operador,e.customer_name
+FROM orden_corte AS a 
+LEFT OUTER JOIN
+    rolls_details AS b ON a.numero = b.numero
+left join producto c on a.product_id = c.product_id
+left join operadores d on a.operador_id = d.operador_id
+left join customer e on a.customer_id = e.customer_id
+WHERE (a.numero = @numero_oc)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             global::Microsoft.Data.SqlClient.SqlParameter param = new global::Microsoft.Data.SqlClient.SqlParameter();
-            param.ParameterName = "@oc";
+            param.ParameterName = "@numero_oc";
             param.DbType = global::System.Data.DbType.Int32;
             param.SqlDbType = global::System.Data.SqlDbType.Int;
             param.Size = 4;
@@ -6773,9 +7362,9 @@ WHERE (a.numero = @Orden_MatPrima)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DsConduce.orden_corteDataTable dataTable, int oc) {
+        public virtual int Fill(DsConduce.orden_corteDataTable dataTable, int numero_oc) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(oc));
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(numero_oc));
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }
@@ -6787,9 +7376,9 @@ WHERE (a.numero = @Orden_MatPrima)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DsConduce.orden_corteDataTable GetData(int oc) {
+        public virtual DsConduce.orden_corteDataTable GetData(int numero_oc) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(oc));
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(numero_oc));
             DsConduce.orden_corteDataTable dataTable = new DsConduce.orden_corteDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;

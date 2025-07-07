@@ -329,6 +329,54 @@ namespace Ritrama2025.Services.CommonService
 
         }
 
+        public void SaveOperatorEntity(string Id, string Name)
+        {
+            using SqlConnection conn = new(StringConnex);
+            SqlCommand comando = new()
+            {
+                Connection = conn,
+                CommandType = CommandType.Text,
+                CommandText = "INSERT INTO operadores (id_operador, nombre) VALUES (@p1, @p2)"
+            };
+            comando.Parameters.Add(new SqlParameter("@p1", SqlDbType.NVarChar) { Value = Id });
+            comando.Parameters.Add(new SqlParameter("@p2", SqlDbType.NVarChar) { Value = Name });
+            try
+            {
+                conn.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                ErrorMsg = ex.Message;
+                MessageBox.Show("Error al guardar la entidad de operadores: " + ErrorMsg);
+            }
+        }
 
+        public void SaveCustomerEntity(string Id, string Name)
+        {
+            using SqlConnection conn = new(StringConnex);
+            SqlCommand comando = new()
+            {
+                Connection = conn,
+                CommandType = CommandType.Text,
+                CommandText = "INSERT INTO customer (customer_id, customer_name,customer_category,customer_email,anulado) VALUES (@p1, @p2, @p3, @p4, @p5)"
+            };
+            comando.Parameters.Add(new SqlParameter("@p1", SqlDbType.NVarChar) { Value = Id });
+            comando.Parameters.Add(new SqlParameter("@p2", SqlDbType.NVarChar) { Value = Name });
+            comando.Parameters.Add(new SqlParameter("@p3", SqlDbType.NVarChar) { Value = "general" });
+            comando.Parameters.Add(new SqlParameter("@p4", SqlDbType.NVarChar) { Value = "nt" });
+            comando.Parameters.Add(new SqlParameter("@p5", SqlDbType.NVarChar) { Value = false });
+
+            try
+            {
+                conn.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                ErrorMsg = ex.Message;
+                MessageBox.Show("Error al guardar la entidad de clientes: " + ErrorMsg);
+            }
+        }
     }
 }

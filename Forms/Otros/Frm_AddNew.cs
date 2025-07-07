@@ -29,7 +29,9 @@ namespace Ritrama2025.Forms.Otros
                     { "Chofer", ("chofer_id", "chofer_name", servicioStatic.SaveChoferEntity) },
                     { "Camion", ("placas_id", "camion_name", servicioStatic.SaveCamionEntity) },
                     { "Persona", ("person_id", "person_name", servicioStatic.SavePersonEntity) },
-                    { "Proveedor", ("proveedor_id", "proveedor_name", servicioStatic.SaveProvaiderEntity) }
+                    { "Proveedor", ("proveedor_id", "proveedor_name", servicioStatic.SaveProvaiderEntity) },
+                    { "operadores", ("id_operador", "nombre", servicioStatic.SaveOperatorEntity) },
+                    { "clientes", ("customer_id", "customer_name", servicioStatic.SaveCustomerEntity) }
                 };
         }
 

@@ -3,6 +3,7 @@ using Ritrama2025.Forms.Otros;
 using Ritrama2025.Forms.Seleccion;
 using Ritrama2025.Models;
 using Ritrama2025.Services;
+using Ritrama2025.Services.CommonService;
 using Ritrama2025.Services.ExportData;
 using System.Data;
 
@@ -14,6 +15,8 @@ namespace Ritrama2025.Forms
         private readonly IDespachoService Service;
         private readonly IReportsService ReportService;
         private readonly ExportDataService ExportDataService = new();
+        private readonly ICommonService CommonService;
+
         DataSet Ds = new();
         readonly BindingSource Bs = [];
         readonly BindingSource BsDetalleRC = [];
@@ -25,14 +28,16 @@ namespace Ritrama2025.Forms
         const decimal CONST_PIE_LINEALES = 0.012m;
         const decimal CONST_MSI = 83.33333333333333m;
 
-        
 
-public FrmDespacho(IConfiguration Config, IDespachoService Service, IReportsService reportService)
+
+        public FrmDespacho(IConfiguration Config, IDespachoService Service, IReportsService reportService, ICommonService commonService)
         {
             InitializeComponent();
             this.Config = Config ?? throw new ArgumentNullException(nameof(Config));
             this.Service = Service ?? throw new ArgumentNullException(nameof(Service));
             this.ReportService = reportService ?? throw new ArgumentNullException(nameof(reportService));
+            this.CommonService = commonService ?? throw new ArgumentNullException(nameof(commonService));
+
         }
 
         private void Despacho_Load(object sender, EventArgs e)
@@ -44,7 +49,7 @@ public FrmDespacho(IConfiguration Config, IDespachoService Service, IReportsServ
             });
             Ds = task.Result;
 
-            if (Ds.Tables.Count > 0) 
+            if (Ds.Tables.Count > 0)
             {
                 //Enlace a datos Encabezado.
                 Bs.DataSource = Ds;
@@ -115,10 +120,10 @@ public FrmDespacho(IConfiguration Config, IDespachoService Service, IReportsServ
             }
 
 
-            
 
 
-            
+
+
         }
 
         private void Bot_primero_Click(object sender, EventArgs e)
@@ -213,7 +218,7 @@ public FrmDespacho(IConfiguration Config, IDespachoService Service, IReportsServ
 
         private void Bot_picking_Click(object sender, EventArgs e)
         {
-            FrmPickingDespacho frm_picking = new();
+            FrmPickingDespacho frm_picking = new(CommonService);
             frm_picking.ShowDialog();
 
             if (frm_picking.Lista_Rollos.Count <= 0)
@@ -272,7 +277,7 @@ public FrmDespacho(IConfiguration Config, IDespachoService Service, IReportsServ
                 int cantidad = Convert.ToInt32(grid_items.Rows[i].Cells["cant"].Value);
                 decimal total_msi_cant_up = (ancho * largo * cantidad);
                 //CALCULO DEL MSI RENGLON
-                grid_items.Rows[i].Cells["msi"].Value = Math.Round( (total_msi_cant_up / CONST_MSI),14,MidpointRounding.AwayFromZero);
+                grid_items.Rows[i].Cells["msi"].Value = Math.Round((total_msi_cant_up / CONST_MSI), 14, MidpointRounding.AwayFromZero);
                 grid_items.Rows[i].Cells["total_pie_lin"].Value = "0";
                 //Busqueda del ratio por producto.
                 grid_items.Rows[i].Cells["ratio"].Value = "0";
@@ -298,7 +303,7 @@ public FrmDespacho(IConfiguration Config, IDespachoService Service, IReportsServ
             FrmSeleccion SelClientes = new()
             {
                 DtItems = Ds.Tables["DtClientes"]!,
-                Titulo = "Clientes",
+                Titulo = "clientes",
             };
             SelClientes.ShowDialog();
             txt_custid.Text = SelClientes.Id;
@@ -310,7 +315,7 @@ public FrmDespacho(IConfiguration Config, IDespachoService Service, IReportsServ
             FrmSeleccion SelVendors = new()
             {
                 DtItems = Ds.Tables["DtVendors"]!,
-                Titulo = "Vendedores",
+                Titulo = "vendedores",
             };
             SelVendors.ShowDialog();
             txt_vend_id.Text = SelVendors.Id;
@@ -334,7 +339,7 @@ public FrmDespacho(IConfiguration Config, IDespachoService Service, IReportsServ
             FrmSeleccion SelChofer = new()
             {
                 DtItems = Ds.Tables["DtChofer"]!,
-                Titulo = "Chofer",
+                Titulo = "chofer",
             };
             SelChofer.ShowDialog();
             txt_chofer_id.Text = SelChofer.Id;
@@ -346,7 +351,7 @@ public FrmDespacho(IConfiguration Config, IDespachoService Service, IReportsServ
             FrmSeleccion SelCamion = new()
             {
                 DtItems = Ds.Tables["DtCamion"]!,
-                Titulo = "Camion",
+                Titulo = "camion",
             };
             SelCamion.ShowDialog();
             txt_camion_id.Text = SelCamion.Id;
@@ -519,13 +524,13 @@ public FrmDespacho(IConfiguration Config, IDespachoService Service, IReportsServ
                 return;
             }
             //validar los kilos de  la paleta.
-            foreach (DataGridViewRow Fila in grid_detalle_paletas.Rows) 
+            foreach (DataGridViewRow Fila in grid_detalle_paletas.Rows)
             {
-                foreach (DataGridViewCell Celda in Fila.Cells) 
+                foreach (DataGridViewCell Celda in Fila.Cells)
                 {
-                    if (Celda.ColumnIndex == 3) 
+                    if (Celda.ColumnIndex == 3)
                     {
-                        if (Convert.ToDecimal(Celda.Value) <= 0) 
+                        if (Convert.ToDecimal(Celda.Value) <= 0)
                         {
                             MessageBox.Show("debe introducir los kilos netos de la paleta.");
                             return;
@@ -645,7 +650,7 @@ public FrmDespacho(IConfiguration Config, IDespachoService Service, IReportsServ
             }
             Service.AddDocumentDespacho(DocumentDespacho);
             Service.AddPickingListDespacho(DocumentDespacho.Detalle_RC);
-            //Service.AddItemsDespacho(DocumentDespacho.Items_Despacho);
+            Service.AddItemsDespacho(DocumentDespacho.Items_Despacho);
             Service.AddPaletDetailsDespacho(DocumentDespacho.Detalle_Paleta);
             //cerrar el formulario a solo lectura.
             txt_persondelivery.ReadOnly = true;
@@ -882,6 +887,11 @@ public FrmDespacho(IConfiguration Config, IDespachoService Service, IReportsServ
                     e.Cancel = true; // Cancela el cambio hasta que sea válido
                 }
             }
+        }
+
+        private void bot_buscar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

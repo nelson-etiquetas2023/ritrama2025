@@ -17,12 +17,13 @@ namespace Ritrama2025.Forms
         readonly List<Recepcion> Lista_Hojas = [];
         readonly List<Recepcion> Lista_Graphics = [];
         readonly List<Recepcion> Lista_Master = [];
-        public CommonService servicio = null!;
+        public ICommonService Servicio = null!;
         
 
-        public FrmPickingDespacho()
+        public FrmPickingDespacho(ICommonService servicio)
         {
             InitializeComponent();
+            Servicio = servicio;   
         }
 
 
@@ -163,7 +164,7 @@ namespace Ritrama2025.Forms
                 }
             }
             //llenar la lista de rollo cortado.
-            await servicio.GetDataRolloCortado(rollos);
+            await Servicio.GetDataRolloCortado(rollos);
 
             rollos.RemoveAll(p => string.IsNullOrWhiteSpace(p.Product_Id));
 

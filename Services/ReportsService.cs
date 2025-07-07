@@ -103,7 +103,9 @@ namespace Ritrama2025.Services
                     {
                         Connection = conn,
                         CommandType = CommandType.Text,
-                        CommandText = "select numero,fecha,fecha_produccion,product_id from orden_corte where numero=@numero_oc"
+                        CommandText = "select a.numero,a.fecha,a.fecha_produccion,a.product_id,c.product_name,b.unique_code,b.roll_number,b.splice,b.width,b.large,b.msi,b.roll_id,b.code_person,b.status,d.nombre as operador,e.customer_name from orden_corte a " + 
+                        "left join rolls_details b on a.numero = b.numero " +
+                        "left join producto c on a.product_id = c.product_id left join operadores d on a.operador_id = d.operador_id left join customer e on a.customer_id = e.customer_id where a.numero=@numero_oc"
                     };
                     conn.Open();
                     comando.Parameters.Add(new SqlParameter("@numero_oc", SqlDbType.NVarChar) { Value = numeroOC });
@@ -125,27 +127,27 @@ namespace Ritrama2025.Services
                         
                     };
                     report.reportViewer1.ProcessingMode = ProcessingMode.Local;
-                    report.reportViewer1.LocalReport.ReportPath = GetPathApplication(ReportName,R.PATH_REPORTS.REPORTS_PRODUCTION);
+                    report.reportViewer1.LocalReport.ReportPath = GetPathApplication(ReportName,R.PATH_REPORTS.REPORTS_DESPACHO);
                     //configuracion de la pagina.
-                    PageSettings pageSettings = new()
-                    {
-                        PaperSize = new PaperSize("Letter", 1100, 850), //A4-carta.
-                        Landscape = true,
-                        Margins = new Margins(0,0,0,0),
-                    };
-                    report.reportViewer1.SetPageSettings(pageSettings);
+                    //PageSettings pageSettings = new()
+                    //{
+                    //    PaperSize = new PaperSize("Letter", 1100, 850), //A4-carta.
+                    //    Landscape = true,
+                    //    Margins = new Margins(0,0,0,0),
+                    //};
+                    //report.reportViewer1.SetPageSettings(pageSettings);
                     //parametros del reporte.
-                    ReportParameter[] param = [new ReportParameter("numero_oc", numeroOC)];
+                    ReportParameter param = new ReportParameter("numero_oc", numeroOC);
                     
                     //Configura el origen de los datos.
 
-                    ReportDataSource rds = new("Dataset1",dt);
+                    ReportDataSource rds = new("DsOrdenCorte", dt);
                     report.reportViewer1.LocalReport.DataSources.Clear();
                     report.reportViewer1.LocalReport.DataSources.Add(rds);
 
 
                     report.reportViewer1.LocalReport.SetParameters(param);
-                    report.reportViewer1.Refresh();
+                    report.reportViewer1.RefreshReport();
                     report.Show();
                 }
                 catch (ReportViewerException ex)
