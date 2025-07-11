@@ -33,7 +33,8 @@ namespace Ritrama2025.Services.MateriaPrima
             //Carga el string de Connexion de la aplicacion.
             if (Config != null)
             {
-                StringConnex = Convert.ToString(Config.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value)!;
+                var ambiente = Config["Ambiente"] ?? R.ENVIRONMET.DESARROLLO;
+                StringConnex = Config.GetSection("ConnectionStringsEnvironment")[ambiente]!;
             }
             //Injecta el servicio de datos.
             this.ServiceData = ServiceData;

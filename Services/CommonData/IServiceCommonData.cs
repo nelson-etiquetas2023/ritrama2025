@@ -10,5 +10,5 @@ namespace Ritrama2025.Services.CommonData
         ObjectQuery CreateObjectProduct(SqlDataAdapter da);
         Task LoadTable(ObjectQuery objectQuery);
         int GetConsecutive(string filtro);
-    }
+    } 
 }

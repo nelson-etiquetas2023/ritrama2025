@@ -121,6 +121,12 @@
   <data name="DATA_DOWNLOAD48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\DATA_DOWNLOAD48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="step2_deactivate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\step2_deactivate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="add_file_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\add_file_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="data_quality_50px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\data_quality_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -133,20 +139,26 @@
   <data name="ROWDELETE48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\ROWDELETE48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="update_doc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\update_doc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="rolls_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\rolls_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="price_tag_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\price_tag_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="step3_active" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\step3_active.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="orden_servicio_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\orden_servicio_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="step5_deactive" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\step5_deactive.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="product_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\product_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="report48_482" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\report48_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="step2_active" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\step2_active.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="registry_editor_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\registry_editor_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -166,14 +178,23 @@
   <data name="step1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\step1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="step3_deactive" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\step3_deactive.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="roll_id" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\roll_id.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="step5_active" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\step5_active.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8_cancel_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\icons8_cancel_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="add_user_group_man_man_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\add_user_group_man_man_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="report48_481" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\report48_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="print_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\print_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -202,6 +223,9 @@
   <data name="administrative_tools_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\administrative_tools_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="search_property32_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\search_property32_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="search_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\search_16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -211,14 +235,11 @@
   <data name="check_file_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\check_file_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="job_seeker_50px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\job_seeker_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="DATA_RESERVA48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\DATA_RESERVA48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="report48_481" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\report48_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="orden_servicio_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\orden_servicio_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="add_to_clipboard_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\add_to_clipboard_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -226,11 +247,17 @@
   <data name="search_property_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\search_property_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="add_file_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\add_file_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="job_seeker_50px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\job_seeker_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="create_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\create_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="step1_deactivate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\step1_deactivate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="step4_active" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\step4_active.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DATA_READ48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\DATA_READ48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -238,40 +265,16 @@
   <data name="registry_editor_32px1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\registry_editor_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="update_doc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\update_doc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="step4_deactive" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\step4_deactive.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="price_tag_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\price_tag_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="approved_delivery_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\approved_delivery_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="search_property32_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\search_property32_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="step1_deactivate" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\step1_deactivate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="step2_active" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\step2_active.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="step2_deactivate" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\step2_deactivate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="step3_active" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\step3_active.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="step3_deactive" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\step3_deactive.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="step4_active" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\step4_active.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="step4_deactive" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\step4_deactive.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="step5_active" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\step5_active.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="step5_deactive" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\step5_deactive.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="products64px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\products64px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

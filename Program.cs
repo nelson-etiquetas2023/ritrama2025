@@ -9,6 +9,7 @@ using Ritrama2025.Services.MateriaPrima;
 using Ritrama2025.Services.ServiceLocator;
 using Ritrama2025.Services.CommonService;
 using Ritrama2025.Services.ExportData;
+using Ritrama2025.Services.ProductsService;
 
 
 namespace Ritrama2025
@@ -38,6 +39,7 @@ namespace Ritrama2025
                     service.AddScoped<IReportsService, ReportsService>();
                     service.AddScoped<ICommonService, CommonService>();
                     service.AddScoped<IExportDataService, ExportDataService>();
+                    service.AddScoped<IProductsService,ProductsService>();
                     service.AddSingleton<FormManager>();
                     //injecccion de dependencias de los formularios.
                     service.AddSingleton<Main>();
@@ -45,6 +47,8 @@ namespace Ritrama2025
                     service.AddTransient<FrmDespacho>();
                     service.AddTransient<FrmCodeBarLabel>();
                     service.AddTransient<FrmOrdenCorte>();
+                    service.AddTransient<FrmProductos>();
+
                 }).Build();
 
             ServiceLocator.Init(host.Services);

@@ -191,6 +191,7 @@
             bot_products.Text = "Productos";
             bot_products.TextImageRelation = TextImageRelation.ImageBeforeText;
             bot_products.UseVisualStyleBackColor = true;
+            bot_products.Click += bot_products_Click;
             // 
             // bot_recepciones
             // 

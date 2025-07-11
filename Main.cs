@@ -11,7 +11,7 @@ namespace Ritrama2025
     public partial class Main : Form
     {
         private readonly FormManager _formManager;
-        
+
         public Main(FormManager formManager)
         {
             InitializeComponent();
@@ -36,7 +36,7 @@ namespace Ritrama2025
         private void Bot_despacho_Click(object sender, EventArgs e)
         {
             FormManager.ShowForm<FrmDespacho>(this);
-            
+
         }
 
         private void Bot_ordencorte_Click(object sender, EventArgs e)
@@ -54,6 +54,13 @@ namespace Ritrama2025
             var FormCodeBar = ServiceLocator.Get<FrmCodeBarLabel>();
             FormCodeBar.MdiParent = this;
             FormCodeBar.Show();
+        }
+
+        private void bot_products_Click(object sender, EventArgs e)
+        {
+            var formProducts = ServiceLocator.Get<FrmProductos>();
+            formProducts.MdiParent = this;
+            formProducts.Show();
         }
     }
 

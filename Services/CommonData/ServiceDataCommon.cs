@@ -14,7 +14,8 @@ namespace Ritrama2025.Services.CommonData
         public ServiceDataCommon(IConfiguration config)
         {
             _config = config ?? throw new ArgumentNullException(nameof(config));
-            StringConnex = Convert.ToString(_config.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value)!;
+            var ambiente = _config["Ambiente"] ?? R.ENVIRONMET.DESARROLLO;
+            StringConnex = _config.GetSection("ConnectionStringsEnvironment")[ambiente]!;
         }
 
         public ObjectQuery CreateObjectQuery(ObjectQuery objectquery,DataSet dataset)
@@ -85,6 +86,46 @@ namespace Ritrama2025.Services.CommonData
                 MessageBox.Show("Error al calcular el consecutivo..." + ex.Message);
             }
             return Consec;
+        }
+    }
+    public static class DataAccess 
+    {
+        public static async Task<DataTable> ExecuteQuery<T>(string connectionString,string sqlQuery,List<SqlParameter>? parameters, bool useTransaction)
+        {
+            var result = new List<T>();
+
+            using var conn = new SqlConnection(connectionString);
+            await conn.OpenAsync();
+
+            SqlTransaction? transaction = null;
+            if (useTransaction) transaction = conn.BeginTransaction();
+
+            try
+            {
+                using var comando = new SqlCommand()
+                {
+                    Connection = conn,
+                    CommandType = CommandType.Text,
+                    CommandText = sqlQuery,
+                };
+
+                if (parameters != null) comando.Parameters.AddRange(parameters.ToArray());
+
+                using var reader = await comando.ExecuteReaderAsync();
+                
+                var table = new DataTable();
+                table.Load(reader);
+                table.TableName = "Dtproducts";
+                             
+                transaction?.Commit();
+                return table;
+
+            }
+            catch
+            {
+                transaction?.Rollback();
+                throw;
+            }
         }
     }
 }

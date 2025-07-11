@@ -3,6 +3,16 @@ namespace Ritrama2025
 {
     public static class R
     {
+        public static class CONNECTIONSTRINGS 
+        {
+            public static readonly string DESARROLLO = @"Data Source=DATABASE-CENTER\\RITRAMASRV01; Initial Catalog=RITRAMA2;User Id=Npino;Password=123;TrustServerCertificate=True;";
+            public static readonly string PRODUCCION = "Data Source=RITRAMASRV01; Initial Catalog=RITRAMA3;User Id=Npino;Password=123;TrustServerCertificate=True;";
+        }
+        public static class ENVIRONMET
+        {
+            public static readonly string DESARROLLO = "Desarrollo";
+            public static readonly string PRODUCCION = "Produccion";
+        }
         public static class CONSTANTES
         {
             public const  double FACTOR_METROS_PULDADAS = 39.3701;
