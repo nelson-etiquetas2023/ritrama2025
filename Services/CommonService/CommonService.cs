@@ -16,7 +16,8 @@ namespace Ritrama2025.Services.CommonService
             this.Config = Config;
             if (Config != null)
             {
-                StringConnex = Convert.ToString(Config.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value)!;
+                var ambiente = Config["Ambiente"] ?? R.ENVIRONMET.DESARROLLO;
+                StringConnex = Config.GetSection(R.ENVIRONMET.NAME_KEY_CONNECTION)[ambiente]!;
             }
         }
         public async Task<List<RolloCortado>> GetDataRolloCortado(List<RolloCortado> lista)

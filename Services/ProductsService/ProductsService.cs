@@ -23,7 +23,8 @@ namespace Ritrama2025.Services.ProductsService
             Configuration = configuration;
             if(Configuration != null)
             {
-                StringConnex = Convert.ToString(Configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value)!;
+                var ambiente = Configuration["Ambiente"] ?? R.ENVIRONMET.DESARROLLO;
+                StringConnex = Configuration.GetSection(R.ENVIRONMET.NAME_KEY_CONNECTION)[ambiente]!;
             }
         }
         public bool Add(Product producto)

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DsProduccion" targetNamespace="http://tempuri.org/DsProduccion.xsd" xmlns:mstns="http://tempuri.org/DsProduccion.xsd" xmlns="http://tempuri.org/DsProduccion.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Data Source=DATABASE-CENTER\RITRAMASRV01;Initial Catalog=RITRAMA2;Persist Security Info=True;User ID=Npino;Password=123;Encrypt=False;TrustServerCertificate=True" IsAppSettingsProperty="false" Modifier="Assembly" Name="RITRAMA2ConnectionString" ParameterPrefix="@" Provider="Microsoft.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DsProduccion" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="DsProduccion" msprop:Generator_DataSetName="DsProduccion">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

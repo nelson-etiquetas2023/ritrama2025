@@ -12,6 +12,7 @@ namespace Ritrama2025
         {
             public static readonly string DESARROLLO = "Desarrollo";
             public static readonly string PRODUCCION = "Produccion";
+            public static readonly string NAME_KEY_CONNECTION = "ConnectionStringsEnvironment";
         }
         public static class CONSTANTES
         {
