@@ -90,9 +90,43 @@ namespace Ritrama2025.Services.CommonData
     }
     public static class DataAccess 
     {
+        public static async Task<bool> ExecuteQueryWrite(string connectionString, string sqlQuery, List<SqlParameter>? parameters, bool useTransaction) 
+        {
+            using var conn = new SqlConnection(connectionString);
+            await conn.OpenAsync();
+
+            SqlTransaction? transaction = null;
+            if (useTransaction) transaction = conn.BeginTransaction();
+
+
+            try
+            {
+                using var comando = new SqlCommand()
+                {
+                    Connection = conn,
+                    CommandType = CommandType.Text,
+                    CommandText = sqlQuery,
+                    Transaction = transaction
+                };
+
+                if (parameters != null) comando.Parameters.AddRange(parameters.ToArray());
+
+                await comando.ExecuteNonQueryAsync();
+
+                transaction?.Commit();
+                return true;
+
+            }
+            catch
+            {
+                transaction?.Rollback();
+                return false;
+            }
+        }
+
         public static async Task<DataTable> ExecuteQuery<T>(string connectionString,string sqlQuery,List<SqlParameter>? parameters, bool useTransaction)
         {
-            var result = new List<T>();
+            //var result = new List<T>();
 
             using var conn = new SqlConnection(connectionString);
             await conn.OpenAsync();
@@ -118,7 +152,7 @@ namespace Ritrama2025.Services.CommonData
                 table.TableName = "Dtproducts";
                              
                 transaction?.Commit();
-                return table;
+                return table ?? new DataTable();
 
             }
             catch

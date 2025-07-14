@@ -4,7 +4,6 @@ using Ritrama2025.Models;
 using Ritrama2025.Services.CommonData;
 using System.Data;
 
-
 namespace Ritrama2025.Services.ProductsService
 {
     
@@ -27,10 +26,81 @@ namespace Ritrama2025.Services.ProductsService
                 StringConnex = Configuration.GetSection(R.ENVIRONMET.NAME_KEY_CONNECTION)[ambiente]!;
             }
         }
-        public bool Add(Product producto)
+
+        public async Task<DataSet> Load()
         {
-          
-           return false;
+            var sqlQuery = R.SQL_STRING_QUERY.SELECT_QUERY_PRODUCTS;
+
+
+
+            DtProducts = await DataAccess.ExecuteQuery<Product>(StringConnex, sqlQuery, null, false);
+            Ds.Tables.Add(DtProducts);
+            return Ds;
+
+        }
+        public async Task<bool> Add(Product producto)
+        {
+            try
+            {
+                var sqlQuery = "INSERT INTO producto (Product_ID,Product_Name,Product_Descrip,Product_Ref,Codebar,MasterRolls,rollo_cortado,Resmas,Graphics,anulado,precio,ratio) VALUES (@product_id,@product_name,@product_description,@reference,@codebar,@master,@rollo,@resma,@graphics,@anulado,@precio,@ratio)";
+
+                var parametros = new List<SqlParameter>
+                {
+                    new SqlParameter("@product_id", SqlDbType.NVarChar) { Value = producto.Product_id },
+                    new SqlParameter("@product_name", SqlDbType.NVarChar) { Value = producto.Product_Name},
+                    new SqlParameter("@product_description", SqlDbType.NVarChar) { Value = producto.Product_Description},
+                    new SqlParameter("@reference", SqlDbType.NVarChar) { Value = producto.Referencia},
+                    new SqlParameter("@codebar", SqlDbType.NVarChar) { Value = producto.Codigo_Barra},
+                    new SqlParameter("@master", SqlDbType.Bit) { Value = producto.Master},
+                    new SqlParameter("@rollo", SqlDbType.Bit) { Value = producto.RolloCortado},
+                    new SqlParameter("@resma", SqlDbType.Bit) { Value = producto.Hoja},
+                    new SqlParameter("@graphics", SqlDbType.Bit) { Value = producto.Graphics},
+                    new SqlParameter("@anulado", SqlDbType.Bit) { Value = producto.Anulado },
+                    new SqlParameter("@precio", SqlDbType.Decimal) { Value = producto.Precio },
+                    new SqlParameter("@ratio", SqlDbType.Decimal) { Value = producto.Ratio },
+                };
+
+                var data = await DataAccess.ExecuteQueryWrite(StringConnex, sqlQuery, parametros, true);
+                if (data) MessageBox.Show("producto nuevo guardado satisfactoriamente...");
+                return true;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("error al agregar un producto nuevo...");
+                return false;
+            }
+        }
+        public bool ValidProductid(string id)
+        {
+            try
+            {
+                using SqlConnection Conn = new(StringConnex);
+                Conn.Open();
+
+                using SqlCommand comando = new()
+                {
+                    Connection = Conn,
+                    CommandType = CommandType.Text,
+                    CommandText = "select COUNT(*) from producto where product_id = @id"
+                };
+
+                SqlParameter p1 = new("@id", id);
+                comando.Parameters.Add(p1);
+
+                var result = (int) comando.ExecuteScalar();
+                if (result > 0)
+                {
+                    return true;
+                }
+                else 
+                {
+                    return false;
+                } 
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public bool Anular(string IdProduct)
@@ -38,19 +108,12 @@ namespace Ritrama2025.Services.ProductsService
             return false;
         }
 
-        public async Task<DataSet> Load()
-        {
-            var sqlQuery = "SELECT [Product_ID],[Product_Name],[Product_Descrip],[Product_Ref],[Codebar],[Category_ID],[MasterRolls],[rollo_cortado],[Resmas],[Graphics],[anulado],[precio],[code_RC],[ratio] FROM [dbo].[producto]";
-
-            DtProducts =  await DataAccess.ExecuteQuery<Product>(StringConnex, sqlQuery, null, false);
-            Ds.Tables.Add(DtProducts);
-            return Ds;
-           
-        }
 
         public bool Update(Product producto)
         {
             return false;
         }
+
+       
     }
 }

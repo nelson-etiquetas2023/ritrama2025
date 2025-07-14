@@ -7,6 +7,9 @@
     <Compile Update="Forms\Buscadores\FrmBuscador_OrdenesMP.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\Buscadores\Frm_ProductSeach.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\FrmCodeBarLabel.cs">
       <SubType>Form</SubType>
     </Compile>

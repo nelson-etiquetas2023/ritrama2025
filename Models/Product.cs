@@ -9,18 +9,14 @@ namespace Ritrama2025.Models
         public string Referencia { get; set; } = null!;
         public string Codigo_Barra { get; set; } = null!;
         public decimal Precio { get; set; }
-        public string Categopria { get; set; } = null!;
-        public string Ratio { get; set; } = null!;
+        public decimal Ratio { get; set; }
         public bool Anulado { get; set; }
-        public TipoProduct Tipo { get; set; }
+        public bool Master { get; set; }
+        public bool Hoja { get; set; }
+        public bool Graphics { get; set; }
+        public bool RolloCortado { get; set; }
     }
-    public enum TipoProduct
-    {
-        Master,
-        Graphics,
-        Hoja,
-        RolloCortado
-    }
+
 }
 
 

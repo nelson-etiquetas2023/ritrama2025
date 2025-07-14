@@ -214,3 +214,4 @@ C:\Programacion\Ritrama2025\obj\Debug\net8.0-windows10.0.19041\refint\Ritrama202
 C:\Programacion\Ritrama2025\obj\Debug\net8.0-windows10.0.19041\Ritrama2025.pdb
 C:\Programacion\Ritrama2025\obj\Debug\net8.0-windows10.0.19041\Ritrama2025.genruntimeconfig.cache
 C:\Programacion\Ritrama2025\obj\Debug\net8.0-windows10.0.19041\ref\Ritrama2025.dll
+C:\Programacion\Ritrama2025\obj\Debug\net8.0-windows10.0.19041\Ritrama2025.Forms.Buscadores.Frm_ProductSeach.resources
