@@ -1,11 +1,7 @@
 ﻿using System.Drawing.Printing;
 using System.IO.Pipes;
 using System.Text;
-using System.Text.Json;
 using System.Text.RegularExpressions;
-
-using Zebra.Sdk.Comm;
-using Zebra.Sdk.Printer.Discovery;
 
 namespace Ritrama2025.Forms
 {
@@ -48,22 +44,22 @@ namespace Ritrama2025.Forms
         }
         private void DiscoveryPrinterZebra()
         {
-            try
-            {
-                textBox1.Clear();
-                foreach (DiscoveredPrinterDriver printer in UsbDiscoverer.GetZebraDriverPrinters())
-                {
-                    textBox1.Text += $"{printer.PrinterName}";
-                }
-                foreach (DiscoveredUsbPrinter usbPrinter in UsbDiscoverer.GetZebraUsbPrinters(new ZebraPrinterFilter()))
-                {
-                    textBox2.Text += usbPrinter.ToString();
-                }
-            }
-            catch (ConnectionException ex)
-            {
-                MessageBox.Show($"Errror discovering local printers: {ex.Message}");
-            }
+            //try
+            //{
+            //    textBox1.Clear();
+            //    foreach (DiscoveredPrinterDriver printer in UsbDiscoverer.GetZebraDriverPrinters())
+            //    {
+            //        textBox1.Text += $"{printer.PrinterName}";
+            //    }
+            //    foreach (DiscoveredUsbPrinter usbPrinter in UsbDiscoverer.GetZebraUsbPrinters(new ZebraPrinterFilter()))
+            //    {
+            //        textBox2.Text += usbPrinter.ToString();
+            //    }
+            //}
+            //catch (ConnectionException ex)
+            //{
+            //    MessageBox.Show($"Errror discovering local printers: {ex.Message}");
+            //}
         }
         private void Button1_Click(object sender, EventArgs e)
         {
@@ -111,37 +107,37 @@ namespace Ritrama2025.Forms
 
         private void SendZplOverUsb(string usbDriverName, string zplData)
         {
-            Connection thePrinterConn = null!;
-            try
-            {
-                thePrinterConn = ConnectionBuilder.Build($"USB:{usbDriverName}");
-                thePrinterConn.Open();
+            //Connection thePrinterConn = null!;
+            //try
+            //{
+            //    thePrinterConn = ConnectionBuilder.Build($"USB:{usbDriverName}");
+            //    thePrinterConn.Open();
 
-                string zplFinal;
+            //    string zplFinal;
 
-                if (zplData.Contains("^PQ"))
-                {
-                    zplFinal = PqRegex().Replace(zplData, "^PQ" + numero_copias.Value);
-                }
-                else
-                {
-                    int idx = zplData.IndexOf("^XZ", StringComparison.OrdinalIgnoreCase);
-                    if (idx >= 0)
-                        zplFinal = zplData.Insert(idx, "^PQ" + numero_copias.Value);
-                    else
-                        zplFinal = zplData + "^PQ" + numero_copias.Value;
-                }
+            //    if (zplData.Contains("^PQ"))
+            //    {
+            //        zplFinal = PqRegex().Replace(zplData, "^PQ" + numero_copias.Value);
+            //    }
+            //    else
+            //    {
+            //        int idx = zplData.IndexOf("^XZ", StringComparison.OrdinalIgnoreCase);
+            //        if (idx >= 0)
+            //            zplFinal = zplData.Insert(idx, "^PQ" + numero_copias.Value);
+            //        else
+            //            zplFinal = zplData + "^PQ" + numero_copias.Value;
+            //    }
 
-                thePrinterConn.Write(Encoding.UTF8.GetBytes(zplFinal));
-            }
-            catch (ConnectionException ex)
-            {
-                MessageBox.Show($"Error connecting to printer: {ex.Message}");
-            }
-            finally
-            {
-                thePrinterConn?.Close();
-            }
+            //    thePrinterConn.Write(Encoding.UTF8.GetBytes(zplFinal));
+            //}
+            //catch (ConnectionException ex)
+            //{
+            //    MessageBox.Show($"Error connecting to printer: {ex.Message}");
+            //}
+            //finally
+            //{
+            //    thePrinterConn?.Close();
+            //}
         }
 
 

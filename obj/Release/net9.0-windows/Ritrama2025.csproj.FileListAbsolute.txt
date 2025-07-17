@@ -44,12 +44,8 @@ C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\Microsoft.ReportViewer.Pr
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\Microsoft.ReportViewer.WinForms.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\SixLabors.Fonts.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\System.ClientModel.dll
-C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\System.Configuration.ConfigurationManager.dll
-C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\System.Diagnostics.EventLog.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\System.IdentityModel.Tokens.Jwt.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\System.Memory.Data.dll
-C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\System.Security.Cryptography.Pkcs.dll
-C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\System.Security.Cryptography.ProtectedData.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\System.ServiceModel.Http.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\System.ServiceModel.Duplex.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\System.ServiceModel.Primitives.dll
@@ -125,8 +121,6 @@ C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\runtimes\win\lib\net9.0\M
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\runtimes\win\lib\net9.0\System.Diagnostics.EventLog.dll
-C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\runtimes\win\lib\net9.0\System.Security.Cryptography.Pkcs.dll
 C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.csproj.AssemblyReference.cache
 C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.FrmDespacho.resources
 C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.FrmPickingDespacho.resources
@@ -178,3 +172,15 @@ C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.FrmMate
 C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.Otros.Frm_AddNew.resources
 C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.Otros.Frm_AprobarOC.resources
 C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.Otros.Frm_oneparameter.resources
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\Images\ADD_DOCUMENT.png
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\Images\CLOSE_DOCUMENT.png
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\Images\OPEN_DOCUMENT.png
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\Images\ANULADO_DOCUMENTO.png
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\Reports\RptOrdenCorte.rdlc
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\Reports\RptImportFormat.rdlc
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\Paquetes\TSCLIB.dll
+C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.Buscadores.FrmBuscador_OrdenesMP.resources
+C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.Buscadores.Frm_ProductSeach.resources
+C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.FrmCodeBarLabel.resources
+C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.FrmProductos.resources
+C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.Seleccion.FrmProductsInsert.resources

@@ -3,6 +3,7 @@ using Ritrama2025.Models;
 using Ritrama2025.Services.ProductsService;
 using System.Data;
 using Ritrama2025.Forms.Buscadores;
+using DocumentFormat.OpenXml.Office2013.Excel;
 
 namespace Ritrama2025.Forms
 {
@@ -12,6 +13,8 @@ namespace Ritrama2025.Forms
         public DataSet Ds = new();
         BindingSource Bs = new();
         DataRowView Row = null!;
+        int EditMode = 0;
+        Product producto { get; set; } = null!;
 
         public FrmProductos(IProductsService productsService)
         {
@@ -42,47 +45,47 @@ namespace Ritrama2025.Forms
             rad_graphics.DataBindings.Add("Checked", Bs, "Graphics", true, DataSourceUpdateMode.OnPropertyChanged);
             rad_rollocortado.DataBindings.Add("Checked", Bs, "rollo_cortado", true, DataSourceUpdateMode.OnPropertyChanged);
             //check anulado.
-            chk_product_anulado.DataBindings["Checked"].Format += (s, e) =>
+            chk_product_anulado.DataBindings["Checked"]!.Format += (s, e) =>
             {
                 if (e.Value == DBNull.Value || e.Value == null) e.Value = false;
             };
-            chk_product_anulado.DataBindings["Checked"].Parse += (s, e) =>
+            chk_product_anulado.DataBindings["Checked"]!.Parse += (s, e) =>
             {
                 if (e.Value == null) e.Value = false;
             };
             //radio master.
-            rad_master.DataBindings["Checked"].Format += (s, e) =>
+            rad_master.DataBindings["Checked"]!.Format += (s, e) =>
             {
                 if (e.Value == DBNull.Value || e.Value == null) e.Value = false;
             };
-            rad_master.DataBindings["Checked"].Parse += (s, e) =>
+            rad_master.DataBindings["Checked"]!.Parse += (s, e) =>
             {
                 if (e.Value == null) e.Value = false;
             };
             //radio graphics.
-            rad_graphics.DataBindings["Checked"].Format += (s, e) =>
+            rad_graphics.DataBindings["Checked"]!.Format += (s, e) =>
             {
                 if (e.Value == DBNull.Value || e.Value == null) e.Value = false;
             };
-            rad_graphics.DataBindings["Checked"].Parse += (s, e) =>
+            rad_graphics.DataBindings["Checked"]!.Parse += (s, e) =>
             {
                 if (e.Value == null) e.Value = false;
             };
             //radio hojas.
-            rad_hoja.DataBindings["Checked"].Format += (s, e) =>
+            rad_hoja.DataBindings["Checked"]!.Format += (s, e) =>
             {
                 if (e.Value == DBNull.Value || e.Value == null) e.Value = false;
             };
-            rad_hoja.DataBindings["Checked"].Parse += (s, e) =>
+            rad_hoja.DataBindings["Checked"]!.Parse += (s, e) =>
             {
                 if (e.Value == null) e.Value = false;
             };
             //rollo cortado.
-            rad_rollocortado.DataBindings["Checked"].Format += (s, e) =>
+            rad_rollocortado.DataBindings["Checked"]!.Format += (s, e) =>
             {
                 if (e.Value == DBNull.Value || e.Value == null) e.Value = false;
             };
-            rad_rollocortado.DataBindings["Checked"].Parse += (s, e) =>
+            rad_rollocortado.DataBindings["Checked"]!.Parse += (s, e) =>
             {
                 if (e.Value == null) e.Value = false;
             };
@@ -162,9 +165,10 @@ namespace Ritrama2025.Forms
         private void bot_nuevo_Click(object sender, EventArgs e)
         {
             OpenEditForm();
-            Row = (DataRowView)Bs.AddNew();
+            Row = (DataRowView)Bs.AddNew()!;
             Row.BeginEdit();
             Row["product_id"] = "";
+            EditMode = 1; //Modo Add
         }
         private void OpenEditForm()
         {
@@ -179,10 +183,14 @@ namespace Ritrama2025.Forms
             rad_hoja.Enabled = true;
             rad_rollocortado.Enabled = true;
             rad_graphics.Enabled = true;
-            rad_graphics.Checked = false;
-            rad_hoja.Checked = false;
-            rad_master.Checked = false;
-            rad_rollocortado.Checked = false;
+            //solo en add
+            if (EditMode == 1)
+            {
+                rad_graphics.Checked = false;
+                rad_hoja.Checked = false;
+                rad_master.Checked = false;
+                rad_rollocortado.Checked = false;
+            }
             //toolsbar changes.
             bot_siguiente.Enabled = false;
             bot_anterior.Enabled = false;
@@ -202,24 +210,40 @@ namespace Ritrama2025.Forms
             if (!ValidModelProduct()) return;
 
             //crear producto
-            var producto = CREATE_OBJECT_PRODUCT();
+            producto = CREATE_OBJECT_PRODUCT();
 
+
+            if (EditMode == 1)
+            {
+                SaveAdd();
+            }
+            if (EditMode == 2)
+            {
+                SaveUpdate();
+            }
+            //cerrar formulario
+            CloseFormUI();
+            Bs.EndEdit();
+            Refreshform();
+            EditMode = 0;
+        }
+        private void SaveUpdate()
+        {
+
+        }
+
+        private void SaveAdd()
+        {
             //verificar que no se repita el codigo
             if (ProductsService.ValidProductid(txt_partid.Text))
             {
                 MessageBox.Show("el codigo del producto que acaba de introducir ya lo esta utilizando otro producto existente...");
                 return;
             }
-
             //guardar base de datos.
             ProductsService.Add(producto);
-
-            //cerrar formulario
-            CloseFormUI();
-
-            Bs.EndEdit();
-            Refreshform();
         }
+
         private Product CREATE_OBJECT_PRODUCT()
         {
             Product producto = new()
@@ -308,7 +332,7 @@ namespace Ritrama2025.Forms
         private void bot_cancelar_Click(object sender, EventArgs e)
         {
             DataRowView RowCurrent;
-            RowCurrent = (DataRowView)Bs.Current;
+            RowCurrent = (DataRowView)Bs.Current!;
             RowCurrent.Row.Delete();
             Bs.EndEdit();
             Bs.Position = 0;
@@ -337,6 +361,14 @@ namespace Ritrama2025.Forms
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
+        }
+
+        private void btn_update_Click(object sender, EventArgs e)
+        {
+            OpenEditForm();
+            btn_update.Enabled = false;
+            txt_partid.ReadOnly = true;
+            EditMode = 2;
         }
     }
 }

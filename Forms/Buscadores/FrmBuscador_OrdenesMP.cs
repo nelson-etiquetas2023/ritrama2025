@@ -1,12 +1,15 @@
 ﻿using System.Data;
+using System.ComponentModel;
 
 namespace Ritrama2025.Forms.Buscadores
 {
     public partial class FrmBuscador_OrdenesMP : Form
 
     {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DataTable DtItems { get; set; } = null!;
         DataView Dv = new();
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Orden { get; set; } = "";
         public FrmBuscador_OrdenesMP()
         {

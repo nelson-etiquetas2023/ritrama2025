@@ -1,14 +1,19 @@
 ﻿using Ritrama2025.Models;
 using System.Data;
+using System.ComponentModel;
 
 namespace Ritrama2025.Forms.Seleccion
 {
 
     public partial class FrmProductsInsert : Form
     {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DataTable DtItems { get; set; } = null!;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Titulo { get; set; } = string.Empty;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ProductMAP Producto { get; set; } = new ProductMAP();
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string TypeProduct { get; set; } = "";
         public FrmProductsInsert()
         {

@@ -1,12 +1,14 @@
-﻿using Org.BouncyCastle.Asn1.Bsi;
-using System.Data;
+﻿using System.Data;
+using System.ComponentModel;
 
 namespace Ritrama2025.Forms.Buscadores
 {
     public partial class Frm_ProductSeach : Form
     {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DataTable DtItems { get; set; } = new();
         DataView Dv = new();
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Selected_ProductID { get; set; } = "";
         public Frm_ProductSeach()
         {
@@ -109,7 +111,7 @@ namespace Ritrama2025.Forms.Buscadores
         private void Grid_Products_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex == -1) return;
-            Selected_ProductID = Grid_Products.Rows[e.RowIndex].Cells["product_id"].Value.ToString()!;
+            Selected_ProductID = Grid_Products.Rows[e.RowIndex].Cells["product_id"].Value!.ToString()!;
             this.Close();
         }
     }

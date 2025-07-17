@@ -63,14 +63,18 @@
             bot_nuevo = new ToolStripButton();
             bot_guardar = new ToolStripButton();
             bot_cancelar = new ToolStripButton();
+            btn_update = new ToolStripButton();
             bot_buscar = new ToolStripButton();
             bot_print = new ToolStripButton();
             bot_excel = new ToolStripButton();
+            groupBox3 = new GroupBox();
+            label7 = new Label();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             toolStrip1.SuspendLayout();
+            groupBox3.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -365,7 +369,7 @@
             toolStrip1.AutoSize = false;
             toolStrip1.BackColor = SystemColors.GradientInactiveCaption;
             toolStrip1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { bot_primero, bot_anterior, bot_siguiente, bot_ultimo, bot_nuevo, bot_guardar, bot_cancelar, bot_buscar, bot_print, bot_excel });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { bot_primero, bot_anterior, bot_siguiente, bot_ultimo, bot_nuevo, bot_guardar, bot_cancelar, btn_update, bot_buscar, bot_print, bot_excel });
             toolStrip1.Location = new Point(0, 114);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(938, 39);
@@ -379,7 +383,7 @@
             bot_primero.Image = (Image)resources.GetObject("bot_primero.Image");
             bot_primero.ImageTransparentColor = Color.Magenta;
             bot_primero.Name = "bot_primero";
-            bot_primero.Size = new Size(90, 30);
+            bot_primero.Size = new Size(85, 30);
             bot_primero.Text = "Primero";
             bot_primero.Click += bot_primero_Click;
             // 
@@ -390,7 +394,7 @@
             bot_anterior.Image = (Image)resources.GetObject("bot_anterior.Image");
             bot_anterior.ImageTransparentColor = Color.Magenta;
             bot_anterior.Name = "bot_anterior";
-            bot_anterior.Size = new Size(90, 30);
+            bot_anterior.Size = new Size(85, 30);
             bot_anterior.Text = "Anterior";
             bot_anterior.Click += bot_anterior_Click;
             // 
@@ -401,7 +405,7 @@
             bot_siguiente.Image = (Image)resources.GetObject("bot_siguiente.Image");
             bot_siguiente.ImageTransparentColor = Color.Magenta;
             bot_siguiente.Name = "bot_siguiente";
-            bot_siguiente.Size = new Size(90, 30);
+            bot_siguiente.Size = new Size(85, 30);
             bot_siguiente.Text = "Siguien";
             bot_siguiente.ToolTipText = "Sigui";
             bot_siguiente.Click += bot_siguiente_Click;
@@ -413,7 +417,7 @@
             bot_ultimo.Image = (Image)resources.GetObject("bot_ultimo.Image");
             bot_ultimo.ImageTransparentColor = Color.Magenta;
             bot_ultimo.Name = "bot_ultimo";
-            bot_ultimo.Size = new Size(90, 30);
+            bot_ultimo.Size = new Size(85, 30);
             bot_ultimo.Text = "Ultimo";
             bot_ultimo.ToolTipText = "Ultimo";
             bot_ultimo.Click += bot_ultimo_Click;
@@ -425,7 +429,7 @@
             bot_nuevo.Image = (Image)resources.GetObject("bot_nuevo.Image");
             bot_nuevo.ImageTransparentColor = Color.Magenta;
             bot_nuevo.Name = "bot_nuevo";
-            bot_nuevo.Size = new Size(90, 30);
+            bot_nuevo.Size = new Size(85, 30);
             bot_nuevo.Text = "Nuevo";
             bot_nuevo.ToolTipText = "Crear productos nuevos";
             bot_nuevo.Click += bot_nuevo_Click;
@@ -438,7 +442,7 @@
             bot_guardar.Image = (Image)resources.GetObject("bot_guardar.Image");
             bot_guardar.ImageTransparentColor = Color.Magenta;
             bot_guardar.Name = "bot_guardar";
-            bot_guardar.Size = new Size(90, 30);
+            bot_guardar.Size = new Size(85, 30);
             bot_guardar.Text = "Guardar";
             bot_guardar.ToolTipText = "Guardar Documento";
             bot_guardar.Click += bot_guardar_Click;
@@ -451,10 +455,21 @@
             bot_cancelar.Image = (Image)resources.GetObject("bot_cancelar.Image");
             bot_cancelar.ImageTransparentColor = Color.Magenta;
             bot_cancelar.Name = "bot_cancelar";
-            bot_cancelar.Size = new Size(90, 30);
+            bot_cancelar.Size = new Size(85, 30);
             bot_cancelar.Text = "Cancelar";
             bot_cancelar.ToolTipText = "Cancelar Documento";
             bot_cancelar.Click += bot_cancelar_Click;
+            // 
+            // btn_update
+            // 
+            btn_update.AutoSize = false;
+            btn_update.Font = new Font("JetBrains Mono", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_update.Image = (Image)resources.GetObject("btn_update.Image");
+            btn_update.ImageTransparentColor = Color.Magenta;
+            btn_update.Name = "btn_update";
+            btn_update.Size = new Size(85, 30);
+            btn_update.Text = "Update ";
+            btn_update.Click += btn_update_Click;
             // 
             // bot_buscar
             // 
@@ -464,7 +479,7 @@
             bot_buscar.ImageScaling = ToolStripItemImageScaling.None;
             bot_buscar.ImageTransparentColor = Color.Magenta;
             bot_buscar.Name = "bot_buscar";
-            bot_buscar.Size = new Size(90, 30);
+            bot_buscar.Size = new Size(85, 30);
             bot_buscar.Text = "Buscar";
             bot_buscar.ToolTipText = "Formulario de Busqueda";
             bot_buscar.Click += bot_buscar_Click;
@@ -476,7 +491,7 @@
             bot_print.Image = (Image)resources.GetObject("bot_print.Image");
             bot_print.ImageTransparentColor = Color.Magenta;
             bot_print.Name = "bot_print";
-            bot_print.Size = new Size(90, 30);
+            bot_print.Size = new Size(85, 30);
             bot_print.Text = "Print";
             bot_print.ToolTipText = "Imprimir Documento";
             // 
@@ -487,15 +502,35 @@
             bot_excel.Image = (Image)resources.GetObject("bot_excel.Image");
             bot_excel.ImageTransparentColor = Color.Magenta;
             bot_excel.Name = "bot_excel";
-            bot_excel.Size = new Size(90, 30);
+            bot_excel.Size = new Size(85, 30);
             bot_excel.Text = "Excel";
             bot_excel.ToolTipText = "Importar Data Excel";
+            // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(label7);
+            groupBox3.Location = new Point(391, 586);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(510, 132);
+            groupBox3.TabIndex = 21;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Informacion: ";
+            // 
+            // label7
+            // 
+            label7.Font = new Font("JetBrains Mono", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label7.Location = new Point(9, 27);
+            label7.Name = "label7";
+            label7.Size = new Size(495, 88);
+            label7.TabIndex = 0;
+            label7.Text = "Puede anular un producto en el boton de \"Update\",\r\n y dar click en el check\r\n\"Producto Anulado\" y guardar los cambios, asi se \r\nanulará el producto.\r\n";
             // 
             // FrmProductos
             // 
             AutoScaleDimensions = new SizeF(8F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(938, 730);
+            Controls.Add(groupBox3);
             Controls.Add(toolStrip1);
             Controls.Add(panel1);
             Controls.Add(chk_product_anulado);
@@ -532,6 +567,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
+            groupBox3.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -575,5 +611,9 @@
         private ToolStripButton bot_buscar;
         private ToolStripButton bot_print;
         private RadioButton rad_rollocortado;
+        private ToolStripButton bot_update;
+        private GroupBox groupBox3;
+        private Label label7;
+        private ToolStripButton btn_update;
     }
 }

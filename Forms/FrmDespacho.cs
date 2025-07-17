@@ -39,7 +39,6 @@ namespace Ritrama2025.Forms
             this.Service = Service ?? throw new ArgumentNullException(nameof(Service));
             this.ReportService = reportService ?? throw new ArgumentNullException(nameof(reportService));
             this.CommonService = commonService ?? throw new ArgumentNullException(nameof(commonService));
-
         }
 
         private void Despacho_Load(object sender, EventArgs e)

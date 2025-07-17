@@ -34,6 +34,8 @@ namespace Ritrama2025.Reports {
         
         private orden_corteDataTable tableorden_corte;
         
+        private CortesDataTable tableCortes;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -78,6 +80,9 @@ namespace Ritrama2025.Reports {
                 }
                 if ((ds.Tables["orden_corte"] != null)) {
                     base.Tables.Add(new orden_corteDataTable(ds.Tables["orden_corte"]));
+                }
+                if ((ds.Tables["Cortes"] != null)) {
+                    base.Tables.Add(new CortesDataTable(ds.Tables["Cortes"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -144,6 +149,16 @@ namespace Ritrama2025.Reports {
         public orden_corteDataTable orden_corte {
             get {
                 return this.tableorden_corte;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public CortesDataTable Cortes {
+            get {
+                return this.tableCortes;
             }
         }
         
@@ -229,6 +244,9 @@ namespace Ritrama2025.Reports {
                 if ((ds.Tables["orden_corte"] != null)) {
                     base.Tables.Add(new orden_corteDataTable(ds.Tables["orden_corte"]));
                 }
+                if ((ds.Tables["Cortes"] != null)) {
+                    base.Tables.Add(new CortesDataTable(ds.Tables["Cortes"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -292,6 +310,12 @@ namespace Ritrama2025.Reports {
                     this.tableorden_corte.InitVars();
                 }
             }
+            this.tableCortes = ((CortesDataTable)(base.Tables["Cortes"]));
+            if ((initTable == true)) {
+                if ((this.tableCortes != null)) {
+                    this.tableCortes.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -312,6 +336,8 @@ namespace Ritrama2025.Reports {
             base.Tables.Add(this.tableIMPORTACION);
             this.tableorden_corte = new orden_corteDataTable();
             base.Tables.Add(this.tableorden_corte);
+            this.tableCortes = new CortesDataTable();
+            base.Tables.Add(this.tableCortes);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -341,6 +367,12 @@ namespace Ritrama2025.Reports {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private bool ShouldSerializeorden_corte() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializeCortes() {
             return false;
         }
         
@@ -413,6 +445,9 @@ namespace Ritrama2025.Reports {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void orden_corteRowChangeEventHandler(object sender, orden_corteRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void CortesRowChangeEventHandler(object sender, CortesRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -2932,8 +2967,6 @@ namespace Ritrama2025.Reports {
             
             private global::System.Data.DataColumn columnproduct_id;
             
-            private global::System.Data.DataColumn columnproduct_name;
-            
             private global::System.Data.DataColumn columnunique_code;
             
             private global::System.Data.DataColumn columnroll_number;
@@ -2954,7 +2987,31 @@ namespace Ritrama2025.Reports {
             
             private global::System.Data.DataColumn columnoperador;
             
-            private global::System.Data.DataColumn columncustomer_name;
+            private global::System.Data.DataColumn columnCustomer_Name;
+            
+            private global::System.Data.DataColumn columnmaster_width;
+            
+            private global::System.Data.DataColumn columnmaster_length;
+            
+            private global::System.Data.DataColumn columnmaster_corte_largo;
+            
+            private global::System.Data.DataColumn columnmaster_cortes_ancho;
+            
+            private global::System.Data.DataColumn columnmaster_vueltas;
+            
+            private global::System.Data.DataColumn columnmaster_cant_rollos;
+            
+            private global::System.Data.DataColumn columnproducto;
+            
+            private global::System.Data.DataColumn columnmaster_width_real;
+            
+            private global::System.Data.DataColumn columnmaster_length_real;
+            
+            private global::System.Data.DataColumn columnmaster_width_restante;
+            
+            private global::System.Data.DataColumn columnmaster_length_restabnte;
+            
+            private global::System.Data.DataColumn columnstep;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -3020,14 +3077,6 @@ namespace Ritrama2025.Reports {
             public global::System.Data.DataColumn product_idColumn {
                 get {
                     return this.columnproduct_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn product_nameColumn {
-                get {
-                    return this.columnproduct_name;
                 }
             }
             
@@ -3113,9 +3162,105 @@ namespace Ritrama2025.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn customer_nameColumn {
+            public global::System.Data.DataColumn Customer_NameColumn {
                 get {
-                    return this.columncustomer_name;
+                    return this.columnCustomer_Name;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn master_widthColumn {
+                get {
+                    return this.columnmaster_width;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn master_lengthColumn {
+                get {
+                    return this.columnmaster_length;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn master_corte_largoColumn {
+                get {
+                    return this.columnmaster_corte_largo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn master_cortes_anchoColumn {
+                get {
+                    return this.columnmaster_cortes_ancho;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn master_vueltasColumn {
+                get {
+                    return this.columnmaster_vueltas;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn master_cant_rollosColumn {
+                get {
+                    return this.columnmaster_cant_rollos;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn productoColumn {
+                get {
+                    return this.columnproducto;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn master_width_realColumn {
+                get {
+                    return this.columnmaster_width_real;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn master_length_realColumn {
+                get {
+                    return this.columnmaster_length_real;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn master_width_restanteColumn {
+                get {
+                    return this.columnmaster_width_restante;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn master_length_restabnteColumn {
+                get {
+                    return this.columnmaster_length_restabnte;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn stepColumn {
+                get {
+                    return this.columnstep;
                 }
             }
             
@@ -3161,7 +3306,6 @@ namespace Ritrama2025.Reports {
                         System.DateTime fecha, 
                         System.DateTime fecha_produccion, 
                         string product_id, 
-                        string product_name, 
                         string unique_code, 
                         int roll_number, 
                         int splice, 
@@ -3172,14 +3316,25 @@ namespace Ritrama2025.Reports {
                         string code_person, 
                         string status, 
                         string operador, 
-                        string customer_name) {
+                        string Customer_Name, 
+                        decimal master_width, 
+                        decimal master_length, 
+                        decimal master_corte_largo, 
+                        int master_cortes_ancho, 
+                        int master_vueltas, 
+                        int master_cant_rollos, 
+                        string producto, 
+                        decimal master_width_real, 
+                        decimal master_length_real, 
+                        decimal master_width_restante, 
+                        decimal master_length_restabnte, 
+                        int step) {
                 orden_corteRow roworden_corteRow = ((orden_corteRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         numero,
                         fecha,
                         fecha_produccion,
                         product_id,
-                        product_name,
                         unique_code,
                         roll_number,
                         splice,
@@ -3190,7 +3345,19 @@ namespace Ritrama2025.Reports {
                         code_person,
                         status,
                         operador,
-                        customer_name};
+                        Customer_Name,
+                        master_width,
+                        master_length,
+                        master_corte_largo,
+                        master_cortes_ancho,
+                        master_vueltas,
+                        master_cant_rollos,
+                        producto,
+                        master_width_real,
+                        master_length_real,
+                        master_width_restante,
+                        master_length_restabnte,
+                        step};
                 roworden_corteRow.ItemArray = columnValuesArray;
                 this.Rows.Add(roworden_corteRow);
                 return roworden_corteRow;
@@ -3224,7 +3391,6 @@ namespace Ritrama2025.Reports {
                 this.columnfecha = base.Columns["fecha"];
                 this.columnfecha_produccion = base.Columns["fecha_produccion"];
                 this.columnproduct_id = base.Columns["product_id"];
-                this.columnproduct_name = base.Columns["product_name"];
                 this.columnunique_code = base.Columns["unique_code"];
                 this.columnroll_number = base.Columns["roll_number"];
                 this.columnsplice = base.Columns["splice"];
@@ -3235,7 +3401,19 @@ namespace Ritrama2025.Reports {
                 this.columncode_person = base.Columns["code_person"];
                 this.columnstatus = base.Columns["status"];
                 this.columnoperador = base.Columns["operador"];
-                this.columncustomer_name = base.Columns["customer_name"];
+                this.columnCustomer_Name = base.Columns["Customer_Name"];
+                this.columnmaster_width = base.Columns["master_width"];
+                this.columnmaster_length = base.Columns["master_length"];
+                this.columnmaster_corte_largo = base.Columns["master_corte_largo"];
+                this.columnmaster_cortes_ancho = base.Columns["master_cortes_ancho"];
+                this.columnmaster_vueltas = base.Columns["master_vueltas"];
+                this.columnmaster_cant_rollos = base.Columns["master_cant_rollos"];
+                this.columnproducto = base.Columns["producto"];
+                this.columnmaster_width_real = base.Columns["master_width_real"];
+                this.columnmaster_length_real = base.Columns["master_length_real"];
+                this.columnmaster_width_restante = base.Columns["master_width_restante"];
+                this.columnmaster_length_restabnte = base.Columns["master_length_restabnte"];
+                this.columnstep = base.Columns["step"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3249,8 +3427,6 @@ namespace Ritrama2025.Reports {
                 base.Columns.Add(this.columnfecha_produccion);
                 this.columnproduct_id = new global::System.Data.DataColumn("product_id", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnproduct_id);
-                this.columnproduct_name = new global::System.Data.DataColumn("product_name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnproduct_name);
                 this.columnunique_code = new global::System.Data.DataColumn("unique_code", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnunique_code);
                 this.columnroll_number = new global::System.Data.DataColumn("roll_number", typeof(int), null, global::System.Data.MappingType.Element);
@@ -3271,21 +3447,45 @@ namespace Ritrama2025.Reports {
                 base.Columns.Add(this.columnstatus);
                 this.columnoperador = new global::System.Data.DataColumn("operador", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnoperador);
-                this.columncustomer_name = new global::System.Data.DataColumn("customer_name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncustomer_name);
+                this.columnCustomer_Name = new global::System.Data.DataColumn("Customer_Name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCustomer_Name);
+                this.columnmaster_width = new global::System.Data.DataColumn("master_width", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmaster_width);
+                this.columnmaster_length = new global::System.Data.DataColumn("master_length", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmaster_length);
+                this.columnmaster_corte_largo = new global::System.Data.DataColumn("master_corte_largo", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmaster_corte_largo);
+                this.columnmaster_cortes_ancho = new global::System.Data.DataColumn("master_cortes_ancho", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmaster_cortes_ancho);
+                this.columnmaster_vueltas = new global::System.Data.DataColumn("master_vueltas", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmaster_vueltas);
+                this.columnmaster_cant_rollos = new global::System.Data.DataColumn("master_cant_rollos", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmaster_cant_rollos);
+                this.columnproducto = new global::System.Data.DataColumn("producto", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnproducto);
+                this.columnmaster_width_real = new global::System.Data.DataColumn("master_width_real", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmaster_width_real);
+                this.columnmaster_length_real = new global::System.Data.DataColumn("master_length_real", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmaster_length_real);
+                this.columnmaster_width_restante = new global::System.Data.DataColumn("master_width_restante", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmaster_width_restante);
+                this.columnmaster_length_restabnte = new global::System.Data.DataColumn("master_length_restabnte", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmaster_length_restabnte);
+                this.columnstep = new global::System.Data.DataColumn("step", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstep);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnnumero}, true));
                 this.columnnumero.AllowDBNull = false;
                 this.columnnumero.Unique = true;
                 this.columnfecha.AllowDBNull = false;
                 this.columnproduct_id.MaxLength = 25;
-                this.columnproduct_name.MaxLength = 200;
                 this.columnunique_code.MaxLength = 50;
                 this.columnroll_id.MaxLength = 50;
                 this.columncode_person.MaxLength = 60;
                 this.columnstatus.MaxLength = 50;
                 this.columnoperador.MaxLength = 50;
-                this.columncustomer_name.MaxLength = 200;
+                this.columnCustomer_Name.MaxLength = 200;
+                this.columnproducto.MaxLength = 200;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3372,6 +3572,339 @@ namespace Ritrama2025.Reports {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "orden_corteDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class CortesDataTable : global::System.Data.TypedTableBase<CortesRow> {
+            
+            private global::System.Data.DataColumn columnnum;
+            
+            private global::System.Data.DataColumn columnwidth;
+            
+            private global::System.Data.DataColumn columnlenght;
+            
+            private global::System.Data.DataColumn columnmsi;
+            
+            private global::System.Data.DataColumn columnorden;
+            
+            private global::System.Data.DataColumn columncode_person;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public CortesDataTable() {
+                this.TableName = "Cortes";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal CortesDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [System.ObsoleteAttribute("This API supports obsolete formatter-based serialization. It should not be called" +
+                " or extended by application code.", DiagnosticId="SYSLIB0051")]
+            protected CortesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn numColumn {
+                get {
+                    return this.columnnum;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn widthColumn {
+                get {
+                    return this.columnwidth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn lenghtColumn {
+                get {
+                    return this.columnlenght;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn msiColumn {
+                get {
+                    return this.columnmsi;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ordenColumn {
+                get {
+                    return this.columnorden;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn code_personColumn {
+                get {
+                    return this.columncode_person;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public CortesRow this[int index] {
+                get {
+                    return ((CortesRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event CortesRowChangeEventHandler CortesRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event CortesRowChangeEventHandler CortesRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event CortesRowChangeEventHandler CortesRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event CortesRowChangeEventHandler CortesRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AddCortesRow(CortesRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public CortesRow AddCortesRow(int num, decimal width, decimal lenght, decimal msi, int orden, string code_person) {
+                CortesRow rowCortesRow = ((CortesRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        num,
+                        width,
+                        lenght,
+                        msi,
+                        orden,
+                        code_person};
+                rowCortesRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowCortesRow);
+                return rowCortesRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public CortesRow FindBynumorden(int num, int orden) {
+                return ((CortesRow)(this.Rows.Find(new object[] {
+                            num,
+                            orden})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                CortesDataTable cln = ((CortesDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new CortesDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columnnum = base.Columns["num"];
+                this.columnwidth = base.Columns["width"];
+                this.columnlenght = base.Columns["lenght"];
+                this.columnmsi = base.Columns["msi"];
+                this.columnorden = base.Columns["orden"];
+                this.columncode_person = base.Columns["code_person"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columnnum = new global::System.Data.DataColumn("num", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnnum);
+                this.columnwidth = new global::System.Data.DataColumn("width", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnwidth);
+                this.columnlenght = new global::System.Data.DataColumn("lenght", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnlenght);
+                this.columnmsi = new global::System.Data.DataColumn("msi", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmsi);
+                this.columnorden = new global::System.Data.DataColumn("orden", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnorden);
+                this.columncode_person = new global::System.Data.DataColumn("code_person", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncode_person);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnnum,
+                                this.columnorden}, true));
+                this.columnnum.AllowDBNull = false;
+                this.columnorden.AllowDBNull = false;
+                this.columncode_person.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public CortesRow NewCortesRow() {
+                return ((CortesRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new CortesRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(CortesRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.CortesRowChanged != null)) {
+                    this.CortesRowChanged(this, new CortesRowChangeEvent(((CortesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.CortesRowChanging != null)) {
+                    this.CortesRowChanging(this, new CortesRowChangeEvent(((CortesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.CortesRowDeleted != null)) {
+                    this.CortesRowDeleted(this, new CortesRowChangeEvent(((CortesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.CortesRowDeleting != null)) {
+                    this.CortesRowDeleting(this, new CortesRowChangeEvent(((CortesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemoveCortesRow(CortesRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                DsConduce ds = new DsConduce();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "CortesDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -5806,22 +6339,6 @@ namespace Ritrama2025.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string product_name {
-                get {
-                    try {
-                        return ((string)(this[this.tableorden_corte.product_nameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'product_name\' de la tabla \'orden_corte\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableorden_corte.product_nameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string unique_code {
                 get {
                     try {
@@ -5982,17 +6499,212 @@ namespace Ritrama2025.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string customer_name {
+            public string Customer_Name {
                 get {
                     try {
-                        return ((string)(this[this.tableorden_corte.customer_nameColumn]));
+                        return ((string)(this[this.tableorden_corte.Customer_NameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'customer_name\' de la tabla \'orden_corte\' es DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Customer_Name\' de la tabla \'orden_corte\' es DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableorden_corte.customer_nameColumn] = value;
+                    this[this.tableorden_corte.Customer_NameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal master_width {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableorden_corte.master_widthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'master_width\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.master_widthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal master_length {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableorden_corte.master_lengthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'master_length\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.master_lengthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal master_corte_largo {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableorden_corte.master_corte_largoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'master_corte_largo\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.master_corte_largoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int master_cortes_ancho {
+                get {
+                    try {
+                        return ((int)(this[this.tableorden_corte.master_cortes_anchoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'master_cortes_ancho\' de la tabla \'orden_corte\' es DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.master_cortes_anchoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int master_vueltas {
+                get {
+                    try {
+                        return ((int)(this[this.tableorden_corte.master_vueltasColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'master_vueltas\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.master_vueltasColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int master_cant_rollos {
+                get {
+                    try {
+                        return ((int)(this[this.tableorden_corte.master_cant_rollosColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'master_cant_rollos\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.master_cant_rollosColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string producto {
+                get {
+                    try {
+                        return ((string)(this[this.tableorden_corte.productoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'producto\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.productoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal master_width_real {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableorden_corte.master_width_realColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'master_width_real\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.master_width_realColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal master_length_real {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableorden_corte.master_length_realColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'master_length_real\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.master_length_realColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal master_width_restante {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableorden_corte.master_width_restanteColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'master_width_restante\' de la tabla \'orden_corte\' es DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.master_width_restanteColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal master_length_restabnte {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableorden_corte.master_length_restabnteColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'master_length_restabnte\' de la tabla \'orden_corte\' es DBN" +
+                                "ull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.master_length_restabnteColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int step {
+                get {
+                    try {
+                        return ((int)(this[this.tableorden_corte.stepColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'step\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.stepColumn] = value;
                 }
             }
             
@@ -6018,18 +6730,6 @@ namespace Ritrama2025.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setproduct_idNull() {
                 this[this.tableorden_corte.product_idColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool Isproduct_nameNull() {
-                return this.IsNull(this.tableorden_corte.product_nameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void Setproduct_nameNull() {
-                this[this.tableorden_corte.product_nameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6154,14 +6854,307 @@ namespace Ritrama2025.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool Iscustomer_nameNull() {
-                return this.IsNull(this.tableorden_corte.customer_nameColumn);
+            public bool IsCustomer_NameNull() {
+                return this.IsNull(this.tableorden_corte.Customer_NameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void Setcustomer_nameNull() {
-                this[this.tableorden_corte.customer_nameColumn] = global::System.Convert.DBNull;
+            public void SetCustomer_NameNull() {
+                this[this.tableorden_corte.Customer_NameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Ismaster_widthNull() {
+                return this.IsNull(this.tableorden_corte.master_widthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setmaster_widthNull() {
+                this[this.tableorden_corte.master_widthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Ismaster_lengthNull() {
+                return this.IsNull(this.tableorden_corte.master_lengthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setmaster_lengthNull() {
+                this[this.tableorden_corte.master_lengthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Ismaster_corte_largoNull() {
+                return this.IsNull(this.tableorden_corte.master_corte_largoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setmaster_corte_largoNull() {
+                this[this.tableorden_corte.master_corte_largoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Ismaster_cortes_anchoNull() {
+                return this.IsNull(this.tableorden_corte.master_cortes_anchoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setmaster_cortes_anchoNull() {
+                this[this.tableorden_corte.master_cortes_anchoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Ismaster_vueltasNull() {
+                return this.IsNull(this.tableorden_corte.master_vueltasColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setmaster_vueltasNull() {
+                this[this.tableorden_corte.master_vueltasColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Ismaster_cant_rollosNull() {
+                return this.IsNull(this.tableorden_corte.master_cant_rollosColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setmaster_cant_rollosNull() {
+                this[this.tableorden_corte.master_cant_rollosColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsproductoNull() {
+                return this.IsNull(this.tableorden_corte.productoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetproductoNull() {
+                this[this.tableorden_corte.productoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Ismaster_width_realNull() {
+                return this.IsNull(this.tableorden_corte.master_width_realColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setmaster_width_realNull() {
+                this[this.tableorden_corte.master_width_realColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Ismaster_length_realNull() {
+                return this.IsNull(this.tableorden_corte.master_length_realColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setmaster_length_realNull() {
+                this[this.tableorden_corte.master_length_realColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Ismaster_width_restanteNull() {
+                return this.IsNull(this.tableorden_corte.master_width_restanteColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setmaster_width_restanteNull() {
+                this[this.tableorden_corte.master_width_restanteColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Ismaster_length_restabnteNull() {
+                return this.IsNull(this.tableorden_corte.master_length_restabnteColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setmaster_length_restabnteNull() {
+                this[this.tableorden_corte.master_length_restabnteColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsstepNull() {
+                return this.IsNull(this.tableorden_corte.stepColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetstepNull() {
+                this[this.tableorden_corte.stepColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class CortesRow : global::System.Data.DataRow {
+            
+            private CortesDataTable tableCortes;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal CortesRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableCortes = ((CortesDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int num {
+                get {
+                    return ((int)(this[this.tableCortes.numColumn]));
+                }
+                set {
+                    this[this.tableCortes.numColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal width {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableCortes.widthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'width\' de la tabla \'Cortes\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCortes.widthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal lenght {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableCortes.lenghtColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'lenght\' de la tabla \'Cortes\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCortes.lenghtColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal msi {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableCortes.msiColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'msi\' de la tabla \'Cortes\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCortes.msiColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int orden {
+                get {
+                    return ((int)(this[this.tableCortes.ordenColumn]));
+                }
+                set {
+                    this[this.tableCortes.ordenColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string code_person {
+                get {
+                    try {
+                        return ((string)(this[this.tableCortes.code_personColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'code_person\' de la tabla \'Cortes\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCortes.code_personColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IswidthNull() {
+                return this.IsNull(this.tableCortes.widthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetwidthNull() {
+                this[this.tableCortes.widthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IslenghtNull() {
+                return this.IsNull(this.tableCortes.lenghtColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetlenghtNull() {
+                this[this.tableCortes.lenghtColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsmsiNull() {
+                return this.IsNull(this.tableCortes.msiColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetmsiNull() {
+                this[this.tableCortes.msiColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Iscode_personNull() {
+                return this.IsNull(this.tableCortes.code_personColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setcode_personNull() {
+                this[this.tableCortes.code_personColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -6321,6 +7314,40 @@ namespace Ritrama2025.Reports {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public orden_corteRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class CortesRowChangeEvent : global::System.EventArgs {
+            
+            private CortesRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public CortesRowChangeEvent(CortesRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public CortesRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -7310,7 +8337,6 @@ WHERE (a.numero = @Orden_MatPrima)";
             tableMapping.ColumnMappings.Add("fecha", "fecha");
             tableMapping.ColumnMappings.Add("fecha_produccion", "fecha_produccion");
             tableMapping.ColumnMappings.Add("product_id", "product_id");
-            tableMapping.ColumnMappings.Add("product_name", "product_name");
             tableMapping.ColumnMappings.Add("unique_code", "unique_code");
             tableMapping.ColumnMappings.Add("roll_number", "roll_number");
             tableMapping.ColumnMappings.Add("splice", "splice");
@@ -7321,7 +8347,19 @@ WHERE (a.numero = @Orden_MatPrima)";
             tableMapping.ColumnMappings.Add("code_person", "code_person");
             tableMapping.ColumnMappings.Add("status", "status");
             tableMapping.ColumnMappings.Add("operador", "operador");
-            tableMapping.ColumnMappings.Add("customer_name", "customer_name");
+            tableMapping.ColumnMappings.Add("Customer_Name", "Customer_Name");
+            tableMapping.ColumnMappings.Add("master_width", "master_width");
+            tableMapping.ColumnMappings.Add("master_length", "master_length");
+            tableMapping.ColumnMappings.Add("master_corte_largo", "master_corte_largo");
+            tableMapping.ColumnMappings.Add("master_cortes_ancho", "master_cortes_ancho");
+            tableMapping.ColumnMappings.Add("master_vueltas", "master_vueltas");
+            tableMapping.ColumnMappings.Add("master_cant_rollos", "master_cant_rollos");
+            tableMapping.ColumnMappings.Add("producto", "producto");
+            tableMapping.ColumnMappings.Add("master_width_real", "master_width_real");
+            tableMapping.ColumnMappings.Add("master_length_real", "master_length_real");
+            tableMapping.ColumnMappings.Add("master_width_restante", "master_width_restante");
+            tableMapping.ColumnMappings.Add("master_length_restabnte", "master_length_restabnte");
+            tableMapping.ColumnMappings.Add("step", "step");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -7339,13 +8377,14 @@ WHERE (a.numero = @Orden_MatPrima)";
             this._commandCollection = new global::Microsoft.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::Microsoft.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT a.numero, a.fecha, a.fecha_produccion,a.product_id,c.product_name,b.unique_code,b.roll_number,b.splice,b.width,b.large,b.msi,b.roll_id,b.code_person,b.status,d.nombre as operador,e.customer_name
-FROM orden_corte AS a 
-LEFT OUTER JOIN
-    rolls_details AS b ON a.numero = b.numero
-left join producto c on a.product_id = c.product_id
-left join operadores d on a.operador_id = d.operador_id
-left join customer e on a.customer_id = e.customer_id
+            this._commandCollection[0].CommandText = @"SELECT a.numero, a.fecha, a.fecha_produccion, a.product_id, c.Product_Name AS producto, b.unique_code, b.roll_number, b.splice, b.width, b.large, b.msi, b.roll_id, b.code_person, b.status, d.nombre AS operador, 
+    e.Customer_Name, a.width_1 AS master_width, a.lenght_1 AS master_length, a.longitud_cortar AS master_corte_largo, a.cortes_ancho AS master_cortes_ancho, a.cortes_largo AS master_vueltas, 
+    a.cant_rollos AS master_cant_rollos,util1_real_width as master_width_real, util1_real_lenght as master_length_real,rest1_width as master_width_restante,rest1_lenght as master_length_restabnte,step
+FROM orden_corte AS a LEFT OUTER JOIN
+    rolls_details AS b ON a.numero = b.numero LEFT OUTER JOIN
+    producto AS c ON a.product_id = c.Product_ID LEFT OUTER JOIN
+    operadores AS d ON a.operador_id = d.operador_id LEFT OUTER JOIN
+    Customer AS e ON a.customer_id = e.customer_id
 WHERE (a.numero = @numero_oc)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             global::Microsoft.Data.SqlClient.SqlParameter param = new global::Microsoft.Data.SqlClient.SqlParameter();
@@ -7386,6 +8425,674 @@ WHERE (a.numero = @numero_oc)";
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class CortesTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::Microsoft.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::Microsoft.Data.SqlClient.SqlConnection _connection;
+        
+        private global::Microsoft.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::Microsoft.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public CortesTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected internal global::Microsoft.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::Microsoft.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::Microsoft.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::Microsoft.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected global::Microsoft.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::Microsoft.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "Cortes";
+            tableMapping.ColumnMappings.Add("num", "num");
+            tableMapping.ColumnMappings.Add("width", "width");
+            tableMapping.ColumnMappings.Add("lenght", "lenght");
+            tableMapping.ColumnMappings.Add("msi", "msi");
+            tableMapping.ColumnMappings.Add("orden", "orden");
+            tableMapping.ColumnMappings.Add("code_person", "code_person");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::Microsoft.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Cortes] WHERE (([num] = @Original_num) AND ((@IsNull_width = 1 AND [width] IS NULL) OR ([width] = @Original_width)) AND ((@IsNull_lenght = 1 AND [lenght] IS NULL) OR ([lenght] = @Original_lenght)) AND ((@IsNull_msi = 1 AND [msi] IS NULL) OR ([msi] = @Original_msi)) AND ([orden] = @Original_orden) AND ((@IsNull_code_person = 1 AND [code_person] IS NULL) OR ([code_person] = @Original_code_person)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            global::Microsoft.Data.SqlClient.SqlParameter param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@Original_num";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SqlDbType = global::System.Data.SqlDbType.Int;
+            param.IsNullable = true;
+            param.SourceColumn = "num";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.DeleteCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@IsNull_width";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SqlDbType = global::System.Data.SqlDbType.Int;
+            param.IsNullable = true;
+            param.SourceColumn = "width";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            param.SourceColumnNullMapping = true;
+            this._adapter.DeleteCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@Original_width";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.SqlDbType = global::System.Data.SqlDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "width";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.DeleteCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@IsNull_lenght";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SqlDbType = global::System.Data.SqlDbType.Int;
+            param.IsNullable = true;
+            param.SourceColumn = "lenght";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            param.SourceColumnNullMapping = true;
+            this._adapter.DeleteCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@Original_lenght";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.SqlDbType = global::System.Data.SqlDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "lenght";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.DeleteCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@IsNull_msi";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SqlDbType = global::System.Data.SqlDbType.Int;
+            param.IsNullable = true;
+            param.SourceColumn = "msi";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            param.SourceColumnNullMapping = true;
+            this._adapter.DeleteCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@Original_msi";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.SqlDbType = global::System.Data.SqlDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "msi";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.DeleteCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@Original_orden";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SqlDbType = global::System.Data.SqlDbType.Int;
+            param.IsNullable = true;
+            param.SourceColumn = "orden";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.DeleteCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@IsNull_code_person";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SqlDbType = global::System.Data.SqlDbType.Int;
+            param.IsNullable = true;
+            param.SourceColumn = "code_person";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            param.SourceColumnNullMapping = true;
+            this._adapter.DeleteCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@Original_code_person";
+            param.SqlDbType = global::System.Data.SqlDbType.NVarChar;
+            param.IsNullable = true;
+            param.SourceColumn = "code_person";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand = new global::Microsoft.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [Cortes] ([num], [width], [lenght], [msi], [orden], [code_person]) VA" +
+                "LUES (@num, @width, @lenght, @msi, @orden, @code_person);\r\nSELECT num, width, le" +
+                "nght, msi, orden, code_person FROM Cortes WHERE (num = @num) AND (orden = @orden" +
+                ")";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@num";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SqlDbType = global::System.Data.SqlDbType.Int;
+            param.IsNullable = true;
+            param.SourceColumn = "num";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@width";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.SqlDbType = global::System.Data.SqlDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "width";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@lenght";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.SqlDbType = global::System.Data.SqlDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "lenght";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@msi";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.SqlDbType = global::System.Data.SqlDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "msi";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@orden";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SqlDbType = global::System.Data.SqlDbType.Int;
+            param.IsNullable = true;
+            param.SourceColumn = "orden";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@code_person";
+            param.SqlDbType = global::System.Data.SqlDbType.NVarChar;
+            param.IsNullable = true;
+            param.SourceColumn = "code_person";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            this._adapter.UpdateCommand = new global::Microsoft.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [Cortes] SET [num] = @num, [width] = @width, [lenght] = @lenght, [msi] = @msi, [orden] = @orden, [code_person] = @code_person WHERE (([num] = @Original_num) AND ((@IsNull_width = 1 AND [width] IS NULL) OR ([width] = @Original_width)) AND ((@IsNull_lenght = 1 AND [lenght] IS NULL) OR ([lenght] = @Original_lenght)) AND ((@IsNull_msi = 1 AND [msi] IS NULL) OR ([msi] = @Original_msi)) AND ([orden] = @Original_orden) AND ((@IsNull_code_person = 1 AND [code_person] IS NULL) OR ([code_person] = @Original_code_person)));
+SELECT num, width, lenght, msi, orden, code_person FROM Cortes WHERE (num = @num) AND (orden = @orden)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@num";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SqlDbType = global::System.Data.SqlDbType.Int;
+            param.IsNullable = true;
+            param.SourceColumn = "num";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@width";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.SqlDbType = global::System.Data.SqlDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "width";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@lenght";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.SqlDbType = global::System.Data.SqlDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "lenght";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@msi";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.SqlDbType = global::System.Data.SqlDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "msi";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@orden";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SqlDbType = global::System.Data.SqlDbType.Int;
+            param.IsNullable = true;
+            param.SourceColumn = "orden";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@code_person";
+            param.SqlDbType = global::System.Data.SqlDbType.NVarChar;
+            param.IsNullable = true;
+            param.SourceColumn = "code_person";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@Original_num";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SqlDbType = global::System.Data.SqlDbType.Int;
+            param.IsNullable = true;
+            param.SourceColumn = "num";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@IsNull_width";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SqlDbType = global::System.Data.SqlDbType.Int;
+            param.IsNullable = true;
+            param.SourceColumn = "width";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            param.SourceColumnNullMapping = true;
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@Original_width";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.SqlDbType = global::System.Data.SqlDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "width";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@IsNull_lenght";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SqlDbType = global::System.Data.SqlDbType.Int;
+            param.IsNullable = true;
+            param.SourceColumn = "lenght";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            param.SourceColumnNullMapping = true;
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@Original_lenght";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.SqlDbType = global::System.Data.SqlDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "lenght";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@IsNull_msi";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SqlDbType = global::System.Data.SqlDbType.Int;
+            param.IsNullable = true;
+            param.SourceColumn = "msi";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            param.SourceColumnNullMapping = true;
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@Original_msi";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.SqlDbType = global::System.Data.SqlDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "msi";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@Original_orden";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SqlDbType = global::System.Data.SqlDbType.Int;
+            param.IsNullable = true;
+            param.SourceColumn = "orden";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@IsNull_code_person";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SqlDbType = global::System.Data.SqlDbType.Int;
+            param.IsNullable = true;
+            param.SourceColumn = "code_person";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            param.SourceColumnNullMapping = true;
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@Original_code_person";
+            param.SqlDbType = global::System.Data.SqlDbType.NVarChar;
+            param.IsNullable = true;
+            param.SourceColumn = "code_person";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.UpdateCommand.Parameters.Add(param);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::Microsoft.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = "Data Source=DATABASE-CENTER\\RITRAMASRV01;Initial Catalog=RITRAMA2;User ID=Npino;P" +
+                "assword=123;Encrypt=False;TrustServerCertificate=True";
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::Microsoft.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::Microsoft.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT num, width, lenght, msi, orden, code_person FROM Cortes WHERE orden=@numer" +
+                "o_oc";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            global::Microsoft.Data.SqlClient.SqlParameter param = new global::Microsoft.Data.SqlClient.SqlParameter();
+            param.ParameterName = "@numero_oc";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SqlDbType = global::System.Data.SqlDbType.Int;
+            param.Size = 4;
+            param.IsNullable = true;
+            param.SourceColumn = "orden";
+            this._commandCollection[0].Parameters.Add(param);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(DsConduce.CortesDataTable dataTable, int numero_oc) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(numero_oc));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual DsConduce.CortesDataTable GetData(int numero_oc) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(numero_oc));
+            DsConduce.CortesDataTable dataTable = new DsConduce.CortesDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(DsConduce.CortesDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(DsConduce dataSet) {
+            return this.Adapter.Update(dataSet, "Cortes");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_num, global::System.Nullable<decimal> Original_width, global::System.Nullable<decimal> Original_lenght, global::System.Nullable<decimal> Original_msi, int Original_orden, string Original_code_person) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_num));
+            if ((Original_width.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_width.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((Original_lenght.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((decimal)(Original_lenght.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((Original_msi.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((decimal)(Original_msi.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.DeleteCommand.Parameters[7].Value = ((int)(Original_orden));
+            if ((Original_code_person == null)) {
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((string)(Original_code_person));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(int num, global::System.Nullable<decimal> width, global::System.Nullable<decimal> lenght, global::System.Nullable<decimal> msi, int orden, string code_person) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(num));
+            if ((width.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(width.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((lenght.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(lenght.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((msi.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(msi.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.InsertCommand.Parameters[4].Value = ((int)(orden));
+            if ((code_person == null)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(code_person));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(int num, global::System.Nullable<decimal> width, global::System.Nullable<decimal> lenght, global::System.Nullable<decimal> msi, int orden, string code_person, int Original_num, global::System.Nullable<decimal> Original_width, global::System.Nullable<decimal> Original_lenght, global::System.Nullable<decimal> Original_msi, int Original_orden, string Original_code_person) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(num));
+            if ((width.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(width.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((lenght.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(lenght.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((msi.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(msi.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(orden));
+            if ((code_person == null)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(code_person));
+            }
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_num));
+            if ((Original_width.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(Original_width.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((Original_lenght.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(Original_lenght.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            if ((Original_msi.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(Original_msi.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_orden));
+            if ((Original_code_person == null)) {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_code_person));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(global::System.Nullable<decimal> width, global::System.Nullable<decimal> lenght, global::System.Nullable<decimal> msi, string code_person, int Original_num, global::System.Nullable<decimal> Original_width, global::System.Nullable<decimal> Original_lenght, global::System.Nullable<decimal> Original_msi, int Original_orden, string Original_code_person) {
+            return this.Update(Original_num, width, lenght, msi, Original_orden, code_person, Original_num, Original_width, Original_lenght, Original_msi, Original_orden, Original_code_person);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -7396,6 +9103,8 @@ WHERE (a.numero = @numero_oc)";
     public partial class TableAdapterManager : global::System.ComponentModel.Component {
         
         private UpdateOrderOption _updateOrder;
+        
+        private CortesTableAdapter _cortesTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -7409,6 +9118,20 @@ WHERE (a.numero = @numero_oc)";
             }
             set {
                 this._updateOrder = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public CortesTableAdapter CortesTableAdapter {
+            get {
+                return this._cortesTableAdapter;
+            }
+            set {
+                this._cortesTableAdapter = value;
             }
         }
         
@@ -7431,6 +9154,10 @@ WHERE (a.numero = @numero_oc)";
                 if ((this._connection != null)) {
                     return this._connection;
                 }
+                if (((this._cortesTableAdapter != null) 
+                            && (this._cortesTableAdapter.Connection != null))) {
+                    return this._cortesTableAdapter.Connection;
+                }
                 return null;
             }
             set {
@@ -7444,6 +9171,9 @@ WHERE (a.numero = @numero_oc)";
         public int TableAdapterInstanceCount {
             get {
                 int count = 0;
+                if ((this._cortesTableAdapter != null)) {
+                    count = (count + 1);
+                }
                 return count;
             }
         }
@@ -7455,6 +9185,15 @@ WHERE (a.numero = @numero_oc)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateUpdatedRows(DsConduce dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._cortesTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Cortes.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._cortesTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             return result;
         }
         
@@ -7465,6 +9204,14 @@ WHERE (a.numero = @numero_oc)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateInsertedRows(DsConduce dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._cortesTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Cortes.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._cortesTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             return result;
         }
         
@@ -7475,6 +9222,14 @@ WHERE (a.numero = @numero_oc)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateDeletedRows(DsConduce dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
+            if ((this._cortesTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Cortes.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._cortesTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             return result;
         }
         
@@ -7514,6 +9269,11 @@ WHERE (a.numero = @numero_oc)";
             if ((dataSet.HasChanges() == false)) {
                 return 0;
             }
+            if (((this._cortesTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._cortesTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
+                        "sma cadena de conexión.");
+            }
             global::System.Data.IDbConnection workConnection = this.Connection;
             if ((workConnection == null)) {
                 throw new global::System.ApplicationException("TableAdapterManager no contiene información de conexión. Establezca cada propieda" +
@@ -7546,6 +9306,15 @@ WHERE (a.numero = @numero_oc)";
             try {
                 // ---- Prepare for update -----------
                 //
+                if ((this._cortesTableAdapter != null)) {
+                    revertConnections.Add(this._cortesTableAdapter, this._cortesTableAdapter.Connection);
+                    this._cortesTableAdapter.Connection = ((global::Microsoft.Data.SqlClient.SqlConnection)(workConnection));
+                    this._cortesTableAdapter.Transaction = ((global::Microsoft.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._cortesTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._cortesTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._cortesTableAdapter.Adapter);
+                    }
+                }
                 // 
                 //---- Perform updates -----------
                 //
@@ -7603,6 +9372,10 @@ WHERE (a.numero = @numero_oc)";
             finally {
                 if (workConnOpened) {
                     workConnection.Close();
+                }
+                if ((this._cortesTableAdapter != null)) {
+                    this._cortesTableAdapter.Connection = ((global::Microsoft.Data.SqlClient.SqlConnection)(revertConnections[this._cortesTableAdapter]));
+                    this._cortesTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

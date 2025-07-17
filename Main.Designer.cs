@@ -43,9 +43,12 @@
             bot_inventario = new Button();
             bot_despacho = new Button();
             bot_ordencorte = new Button();
+            splitContainer1 = new SplitContainer();
             panel1.SuspendLayout();
             panel_foto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -116,6 +119,7 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
             // 
             // button4
             // 
@@ -256,12 +260,30 @@
             bot_ordencorte.UseVisualStyleBackColor = true;
             bot_ordencorte.Click += Bot_ordencorte_Click;
             // 
+            // splitContainer1
+            // 
+            splitContainer1.Dock = DockStyle.Fill;
+            splitContainer1.Location = new Point(221, 0);
+            splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.BackColor = SystemColors.ControlDark;
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.BackColor = SystemColors.ScrollBar;
+            splitContainer1.Size = new Size(1058, 924);
+            splitContainer1.SplitterDistance = 854;
+            splitContainer1.TabIndex = 2;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
-            ClientSize = new Size(935, 924);
+            ClientSize = new Size(1279, 924);
+            Controls.Add(splitContainer1);
             Controls.Add(panel1);
             Font = new Font("Segoe UI", 8.830189F);
             FormBorderStyle = FormBorderStyle.Fixed3D;
@@ -275,6 +297,8 @@
             panel1.ResumeLayout(false);
             panel_foto.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -294,5 +318,6 @@
         private PictureBox pictureBox1;
         private Label lbl_user_name;
         private Button OPC_MENU_LABELS;
+        private SplitContainer splitContainer1;
     }
 }

@@ -1,9 +1,8 @@
 ﻿using Ritrama2025.Forms;
-using System.ComponentModel;
-using Ritrama2025.Services.ServiceLocator;
-using System.Runtime.CompilerServices;
-using Microsoft.Extensions.DependencyInjection;
 using Ritrama2025.Helpers;
+using Ritrama2025.Services.ServiceLocator;
+using System.ComponentModel;
+using System.Windows.Forms;
 
 
 namespace Ritrama2025
@@ -27,40 +26,40 @@ namespace Ritrama2025
             PropertyGrid propertyGrid = new()
             {
                 SelectedObject = new Configuration(),
-                Size = new Size(400, 600),
-                Dock = DockStyle.Right
+                Size = new Size(300, 600),
+                Dock = DockStyle.Fill
             };
-            Controls.Add(propertyGrid);
+            this.splitContainer1.Panel2.Controls.Add(propertyGrid);
         }
 
         private void Bot_despacho_Click(object sender, EventArgs e)
         {
-            FormManager.ShowForm<FrmDespacho>(this);
-
+            splitContainer1.Panel1.Controls.Add(FormManager.ShowForm<FrmDespacho>(this));
         }
 
         private void Bot_ordencorte_Click(object sender, EventArgs e)
         {
-            FormManager.ShowForm<FrmOrdenCorte>(this);
+            splitContainer1.Panel1.Controls.Add(FormManager.ShowForm<FrmOrdenCorte>(this));        
         }
 
         private void Bot_recepciones_Click(object sender, EventArgs e)
         {
-            FormManager.ShowForm<FrmMateriaPrima>(this);
+            splitContainer1.Panel1.Controls.Add(FormManager.ShowForm<FrmMateriaPrima>(this));
         }
 
         private void OPC_MENU_LABELS_Click(object sender, EventArgs e)
         {
-            var FormCodeBar = ServiceLocator.Get<FrmCodeBarLabel>();
-            FormCodeBar.MdiParent = this;
-            FormCodeBar.Show();
+            splitContainer1.Panel1.Controls.Add(FormManager.ShowForm<FrmCodeBarLabel>(this));
         }
 
         private void bot_products_Click(object sender, EventArgs e)
         {
-            var formProducts = ServiceLocator.Get<FrmProductos>();
-            formProducts.MdiParent = this;
-            formProducts.Show();
+            splitContainer1.Panel1.Controls.Add(FormManager.ShowForm<FrmProductos>(this));   
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
@@ -132,20 +131,20 @@ namespace Ritrama2025
         [DisplayName("Calcular MSI")]
         [Description("Factor necesario para calcular los msi, la formala es: Ancho * Largo * cantidad entre 83.3333333333333 [Son 14 Decimales]")]
 
-        public Double CONST_MSI { get; set; } = 83.33333333333333;
+        public Double CONST_MSI { get; set; } = 83.33;
 
         [Category("Version App.")]
         [DisplayName("Numero Compilacion:")]
         [Description("Datos principalaes de compilacion de la aplicacion de escritorio")]
-        public string Version { get; set; } = "1.1";
+        public string Version { get; set; } = "1.3";
         [Category("Version App.")]
         [DisplayName("Fecha Compilación")]
         [Description("Fecha y Compilacion de la aplicación.")]
-        public string Compilation_date { get; set; } = "12-06-2025 : 11:03 a.m.";
+        public string Compilation_date { get; set; } = "16-07-2025 : 02:20 p.m.";
         [Category("Version App.")]
         [DisplayName("FrameWork:")]
         [Description("Versión .Net")]
-        public string VersionNet { get; set; } = ".NetCore 9";
+        public string VersionNet { get; set; } = ".NET 9";
     }
     [TypeConverter(typeof(ExpandableObjectConverter))]
     public class ConnectionSettings

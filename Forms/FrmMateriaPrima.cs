@@ -176,7 +176,7 @@ namespace Ritrama2025.Forms
             chk_DocumentClose.DataBindings.Clear();
             chk_DocumentClose.Checked = false;
             chk_anulado.Checked = false;
-            ParentRow = (DataRowView)Bs.AddNew();
+            ParentRow = (DataRowView)Bs.AddNew()!;
             ParentRow.BeginEdit();
             ParentRow["numero"] = Services.LoadConsecOrden("CMP");
             ParentRow["total_cantidad"] = 0;
@@ -269,7 +269,7 @@ namespace Ritrama2025.Forms
             //Insertar el row en el GridItems.
             if (frmInsertRows.Producto != null)
             {
-                ChildsRows = (DataRowView)BsDetalle.AddNew();
+                ChildsRows = (DataRowView)BsDetalle.AddNew()!;
                 ChildsRows.BeginEdit();
                 ChildsRows["numero"] = txt_numeroOrden.Text;
                 ChildsRows["product_id"] = frmInsertRows.Producto.Product_Id;
@@ -287,7 +287,7 @@ namespace Ritrama2025.Forms
 
 
 
-                ChildsRows.Row.SetParentRow(((DataRowView)Bs.Current).Row, Ds.Relations["FK_MASTER_DETAILS"]);
+                ChildsRows.Row.SetParentRow(((DataRowView)Bs.Current!).Row, Ds.Relations["FK_MASTER_DETAILS"]);
                 ChildsRows.EndEdit();
                 ContarFilas();
 
@@ -415,18 +415,18 @@ namespace Ritrama2025.Forms
                 var WidthMaster = Convert.ToDouble(Item.Cells["width"].Value);
                 var LengthMaster = Convert.ToDouble(Item.Cells["length"].Value);
                 var MsiMaster = Convert.ToDouble(Item.Cells["msi"].Value);
-                var RollId = Item.Cells["rollid"].Value.ToString()!;
+                var RollId = Item.Cells["rollid"].Value!.ToString()!;
                 var Splice = Convert.ToInt16(Item.Cells["splice"].Value);
                 var Core = Convert.ToDouble(Item.Cells["core"].Value);
-                var Ubicacion = Item.Cells["ubicacion"].Value.ToString()!;
+                var Ubicacion = Item.Cells["ubicacion"].Value!.ToString()!;
                 var Cantidad_Pedido = Convert.ToInt32(Item.Cells["cant_pedido"].Value);
                 var Cantidad_Real = Convert.ToInt32(Item.Cells["cant_real"].Value);
                 Orden.Items.Add(new OrdenDetailsMP
                 {
                     Numero = txt_numeroOrden.Text,
-                    Product_Id = ProductId.ToString()!,
-                    Product_Name = ProductName.ToString()!,
-                    Product_Type = Product_Type.ToString()!,
+                    Product_Id = ProductId!.ToString()!,
+                    Product_Name = ProductName!.ToString()!,
+                    Product_Type = Product_Type!.ToString()!,
                     Width = WidthMaster,
                     Length = LengthMaster,
                     Msi = MsiMaster,
@@ -445,7 +445,7 @@ namespace Ritrama2025.Forms
         private void btn_cancel_Click(object sender, EventArgs e)
         {
             DataRowView FilaActual;
-            FilaActual = (DataRowView)Bs.Current;
+            FilaActual = (DataRowView)Bs.Current!;
             FilaActual.Row.Delete();
             Bs.EndEdit();
             Bs.Position = Bs.Count;
@@ -517,7 +517,7 @@ namespace Ritrama2025.Forms
             foreach (var fila in filas)
             {
                 if (fila.Cell(1).Value.ToString() == string.Empty) continue; //Si la celda esta vacia, no la agrego.
-                ChildsRows = (DataRowView)BsDetalle.AddNew();
+                ChildsRows = (DataRowView)BsDetalle.AddNew()!;
                 ChildsRows.BeginEdit();
                 ChildsRows["numero"] = txt_numeroOrden.Text;
                 ChildsRows["product_id"] = fila.Cell(1).Value.ToString()!;
@@ -532,7 +532,7 @@ namespace Ritrama2025.Forms
                 ChildsRows["ubicacion"] = "SU";
                 ChildsRows["cant_pedido"] = 1;
                 ChildsRows["cant_real"] = 0;
-                ChildsRows.Row.SetParentRow(((DataRowView)Bs.Current).Row, Ds.Relations["FK_MASTER_DETAILS"]);
+                ChildsRows.Row.SetParentRow(((DataRowView)Bs.Current!).Row, Ds.Relations["FK_MASTER_DETAILS"]);
                 ChildsRows.EndEdit();
             }
             if (GridItems.Rows.Count > 0)
@@ -589,7 +589,7 @@ namespace Ritrama2025.Forms
             if (result == DialogResult.Yes)
             {
                 Services.CloseOrder(txt_numeroOrden.Text);
-                var doc = (DataRowView)Bs.Current;
+                var doc = (DataRowView)Bs.Current!;
                 doc.BeginEdit();
                 doc["CloseDocument"] = true;
                 doc.EndEdit();
@@ -628,7 +628,7 @@ namespace Ritrama2025.Forms
             if (result == DialogResult.Yes)
             {
                 Services.AnularOrden(txt_numeroOrden.Text);
-                var doc = (DataRowView)Bs.Current;
+                var doc = (DataRowView)Bs.Current!;
                 doc.BeginEdit();
                 doc["Anulado"] = true;
                 doc.EndEdit();
@@ -697,7 +697,7 @@ namespace Ritrama2025.Forms
                     MessageBoxIcon.Information);
                 return;
             }
-            var row = (DataRowView)GridItems.CurrentRow.DataBoundItem;
+            var row = (DataRowView)GridItems.CurrentRow.DataBoundItem!;
             if (MessageBox.Show($"Eliminar el producto con Id = {row["product_id"]}?", "Confirmar Borrado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
 
             row.Delete();

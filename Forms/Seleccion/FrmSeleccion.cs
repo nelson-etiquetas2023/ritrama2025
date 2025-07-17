@@ -40,6 +40,7 @@ namespace Ritrama2025.Forms.Seleccion
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Titulo { get; set; } = null!;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
         public string Tipo { get; set; } = null!;
 
         DataView Dv = new();

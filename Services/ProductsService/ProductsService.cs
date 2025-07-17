@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Ritrama2025.Models;
 using Ritrama2025.Services.CommonData;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace Ritrama2025.Services.ProductsService
 {
@@ -102,17 +103,37 @@ namespace Ritrama2025.Services.ProductsService
                 return false;
             }
         }
+        public async Task<bool> Update(Product producto)
+        {
+            
+            try
+            {
+                string sqlQuery = "UPDATE dbo.producto SET Product_Name = @name,Product_Descrip = @descrip,Product_Ref = @reference WHERE product_id = @id";
 
+                var parametros = new List<SqlParameter>
+                {
+                    new SqlParameter("@id", SqlDbType.NVarChar) { Value = producto.Product_id },
+                    new SqlParameter("@name", SqlDbType.NVarChar) { Value = producto.Product_Name},
+                    new SqlParameter("@descrip", SqlDbType.NVarChar) { Value = producto.Product_Description},
+                    new SqlParameter("@reference", SqlDbType.NVarChar) { Value = producto.Referencia},
+                };
+
+                var data = await DataAccess.ExecuteQueryWrite(StringConnex, sqlQuery, parametros, true);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al modificar los datos del producto [Codigo Error:] " + ex.Message);
+                return false;
+            }
+        }
         public bool Anular(string IdProduct)
         {
             return false;
         }
 
 
-        public bool Update(Product producto)
-        {
-            return false;
-        }
+       
 
        
     }

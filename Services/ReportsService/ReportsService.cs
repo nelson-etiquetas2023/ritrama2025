@@ -94,26 +94,39 @@ namespace Ritrama2025.Services.ReportsService.ReportsService
         public void Reporte_Orden_Corte(string numeroOC,Form form,string ReportName,string TitleReport) 
         {
             DataTable dt = new();
+            DataTable dtcortes = new();
             try
             {
-                //Catga de los datos
-                
+                //carga los datos de la orden de corte.
                 using (SqlConnection conn = new(StringConnex))
                 {
                     SqlCommand comando = new()
                     {
                         Connection = conn,
                         CommandType = CommandType.Text,
-                        CommandText = "select a.numero,a.fecha,a.fecha_produccion,a.product_id,c.product_name,b.unique_code,b.roll_number,b.splice,b.width,b.large,b.msi,b.roll_id,b.code_person,b.status,d.nombre as operador,e.customer_name from orden_corte a " + 
-                        "left join rolls_details b on a.numero = b.numero " +
-                        "left join producto c on a.product_id = c.product_id left join operadores d on a.operador_id = d.operador_id left join customer e on a.customer_id = e.customer_id where a.numero=@numero_oc"
+                        CommandText = "SELECT a.numero, a.fecha, a.fecha_produccion, a.product_id, c.Product_Name AS producto,b.unique_code, b.roll_number, b.splice, b.width, b.large, b.msi, b.roll_id, b.code_person, b.status, d.nombre AS operador,e.Customer_Name, a.width_1 AS master_width, a.lenght_1 AS master_length, a.longitud_cortar AS master_corte_largo, a.cortes_ancho AS master_cortes_ancho, a.cortes_largo AS master_vueltas,a.cant_rollos AS master_cant_rollos,util1_real_width as master_width_real, util1_real_lenght as master_length_real,rest1_width as master_width_restante,rest1_lenght as master_length_restabnte,step FROM orden_corte AS a LEFT OUTER JOIN rolls_details AS b ON a.numero = b.numero LEFT OUTER JOIN producto AS c ON a.product_id = c.Product_ID LEFT OUTER JOIN operadores AS d ON a.operador_id = d.operador_id LEFT OUTER JOIN Customer AS e ON a.customer_id = e.customer_id WHERE (a.numero = @numero_oc)"
                     };
                     conn.Open();
                     comando.Parameters.Add(new SqlParameter("@numero_oc", SqlDbType.NVarChar) { Value = numeroOC });
                     comando.ExecuteNonQuery();
-                 
                     SqlDataAdapter da = new(comando);
                     da.Fill(dt);
+                    //carga los datos delos cortes.
+                    SqlCommand comado_cortes = new(StringConnex)
+                    {
+                        Connection = conn,
+                        CommandType = CommandType.Text,
+                        CommandText = "SELECT num,width,lenght,msi,orden,code_person FROM cortes WHERE orden = @numero_oc"
+                    };
+                    comado_cortes.Parameters.Add(new SqlParameter("@numero_oc", SqlDbType.NVarChar) { Value = numeroOC });
+                    comado_cortes.ExecuteNonQuery();
+
+
+                    SqlDataAdapter dacortes = new(comado_cortes);
+                    dacortes.Fill(dtcortes);
+                    conn.Dispose();
+                    comando.Dispose();
+                    comado_cortes.Dispose();
                 }
                 //Creacion del reporte.
                 try
@@ -121,8 +134,8 @@ namespace Ritrama2025.Services.ReportsService.ReportsService
                     ReportsViewer report = new()
                     {
                         Text = TitleReport,
-                        Width = 1130,
-                        Height = 780,
+                        Width = 900,
+                        Height = 800,
                         MdiParent = form.MdiParent,
                         StartPosition = FormStartPosition.CenterScreen
                         
@@ -130,23 +143,21 @@ namespace Ritrama2025.Services.ReportsService.ReportsService
                     report.reportViewer1.ProcessingMode = ProcessingMode.Local;
                     report.reportViewer1.LocalReport.ReportPath = GetPathApplication(ReportName,R.PATH_REPORTS.REPORTS_DESPACHO);
                     //configuracion de la pagina.
-                    //PageSettings pageSettings = new()
-                    //{
-                    //    PaperSize = new PaperSize("Letter", 1100, 850), //A4-carta.
-                    //    Landscape = true,
-                    //    Margins = new Margins(0,0,0,0),
-                    //};
-                    //report.reportViewer1.SetPageSettings(pageSettings);
+                    PageSettings pageSettings = new()
+                    {
+                        PaperSize = new PaperSize("Carta", 850, 1100), //A4-carta.
+                        Landscape = false,
+                        Margins = new Margins(0,0,0,0),
+                    };
+                    report.reportViewer1.SetPageSettings(pageSettings);
                     //parametros del reporte.
                     ReportParameter param = new ReportParameter("numero_oc", numeroOC);
-                    
                     //Configura el origen de los datos.
-
-                    ReportDataSource rds = new("DsOrdenCorte", dt);
+                    ReportDataSource rds = new("DsOC", dt);
+                    ReportDataSource rdsCortes = new("DsCortes", dtcortes);
                     report.reportViewer1.LocalReport.DataSources.Clear();
                     report.reportViewer1.LocalReport.DataSources.Add(rds);
-
-
+                    report.reportViewer1.LocalReport.DataSources.Add(rdsCortes);
                     report.reportViewer1.LocalReport.SetParameters(param);
                     report.reportViewer1.RefreshReport();
                     report.Show();
@@ -188,18 +199,20 @@ namespace Ritrama2025.Services.ReportsService.ReportsService
             ReportsViewer reports = new()
             {
                 Text = TitleReport,
-                Width = 1130,
+                Width = 900,
                 Height = 780,
                 MdiParent = form.MdiParent,
+                
             };
             reports.reportViewer1.ProcessingMode = ProcessingMode.Local;
             reports.reportViewer1.LocalReport.ReportPath = GetPathApplication(ReportName,R.PATH_REPORTS.REPORTS_DESPACHO);
+            reports.StartPosition = FormStartPosition.CenterParent;
             //creo un objeto del tipo PageSettings para configurar la pagina a imprimir.
             PageSettings pageSettings = new()
             {
-                PaperSize = new PaperSize("Letter", 1100, 850), // A4 size in hundredths of millimeters
-                Landscape = true,
-                Margins = new Margins(0, 0, 0, 0)
+                PaperSize = new PaperSize("Carta", 850, 1100), // A4 size in hundredths of millimeters
+                Landscape = false,
+                Margins = new Margins(100, 100, 100, 100)
             };
             reports.reportViewer1.SetPageSettings(pageSettings);
             //trabajo con los parametros del reporte.
@@ -241,14 +254,14 @@ namespace Ritrama2025.Services.ReportsService.ReportsService
                 Height = 780,
                 MdiParent = form.MdiParent,
             };
-            string ReportName = "Picking-List.rdlc";
+            string ReportName = "Conduce_sinprecio.rdlc";
             reports.reportViewer1.ProcessingMode = ProcessingMode.Local;
             reports.reportViewer1.LocalReport.ReportPath = GetPathApplication(ReportName, R.PATH_REPORTS.REPORTS_DESPACHO);
             //creo un objeto del tipo PageSettings para configurar la pagina a imprimir.
             PageSettings pageSettings = new()
             {
-                PaperSize = new PaperSize("Letter", 1100, 850), // A4 size in hundredths of millimeters
-                Landscape = true,
+                PaperSize = new PaperSize("Carta", 850, 1100), // A4 size in hundredths of millimeters
+                Landscape = false,
                 Margins = new Margins(0, 0, 0, 0)
             };
             reports.reportViewer1.SetPageSettings(pageSettings);

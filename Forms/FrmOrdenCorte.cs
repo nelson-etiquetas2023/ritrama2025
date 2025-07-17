@@ -746,6 +746,46 @@ namespace Ritrama2025.Forms
 
         private void Bot_guardar_Click(object sender, EventArgs e)
         {
+            if (txt_rollid_1.Text == "")
+            {
+                MessageBox.Show("debe seleccionar el roll-id del master a montar...");
+                return;
+            }
+            if (txt_operador_id.Text == "") 
+            {
+                MessageBox.Show("debe introducir el nombre del operador...");
+                return;
+            }
+            if (txt_cust_id.Text == "")
+            {
+                MessageBox.Show("debe introducir el nombre del cliente...");
+                return;
+            }
+            if (txt_long_cortar.Text == "") 
+            {
+                MessageBox.Show("debe introducir la longitud a cortar...");
+                return;
+            }
+            if (txt_vueltas1.Value == 0) 
+            {
+                MessageBox.Show("debe agregar el numero de vueltas...");
+                return;
+            }
+            if (grid_items.Rows.Count == 0) 
+            {
+                MessageBox.Show("no tiene renglones de rollos cortados, debe generar los rollos ...");
+                return;
+            }
+            if (grid_cortes.Rows.Count == 0)
+            {
+                MessageBox.Show("no tiene la definicion de los cortres, definirla por favor...");
+                return;
+            }
+
+
+
+
+
             CREATE_HEADER_ORDEN();
             CREATE_CORTES();
             CREATE_DETALLE_ORDEN();

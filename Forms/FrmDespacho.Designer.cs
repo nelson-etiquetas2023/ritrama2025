@@ -1053,7 +1053,7 @@
             // 
             cbo_tipoVenta.Enabled = false;
             cbo_tipoVenta.FormattingEnabled = true;
-            cbo_tipoVenta.Items.AddRange(new object[] { "Venta Local", "Traspaso" });
+            cbo_tipoVenta.Items.AddRange(new object[] { "Venta Local", "Traspaso", "Importación", "Otros" });
             cbo_tipoVenta.Location = new Point(859, 212);
             cbo_tipoVenta.Name = "cbo_tipoVenta";
             cbo_tipoVenta.Size = new Size(268, 27);
