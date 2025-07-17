@@ -198,7 +198,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>numero</rd:DefaultName>
-            <Top>4.49474cm</Top>
+            <Top>4.30424cm</Top>
             <Left>0.3937cm</Left>
             <Height>0.6cm</Height>
             <Width>8.71771cm</Width>
@@ -229,7 +229,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>fecha</rd:DefaultName>
-            <Top>4.95363cm</Top>
+            <Top>4.90424cm</Top>
             <Left>0.3937cm</Left>
             <Height>0.6cm</Height>
             <Width>8.71771cm</Width>
@@ -261,7 +261,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>fecha</rd:DefaultName>
-            <Top>5.41252cm</Top>
+            <Top>5.50424cm</Top>
             <Left>0.3937cm</Left>
             <Height>0.6cm</Height>
             <Width>8.71771cm</Width>
@@ -293,7 +293,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>product_id</rd:DefaultName>
-            <Top>5.87141cm</Top>
+            <Top>6.10424cm</Top>
             <Left>0.3937cm</Left>
             <Height>0.6cm</Height>
             <Width>8.71771cm</Width>
@@ -325,7 +325,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>producto</rd:DefaultName>
-            <Top>6.0128cm</Top>
+            <Top>6.70424cm</Top>
             <Left>0.3937cm</Left>
             <Height>0.6cm</Height>
             <Width>8.71771cm</Width>
@@ -357,7 +357,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>operador</rd:DefaultName>
-            <Top>6.15419cm</Top>
+            <Top>7.33952cm</Top>
             <Left>0.3937cm</Left>
             <Height>0.6cm</Height>
             <Width>8.71771cm</Width>
@@ -387,10 +387,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Customer_Name</rd:DefaultName>
-            <Top>6.61307cm</Top>
+            <Top>7.93952cm</Top>
             <Left>0.3937cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.71771cm</Width>
+            <Width>8.69802cm</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -419,10 +419,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>roll_id</rd:DefaultName>
-            <Top>4.63613cm</Top>
-            <Left>12.97135cm</Left>
+            <Top>4.39403cm</Top>
+            <Left>12.04656cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.71771cm</Width>
+            <Width>8.29438cm</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
@@ -451,10 +451,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>master_width</rd:DefaultName>
-            <Top>5.09502cm</Top>
-            <Left>12.97135cm</Left>
+            <Top>4.99403cm</Top>
+            <Left>12.04656cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.71771cm</Width>
+            <Width>8.29438cm</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>
@@ -484,10 +484,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>master_length</rd:DefaultName>
-            <Top>5.55391cm</Top>
-            <Left>12.97135cm</Left>
+            <Top>5.59403cm</Top>
+            <Left>12.04657cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.71771cm</Width>
+            <Width>8.29438cm</Width>
             <ZIndex>9</ZIndex>
             <Style>
               <Border>
@@ -516,10 +516,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>master_corte_largo</rd:DefaultName>
-            <Top>6.15419cm</Top>
-            <Left>12.97135cm</Left>
+            <Top>6.79403cm</Top>
+            <Left>12.04655cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.71771cm</Width>
+            <Width>8.29438cm</Width>
             <ZIndex>10</ZIndex>
             <Style>
               <Border>
@@ -548,10 +548,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>master_cortes_ancho</rd:DefaultName>
-            <Top>6.0128cm</Top>
-            <Left>12.97135cm</Left>
+            <Top>6.19403cm</Top>
+            <Left>12.04657cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.71771cm</Width>
+            <Width>8.29438cm</Width>
             <ZIndex>11</ZIndex>
             <Style>
               <Border>
@@ -580,10 +580,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>master_vueltas</rd:DefaultName>
-            <Top>6.29557cm</Top>
-            <Left>12.97135cm</Left>
+            <Top>7.39403cm</Top>
+            <Left>12.04657cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.71771cm</Width>
+            <Width>8.29438cm</Width>
             <ZIndex>12</ZIndex>
             <Style>
               <Border>
@@ -612,10 +612,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>master_cant_rollos</rd:DefaultName>
-            <Top>6.75446cm</Top>
-            <Left>12.97135cm</Left>
+            <Top>7.99403cm</Top>
+            <Left>12.04655cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.71771cm</Width>
+            <Width>8.29438cm</Width>
             <ZIndex>13</ZIndex>
             <Style>
               <Border>
@@ -634,13 +634,13 @@
                   <Width>0.915cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.585cm</Width>
+                  <Width>1.29651cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>5.24103cm</Width>
+                  <Width>5.1062cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.97526cm</Width>
+                  <Width>1.4738cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1.28229cm</Width>
@@ -652,10 +652,10 @@
                   <Width>1.75917cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.28292cm</Width>
+                  <Width>1.01832cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.23542cm</Width>
+                  <Width>2.07668cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1.941cm</Width>
@@ -1474,10 +1474,10 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DsOC</DataSetName>
-            <Top>8.93974cm</Top>
+            <Top>10.33674cm</Top>
             <Left>0.3937cm</Left>
             <Height>1.2cm</Height>
-            <Width>21.29536cm</Width>
+            <Width>19.94725cm</Width>
             <ZIndex>14</ZIndex>
             <Style>
               <Border>
@@ -1557,7 +1557,7 @@
             <Top>0.93072cm</Top>
             <Left>16.23327cm</Left>
             <Height>0.63999cm</Height>
-            <Width>5.4558cm</Width>
+            <Width>4.10767cm</Width>
             <ZIndex>17</ZIndex>
             <Style>
               <Border>
@@ -1592,7 +1592,7 @@
             <Top>0.28137cm</Top>
             <Left>16.23327cm</Left>
             <Height>0.6cm</Height>
-            <Width>5.4558cm</Width>
+            <Width>4.10767cm</Width>
             <ZIndex>18</ZIndex>
             <Style>
               <Border>
@@ -1625,7 +1625,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox52</rd:DefaultName>
-            <Top>3.78891cm</Top>
+            <Top>3.59841cm</Top>
             <Left>0.3937cm</Left>
             <Height>0.6cm</Height>
             <Width>8.71771cm</Width>
@@ -1661,10 +1661,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox52</rd:DefaultName>
-            <Top>3.78891cm</Top>
-            <Left>12.97135cm</Left>
+            <Top>3.54681cm</Top>
+            <Left>12.04656cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.71771cm</Width>
+            <Width>8.29439cm</Width>
             <ZIndex>20</ZIndex>
             <Style>
               <Border>
@@ -1784,7 +1784,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>Av. Charles de Gaul Numero 5, Oficina No. 2, Villa Carmen Santo Domingo Este</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -1793,7 +1795,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>Republica Dominicana</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -1802,7 +1806,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>Telefono +1 809-6200809</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -1811,7 +1817,7 @@
             <rd:DefaultName>Textbox50</rd:DefaultName>
             <Top>1.71182cm</Top>
             <Left>7.65787cm</Left>
-            <Height>1.9007cm</Height>
+            <Height>1.71886cm</Height>
             <Width>8.3769cm</Width>
             <ZIndex>24</ZIndex>
             <Style>
@@ -1847,7 +1853,7 @@
             <Top>1.7471cm</Top>
             <Left>16.23327cm</Left>
             <Height>0.6cm</Height>
-            <Width>5.45579cm</Width>
+            <Width>4.10766cm</Width>
             <ZIndex>25</ZIndex>
             <Style>
               <Border>
@@ -1894,9 +1900,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox52</rd:DefaultName>
             <Top>2.52348cm</Top>
-            <Left>16.23327cm</Left>
+            <Left>12.97135cm</Left>
             <Height>0.9175cm</Height>
-            <Width>5.4558cm</Width>
+            <Width>7.36959cm</Width>
             <ZIndex>26</ZIndex>
             <Style>
               <Border>
@@ -1918,7 +1924,7 @@
                     <Value>CONSUMO DE MATERIA PRIMA</Value>
                     <Style>
                       <FontFamily>JetBrains Mono ExtraBold</FontFamily>
-                      <FontSize>12pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1928,7 +1934,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox52</rd:DefaultName>
-            <Top>10.31613cm</Top>
+            <Top>11.71313cm</Top>
             <Left>0.41883cm</Left>
             <Height>0.6cm</Height>
             <Width>6.57591cm</Width>
@@ -1954,7 +1960,7 @@
                     <Value>DEFINICION DE CORTES</Value>
                     <Style>
                       <FontFamily>JetBrains Mono ExtraBold</FontFamily>
-                      <FontSize>12pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1964,10 +1970,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox52</rd:DefaultName>
-            <Top>10.43877cm</Top>
+            <Top>11.71313cm</Top>
             <Left>7.17113cm</Left>
             <Height>0.6cm</Height>
-            <Width>10.43886cm</Width>
+            <Width>13.16982cm</Width>
             <ZIndex>28</ZIndex>
             <Style>
               <Border>
@@ -1990,7 +1996,9 @@
                     <TextRuns>
                       <TextRun>
                         <Value>Descripcion</Value>
-                        <Style />
+                        <Style>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
                     <Style>
@@ -2022,7 +2030,9 @@
                     <TextRuns>
                       <TextRun>
                         <Value>Width</Value>
-                        <Style />
+                        <Style>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
                     <Style>
@@ -2055,7 +2065,9 @@
                     <TextRuns>
                       <TextRun>
                         <Value>Lenght</Value>
-                        <Style />
+                        <Style>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
                     <Style>
@@ -2089,6 +2101,7 @@
                       <TextRun>
                         <Value>MASTER</Value>
                         <Style>
+                          <FontSize>8pt</FontSize>
                           <FontWeight>Bold</FontWeight>
                         </Style>
                       </TextRun>
@@ -2124,6 +2137,7 @@
                       <TextRun>
                         <Value>REAL UTI.</Value>
                         <Style>
+                          <FontSize>8pt</FontSize>
                           <FontWeight>Bold</FontWeight>
                         </Style>
                       </TextRun>
@@ -2159,6 +2173,7 @@
                       <TextRun>
                         <Value>RESTANTE</Value>
                         <Style>
+                          <FontSize>8pt</FontSize>
                           <FontWeight>Bold</FontWeight>
                         </Style>
                       </TextRun>
@@ -2194,6 +2209,7 @@
                       <TextRun>
                         <Value>=First(Fields!master_width.Value,"DsOC")</Value>
                         <Style>
+                          <FontSize>8pt</FontSize>
                           <Format>0.00000;(0.00000)</Format>
                         </Style>
                       </TextRun>
@@ -2229,6 +2245,7 @@
                       <TextRun>
                         <Value>=First(Fields!master_width_real.Value,"DsOC")</Value>
                         <Style>
+                          <FontSize>8pt</FontSize>
                           <Format>0.00000;(0.00000)</Format>
                         </Style>
                       </TextRun>
@@ -2264,6 +2281,7 @@
                       <TextRun>
                         <Value>=First(Fields!master_width_restante.Value,"DsOC")</Value>
                         <Style>
+                          <FontSize>8pt</FontSize>
                           <Format>0.00000;(0.00000)</Format>
                         </Style>
                       </TextRun>
@@ -2274,7 +2292,7 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox50</rd:DefaultName>
-                <Top>2.69228cm</Top>
+                <Top>2.657cm</Top>
                 <Left>2.4355cm</Left>
                 <Height>0.68547cm</Height>
                 <Width>1.94094cm</Width>
@@ -2299,6 +2317,7 @@
                       <TextRun>
                         <Value>=First(Fields!master_length.Value,"DsOC")</Value>
                         <Style>
+                          <FontSize>8pt</FontSize>
                           <Format>0.00000;(0.00000)</Format>
                         </Style>
                       </TextRun>
@@ -2334,6 +2353,7 @@
                       <TextRun>
                         <Value>=First(Fields!master_length_real.Value,"DsOC")</Value>
                         <Style>
+                          <FontSize>8pt</FontSize>
                           <Format>0.00000;(0.00000)</Format>
                         </Style>
                       </TextRun>
@@ -2369,6 +2389,7 @@
                       <TextRun>
                         <Value>=First(Fields!master_length_restabnte.Value,"DsOC")</Value>
                         <Style>
+                          <FontSize>8pt</FontSize>
                           <Format>0.00000;(0.00000)</Format>
                         </Style>
                       </TextRun>
@@ -2397,7 +2418,7 @@
               </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Top>11.09252cm</Top>
+            <Top>12.48952cm</Top>
             <Left>0.07553cm</Left>
             <Height>3.37775cm</Height>
             <Width>6.91921cm</Width>
@@ -2420,7 +2441,7 @@
                     <Value>ROLLOS CORTADOS</Value>
                     <Style>
                       <FontFamily>JetBrains Mono ExtraBold</FontFamily>
-                      <FontSize>12pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -2430,10 +2451,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox52</rd:DefaultName>
-            <Top>8.30446cm</Top>
+            <Top>9.70146cm</Top>
             <Left>0.3662cm</Left>
             <Height>0.6cm</Height>
-            <Width>21.32285cm</Width>
+            <Width>19.97475cm</Width>
             <ZIndex>30</ZIndex>
             <Style>
               <Border>
@@ -2480,6 +2501,7 @@
                                 <TextRun>
                                   <Value>IT.</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -2515,6 +2537,7 @@
                                 <TextRun>
                                   <Value>Width</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -2550,6 +2573,7 @@
                                 <TextRun>
                                   <Value>Length</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -2585,6 +2609,7 @@
                                 <TextRun>
                                   <Value>MSI</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>0.00000;(0.00000)</Format>
                                   </Style>
@@ -2621,6 +2646,7 @@
                                 <TextRun>
                                   <Value>Code Person</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -2660,7 +2686,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!num.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -2693,6 +2721,7 @@
                                 <TextRun>
                                   <Value>=Fields!width.Value</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <Format>0.00000;(0.00000)</Format>
                                   </Style>
                                 </TextRun>
@@ -2727,6 +2756,7 @@
                                 <TextRun>
                                   <Value>=Fields!lenght.Value</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <Format>0.00000;(0.00000)</Format>
                                   </Style>
                                 </TextRun>
@@ -2761,6 +2791,7 @@
                                 <TextRun>
                                   <Value>=Fields!msi.Value</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <Format>0.00000;(0.00000)</Format>
                                   </Style>
                                 </TextRun>
@@ -2794,7 +2825,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!code_person.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -2840,7 +2873,7 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DsCortes</DataSetName>
-            <Top>11.21516cm</Top>
+            <Top>12.61216cm</Top>
             <Left>7.17113cm</Left>
             <Height>1.2cm</Height>
             <Width>10.43886cm</Width>
@@ -2861,7 +2894,9 @@
                     <TextRuns>
                       <TextRun>
                         <Value>Prepared</Value>
-                        <Style />
+                        <Style>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
                     <Style>
@@ -2887,7 +2922,7 @@
               </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Top>15.77586cm</Top>
+            <Top>16.60136cm</Top>
             <Left>0.30463cm</Left>
             <Height>1.4171cm</Height>
             <Width>4.91933cm</Width>
@@ -2910,7 +2945,9 @@
                     <TextRuns>
                       <TextRun>
                         <Value>Authorized</Value>
-                        <Style />
+                        <Style>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
                     <Style>
@@ -2935,7 +2972,7 @@
               </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Top>15.77586cm</Top>
+            <Top>16.60136cm</Top>
             <Left>5.36506cm</Left>
             <Height>1.4171cm</Height>
             <Width>4.89183cm</Width>
@@ -2968,7 +3005,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox50</rd:DefaultName>
-            <Top>17.26351cm</Top>
+            <Top>18.08901cm</Top>
             <Left>0.33213cm</Left>
             <Height>0.55335cm</Height>
             <Width>4.89183cm</Width>
@@ -3000,10 +3037,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox50</rd:DefaultName>
-            <Top>17.29879cm</Top>
+            <Top>18.12429cm</Top>
             <Left>5.39638cm</Left>
             <Height>0.55335cm</Height>
-            <Width>15.0794cm</Width>
+            <Width>14.94457cm</Width>
             <ZIndex>35</ZIndex>
             <Style>
               <Border>
@@ -3022,7 +3059,9 @@
                     <TextRuns>
                       <TextRun>
                         <Value>Observaciones</Value>
-                        <Style />
+                        <Style>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
                     <Style>
@@ -3032,8 +3071,9 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox50</rd:DefaultName>
                 <Top>0.1067cm</Top>
+                <Left>0cm</Left>
                 <Height>0.68547cm</Height>
-                <Width>5.06661cm</Width>
+                <Width>4.93176cm</Width>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -3047,10 +3087,10 @@
               </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Top>15.77586cm</Top>
+            <Top>16.60136cm</Top>
             <Left>15.40917cm</Left>
             <Height>1.4171cm</Height>
-            <Width>5.06661cm</Width>
+            <Width>4.93176cm</Width>
             <ZIndex>36</ZIndex>
             <Style>
               <Border>
@@ -3070,7 +3110,7 @@
                     <Value>NOTES</Value>
                     <Style>
                       <FontFamily>JetBrains Mono ExtraBold</FontFamily>
-                      <FontSize>12pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -3080,10 +3120,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox52</rd:DefaultName>
-            <Top>15.20983cm</Top>
+            <Top>16.03533cm</Top>
             <Left>0.37401cm</Left>
             <Height>0.6cm</Height>
-            <Width>20.10177cm</Width>
+            <Width>19.96692cm</Width>
             <ZIndex>37</ZIndex>
             <Style>
               <Border>
@@ -3106,7 +3146,9 @@
                     <TextRuns>
                       <TextRun>
                         <Value>Authorized</Value>
-                        <Style />
+                        <Style>
+                          <FontSize>8pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
                     <Style>
@@ -3131,7 +3173,7 @@
               </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Top>15.77586cm</Top>
+            <Top>16.60136cm</Top>
             <Left>10.32745cm</Left>
             <Height>1.4171cm</Height>
             <Width>4.89183cm</Width>
@@ -3159,10 +3201,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox133</rd:DefaultName>
-            <Top>6.89308cm</Top>
-            <Left>0.30463cm</Left>
+            <Top>8.53952cm</Top>
+            <Left>0.3937cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.80678cm</Width>
+            <Width>8.69258cm</Width>
             <ZIndex>39</ZIndex>
             <Style>
               <Border>
@@ -3178,15 +3220,9 @@
         <Height>8.05005in</Height>
         <Style />
       </Body>
-      <Width>8.88506in</Width>
+      <Width>8.8134in</Width>
       <Page>
-        <PageHeight>29.7cm</PageHeight>
-        <PageWidth>21cm</PageWidth>
-        <LeftMargin>2cm</LeftMargin>
-        <RightMargin>2cm</RightMargin>
-        <TopMargin>2cm</TopMargin>
-        <BottomMargin>2cm</BottomMargin>
-        <ColumnSpacing>0.13cm</ColumnSpacing>
+        <ColumnSpacing>0.05118in</ColumnSpacing>
         <Style />
       </Page>
     </ReportSection>
@@ -3228,6 +3264,6 @@ zmA53FjHIeMAH0vRf2vPih8NvCPjLxh8bPhNo3w18A+CvD15r17q2n+L49cmxbqJGjECQRnmMSHdu6qB
 AM/WfCWk+I72zudQ0vT76404u1pLcWySvbF0KOULAldykqcYyCQeKwfCv7P/AID8C6vHqGh+CfCOj38f3Lmx0e3t5k+jogI/OuuooAo3vhfTdS1yx1S406xuNS01ZFs7uS3Vp7QSACQRuRuQMAAdpGQBmjUPDOm6tq9jqF1p9jc3+llzZ3MsCvNaF12v5bkZTcvB2kZHBq9RQBwM37KfwuuJWkk+G3gGSSQlmZvD1oSxPUk+XWt8Q/gj4L+Lul2tj4s8I+F/FFlZHNvb6tpUF7FAfVFlVgvQdPSuoooAwx8M/Da+FbTQh4f0MaHp7Rva6f8AYYvsts0bBoykW3YpVgCpAGCARirXijwXo/jizgt9a0nTdYt7WdLqGK9tUuEimTOyRQ4IDrk4YcjPFaVFAGT4z8A6F8RtJXT/ABDouk69YrIJRbajZx3UIcZAbbICMjJ5xnk1l+DPgZ4J+HGrtqHh3wd4V0G/aMwm507SYLWYoSCV3xoDtJAOM44FdVRQBxtp+zn8PbDx+3iy38B+DYfFLP5jazHotsuoFv7xnCeZn33V2VFFABRRRQAUUUUAFFFFABRRRQB//9k=</ImageData>
     </EmbeddedImage>
   </EmbeddedImages>
-  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>5983c40d-c7c8-420a-9036-c2a73e86ca42</rd:ReportID>
 </Report>
