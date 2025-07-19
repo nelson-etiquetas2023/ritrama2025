@@ -61,6 +61,12 @@ namespace Ritrama2025.Forms.Otros
 
         private void btn_load_data_Click(object sender, EventArgs e)
         {
+            LoadData();
+        }
+
+
+        private void LoadData() 
+        {
             string filePath = PathFileName;
             string fileName = FileName;
             //leer la hoja de excel.
@@ -71,7 +77,7 @@ namespace Ritrama2025.Forms.Otros
                 //Empiezo en la fila 2 por los encabezados.
                 var filas = worksheet.Rows().Skip(1);
                 // recorro filas donde esta la data de la hoja.
-                
+
                 int itemno = 1;
                 foreach (var item in filas)
                 {
@@ -102,7 +108,36 @@ namespace Ritrama2025.Forms.Otros
 
         private void btn_saveDatabase_Click(object sender, EventArgs e)
         {
+            //Guardar en Base de Datos.
             InventarioService.SaveMasterInitialDB(lista);
+            //Registrar Productos no registrados.
+            ProductsNotFoundDB();
+        }
+        private void ProductsNotFoundDB() 
+        {
+            if (chk_product_NoFound.Checked)
+            {
+                foreach (var item in lista)
+                {
+                    if (!InventarioService.ValidProductid(item.Product_Id))
+                    {
+                        var producto = new Product
+                        {
+                            Product_id = item.Product_Id,
+                            Product_Name = item.Product_Name,
+                            Product_Description = item.Product_Name,
+                            Master = true,
+                            Anulado = false,
+                            Hoja = false,
+                            Graphics = false,
+                            RolloCortado = false,
+                        };
+                        //No esta en productos, lo agrego.
+                        InventarioService.InsertProduct(producto);
+                    }
+                }
+                MessageBox.Show("Se actualizó los productos no registrados... ");
+            }
         }
     }
 }

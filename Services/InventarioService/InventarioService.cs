@@ -57,11 +57,6 @@ namespace Ritrama2025.Services.InventarioService
                     comando.Parameters.AddWithValue("@wid_c", 0);
                     comando.Parameters.AddWithValue("@len_c", 0);
                     comando.Parameters.AddWithValue("@palet", item.Paleta);
-
-
-
-
-
                     comando.ExecuteNonQuery();
                     transaction.Commit();
 
@@ -74,6 +69,73 @@ namespace Ritrama2025.Services.InventarioService
                 MessageBox.Show("Error al guardar los datos en la base de datos. Error code: " + ex.Message);
                 return false;
 			}
+        }
+
+        public bool ValidProductid(string id)
+        {
+            try
+            {
+                using SqlConnection Conn = new(StringConnex);
+                Conn.Open();
+
+                using SqlCommand comando = new()
+                {
+                    Connection = Conn,
+                    CommandType = CommandType.Text,
+                    CommandText = "select COUNT(*) from producto where product_id = @id"
+                };
+
+                SqlParameter p1 = new("@id", id);
+                comando.Parameters.Add(p1);
+
+                var result = (int)comando.ExecuteScalar();
+                if (result > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool InsertProduct(Product producto)
+        {
+            try
+            {
+                using SqlConnection conn = new(StringConnex);
+                conn.Open();
+                using var transaction = conn.BeginTransaction();
+                using SqlCommand comando = new()
+                {
+                    Connection = conn,
+                    Transaction = transaction,
+                    CommandType = CommandType.Text,
+                    CommandText = "INSERT INTO producto (product_id,product_name,product_descrip,anulado,masterRolls,graphics,resmas,rollo_cortado) VALUES (@product_id,@name,@descrip,@anulado,@master,@graphics,@hojas,@rollo)"
+                };
+                comando.Parameters.AddWithValue("@product_id", producto.Product_id);
+                comando.Parameters.AddWithValue("@name", producto.Product_Name);
+                comando.Parameters.AddWithValue("@descrip", producto.Product_Description);
+                comando.Parameters.AddWithValue("@anulado", producto.Anulado);
+                comando.Parameters.AddWithValue("@master", producto.Master);
+                comando.Parameters.AddWithValue("@graphics", producto.Graphics);
+                comando.Parameters.AddWithValue("@hojas", producto.Hoja);
+                comando.Parameters.AddWithValue("@rollo", producto.RolloCortado);
+                comando.ExecuteNonQuery();
+                transaction.Commit();
+                return true;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error al tratar de registrar los productos, en el modulo de inventario...");
+                return false;
+               
+            }
         }
     }
 }

@@ -57,7 +57,7 @@
             button1 = new Button();
             checkBox2 = new CheckBox();
             checkBox3 = new CheckBox();
-            checkBox4 = new CheckBox();
+            chk_product_NoFound = new CheckBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Grid_Items).BeginInit();
@@ -349,22 +349,22 @@
             checkBox3.Text = "Validar Columnas Fecha";
             checkBox3.UseVisualStyleBackColor = true;
             // 
-            // checkBox4
+            // chk_product_NoFound
             // 
-            checkBox4.AutoSize = true;
-            checkBox4.Location = new Point(652, 466);
-            checkBox4.Name = "checkBox4";
-            checkBox4.Size = new Size(213, 19);
-            checkBox4.TabIndex = 23;
-            checkBox4.Text = "Guardar Productos No Encontrados";
-            checkBox4.UseVisualStyleBackColor = true;
+            chk_product_NoFound.AutoSize = true;
+            chk_product_NoFound.Location = new Point(652, 466);
+            chk_product_NoFound.Name = "chk_product_NoFound";
+            chk_product_NoFound.Size = new Size(213, 19);
+            chk_product_NoFound.TabIndex = 23;
+            chk_product_NoFound.Text = "Guardar Productos No Encontrados";
+            chk_product_NoFound.UseVisualStyleBackColor = true;
             // 
             // Frm_Imports
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(985, 712);
-            Controls.Add(checkBox4);
+            Controls.Add(chk_product_NoFound);
             Controls.Add(checkBox3);
             Controls.Add(checkBox2);
             Controls.Add(button1);
@@ -434,6 +434,6 @@
         private Button button1;
         private CheckBox checkBox2;
         private CheckBox checkBox3;
-        private CheckBox checkBox4;
+        private CheckBox chk_product_NoFound;
     }
 }
