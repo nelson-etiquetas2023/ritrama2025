@@ -176,7 +176,6 @@ C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\Images\ADD_DOCUMENT.png
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\Images\CLOSE_DOCUMENT.png
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\Images\OPEN_DOCUMENT.png
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\Images\ANULADO_DOCUMENTO.png
-C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\Reports\RptOrdenCorte.rdlc
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\Reports\RptImportFormat.rdlc
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\Paquetes\TSCLIB.dll
 C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.Buscadores.FrmBuscador_OrdenesMP.resources
@@ -184,3 +183,4 @@ C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.Buscado
 C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.FrmCodeBarLabel.resources
 C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.FrmProductos.resources
 C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.Seleccion.FrmProductsInsert.resources
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\Reports\RptOC.rdlc

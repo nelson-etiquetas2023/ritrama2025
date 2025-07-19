@@ -12,7 +12,7 @@ using Ritrama2025.Services.ProductsService;
 using Ritrama2025.Services.ProduccionService;
 using Ritrama2025.Services.DespachoService.DespachoService;
 using Ritrama2025.Services.ReportsService.ReportsService;
-
+using Ritrama2025.Services.InventarioService;
 
 namespace Ritrama2025
 {
@@ -32,24 +32,26 @@ namespace Ritrama2025
                 })
                 .ConfigureServices((context, service) =>
                 {
-                    IConfiguration configuration = context.Configuration;
-                    //Configuracion de servicios Standard de la App.
-                    service.AddScoped<IServiceCommonData, ServiceDataCommon>();
-                    service.AddScoped<IServiceMateriaPrima, ServiceMateriaPrima>();
-                    service.AddScoped<IProduccionService, ProduccionService>();
-                    service.AddScoped<IDespachoService, DespachoService>();
-                    service.AddScoped<IReportsService, ReportsService>();
-                    service.AddScoped<ICommonService, CommonService>();
-                    service.AddScoped<IExportDataService, ExportDataService>();
-                    service.AddScoped<IProductsService,ProductsService>();
+                IConfiguration configuration = context.Configuration;
+                //Configuracion de servicios Standard de la App.
+                service.AddScoped<IServiceCommonData, ServiceDataCommon>();
+                service.AddScoped<IServiceMateriaPrima, ServiceMateriaPrima>();
+                service.AddScoped<IProduccionService, ProduccionService>();
+                service.AddScoped<IDespachoService, DespachoService>();
+                service.AddScoped<IReportsService, ReportsService>();
+                service.AddScoped<ICommonService, CommonService>();
+                service.AddScoped<IExportDataService, ExportDataService>();
+                service.AddScoped<IProductsService, ProductsService>();
+                service.AddScoped<IInventarioService, InventarioService>();
                     service.AddSingleton<FormManager>();
-                    //injecccion de dependencias de los formularios.
-                    service.AddSingleton<Main>();
-                    service.AddTransient<FrmMateriaPrima>();
-                    service.AddTransient<FrmDespacho>();
-                    service.AddTransient<FrmCodeBarLabel>();
-                    service.AddTransient<FrmOrdenCorte>();
-                    service.AddTransient<FrmProductos>();
+                //injecccion de dependencias de los formularios.
+                service.AddSingleton<Main>();
+                service.AddTransient<FrmMateriaPrima>();
+                service.AddTransient<FrmDespacho>();
+                service.AddTransient<FrmCodeBarLabel>();
+                service.AddTransient<FrmOrdenCorte>();
+                service.AddTransient<FrmProductos>();
+                service.AddTransient<Frm_Inventarios>();
 
                 }).Build();
 

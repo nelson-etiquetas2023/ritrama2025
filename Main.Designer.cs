@@ -227,6 +227,7 @@
             bot_inventario.Text = "Inventario";
             bot_inventario.TextImageRelation = TextImageRelation.ImageBeforeText;
             bot_inventario.UseVisualStyleBackColor = true;
+            bot_inventario.Click += bot_inventario_Click;
             // 
             // bot_despacho
             // 

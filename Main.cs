@@ -39,7 +39,7 @@ namespace Ritrama2025
 
         private void Bot_ordencorte_Click(object sender, EventArgs e)
         {
-            splitContainer1.Panel1.Controls.Add(FormManager.ShowForm<FrmOrdenCorte>(this));        
+            splitContainer1.Panel1.Controls.Add(FormManager.ShowForm<FrmOrdenCorte>(this));
         }
 
         private void Bot_recepciones_Click(object sender, EventArgs e)
@@ -54,12 +54,17 @@ namespace Ritrama2025
 
         private void bot_products_Click(object sender, EventArgs e)
         {
-            splitContainer1.Panel1.Controls.Add(FormManager.ShowForm<FrmProductos>(this));   
+            splitContainer1.Panel1.Controls.Add(FormManager.ShowForm<FrmProductos>(this));
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void bot_inventario_Click(object sender, EventArgs e)
+        {
+            splitContainer1.Panel1.Controls.Add(FormManager.ShowForm<Frm_Inventarios>(this));
         }
     }
 
@@ -136,11 +141,11 @@ namespace Ritrama2025
         [Category("Version App.")]
         [DisplayName("Numero Compilacion:")]
         [Description("Datos principalaes de compilacion de la aplicacion de escritorio")]
-        public string Version { get; set; } = "1.3";
+        public string Version { get; set; } = "1.4";
         [Category("Version App.")]
         [DisplayName("Fecha Compilación")]
         [Description("Fecha y Compilacion de la aplicación.")]
-        public string Compilation_date { get; set; } = "16-07-2025 : 02:20 p.m.";
+        public string Compilation_date { get; set; } = "18-07-2025 : 09:58 p.m.";
         [Category("Version App.")]
         [DisplayName("FrameWork:")]
         [Description("Versión .Net")]

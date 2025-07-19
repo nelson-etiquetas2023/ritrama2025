@@ -202,6 +202,7 @@ namespace Ritrama2025.Forms
             bot_nuevo.Enabled = false;
             bot_excel.Enabled = false;
             bot_cancelar.Enabled = true;
+            btn_update.Enabled = false;
         }
 
         private void bot_guardar_Click(object sender, EventArgs e)
@@ -225,11 +226,13 @@ namespace Ritrama2025.Forms
             CloseFormUI();
             Bs.EndEdit();
             Refreshform();
+            btn_update.Enabled = true;  
             EditMode = 0;
         }
         private void SaveUpdate()
         {
-
+            //llamar al servicio que modifica el producto
+            ProductsService.Update(producto);
         }
 
         private void SaveAdd()
@@ -254,7 +257,7 @@ namespace Ritrama2025.Forms
                 Referencia = txt_referencia.Text,
                 Codigo_Barra = txt_codebar.Text,
                 Precio = Convert.ToDecimal(txt_precio.Text == "" || txt_precio.Text is null ? 0 : txt_precio.Text),
-                Ratio = Convert.ToDecimal(txt_precio.Text == "" || txt_precio.Text is null ? 0 : txt_precio.Text),
+                Ratio = Convert.ToDecimal(txt_ratio.Text == "" || txt_ratio.Text is null ? 0 : txt_ratio.Text),
                 Master = rad_master.Checked,
                 Graphics = rad_graphics.Checked,
                 Hoja = rad_hoja.Checked,
@@ -290,7 +293,6 @@ namespace Ritrama2025.Forms
             rad_hoja.Enabled = false;
             rad_master.Enabled = false;
             rad_rollocortado.Enabled = false;
-
         }
 
         private bool ValidModelProduct()
@@ -338,6 +340,7 @@ namespace Ritrama2025.Forms
             Bs.Position = 0;
             //Close Form.
             CloseFormUI();
+            btn_update.Enabled = true;
             Refreshform();
         }
 
@@ -348,7 +351,7 @@ namespace Ritrama2025.Forms
                 DtItems = Ds.Tables["Dtproducts"]!
             };
             buscador.ShowDialog();
-            if (buscador.Selected_ProductID != "" || buscador.Selected_ProductID != null)
+            if (buscador.Selected_ProductID != "" && buscador.Selected_ProductID != null)
             {
                 int busqueda = Bs.Find("product_id", buscador.Selected_ProductID);
                 if (busqueda > 0)

@@ -340,7 +340,7 @@
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(938, 114);
+            panel1.Size = new Size(984, 114);
             panel1.TabIndex = 19;
             // 
             // pictureBox1
@@ -372,7 +372,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { bot_primero, bot_anterior, bot_siguiente, bot_ultimo, bot_nuevo, bot_guardar, bot_cancelar, btn_update, bot_buscar, bot_print, bot_excel });
             toolStrip1.Location = new Point(0, 114);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(938, 39);
+            toolStrip1.Size = new Size(984, 39);
             toolStrip1.TabIndex = 20;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -529,7 +529,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(938, 730);
+            ClientSize = new Size(984, 730);
             Controls.Add(groupBox3);
             Controls.Add(toolStrip1);
             Controls.Add(panel1);
@@ -611,7 +611,6 @@
         private ToolStripButton bot_buscar;
         private ToolStripButton bot_print;
         private RadioButton rad_rollocortado;
-        private ToolStripButton bot_update;
         private GroupBox groupBox3;
         private Label label7;
         private ToolStripButton btn_update;

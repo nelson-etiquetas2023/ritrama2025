@@ -108,7 +108,7 @@ namespace Ritrama2025.Services.ProductsService
             
             try
             {
-                string sqlQuery = "UPDATE dbo.producto SET Product_Name = @name,Product_Descrip = @descrip,Product_Ref = @reference WHERE product_id = @id";
+                string sqlQuery = "UPDATE dbo.producto SET Product_Name = @name,Product_Descrip = @descrip,Product_Ref = @reference,codebar=@barra,precio=@precio,ratio=@ratio,@master=masterRoll,@graphics=graphics,@hoja=resmas,@rollo=rollo_cortado WHERE product_id = @id";
 
                 var parametros = new List<SqlParameter>
                 {
@@ -116,10 +116,25 @@ namespace Ritrama2025.Services.ProductsService
                     new SqlParameter("@name", SqlDbType.NVarChar) { Value = producto.Product_Name},
                     new SqlParameter("@descrip", SqlDbType.NVarChar) { Value = producto.Product_Description},
                     new SqlParameter("@reference", SqlDbType.NVarChar) { Value = producto.Referencia},
+                    new SqlParameter("@barra", SqlDbType.NVarChar) { Value = producto.Codigo_Barra},
+                    new SqlParameter("@precio", SqlDbType.Decimal) { Value = producto.Precio},
+                    new SqlParameter("@ratio", SqlDbType.Decimal) { Value = producto.Ratio},
+                    new SqlParameter("@master", SqlDbType.Bit) { Value = producto.Master },
+                    new SqlParameter("@graphics", SqlDbType.Bit) { Value = producto.Graphics },
+                    new SqlParameter("@hoja", SqlDbType.Bit) { Value = producto.Hoja },
+                    new SqlParameter("@rollo", SqlDbType.Bit) { Value = producto.RolloCortado },
                 };
 
                 var data = await DataAccess.ExecuteQueryWrite(StringConnex, sqlQuery, parametros, true);
-                return true;
+                if (data)
+                {
+                    MessageBox.Show("Producto modificado satisfactoriamente...");
+                    return true;
+                }
+                else 
+                {
+                    return false;
+                }
             }
             catch (Exception ex)
             {

@@ -3071,7 +3071,6 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox50</rd:DefaultName>
                 <Top>0.1067cm</Top>
-                <Left>0cm</Left>
                 <Height>0.68547cm</Height>
                 <Width>4.93176cm</Width>
                 <Style>
@@ -3220,7 +3219,7 @@
         <Height>8.05005in</Height>
         <Style />
       </Body>
-      <Width>8.8134in</Width>
+      <Width>8.20923in</Width>
       <Page>
         <ColumnSpacing>0.05118in</ColumnSpacing>
         <Style />
