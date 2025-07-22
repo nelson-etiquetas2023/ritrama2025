@@ -37,7 +37,6 @@
             btn_actualizar = new Button();
             sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
             groupBox1 = new GroupBox();
-            rad_uniquecode = new RadioButton();
             rad_productname = new RadioButton();
             rad_productid = new RadioButton();
             rad_rollid = new RadioButton();
@@ -128,7 +127,6 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(rad_uniquecode);
             groupBox1.Controls.Add(rad_productname);
             groupBox1.Controls.Add(rad_productid);
             groupBox1.Controls.Add(rad_rollid);
@@ -138,16 +136,6 @@
             groupBox1.TabIndex = 6;
             groupBox1.TabStop = false;
             groupBox1.Text = "Filtros de Busqueda";
-            // 
-            // rad_uniquecode
-            // 
-            rad_uniquecode.AutoSize = true;
-            rad_uniquecode.Location = new Point(42, 81);
-            rad_uniquecode.Name = "rad_uniquecode";
-            rad_uniquecode.Size = new Size(94, 19);
-            rad_uniquecode.TabIndex = 3;
-            rad_uniquecode.Text = "Unique Code";
-            rad_uniquecode.UseVisualStyleBackColor = true;
             // 
             // rad_productname
             // 
@@ -262,7 +250,6 @@
         private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
         private GroupBox groupBox1;
         private RadioButton rad_rollid;
-        private RadioButton rad_uniquecode;
         private RadioButton rad_productname;
         private RadioButton rad_productid;
         private Panel panel1;

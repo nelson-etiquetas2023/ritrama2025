@@ -22,6 +22,9 @@ namespace Ritrama2025.Forms
         DataRowView ParentRow = null!;
         DataRowView ChildRowCortes = null!;
         DataRowView RollosCortados = null!;
+        string operadorId = "ff8fe855-0f8b-4062-8aa5-860d94f804d5";
+        string operadorName = "NO-ASIGNADO";
+
 
         public FrmOrdenCorte(IProduccionService service, IExportDataService exportService, IReportsService reportService)
         {
@@ -137,7 +140,21 @@ namespace Ritrama2025.Forms
             txt_rollos_cortar1.DataBindings.Add("Text", Bs, "cant_rollos");
             txt_ancho_corte.DataBindings.Add("Text", Bs, "total_salida");
             txt_step.DataBindings.Add("Text", Bs, "step");
+            txt_sellOrder.DataBindings.Add("Text", Bs, "sellOrder");
+            chk_desperdicio1.DataBindings.Add("Checked", Bs, "desperdicio", true);
+            //check desperdicios.
+            chk_desperdicio1.DataBindings["Checked"]!.Format += (s, e) =>
+            {
+                if (e.Value == DBNull.Value || e.Value == null) e.Value = false;
+            };
+            chk_desperdicio1.DataBindings["Checked"]!.Parse += (s, e) =>
+            {
+                if (e.Value == DBNull.Value || e.Value == null) e.Value = false;
+            };
         }
+
+
+
 
         private static void ADD_COLUMN_GRID(string name, int size, string title, string field_bd, DataGridView grid)
         {
@@ -198,6 +215,10 @@ namespace Ritrama2025.Forms
                 ChildRowCortes["code_person"] = "S/N";
                 ChildRowCortes.EndEdit();
             }
+            //OPERADOR POR DEFECTO.
+            Service.CheckOperatorDefault(operadorId, operadorName);
+            txt_operador_id.Text = operadorId;
+            txt_operador_name.Text = operadorName;
             grid_cortes.ReadOnly = false;
             btn_add_row_corte.Enabled = true;
             btn_delete_row_corte.Enabled = true;
@@ -212,6 +233,7 @@ namespace Ritrama2025.Forms
             txt_menos1.ReadOnly = false;
             txt_plus2.ReadOnly = false;
             txt_menos2.ReadOnly = false;
+            txt_sellOrder.ReadOnly = false;
             btn_buscar_rollid1.Enabled = true;
             //Menu opciones
             bot_primero.Enabled = false;
@@ -230,7 +252,8 @@ namespace Ritrama2025.Forms
             btn_add_row_corte.Enabled = true;
             btn_delete_row_corte.Enabled = true;
             txt_vueltas1.Enabled = true;
-            txt_step.Text="1";
+            txt_step.Text = "1";
+            chk_desperdicio1.Enabled = true;
             UpdateStepIndicator();
 
         }
@@ -466,10 +489,10 @@ namespace Ritrama2025.Forms
         private void Grid_cortes_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             //CALCULAR LA SUMATORIA DE WIDTH DE LOS CORTES 
-            int num = 0;
+            double num = 0;
             for (int i = 0; i <= grid_cortes.Rows.Count - 1; i++)
             {
-                num += (Convert.ToInt32(grid_cortes.Rows[i].Cells["width"].Value));
+                num += (Convert.ToDouble(grid_cortes.Rows[i].Cells["width"].Value));
                 txt_ancho_corte.Text = num.ToString();
             }
             //calcular los cortes a lo ancho
@@ -672,7 +695,9 @@ namespace Ritrama2025.Forms
                 Real_usado_r1 = 0,
                 Real_usado_r2 = 0,
                 Restante_rollid1 = txt_matrest1_lenght.Text,
-                Restante_rollid2 = txt_matrest2_lenght.Text
+                Restante_rollid2 = txt_matrest2_lenght.Text,
+                SellOrder = txt_sellOrder.Text,
+                Desperdicio = chk_desperdicio1.Checked
 
             };
             Service.GuardarEncabezadoOrdenCorte(orden);
@@ -742,16 +767,19 @@ namespace Ritrama2025.Forms
             }
 
             Service.GuardarRollos(detalle);
+
         }
 
         private void Bot_guardar_Click(object sender, EventArgs e)
         {
+            if (!ValidDefintionsCortes()) return;
+
             if (txt_rollid_1.Text == "")
             {
                 MessageBox.Show("debe seleccionar el roll-id del master a montar...");
                 return;
             }
-            if (txt_operador_id.Text == "") 
+            if (txt_operador_id.Text == "")
             {
                 MessageBox.Show("debe introducir el nombre del operador...");
                 return;
@@ -761,17 +789,17 @@ namespace Ritrama2025.Forms
                 MessageBox.Show("debe introducir el nombre del cliente...");
                 return;
             }
-            if (txt_long_cortar.Text == "") 
+            if (txt_long_cortar.Text == "")
             {
                 MessageBox.Show("debe introducir la longitud a cortar...");
                 return;
             }
-            if (txt_vueltas1.Value == 0) 
+            if (txt_vueltas1.Value == 0)
             {
                 MessageBox.Show("debe agregar el numero de vueltas...");
                 return;
             }
-            if (grid_items.Rows.Count == 0) 
+            if (grid_items.Rows.Count == 0)
             {
                 MessageBox.Show("no tiene renglones de rollos cortados, debe generar los rollos ...");
                 return;
@@ -781,11 +809,6 @@ namespace Ritrama2025.Forms
                 MessageBox.Show("no tiene la definicion de los cortres, definirla por favor...");
                 return;
             }
-
-
-
-
-
             CREATE_HEADER_ORDEN();
             CREATE_CORTES();
             CREATE_DETALLE_ORDEN();
@@ -811,6 +834,7 @@ namespace Ritrama2025.Forms
             txt_plus2.ReadOnly = true;
             txt_menos1.ReadOnly = true;
             txt_menos2.ReadOnly = true;
+            txt_sellOrder.ReadOnly = true;
             btn_buscar_customer.Enabled = false;
             btn_buscar_rollid1.Enabled = false;
             btn_buscar_rollid2.Enabled = false;
@@ -822,7 +846,7 @@ namespace Ritrama2025.Forms
             txt_vueltas1.Enabled = false;
             txt_largo_corte.Enabled = false;
             txt_long_cortar.ReadOnly = true;
-
+            chk_desperdicio1.Enabled = false;
         }
         private void ContadorRegistros()
         {
@@ -1094,6 +1118,77 @@ namespace Ritrama2025.Forms
         private void bot_accion_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void bot_cancelar_Click(object sender, EventArgs e)
+        {
+            DataRowView FilaActual;
+            FilaActual = (DataRowView)Bs.Current!;
+            FilaActual.Row.Delete();
+            Bs.EndEdit();
+            Bs.Position = Bs.Count;
+            bot_primero.Enabled = true;
+            bot_siguiente.Enabled = true;
+            bot_ultimo.Enabled = true;
+            bot_anterior.Enabled = true;
+            bot_guardar.Enabled = false;
+            bot_cancelar.Enabled = false;
+            bot_imprimir.Enabled = true;
+            bot_exportar.Enabled = true;
+            bot_accion.Enabled = true;
+            bot_buscar.Enabled = true;
+            //cerrar el formulario
+            txt_long_cortar.ReadOnly = true;
+            txt_vueltas1.ReadOnly = true;
+            txt_vueltas2.ReadOnly = true;
+
+            btn_add_row_corte.Enabled = false;
+            btn_buscar_customer.Enabled = false;
+            btn_buscar_operador.Enabled = false;
+            btn_buscar_rollid1.Enabled = false;
+            btn_buscar_rollid2.Enabled = false;
+            btn_generar_rollos.Enabled = false;
+
+        }
+
+        private void btn_add_row_corte_Click(object sender, EventArgs e)
+        {
+            RollosCortados = (DataRowView)BsCortes.AddNew()!;
+            RollosCortados[0] = grid_cortes.Rows.Count.ToString();
+            RollosCortados["width"] = 0;
+            RollosCortados["lenght"] = 0;
+            RollosCortados["msi"] = 0;
+            RollosCortados["code_person"] = "S/N";
+            RollosCortados.BeginEdit();
+
+        }
+        private bool ValidDefintionsCortes()
+        {
+            for (int i = 0; i < grid_cortes.Rows.Count; i++)
+            {
+                if (grid_cortes.Rows[i].Cells["width"].Value!.ToString() == "0" ||
+                    grid_cortes.Rows[i].Cells["lenght"].Value!.ToString() == "0" ||
+                    grid_cortes.Rows[i].Cells["msi"].Value!.ToString() == "0")
+                {
+                    MessageBox.Show("Debe completar todas la definicion de los cortes antes de continuar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private void btn_code_person_Click(object sender, EventArgs e)
+        {
+            if (txt_code_person.Text == "") 
+            {
+                MessageBox.Show("Debe ingresar el codigo personalizado...", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            foreach (DataRowView row in BsRollos)
+            {
+                row["code_person"]=txt_code_person.Text.ToString();
+            }
+            Service.OrdenUpdateCodePerson(txt_numeroOC.Text, txt_code_person.Text);
         }
     }
 }

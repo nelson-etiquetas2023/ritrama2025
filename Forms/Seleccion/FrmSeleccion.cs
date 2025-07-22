@@ -172,6 +172,11 @@ namespace Ritrama2025.Forms.Seleccion
                     string id = row["proveedor_id"].ToString()!;
                     service.DeleteProvaiderEntity(id);
                 }
+                if (Titulo == "operadores")
+                {
+                    string id = row["operador_id"].ToString()!;
+                    service.DeleteOperatorEntity(id);   
+                }
                 //borro solo al final.
                 DtItems.Rows.Remove(row.Row);
                 DtItems.AcceptChanges();

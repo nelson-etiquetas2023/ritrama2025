@@ -321,6 +321,18 @@
         goiEFgmramxY0u5whOEk7MIhzOrjSJECKBb7BIPKBhKw5rJXAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="btn_code_person.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAFRSURBVEhLY6ArSEtL44qKilIiByckJHBAjcEOgIq8oqOjvwPxfyh+CsR3icQgtdeBlkhAjcME
+        MTEx04CKYIb/B/JtoVIEAUgtVN/V2NhYMagwKgAqmkmsBUlJSbxANeuAeBKIj2TBf2BI3IyIiJACK0QG
+        pFgQGRkpAlV3HcRHtgCKbwDFJMGKYYDKFoBwO1gxDFDbAqBYH1gxDKBbAAxLF6gUBggNDWUGRqYmKHmC
+        +EC9Dsh6QZigBUD+YaABacRgoNoDyHqh+vFbQCkeNBZ8BOJ3ROBPQIyil6AFQH4pVIoYwAiMixo0/QQt
+        ILqoAAGgeg80/aMWoIJBYwEoWe6GKiDXgh1A/BWbBaAK5xkQt4AUkmsBMLnWA+k3QH43VAoCgAKuQIlv
+        IEVQDMo82DIVLvwZiGF6PwNLXBuo0QgAqriBLhCkFHt6erJDjaQ1YGAAAHJOMJ++7GKyAAAAAElFTkSu
+        QmCC
+</value>
+  </data>
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAqJJREFUaEPt

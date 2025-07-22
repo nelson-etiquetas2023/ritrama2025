@@ -57,29 +57,18 @@ namespace Ritrama2025.Forms.Seleccion
         }
         private void BuscarMasterIdData()
         {
-            if (!chk_rebobinado.Checked)
-            {
-                Dv.RowFilter = "part_number LIKE '%%'";
-            }
-            if (rad_rollid.Checked && !chk_rebobinado.Checked)
-            {
-                Dv.RowFilter = "Roll_Id LIKE '%" + txt_buscar.Text + "%'";
-            }
-            if (rad_productname.Checked && !chk_rebobinado.Checked)
-            {
-                Dv.RowFilter = "Product_Name LIKE '%" + txt_buscar.Text + "%'";
-            }
-            if (rad_uniquecode.Checked && chk_rebobinado.Checked)
-            {
-                Dv.RowFilter = "unique_code LIKE '%" + txt_buscar.Text + "%'";
-            }
-            if (rad_productid.Checked && !chk_rebobinado.Checked)
+            
+            if (rad_productid.Checked) 
             {
                 Dv.RowFilter = "part_number LIKE '%" + txt_buscar.Text + "%'";
             }
-            if (rad_productid.Checked && chk_rebobinado.Checked)
+            if (rad_rollid.Checked)
             {
-                Dv.RowFilter = "product_id LIKE '%" + txt_buscar.Text + "%'";
+                Dv.RowFilter = "Roll_Id LIKE '%" + txt_buscar.Text + "%'";
+            }
+            if (rad_productname.Checked)
+            {
+                Dv.RowFilter = "Product_Name LIKE '%" + txt_buscar.Text + "%'";
             }
             CONTADOR_REGISTROS.Text = Convert.ToString(Dv.Count) + " registros encontrados.";
         }

@@ -141,11 +141,11 @@ namespace Ritrama2025
         [Category("Version App.")]
         [DisplayName("Numero Compilacion:")]
         [Description("Datos principalaes de compilacion de la aplicacion de escritorio")]
-        public string Version { get; set; } = "1.4";
+        public string Version { get; set; } = "1.6";
         [Category("Version App.")]
         [DisplayName("Fecha Compilación")]
         [Description("Fecha y Compilacion de la aplicación.")]
-        public string Compilation_date { get; set; } = "18-07-2025 : 09:58 p.m.";
+        public string Compilation_date { get; set; } = "21-07-2025 : 3:20 p.m.";
         [Category("Version App.")]
         [DisplayName("FrameWork:")]
         [Description("Versión .Net")]

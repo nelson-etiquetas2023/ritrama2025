@@ -184,3 +184,5 @@ C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.FrmCode
 C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.FrmProductos.resources
 C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.Seleccion.FrmProductsInsert.resources
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\Reports\RptOC.rdlc
+C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.Frm_Inventarios.resources
+C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.Otros.Frm_Imports.resources

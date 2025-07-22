@@ -12,5 +12,6 @@ namespace Ritrama2025.Services.ProductsService
         public Task<bool> Update(Product producto);
         public bool Anular(string IdProduct);
         public bool ValidProductid(string id);
+       
     }
 }

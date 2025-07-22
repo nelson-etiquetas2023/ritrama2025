@@ -63,6 +63,8 @@ namespace Ritrama2025.Models
         public DateTime FechaAutorize { get; set; }
         public string ToAutorize { get; set; } = null!;
         public string Note { get; set; } = null!;
+        public string SellOrder { get; set; } = null!;
+        public bool Desperdicio { get; set; }
     }
 }
 

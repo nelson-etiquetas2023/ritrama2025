@@ -62,7 +62,7 @@ namespace Ritrama2025.Services.ProduccionService
                 SqlCommand ComandoMaster = new()
                 {
                     Connection = conn,
-                    CommandText = "SELECT numero,fecha,fecha_produccion,a.product_id,b.product_Name,rollid_1,width_1,lenght_1,rollid_2,width_2,lenght_2,util1_real_width,util1_real_lenght,util2_real_width,util2_real_lenght,rest1_width,rest1_lenght,rest2_width,rest2_lenght,a.operador_id,c.nombre,a.customer_id,d.customer_name,tot_inch_ancho,lenght_entrada,resta_entrada,total_salida,plus1_pies,plus2_pies,longitud_cortar,cortes_ancho,cortes_largo,cant_rollos,cant_rollos2,step FROM orden_corte a LEFT JOIN producto b ON a.product_id = b.product_id LEFT JOIN operadores c ON a.operador_id = c.operador_id LEFT JOIN customer d ON a.customer_id = d.customer_id ORDER BY numero DESC",
+                    CommandText = "SELECT numero,fecha,fecha_produccion,a.product_id,b.product_Name,rollid_1,width_1,lenght_1,rollid_2,width_2,lenght_2,util1_real_width,util1_real_lenght,util2_real_width,util2_real_lenght,rest1_width,rest1_lenght,rest2_width,rest2_lenght,a.operador_id,c.nombre,a.customer_id,d.customer_name,tot_inch_ancho,lenght_entrada,resta_entrada,total_salida,plus1_pies,plus2_pies,longitud_cortar,cortes_ancho,cortes_largo,cant_rollos,cant_rollos2,step,sellOrder,desperdicio FROM orden_corte a LEFT JOIN producto b ON a.product_id = b.product_id LEFT JOIN operadores c ON a.operador_id = c.operador_id LEFT JOIN customer d ON a.customer_id = d.customer_id ORDER BY numero DESC",
                     CommandType = CommandType.Text
                 };
                 await conn.OpenAsync();
@@ -164,7 +164,7 @@ namespace Ritrama2025.Services.ProduccionService
                 SqlCommand comando = new()
                 {
                     Connection = conn,
-                    CommandText = "INSERT INTO orden_corte (numero,fecha,fecha_produccion,product_id,rollid_1,width_1,lenght_1,rollid_2,width_2,lenght_2,anulada,procesado,CloseDocument,tot_inch_ancho,longitud_cortar,cortes_ancho,cortes_largo,cant_rollos,decartable1_pies,lenght_master_real,util1_real_width,util1_real_lenght,descartable2_pies" + ",util2_real_width,util2_real_lenght,lenght_master_real2,rest1_width,rest1_lenght,rest2_width,rest2_lenght,cant_rollos2,cortes_largo2,step,lastupdate,fecha_autorize,toautorize,notes,tipo_mov1,tipo_mov2,plus1_pies,plus2_pies,rollo_unificado,length_entrada,real_usado_r1,real_usado_r2,restante_rollid1,restante_rollid2,resta_entrada,total_salida,lenght_entrada,customer_id,operador_id) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27,@p28,@p29,@p30,@p31,@p32,@p33,@p34,@p35,@p36,@p37,@p38,@p39,@p40,@p41,@p44,@p45,@p46,@p47,@p48,@p49,@p50,@p51,@p52,@customer_id,@operador_id)",
+                    CommandText = "INSERT INTO orden_corte (numero,fecha,fecha_produccion,product_id,rollid_1,width_1,lenght_1,rollid_2,width_2,lenght_2,anulada,procesado,CloseDocument,tot_inch_ancho,longitud_cortar,cortes_ancho,cortes_largo,cant_rollos,decartable1_pies,lenght_master_real,util1_real_width,util1_real_lenght,descartable2_pies" + ",util2_real_width,util2_real_lenght,lenght_master_real2,rest1_width,rest1_lenght,rest2_width,rest2_lenght,cant_rollos2,cortes_largo2,step,lastupdate,fecha_autorize,toautorize,notes,tipo_mov1,tipo_mov2,plus1_pies,plus2_pies,rollo_unificado,length_entrada,real_usado_r1,real_usado_r2,restante_rollid1,restante_rollid2,resta_entrada,total_salida,lenght_entrada,customer_id,operador_id,SellOrder,desperdicio) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27,@p28,@p29,@p30,@p31,@p32,@p33,@p34,@p35,@p36,@p37,@p38,@p39,@p40,@p41,@p44,@p45,@p46,@p47,@p48,@p49,@p50,@p51,@p52,@customer_id,@operador_id,@SellOrder,@desper)",
                     CommandType = CommandType.Text
                 };
                 conn.Open();
@@ -218,6 +218,8 @@ namespace Ritrama2025.Services.ProduccionService
                 comando.Parameters.AddWithValue("@p50", 0);
                 comando.Parameters.AddWithValue("@p51", 0);
                 comando.Parameters.AddWithValue("@p52", 0);
+                comando.Parameters.AddWithValue("@sellOrder",OrdenCorte.SellOrder);
+                comando.Parameters.AddWithValue("@desper", OrdenCorte.Desperdicio);
                 comando.Parameters.Add(new SqlParameter("@customer_id", SqlDbType.UniqueIdentifier)
                 {
                     Value = OrdenCorte.Customer_Id
@@ -411,6 +413,7 @@ namespace Ritrama2025.Services.ProduccionService
                 SqlParameter p1 = new("@p1", consec);
                 comando.Parameters.Add(p1);
                 comando.ExecuteNonQuery();
+                MessageBox.Show("se guardaron los datos correctanmentes.");
                 return true;
             }
             catch (SqlException ex)
@@ -419,7 +422,7 @@ namespace Ritrama2025.Services.ProduccionService
                 return false;
             }
         }
-        public void UpdateUniqueCodeRollosCortados(List<RolloCortado> rollos) 
+        public void UpdateUniqueCodeRollosCortados(List<RolloCortado> rollos)
         {
             try
             {
@@ -443,6 +446,100 @@ namespace Ritrama2025.Services.ProduccionService
             {
                 MessageBox.Show("error al guardar los codigo unicos de los rollos" + ex.Message);
             }
+        }
+        public bool CheckOperatorDefault(string id, string name)
+        {
+            //verificar si el registro no-asignado existe?
+            try
+            {
+                using SqlConnection Conn = new(StringConnex);
+                Conn.Open();
+
+                using SqlCommand comando = new()
+                {
+                    Connection = Conn,
+                    CommandType = CommandType.Text,
+                    CommandText = "select COUNT(*) from operadores where operador_id = @id"
+                };
+
+                SqlParameter p1 = new("@id", id);
+                comando.Parameters.Add(p1);
+
+                var result = (int)comando.ExecuteScalar();
+                if (result > 0)
+                {
+                    //existe
+                    return true;
+                }
+                else
+                {
+                    //no existe, insertar el registro.
+                    AddOperatorDefault(id, name);
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+
+
+
+
+        }
+        public void AddOperatorDefault(string id, string name)
+        {
+            try
+            {
+                using SqlConnection Conn = new(StringConnex);
+                Conn.Open();
+                using SqlCommand comando = new()
+                {
+                    Connection = Conn,
+                    CommandType = CommandType.Text,
+                    CommandText = "INSERT INTO operadores (operador_id,nombre,status) VALUES (@id,@name,1)"
+                };
+                SqlParameter p1 = new("@id", id);
+                SqlParameter p2 = new("@name", name);
+                comando.Parameters.Add(p1);
+                comando.Parameters.Add(p2);
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al agregar el operador por defecto: " + ex.Message);
+            }
+
+        }
+        public bool OrdenUpdateCodePerson(string orden, string code_person)
+        {
+            try
+            {
+                SqlConnection conn = new(StringConnex);
+                conn.Open();
+                SqlCommand comando = new()
+                {
+                    Connection = conn,
+                    CommandText = "update rolls_details set code_person=@code_per where numero=@orden",
+                    CommandType = CommandType.Text
+                };
+                SqlParameter p1 = new("@code_per", code_person);
+                SqlParameter p2 = new("@orden", orden);
+
+                comando.Parameters.Add(p1);
+                comando.Parameters.Add(p2);
+
+                comando.ExecuteNonQuery();
+                
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Error al actualizar el codigo personalizado. Codigo de Error : " + ex.Message);
+                return false;
+            }
+
         }
     }
 }

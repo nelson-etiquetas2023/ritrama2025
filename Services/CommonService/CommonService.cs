@@ -52,13 +52,13 @@ namespace Ritrama2025.Services.CommonService
                         item.Cantidad = 0;
                         item.Tipo = reader.GetString("tipo_mov");
                         item.Code_Person = reader.GetString("code_person");
-                        
+
                     }
                 }
                 catch (SqlException ex)
                 {
                     ErrorMsg = ex.Message;
-                    MessageBox.Show("error al cargar los datos del rc en el picking: "+ErrorMsg); 
+                    MessageBox.Show("error al cargar los datos del rc en el picking: " + ErrorMsg);
                 }
             }
             return lista;
@@ -215,7 +215,6 @@ namespace Ritrama2025.Services.CommonService
                 MessageBox.Show("Error al guardar la entidad de proveedor: " + ErrorMsg);
             }
         }
-
         public void DeleteProvaiderEntity(string Id)
         {
             using SqlConnection conn = new(StringConnex);
@@ -237,7 +236,6 @@ namespace Ritrama2025.Services.CommonService
                 MessageBox.Show("Error al eliminar la entidad de proveedor: " + ErrorMsg);
             }
         }
-
         public void SavePersonEntity(string Id, string Name)
         {
             using SqlConnection conn = new(StringConnex);
@@ -260,12 +258,10 @@ namespace Ritrama2025.Services.CommonService
                 MessageBox.Show("Error al guardar la entidad de persona: " + ErrorMsg);
             }
         }
-
         public void DeletePersonEntity(string Id)
         {
             throw new NotImplementedException();
         }
-
         public bool DocumentCheckWriteOC(DocumentCheckOC doc)
         {
             try
@@ -293,10 +289,10 @@ namespace Ritrama2025.Services.CommonService
                 return false;
             }
         }
-        public DocumentCheckOC DocumentCheckReadOC(string oc) 
+        public DocumentCheckOC DocumentCheckReadOC(string oc)
         {
             DocumentCheckOC document = new();
-            
+
             try
             {
                 using SqlConnection conn = new(StringConnex);
@@ -309,9 +305,9 @@ namespace Ritrama2025.Services.CommonService
                 };
                 comando.Parameters.AddWithValue("@p1", oc);
                 SqlDataReader dr = comando.ExecuteReader();
-                while (dr.Read()) 
+                while (dr.Read())
                 {
-                    document = new() 
+                    document = new()
                     {
                         PersonCheck = dr.GetString(dr.GetOrdinal("PersonCheck")),
                         Orden_Servicio = dr.GetString(dr.GetOrdinal("Orden_Servicio")),
@@ -325,11 +321,10 @@ namespace Ritrama2025.Services.CommonService
             catch (Exception ex)
             {
                 MessageBox.Show("Error al tratar de leer el documento aprobado de orden de corte...: codigo error :" + ex.Message);
-                return document;   
+                return document;
             }
 
         }
-
         public void SaveOperatorEntity(string Id, string Name)
         {
             using SqlConnection conn = new(StringConnex);
@@ -337,7 +332,7 @@ namespace Ritrama2025.Services.CommonService
             {
                 Connection = conn,
                 CommandType = CommandType.Text,
-                CommandText = "INSERT INTO operadores (id_operador, nombre) VALUES (@p1, @p2)"
+                CommandText = "INSERT INTO operadores (operador_id, nombre) VALUES (@p1, @p2)"
             };
             comando.Parameters.Add(new SqlParameter("@p1", SqlDbType.NVarChar) { Value = Id });
             comando.Parameters.Add(new SqlParameter("@p2", SqlDbType.NVarChar) { Value = Name });
@@ -352,7 +347,27 @@ namespace Ritrama2025.Services.CommonService
                 MessageBox.Show("Error al guardar la entidad de operadores: " + ErrorMsg);
             }
         }
-
+        public void DeleteOperatorEntity(string Id)
+        {
+            using SqlConnection conn = new(StringConnex);
+            SqlCommand comando = new()
+            {
+                Connection = conn,
+                CommandType = CommandType.Text,
+                CommandText = "DELETE FROM operadores WHERE operador_id=@p1"
+            };
+            comando.Parameters.Add(new SqlParameter("@p1", SqlDbType.NVarChar) { Value = Id });
+            try
+            {
+                conn.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                ErrorMsg = ex.Message;
+                MessageBox.Show("Error al eliminar la entidad de operadores: " + ErrorMsg);
+            }
+        }
         public void SaveCustomerEntity(string Id, string Name)
         {
             using SqlConnection conn = new(StringConnex);
@@ -378,6 +393,30 @@ namespace Ritrama2025.Services.CommonService
                 ErrorMsg = ex.Message;
                 MessageBox.Show("Error al guardar la entidad de clientes: " + ErrorMsg);
             }
+        }
+        public static DataTable ToDataTable<T>(List<T> lista)
+        {
+            DataTable table = new();
+            if (lista == null || !lista.Any())
+                return table;
+            // Get properties of the type T
+            var properties = typeof(T).GetProperties();
+            // Add columns to the DataTable
+            foreach (var prop in properties)
+            {
+                table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+            }
+            // Add rows to the DataTable
+            foreach (var item in lista)
+            {
+                var row = table.NewRow();
+                foreach (var prop in properties)
+                {
+                    row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
+                }
+                table.Rows.Add(row);
+            }
+            return table;
         }
     }
 }

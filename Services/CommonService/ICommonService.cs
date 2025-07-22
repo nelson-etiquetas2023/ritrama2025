@@ -17,6 +17,7 @@ namespace Ritrama2025.Services.CommonService
         void SavePersonEntity(string Id, string Name);  
         void DeletePersonEntity(string Id);
         void SaveOperatorEntity(string Id, string Name);
+        void DeleteOperatorEntity(string Id);
         void SaveCustomerEntity(string Id, string Name);
 
         bool DocumentCheckWriteOC(DocumentCheckOC doc);

@@ -159,8 +159,10 @@
             btn_datosDocAprob = new Button();
             btn_buscar_orden = new Button();
             chk_desperdicio1 = new CheckBox();
-            checkBox1 = new CheckBox();
+            chk_desperdicio2 = new CheckBox();
             chk_generartxt_rc = new CheckBox();
+            label35 = new Label();
+            txt_sellOrder = new TextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             toolStrip1.SuspendLayout();
@@ -355,6 +357,7 @@
             bot_cancelar.Name = "bot_cancelar";
             bot_cancelar.Size = new Size(80, 30);
             bot_cancelar.Text = "Cancel";
+            bot_cancelar.Click += bot_cancelar_Click;
             // 
             // bot_imprimir
             // 
@@ -1057,6 +1060,7 @@
             btn_add_row_corte.Text = "Agregar";
             btn_add_row_corte.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_add_row_corte.UseVisualStyleBackColor = true;
+            btn_add_row_corte.Click += btn_add_row_corte_Click;
             // 
             // btn_delete_row_corte
             // 
@@ -1255,12 +1259,14 @@
             // 
             // btn_code_person
             // 
-            btn_code_person.Location = new Point(1010, 792);
+            btn_code_person.Image = (Image)resources.GetObject("btn_code_person.Image");
+            btn_code_person.Location = new Point(1010, 789);
             btn_code_person.Name = "btn_code_person";
             btn_code_person.Size = new Size(43, 30);
             btn_code_person.TabIndex = 94;
             btn_code_person.Text = "...";
             btn_code_person.UseVisualStyleBackColor = true;
+            btn_code_person.Click += btn_code_person_Click;
             // 
             // chk_unificar_rollos
             // 
@@ -1477,6 +1483,7 @@
             // chk_desperdicio1
             // 
             chk_desperdicio1.AutoSize = true;
+            chk_desperdicio1.Enabled = false;
             chk_desperdicio1.Location = new Point(427, 225);
             chk_desperdicio1.Name = "chk_desperdicio1";
             chk_desperdicio1.Size = new Size(97, 22);
@@ -1484,15 +1491,15 @@
             chk_desperdicio1.Text = "Desperdicio";
             chk_desperdicio1.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // chk_desperdicio2
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(425, 319);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(97, 22);
-            checkBox1.TabIndex = 119;
-            checkBox1.Text = "Desperdicio";
-            checkBox1.UseVisualStyleBackColor = true;
+            chk_desperdicio2.AutoSize = true;
+            chk_desperdicio2.Location = new Point(425, 319);
+            chk_desperdicio2.Name = "chk_desperdicio2";
+            chk_desperdicio2.Size = new Size(97, 22);
+            chk_desperdicio2.TabIndex = 119;
+            chk_desperdicio2.Text = "Desperdicio";
+            chk_desperdicio2.UseVisualStyleBackColor = true;
             // 
             // chk_generartxt_rc
             // 
@@ -1504,13 +1511,34 @@
             chk_generartxt_rc.Text = "Solo con los RC";
             chk_generartxt_rc.UseVisualStyleBackColor = true;
             // 
+            // label35
+            // 
+            label35.AutoSize = true;
+            label35.Font = new Font("Noto Sans", 9.75F);
+            label35.Location = new Point(676, 452);
+            label35.Name = "label35";
+            label35.Size = new Size(67, 18);
+            label35.TabIndex = 122;
+            label35.Text = "Sell-Order";
+            // 
+            // txt_sellOrder
+            // 
+            txt_sellOrder.Font = new Font("Noto Sans", 9.75F);
+            txt_sellOrder.Location = new Point(676, 469);
+            txt_sellOrder.Name = "txt_sellOrder";
+            txt_sellOrder.ReadOnly = true;
+            txt_sellOrder.Size = new Size(377, 25);
+            txt_sellOrder.TabIndex = 121;
+            // 
             // FrmOrdenCorte
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1263, 843);
+            Controls.Add(label35);
+            Controls.Add(txt_sellOrder);
             Controls.Add(chk_generartxt_rc);
-            Controls.Add(checkBox1);
+            Controls.Add(chk_desperdicio2);
             Controls.Add(chk_desperdicio1);
             Controls.Add(btn_buscar_orden);
             Controls.Add(btn_datosDocAprob);
@@ -1772,7 +1800,9 @@
         private Button btn_datosDocAprob;
         private Button btn_buscar_orden;
         private CheckBox chk_desperdicio1;
-        private CheckBox checkBox1;
+        private CheckBox chk_desperdicio2;
         private CheckBox chk_generartxt_rc;
+        private Label label35;
+        private TextBox txt_sellOrder;
     }
 }
