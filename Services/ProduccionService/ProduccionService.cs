@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Office.Word;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Ritrama2025.Models;
 using System.Data;
@@ -9,8 +8,6 @@ namespace Ritrama2025.Services.ProduccionService
     public class ProduccionService : IProduccionService
     {
         public IConfiguration Config { get; } = null!;
-
-
         public string StringConnex { get; set; } = null!;
         public string ErrorMsg { get; set; } = null!;
         public DataSet Ds = new();
@@ -43,18 +40,12 @@ namespace Ritrama2025.Services.ProduccionService
                 //limpiar el dataset para segundas cargas.
                 if (Ds.Tables.Count > 0)
                 {
-                    DataTable tabla = Ds.Tables["DtMaster"]!;
-
-                    // Eliminar todas las restricciones del master
-                    var tempConstraints = tabla.Constraints.Cast<Constraint>().ToList();
-                    foreach (var constraint in tempConstraints)
+                    Ds.Relations.Clear();     // Elimina todas las relaciones (DataRelation)
+                    foreach (DataTable table in Ds.Tables)
                     {
-                        tabla.Constraints.Remove(constraint);
+                        table.Constraints.Clear(); // Elimina las restricciones (PrimaryKey, ForeignKey, Unique, etc.)
                     }
-                    //eliminar las relaciones
-                    Ds.Relations.Clear();
                     Ds.Tables.Clear();
-                    Ds.Clear();
                     Ds.AcceptChanges();
                 }
                 //1.- cargar la tabla de encabezado de las Ordenes de Corte.
@@ -144,13 +135,13 @@ namespace Ritrama2025.Services.ProduccionService
                 DataRelation Despacho_Cortes = new("FK_ENCABEZADO_CORTES", ParentCol0, ChildCol0, false);
                 Ds.Relations.Add(Despacho_Cortes);
                 //Relacion entre master y Rollos.
-                DataColumn ParentCol1 = Ds.Tables["DtMaster"]!.Columns["numero"]!;
-                DataColumn ChildCol1 = Ds.Tables["DtRollos"]!.Columns["numero"]!;
-                DataRelation Master_Rollos = new("FK_MASTER_ROLLOS", ParentCol1, ChildCol1);
-                Ds.Relations.Add(Master_Rollos);
+                DataColumn ParentColumn1 = Ds.Tables["DtMaster"]!.Columns["numero"]!;
+                DataColumn ChildColumn1 = Ds.Tables["DtRollos"]!.Columns["numero"]!;
+                //DataRelation Master_Rollos = new();
+                Ds.Relations.Add("REL_MASTER_ROLLOS", ParentColumn1, ChildColumn1);
                 return true;
             }
-            catch (Exception ex)
+            catch (ConstraintException ex)
             {
                 ErrorMsg = ex.Message;
                 return false;
@@ -540,6 +531,43 @@ namespace Ritrama2025.Services.ProduccionService
                 return false;
             }
 
+        }
+
+        public bool UpdateOrdenCorte(Orden orden)
+        {
+            try
+            {
+                SqlConnection conn = new(StringConnex);
+                conn.Open();
+                SqlCommand comando = new()
+                {
+                    Connection = conn,
+                    CommandText = "update orden_corte set fecha=@fecha,fecha_produccion=@fecha_pro,operador_id=@oper,sellOrder=@sellOrder,desperdicio=@desper,customer_id=@CustId where numero=@orden",
+                    CommandType = CommandType.Text
+                };
+                SqlParameter p1 = new("@orden", orden.Numero);
+                SqlParameter p2 = new("@fecha", orden.Fecha);
+                SqlParameter p3 = new("@fecha_pro", orden.Fecha_produccion);
+                SqlParameter p4 = new("@oper", orden.operador_id);
+                SqlParameter p5 = new("@sellOrder", orden.SellOrder);
+                SqlParameter p6 = new("@desper", orden.Desperdicio);
+                SqlParameter p7 = new("@CustId", orden.Customer_Id);
+                comando.Parameters.Add(p1);
+                comando.Parameters.Add(p2);
+                comando.Parameters.Add(p3);
+                comando.Parameters.Add(p4);
+                comando.Parameters.Add(p5);
+                comando.Parameters.Add(p6);
+                comando.Parameters.Add(p7);
+                comando.ExecuteNonQuery();
+                MessageBox.Show("Se actualizo la orden de corte correctamente.");   
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar la orden de corte: error[code] :" + ex.Message);
+                return false;
+            }
         }
     }
 }

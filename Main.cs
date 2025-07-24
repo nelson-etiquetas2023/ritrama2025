@@ -66,6 +66,11 @@ namespace Ritrama2025
         {
             splitContainer1.Panel1.Controls.Add(FormManager.ShowForm<Frm_Inventarios>(this));
         }
+
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 
     public class Configuration
@@ -141,11 +146,11 @@ namespace Ritrama2025
         [Category("Version App.")]
         [DisplayName("Numero Compilacion:")]
         [Description("Datos principalaes de compilacion de la aplicacion de escritorio")]
-        public string Version { get; set; } = "1.6";
+        public string Version { get; set; } = "1.8";
         [Category("Version App.")]
         [DisplayName("Fecha Compilación")]
         [Description("Fecha y Compilacion de la aplicación.")]
-        public string Compilation_date { get; set; } = "21-07-2025 : 3:20 p.m.";
+        public string Compilation_date { get; set; } = "23-07-2025 : 11:52 a.m.";
         [Category("Version App.")]
         [DisplayName("FrameWork:")]
         [Description("Versión .Net")]

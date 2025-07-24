@@ -4,6 +4,9 @@
     <_LastSelectedProfileId>C:\Programacion\Ritrama2025\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="Forms\Buscadores\FrmBuscadorOC.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\Buscadores\FrmBuscador_OrdenesMP.cs">
       <SubType>Form</SubType>
     </Compile>

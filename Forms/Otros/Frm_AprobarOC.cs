@@ -1,5 +1,6 @@
 ﻿using Ritrama2025.Models;
 using Ritrama2025.Services;
+using Ritrama2025.Services.CommonService;
 using System.ComponentModel;
 
 namespace Ritrama2025.Forms.Otros
@@ -10,10 +11,12 @@ namespace Ritrama2025.Forms.Otros
         public string NumeroOC { get; set; } = null!;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string TypeAction { get; set; } = null!;
-        //readonly CommonService servicio = new();
-        public Frm_AprobarOC()
+        
+        private ICommonService Servicio { get; set; }
+        public Frm_AprobarOC(ICommonService service)
         {
             InitializeComponent();
+            Servicio = service;
         }
         private void Frm_AprobarOC_Load(object sender, EventArgs e)
         {
@@ -30,12 +33,12 @@ namespace Ritrama2025.Forms.Otros
                 bot_cancel.Enabled = false;
                 bot_documentCheck.Enabled = false;
                 chk_closeOrden.Enabled = false;
-                //DocumentCheckOC doc = servicio.DocumentCheckReadOC(NumeroOC);
-                //txt_comentarios.Text = doc.Observaciones;
-                //txt_person.Text = doc.PersonCheck;
-                //txt_OrdenServicio.Text = doc.Orden_Servicio;
-                //txt_OrdenTrabajo.Text = doc.Orden_Trabajo;
-                //label_datetime.Text = "Este Documento se Aprtobo: " + doc.FechaCheck.ToString();
+                DocumentCheckOC doc = Servicio.DocumentCheckReadOC(NumeroOC);
+                txt_comentarios.Text = doc.Observaciones;
+                txt_person.Text = doc.PersonCheck;
+                txt_OrdenServicio.Text = doc.Orden_Servicio;
+                txt_OrdenTrabajo.Text = doc.Orden_Trabajo;
+                label_datetime.Text = "Este Documento se Aprtobo: " + doc.FechaCheck.ToString();
             }
 
             
@@ -67,7 +70,7 @@ namespace Ritrama2025.Forms.Otros
                 Observaciones = txt_comentarios.Text,
                 FechaCheck = DateTime.Now
             };
-            //servicio.DocumentCheckWriteOC(document);
+            Servicio.DocumentCheckWriteOC(document);
             this.Close();
         }
     }

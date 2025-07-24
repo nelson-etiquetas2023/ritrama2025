@@ -17,5 +17,6 @@ namespace Ritrama2025.Services.ProduccionService
         bool UpdateUniqueCodeBD(string consec);
         public bool CheckOperatorDefault(string id, string name);
         public bool OrdenUpdateCodePerson(string orden,string code_person);
+        public bool UpdateOrdenCorte(Orden orden);
     }
 }

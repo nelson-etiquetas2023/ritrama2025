@@ -5,8 +5,10 @@ using Ritrama2025.Models;
 using Ritrama2025.Services.ExportData;
 using Ritrama2025.Services.ProduccionService;
 using Ritrama2025.Services.ReportsService.ReportsService;
+using Ritrama2025.Forms.Buscadores;
 using System.Configuration;
 using System.Data;
+using Ritrama2025.Services.CommonService;
 
 namespace Ritrama2025.Forms
 {
@@ -15,6 +17,7 @@ namespace Ritrama2025.Forms
         private readonly IProduccionService Service;
         private readonly IExportDataService ExportDataService;
         private readonly IReportsService ReportService;
+        private readonly ICommonService CommonService;
         DataSet Ds = new();
         readonly BindingSource Bs = [];
         readonly BindingSource BsCortes = [];
@@ -24,14 +27,19 @@ namespace Ritrama2025.Forms
         DataRowView RollosCortados = null!;
         string operadorId = "ff8fe855-0f8b-4062-8aa5-860d94f804d5";
         string operadorName = "NO-ASIGNADO";
+        int EditMode = 0;
+        Orden orden { get; set; } = null!;
+        List<Corte> cortes { get; set; } = [];
+        List<RolloCortado> detalle { get; set; } = [];
 
 
-        public FrmOrdenCorte(IProduccionService service, IExportDataService exportService, IReportsService reportService)
+        public FrmOrdenCorte(IProduccionService service, IExportDataService exportService, IReportsService reportService,ICommonService commonService)
         {
             InitializeComponent();
             Service = service;
             ExportDataService = exportService;
             ReportService = reportService;
+            CommonService = commonService;
         }
 
         private void FrmOrdenCorte_Load(object sender, EventArgs e)
@@ -42,71 +50,19 @@ namespace Ritrama2025.Forms
                 return await Service.LoadDataOC();
             });
             Ds = task.Result;
-            //Enlace a datos Encabezado.
-            Bs.DataSource = Ds;
-            Bs.DataMember = "DtMaster";
-            Bs.Sort = "numero DESC";
+            //Bs.Sort = "numero DESC";
             //Enlace a datos Encabezado de la Orden Corte.
             HeaderBinding();
-            //Enlace a datos de Grid-Cortes.
-            BsCortes.DataSource = Bs;
-            BsCortes.DataMember = "FK_ENCABEZADO_CORTES";
-            grid_cortes.AutoGenerateColumns = false;
-            ADD_COLUMN_GRID("it", 25, "It.", "num", grid_cortes);
-            ADD_COLUMN_GRID("width", 75, "Width [INCH]", "width", grid_cortes);
-            ADD_COLUMN_GRID("lenght", 75, "Lenght [PIES]", "lenght", grid_cortes);
-            ADD_COLUMN_GRID("msi", 75, "Msi", "msi", grid_cortes);
-            ADD_COLUMN_GRID("code_person", 85, "Code Person", "code_person", grid_cortes);
-            grid_cortes.DataSource = BsCortes;
-            //Enlace a datos de Grid-Rollos Cortados.
-            BsRollos.DataSource = Bs;
-            BsRollos.DataMember = "FK_MASTER_ROLLOS";
-            grid_items.AutoGenerateColumns = false;
-            ADD_COLUMN_GRID("roll_number", 25, "#", "roll_number", grid_items);
-            ADD_COLUMN_GRID("product_id", 60, "Product Id", "product_id", grid_items);
-            ADD_COLUMN_GRID("product_name", 250, "Product Name", "product_name", grid_items);
-            ADD_COLUMN_GRID("unique_code", 60, "Unique Code", "unique_code", grid_items);
-            ADD_COLUMN_GRID("width", 75, "Width [Inch]", "width", grid_items);
-            ADD_COLUMN_GRID("large", 75, "Length [Pies]", "large", grid_items);
-            ADD_COLUMN_GRID("msi", 75, "MSI", "msi", grid_items);
-            ADD_COLUMN_GRID("splice", 50, "Splice", "splice", grid_items);
-            ADD_COLUMN_GRID("roll_id", 75, "Roll Id.", "roll_id", grid_items);
-            ADD_COLUMN_GRID("code_person", 75, "Code Person.", "code_person", grid_items);
-            ADD_COLUMN_GRID("status", 80, "Status", "status", grid_items);
-            grid_items.DataSource = BsRollos;
+            BindingRollos();
+            BindingCortes();
             UpdateStepIndicator();
             ContadorRegistros();
         }
-
-        private void Bot_primero_Click(object sender, EventArgs e)
-        {
-            Bs.Position = Bs.Count - 1;
-            UpdateStepIndicator();
-            ContadorRegistros();
-        }
-
-        private void Bot_anterior_Click(object sender, EventArgs e)
-        {
-            Bs.Position += 1;
-            UpdateStepIndicator();
-            ContadorRegistros();
-        }
-
-        private void Bot_siguiente_Click(object sender, EventArgs e)
-        {
-            Bs.Position -= 1;
-            UpdateStepIndicator();
-            ContadorRegistros();
-        }
-
-        private void Bot_ultimo_Click(object sender, EventArgs e)
-        {
-            Bs.Position = 0;
-            UpdateStepIndicator();
-            ContadorRegistros();
-        }
+       
         private void HeaderBinding()
         {
+            Bs.DataSource = Ds;
+            Bs.DataMember = "DtMaster";
             txt_numeroOC.DataBindings.Add("Text", Bs, "numero");
             txt_fecha_emision.DataBindings.Add("Text", Bs, "fecha");
             txt_fecha_produccion.DataBindings.Add("Text", Bs, "fecha_produccion");
@@ -152,10 +108,69 @@ namespace Ritrama2025.Forms
                 if (e.Value == DBNull.Value || e.Value == null) e.Value = false;
             };
         }
+        private void BindingRollos()
+        {
+            //Enlace a datos de Grid-Rollos Cortados.
+            BsRollos.DataSource = Bs;
+            BsRollos.DataMember = "REL_MASTER_ROLLOS";
+            grid_items.AutoGenerateColumns = false;
+            ADD_COLUMN_GRID("roll_number", 25, "#", "roll_number", grid_items);
+            ADD_COLUMN_GRID("product_id", 60, "Product Id", "product_id", grid_items);
+            ADD_COLUMN_GRID("product_name", 250, "Product Name", "product_name", grid_items);
+            ADD_COLUMN_GRID("unique_code", 60, "Unique Code", "unique_code", grid_items);
+            ADD_COLUMN_GRID("width", 75, "Width [Inch]", "width", grid_items);
+            ADD_COLUMN_GRID("large", 75, "Length [Pies]", "large", grid_items);
+            ADD_COLUMN_GRID("msi", 75, "MSI", "msi", grid_items);
+            ADD_COLUMN_GRID("splice", 50, "Splice", "splice", grid_items);
+            ADD_COLUMN_GRID("roll_id", 75, "Roll Id.", "roll_id", grid_items);
+            ADD_COLUMN_GRID("code_person", 75, "Code Person.", "code_person", grid_items);
+            ADD_COLUMN_GRID("status", 80, "Status", "status", grid_items);
+            //ADD_COLUMN_GRID("numero", 80, "Numero", "numero", grid_items);
+            grid_items.DataSource = BsRollos;
+        }
 
+        private void BindingCortes()
+        {
+            // Enlace a datos de Grid-Cortes.
+            BsCortes.DataSource = Bs;
+            BsCortes.DataMember = "FK_ENCABEZADO_CORTES";
+            grid_cortes.AutoGenerateColumns = false;
+            ADD_COLUMN_GRID("it", 25, "It.", "num", grid_cortes);
+            ADD_COLUMN_GRID("width", 75, "Width [INCH]", "width", grid_cortes);
+            ADD_COLUMN_GRID("lenght", 75, "Lenght [PIES]", "lenght", grid_cortes);
+            ADD_COLUMN_GRID("msi", 75, "Msi", "msi", grid_cortes);
+            ADD_COLUMN_GRID("code_person", 85, "Code Person", "code_person", grid_cortes);
+            grid_cortes.DataSource = BsCortes;
+        }
 
+        private void Bot_primero_Click(object sender, EventArgs e)
+        {
+            Bs.Position = Bs.Count - 1;
+            UpdateStepIndicator();
+            ContadorRegistros();
+        }
 
+        private void Bot_anterior_Click(object sender, EventArgs e)
+        {
+            Bs.Position += 1;
+            UpdateStepIndicator();
+            ContadorRegistros();
+        }
 
+        private void Bot_siguiente_Click(object sender, EventArgs e)
+        {
+            Bs.Position -= 1;
+            UpdateStepIndicator();
+            ContadorRegistros();
+        }
+
+        private void Bot_ultimo_Click(object sender, EventArgs e)
+        {
+            Bs.Position = 0;
+            UpdateStepIndicator();
+            ContadorRegistros();
+        }
+       
         private static void ADD_COLUMN_GRID(string name, int size, string title, string field_bd, DataGridView grid)
         {
             DataGridViewTextBoxColumn col = new()
@@ -167,10 +182,8 @@ namespace Ritrama2025.Forms
             };
             grid.Columns.Add(col);
         }
-
         private void Opt_create_document_Click(object sender, EventArgs e)
         {
-            Bs.Sort = "";
             //1.- Inicialiozar el Documento de Orden de Corte.
             ParentRow = (DataRowView)Bs.AddNew()!;
             ParentRow.BeginEdit();
@@ -215,6 +228,13 @@ namespace Ritrama2025.Forms
                 ChildRowCortes["code_person"] = "S/N";
                 ChildRowCortes.EndEdit();
             }
+            if (grid_cortes.Rows.Count > 0) 
+            {
+                grid_cortes.ClearSelection();
+                grid_cortes.CurrentCell = grid_cortes.Rows[0].Cells[0];
+                grid_cortes.Rows[0].Selected = true;
+            }
+
             //OPERADOR POR DEFECTO.
             Service.CheckOperatorDefault(operadorId, operadorName);
             txt_operador_id.Text = operadorId;
@@ -235,6 +255,19 @@ namespace Ritrama2025.Forms
             txt_menos2.ReadOnly = false;
             txt_sellOrder.ReadOnly = false;
             btn_buscar_rollid1.Enabled = true;
+            CloseToolsBar();
+            //Controles del Formulario.
+            btn_generar_rollos.Enabled = true;
+            btn_add_row_corte.Enabled = true;
+            btn_delete_row_corte.Enabled = true;
+            txt_vueltas1.Enabled = true;
+            txt_step.Text = "1";
+            chk_desperdicio1.Enabled = true;
+            UpdateStepIndicator();
+            EditMode = 1;
+        }
+        private void CloseToolsBar()
+        {
             //Menu opciones
             bot_primero.Enabled = false;
             bot_siguiente.Enabled = false;
@@ -244,20 +277,11 @@ namespace Ritrama2025.Forms
             bot_imprimir.Enabled = false;
             bot_etiquetar.Enabled = false;
             bot_exportar.Enabled = false;
-            bot_buscar.Enabled = false;
+            bot_editOrden.Enabled = false;
             bot_guardar.Enabled = true;
             bot_cancelar.Enabled = true;
-            //Controles del Formulario.
-            btn_generar_rollos.Enabled = true;
-            btn_add_row_corte.Enabled = true;
-            btn_delete_row_corte.Enabled = true;
-            txt_vueltas1.Enabled = true;
-            txt_step.Text = "1";
-            chk_desperdicio1.Enabled = true;
-            UpdateStepIndicator();
-
+            bot_buscarOrders.Enabled = false;
         }
-
         private void Btn_buscar_rollid1_Click(object sender, EventArgs e)
         {
             Frm_RollId frmrollid = new()
@@ -483,6 +507,11 @@ namespace Ritrama2025.Forms
 
         private void Btn_generar_rollos_Click(object sender, EventArgs e)
         {
+            if (!ValidDefintionsCortes())
+            {
+                MessageBox.Show("debe definir los cortes primero...");
+                return;
+            }
             GENERAR_ROLLOS_CORTADOS();
         }
 
@@ -617,7 +646,7 @@ namespace Ritrama2025.Forms
             DataRowView rowMaestro = (DataRowView)Bs.Current;
 
             // Obtener todas las filas hijas relacionadas
-            DataRow[] filasHijas = rowMaestro.Row.GetChildRows("FK_MASTER_ROLLOS");
+            DataRow[] filasHijas = rowMaestro.Row.GetChildRows("REL_MASTER_ROLLOS");
 
             // Eliminar cada fila hija
             foreach (DataRow filaHija in filasHijas)
@@ -642,7 +671,7 @@ namespace Ritrama2025.Forms
         }
         private void CREATE_HEADER_ORDEN()
         {
-            Orden orden = new()
+            orden = new()
             {
                 Numero = Convert.ToInt32(txt_numeroOC.Text),
                 Fecha = Convert.ToDateTime(txt_fecha_emision.Text),
@@ -672,15 +701,15 @@ namespace Ritrama2025.Forms
                 Cortes_Largo2 = Convert.ToInt32(txt_vueltas2.Value),
                 Cortes_Ancho = Convert.ToInt32(txt_cortes_ancho.Text),
                 Cantidad_Rollos = Convert.ToInt32(txt_rollos_cortar1.Text),
-                Cantidad_Rollos2 = Convert.ToInt32(txt_rollos_cortar2.Text),
+                Cantidad_Rollos2 = Convert.ToInt32(txt_rollos_cortar2.Text == "" ? 0 : txt_rollos_cortar2.Text),
                 Anulada = false,
                 Procesado = false,
                 CloseDocument = false,
                 Descartable1_pies = 0,
                 Descartable2_pies = 0,
-                Total_Inch_Ancho = Convert.ToDouble(txt_ancho_corte.Text),
-                Lenght_Master_Real = Convert.ToDouble(txt_real1.Text),
-                Master_lenght2_Real = Convert.ToDouble(txt_real2.Text),
+                Total_Inch_Ancho = Convert.ToDouble(txt_ancho_corte.Text == "" ? 0 : txt_ancho_corte.Text),
+                Lenght_Master_Real = Convert.ToDouble(txt_real1.Text == "" ? 0 : txt_real1.Text),
+                Master_lenght2_Real = Convert.ToDouble(txt_real2.Text == "" ? 0 : txt_real2.Text),
                 LastUpdate = DateTime.Now,
                 FechaAutorize = DateTime.Now,
                 Step = 1,
@@ -700,13 +729,13 @@ namespace Ritrama2025.Forms
                 Desperdicio = chk_desperdicio1.Checked
 
             };
-            Service.GuardarEncabezadoOrdenCorte(orden);
+
 
         }
 
         private void CREATE_CORTES()
         {
-            List<Corte> cortes = [];
+            cortes = [];
             for (int i = 0; i <= grid_cortes.Rows.Count - 1; i++)
             {
                 var codePersonValue = grid_cortes.Rows[i].Cells["code_person"].Value;
@@ -723,12 +752,12 @@ namespace Ritrama2025.Forms
                 };
                 cortes.Add(corte);
             }
-            Service.GuardarCortes(cortes);
+
         }
 
         private void CREATE_DETALLE_ORDEN()
         {
-            List<RolloCortado> detalle = [];
+            detalle = [];
             for (int i = 0; i <= grid_items.Rows.Count - 1; i++)
             {
                 var rollNumberValue = grid_items.Rows[i].Cells["roll_number"].Value;
@@ -764,11 +793,25 @@ namespace Ritrama2025.Forms
                     Status = "OK.",
                 };
                 detalle.Add(rollo);
+
+
             }
 
-            Service.GuardarRollos(detalle);
+
 
         }
+
+        private void GuardarOrdeAddMode()
+        {
+            Service.GuardarEncabezadoOrdenCorte(orden);
+            Service.GuardarCortes(cortes);
+            Service.GuardarRollos(detalle);
+        }
+        private void GuardarOrderUpdateMode()
+        {
+            Service.UpdateOrdenCorte(orden);
+        }
+
 
         private void Bot_guardar_Click(object sender, EventArgs e)
         {
@@ -812,9 +855,18 @@ namespace Ritrama2025.Forms
             CREATE_HEADER_ORDEN();
             CREATE_CORTES();
             CREATE_DETALLE_ORDEN();
-            //Actualizar el consecutivo de la Orden de Corte den la Base de Datos.
-            string UpdateConsecBd = (Convert.ToInt32(txt_numeroOC.Text) + 1).ToString();
-            Service.UpdateConsecOC(UpdateConsecBd);
+
+            if (EditMode == 1)
+            {
+                GuardarOrdeAddMode();
+                //Actualizar el consecutivo de la Orden de Corte den la Base de Datos.
+                string UpdateConsecBd = (Convert.ToInt32(txt_numeroOC.Text) + 1).ToString();
+                Service.UpdateConsecOC(UpdateConsecBd);
+            }
+            else if (EditMode == 2)
+            {
+                GuardarOrderUpdateMode();
+            }
             //Menu opciones
             bot_primero.Enabled = true;
             bot_siguiente.Enabled = true;
@@ -824,9 +876,18 @@ namespace Ritrama2025.Forms
             bot_imprimir.Enabled = true;
             bot_etiquetar.Enabled = true;
             bot_exportar.Enabled = true;
-            bot_buscar.Enabled = true;
+            bot_editOrden.Enabled = true;
+            bot_buscarOrders.Enabled = true;
             bot_guardar.Enabled = false;
             bot_cancelar.Enabled = false;
+            //botones formulario
+            btn_buscar_customer.Enabled = false;
+            btn_buscar_rollid1.Enabled = false;
+            btn_buscar_rollid2.Enabled = false;
+            btn_buscar_operador.Enabled = false;
+            btn_generar_rollos.Enabled = false;
+            btn_add_row_corte.Enabled = false;
+            btn_delete_row_corte.Enabled = false;
             //controles del formulario.
             txt_fecha_emision.Enabled = false;
             txt_fecha_produccion.Enabled = false;
@@ -835,22 +896,17 @@ namespace Ritrama2025.Forms
             txt_menos1.ReadOnly = true;
             txt_menos2.ReadOnly = true;
             txt_sellOrder.ReadOnly = true;
-            btn_buscar_customer.Enabled = false;
-            btn_buscar_rollid1.Enabled = false;
-            btn_buscar_rollid2.Enabled = false;
-            btn_buscar_operador.Enabled = false;
-            btn_generar_rollos.Enabled = false;
-            grid_cortes.ReadOnly = true;
-            btn_add_row_corte.Enabled = false;
-            btn_delete_row_corte.Enabled = false;
             txt_vueltas1.Enabled = false;
             txt_largo_corte.Enabled = false;
             txt_long_cortar.ReadOnly = true;
             chk_desperdicio1.Enabled = false;
+            grid_cortes.ReadOnly = true;
+            EditMode = 0;
+            ContadorRegistros();
         }
         private void ContadorRegistros()
         {
-            registros.Text = "Registros: " + (Bs.Position + 1) + "/" + Bs.Count.ToString();
+            registros.Text = "Registros: " + (Bs.Position+1) + "/" + Bs.Count.ToString();
         }
 
         private void InitStepIndicator()
@@ -951,7 +1007,7 @@ namespace Ritrama2025.Forms
             // Obtener la fila maestra actual como DataRowView
             DataRowView rowMaestro = (DataRowView)Bs.Current;
             // Obtener todas las filas hijas relacionadas
-            DataRow[] filasHijas = rowMaestro.Row.GetChildRows("FK_MASTER_ROLLOS");
+            DataRow[] filasHijas = rowMaestro.Row.GetChildRows("REL_MASTER_ROLLOS");
             int numero_unico = Service.BuscarUniqueCodeConsec();
             //acvtualiza la ui del datagrid items rollos cortados
             List<RolloCortado> rolls = [];
@@ -989,7 +1045,7 @@ namespace Ritrama2025.Forms
         public DataRow[] BuscarItemsDetailsOrden()
         {
             DataRowView rowMaestro = (DataRowView)Bs.Current!;
-            return rowMaestro.Row.GetChildRows("FK_MASTER_ROLLOS");
+            return rowMaestro.Row.GetChildRows("REL_MASTER_ROLLOS");
         }
 
         private void Btn_generar_txt_Click(object sender, EventArgs e)
@@ -1031,7 +1087,7 @@ namespace Ritrama2025.Forms
         private void Opt_aprobar_orden_Click(object sender, EventArgs e)
         {
             //cargar el formulario de aprobacion
-            Frm_AprobarOC form = new()
+            Frm_AprobarOC form = new(CommonService)
             {
                 NumeroOC = txt_numeroOC.Text,
                 TypeAction = "WRITE"
@@ -1055,7 +1111,7 @@ namespace Ritrama2025.Forms
                 MessageBox.Show("el documento no esta aprobado...");
                 return;
             }
-            Frm_AprobarOC form = new()
+            Frm_AprobarOC form = new(CommonService)
             {
                 NumeroOC = txt_numeroOC.Text,
                 TypeAction = "READ"
@@ -1136,7 +1192,7 @@ namespace Ritrama2025.Forms
             bot_imprimir.Enabled = true;
             bot_exportar.Enabled = true;
             bot_accion.Enabled = true;
-            bot_buscar.Enabled = true;
+            bot_editOrden.Enabled = true;
             //cerrar el formulario
             txt_long_cortar.ReadOnly = true;
             txt_vueltas1.ReadOnly = true;
@@ -1179,16 +1235,45 @@ namespace Ritrama2025.Forms
 
         private void btn_code_person_Click(object sender, EventArgs e)
         {
-            if (txt_code_person.Text == "") 
+            if (txt_code_person.Text == "")
             {
                 MessageBox.Show("Debe ingresar el codigo personalizado...", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             foreach (DataRowView row in BsRollos)
             {
-                row["code_person"]=txt_code_person.Text.ToString();
+                row["code_person"] = txt_code_person.Text.ToString();
             }
             Service.OrdenUpdateCodePerson(txt_numeroOC.Text, txt_code_person.Text);
+        }
+
+        private void bot_buscar_Click(object sender, EventArgs e)
+        {
+            txt_fecha_emision.Enabled = true;
+            txt_fecha_produccion.Enabled = true;
+            btn_buscar_operador.Enabled = true;
+            btn_buscar_customer.Enabled = true;
+            txt_sellOrder.ReadOnly = false;
+            chk_desperdicio1.Enabled = true;
+            CloseToolsBar();
+            EditMode = 2;
+        }
+
+        private void bot_buscarOrders_Click(object sender, EventArgs e)
+        {
+            FrmBuscadorOC fbuscador = new()
+            {
+                DtItems = Ds.Tables["DtMaster"]!
+            };  
+            fbuscador.ShowDialog();
+            if (fbuscador.Orden != null)
+            {
+                int busqueda = Bs.Find("numero", fbuscador.Orden);
+                if (busqueda > 0)
+                {
+                    Bs.Position = busqueda;
+                }
+            }
         }
     }
 }

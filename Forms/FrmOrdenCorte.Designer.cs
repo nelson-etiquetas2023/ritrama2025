@@ -49,10 +49,11 @@
             opt_modif_orden = new ToolStripMenuItem();
             bot_guardar = new ToolStripButton();
             bot_cancelar = new ToolStripButton();
+            bot_editOrden = new ToolStripButton();
             bot_imprimir = new ToolStripButton();
             bot_exportar = new ToolStripButton();
             bot_etiquetar = new ToolStripButton();
-            bot_buscar = new ToolStripButton();
+            bot_buscarOrders = new ToolStripButton();
             label2 = new Label();
             txt_numeroOC = new TextBox();
             txt_fecha_emision = new DateTimePicker();
@@ -224,7 +225,7 @@
             // toolStrip1
             // 
             toolStrip1.Font = new Font("Microsoft Sans Serif", 11.25F);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { bot_primero, bot_anterior, bot_siguiente, bot_ultimo, bot_accion, bot_guardar, bot_cancelar, bot_imprimir, bot_exportar, bot_etiquetar, bot_buscar });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { bot_primero, bot_anterior, bot_siguiente, bot_ultimo, bot_accion, bot_guardar, bot_cancelar, bot_editOrden, bot_imprimir, bot_exportar, bot_etiquetar, bot_buscarOrders });
             toolStrip1.Location = new Point(0, 62);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1263, 33);
@@ -359,6 +360,17 @@
             bot_cancelar.Text = "Cancel";
             bot_cancelar.Click += bot_cancelar_Click;
             // 
+            // bot_editOrden
+            // 
+            bot_editOrden.AutoSize = false;
+            bot_editOrden.Font = new Font("Microsoft Sans Serif", 11.25F);
+            bot_editOrden.Image = (Image)resources.GetObject("bot_editOrden.Image");
+            bot_editOrden.ImageTransparentColor = Color.Magenta;
+            bot_editOrden.Name = "bot_editOrden";
+            bot_editOrden.Size = new Size(80, 30);
+            bot_editOrden.Text = "Editar";
+            bot_editOrden.Click += bot_buscar_Click;
+            // 
             // bot_imprimir
             // 
             bot_imprimir.AutoSize = false;
@@ -391,15 +403,16 @@
             bot_etiquetar.Size = new Size(80, 30);
             bot_etiquetar.Text = "Etiquetar";
             // 
-            // bot_buscar
+            // bot_buscarOrders
             // 
-            bot_buscar.AutoSize = false;
-            bot_buscar.Font = new Font("Microsoft Sans Serif", 11.25F);
-            bot_buscar.Image = (Image)resources.GetObject("bot_buscar.Image");
-            bot_buscar.ImageTransparentColor = Color.Magenta;
-            bot_buscar.Name = "bot_buscar";
-            bot_buscar.Size = new Size(80, 30);
-            bot_buscar.Text = "Buscar";
+            bot_buscarOrders.AutoSize = false;
+            bot_buscarOrders.Font = new Font("Microsoft Sans Serif", 11.25F);
+            bot_buscarOrders.Image = (Image)resources.GetObject("bot_buscarOrders.Image");
+            bot_buscarOrders.ImageTransparentColor = Color.Magenta;
+            bot_buscarOrders.Name = "bot_buscarOrders";
+            bot_buscarOrders.Size = new Size(80, 30);
+            bot_buscarOrders.Text = "Buscar";
+            bot_buscarOrders.Click += bot_buscarOrders_Click;
             // 
             // label2
             // 
@@ -1766,7 +1779,7 @@
         private ToolStripButton bot_anterior;
         private ToolStripButton bot_siguiente;
         private ToolStripButton bot_ultimo;
-        private ToolStripButton bot_buscar;
+        private ToolStripButton bot_editOrden;
         private ToolStripButton bot_cancelar;
         private ToolStripButton bot_imprimir;
         private ToolStripButton bot_exportar;
@@ -1804,5 +1817,6 @@
         private CheckBox chk_generartxt_rc;
         private Label label35;
         private TextBox txt_sellOrder;
+        private ToolStripButton bot_buscarOrders;
     }
 }

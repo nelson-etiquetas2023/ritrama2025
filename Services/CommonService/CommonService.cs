@@ -418,5 +418,17 @@ namespace Ritrama2025.Services.CommonService
             }
             return table;
         }
+        public static void ADD_COLUMN_GRID(string name, int size, string title, string field_bd, DataGridView grid)
+        {
+            DataGridViewTextBoxColumn col = new()
+            {
+                Name = name,
+                Width = size,
+                HeaderText = title,
+                DataPropertyName = field_bd,
+            };
+            grid.Columns.Add(col);
+        }
+
     }
 }
