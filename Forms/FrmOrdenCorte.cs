@@ -1,14 +1,14 @@
 ﻿using Newtonsoft.Json;
+using Ritrama2025.Forms.Buscadores;
 using Ritrama2025.Forms.Otros;
 using Ritrama2025.Forms.Seleccion;
 using Ritrama2025.Models;
+using Ritrama2025.Services.CommonService;
 using Ritrama2025.Services.ExportData;
 using Ritrama2025.Services.ProduccionService;
 using Ritrama2025.Services.ReportsService.ReportsService;
-using Ritrama2025.Forms.Buscadores;
 using System.Configuration;
 using System.Data;
-using Ritrama2025.Services.CommonService;
 
 namespace Ritrama2025.Forms
 {
@@ -50,7 +50,7 @@ namespace Ritrama2025.Forms
                 return await Service.LoadDataOC();
             });
             Ds = task.Result;
-            //Bs.Sort = "numero DESC";
+            
             //Enlace a datos Encabezado de la Orden Corte.
             HeaderBinding();
             BindingRollos();
@@ -112,20 +112,20 @@ namespace Ritrama2025.Forms
         {
             //Enlace a datos de Grid-Rollos Cortados.
             BsRollos.DataSource = Bs;
-            BsRollos.DataMember = "REL_MASTER_ROLLOS";
-            grid_items.AutoGenerateColumns = false;
-            ADD_COLUMN_GRID("roll_number", 25, "#", "roll_number", grid_items);
-            ADD_COLUMN_GRID("product_id", 60, "Product Id", "product_id", grid_items);
-            ADD_COLUMN_GRID("product_name", 250, "Product Name", "product_name", grid_items);
-            ADD_COLUMN_GRID("unique_code", 60, "Unique Code", "unique_code", grid_items);
-            ADD_COLUMN_GRID("width", 75, "Width [Inch]", "width", grid_items);
-            ADD_COLUMN_GRID("large", 75, "Length [Pies]", "large", grid_items);
-            ADD_COLUMN_GRID("msi", 75, "MSI", "msi", grid_items);
-            ADD_COLUMN_GRID("splice", 50, "Splice", "splice", grid_items);
-            ADD_COLUMN_GRID("roll_id", 75, "Roll Id.", "roll_id", grid_items);
-            ADD_COLUMN_GRID("code_person", 75, "Code Person.", "code_person", grid_items);
-            ADD_COLUMN_GRID("status", 80, "Status", "status", grid_items);
-            //ADD_COLUMN_GRID("numero", 80, "Numero", "numero", grid_items);
+            BsRollos.DataMember = R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS; 
+        //    grid_items.AutoGenerateColumns = false;
+        //    ADD_COLUMN_GRID("roll_number", 25, "#", "roll_number", grid_items);
+        //    ADD_COLUMN_GRID("product_id", 60, "Product Id", "product_id", grid_items);
+        //    ADD_COLUMN_GRID("product_name", 250, "Product Name", "product_name", grid_items);
+        //    ADD_COLUMN_GRID("unique_code", 60, "Unique Code", "unique_code", grid_items);
+        //    ADD_COLUMN_GRID("width", 75, "Width [Inch]", "width", grid_items);
+        //    ADD_COLUMN_GRID("large", 75, "Length [Pies]", "large", grid_items);
+        //    ADD_COLUMN_GRID("msi", 75, "MSI", "msi", grid_items);
+        //    ADD_COLUMN_GRID("splice", 50, "Splice", "splice", grid_items);
+        //    ADD_COLUMN_GRID("roll_id", 75, "Roll Id.", "roll_id", grid_items);
+        //    ADD_COLUMN_GRID("code_person", 75, "Code Person.", "code_person", grid_items);
+        //    ADD_COLUMN_GRID("status", 80, "Status", "status", grid_items);
+        //    //ADD_COLUMN_GRID("numero", 80, "Numero", "numero", grid_items);
             grid_items.DataSource = BsRollos;
         }
 
@@ -646,7 +646,7 @@ namespace Ritrama2025.Forms
             DataRowView rowMaestro = (DataRowView)Bs.Current;
 
             // Obtener todas las filas hijas relacionadas
-            DataRow[] filasHijas = rowMaestro.Row.GetChildRows("REL_MASTER_ROLLOS");
+            DataRow[] filasHijas = rowMaestro.Row.GetChildRows(R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS);
 
             // Eliminar cada fila hija
             foreach (DataRow filaHija in filasHijas)
@@ -862,6 +862,7 @@ namespace Ritrama2025.Forms
                 //Actualizar el consecutivo de la Orden de Corte den la Base de Datos.
                 string UpdateConsecBd = (Convert.ToInt32(txt_numeroOC.Text) + 1).ToString();
                 Service.UpdateConsecOC(UpdateConsecBd);
+                ACTUALIZAR_INVENTARIOS_MASTER();
             }
             else if (EditMode == 2)
             {
@@ -904,6 +905,42 @@ namespace Ritrama2025.Forms
             EditMode = 0;
             ContadorRegistros();
         }
+        private async void ACTUALIZAR_INVENTARIOS_MASTER() 
+        {
+            //actualizarla tabla de detalle de consumo parciales.
+            double cons = txt_real1_length.Text == "" ? 0 : Convert.ToDouble(txt_real1_length.Text);
+
+            var p = new { rollid = txt_rollid_1.Text, orden = txt_numeroOC.Text, consumo = cons, fecha = DateTime.Now };
+            await Service.UpdateDetailsConsumosMasterIniciales(p.rollid, p.orden, p.consumo, p.fecha);
+
+            // actualiza el campo largo_consumido en orden_corte.
+            double consumoParcial =  txt_real1_length.Text=="" ? 0 : Convert.ToDouble(txt_real1_length.Text);
+            string rollid = txt_rollid_1.Text;
+            await Service.UpdateInventaryMasterInitial(consumoParcial,rollid);
+            //actualiza el registro de la tabla de consumos parciales master [recarga los iniciales].
+
+            var fila = Ds.Tables["DtRollid"]!.AsEnumerable()
+                                .FirstOrDefault(row => row.Field<string>("Roll_Id") == p.rollid);
+
+            if (fila != null)
+            {
+                decimal cantidadActual = fila.Field<decimal>("largo_consumido");
+                decimal length_original = fila.Field<decimal>("lenght");
+                decimal cond = txt_real1_length.Text == "" ? 0 : Convert.ToDecimal(txt_real1_length.Text);
+                fila.SetField("largo_consumido", cantidadActual + cond);
+                fila.SetField("largo_restante", length_original - (cantidadActual + cond));
+                decimal restante = fila.Field<decimal>("largo_restante");
+                decimal consumos = (cantidadActual + cond);
+
+                string estado = restante == 0 ? "Agotado" :
+                    consumos == 0 ? "Completo" :
+                    "Parcialmente Utilizado";
+
+                fila.SetField("estado", estado);
+
+            }
+        }
+
         private void ContadorRegistros()
         {
             registros.Text = "Registros: " + (Bs.Position+1) + "/" + Bs.Count.ToString();
@@ -1007,7 +1044,7 @@ namespace Ritrama2025.Forms
             // Obtener la fila maestra actual como DataRowView
             DataRowView rowMaestro = (DataRowView)Bs.Current;
             // Obtener todas las filas hijas relacionadas
-            DataRow[] filasHijas = rowMaestro.Row.GetChildRows("REL_MASTER_ROLLOS");
+            DataRow[] filasHijas = rowMaestro.Row.GetChildRows(R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS);
             int numero_unico = Service.BuscarUniqueCodeConsec();
             //acvtualiza la ui del datagrid items rollos cortados
             List<RolloCortado> rolls = [];
@@ -1045,7 +1082,7 @@ namespace Ritrama2025.Forms
         public DataRow[] BuscarItemsDetailsOrden()
         {
             DataRowView rowMaestro = (DataRowView)Bs.Current!;
-            return rowMaestro.Row.GetChildRows("REL_MASTER_ROLLOS");
+            return rowMaestro.Row.GetChildRows(R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS);
         }
 
         private void Btn_generar_txt_Click(object sender, EventArgs e)

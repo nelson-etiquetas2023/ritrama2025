@@ -1,8 +1,31 @@
 ﻿
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+
 namespace Ritrama2025
 {
     public static class R
     {
+        public class PARAMETERS 
+        {
+            public static string NAME_RELATION_OC_MASTER_DETAILS = "RELATION_MASTER_DETAILS_ROLLOS_CORTADOS";
+        }
+        public class QUERY 
+        {
+            public class PRODUCTION 
+            {
+                public static string SQL_QUERY_SELECT_LOAD_OC_HEADER = "SELECT numero,fecha,fecha_produccion,a.product_id,b.product_Name,rollid_1,width_1,lenght_1,rollid_2,width_2,lenght_2,util1_real_width,util1_real_lenght,util2_real_width,util2_real_lenght,rest1_width,rest1_lenght,rest2_width,rest2_lenght,a.operador_id,c.nombre,a.customer_id,d.customer_name,tot_inch_ancho,lenght_entrada,resta_entrada,total_salida,plus1_pies,plus2_pies,longitud_cortar,cortes_ancho,cortes_largo,cant_rollos,cant_rollos2,step,sellOrder,desperdicio FROM orden_corte a LEFT JOIN producto b ON a.product_id = b.product_id LEFT JOIN operadores c ON a.operador_id = c.operador_id LEFT JOIN customer d ON a.customer_id = d.customer_id ORDER BY numero DESC";
+                public static string SQL_QUERY_SELECT_LOAD_OC_CORTES = "select num,width,lenght,msi,orden,code_person from cortes";
+                public static string SQL_QUERY_SELECT_LOAD_OC_ROLLO_CORTADO = "SELECT numero,product_id,product_name,roll_number,unique_code,splice,width,large,msi,roll_id,code_person,status,disponible,width_c,lenght_c,ubic,ratio,fecha,rollid_oculto FROM rolls_details ORDER BY roll_number ASC";
+                public static string SQL_QUERY_SELECT_LOAD_ROLL_ID = "SELECT a.roll_id,a.part_number,b.product_name,a.master,a.graphics,a.resma,a.Width,lenght=a.lenght - a.lenght_c, disponible, fecha_pro, fecha_recep, splice, Ubicacion,'Inic.' AS tipo_mov,largo_consumido,(lenght - largo_consumido) as largo_restante,CASE WHEN largo_consumido=0 THEN 'Completo' WHEN (lenght - largo_consumido)=0 THEN 'Agotado' ELSE 'Parcialmente Utilizado' END AS estado FROM MasterInic a LEFT JOIN producto b ON a.part_number = b.product_id where b.MasterRolls = 1 and a.disponible = 1";
+                public static string SQL_QUERY_SELECT_LOAD_OPERATOR = "SELECT operador_id,nombre,status FROM operadores";
+                public static string SQL_QUERY_SELECT_LOAD_CUSTOMER = "SELECT customer_id,customer_name FROM customer";
+
+                public static string SQL_QUERY_ACTUALIZAR_INVENTARIO_INICIALES = "UPDATE MasterInic SET largo_consumido=largo_consumido+@consumo WHERE roll_id=@rollid";
+
+                public static string UPDATE_QUERY_ACTUALIZAR_INVENTARIO_DETAILS_INICIALES ="INSERT INTO MasterDetailsInic (rollid,orden,consumo,fecha_reg) VALUES(@rollid,@orden,@consumo,@fecha)";
+
+            }
+        }
         public static class CONNECTIONSTRINGS 
         {
             public static readonly string DESARROLLO = @"Data Source=DATABASE-CENTER\\RITRAMASRV01; Initial Catalog=RITRAMA2;User Id=Npino;Password=123;TrustServerCertificate=True;";

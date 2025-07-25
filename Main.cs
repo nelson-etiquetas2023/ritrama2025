@@ -57,19 +57,9 @@ namespace Ritrama2025
             splitContainer1.Panel1.Controls.Add(FormManager.ShowForm<FrmProductos>(this));
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void bot_inventario_Click(object sender, EventArgs e)
         {
             splitContainer1.Panel1.Controls.Add(FormManager.ShowForm<Frm_Inventarios>(this));
-        }
-
-        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 

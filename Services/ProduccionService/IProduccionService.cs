@@ -18,5 +18,8 @@ namespace Ritrama2025.Services.ProduccionService
         public bool CheckOperatorDefault(string id, string name);
         public bool OrdenUpdateCodePerson(string orden,string code_person);
         public bool UpdateOrdenCorte(Orden orden);
+        public Task<bool> UpdateInventaryMasterInitial(double ConsumoParcial,string orden);
+        public Task<DataTable?> LoadTableMasterInic();
+        public Task<bool> UpdateDetailsConsumosMasterIniciales(string rollid, string orden,double length_consumo, DateTime fecha_reg);  
     }
 }

@@ -54,14 +54,14 @@
             // 
             txt_buscar.Location = new Point(4, 172);
             txt_buscar.Name = "txt_buscar";
-            txt_buscar.Size = new Size(739, 23);
+            txt_buscar.Size = new Size(897, 23);
             txt_buscar.TabIndex = 0;
             // 
             // btn_buscar
             // 
             btn_buscar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_buscar.Image = Properties.Resources.search_16px;
-            btn_buscar.Location = new Point(749, 172);
+            btn_buscar.Location = new Point(907, 172);
             btn_buscar.Name = "btn_buscar";
             btn_buscar.Size = new Size(105, 23);
             btn_buscar.TabIndex = 1;
@@ -82,9 +82,8 @@
             GridItems.Name = "GridItems";
             GridItems.ReadOnly = true;
             GridItems.RowHeadersWidth = 33;
-            GridItems.ScrollBars = ScrollBars.Vertical;
             GridItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            GridItems.Size = new Size(850, 217);
+            GridItems.Size = new Size(1008, 382);
             GridItems.TabIndex = 2;
             GridItems.CellMouseDoubleClick += GridItems_CellMouseDoubleClick;
             // 
@@ -92,7 +91,7 @@
             // 
             CONTADOR_REGISTROS.AutoSize = true;
             CONTADOR_REGISTROS.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            CONTADOR_REGISTROS.Location = new Point(12, 440);
+            CONTADOR_REGISTROS.Location = new Point(12, 586);
             CONTADOR_REGISTROS.Name = "CONTADOR_REGISTROS";
             CONTADOR_REGISTROS.Size = new Size(160, 15);
             CONTADOR_REGISTROS.TabIndex = 3;
@@ -101,7 +100,7 @@
             // chk_rebobinado
             // 
             chk_rebobinado.AutoSize = true;
-            chk_rebobinado.Location = new Point(12, 489);
+            chk_rebobinado.Location = new Point(12, 635);
             chk_rebobinado.Name = "chk_rebobinado";
             chk_rebobinado.Size = new Size(142, 19);
             chk_rebobinado.TabIndex = 4;
@@ -112,7 +111,7 @@
             // 
             btn_actualizar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_actualizar.Image = Properties.Resources.update_doc;
-            btn_actualizar.Location = new Point(12, 514);
+            btn_actualizar.Location = new Point(12, 660);
             btn_actualizar.Name = "btn_actualizar";
             btn_actualizar.Size = new Size(142, 39);
             btn_actualizar.TabIndex = 5;
@@ -130,9 +129,9 @@
             groupBox1.Controls.Add(rad_productname);
             groupBox1.Controls.Add(rad_productid);
             groupBox1.Controls.Add(rad_rollid);
-            groupBox1.Location = new Point(654, 424);
+            groupBox1.Location = new Point(812, 586);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(200, 129);
+            groupBox1.Size = new Size(200, 102);
             groupBox1.TabIndex = 6;
             groupBox1.TabStop = false;
             groupBox1.Text = "Filtros de Busqueda";
@@ -176,7 +175,7 @@
             panel1.Controls.Add(label2);
             panel1.Location = new Point(4, 8);
             panel1.Name = "panel1";
-            panel1.Size = new Size(850, 100);
+            panel1.Size = new Size(1008, 100);
             panel1.TabIndex = 7;
             // 
             // pictureBox1
@@ -211,7 +210,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(866, 562);
+            ClientSize = new Size(1024, 703);
             Controls.Add(label1);
             Controls.Add(panel1);
             Controls.Add(groupBox1);

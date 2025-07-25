@@ -31,6 +31,7 @@ namespace Ritrama2025.Helpers
             form.StartPosition = FormStartPosition.Manual;
             form.Location = new Point(0, 0);
             form.WindowState = FormWindowState.Normal;
+            
 
             _forms[type] = form;
 

@@ -29,20 +29,19 @@ namespace Ritrama2025.Forms.Seleccion
         {
             GridItems.DataSource = null;
             GridItems.Columns.Clear();
-            AGREGAR_COLUMN_GRID("rollid", 82, "Roll Id", "Roll_Id");
-            AGREGAR_COLUMN_GRID("product_id", 65, "Product Id", "part_number");
+            AGREGAR_COLUMN_GRID("rollid", 70, "Roll Id", "Roll_Id");
+            AGREGAR_COLUMN_GRID("product_id", 60, "Product Id", "part_number");
             AGREGAR_COLUMN_GRID("product_name", 240, "Nombre del Producto", "product_name");
-            AGREGAR_COLUMN_GRID("width", 65, "Width", "width");
-            AGREGAR_COLUMN_GRID("lenght", 65, "Lenght", "lenght");
+            AGREGAR_COLUMN_GRID("Ancho", 65, "Width", "width");
+            AGREGAR_COLUMN_GRID("lenght", 65, "Largo Original", "lenght");
+            AGREGAR_COLUMN_GRID("lenght_consumido", 70, "Largo Consumido", "largo_consumido");
+            AGREGAR_COLUMN_GRID("largo_restante", 70, "Largo Restante", "largo_restante");
+            AGREGAR_COLUMN_GRID("estado", 70, "Estado", "estado");
             AGREGAR_COLUMN_GRID("fecha_pro", 67, "Fecha produccion", "fecha_pro");
             AGREGAR_COLUMN_GRID("fecha_doc", 67, "Fecha Recepcion", "fecha_recep");
             AGREGAR_COLUMN_GRID("splice", 50, "Splice", "splice");
             AGREGAR_COLUMN_GRID("ubicacion", 60, "Ubicacion", "ubicacion");
             AGREGAR_COLUMN_GRID("tipo_mov", 40, "Tipo", "tipo_mov");
-            GridItems.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            GridItems.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            GridItems.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            GridItems.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
         private void AGREGAR_COLUMN_GRID(string name, int size, string title, string field_bd)
         {
@@ -82,12 +81,19 @@ namespace Ritrama2025.Forms.Seleccion
         {
             if (e.RowIndex >= 0)
             {
-                // Ensure that the cell values are not null before accessing them
-                var rollIdValue = GridItems.Rows[e.RowIndex].Cells[0].Value?.ToString();
+                 double resto = GridItems.Rows[e.RowIndex].Cells["largo_restante"].Value!.ToString() == "" ? 0:Convert.ToDouble(GridItems.Rows[e.RowIndex].Cells["largo_restante"].Value);
+
+                if (resto <= 0) 
+                {
+                    MessageBox.Show("este rollo ya ha sido consumido...");
+                    return;
+                }
+                    // Ensure that the cell values are not null before accessing them
+                    var rollIdValue = GridItems.Rows[e.RowIndex].Cells[0].Value?.ToString();
                 var productIdValue = GridItems.Rows[e.RowIndex].Cells[1].Value?.ToString();
                 var productNameValue = GridItems.Rows[e.RowIndex].Cells[2].Value?.ToString();
                 var widthValue = GridItems.Rows[e.RowIndex].Cells[3].Value;
-                var lengthValue = GridItems.Rows[e.RowIndex].Cells[4].Value;
+                var lengthValue = GridItems.Rows[e.RowIndex].Cells["largo_restante"].Value;
                 //var msiValue = GridItems.Rows[e.RowIndex].Cells[5].Value;
 
                 if (rollIdValue != null && productIdValue != null && productNameValue != null &&

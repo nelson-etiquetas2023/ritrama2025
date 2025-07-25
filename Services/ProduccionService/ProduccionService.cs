@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using DocumentFormat.OpenXml.Office.Word;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Ritrama2025.Models;
 using System.Data;
@@ -11,17 +12,11 @@ namespace Ritrama2025.Services.ProduccionService
         public string StringConnex { get; set; } = null!;
         public string ErrorMsg { get; set; } = null!;
         public DataSet Ds = new();
-        public SqlDataAdapter DaMaster = new();
         public DataTable DtMaster = new();
-        public SqlDataAdapter DaCortes = new();
         public DataTable DtCortes = new();
-        public SqlDataAdapter DaRollos = new();
         public DataTable DtRollos = new();
-        public SqlDataAdapter DaRollid = new();
         public DataTable DtRollid = new();
-        public SqlDataAdapter DaOperator = new();
         public DataTable DtOperator = new();
-        public SqlDataAdapter DaCustomer = new();
         public DataTable DtCustomer = new();
 
         public ProduccionService(IConfiguration config)
@@ -33,6 +28,50 @@ namespace Ritrama2025.Services.ProduccionService
                 StringConnex = Config.GetSection("ConnectionStringsEnvironment")[ambiente]!;
             }
         }
+
+        private async Task<DataTable?> CargarTablaAsync(
+            string sqlQuery,
+            bool loadDataset = false,
+            SqlParameter[]? parametros = null,
+            string? nombreTabla = null,         
+            bool returnDataTable = false
+            )
+        {
+
+            using SqlConnection conn = new SqlConnection(StringConnex);
+            await conn.OpenAsync();
+
+            using SqlCommand comando = new()
+            {
+                Connection = conn,
+                CommandText = sqlQuery,
+                CommandType = CommandType.Text
+            };
+
+            if (parametros != null)
+            {
+                comando.Parameters.AddRange(parametros);
+            }
+
+            if (loadDataset)
+            {
+                using SqlDataAdapter adapter = new() { SelectCommand = comando };
+                adapter.Fill(Ds, nombreTabla!);
+                return null;
+            }
+
+            if (returnDataTable) 
+            {
+                using SqlDataAdapter adapter = new() { SelectCommand = comando };
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                return dt;
+            }
+
+            await comando.ExecuteNonQueryAsync();
+            return null;
+        }
+
         public async Task<DataSet> LoadDataOC()
         {
             try
@@ -48,74 +87,22 @@ namespace Ritrama2025.Services.ProduccionService
                     Ds.Tables.Clear();
                     Ds.AcceptChanges();
                 }
-                //1.- cargar la tabla de encabezado de las Ordenes de Corte.
-                using SqlConnection conn = new(StringConnex);
-                SqlCommand ComandoMaster = new()
+
+
+              
+                var tablas = new[]
                 {
-                    Connection = conn,
-                    CommandText = "SELECT numero,fecha,fecha_produccion,a.product_id,b.product_Name,rollid_1,width_1,lenght_1,rollid_2,width_2,lenght_2,util1_real_width,util1_real_lenght,util2_real_width,util2_real_lenght,rest1_width,rest1_lenght,rest2_width,rest2_lenght,a.operador_id,c.nombre,a.customer_id,d.customer_name,tot_inch_ancho,lenght_entrada,resta_entrada,total_salida,plus1_pies,plus2_pies,longitud_cortar,cortes_ancho,cortes_largo,cant_rollos,cant_rollos2,step,sellOrder,desperdicio FROM orden_corte a LEFT JOIN producto b ON a.product_id = b.product_id LEFT JOIN operadores c ON a.operador_id = c.operador_id LEFT JOIN customer d ON a.customer_id = d.customer_id ORDER BY numero DESC",
-                    CommandType = CommandType.Text
+                    new { Nombre = "DtMaster", Sql = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_OC_HEADER },
+                    new { Nombre = "DtCortes", Sql = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_OC_CORTES },
+                    new { Nombre = "DtRollos", Sql = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_OC_ROLLO_CORTADO },
+                    new { Nombre = "DtRollid", Sql = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_ROLL_ID },
+                    new { Nombre = "DtOperator", Sql = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_OPERATOR },
+                    new { Nombre = "DtCustomer", Sql = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_CUSTOMER }
                 };
-                await conn.OpenAsync();
-                SqlDataReader readerMaster = await ComandoMaster.ExecuteReaderAsync();
-                await readerMaster.CloseAsync();
-                DaMaster.SelectCommand = ComandoMaster;
-                DaMaster.Fill(Ds, "DtMaster");
-                //2.- cargar la tabla de cortes.    
-                SqlCommand ComandoCortes = new()
-                {
-                    Connection = conn,
-                    CommandText = "select num,width,lenght,msi,orden,code_person from cortes",
-                    CommandType = CommandType.Text
-                };
-                SqlDataReader readerCortes = await ComandoCortes.ExecuteReaderAsync();
-                await readerCortes.CloseAsync();
-                DaCortes.SelectCommand = ComandoCortes;
-                DaCortes.Fill(Ds, "DtCortes");
-                //3.- Cargar la Tabla de Rollos Cortados.
-                SqlCommand ComandoRollos = new()
-                {
-                    Connection = conn,
-                    CommandText = "SELECT numero,product_id,product_name,roll_number,unique_code,splice,width,large,msi,roll_id,code_person,status,disponible,width_c,lenght_c,ubic,ratio,fecha,rollid_oculto FROM rolls_details ORDER BY roll_number ASC",
-                    CommandType = CommandType.Text
-                };
-                SqlDataReader readerRollos = await ComandoRollos.ExecuteReaderAsync();
-                await readerRollos.CloseAsync();
-                DaRollos.SelectCommand = ComandoRollos;
-                DaRollos.Fill(Ds, "DtRollos");
-                // 4.- Carga de los Master en el Inventario [ROLL-ID].
-                SqlCommand ComandoRollid = new()
-                {
-                    Connection = conn,
-                    CommandText = "SELECT a.roll_id,a.part_number,b.product_name,a.master,a.graphics,a.resma,a.Width,lenght=a.lenght - a.lenght_c, disponible, fecha_pro, fecha_recep, splice, Ubicacion,'M' AS tipo_mov from MasterInic a LEFT JOIN producto b ON a.part_number = b.product_id where b.MasterRolls = 1 and a.disponible = 1",
-                    CommandType = CommandType.Text
-                };
-                SqlDataReader readerRollid = await ComandoRollid.ExecuteReaderAsync();
-                await readerRollid.CloseAsync();
-                DaRollid.SelectCommand = ComandoRollid;
-                DaRollid.Fill(Ds, "DtRollid");
-                //5.- Carga de los Rollos en el Operadores.
-                SqlCommand ComandoOperator = new()
-                {
-                    Connection = conn,
-                    CommandText = "SELECT operador_id,nombre,status FROM operadores",
-                    CommandType = CommandType.Text
-                };
-                SqlDataReader readerOperator = await ComandoOperator.ExecuteReaderAsync();
-                await readerOperator.CloseAsync();
-                DaOperator.SelectCommand = ComandoOperator;
-                DaOperator.Fill(Ds, "DtOperator");
-                //6.- Carga de los Customer.
-                SqlCommand ComandoCust = new()
-                {
-                    Connection = conn,
-                    CommandText = "SELECT customer_id,customer_name FROM customer",
-                    CommandType = CommandType.Text
-                };
-                SqlDataReader readerCust = await ComandoCust.ExecuteReaderAsync();
-                await readerCust.CloseAsync();
-                DaCustomer.SelectCommand = ComandoCust;
-                DaCustomer.Fill(Ds, "DtCustomer");
+
+                foreach (var tabla in tablas)
+                    await CargarTablaAsync(tabla.Sql,true,null,tabla.Nombre,false);
+
             }
             catch (SqlException ex)
             {
@@ -129,19 +116,37 @@ namespace Ritrama2025.Services.ProduccionService
         {
             try
             {
-                //Relacion entre master y Cortes.
-                DataColumn ParentCol0 = Ds.Tables["DtMaster"]!.Columns["numero"]!;
-                DataColumn ChildCol0 = Ds.Tables["DtCortes"]!.Columns["orden"]!;
+                // Relación entre master y Rollos.
+                if (Ds.Tables["DtMaster"] is null || Ds.Tables["DtRollos"] is null)
+                    throw new InvalidOperationException("Las tablas DtMaster o DtRollos no existen en el DataSet.");
+
+                DataColumn? ParentColumnRC = Ds.Tables["DtMaster"]?.Columns["numero"];
+                DataColumn? ChildColumnRC = Ds.Tables["DtRollos"]?.Columns["numero"];
+                if (ParentColumnRC is null || ChildColumnRC is null)
+                    throw new InvalidOperationException("Las columnas 'numero' no existen en las tablas DtMaster o DtRollos.");
+
+                DataRelation relation = new(R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS, ParentColumnRC, ChildColumnRC, true);
+                Ds.Tables["DtRollos"]!.ParentRelations.Add(relation);
+
+                // Relación entre master y Cortes.
+                if (Ds.Tables["DtCortes"] is null)
+                    throw new InvalidOperationException("La tabla DtCortes no existe en el DataSet.");
+
+                DataColumn? ParentCol0 = Ds.Tables["DtMaster"]?.Columns["numero"];
+                DataColumn? ChildCol0 = Ds.Tables["DtCortes"]?.Columns["orden"];
+                if (ParentCol0 is null || ChildCol0 is null)
+                    throw new InvalidOperationException("Las columnas 'numero' o 'orden' no existen en las tablas DtMaster o DtCortes.");
+
                 DataRelation Despacho_Cortes = new("FK_ENCABEZADO_CORTES", ParentCol0, ChildCol0, false);
                 Ds.Relations.Add(Despacho_Cortes);
-                //Relacion entre master y Rollos.
-                DataColumn ParentColumn1 = Ds.Tables["DtMaster"]!.Columns["numero"]!;
-                DataColumn ChildColumn1 = Ds.Tables["DtRollos"]!.Columns["numero"]!;
-                //DataRelation Master_Rollos = new();
-                Ds.Relations.Add("REL_MASTER_ROLLOS", ParentColumn1, ChildColumn1);
                 return true;
             }
             catch (ConstraintException ex)
+            {
+                ErrorMsg = ex.Message;
+                return false;
+            }
+            catch (InvalidOperationException ex)
             {
                 ErrorMsg = ex.Message;
                 return false;
@@ -532,7 +537,6 @@ namespace Ritrama2025.Services.ProduccionService
             }
 
         }
-
         public bool UpdateOrdenCorte(Orden orden)
         {
             try
@@ -566,6 +570,73 @@ namespace Ritrama2025.Services.ProduccionService
             catch (Exception ex)
             {
                 MessageBox.Show("Error al actualizar la orden de corte: error[code] :" + ex.Message);
+                return false;
+            }
+        }
+        public async Task<bool> UpdateInventaryMasterInitial(double ConsumoParcial,string RollId)
+        {
+            try
+            {
+                var tabla = new { nameTabla = "MasterInic", sql = R.QUERY.PRODUCTION.SQL_QUERY_ACTUALIZAR_INVENTARIO_INICIALES };
+
+                SqlParameter[] parametros =
+                [
+                    new SqlParameter("@consumo", ConsumoParcial),
+                    new SqlParameter("@rollid", RollId)
+                ];
+
+                await CargarTablaAsync(tabla.sql,false,parametros,tabla.nameTabla,false);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("error al actualizar los inventarios de master Inic [error code: ] " + ex.Message);
+                return false;
+            }
+        }
+        public async Task<DataTable?> LoadTableMasterInic()
+        {
+            try
+            {
+                var tabla = new { nameTabla = "MasterInic", sql = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_ROLL_ID };
+
+                DataTable? dt = await CargarTablaAsync(tabla.sql, false, null, tabla.nameTabla, true);
+
+                if (dt == null)
+                {
+                    throw new InvalidOperationException("La tabla MasterInic no se pudo cargar correctamente.");
+                }
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("error al cargar la tabla de los iniciales [error code: ] " + ex.Message);
+                return null;
+            }
+        }
+
+        public async Task<bool> UpdateDetailsConsumosMasterIniciales(string rollid, string orden, double length_consumo, DateTime fecha_reg)
+        {
+            try
+            {
+                var tabla = new { nameTabla = "MasterDetailsInic", sql = R.QUERY.PRODUCTION.UPDATE_QUERY_ACTUALIZAR_INVENTARIO_DETAILS_INICIALES};
+
+                SqlParameter[] parameros =
+                [ 
+                    new SqlParameter("@rollid", rollid),
+                    new SqlParameter("@orden", orden),
+                    new SqlParameter("@consumo", length_consumo),
+                    new SqlParameter("@fecha", fecha_reg)
+                ];
+
+                await CargarTablaAsync(tabla.sql,false,parameros,tabla.nameTabla,false);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("error al actualizar el detalle de los  master  [error code: ] " + ex.Message);
                 return false;
             }
         }
