@@ -1,28 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Programacion\\Ritrama2025\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|c:\\programacion\\ritrama2025\\forms\\frmordencorte.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|solutionrelative:forms\\frmordencorte.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|c:\\programacion\\ritrama2025\\r.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|solutionrelative:r.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|c:\\programacion\\ritrama2025\\services\\produccionservice\\produccionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|solutionrelative:services\\produccionservice\\produccionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|c:\\programacion\\ritrama2025\\forms\\frmordencorte.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|solutionrelative:forms\\frmordencorte.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|c:\\programacion\\ritrama2025\\services\\produccionservice\\iproduccionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|solutionrelative:services\\produccionservice\\iproduccionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
@@ -30,22 +9,8 @@
       "DocumentGroups": [
         {
           "DockedHeight": 304,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": -1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "R.cs",
-              "DocumentMoniker": "C:\\Programacion\\Ritrama2025\\R.cs",
-              "RelativeDocumentMoniker": "R.cs",
-              "ToolTip": "C:\\Programacion\\Ritrama2025\\R.cs",
-              "RelativeToolTip": "R.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAxwBIAAACKAQAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-25T12:27:18.112Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{0174dea2-fdbe-4ef1-8f99-c0beae78880f}"
@@ -61,57 +26,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3fd5e0cc-709a-4f8c-94c3-7f0f8dff5bb2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "IProduccionService.cs",
-              "DocumentMoniker": "C:\\Programacion\\Ritrama2025\\Services\\ProduccionService\\IProduccionService.cs",
-              "RelativeDocumentMoniker": "Services\\ProduccionService\\IProduccionService.cs",
-              "ToolTip": "C:\\Programacion\\Ritrama2025\\Services\\ProduccionService\\IProduccionService.cs",
-              "RelativeToolTip": "Services\\ProduccionService\\IProduccionService.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAzwBYAAACEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-25T13:41:48.666Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "FrmOrdenCorte.cs",
-              "DocumentMoniker": "C:\\Programacion\\Ritrama2025\\Forms\\FrmOrdenCorte.cs",
-              "RelativeDocumentMoniker": "Forms\\FrmOrdenCorte.cs",
-              "ToolTip": "C:\\Programacion\\Ritrama2025\\Forms\\FrmOrdenCorte.cs",
-              "RelativeToolTip": "Forms\\FrmOrdenCorte.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-25T12:22:19.751Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "FrmOrdenCorte.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Programacion\\Ritrama2025\\Forms\\FrmOrdenCorte.cs",
-              "RelativeDocumentMoniker": "Forms\\FrmOrdenCorte.cs",
-              "ToolTip": "C:\\Programacion\\Ritrama2025\\Forms\\FrmOrdenCorte.cs [Dise\u00F1o]",
-              "RelativeToolTip": "Forms\\FrmOrdenCorte.cs [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-25T12:22:15.53Z",
-              "EditorCaption": " [Dise\u00F1o]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ProduccionService.cs",
-              "DocumentMoniker": "C:\\Programacion\\Ritrama2025\\Services\\ProduccionService\\ProduccionService.cs",
-              "RelativeDocumentMoniker": "Services\\ProduccionService\\ProduccionService.cs",
-              "ToolTip": "C:\\Programacion\\Ritrama2025\\Services\\ProduccionService\\ProduccionService.cs",
-              "RelativeToolTip": "Services\\ProduccionService\\ProduccionService.cs",
-              "ViewState": "AgIAAJwAAAAAAAAAAAAYwGwCAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-25T12:20:33.505Z",
-              "EditorCaption": ""
             }
           ]
         },

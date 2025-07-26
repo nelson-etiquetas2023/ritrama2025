@@ -9,17 +9,18 @@ namespace Ritrama2025.Services.ProduccionService
         void GuardarEncabezadoOrdenCorte(Orden OrdenCorte);
         void GuardarCortes(List<Corte> cortes);
         void GuardarRollos(List<RolloCortado> rollos);
-        bool UpdateStatusDocumentOC(int stepchange,string oc);
+        bool UpdateStatusDocumentOC(int stepchange, string oc);
         int BuscarConsecOC();
         bool UpdateConsecOC(string consec);
         int BuscarUniqueCodeConsec();
         void UpdateUniqueCodeRollosCortados(List<RolloCortado> lista);
         bool UpdateUniqueCodeBD(string consec);
         public bool CheckOperatorDefault(string id, string name);
-        public bool OrdenUpdateCodePerson(string orden,string code_person);
+        public bool OrdenUpdateCodePerson(string orden, string code_person);
         public bool UpdateOrdenCorte(Orden orden);
-        public Task<bool> UpdateInventaryMasterInitial(double ConsumoParcial,string orden);
+        public Task<bool> UpdateInventaryMasterInitial(double ConsumoParcial, string orden);
         public Task<DataTable?> LoadTableMasterInic();
-        public Task<bool> UpdateDetailsConsumosMasterIniciales(string rollid, string orden,double length_consumo, DateTime fecha_reg);  
+        public Task<bool> UpdateDetailsConsumosMasterIniciales(string rollid, string orden, double length_consumo, DateTime fecha_reg);
+        public Task<DataTable?> LoadDataDetailsConsumosMasterInic(string rollid);
     }
 }

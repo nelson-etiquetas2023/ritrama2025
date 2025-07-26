@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Office.Word;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Ritrama2025.Models;
 using System.Data;
@@ -38,7 +37,7 @@ namespace Ritrama2025.Services.ProduccionService
             )
         {
 
-            using SqlConnection conn = new SqlConnection(StringConnex);
+            using SqlConnection conn = new(StringConnex);
             await conn.OpenAsync();
 
             using SqlCommand comando = new()
@@ -63,7 +62,7 @@ namespace Ritrama2025.Services.ProduccionService
             if (returnDataTable) 
             {
                 using SqlDataAdapter adapter = new() { SelectCommand = comando };
-                DataTable dt = new DataTable();
+                DataTable dt = new();
                 adapter.Fill(dt);
                 return dt;
             }
@@ -93,15 +92,18 @@ namespace Ritrama2025.Services.ProduccionService
                 var tablas = new[]
                 {
                     new { Nombre = "DtMaster", Sql = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_OC_HEADER },
-                    new { Nombre = "DtCortes", Sql = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_OC_CORTES },
                     new { Nombre = "DtRollos", Sql = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_OC_ROLLO_CORTADO },
-                    new { Nombre = "DtRollid", Sql = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_ROLL_ID },
                     new { Nombre = "DtOperator", Sql = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_OPERATOR },
-                    new { Nombre = "DtCustomer", Sql = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_CUSTOMER }
+                    new { Nombre = "DtCustomer", Sql = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_CUSTOMER },
+                    new { Nombre = "DtCortes", Sql = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_OC_CORTES },
+                    new { Nombre = "DtRollid", Sql = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_ROLL_ID },
+
                 };
 
                 foreach (var tabla in tablas)
                     await CargarTablaAsync(tabla.Sql,true,null,tabla.Nombre,false);
+
+                SetRelaionsTables();
 
             }
             catch (SqlException ex)
@@ -109,7 +111,7 @@ namespace Ritrama2025.Services.ProduccionService
                 ErrorMsg = ex.Message;
                 throw;
             }
-            SetRelaionsTables();
+            
             return Ds;
         }
         public bool SetRelaionsTables()
@@ -117,27 +119,31 @@ namespace Ritrama2025.Services.ProduccionService
             try
             {
                 // Relación entre master y Rollos.
-                if (Ds.Tables["DtMaster"] is null || Ds.Tables["DtRollos"] is null)
-                    throw new InvalidOperationException("Las tablas DtMaster o DtRollos no existen en el DataSet.");
+                var relacion = new DataRelation(R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS,
+                                Ds.Tables["DtMaster"]!.Columns["numero"]!,
+                                Ds.Tables["DtRollos"]!.Columns["numero"]!,true);
 
-                DataColumn? ParentColumnRC = Ds.Tables["DtMaster"]?.Columns["numero"];
-                DataColumn? ChildColumnRC = Ds.Tables["DtRollos"]?.Columns["numero"];
-                if (ParentColumnRC is null || ChildColumnRC is null)
-                    throw new InvalidOperationException("Las columnas 'numero' no existen en las tablas DtMaster o DtRollos.");
+                if (!Ds.Relations.Contains(R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS))
+                    Ds.Relations.Add(relacion);
 
-                DataRelation relation = new(R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS, ParentColumnRC, ChildColumnRC, true);
-                Ds.Tables["DtRollos"]!.ParentRelations.Add(relation);
+                var hijos = Ds.Tables["Dtrollos"]!.AsEnumerable();
+                var padres = Ds.Tables["Dtmaster"]!.AsEnumerable();
 
-                // Relación entre master y Cortes.
-                if (Ds.Tables["DtCortes"] is null)
-                    throw new InvalidOperationException("La tabla DtCortes no existe en el DataSet.");
+                var hijosHuerfanos = hijos
+                    .Where(h => !padres.Any(p => p.Field<int>("numero") == h.Field<int>("numero")))
+                    .ToList();
+
+                if (hijosHuerfanos.Count != 0)
+                {
+                    MessageBox.Show($"⚠️ Hay {hijosHuerfanos.Count} registros huérfanos en la tabla DetalleOrden.");
+                }
+
 
                 DataColumn? ParentCol0 = Ds.Tables["DtMaster"]?.Columns["numero"];
                 DataColumn? ChildCol0 = Ds.Tables["DtCortes"]?.Columns["orden"];
-                if (ParentCol0 is null || ChildCol0 is null)
-                    throw new InvalidOperationException("Las columnas 'numero' o 'orden' no existen en las tablas DtMaster o DtCortes.");
+                
 
-                DataRelation Despacho_Cortes = new("FK_ENCABEZADO_CORTES", ParentCol0, ChildCol0, false);
+                DataRelation Despacho_Cortes = new("FK_ENCABEZADO_CORTES", ParentCol0!, ChildCol0!, false);
                 Ds.Relations.Add(Despacho_Cortes);
                 return true;
             }
@@ -607,8 +613,10 @@ namespace Ritrama2025.Services.ProduccionService
                 {
                     throw new InvalidOperationException("La tabla MasterInic no se pudo cargar correctamente.");
                 }
-
-                return dt;
+                else
+                {
+                    return dt;
+                }
             }
             catch (Exception ex)
             {
@@ -616,7 +624,6 @@ namespace Ritrama2025.Services.ProduccionService
                 return null;
             }
         }
-
         public async Task<bool> UpdateDetailsConsumosMasterIniciales(string rollid, string orden, double length_consumo, DateTime fecha_reg)
         {
             try
@@ -638,6 +645,35 @@ namespace Ritrama2025.Services.ProduccionService
             {
                 MessageBox.Show("error al actualizar el detalle de los  master  [error code: ] " + ex.Message);
                 return false;
+            }
+        }
+
+        public async Task<DataTable?> LoadDataDetailsConsumosMasterInic(string rollid)
+        {
+            try
+            {
+                var tabla = new { nameTabla = "MasterDetailsInic", sql = R.QUERY.PRODUCTION.SQL_SELECT_QUERY_LOAD_DETAILS_MASTER_INICIALES };
+
+                SqlParameter[] parametros =
+                [
+                    new SqlParameter("@rollid", rollid)
+                ];
+
+                DataTable? dt = await CargarTablaAsync(tabla.sql, false, parametros, tabla.nameTabla, true);
+
+                if (dt == null)
+                {
+                    throw new InvalidOperationException("La tabla de detalle de consumos de master no se pudo cargar correctamente.");
+                }
+                else
+                {
+                    return dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("error al cargar los detalles de los master iniciales [error code: ] " + ex.Message);
+                return null;
             }
         }
     }

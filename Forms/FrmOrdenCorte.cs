@@ -25,12 +25,12 @@ namespace Ritrama2025.Forms
         DataRowView ParentRow = null!;
         DataRowView ChildRowCortes = null!;
         DataRowView RollosCortados = null!;
-        string operadorId = "ff8fe855-0f8b-4062-8aa5-860d94f804d5";
-        string operadorName = "NO-ASIGNADO";
+        readonly string operadorId = "ff8fe855-0f8b-4062-8aa5-860d94f804d5";
+        readonly string operadorName = "NO-ASIGNADO";
         int EditMode = 0;
-        Orden orden { get; set; } = null!;
-        List<Corte> cortes { get; set; } = [];
-        List<RolloCortado> detalle { get; set; } = [];
+        Orden Orden { get; set; } = null!;
+        List<Corte> Cortes { get; set; } = [];
+        List<RolloCortado> Detalle { get; set; } = [];
 
 
         public FrmOrdenCorte(IProduccionService service, IExportDataService exportService, IReportsService reportService,ICommonService commonService)
@@ -42,15 +42,9 @@ namespace Ritrama2025.Forms
             CommonService = commonService;
         }
 
-        private void FrmOrdenCorte_Load(object sender, EventArgs e)
+        private async void FrmOrdenCorte_Load(object sender, EventArgs e)
         {
-            //1.- Procedimiento para cargar las Ordenes de Corte.
-            var task = Task.Run(async () =>
-            {
-                return await Service.LoadDataOC();
-            });
-            Ds = task.Result;
-            
+            Ds = await Service.LoadDataOC();
             //Enlace a datos Encabezado de la Orden Corte.
             HeaderBinding();
             BindingRollos();
@@ -113,19 +107,19 @@ namespace Ritrama2025.Forms
             //Enlace a datos de Grid-Rollos Cortados.
             BsRollos.DataSource = Bs;
             BsRollos.DataMember = R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS; 
-        //    grid_items.AutoGenerateColumns = false;
-        //    ADD_COLUMN_GRID("roll_number", 25, "#", "roll_number", grid_items);
-        //    ADD_COLUMN_GRID("product_id", 60, "Product Id", "product_id", grid_items);
-        //    ADD_COLUMN_GRID("product_name", 250, "Product Name", "product_name", grid_items);
-        //    ADD_COLUMN_GRID("unique_code", 60, "Unique Code", "unique_code", grid_items);
-        //    ADD_COLUMN_GRID("width", 75, "Width [Inch]", "width", grid_items);
-        //    ADD_COLUMN_GRID("large", 75, "Length [Pies]", "large", grid_items);
-        //    ADD_COLUMN_GRID("msi", 75, "MSI", "msi", grid_items);
-        //    ADD_COLUMN_GRID("splice", 50, "Splice", "splice", grid_items);
-        //    ADD_COLUMN_GRID("roll_id", 75, "Roll Id.", "roll_id", grid_items);
-        //    ADD_COLUMN_GRID("code_person", 75, "Code Person.", "code_person", grid_items);
-        //    ADD_COLUMN_GRID("status", 80, "Status", "status", grid_items);
-        //    //ADD_COLUMN_GRID("numero", 80, "Numero", "numero", grid_items);
+            //grid_items.AutoGenerateColumns = false;
+            //ADD_COLUMN_GRID("roll_number", 25, "#", "roll_number", grid_items);
+            //ADD_COLUMN_GRID("product_id", 60, "Product Id", "product_id", grid_items);
+            //ADD_COLUMN_GRID("product_name", 250, "Product Name", "product_name", grid_items);
+            //ADD_COLUMN_GRID("unique_code", 60, "Unique Code", "unique_code", grid_items);
+            //ADD_COLUMN_GRID("width", 75, "Width [Inch]", "width", grid_items);
+            //ADD_COLUMN_GRID("large", 75, "Length [Pies]", "large", grid_items);
+            //ADD_COLUMN_GRID("msi", 75, "MSI", "msi", grid_items);
+            //ADD_COLUMN_GRID("splice", 50, "Splice", "splice", grid_items);
+            //ADD_COLUMN_GRID("roll_id", 75, "Roll Id.", "roll_id", grid_items);
+            //ADD_COLUMN_GRID("code_person", 75, "Code Person.", "code_person", grid_items);
+            //ADD_COLUMN_GRID("status", 80, "Status", "status", grid_items);
+            ////ADD_COLUMN_GRID("numero", 80, "Numero", "numero", grid_items);
             grid_items.DataSource = BsRollos;
         }
 
@@ -145,28 +139,28 @@ namespace Ritrama2025.Forms
 
         private void Bot_primero_Click(object sender, EventArgs e)
         {
-            Bs.Position = Bs.Count - 1;
+            Bs.Position += 1;
             UpdateStepIndicator();
             ContadorRegistros();
         }
 
         private void Bot_anterior_Click(object sender, EventArgs e)
         {
-            Bs.Position += 1;
+            Bs.Position -= 1;
             UpdateStepIndicator();
             ContadorRegistros();
         }
 
         private void Bot_siguiente_Click(object sender, EventArgs e)
         {
-            Bs.Position -= 1;
+            Bs.Position++;
             UpdateStepIndicator();
             ContadorRegistros();
         }
 
         private void Bot_ultimo_Click(object sender, EventArgs e)
         {
-            Bs.Position = 0;
+            Bs.Position = Bs.Count + 1;
             UpdateStepIndicator();
             ContadorRegistros();
         }
@@ -284,7 +278,7 @@ namespace Ritrama2025.Forms
         }
         private void Btn_buscar_rollid1_Click(object sender, EventArgs e)
         {
-            Frm_RollId frmrollid = new()
+            Frm_RollId frmrollid = new(Service)
             {
                 DtRollid = Ds.Tables["DtRollid"]!
             };
@@ -671,7 +665,7 @@ namespace Ritrama2025.Forms
         }
         private void CREATE_HEADER_ORDEN()
         {
-            orden = new()
+            Orden = new()
             {
                 Numero = Convert.ToInt32(txt_numeroOC.Text),
                 Fecha = Convert.ToDateTime(txt_fecha_emision.Text),
@@ -735,7 +729,7 @@ namespace Ritrama2025.Forms
 
         private void CREATE_CORTES()
         {
-            cortes = [];
+            Cortes = [];
             for (int i = 0; i <= grid_cortes.Rows.Count - 1; i++)
             {
                 var codePersonValue = grid_cortes.Rows[i].Cells["code_person"].Value;
@@ -750,14 +744,14 @@ namespace Ritrama2025.Forms
                     Orden = Convert.ToInt32(txt_numeroOC.Text),
                     CodePerson = codePerson // Safely assign the value
                 };
-                cortes.Add(corte);
+                Cortes.Add(corte);
             }
 
         }
 
         private void CREATE_DETALLE_ORDEN()
         {
-            detalle = [];
+            Detalle = [];
             for (int i = 0; i <= grid_items.Rows.Count - 1; i++)
             {
                 var rollNumberValue = grid_items.Rows[i].Cells["roll_number"].Value;
@@ -792,7 +786,7 @@ namespace Ritrama2025.Forms
                     Ubicacion = ".",
                     Status = "OK.",
                 };
-                detalle.Add(rollo);
+                Detalle.Add(rollo);
 
 
             }
@@ -803,13 +797,13 @@ namespace Ritrama2025.Forms
 
         private void GuardarOrdeAddMode()
         {
-            Service.GuardarEncabezadoOrdenCorte(orden);
-            Service.GuardarCortes(cortes);
-            Service.GuardarRollos(detalle);
+            Service.GuardarEncabezadoOrdenCorte(Orden);
+            Service.GuardarCortes(Cortes);
+            Service.GuardarRollos(Detalle);
         }
         private void GuardarOrderUpdateMode()
         {
-            Service.UpdateOrdenCorte(orden);
+            Service.UpdateOrdenCorte(Orden);
         }
 
 
@@ -1208,12 +1202,12 @@ namespace Ritrama2025.Forms
             ReportService.Reporte_Orden_Corte(txt_numeroOC.Text, this, R.REPORT_NAME.REPORT_OC, R.REPORT_TITLE.REPORT_OC);
         }
 
-        private void bot_accion_Click(object sender, EventArgs e)
+        private void Bot_accion_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void bot_cancelar_Click(object sender, EventArgs e)
+        private void Bot_cancelar_Click(object sender, EventArgs e)
         {
             DataRowView FilaActual;
             FilaActual = (DataRowView)Bs.Current!;
@@ -1244,7 +1238,7 @@ namespace Ritrama2025.Forms
 
         }
 
-        private void btn_add_row_corte_Click(object sender, EventArgs e)
+        private void Btn_add_row_corte_Click(object sender, EventArgs e)
         {
             RollosCortados = (DataRowView)BsCortes.AddNew()!;
             RollosCortados[0] = grid_cortes.Rows.Count.ToString();
@@ -1270,7 +1264,7 @@ namespace Ritrama2025.Forms
             return true;
         }
 
-        private void btn_code_person_Click(object sender, EventArgs e)
+        private void Btn_code_person_Click(object sender, EventArgs e)
         {
             if (txt_code_person.Text == "")
             {
@@ -1284,7 +1278,7 @@ namespace Ritrama2025.Forms
             Service.OrdenUpdateCodePerson(txt_numeroOC.Text, txt_code_person.Text);
         }
 
-        private void bot_buscar_Click(object sender, EventArgs e)
+        private void Bot_buscar_Click(object sender, EventArgs e)
         {
             txt_fecha_emision.Enabled = true;
             txt_fecha_produccion.Enabled = true;
@@ -1296,7 +1290,7 @@ namespace Ritrama2025.Forms
             EditMode = 2;
         }
 
-        private void bot_buscarOrders_Click(object sender, EventArgs e)
+        private void Bot_buscarOrders_Click(object sender, EventArgs e)
         {
             FrmBuscadorOC fbuscador = new()
             {

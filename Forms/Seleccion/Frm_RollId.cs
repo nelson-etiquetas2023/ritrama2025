@@ -1,6 +1,8 @@
 ﻿using System.Data;
 using System.ComponentModel;
 using Ritrama2025.Models;
+using Ritrama2025.Forms.Otros;
+using Ritrama2025.Services.ProduccionService;
 
 
 namespace Ritrama2025.Forms.Seleccion
@@ -12,9 +14,12 @@ namespace Ritrama2025.Forms.Seleccion
         public DataTable DtRollid { get; set; } = null!;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public RolloCortado MasterRoll { get; set; } = null!;
-        public Frm_RollId()
+
+        private IProduccionService ProduccionService  { get; set; }
+        public Frm_RollId(IProduccionService produccionService)
         {
             InitializeComponent();
+            ProduccionService = produccionService;
         }
 
         private void Frm_RollId_Load(object sender, EventArgs e)
@@ -23,6 +28,10 @@ namespace Ritrama2025.Forms.Seleccion
             GridItems.AutoGenerateColumns = false;
             StyleGridColumns();
             GridItems.DataSource = DtRollid;
+            RefreshForms();
+        }
+        private void RefreshForms()
+        {
             CONTADOR_REGISTROS.Text = Convert.ToString(Dv.Count) + " registros encontrados.";
         }
         private void StyleGridColumns()
@@ -56,8 +65,8 @@ namespace Ritrama2025.Forms.Seleccion
         }
         private void BuscarMasterIdData()
         {
-            
-            if (rad_productid.Checked) 
+
+            if (rad_productid.Checked)
             {
                 Dv.RowFilter = "part_number LIKE '%" + txt_buscar.Text + "%'";
             }
@@ -69,7 +78,7 @@ namespace Ritrama2025.Forms.Seleccion
             {
                 Dv.RowFilter = "Product_Name LIKE '%" + txt_buscar.Text + "%'";
             }
-            CONTADOR_REGISTROS.Text = Convert.ToString(Dv.Count) + " registros encontrados.";
+            RefreshForms();
         }
 
         private void Btn_buscar_Click(object sender, EventArgs e)
@@ -81,15 +90,15 @@ namespace Ritrama2025.Forms.Seleccion
         {
             if (e.RowIndex >= 0)
             {
-                 double resto = GridItems.Rows[e.RowIndex].Cells["largo_restante"].Value!.ToString() == "" ? 0:Convert.ToDouble(GridItems.Rows[e.RowIndex].Cells["largo_restante"].Value);
+                double resto = GridItems.Rows[e.RowIndex].Cells["largo_restante"].Value!.ToString() == "" ? 0 : Convert.ToDouble(GridItems.Rows[e.RowIndex].Cells["largo_restante"].Value);
 
-                if (resto <= 0) 
+                if (resto <= 0)
                 {
                     MessageBox.Show("este rollo ya ha sido consumido...");
                     return;
                 }
-                    // Ensure that the cell values are not null before accessing them
-                    var rollIdValue = GridItems.Rows[e.RowIndex].Cells[0].Value?.ToString();
+                // Ensure that the cell values are not null before accessing them
+                var rollIdValue = GridItems.Rows[e.RowIndex].Cells[0].Value?.ToString();
                 var productIdValue = GridItems.Rows[e.RowIndex].Cells[1].Value?.ToString();
                 var productNameValue = GridItems.Rows[e.RowIndex].Cells[2].Value?.ToString();
                 var widthValue = GridItems.Rows[e.RowIndex].Cells[3].Value;
@@ -115,6 +124,25 @@ namespace Ritrama2025.Forms.Seleccion
                     MessageBox.Show("Algunos valores de las celdas son nulos. Por favor, verifique los datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void Btn_reload_Click(object sender, EventArgs e)
+        {
+            Dv.RowFilter = string.Empty; // Clear the filter
+            RefreshForms();
+            txt_buscar.Text = string.Empty; // Clear the search text    
+
+        }
+
+        private void Btn_DetailsConsumos_Click(object sender, EventArgs e)
+        {
+            Frm_DetailsConsumos frmDetails = new(ProduccionService) 
+            {
+                Rollid = GridItems.CurrentRow?.Cells["rollid"].Value?.ToString() ?? string.Empty,
+                Productid = GridItems.CurrentRow?.Cells["product_id"].Value?.ToString() ?? string.Empty,
+                Product_Name = GridItems.CurrentRow?.Cells["product_name"].Value?.ToString() ?? string.Empty
+            };
+            frmDetails.ShowDialog();
         }
     }
 }

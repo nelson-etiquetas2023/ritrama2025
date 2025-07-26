@@ -44,6 +44,8 @@
             pictureBox1 = new PictureBox();
             label2 = new Label();
             label1 = new Label();
+            btn_reload = new Button();
+            btn_DetailsConsumos = new Button();
             ((System.ComponentModel.ISupportInitialize)GridItems).BeginInit();
             groupBox1.SuspendLayout();
             panel1.SuspendLayout();
@@ -181,7 +183,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.roll_id;
-            pictureBox1.Location = new Point(268, 21);
+            pictureBox1.Location = new Point(379, 18);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(51, 50);
             pictureBox1.TabIndex = 1;
@@ -191,7 +193,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(334, 31);
+            label2.Location = new Point(436, 32);
             label2.Name = "label2";
             label2.Size = new Size(187, 25);
             label2.TabIndex = 0;
@@ -206,11 +208,38 @@
             label1.TabIndex = 8;
             label1.Text = "Introduzca la palabra clave para buscar la informacion en la lista de los master, tenga en cuenta la seleccion de los filtros en la parte de abajo del formulario";
             // 
+            // btn_reload
+            // 
+            btn_reload.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_reload.Image = (Image)resources.GetObject("btn_reload.Image");
+            btn_reload.Location = new Point(1018, 172);
+            btn_reload.Name = "btn_reload";
+            btn_reload.Size = new Size(166, 67);
+            btn_reload.TabIndex = 9;
+            btn_reload.Text = "Recargar Data";
+            btn_reload.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_reload.UseVisualStyleBackColor = true;
+            btn_reload.Click += Btn_reload_Click;
+            // 
+            // btn_DetailsConsumos
+            // 
+            btn_DetailsConsumos.Image = (Image)resources.GetObject("btn_DetailsConsumos.Image");
+            btn_DetailsConsumos.Location = new Point(1018, 245);
+            btn_DetailsConsumos.Name = "btn_DetailsConsumos";
+            btn_DetailsConsumos.Size = new Size(166, 67);
+            btn_DetailsConsumos.TabIndex = 10;
+            btn_DetailsConsumos.Text = "Detalle Cosumos";
+            btn_DetailsConsumos.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_DetailsConsumos.UseVisualStyleBackColor = true;
+            btn_DetailsConsumos.Click += Btn_DetailsConsumos_Click;
+            // 
             // Frm_RollId
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1024, 703);
+            ClientSize = new Size(1196, 703);
+            Controls.Add(btn_DetailsConsumos);
+            Controls.Add(btn_reload);
             Controls.Add(label1);
             Controls.Add(panel1);
             Controls.Add(groupBox1);
@@ -255,5 +284,7 @@
         private PictureBox pictureBox1;
         private Label label2;
         private Label label1;
+        private Button btn_reload;
+        private Button btn_DetailsConsumos;
     }
 }

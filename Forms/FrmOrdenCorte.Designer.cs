@@ -287,7 +287,7 @@
             bot_accion.Name = "bot_accion";
             bot_accion.Size = new Size(98, 30);
             bot_accion.Text = "Acciones";
-            bot_accion.Click += bot_accion_Click;
+            bot_accion.Click += Bot_accion_Click;
             // 
             // opt_create_document
             // 
@@ -358,7 +358,7 @@
             bot_cancelar.Name = "bot_cancelar";
             bot_cancelar.Size = new Size(80, 30);
             bot_cancelar.Text = "Cancel";
-            bot_cancelar.Click += bot_cancelar_Click;
+            bot_cancelar.Click += Bot_cancelar_Click;
             // 
             // bot_editOrden
             // 
@@ -369,7 +369,7 @@
             bot_editOrden.Name = "bot_editOrden";
             bot_editOrden.Size = new Size(80, 30);
             bot_editOrden.Text = "Editar";
-            bot_editOrden.Click += bot_buscar_Click;
+            bot_editOrden.Click += Bot_buscar_Click;
             // 
             // bot_imprimir
             // 
@@ -412,7 +412,7 @@
             bot_buscarOrders.Name = "bot_buscarOrders";
             bot_buscarOrders.Size = new Size(80, 30);
             bot_buscarOrders.Text = "Buscar";
-            bot_buscarOrders.Click += bot_buscarOrders_Click;
+            bot_buscarOrders.Click += Bot_buscarOrders_Click;
             // 
             // label2
             // 
@@ -1073,7 +1073,7 @@
             btn_add_row_corte.Text = "Agregar";
             btn_add_row_corte.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_add_row_corte.UseVisualStyleBackColor = true;
-            btn_add_row_corte.Click += btn_add_row_corte_Click;
+            btn_add_row_corte.Click += Btn_add_row_corte_Click;
             // 
             // btn_delete_row_corte
             // 
@@ -1279,7 +1279,7 @@
             btn_code_person.TabIndex = 94;
             btn_code_person.Text = "...";
             btn_code_person.UseVisualStyleBackColor = true;
-            btn_code_person.Click += btn_code_person_Click;
+            btn_code_person.Click += Btn_code_person_Click;
             // 
             // chk_unificar_rollos
             // 
