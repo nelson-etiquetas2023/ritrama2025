@@ -901,18 +901,30 @@ namespace Ritrama2025.Forms
         }
         private async void ACTUALIZAR_INVENTARIOS_MASTER() 
         {
-            //actualizarla tabla de detalle de consumo parciales.
+            //actualizar la tabla de detalle de consumo parciales.
             double cons = txt_real1_length.Text == "" ? 0 : Convert.ToDouble(txt_real1_length.Text);
+            var p = new { rollid = txt_rollid_1.Text, orden = txt_numeroOC.Text, consumo = cons, fecha = DateTime.Now,desperdicio = false };
+            await Service.UpdateDetailsConsumosMasterIniciales(p.rollid, p.orden, p.consumo, p.fecha, p.desperdicio);
 
-            var p = new { rollid = txt_rollid_1.Text, orden = txt_numeroOC.Text, consumo = cons, fecha = DateTime.Now };
-            await Service.UpdateDetailsConsumosMasterIniciales(p.rollid, p.orden, p.consumo, p.fecha);
+            if (chk_desperdicio1.Checked) 
+            {
+                double consumo_desper = txt_matrest1_lenght.Text == "" ? 0 : Convert.ToDouble(txt_matrest1_lenght.Text);
+                var d = new { rollid = txt_rollid_1.Text, orden = txt_numeroOC.Text, consumo = consumo_desper, fecha = DateTime.Now, desperdicio = true };
+                await Service.UpdateDetailsConsumosMasterIniciales(d.rollid, d.orden, d.consumo, d.fecha, d.desperdicio);
+            }
 
             // actualiza el campo largo_consumido en orden_corte.
             double consumoParcial =  txt_real1_length.Text=="" ? 0 : Convert.ToDouble(txt_real1_length.Text);
             string rollid = txt_rollid_1.Text;
             await Service.UpdateInventaryMasterInitial(consumoParcial,rollid);
-            //actualiza el registro de la tabla de consumos parciales master [recarga los iniciales].
 
+            if (chk_desperdicio1.Checked) 
+            {
+                double consumo_desperdicio = txt_matrest1_lenght.Text == "" ? 0 : Convert.ToDouble(txt_matrest1_lenght.Text);
+                await Service.UpdateInventaryMasterInitial(consumo_desperdicio, rollid);
+            }
+
+            //actualiza el registro de la tabla de consumos parciales master [recarga los iniciales] EN LA UI.
             var fila = Ds.Tables["DtRollid"]!.AsEnumerable()
                                 .FirstOrDefault(row => row.Field<string>("Roll_Id") == p.rollid);
 
@@ -921,6 +933,12 @@ namespace Ritrama2025.Forms
                 decimal cantidadActual = fila.Field<decimal>("largo_consumido");
                 decimal length_original = fila.Field<decimal>("lenght");
                 decimal cond = txt_real1_length.Text == "" ? 0 : Convert.ToDecimal(txt_real1_length.Text);
+                
+                if (chk_desperdicio1.Checked) 
+                {
+                    decimal consumo_desperdicio = txt_matrest1_lenght.Text == "" ? 0 : Convert.ToDecimal(txt_matrest1_lenght.Text);
+                    cond += consumo_desperdicio;
+                }
                 fila.SetField("largo_consumido", cantidadActual + cond);
                 fila.SetField("largo_restante", length_original - (cantidadActual + cond));
                 decimal restante = fila.Field<decimal>("largo_restante");
@@ -929,9 +947,7 @@ namespace Ritrama2025.Forms
                 string estado = restante == 0 ? "Agotado" :
                     consumos == 0 ? "Completo" :
                     "Parcialmente Utilizado";
-
                 fila.SetField("estado", estado);
-
             }
         }
 

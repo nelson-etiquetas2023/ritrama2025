@@ -624,7 +624,7 @@ namespace Ritrama2025.Services.ProduccionService
                 return null;
             }
         }
-        public async Task<bool> UpdateDetailsConsumosMasterIniciales(string rollid, string orden, double length_consumo, DateTime fecha_reg)
+        public async Task<bool> UpdateDetailsConsumosMasterIniciales(string rollid, string orden, double length_consumo, DateTime fecha_reg,bool desperdicio)
         {
             try
             {
@@ -635,7 +635,8 @@ namespace Ritrama2025.Services.ProduccionService
                     new SqlParameter("@rollid", rollid),
                     new SqlParameter("@orden", orden),
                     new SqlParameter("@consumo", length_consumo),
-                    new SqlParameter("@fecha", fecha_reg)
+                    new SqlParameter("@fecha", fecha_reg),
+                    new SqlParameter("@desperdicio", desperdicio)
                 ];
 
                 await CargarTablaAsync(tabla.sql,false,parameros,tabla.nameTabla,false);
@@ -643,11 +644,10 @@ namespace Ritrama2025.Services.ProduccionService
             }
             catch (Exception ex)
             {
-                MessageBox.Show("error al actualizar el detalle de los  master  [error code: ] " + ex.Message);
+                MessageBox.Show("error al actualizar el detalle de los master [error code: ] " + ex.Message);
                 return false;
             }
         }
-
         public async Task<DataTable?> LoadDataDetailsConsumosMasterInic(string rollid)
         {
             try

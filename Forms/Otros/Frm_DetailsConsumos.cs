@@ -64,7 +64,7 @@ namespace Ritrama2025.Forms.Otros
                 Name = "chk_desper",
                 Width = 80,
                 HeaderText = "Desperdicio",
-                DataPropertyName = "check",
+                DataPropertyName = "desperdicio",
             };
             colCheck.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             Grid_Items.Columns.Add(colCheck);

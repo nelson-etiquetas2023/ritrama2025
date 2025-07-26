@@ -20,7 +20,7 @@ namespace Ritrama2025
 
                 internal static string SQL_QUERY_ACTUALIZAR_INVENTARIO_INICIALES = "UPDATE MasterInic SET largo_consumido=largo_consumido+@consumo WHERE roll_id=@rollid";
 
-                internal static string UPDATE_QUERY_ACTUALIZAR_INVENTARIO_DETAILS_INICIALES = "INSERT INTO MasterDetailsInic (rollid,orden,consumo,fecha_reg) VALUES(@rollid,@orden,@consumo,@fecha)";
+                internal static string UPDATE_QUERY_ACTUALIZAR_INVENTARIO_DETAILS_INICIALES = "INSERT INTO MasterDetailsInic (rollid,orden,consumo,fecha_reg,desperdicio) VALUES(@rollid,@orden,@consumo,@fecha,@desperdicio)";
 
                 internal static string SQL_SELECT_QUERY_LOAD_DETAILS_MASTER_INICIALES = "SELECT rollid,orden,consumo,fecha_reg,desperdicio FROM MasterDetailsInic WHERE rollid=@rollid";
             }

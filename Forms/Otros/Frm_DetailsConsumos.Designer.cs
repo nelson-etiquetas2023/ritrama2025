@@ -161,6 +161,7 @@
             // 
             // txt_total
             // 
+            txt_total.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_total.Location = new Point(400, 505);
             txt_total.Name = "txt_total";
             txt_total.ReadOnly = true;
