@@ -42,6 +42,12 @@
             label4 = new Label();
             txt_total = new TextBox();
             label5 = new Label();
+            label6 = new Label();
+            txt_rollos_Producc = new TextBox();
+            txt_width = new TextBox();
+            label7 = new Label();
+            txt_lenght = new TextBox();
+            label8 = new Label();
             ((System.ComponentModel.ISupportInitialize)Grid_Items).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -118,7 +124,7 @@
             txt_rollid.Location = new Point(105, 118);
             txt_rollid.Name = "txt_rollid";
             txt_rollid.ReadOnly = true;
-            txt_rollid.Size = new Size(484, 23);
+            txt_rollid.Size = new Size(127, 23);
             txt_rollid.TabIndex = 4;
             // 
             // txt_productid
@@ -178,11 +184,74 @@
             label5.TabIndex = 10;
             label5.Text = "Total Consumo Length:";
             // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.Location = new Point(254, 537);
+            label6.Name = "label6";
+            label6.Size = new Size(140, 15);
+            label6.TabIndex = 12;
+            label6.Text = "Total Rollos Producidos :";
+            // 
+            // txt_rollos_Producc
+            // 
+            txt_rollos_Producc.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txt_rollos_Producc.Location = new Point(400, 534);
+            txt_rollos_Producc.Name = "txt_rollos_Producc";
+            txt_rollos_Producc.ReadOnly = true;
+            txt_rollos_Producc.Size = new Size(189, 23);
+            txt_rollos_Producc.TabIndex = 11;
+            // 
+            // txt_width
+            // 
+            txt_width.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txt_width.Location = new Point(290, 118);
+            txt_width.Name = "txt_width";
+            txt_width.ReadOnly = true;
+            txt_width.Size = new Size(113, 23);
+            txt_width.TabIndex = 14;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label7.Location = new Point(240, 121);
+            label7.Name = "label7";
+            label7.Size = new Size(44, 15);
+            label7.TabIndex = 13;
+            label7.Text = "Width:";
+            // 
+            // txt_lenght
+            // 
+            txt_lenght.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txt_lenght.Location = new Point(462, 121);
+            txt_lenght.Name = "txt_lenght";
+            txt_lenght.ReadOnly = true;
+            txt_lenght.Size = new Size(127, 23);
+            txt_lenght.TabIndex = 16;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label8.Location = new Point(412, 124);
+            label8.Name = "label8";
+            label8.Size = new Size(49, 15);
+            label8.TabIndex = 15;
+            label8.Text = "Length:";
+            // 
             // Frm_DetailsConsumos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(601, 677);
+            Controls.Add(txt_lenght);
+            Controls.Add(label8);
+            Controls.Add(txt_width);
+            Controls.Add(label7);
+            Controls.Add(label6);
+            Controls.Add(txt_rollos_Producc);
             Controls.Add(label5);
             Controls.Add(txt_total);
             Controls.Add(txt_productName);
@@ -223,5 +292,11 @@
         private Label label4;
         private TextBox txt_total;
         private Label label5;
+        private Label label6;
+        private TextBox txt_rollos_Producc;
+        private TextBox txt_width;
+        private Label label7;
+        private TextBox txt_lenght;
+        private Label label8;
     }
 }

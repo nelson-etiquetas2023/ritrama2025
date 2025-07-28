@@ -140,7 +140,10 @@ namespace Ritrama2025.Forms.Seleccion
             {
                 Rollid = GridItems.CurrentRow?.Cells["rollid"].Value?.ToString() ?? string.Empty,
                 Productid = GridItems.CurrentRow?.Cells["product_id"].Value?.ToString() ?? string.Empty,
-                Product_Name = GridItems.CurrentRow?.Cells["product_name"].Value?.ToString() ?? string.Empty
+                Product_Name = GridItems.CurrentRow?.Cells["product_name"].Value?.ToString() ?? string.Empty,
+                Width_t = GridItems.CurrentRow?.Cells["Ancho"].Value?.ToString() ?? string.Empty,
+                Length = GridItems.CurrentRow?.Cells["lenght"].Value?.ToString() ?? string.Empty
+
             };
             frmDetails.ShowDialog();
         }

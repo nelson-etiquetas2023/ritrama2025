@@ -22,7 +22,7 @@ namespace Ritrama2025
 
                 internal static string UPDATE_QUERY_ACTUALIZAR_INVENTARIO_DETAILS_INICIALES = "INSERT INTO MasterDetailsInic (rollid,orden,consumo,fecha_reg,desperdicio) VALUES(@rollid,@orden,@consumo,@fecha,@desperdicio)";
 
-                internal static string SQL_SELECT_QUERY_LOAD_DETAILS_MASTER_INICIALES = "SELECT rollid,orden,consumo,fecha_reg,desperdicio FROM MasterDetailsInic WHERE rollid=@rollid";
+                internal static string SQL_SELECT_QUERY_LOAD_DETAILS_MASTER_INICIALES = "SELECT rollid,orden,consumo,fecha_reg,a.desperdicio,case when a.desperdicio=1 then 0 else b.cant_rollos end as cant_rollos,b.customer_id,c.Customer_Name FROM MasterDetailsInic a left join orden_corte b on a.orden=b.numero left join Customer c on b.customer_id=c.customer_id WHERE rollid=@rollid";
             }
         }
         public static class CONNECTIONSTRINGS
