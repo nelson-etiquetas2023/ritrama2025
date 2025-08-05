@@ -1,4 +1,6 @@
 ﻿
+using DocumentFormat.OpenXml.Wordprocessing;
+
 namespace Ritrama2025.Models
 {
     public class RolloCortado
@@ -20,10 +22,9 @@ namespace Ritrama2025.Models
         public int Cantidad { get; set; }
         public string Tipo { get; set; } = null!;
         public string Paleta { get; set; } = null!;
-       
         public bool Disponible { get; set; }
-        
         public string Numero { get; set; } = null!;
+        public string tipo_mov { get; set; } = null!;
 
     }
 }

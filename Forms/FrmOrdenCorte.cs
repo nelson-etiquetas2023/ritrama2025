@@ -19,32 +19,61 @@ namespace Ritrama2025.Forms
         private readonly IReportsService ReportService;
         private readonly ICommonService CommonService;
         DataSet Ds = new();
-        readonly BindingSource Bs = [];
+        readonly BindingSource BsMaster = [];
+        readonly BindingSource BsDetails = [];
         readonly BindingSource BsCortes = [];
-        readonly BindingSource BsRollos = [];
+
         DataRowView ParentRow = null!;
         DataRowView ChildRowCortes = null!;
         DataRowView RollosCortados = null!;
         readonly string operadorId = "ff8fe855-0f8b-4062-8aa5-860d94f804d5";
         readonly string operadorName = "NO-ASIGNADO";
+        private string TipoMovimiento = "";
         int EditMode = 0;
         Orden Orden { get; set; } = null!;
         List<Corte> Cortes { get; set; } = [];
         List<RolloCortado> Detalle { get; set; } = [];
 
 
-        public FrmOrdenCorte(IProduccionService service, IExportDataService exportService, IReportsService reportService,ICommonService commonService)
+        public FrmOrdenCorte(IProduccionService service, IExportDataService exportService, IReportsService reportService, ICommonService commonService)
         {
             InitializeComponent();
             Service = service;
             ExportDataService = exportService;
             ReportService = reportService;
             CommonService = commonService;
+            BsMaster.PositionChanged += BsMaster_PositionChanged;
+        }
+
+        private void Dtrollos_RowDeleted(object sender, DataRowChangeEventArgs e)
+        {
+            if(e.Row.RowState == DataRowState.Deleted)
+            {
+                e.Row.RejectChanges();
+            }
+        }
+
+        private void BsMaster_PositionChanged(object? sender, EventArgs e)
+        {
+            if (BsMaster.Current is DataRowView drv) 
+            {
+                var row = drv.Row;
+                if (row.RowState == DataRowState.Deleted) 
+                {
+                   row.RejectChanges();
+                    Ds.AcceptChanges();
+                }
+            }
         }
 
         private async void FrmOrdenCorte_Load(object sender, EventArgs e)
         {
             Ds = await Service.LoadDataOC();
+            Ds.RejectChanges();
+            Ds.AcceptChanges();
+
+            Ds.Tables["Dtrollos"]!.RowDeleted += Dtrollos_RowDeleted;
+
             //Enlace a datos Encabezado de la Orden Corte.
             HeaderBinding();
             BindingRollos();
@@ -52,46 +81,46 @@ namespace Ritrama2025.Forms
             UpdateStepIndicator();
             ContadorRegistros();
         }
-       
+
         private void HeaderBinding()
         {
-            Bs.DataSource = Ds;
-            Bs.DataMember = "DtMaster";
-            txt_numeroOC.DataBindings.Add("Text", Bs, "numero");
-            txt_fecha_emision.DataBindings.Add("Text", Bs, "fecha");
-            txt_fecha_produccion.DataBindings.Add("Text", Bs, "fecha_produccion");
-            txt_rollid_1.DataBindings.Add("Text", Bs, "rollid_1");
-            txt_width1.DataBindings.Add("Text", Bs, "width_1");
-            txt_length1.DataBindings.Add("Text", Bs, "lenght_1");
-            txt_real1_width.DataBindings.Add("Text", Bs, "util1_real_width");
-            txt_real1_length.DataBindings.Add("Text", Bs, "util1_real_lenght");
-            txt_real2_width.DataBindings.Add("Text", Bs, "util2_real_width");
-            txt_real2_length.DataBindings.Add("Text", Bs, "util2_real_lenght");
-            txt_rollid_2.DataBindings.Add("Text", Bs, "rollid_2");
-            txt_width2.DataBindings.Add("Text", Bs, "width_2");
-            txt_length2.DataBindings.Add("Text", Bs, "lenght_2");
-            txt_matrest1_width.DataBindings.Add("Text", Bs, "rest1_width");
-            txt_matrest1_lenght.DataBindings.Add("Text", Bs, "rest1_lenght");
-            txt_matrest2_width.DataBindings.Add("Text", Bs, "rest2_width");
-            txt_matrest2_lenght.DataBindings.Add("Text", Bs, "rest2_lenght");
-            txt_product_id.DataBindings.Add("Text", Bs, "product_id");
-            txt_product_name.DataBindings.Add("Text", Bs, "product_Name");
-            txt_operador_id.DataBindings.Add("Text", Bs, "operador_id");
-            txt_operador_name.DataBindings.Add("Text", Bs, "nombre");
-            txt_cust_id.DataBindings.Add("Text", Bs, "customer_id");
-            txt_cust_name.DataBindings.Add("Text", Bs, "customer_name");
-            txt_resta_corte.DataBindings.Add("Text", Bs, "resta_entrada");
-            txt_largo_corte.DataBindings.Add("Text", Bs, "lenght_entrada");
-            txt_plus1.DataBindings.Add("Text", Bs, "plus1_pies");
-            txt_plus2.DataBindings.Add("Text", Bs, "plus2_pies");
-            txt_long_cortar.DataBindings.Add("Text", Bs, "longitud_cortar");
-            txt_cortes_ancho.DataBindings.Add("Text", Bs, "cortes_ancho");
-            txt_vueltas1.DataBindings.Add("Text", Bs, "cortes_largo");
-            txt_rollos_cortar1.DataBindings.Add("Text", Bs, "cant_rollos");
-            txt_ancho_corte.DataBindings.Add("Text", Bs, "total_salida");
-            txt_step.DataBindings.Add("Text", Bs, "step");
-            txt_sellOrder.DataBindings.Add("Text", Bs, "sellOrder");
-            chk_desperdicio1.DataBindings.Add("Checked", Bs, "desperdicio", true);
+            BsMaster.DataSource = Ds;
+            BsMaster.DataMember = "DtMaster";
+            txt_numeroOC.DataBindings.Add("Text", BsMaster, "numero");
+            txt_fecha_emision.DataBindings.Add("Text", BsMaster, "fecha");
+            txt_fecha_produccion.DataBindings.Add("Text", BsMaster, "fecha_produccion");
+            txt_rollid_1.DataBindings.Add("Text", BsMaster, "rollid_1");
+            txt_width1.DataBindings.Add("Text", BsMaster, "width_1");
+            txt_length1.DataBindings.Add("Text", BsMaster, "lenght_1");
+            txt_real1_width.DataBindings.Add("Text", BsMaster, "util1_real_width");
+            txt_real1_length.DataBindings.Add("Text", BsMaster, "util1_real_lenght");
+            txt_real2_width.DataBindings.Add("Text", BsMaster, "util2_real_width");
+            txt_real2_length.DataBindings.Add("Text", BsMaster, "util2_real_lenght");
+            txt_rollid_2.DataBindings.Add("Text", BsMaster, "rollid_2");
+            txt_width2.DataBindings.Add("Text", BsMaster, "width_2");
+            txt_length2.DataBindings.Add("Text", BsMaster, "lenght_2");
+            txt_matrest1_width.DataBindings.Add("Text", BsMaster, "rest1_width");
+            txt_matrest1_lenght.DataBindings.Add("Text", BsMaster, "rest1_lenght");
+            txt_matrest2_width.DataBindings.Add("Text", BsMaster, "rest2_width");
+            txt_matrest2_lenght.DataBindings.Add("Text", BsMaster, "rest2_lenght");
+            txt_product_id.DataBindings.Add("Text", BsMaster, "product_id");
+            txt_product_name.DataBindings.Add("Text", BsMaster, "product_Name");
+            txt_operador_id.DataBindings.Add("Text", BsMaster, "operador_id");
+            txt_operador_name.DataBindings.Add("Text", BsMaster, "nombre");
+            txt_cust_id.DataBindings.Add("Text", BsMaster, "customer_id");
+            txt_cust_name.DataBindings.Add("Text", BsMaster, "customer_name");
+            txt_resta_corte.DataBindings.Add("Text", BsMaster, "resta_entrada");
+            txt_largo_corte.DataBindings.Add("Text", BsMaster, "lenght_entrada");
+            txt_plus1.DataBindings.Add("Text", BsMaster, "plus1_pies");
+            txt_plus2.DataBindings.Add("Text", BsMaster, "plus2_pies");
+            txt_long_cortar.DataBindings.Add("Text", BsMaster, "longitud_cortar");
+            txt_cortes_ancho.DataBindings.Add("Text", BsMaster, "cortes_ancho");
+            txt_vueltas1.DataBindings.Add("Text", BsMaster, "cortes_largo");
+            txt_rollos_cortar1.DataBindings.Add("Text", BsMaster, "cant_rollos");
+            txt_ancho_corte.DataBindings.Add("Text", BsMaster, "total_salida");
+            txt_step.DataBindings.Add("Text", BsMaster, "step");
+            txt_sellOrder.DataBindings.Add("Text", BsMaster, "sellOrder");
+            chk_desperdicio1.DataBindings.Add("Checked", BsMaster, "desperdicio", true);
             //check desperdicios.
             chk_desperdicio1.DataBindings["Checked"]!.Format += (s, e) =>
             {
@@ -105,28 +134,28 @@ namespace Ritrama2025.Forms
         private void BindingRollos()
         {
             //Enlace a datos de Grid-Rollos Cortados.
-            BsRollos.DataSource = Bs;
-            BsRollos.DataMember = R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS; 
-            //grid_items.AutoGenerateColumns = false;
-            //ADD_COLUMN_GRID("roll_number", 25, "#", "roll_number", grid_items);
-            //ADD_COLUMN_GRID("product_id", 60, "Product Id", "product_id", grid_items);
-            //ADD_COLUMN_GRID("product_name", 250, "Product Name", "product_name", grid_items);
-            //ADD_COLUMN_GRID("unique_code", 60, "Unique Code", "unique_code", grid_items);
-            //ADD_COLUMN_GRID("width", 75, "Width [Inch]", "width", grid_items);
-            //ADD_COLUMN_GRID("large", 75, "Length [Pies]", "large", grid_items);
-            //ADD_COLUMN_GRID("msi", 75, "MSI", "msi", grid_items);
-            //ADD_COLUMN_GRID("splice", 50, "Splice", "splice", grid_items);
-            //ADD_COLUMN_GRID("roll_id", 75, "Roll Id.", "roll_id", grid_items);
-            //ADD_COLUMN_GRID("code_person", 75, "Code Person.", "code_person", grid_items);
-            //ADD_COLUMN_GRID("status", 80, "Status", "status", grid_items);
-            ////ADD_COLUMN_GRID("numero", 80, "Numero", "numero", grid_items);
-            grid_items.DataSource = BsRollos;
+            BsDetails.DataSource = BsMaster;
+            BsDetails.DataMember = R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS;
+            grid_items.AutoGenerateColumns = false;
+            ADD_COLUMN_GRID("roll_number", 25, "#", "roll_number", grid_items);
+            ADD_COLUMN_GRID("product_id", 60, "Product Id", "product_id", grid_items);
+            ADD_COLUMN_GRID("product_name", 250, "Product Name", "product_name", grid_items);
+            ADD_COLUMN_GRID("unique_code", 60, "Unique Code", "unique_code", grid_items);
+            ADD_COLUMN_GRID("width", 75, "Width [Inch]", "width", grid_items);
+            ADD_COLUMN_GRID("large", 75, "Length [Pies]", "large", grid_items);
+            ADD_COLUMN_GRID("msi", 75, "MSI", "msi", grid_items);
+            ADD_COLUMN_GRID("splice", 50, "Splice", "splice", grid_items);
+            ADD_COLUMN_GRID("roll_id", 75, "Roll Id.", "roll_id", grid_items);
+            ADD_COLUMN_GRID("code_person", 75, "Code Person.", "code_person", grid_items);
+            ADD_COLUMN_GRID("status", 80, "Status", "status", grid_items);
+            ADD_COLUMN_GRID("numero", 80, "Numero", "numero", grid_items);
+            grid_items.DataSource = BsDetails;
         }
 
         private void BindingCortes()
         {
             // Enlace a datos de Grid-Cortes.
-            BsCortes.DataSource = Bs;
+            BsCortes.DataSource = BsMaster;
             BsCortes.DataMember = "FK_ENCABEZADO_CORTES";
             grid_cortes.AutoGenerateColumns = false;
             ADD_COLUMN_GRID("it", 25, "It.", "num", grid_cortes);
@@ -139,32 +168,34 @@ namespace Ritrama2025.Forms
 
         private void Bot_primero_Click(object sender, EventArgs e)
         {
-            Bs.Position += 1;
+            BsMaster.Position += 1;
             UpdateStepIndicator();
             ContadorRegistros();
         }
 
         private void Bot_anterior_Click(object sender, EventArgs e)
         {
-            Bs.Position -= 1;
+            BsMaster.MovePrevious();
+            BsMaster.ResetBindings(false);
             UpdateStepIndicator();
             ContadorRegistros();
         }
 
         private void Bot_siguiente_Click(object sender, EventArgs e)
         {
-            Bs.Position++;
+            BsMaster.MoveNext();
+            BsMaster.ResetBindings(false);
             UpdateStepIndicator();
             ContadorRegistros();
         }
 
         private void Bot_ultimo_Click(object sender, EventArgs e)
         {
-            Bs.Position = Bs.Count + 1;
+            BsMaster.Position = BsMaster.Count + 1;
             UpdateStepIndicator();
             ContadorRegistros();
         }
-       
+
         private static void ADD_COLUMN_GRID(string name, int size, string title, string field_bd, DataGridView grid)
         {
             DataGridViewTextBoxColumn col = new()
@@ -179,7 +210,7 @@ namespace Ritrama2025.Forms
         private void Opt_create_document_Click(object sender, EventArgs e)
         {
             //1.- Inicialiozar el Documento de Orden de Corte.
-            ParentRow = (DataRowView)Bs.AddNew()!;
+            ParentRow = (DataRowView)BsMaster.AddNew()!;
             ParentRow.BeginEdit();
             ParentRow["numero"] = Service.BuscarConsecOC();
             ParentRow["rollid_1"] = "0";
@@ -222,7 +253,7 @@ namespace Ritrama2025.Forms
                 ChildRowCortes["code_person"] = "S/N";
                 ChildRowCortes.EndEdit();
             }
-            if (grid_cortes.Rows.Count > 0) 
+            if (grid_cortes.Rows.Count > 0)
             {
                 grid_cortes.ClearSelection();
                 grid_cortes.CurrentCell = grid_cortes.Rows[0].Cells[0];
@@ -292,6 +323,7 @@ namespace Ritrama2025.Forms
                 txt_product_id.Text = frmrollid.MasterRoll.Product_Id;
                 txt_product_name.Text = frmrollid.MasterRoll.Product_Name;
                 checkList_pasos_orden.SetItemChecked(0, true);
+                TipoMovimiento = frmrollid.MasterRoll.tipo_mov;
             }
         }
 
@@ -473,7 +505,7 @@ namespace Ritrama2025.Forms
             {
                 for (int j = 0; j <= numcortes - 1; j++)
                 {
-                    RollosCortados = (DataRowView)BsRollos.AddNew()!;
+                    RollosCortados = (DataRowView)BsDetails.AddNew()!;
                     RollosCortados.BeginEdit();
                     RollosCortados["roll_number"] = renglon;
                     RollosCortados["product_id"] = txt_product_id.Text;
@@ -634,10 +666,10 @@ namespace Ritrama2025.Forms
         }
         private void BorrarRollosCortadosHijos()
         {
-            if (Bs.Current == null) return;
+            if (BsMaster.Current == null) return;
 
             // Obtener la fila maestra actual como DataRowView
-            DataRowView rowMaestro = (DataRowView)Bs.Current;
+            DataRowView rowMaestro = (DataRowView)BsMaster.Current;
 
             // Obtener todas las filas hijas relacionadas
             DataRow[] filasHijas = rowMaestro.Row.GetChildRows(R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS);
@@ -649,7 +681,7 @@ namespace Ritrama2025.Forms
             }
 
             // Actualizar el DataGridView
-            BsRollos.EndEdit();
+            BsDetails.EndEdit();
         }
 
         private void Grid_cortes_Leave(object sender, EventArgs e)
@@ -809,50 +841,27 @@ namespace Ritrama2025.Forms
 
         private void Bot_guardar_Click(object sender, EventArgs e)
         {
-            if (!ValidDefintionsCortes()) return;
+            //1.- Validar los datos del formulario.
+            Validar();
 
-            if (txt_rollid_1.Text == "")
-            {
-                MessageBox.Show("debe seleccionar el roll-id del master a montar...");
-                return;
-            }
-            if (txt_operador_id.Text == "")
-            {
-                MessageBox.Show("debe introducir el nombre del operador...");
-                return;
-            }
-            if (txt_cust_id.Text == "")
-            {
-                MessageBox.Show("debe introducir el nombre del cliente...");
-                return;
-            }
-            if (txt_long_cortar.Text == "")
-            {
-                MessageBox.Show("debe introducir la longitud a cortar...");
-                return;
-            }
-            if (txt_vueltas1.Value == 0)
-            {
-                MessageBox.Show("debe agregar el numero de vueltas...");
-                return;
-            }
-            if (grid_items.Rows.Count == 0)
-            {
-                MessageBox.Show("no tiene renglones de rollos cortados, debe generar los rollos ...");
-                return;
-            }
-            if (grid_cortes.Rows.Count == 0)
-            {
-                MessageBox.Show("no tiene la definicion de los cortres, definirla por favor...");
-                return;
-            }
-            CREATE_HEADER_ORDEN();
-            CREATE_CORTES();
-            CREATE_DETALLE_ORDEN();
+            //2.- Crear los objetos (clases) de la Orden de Corte.
+            CrearObjetoOrden();
 
+            // 3.- Guardar el documento en la Base de Datos.
+            SaveDocument();
+        
+            //4.- Actualizar la UI.
+            RefrescarUI();
+            
+            EditMode = 0;
+        }
+
+        private void SaveDocument() 
+        {
             if (EditMode == 1)
             {
                 GuardarOrdeAddMode();
+
                 //Actualizar el consecutivo de la Orden de Corte den la Base de Datos.
                 string UpdateConsecBd = (Convert.ToInt32(txt_numeroOC.Text) + 1).ToString();
                 Service.UpdateConsecOC(UpdateConsecBd);
@@ -862,6 +871,88 @@ namespace Ritrama2025.Forms
             {
                 GuardarOrderUpdateMode();
             }
+        }
+
+        private void RefrescarUI() 
+        {
+            BsMaster.MoveLast();
+            BsMaster.EndEdit();
+            BsMaster.ResetBindings(false);
+            BsDetails.EndEdit();
+            BsDetails.ResetBindings(false);
+            Ds.Tables["DtMaster"]!.AcceptChanges();
+            Ds.Tables["DtRollos"]!.AcceptChanges();
+            grid_items.Refresh();
+            CerrarForms();
+            ContadorRegistros();
+        }
+
+
+        private void Validar() 
+        {
+            if (!ValidDefintionsCortes()) return;
+            if (!ValidarDocumento()) return;
+        }
+
+        private void CrearObjetoOrden() 
+        {
+            //Actualizar la base de datos
+            CREATE_HEADER_ORDEN();
+            CREATE_CORTES();
+            CREATE_DETALLE_ORDEN();
+        }
+
+
+        private bool ValidarDocumento() 
+        {
+            bool validateDoc = false;
+            if (txt_rollid_1.Text == "")
+            {
+                MessageBox.Show("debe seleccionar el roll-id del master a montar...");
+                validateDoc = false;
+                return validateDoc;
+            }
+            if (txt_operador_id.Text == "")
+            {
+                MessageBox.Show("debe introducir el nombre del operador...");
+                validateDoc = false;
+                return validateDoc; 
+            }
+            if (txt_cust_id.Text == "")
+            {
+                MessageBox.Show("debe introducir el nombre del cliente...");
+                validateDoc = false;
+                return validateDoc;
+            }
+            if (txt_long_cortar.Text == "")
+            {
+                MessageBox.Show("debe introducir la longitud a cortar...");
+                validateDoc = false;
+                return validateDoc;
+            }
+            if (txt_vueltas1.Value == 0)
+            {
+                MessageBox.Show("debe agregar el numero de vueltas...");
+                validateDoc = false;
+                return validateDoc;
+            }
+            if (grid_items.Rows.Count == 0)
+            {
+                MessageBox.Show("no tiene renglones de rollos cortados, debe generar los rollos ...");
+                validateDoc = false;
+                return validateDoc;
+            }
+            if (grid_cortes.Rows.Count == 0)
+            {
+                MessageBox.Show("no tiene la definicion de los cortres, definirla por favor...");
+                validateDoc = false;
+                return validateDoc;
+            }
+            return true;
+        }
+
+        private void CerrarForms()
+        {
             //Menu opciones
             bot_primero.Enabled = true;
             bot_siguiente.Enabled = true;
@@ -896,17 +987,17 @@ namespace Ritrama2025.Forms
             txt_long_cortar.ReadOnly = true;
             chk_desperdicio1.Enabled = false;
             grid_cortes.ReadOnly = true;
-            EditMode = 0;
-            ContadorRegistros();
         }
-        private async void ACTUALIZAR_INVENTARIOS_MASTER() 
+
+
+        private async void ACTUALIZAR_INVENTARIOS_MASTER()
         {
             //actualizar la tabla de detalle de consumo parciales.
             double cons = txt_real1_length.Text == "" ? 0 : Convert.ToDouble(txt_real1_length.Text);
-            var p = new { rollid = txt_rollid_1.Text, orden = txt_numeroOC.Text, consumo = cons, fecha = DateTime.Now,desperdicio = false };
+            var p = new { rollid = txt_rollid_1.Text, orden = txt_numeroOC.Text, consumo = cons, fecha = DateTime.Now, desperdicio = false };
             await Service.UpdateDetailsConsumosMasterIniciales(p.rollid, p.orden, p.consumo, p.fecha, p.desperdicio);
 
-            if (chk_desperdicio1.Checked) 
+            if (chk_desperdicio1.Checked)
             {
                 double consumo_desper = txt_matrest1_lenght.Text == "" ? 0 : Convert.ToDouble(txt_matrest1_lenght.Text);
                 var d = new { rollid = txt_rollid_1.Text, orden = txt_numeroOC.Text, consumo = consumo_desper, fecha = DateTime.Now, desperdicio = true };
@@ -914,14 +1005,22 @@ namespace Ritrama2025.Forms
             }
 
             // actualiza el campo largo_consumido en orden_corte.
-            double consumoParcial =  txt_real1_length.Text=="" ? 0 : Convert.ToDouble(txt_real1_length.Text);
+            double consumoParcial = txt_real1_length.Text == "" ? 0 : Convert.ToDouble(txt_real1_length.Text);
             string rollid = txt_rollid_1.Text;
-            await Service.UpdateInventaryMasterInitial(consumoParcial,rollid);
+            string nameTable = TipoMovimiento == "Inic." ? "MasterInic" : "ItemsMateria";
+            string ssql = TipoMovimiento == "Inic." ? R.QUERY.PRODUCTION.SQL_QUERY_ACTUALIZAR_INVENTARIO_INICIALES :
+                R.QUERY.PRODUCTION.SQL_QUERY_ACTUALIZAR_INVENTARIO_MATERIA;
 
-            if (chk_desperdicio1.Checked) 
+            var objeto = new { consumo = consumoParcial, roll_id = rollid, nametable = nameTable, sql = ssql };
+
+            await Service.UpdateInventaryMasterInitial(objeto);
+
+            if (chk_desperdicio1.Checked)
             {
                 double consumo_desperdicio = txt_matrest1_lenght.Text == "" ? 0 : Convert.ToDouble(txt_matrest1_lenght.Text);
-                await Service.UpdateInventaryMasterInitial(consumo_desperdicio, rollid);
+                var objeto_desper = new { consumo = consumo_desperdicio, roll_id = rollid, nametable = nameTable, sql = ssql };
+
+                await Service.UpdateInventaryMasterInitial(objeto_desper);
             }
 
             //actualiza el registro de la tabla de consumos parciales master [recarga los iniciales] EN LA UI.
@@ -933,8 +1032,8 @@ namespace Ritrama2025.Forms
                 decimal cantidadActual = fila.Field<decimal>("largo_consumido");
                 decimal length_original = fila.Field<decimal>("lenght");
                 decimal cond = txt_real1_length.Text == "" ? 0 : Convert.ToDecimal(txt_real1_length.Text);
-                
-                if (chk_desperdicio1.Checked) 
+
+                if (chk_desperdicio1.Checked)
                 {
                     decimal consumo_desperdicio = txt_matrest1_lenght.Text == "" ? 0 : Convert.ToDecimal(txt_matrest1_lenght.Text);
                     cond += consumo_desperdicio;
@@ -953,7 +1052,7 @@ namespace Ritrama2025.Forms
 
         private void ContadorRegistros()
         {
-            registros.Text = "Registros: " + (Bs.Position+1) + "/" + Bs.Count.ToString();
+            registros.Text = "Registros: " + (BsMaster.Position + 1) + "/" + BsMaster.Count.ToString();
         }
 
         private void InitStepIndicator()
@@ -1029,9 +1128,9 @@ namespace Ritrama2025.Forms
             Service.UpdateStatusDocumentOC(2, txt_numeroOC.Text);
             //se actualiza en la UI del Sistema.
             DataRowView FilaActual;
-            FilaActual = (DataRowView)Bs.Current!;
+            FilaActual = (DataRowView)BsMaster.Current!;
             FilaActual["step"] = 2;
-            Bs.EndEdit();
+            BsMaster.EndEdit();
             UpdateStepIndicator();
             MessageBox.Show("Se ha cambiado el estatus del documento a PRODUCCION...");
         }
@@ -1046,13 +1145,13 @@ namespace Ritrama2025.Forms
             Service.UpdateStatusDocumentOC(3, txt_numeroOC.Text);
             //actualiza la ui del textbox de step-indicator
             DataRowView FilaActual;
-            FilaActual = (DataRowView)Bs.Current!;
+            FilaActual = (DataRowView)BsMaster.Current!;
             FilaActual["step"] = 3;
-            Bs.EndEdit();
+            BsMaster.EndEdit();
             //se actualiza el unique code
-            if (Bs.Current == null) return;
+            if (BsMaster.Current == null) return;
             // Obtener la fila maestra actual como DataRowView
-            DataRowView rowMaestro = (DataRowView)Bs.Current;
+            DataRowView rowMaestro = (DataRowView)BsMaster.Current;
             // Obtener todas las filas hijas relacionadas
             DataRow[] filasHijas = rowMaestro.Row.GetChildRows(R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS);
             int numero_unico = Service.BuscarUniqueCodeConsec();
@@ -1091,7 +1190,7 @@ namespace Ritrama2025.Forms
 
         public DataRow[] BuscarItemsDetailsOrden()
         {
-            DataRowView rowMaestro = (DataRowView)Bs.Current!;
+            DataRowView rowMaestro = (DataRowView)BsMaster.Current!;
             return rowMaestro.Row.GetChildRows(R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS);
         }
 
@@ -1144,9 +1243,9 @@ namespace Ritrama2025.Forms
             Service.UpdateStatusDocumentOC(4, txt_numeroOC.Text);
             //actualiza la ui del textbox de step-indicator
             DataRowView FilaActual;
-            FilaActual = (DataRowView)Bs.Current!;
+            FilaActual = (DataRowView)BsMaster.Current!;
             FilaActual["step"] = 4;
-            Bs.EndEdit();
+            BsMaster.EndEdit();
             UpdateStepIndicator();
         }
 
@@ -1183,9 +1282,9 @@ namespace Ritrama2025.Forms
         private void UpdateUIStepIndicator(int step)
         {
             DataRowView FilaActual;
-            FilaActual = (DataRowView)Bs.Current!;
+            FilaActual = (DataRowView)BsMaster.Current!;
             FilaActual["step"] = step;
-            Bs.EndEdit();
+            BsMaster.EndEdit();
         }
 
         private void Btn_buscar_orden_Click(object sender, EventArgs e)
@@ -1199,10 +1298,10 @@ namespace Ritrama2025.Forms
             frmBuscar.ShowDialog();
             if (frmBuscar.Parameter != null)
             {
-                int busqueda = Bs.Find("numero", frmBuscar.Parameter);
+                int busqueda = BsMaster.Find("numero", frmBuscar.Parameter);
                 if (busqueda > 0)
                 {
-                    Bs.Position = busqueda;
+                    BsMaster.Position = busqueda;
                     UpdateStepIndicator();
                     ContadorRegistros();
                 }
@@ -1226,10 +1325,10 @@ namespace Ritrama2025.Forms
         private void Bot_cancelar_Click(object sender, EventArgs e)
         {
             DataRowView FilaActual;
-            FilaActual = (DataRowView)Bs.Current!;
+            FilaActual = (DataRowView)BsMaster.Current!;
             FilaActual.Row.Delete();
-            Bs.EndEdit();
-            Bs.Position = Bs.Count;
+            BsMaster.EndEdit();
+            BsMaster.Position = BsMaster.Count;
             bot_primero.Enabled = true;
             bot_siguiente.Enabled = true;
             bot_ultimo.Enabled = true;
@@ -1287,7 +1386,7 @@ namespace Ritrama2025.Forms
                 MessageBox.Show("Debe ingresar el codigo personalizado...", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            foreach (DataRowView row in BsRollos)
+            foreach (DataRowView row in BsDetails)
             {
                 row["code_person"] = txt_code_person.Text.ToString();
             }
@@ -1311,14 +1410,14 @@ namespace Ritrama2025.Forms
             FrmBuscadorOC fbuscador = new()
             {
                 DtItems = Ds.Tables["DtMaster"]!
-            };  
+            };
             fbuscador.ShowDialog();
             if (fbuscador.Orden != null)
             {
-                int busqueda = Bs.Find("numero", fbuscador.Orden);
+                int busqueda = BsMaster.Find("numero", fbuscador.Orden);
                 if (busqueda > 0)
                 {
-                    Bs.Position = busqueda;
+                    BsMaster.Position = busqueda;
                 }
             }
         }

@@ -63,9 +63,9 @@
             // 
             btn_buscar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_buscar.Image = Properties.Resources.search_16px;
-            btn_buscar.Location = new Point(907, 172);
+            btn_buscar.Location = new Point(907, 130);
             btn_buscar.Name = "btn_buscar";
-            btn_buscar.Size = new Size(105, 23);
+            btn_buscar.Size = new Size(105, 65);
             btn_buscar.TabIndex = 1;
             btn_buscar.Text = "Buscar";
             btn_buscar.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -177,7 +177,7 @@
             panel1.Controls.Add(label2);
             panel1.Location = new Point(4, 8);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1008, 100);
+            panel1.Size = new Size(1180, 100);
             panel1.TabIndex = 7;
             // 
             // pictureBox1
@@ -204,7 +204,7 @@
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.Location = new Point(4, 119);
             label1.Name = "label1";
-            label1.Size = new Size(337, 50);
+            label1.Size = new Size(897, 50);
             label1.TabIndex = 8;
             label1.Text = "Introduzca la palabra clave para buscar la informacion en la lista de los master, tenga en cuenta la seleccion de los filtros en la parte de abajo del formulario";
             // 
@@ -212,7 +212,7 @@
             // 
             btn_reload.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_reload.Image = (Image)resources.GetObject("btn_reload.Image");
-            btn_reload.Location = new Point(1018, 172);
+            btn_reload.Location = new Point(1018, 130);
             btn_reload.Name = "btn_reload";
             btn_reload.Size = new Size(166, 67);
             btn_reload.TabIndex = 9;
@@ -224,7 +224,7 @@
             // btn_DetailsConsumos
             // 
             btn_DetailsConsumos.Image = (Image)resources.GetObject("btn_DetailsConsumos.Image");
-            btn_DetailsConsumos.Location = new Point(1018, 245);
+            btn_DetailsConsumos.Location = new Point(1018, 203);
             btn_DetailsConsumos.Name = "btn_DetailsConsumos";
             btn_DetailsConsumos.Size = new Size(166, 67);
             btn_DetailsConsumos.TabIndex = 10;

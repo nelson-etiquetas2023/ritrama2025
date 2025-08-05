@@ -118,33 +118,39 @@ namespace Ritrama2025.Services.ProduccionService
         {
             try
             {
+
                 // Relación entre master y Rollos.
                 var relacion = new DataRelation(R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS,
                                 Ds.Tables["DtMaster"]!.Columns["numero"]!,
-                                Ds.Tables["DtRollos"]!.Columns["numero"]!,true);
+                                Ds.Tables["DtRollos"]!.Columns["numero"]!);
 
                 if (!Ds.Relations.Contains(R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS))
                     Ds.Relations.Add(relacion);
 
                 var hijos = Ds.Tables["Dtrollos"]!.AsEnumerable();
                 var padres = Ds.Tables["Dtmaster"]!.AsEnumerable();
+                
+
 
                 var hijosHuerfanos = hijos
-                    .Where(h => !padres.Any(p => p.Field<int>("numero") == h.Field<int>("numero")))
-                    .ToList();
+                   .Where(h => !padres.Any(p => p.Field<int>("numero") == h.Field<int>("numero")))
+                   .ToList();
 
                 if (hijosHuerfanos.Count != 0)
                 {
                     MessageBox.Show($"⚠️ Hay {hijosHuerfanos.Count} registros huérfanos en la tabla DetalleOrden.");
                 }
 
+                relacion.ChildKeyConstraint!.DeleteRule = Rule.None;
+                relacion.ChildKeyConstraint!.UpdateRule = Rule.None;
 
                 DataColumn? ParentCol0 = Ds.Tables["DtMaster"]?.Columns["numero"];
                 DataColumn? ChildCol0 = Ds.Tables["DtCortes"]?.Columns["orden"];
-                
 
                 DataRelation Despacho_Cortes = new("FK_ENCABEZADO_CORTES", ParentCol0!, ChildCol0!, false);
                 Ds.Relations.Add(Despacho_Cortes);
+
+                Ds.AcceptChanges();
                 return true;
             }
             catch (ConstraintException ex)
@@ -579,19 +585,23 @@ namespace Ritrama2025.Services.ProduccionService
                 return false;
             }
         }
-        public async Task<bool> UpdateInventaryMasterInitial(double ConsumoParcial,string RollId)
+        public async Task<bool> UpdateInventaryMasterInitial(object objeto)
         {
             try
             {
-                var tabla = new { nameTabla = "MasterInic", sql = R.QUERY.PRODUCTION.SQL_QUERY_ACTUALIZAR_INVENTARIO_INICIALES };
+                var tipo = objeto.GetType();
+                var rollIdProperty = tipo.GetProperty("roll_id")!.GetValue(objeto);
+                var consumoParcialProperty = tipo.GetProperty("consumo")!.GetValue(objeto);
+                var nameTableProperty = tipo.GetProperty("nametable")!.GetValue(objeto);
+                var sqlProperty = tipo.GetProperty("sql")!.GetValue(objeto)!.ToString();  
 
                 SqlParameter[] parametros =
                 [
-                    new SqlParameter("@consumo", ConsumoParcial),
-                    new SqlParameter("@rollid", RollId)
+                    new SqlParameter("@consumo", consumoParcialProperty),
+                    new SqlParameter("@rollid", rollIdProperty)
                 ];
 
-                await CargarTablaAsync(tabla.sql,false,parametros,tabla.nameTabla,false);
+                await CargarTablaAsync(sqlProperty,false,parametros, nameTableProperty!.ToString(), false);
 
                 return true;
             }

@@ -207,7 +207,7 @@ namespace Ritrama2025.Services.MateriaPrima
                     {
                         Connection = conn,
                         Transaction = transaction,
-                        CommandText = "INSERT INTO ItemsMateria (numero,product_id,type,cant_pedido,cant_real,width,length,msi,rollid,splice,ubicacion,core) VALUES (@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12)"
+                        CommandText = "INSERT INTO ItemsMateria (numero,product_id,type,cant_pedido,cant_real,width,length,msi,rollid,splice,ubicacion,core,largo_restante) VALUES (@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@restante)"
                     };
                     comandoItems.Parameters.AddWithValue("@p1", orden.Numero);
                     comandoItems.Parameters.AddWithValue("@p2", item.Product_Id);
@@ -221,6 +221,8 @@ namespace Ritrama2025.Services.MateriaPrima
                     comandoItems.Parameters.AddWithValue("@p10", item.Splice);
                     comandoItems.Parameters.AddWithValue("@p11", item.Ubicacion);
                     comandoItems.Parameters.AddWithValue("@p12", item.Core);
+                    comandoItems.Parameters.AddWithValue("@restante", item.Length);
+
                     comandoItems.ExecuteNonQuery();
                 }
                 transaction.Commit();

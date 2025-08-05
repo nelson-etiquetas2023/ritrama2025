@@ -14,6 +14,8 @@ namespace Ritrama2025.Forms.Seleccion
         public DataTable DtRollid { get; set; } = null!;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public RolloCortado MasterRoll { get; set; } = null!;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string tipo_mov { get; set; } = "";
 
         private IProduccionService ProduccionService  { get; set; }
         public Frm_RollId(IProduccionService produccionService)
@@ -103,10 +105,12 @@ namespace Ritrama2025.Forms.Seleccion
                 var productNameValue = GridItems.Rows[e.RowIndex].Cells[2].Value?.ToString();
                 var widthValue = GridItems.Rows[e.RowIndex].Cells[3].Value;
                 var lengthValue = GridItems.Rows[e.RowIndex].Cells["largo_restante"].Value;
-                //var msiValue = GridItems.Rows[e.RowIndex].Cells[5].Value;
+                var tipo_movi = GridItems.Rows[e.RowIndex].Cells["tipo_mov"].Value!.ToString();
+
+
 
                 if (rollIdValue != null && productIdValue != null && productNameValue != null &&
-                    widthValue != null && lengthValue != null)
+                    widthValue != null && lengthValue != null && tipo_movi != null)
                 {
                     MasterRoll = new()
                     {
@@ -115,7 +119,7 @@ namespace Ritrama2025.Forms.Seleccion
                         Product_Name = productNameValue,
                         Width = Convert.ToDecimal(widthValue),
                         Length = Convert.ToDecimal(lengthValue),
-                        //Msi = Convert.ToDecimal(msiValue),
+                        tipo_mov = tipo_movi,
                     };
                     this.Close();
                 }
