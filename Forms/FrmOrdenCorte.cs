@@ -168,7 +168,7 @@ namespace Ritrama2025.Forms
 
         private void Bot_primero_Click(object sender, EventArgs e)
         {
-            BsMaster.Position += 1;
+            BsMaster.MoveFirst();       
             UpdateStepIndicator();
             ContadorRegistros();
         }
@@ -176,7 +176,6 @@ namespace Ritrama2025.Forms
         private void Bot_anterior_Click(object sender, EventArgs e)
         {
             BsMaster.MovePrevious();
-            BsMaster.ResetBindings(false);
             UpdateStepIndicator();
             ContadorRegistros();
         }
@@ -184,7 +183,6 @@ namespace Ritrama2025.Forms
         private void Bot_siguiente_Click(object sender, EventArgs e)
         {
             BsMaster.MoveNext();
-            BsMaster.ResetBindings(false);
             UpdateStepIndicator();
             ContadorRegistros();
         }
@@ -288,6 +286,9 @@ namespace Ritrama2025.Forms
             txt_vueltas1.Enabled = true;
             txt_step.Text = "1";
             chk_desperdicio1.Enabled = true;
+            btn_buscar_orden.Enabled = false;
+            btn_generar_txt.Enabled = false;
+            btn_datosDocAprob.Enabled = false;
             UpdateStepIndicator();
             EditMode = 1;
         }
@@ -974,6 +975,10 @@ namespace Ritrama2025.Forms
             btn_generar_rollos.Enabled = false;
             btn_add_row_corte.Enabled = false;
             btn_delete_row_corte.Enabled = false;
+            btn_buscar_orden.Enabled = true;
+            btn_generar_txt.Enabled = true;
+            btn_datosDocAprob.Enabled = true;
+
             //controles del formulario.
             txt_fecha_emision.Enabled = false;
             txt_fecha_produccion.Enabled = false;
@@ -987,6 +992,7 @@ namespace Ritrama2025.Forms
             txt_long_cortar.ReadOnly = true;
             chk_desperdicio1.Enabled = false;
             grid_cortes.ReadOnly = true;
+
         }
 
 
@@ -997,6 +1003,8 @@ namespace Ritrama2025.Forms
             var p = new { rollid = txt_rollid_1.Text, orden = txt_numeroOC.Text, consumo = cons, fecha = DateTime.Now, desperdicio = false };
             await Service.UpdateDetailsConsumosMasterIniciales(p.rollid, p.orden, p.consumo, p.fecha, p.desperdicio);
 
+
+            //manejom de desperdicio.
             if (chk_desperdicio1.Checked)
             {
                 double consumo_desper = txt_matrest1_lenght.Text == "" ? 0 : Convert.ToDouble(txt_matrest1_lenght.Text);
