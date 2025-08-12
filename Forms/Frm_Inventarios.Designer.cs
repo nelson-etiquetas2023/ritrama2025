@@ -29,31 +29,25 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Inventarios));
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            btn_limpiar_filtros = new Button();
+            COUNT_ROWS = new Label();
+            btn_DetailsConsumos = new Button();
             groupBox3 = new GroupBox();
-            radioButton1 = new RadioButton();
-            radioButton2 = new RadioButton();
-            dataGridView1 = new DataGridView();
-            button1 = new Button();
+            rad_rollid = new RadioButton();
+            rad_ubication = new RadioButton();
+            rad_productid = new RadioButton();
+            rad_product_name = new RadioButton();
+            GridMaster = new DataGridView();
+            btn_buscar = new Button();
             label8 = new Label();
-            textBox1 = new TextBox();
+            txt_buscar = new TextBox();
             tabPage2 = new TabPage();
             tabPage3 = new TabPage();
             tabPage4 = new TabPage();
             tabPage5 = new TabPage();
-            label11 = new Label();
-            groupBox4 = new GroupBox();
-            radioButton3 = new RadioButton();
-            radioButton4 = new RadioButton();
-            dataGridView2 = new DataGridView();
-            button2 = new Button();
-            label10 = new Label();
-            textBox2 = new TextBox();
-            tabPage6 = new TabPage();
-            panel1 = new Panel();
-            pictureBox1 = new PictureBox();
-            label1 = new Label();
             groupBox1 = new GroupBox();
             label9 = new Label();
             ListColumns = new ListBox();
@@ -73,23 +67,24 @@
             txt_file_path = new TextBox();
             label2 = new Label();
             txt_file_name = new TextBox();
+            tabPage6 = new TabPage();
+            panel1 = new Panel();
+            pictureBox1 = new PictureBox();
+            label1 = new Label();
             toolStrip1 = new ToolStrip();
-            toolStripButton1 = new ToolStripButton();
-            toolStripButton2 = new ToolStripButton();
-            toolStripButton3 = new ToolStripButton();
-            toolStripButton4 = new ToolStripButton();
-            toolStripButton5 = new ToolStripButton();
+            Btn_reload = new ToolStripButton();
+            Bot_Reports = new ToolStripButton();
+            Bot_Excel = new ToolStripButton();
+            Bot_Txt = new ToolStripButton();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)GridMaster).BeginInit();
             tabPage5.SuspendLayout();
-            groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
-            panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -101,258 +96,212 @@
             tabControl1.Controls.Add(tabPage4);
             tabControl1.Controls.Add(tabPage5);
             tabControl1.Controls.Add(tabPage6);
-            tabControl1.Location = new Point(12, 367);
+            tabControl1.Font = new Font("Roboto", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tabControl1.Location = new Point(12, 134);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(986, 349);
+            tabControl1.Size = new Size(1247, 688);
             tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(btn_limpiar_filtros);
+            tabPage1.Controls.Add(COUNT_ROWS);
+            tabPage1.Controls.Add(btn_DetailsConsumos);
             tabPage1.Controls.Add(groupBox3);
-            tabPage1.Controls.Add(dataGridView1);
-            tabPage1.Controls.Add(button1);
+            tabPage1.Controls.Add(GridMaster);
+            tabPage1.Controls.Add(btn_buscar);
             tabPage1.Controls.Add(label8);
-            tabPage1.Controls.Add(textBox1);
-            tabPage1.Location = new Point(4, 24);
+            tabPage1.Controls.Add(txt_buscar);
+            tabPage1.Location = new Point(4, 23);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(978, 321);
+            tabPage1.Size = new Size(1239, 661);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Master";
             tabPage1.UseVisualStyleBackColor = true;
             // 
+            // btn_limpiar_filtros
+            // 
+            btn_limpiar_filtros.Image = (Image)resources.GetObject("btn_limpiar_filtros.Image");
+            btn_limpiar_filtros.Location = new Point(722, 21);
+            btn_limpiar_filtros.Name = "btn_limpiar_filtros";
+            btn_limpiar_filtros.Size = new Size(95, 40);
+            btn_limpiar_filtros.TabIndex = 13;
+            btn_limpiar_filtros.Text = "Limpiar";
+            btn_limpiar_filtros.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_limpiar_filtros.UseVisualStyleBackColor = true;
+            btn_limpiar_filtros.Click += Btn_limpiar_filtros_Click;
+            // 
+            // COUNT_ROWS
+            // 
+            COUNT_ROWS.AutoSize = true;
+            COUNT_ROWS.Font = new Font("Roboto Medium", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            COUNT_ROWS.Location = new Point(1016, 496);
+            COUNT_ROWS.Name = "COUNT_ROWS";
+            COUNT_ROWS.Size = new Size(184, 19);
+            COUNT_ROWS.TabIndex = 12;
+            COUNT_ROWS.Text = "0 Registros Encontrados";
+            // 
+            // btn_DetailsConsumos
+            // 
+            btn_DetailsConsumos.Image = (Image)resources.GetObject("btn_DetailsConsumos.Image");
+            btn_DetailsConsumos.Location = new Point(1067, 8);
+            btn_DetailsConsumos.Name = "btn_DetailsConsumos";
+            btn_DetailsConsumos.Size = new Size(166, 56);
+            btn_DetailsConsumos.TabIndex = 11;
+            btn_DetailsConsumos.Text = "Detalle Cosumos";
+            btn_DetailsConsumos.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_DetailsConsumos.UseVisualStyleBackColor = true;
+            btn_DetailsConsumos.Click += Btn_DetailsConsumos_Click;
+            // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(radioButton1);
-            groupBox3.Controls.Add(radioButton2);
-            groupBox3.Location = new Point(7, 225);
+            groupBox3.Controls.Add(rad_rollid);
+            groupBox3.Controls.Add(rad_ubication);
+            groupBox3.Controls.Add(rad_productid);
+            groupBox3.Controls.Add(rad_product_name);
+            groupBox3.Location = new Point(7, 486);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(200, 84);
+            groupBox3.Size = new Size(245, 169);
             groupBox3.TabIndex = 7;
             groupBox3.TabStop = false;
             groupBox3.Text = "Filtrar Por: ";
             // 
-            // radioButton1
+            // rad_rollid
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(13, 22);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(80, 19);
-            radioButton1.TabIndex = 5;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Product Id";
-            radioButton1.UseVisualStyleBackColor = true;
+            rad_rollid.AutoSize = true;
+            rad_rollid.Checked = true;
+            rad_rollid.Location = new Point(6, 28);
+            rad_rollid.Name = "rad_rollid";
+            rad_rollid.Size = new Size(58, 18);
+            rad_rollid.TabIndex = 7;
+            rad_rollid.TabStop = true;
+            rad_rollid.Text = "Roll-Id";
+            rad_rollid.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // rad_ubication
             // 
-            radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(13, 38);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(140, 19);
-            radioButton2.TabIndex = 6;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "Nombre del Producto";
-            radioButton2.UseVisualStyleBackColor = true;
+            rad_ubication.AutoSize = true;
+            rad_ubication.Location = new Point(6, 84);
+            rad_ubication.Name = "rad_ubication";
+            rad_ubication.Size = new Size(101, 18);
+            rad_ubication.TabIndex = 7;
+            rad_ubication.Text = "Por Ubicación";
+            rad_ubication.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // rad_productid
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(7, 69);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(965, 150);
-            dataGridView1.TabIndex = 3;
+            rad_productid.AutoSize = true;
+            rad_productid.Location = new Point(6, 47);
+            rad_productid.Name = "rad_productid";
+            rad_productid.Size = new Size(81, 18);
+            rad_productid.TabIndex = 5;
+            rad_productid.Text = "Product Id";
+            rad_productid.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // rad_product_name
             // 
-            button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.Location = new Point(292, 40);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 2;
-            button1.Text = "Buscar";
-            button1.TextImageRelation = TextImageRelation.ImageBeforeText;
-            button1.UseVisualStyleBackColor = true;
+            rad_product_name.AutoSize = true;
+            rad_product_name.Location = new Point(6, 65);
+            rad_product_name.Name = "rad_product_name";
+            rad_product_name.Size = new Size(141, 18);
+            rad_product_name.TabIndex = 6;
+            rad_product_name.Text = "Nombre del Producto";
+            rad_product_name.UseVisualStyleBackColor = true;
+            // 
+            // GridMaster
+            // 
+            GridMaster.AllowUserToAddRows = false;
+            GridMaster.AllowUserToDeleteRows = false;
+            GridMaster.AllowUserToResizeRows = false;
+            GridMaster.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            GridMaster.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Cascadia Code", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            GridMaster.DefaultCellStyle = dataGridViewCellStyle1;
+            GridMaster.Location = new Point(7, 70);
+            GridMaster.MultiSelect = false;
+            GridMaster.Name = "GridMaster";
+            GridMaster.ReadOnly = true;
+            GridMaster.RowHeadersWidth = 33;
+            GridMaster.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            GridMaster.Size = new Size(1226, 410);
+            GridMaster.TabIndex = 3;
+            // 
+            // btn_buscar
+            // 
+            btn_buscar.Image = (Image)resources.GetObject("btn_buscar.Image");
+            btn_buscar.Location = new Point(621, 21);
+            btn_buscar.Name = "btn_buscar";
+            btn_buscar.Size = new Size(95, 40);
+            btn_buscar.TabIndex = 2;
+            btn_buscar.Text = "Buscar";
+            btn_buscar.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_buscar.UseVisualStyleBackColor = true;
+            btn_buscar.Click += Btn_buscar_Click;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(7, 22);
+            label8.Location = new Point(7, 21);
             label8.Name = "label8";
-            label8.Size = new Size(66, 15);
+            label8.Size = new Size(68, 14);
             label8.TabIndex = 1;
             label8.Text = "Buscar por:";
             // 
-            // textBox1
+            // txt_buscar
             // 
-            textBox1.Location = new Point(7, 40);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(279, 23);
-            textBox1.TabIndex = 0;
+            txt_buscar.Location = new Point(7, 37);
+            txt_buscar.Name = "txt_buscar";
+            txt_buscar.Size = new Size(608, 22);
+            txt_buscar.TabIndex = 0;
             // 
             // tabPage2
             // 
-            tabPage2.Location = new Point(4, 24);
+            tabPage2.Location = new Point(4, 23);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(978, 321);
+            tabPage2.Size = new Size(1239, 661);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Graphics";
             tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
-            tabPage3.Location = new Point(4, 24);
+            tabPage3.Location = new Point(4, 23);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(978, 321);
+            tabPage3.Size = new Size(1239, 661);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Hojas";
             tabPage3.UseVisualStyleBackColor = true;
             // 
             // tabPage4
             // 
-            tabPage4.Location = new Point(4, 24);
+            tabPage4.Location = new Point(4, 23);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new Padding(3);
-            tabPage4.Size = new Size(978, 321);
+            tabPage4.Size = new Size(1239, 661);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Rollos Cortados";
             tabPage4.UseVisualStyleBackColor = true;
             // 
             // tabPage5
             // 
-            tabPage5.Controls.Add(label11);
-            tabPage5.Controls.Add(groupBox4);
-            tabPage5.Controls.Add(dataGridView2);
-            tabPage5.Controls.Add(button2);
-            tabPage5.Controls.Add(label10);
-            tabPage5.Controls.Add(textBox2);
-            tabPage5.Location = new Point(4, 24);
+            tabPage5.Controls.Add(groupBox1);
+            tabPage5.Location = new Point(4, 23);
             tabPage5.Name = "tabPage5";
             tabPage5.Padding = new Padding(3);
-            tabPage5.Size = new Size(978, 321);
+            tabPage5.Size = new Size(1239, 661);
             tabPage5.TabIndex = 4;
-            tabPage5.Text = "Data Import";
+            tabPage5.Text = "Export Excel";
             tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label11.Location = new Point(623, 17);
-            label11.Name = "label11";
-            label11.Size = new Size(106, 21);
-            label11.TabIndex = 14;
-            label11.Text = "Data Import:";
-            // 
-            // groupBox4
-            // 
-            groupBox4.Controls.Add(radioButton3);
-            groupBox4.Controls.Add(radioButton4);
-            groupBox4.Location = new Point(7, 220);
-            groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(200, 84);
-            groupBox4.TabIndex = 12;
-            groupBox4.TabStop = false;
-            groupBox4.Text = "Filtrar Por: ";
-            // 
-            // radioButton3
-            // 
-            radioButton3.AutoSize = true;
-            radioButton3.Location = new Point(13, 22);
-            radioButton3.Name = "radioButton3";
-            radioButton3.Size = new Size(80, 19);
-            radioButton3.TabIndex = 5;
-            radioButton3.TabStop = true;
-            radioButton3.Text = "Product Id";
-            radioButton3.UseVisualStyleBackColor = true;
-            // 
-            // radioButton4
-            // 
-            radioButton4.AutoSize = true;
-            radioButton4.Location = new Point(13, 38);
-            radioButton4.Name = "radioButton4";
-            radioButton4.Size = new Size(140, 19);
-            radioButton4.TabIndex = 6;
-            radioButton4.TabStop = true;
-            radioButton4.Text = "Nombre del Producto";
-            radioButton4.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView2
-            // 
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(7, 64);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.Size = new Size(965, 150);
-            dataGridView2.TabIndex = 11;
-            // 
-            // button2
-            // 
-            button2.Image = (Image)resources.GetObject("button2.Image");
-            button2.Location = new Point(292, 35);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 10;
-            button2.Text = "Buscar";
-            button2.TextImageRelation = TextImageRelation.ImageBeforeText;
-            button2.UseVisualStyleBackColor = true;
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Location = new Point(7, 17);
-            label10.Name = "label10";
-            label10.Size = new Size(66, 15);
-            label10.TabIndex = 9;
-            label10.Text = "Buscar por:";
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(7, 35);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(279, 23);
-            textBox2.TabIndex = 8;
-            // 
-            // tabPage6
-            // 
-            tabPage6.Location = new Point(4, 24);
-            tabPage6.Name = "tabPage6";
-            tabPage6.Padding = new Padding(3);
-            tabPage6.Size = new Size(978, 321);
-            tabPage6.TabIndex = 5;
-            tabPage6.Text = "Notificaciones";
-            tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            panel1.BackColor = SystemColors.ButtonHighlight;
-            panel1.Controls.Add(pictureBox1);
-            panel1.Controls.Add(label1);
-            panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1010, 100);
-            panel1.TabIndex = 1;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(254, 29);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(50, 50);
-            pictureBox1.TabIndex = 1;
-            pictureBox1.TabStop = false;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(306, 24);
-            label1.Name = "label1";
-            label1.Size = new Size(411, 50);
-            label1.TabIndex = 0;
-            label1.Text = "Control de Inventarios";
             // 
             // groupBox1
             // 
@@ -370,9 +319,9 @@
             groupBox1.Controls.Add(txt_file_path);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(txt_file_name);
-            groupBox1.Location = new Point(12, 128);
+            groupBox1.Location = new Point(12, 15);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(982, 233);
+            groupBox1.Size = new Size(960, 269);
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             groupBox1.Text = "Importar Data de Excel";
@@ -381,7 +330,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label9.Location = new Point(675, 116);
+            label9.Location = new Point(675, 108);
             label9.Name = "label9";
             label9.Size = new Size(165, 15);
             label9.TabIndex = 13;
@@ -391,18 +340,18 @@
             // 
             ListColumns.FormattingEnabled = true;
             ListColumns.Items.AddRange(new object[] { "1.- Product Id., Columna1" });
-            ListColumns.Location = new Point(529, 133);
+            ListColumns.Location = new Point(529, 124);
             ListColumns.Name = "ListColumns";
-            ListColumns.Size = new Size(447, 94);
+            ListColumns.Size = new Size(368, 74);
             ListColumns.TabIndex = 12;
             // 
             // chk_checkFileCorrect
             // 
             chk_checkFileCorrect.AutoSize = true;
             chk_checkFileCorrect.Enabled = false;
-            chk_checkFileCorrect.Location = new Point(11, 194);
+            chk_checkFileCorrect.Location = new Point(11, 181);
             chk_checkFileCorrect.Name = "chk_checkFileCorrect";
-            chk_checkFileCorrect.Size = new Size(199, 19);
+            chk_checkFileCorrect.Size = new Size(203, 18);
             chk_checkFileCorrect.TabIndex = 11;
             chk_checkFileCorrect.Text = "Localizacion Correcta de Archivo";
             chk_checkFileCorrect.UseVisualStyleBackColor = true;
@@ -411,7 +360,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label7.Location = new Point(675, 19);
+            label7.Location = new Point(675, 18);
             label7.Name = "label7";
             label7.Size = new Size(182, 21);
             label7.TabIndex = 10;
@@ -420,27 +369,27 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(529, 90);
+            label6.Location = new Point(529, 84);
             label6.Name = "label6";
-            label6.Size = new Size(84, 15);
+            label6.Size = new Size(86, 14);
             label6.TabIndex = 9;
             label6.Text = "Advertencias : ";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(529, 67);
+            label5.Location = new Point(529, 63);
             label5.Name = "label5";
-            label5.Size = new Size(148, 15);
+            label5.Size = new Size(153, 14);
             label5.TabIndex = 8;
             label5.Text = "Productos no registrados : ";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(529, 44);
+            label4.Location = new Point(529, 41);
             label4.Name = "label4";
-            label4.Size = new Size(127, 15);
+            label4.Size = new Size(129, 14);
             label4.TabIndex = 7;
             label4.Text = "Numero de Registros : ";
             // 
@@ -450,9 +399,9 @@
             groupBox2.Controls.Add(rad_hojas);
             groupBox2.Controls.Add(rad_graphics);
             groupBox2.Controls.Add(rad_master);
-            groupBox2.Location = new Point(302, 116);
+            groupBox2.Location = new Point(302, 108);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(200, 111);
+            groupBox2.Size = new Size(200, 104);
             groupBox2.TabIndex = 6;
             groupBox2.TabStop = false;
             groupBox2.Text = "Tipo Producto";
@@ -460,9 +409,9 @@
             // rad_rollos
             // 
             rad_rollos.AutoSize = true;
-            rad_rollos.Location = new Point(25, 77);
+            rad_rollos.Location = new Point(25, 72);
             rad_rollos.Name = "rad_rollos";
-            rad_rollos.Size = new Size(98, 19);
+            rad_rollos.Size = new Size(99, 18);
             rad_rollos.TabIndex = 3;
             rad_rollos.TabStop = true;
             rad_rollos.Text = "Rollo Cortado";
@@ -471,9 +420,9 @@
             // rad_hojas
             // 
             rad_hojas.AutoSize = true;
-            rad_hojas.Location = new Point(25, 59);
+            rad_hojas.Location = new Point(25, 55);
             rad_hojas.Name = "rad_hojas";
-            rad_hojas.Size = new Size(55, 19);
+            rad_hojas.Size = new Size(57, 18);
             rad_hojas.TabIndex = 2;
             rad_hojas.TabStop = true;
             rad_hojas.Text = "Hojas";
@@ -482,9 +431,9 @@
             // rad_graphics
             // 
             rad_graphics.AutoSize = true;
-            rad_graphics.Location = new Point(25, 40);
+            rad_graphics.Location = new Point(25, 37);
             rad_graphics.Name = "rad_graphics";
-            rad_graphics.Size = new Size(71, 19);
+            rad_graphics.Size = new Size(73, 18);
             rad_graphics.TabIndex = 1;
             rad_graphics.TabStop = true;
             rad_graphics.Text = "Graphics";
@@ -493,9 +442,9 @@
             // rad_master
             // 
             rad_master.AutoSize = true;
-            rad_master.Location = new Point(25, 21);
+            rad_master.Location = new Point(25, 20);
             rad_master.Name = "rad_master";
-            rad_master.Size = new Size(61, 19);
+            rad_master.Size = new Size(62, 18);
             rad_master.TabIndex = 0;
             rad_master.TabStop = true;
             rad_master.Text = "Master";
@@ -504,32 +453,32 @@
             // btn_import_excel
             // 
             btn_import_excel.Image = (Image)resources.GetObject("btn_import_excel.Image");
-            btn_import_excel.Location = new Point(154, 116);
+            btn_import_excel.Location = new Point(154, 108);
             btn_import_excel.Name = "btn_import_excel";
-            btn_import_excel.Size = new Size(142, 69);
+            btn_import_excel.Size = new Size(142, 64);
             btn_import_excel.TabIndex = 5;
             btn_import_excel.Text = "Cargar Data";
             btn_import_excel.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_import_excel.UseVisualStyleBackColor = true;
-            btn_import_excel.Click += btn_import_excel_Click;
+            btn_import_excel.Click += Btn_import_excel_Click;
             // 
             // btn_load_sheet
             // 
             btn_load_sheet.Image = (Image)resources.GetObject("btn_load_sheet.Image");
-            btn_load_sheet.Location = new Point(11, 116);
+            btn_load_sheet.Location = new Point(11, 108);
             btn_load_sheet.Name = "btn_load_sheet";
-            btn_load_sheet.Size = new Size(142, 69);
+            btn_load_sheet.Size = new Size(142, 64);
             btn_load_sheet.TabIndex = 4;
             btn_load_sheet.Text = "Buscar Hoja";
             btn_load_sheet.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_load_sheet.UseVisualStyleBackColor = true;
-            btn_load_sheet.Click += btn_load_sheet_Click;
+            btn_load_sheet.Click += Btn_load_sheet_Click;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(11, 67);
+            label3.Location = new Point(11, 63);
             label3.Name = "label3";
             label3.Size = new Size(119, 15);
             label3.TabIndex = 3;
@@ -537,17 +486,17 @@
             // 
             // txt_file_path
             // 
-            txt_file_path.Location = new Point(6, 87);
+            txt_file_path.Location = new Point(6, 81);
             txt_file_path.Name = "txt_file_path";
             txt_file_path.ReadOnly = true;
-            txt_file_path.Size = new Size(496, 23);
+            txt_file_path.Size = new Size(496, 22);
             txt_file_path.TabIndex = 2;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(11, 21);
+            label2.Location = new Point(11, 20);
             label2.Name = "label2";
             label2.Size = new Size(119, 15);
             label2.TabIndex = 1;
@@ -555,77 +504,111 @@
             // 
             // txt_file_name
             // 
-            txt_file_name.Location = new Point(6, 41);
+            txt_file_name.Location = new Point(6, 38);
             txt_file_name.Name = "txt_file_name";
             txt_file_name.ReadOnly = true;
-            txt_file_name.Size = new Size(496, 23);
+            txt_file_name.Size = new Size(496, 22);
             txt_file_name.TabIndex = 0;
+            // 
+            // tabPage6
+            // 
+            tabPage6.Location = new Point(4, 23);
+            tabPage6.Name = "tabPage6";
+            tabPage6.Padding = new Padding(3);
+            tabPage6.Size = new Size(1239, 661);
+            tabPage6.TabIndex = 5;
+            tabPage6.Text = "Notificaciones";
+            tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = SystemColors.ScrollBar;
+            panel1.Controls.Add(pictureBox1);
+            panel1.Controls.Add(label1);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1271, 93);
+            panel1.TabIndex = 1;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(381, 27);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(50, 47);
+            pictureBox1.TabIndex = 1;
+            pictureBox1.TabStop = false;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(437, 24);
+            label1.Name = "label1";
+            label1.Size = new Size(411, 50);
+            label1.TabIndex = 0;
+            label1.Text = "Control de Inventarios";
             // 
             // toolStrip1
             // 
             toolStrip1.BackColor = SystemColors.ActiveCaption;
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1, toolStripButton2, toolStripButton3, toolStripButton4, toolStripButton5 });
-            toolStrip1.Location = new Point(0, 100);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { Btn_reload, Bot_Reports, Bot_Excel, Bot_Txt });
+            toolStrip1.Location = new Point(0, 93);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.RenderMode = ToolStripRenderMode.Professional;
-            toolStrip1.Size = new Size(1010, 25);
+            toolStrip1.Size = new Size(1271, 33);
             toolStrip1.TabIndex = 2;
             toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // Btn_reload
             // 
-            toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
-            toolStripButton1.ImageTransparentColor = Color.Magenta;
-            toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new Size(23, 22);
-            toolStripButton1.Text = "toolStripButton1";
+            Btn_reload.AutoSize = false;
+            Btn_reload.Image = (Image)resources.GetObject("Btn_reload.Image");
+            Btn_reload.ImageTransparentColor = Color.Magenta;
+            Btn_reload.Name = "Btn_reload";
+            Btn_reload.Size = new Size(73, 30);
+            Btn_reload.Text = "Cargar";
+            Btn_reload.Click += Btn_reload_Click;
             // 
-            // toolStripButton2
+            // Bot_Reports
             // 
-            toolStripButton2.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton2.Image = (Image)resources.GetObject("toolStripButton2.Image");
-            toolStripButton2.ImageTransparentColor = Color.Magenta;
-            toolStripButton2.Name = "toolStripButton2";
-            toolStripButton2.Size = new Size(23, 22);
-            toolStripButton2.Text = "toolStripButton2";
+            Bot_Reports.AutoSize = false;
+            Bot_Reports.Image = (Image)resources.GetObject("Bot_Reports.Image");
+            Bot_Reports.ImageTransparentColor = Color.Magenta;
+            Bot_Reports.Name = "Bot_Reports";
+            Bot_Reports.Size = new Size(73, 30);
+            Bot_Reports.Text = "Reportes";
+            Bot_Reports.Click += ToolStripButton1_Click;
             // 
-            // toolStripButton3
+            // Bot_Excel
             // 
-            toolStripButton3.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton3.Image = (Image)resources.GetObject("toolStripButton3.Image");
-            toolStripButton3.ImageTransparentColor = Color.Magenta;
-            toolStripButton3.Name = "toolStripButton3";
-            toolStripButton3.Size = new Size(23, 22);
-            toolStripButton3.Text = "toolStripButton3";
+            Bot_Excel.AutoSize = false;
+            Bot_Excel.Image = (Image)resources.GetObject("Bot_Excel.Image");
+            Bot_Excel.ImageTransparentColor = Color.Magenta;
+            Bot_Excel.Name = "Bot_Excel";
+            Bot_Excel.Size = new Size(73, 30);
+            Bot_Excel.Text = "Excel";
+            Bot_Excel.Click += Bot_Excel_Click;
             // 
-            // toolStripButton4
+            // Bot_Txt
             // 
-            toolStripButton4.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton4.Image = (Image)resources.GetObject("toolStripButton4.Image");
-            toolStripButton4.ImageTransparentColor = Color.Magenta;
-            toolStripButton4.Name = "toolStripButton4";
-            toolStripButton4.Size = new Size(23, 22);
-            toolStripButton4.Text = "toolStripButton4";
-            // 
-            // toolStripButton5
-            // 
-            toolStripButton5.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton5.Image = (Image)resources.GetObject("toolStripButton5.Image");
-            toolStripButton5.ImageTransparentColor = Color.Magenta;
-            toolStripButton5.Name = "toolStripButton5";
-            toolStripButton5.Size = new Size(23, 22);
-            toolStripButton5.Text = "toolStripButton5";
+            Bot_Txt.AutoSize = false;
+            Bot_Txt.Image = (Image)resources.GetObject("Bot_Txt.Image");
+            Bot_Txt.ImageTransparentColor = Color.Magenta;
+            Bot_Txt.Name = "Bot_Txt";
+            Bot_Txt.Size = new Size(73, 30);
+            Bot_Txt.Text = "Texto";
             // 
             // Frm_Inventarios
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(7F, 14F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1010, 728);
+            ClientSize = new Size(1271, 834);
             Controls.Add(toolStrip1);
-            Controls.Add(groupBox1);
             Controls.Add(panel1);
             Controls.Add(tabControl1);
+            Font = new Font("Roboto", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Frm_Inventarios";
             Text = "Control de Inventarios:";
@@ -635,19 +618,15 @@
             tabPage1.PerformLayout();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)GridMaster).EndInit();
             tabPage5.ResumeLayout(false);
-            tabPage5.PerformLayout();
-            groupBox4.ResumeLayout(false);
-            groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ResumeLayout(false);
@@ -683,28 +662,24 @@
         private ToolStrip toolStrip1;
         private Label label6;
         private Label label7;
-        private ToolStripButton toolStripButton1;
-        private ToolStripButton toolStripButton2;
-        private ToolStripButton toolStripButton3;
-        private ToolStripButton toolStripButton4;
-        private ToolStripButton toolStripButton5;
+        private ToolStripButton Btn_reload;
         private GroupBox groupBox3;
-        private RadioButton radioButton2;
-        private RadioButton radioButton1;
-        private DataGridView dataGridView1;
-        private Button button1;
+        private RadioButton rad_product_name;
+        private RadioButton rad_productid;
+        private DataGridView GridMaster;
+        private Button btn_buscar;
         private Label label8;
-        private TextBox textBox1;
+        private TextBox txt_buscar;
         private CheckBox chk_checkFileCorrect;
         private ListBox ListColumns;
         private Label label9;
-        private Label label11;
-        private GroupBox groupBox4;
-        private RadioButton radioButton3;
-        private RadioButton radioButton4;
-        private DataGridView dataGridView2;
-        private Button button2;
-        private Label label10;
-        private TextBox textBox2;
+        private RadioButton rad_rollid;
+        private Button btn_DetailsConsumos;
+        private RadioButton rad_ubication;
+        private Label COUNT_ROWS;
+        private ToolStripButton Bot_Reports;
+        private ToolStripButton Bot_Txt;
+        private Button btn_limpiar_filtros;
+        private ToolStripButton Bot_Excel;
     }
 }

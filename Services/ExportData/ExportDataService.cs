@@ -44,10 +44,57 @@ namespace Ritrama2025.Services.ExportData
 
             // 3. Autoajustar ancho de columnas
             worksheet.Columns().AdjustToContents();
-          
+
+            //Definir las columnas de forma personalizada para el inventario de master.
+            if (FileName == "InventarioMaster.xlsx")
+            {
+                worksheet.Cell(1, 1).Value = "It.";
+                worksheet.Cell(1, 2).Value = "Product Id.";
+                worksheet.Cell(1, 3).Value = "Nombre del Producto";
+                worksheet.Cell(1, 5).Value = "Width [Inch]";
+                worksheet.Cell(1, 6).Value = "Length [Pies]";
+                worksheet.Cell(1, 7).Value = "Consumido [Pies]";
+                worksheet.Cell(1, 8).Value = "Restante [Pies]";
+                worksheet.Cell(1, 14).Value = "Ubicación";
+                //worksheet.Cell(1, 16).Value = "Fecha Producción";
+                //worksheet.Cell(1, 17).Value = "Fecha Ingreso";
+
+
+                
+                worksheet.Column(5).AdjustToContents();
+                worksheet.Column(6).AdjustToContents();
+
+                // Fila con format condicional.
+                var rango = worksheet.Range("A2:O100");
+                rango.AddConditionalFormat()
+                    .WhenIsTrue("=$I2=\"Agotado\"")
+                    .Fill.SetBackgroundColor(XLColor.Red)
+                    .Font.SetFontColor(XLColor.Black)
+                    .Font.SetBold(true);
+
+                worksheet.Column(4).Hide();
+                worksheet.Column(15).Hide();
+                worksheet.Column(16).Hide();
+                worksheet.Column(17).Hide();
+
+                worksheet.Cell(1, 18).Value = "Fecha Produción";
+                worksheet.Cell(1, 19).Value = "Fecha Llegada";
+
+            }
+
             string filePath = Path.Combine(Environment.CurrentDirectory, FileName);
+
             // 4. Guardar el archivo
-            workbook.SaveAs(filePath);
+            try
+            {
+                workbook.SaveAs(filePath);
+            }
+            catch 
+            {
+                MessageBox.Show("error al abrir la hoja de excel");
+            }
+
+            
 
             // 5) Lanzar Excel automáticamente
             var psi = new ProcessStartInfo

@@ -9,6 +9,9 @@ namespace Ritrama2025.Models
         public string Product_Type { get; set; } = null!;
         public double Width { get; set; }
         public double Length { get; set; }
+        public double Length_Consumido { get; set; }
+        public double Length_Restante { get; set; }
+        public string Estado { get; set; } = null!;
         public double Msi { get; set; }
         public int Core { get; set; }
         public int Splice { get; set; }

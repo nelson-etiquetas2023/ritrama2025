@@ -2,7 +2,7 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Ritrama2025.Models;
-
+using Ritrama2025.Reports;
 using System.Data;
 
 namespace Ritrama2025.Services.InventarioService
@@ -11,6 +11,8 @@ namespace Ritrama2025.Services.InventarioService
     {
         public IConfiguration Config { get; }
         public string StringConnex { get; set; } = null!;
+        public DataSet Ds = new();
+
         public InventarioService(IConfiguration Config)
         {
             this.Config = Config;
@@ -21,6 +23,32 @@ namespace Ritrama2025.Services.InventarioService
                 StringConnex = Config.GetSection("ConnectionStringsEnvironment")[ambiente]!;
             }
         }
+
+        public async Task<DataTable?> LoadMasterInventario() 
+        {
+            try
+            {
+                var parameters = new { NombreTable = "MasterInics", Sql = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_ROLL_ID };
+
+                DataTable? dt = await CargarTablaAsync(parameters.Sql, false, null, parameters.NombreTable, true);
+
+                if (dt == null)
+                {
+                    throw new InvalidOperationException("La tabla de master no se pudo cargar correctamente.");
+                }
+                else
+                {
+                    return dt;
+                }
+
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("error al cargar los master [error code: ] " + ex.Message);
+                return null;
+            }
+        }
+
         public bool SaveMasterInitialDB(List<ProductMAP> lista)
         {
 			try
@@ -136,6 +164,49 @@ namespace Ritrama2025.Services.InventarioService
                 return false;
                
             }
+        }
+
+        private async Task<DataTable?> CargarTablaAsync(
+            string sqlQuery,
+            bool loadDataset = false, 
+            SqlParameter[]? parametros = null, 
+            string? nombreTabla = null,
+            bool returnDataTable = false) 
+        {
+
+            using SqlConnection conn = new(StringConnex);
+            await conn.OpenAsync();
+
+            using SqlCommand comando = new()
+            {
+                Connection = conn,
+                CommandText = sqlQuery,
+                CommandType = CommandType.Text
+            };
+
+            if (parametros != null)
+            {
+                comando.Parameters.AddRange(parametros);
+            }
+
+            if (loadDataset) 
+            {
+                using SqlDataAdapter adapter = new() { SelectCommand = comando};
+                adapter.Fill(Ds, nombreTabla!);
+                return null;
+            }
+
+            if (returnDataTable) 
+            {
+                using SqlDataAdapter adapter = new() { SelectCommand = comando };
+                DataTable dt = new();
+                adapter.Fill(dt);
+                return dt;
+            }
+
+            await comando.ExecuteNonQueryAsync();
+            return null;
+
         }
     }
 }

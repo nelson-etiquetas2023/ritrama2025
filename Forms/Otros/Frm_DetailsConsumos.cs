@@ -3,7 +3,6 @@ using Ritrama2025.Services.ProduccionService;
 using System.ComponentModel;
 using System.Data;
 
-
 namespace Ritrama2025.Forms.Otros
 {
     public partial class Frm_DetailsConsumos : Form
@@ -20,8 +19,6 @@ namespace Ritrama2025.Forms.Otros
         public string Width_t { get; set; } = null!;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Length { get; set; } = null!;
-
-
         private IProduccionService ProduccionService { get; set; }
         public Frm_DetailsConsumos(IProduccionService produccionService)
         {
@@ -62,7 +59,6 @@ namespace Ritrama2025.Forms.Otros
 
         private void ColumnDefinitionsGrid() 
         {
-            
             Grid_Items.AutoGenerateColumns = false;
             CommonService.ADD_COLUMN_GRID("item", 30, "It.", "", Grid_Items);
             CommonService.ADD_COLUMN_GRID("orden",60,"Orden Corte","orden",Grid_Items);

@@ -15,7 +15,7 @@ namespace Ritrama2025.Forms.Seleccion
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public RolloCortado MasterRoll { get; set; } = null!;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string tipo_mov { get; set; } = "";
+        public string Tipo_mov { get; set; } = "";
 
         private IProduccionService ProduccionService  { get; set; }
         public Frm_RollId(IProduccionService produccionService)

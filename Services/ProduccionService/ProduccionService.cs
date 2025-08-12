@@ -601,7 +601,7 @@ namespace Ritrama2025.Services.ProduccionService
                     new SqlParameter("@rollid", rollIdProperty)
                 ];
 
-                await CargarTablaAsync(sqlProperty,false,parametros, nameTableProperty!.ToString(), false);
+                await CargarTablaAsync(sqlProperty!,false,parametros, nameTableProperty!.ToString(), false);
 
                 return true;
             }

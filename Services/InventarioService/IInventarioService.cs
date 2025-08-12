@@ -1,4 +1,5 @@
 ﻿using Ritrama2025.Models;
+using System.Data;
 
 namespace Ritrama2025.Services.InventarioService
 {
@@ -7,5 +8,6 @@ namespace Ritrama2025.Services.InventarioService
         bool SaveMasterInitialDB(List<ProductMAP> lista);
         bool ValidProductid(string id);
         bool InsertProduct(Product producto);
+        Task<DataTable?> LoadMasterInventario();
     }
 }
