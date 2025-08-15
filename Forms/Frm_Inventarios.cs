@@ -1,10 +1,11 @@
-﻿using Ritrama2025.Models;
-using Ritrama2025.Forms.Otros;
+﻿using Ritrama2025.Forms.Otros;
+using Ritrama2025.Models;
 using Ritrama2025.Services.CommonService;
+using Ritrama2025.Services.ExportData;
 using Ritrama2025.Services.InventarioService;
 using Ritrama2025.Services.ProduccionService;
 using System.Data;
-using Ritrama2025.Services.ExportData;
+using System.Diagnostics;
 
 
 namespace Ritrama2025.Forms
@@ -68,7 +69,7 @@ namespace Ritrama2025.Forms
             CommonService.ADD_COLUMN_GRID("length_restante", 80, "Restante", "largo_restante", GridMaster);
             CommonService.ADD_COLUMN_GRID("estado", 80, "Estado", "estado", GridMaster);
             CommonService.ADD_COLUMN_GRID("fecha_pro", 80, "Produccion", "fecha_pro", GridMaster);
-            CommonService.ADD_COLUMN_GRID("fecha", 80, "Recep.", "fecha", GridMaster);
+            CommonService.ADD_COLUMN_GRID("fecha", 80, "Recep.", "fecha_recep", GridMaster);
             CommonService.ADD_COLUMN_GRID("splice", 80, "Splice", "splice", GridMaster);
             CommonService.ADD_COLUMN_GRID("ubic", 80, "Ubic. ", "ubicacion", GridMaster);
             CommonService.ADD_COLUMN_GRID("tipo_mov", 80, "Tipo", "tipo_mov", GridMaster);
@@ -188,8 +189,73 @@ namespace Ritrama2025.Forms
 
         private void Bot_Excel_Click(object sender, EventArgs e)
         {
+            if (GridMaster.Rows.Count == 0) 
+            {
+                MessageBox.Show("Cargue los datos prtimero...");
+                return;
+            }
+
             List<ProductMAP> listaMasterRolls = CreateListaMasterRolls();
             ExportDataService.ExportToExcel<ProductMAP>(listaMasterRolls, "InventarioMaster.xlsx");
+        }
+
+        private void Bot_Txt_Click(object sender, EventArgs e)
+        {
+            DataRow[] listaMasters = Dv.ToTable().AsEnumerable()
+                .Where(r => r.RowState != DataRowState.Deleted)
+                .ToArray();
+
+            ExportFileTextFormat(listaMasters);
+        }
+
+        private static bool ExportFileTextFormat(DataRow[] listaMasters) 
+        {
+            try
+            {
+                var folderPath = Path.Combine(Application.StartupPath, "Archivos");
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+                var filePath = Path.Combine(folderPath, "Imaster.txt");
+                using (StreamWriter sr = new(filePath))
+                {
+                    foreach (DataRow item in listaMasters)
+                    {
+                        string product_id = item["part_number"].ToString()!.Trim();
+                        string product_name = item["product_name"].ToString()!.Trim();
+                        string rollid = item["roll_id"].ToString()!.Trim();
+                        string width = item["width"].ToString()!.Trim();
+                        string lenght = item["lenght"].ToString()!.Trim();
+                        string length_Consumido = item["largo_consumido"].ToString()!.Trim();
+                        string length_Restante = item["largo_restante"].ToString()!.Trim();
+                        string estado = item["estado"].ToString()!.Trim();
+                        string fec_produc = item["fecha_pro"].ToString()!.Trim();
+                        string fec_ingreso = item["fecha_recep"].ToString()!.Trim();
+                        string splice = item["splice"].ToString()!.Trim();
+                        string ubic = item["ubicacion"].ToString()!.Trim();
+                        string tipo_mov = item["tipo_mov"].ToString()!.Trim();
+
+                        string linea = $"{product_id},{product_name},{rollid},{width},{lenght},{length_Consumido}," +
+                            $"{length_Restante},{estado},{fec_produc},{fec_ingreso},{splice},{ubic},{tipo_mov}";
+
+                        sr.WriteLine(linea);
+                    }
+                }
+                //abri el archivo con el programa predeterminado.
+                var psi = new ProcessStartInfo
+                {
+                    FileName = filePath,
+                    UseShellExecute = true
+                };
+                Process.Start(psi);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al crear el inventario de masters...: " + ex.Message);
+                return false;
+            }
         }
     }
     public class ColumnaType

@@ -599,6 +599,7 @@
             Bot_Txt.Name = "Bot_Txt";
             Bot_Txt.Size = new Size(73, 30);
             Bot_Txt.Text = "Texto";
+            Bot_Txt.Click += Bot_Txt_Click;
             // 
             // Frm_Inventarios
             // 
