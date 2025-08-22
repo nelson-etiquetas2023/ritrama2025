@@ -49,17 +49,18 @@
             Rollos = new TabPage();
             COUNTER_ROLLOS = new Label();
             groupBox4 = new GroupBox();
-            radioButton6 = new RadioButton();
-            radioButton5 = new RadioButton();
-            radioButton1 = new RadioButton();
-            radioButton2 = new RadioButton();
-            radioButton3 = new RadioButton();
-            radioButton4 = new RadioButton();
+            rad_ordencorte_cor = new RadioButton();
+            rad_codeperson_cor = new RadioButton();
+            rad_codeunique_cor = new RadioButton();
+            rad_rollid_cor = new RadioButton();
+            rad_ubic_cor = new RadioButton();
+            rad_productid_cor = new RadioButton();
+            rad_productname_cor = new RadioButton();
             GridRollosCortados = new DataGridView();
-            button1 = new Button();
-            button2 = new Button();
+            bto_limpiar_cor = new Button();
+            bot_buscar_cor = new Button();
             label10 = new Label();
-            textBox1 = new TextBox();
+            txt_buscar_cor = new TextBox();
             tabPage5 = new TabPage();
             groupBox1 = new GroupBox();
             label9 = new Label();
@@ -81,6 +82,9 @@
             label2 = new Label();
             txt_file_name = new TextBox();
             tabPage6 = new TabPage();
+            panel_loading = new Panel();
+            text_loadingindicator = new Label();
+            pictureBox2 = new PictureBox();
             panel1 = new Panel();
             pictureBox1 = new PictureBox();
             label1 = new Label();
@@ -99,6 +103,8 @@
             tabPage5.SuspendLayout();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
+            panel_loading.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             toolStrip1.SuspendLayout();
@@ -113,10 +119,10 @@
             RollosCortados.Controls.Add(tabPage5);
             RollosCortados.Controls.Add(tabPage6);
             RollosCortados.Font = new Font("Roboto", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            RollosCortados.Location = new Point(12, 134);
+            RollosCortados.Location = new Point(12, 129);
             RollosCortados.Name = "RollosCortados";
             RollosCortados.SelectedIndex = 0;
-            RollosCortados.Size = new Size(1247, 688);
+            RollosCortados.Size = new Size(1247, 693);
             RollosCortados.TabIndex = 0;
             RollosCortados.SelectedIndexChanged += TabControl1_SelectedIndexChanged;
             // 
@@ -133,7 +139,7 @@
             tabPage1.Location = new Point(4, 23);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1239, 661);
+            tabPage1.Size = new Size(1239, 666);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Master";
             tabPage1.UseVisualStyleBackColor = true;
@@ -280,13 +286,14 @@
             txt_buscar.Name = "txt_buscar";
             txt_buscar.Size = new Size(608, 22);
             txt_buscar.TabIndex = 0;
+            txt_buscar.TextChanged += txt_buscar_TextChanged;
             // 
             // tabPage2
             // 
             tabPage2.Location = new Point(4, 23);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1239, 661);
+            tabPage2.Size = new Size(1239, 666);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Graphics";
             tabPage2.UseVisualStyleBackColor = true;
@@ -296,7 +303,7 @@
             tabPage3.Location = new Point(4, 23);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(1239, 661);
+            tabPage3.Size = new Size(1239, 666);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Hojas";
             tabPage3.UseVisualStyleBackColor = true;
@@ -306,17 +313,18 @@
             Rollos.Controls.Add(COUNTER_ROLLOS);
             Rollos.Controls.Add(groupBox4);
             Rollos.Controls.Add(GridRollosCortados);
-            Rollos.Controls.Add(button1);
-            Rollos.Controls.Add(button2);
+            Rollos.Controls.Add(bto_limpiar_cor);
+            Rollos.Controls.Add(bot_buscar_cor);
             Rollos.Controls.Add(label10);
-            Rollos.Controls.Add(textBox1);
+            Rollos.Controls.Add(txt_buscar_cor);
             Rollos.Location = new Point(4, 23);
             Rollos.Name = "Rollos";
             Rollos.Padding = new Padding(3);
-            Rollos.Size = new Size(1239, 661);
+            Rollos.Size = new Size(1239, 666);
             Rollos.TabIndex = 3;
             Rollos.Text = "Rollos Cortados";
             Rollos.UseVisualStyleBackColor = true;
+            Rollos.Click += Rollos_Click;
             // 
             // COUNTER_ROLLOS
             // 
@@ -330,12 +338,13 @@
             // 
             // groupBox4
             // 
-            groupBox4.Controls.Add(radioButton6);
-            groupBox4.Controls.Add(radioButton5);
-            groupBox4.Controls.Add(radioButton1);
-            groupBox4.Controls.Add(radioButton2);
-            groupBox4.Controls.Add(radioButton3);
-            groupBox4.Controls.Add(radioButton4);
+            groupBox4.Controls.Add(rad_ordencorte_cor);
+            groupBox4.Controls.Add(rad_codeperson_cor);
+            groupBox4.Controls.Add(rad_codeunique_cor);
+            groupBox4.Controls.Add(rad_rollid_cor);
+            groupBox4.Controls.Add(rad_ubic_cor);
+            groupBox4.Controls.Add(rad_productid_cor);
+            groupBox4.Controls.Add(rad_productname_cor);
             groupBox4.Location = new Point(6, 466);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(245, 174);
@@ -343,67 +352,77 @@
             groupBox4.TabStop = false;
             groupBox4.Text = "Filtrar Por: ";
             // 
-            // radioButton6
+            // rad_ordencorte_cor
             // 
-            radioButton6.AutoSize = true;
-            radioButton6.Location = new Point(6, 121);
-            radioButton6.Name = "radioButton6";
-            radioButton6.Size = new Size(167, 18);
-            radioButton6.TabIndex = 9;
-            radioButton6.Text = "Por Codigo Personalizado";
-            radioButton6.UseVisualStyleBackColor = true;
+            rad_ordencorte_cor.AutoSize = true;
+            rad_ordencorte_cor.Location = new Point(6, 138);
+            rad_ordencorte_cor.Name = "rad_ordencorte_cor";
+            rad_ordencorte_cor.Size = new Size(89, 18);
+            rad_ordencorte_cor.TabIndex = 10;
+            rad_ordencorte_cor.Text = "Orden Corte";
+            rad_ordencorte_cor.UseVisualStyleBackColor = true;
             // 
-            // radioButton5
+            // rad_codeperson_cor
             // 
-            radioButton5.AutoSize = true;
-            radioButton5.Location = new Point(6, 103);
-            radioButton5.Name = "radioButton5";
-            radioButton5.Size = new Size(120, 18);
-            radioButton5.TabIndex = 8;
-            radioButton5.Text = "Por Codigo Unico";
-            radioButton5.UseVisualStyleBackColor = true;
+            rad_codeperson_cor.AutoSize = true;
+            rad_codeperson_cor.Location = new Point(6, 121);
+            rad_codeperson_cor.Name = "rad_codeperson_cor";
+            rad_codeperson_cor.Size = new Size(167, 18);
+            rad_codeperson_cor.TabIndex = 9;
+            rad_codeperson_cor.Text = "Por Codigo Personalizado";
+            rad_codeperson_cor.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // rad_codeunique_cor
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Checked = true;
-            radioButton1.Location = new Point(6, 28);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(58, 18);
-            radioButton1.TabIndex = 7;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Roll-Id";
-            radioButton1.UseVisualStyleBackColor = true;
+            rad_codeunique_cor.AutoSize = true;
+            rad_codeunique_cor.Location = new Point(6, 103);
+            rad_codeunique_cor.Name = "rad_codeunique_cor";
+            rad_codeunique_cor.Size = new Size(120, 18);
+            rad_codeunique_cor.TabIndex = 8;
+            rad_codeunique_cor.Text = "Por Codigo Unico";
+            rad_codeunique_cor.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // rad_rollid_cor
             // 
-            radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(6, 84);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(101, 18);
-            radioButton2.TabIndex = 7;
-            radioButton2.Text = "Por Ubicación";
-            radioButton2.UseVisualStyleBackColor = true;
+            rad_rollid_cor.AutoSize = true;
+            rad_rollid_cor.Checked = true;
+            rad_rollid_cor.Location = new Point(6, 28);
+            rad_rollid_cor.Name = "rad_rollid_cor";
+            rad_rollid_cor.Size = new Size(58, 18);
+            rad_rollid_cor.TabIndex = 7;
+            rad_rollid_cor.TabStop = true;
+            rad_rollid_cor.Text = "Roll-Id";
+            rad_rollid_cor.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // rad_ubic_cor
             // 
-            radioButton3.AutoSize = true;
-            radioButton3.Location = new Point(6, 47);
-            radioButton3.Name = "radioButton3";
-            radioButton3.Size = new Size(81, 18);
-            radioButton3.TabIndex = 5;
-            radioButton3.Text = "Product Id";
-            radioButton3.UseVisualStyleBackColor = true;
+            rad_ubic_cor.AutoSize = true;
+            rad_ubic_cor.Location = new Point(6, 84);
+            rad_ubic_cor.Name = "rad_ubic_cor";
+            rad_ubic_cor.Size = new Size(101, 18);
+            rad_ubic_cor.TabIndex = 7;
+            rad_ubic_cor.Text = "Por Ubicación";
+            rad_ubic_cor.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // rad_productid_cor
             // 
-            radioButton4.AutoSize = true;
-            radioButton4.Location = new Point(6, 65);
-            radioButton4.Name = "radioButton4";
-            radioButton4.Size = new Size(141, 18);
-            radioButton4.TabIndex = 6;
-            radioButton4.Text = "Nombre del Producto";
-            radioButton4.UseVisualStyleBackColor = true;
+            rad_productid_cor.AutoSize = true;
+            rad_productid_cor.Location = new Point(6, 47);
+            rad_productid_cor.Name = "rad_productid_cor";
+            rad_productid_cor.Size = new Size(81, 18);
+            rad_productid_cor.TabIndex = 5;
+            rad_productid_cor.Text = "Product Id";
+            rad_productid_cor.UseVisualStyleBackColor = true;
+            // 
+            // rad_productname_cor
+            // 
+            rad_productname_cor.AutoSize = true;
+            rad_productname_cor.Location = new Point(6, 65);
+            rad_productname_cor.Name = "rad_productname_cor";
+            rad_productname_cor.Size = new Size(141, 18);
+            rad_productname_cor.TabIndex = 6;
+            rad_productname_cor.Text = "Nombre del Producto";
+            rad_productname_cor.UseVisualStyleBackColor = true;
             // 
             // GridRollosCortados
             // 
@@ -420,27 +439,29 @@
             GridRollosCortados.Size = new Size(1227, 393);
             GridRollosCortados.TabIndex = 18;
             // 
-            // button1
+            // bto_limpiar_cor
             // 
-            button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.Location = new Point(1062, 21);
-            button1.Name = "button1";
-            button1.Size = new Size(95, 40);
-            button1.TabIndex = 17;
-            button1.Text = "Limpiar";
-            button1.TextImageRelation = TextImageRelation.ImageBeforeText;
-            button1.UseVisualStyleBackColor = true;
+            bto_limpiar_cor.Image = (Image)resources.GetObject("bto_limpiar_cor.Image");
+            bto_limpiar_cor.Location = new Point(1062, 21);
+            bto_limpiar_cor.Name = "bto_limpiar_cor";
+            bto_limpiar_cor.Size = new Size(95, 40);
+            bto_limpiar_cor.TabIndex = 17;
+            bto_limpiar_cor.Text = "Limpiar";
+            bto_limpiar_cor.TextImageRelation = TextImageRelation.ImageBeforeText;
+            bto_limpiar_cor.UseVisualStyleBackColor = true;
+            bto_limpiar_cor.Click += bto_limpiar_cor_Click;
             // 
-            // button2
+            // bot_buscar_cor
             // 
-            button2.Image = (Image)resources.GetObject("button2.Image");
-            button2.Location = new Point(961, 21);
-            button2.Name = "button2";
-            button2.Size = new Size(95, 40);
-            button2.TabIndex = 16;
-            button2.Text = "Buscar";
-            button2.TextImageRelation = TextImageRelation.ImageBeforeText;
-            button2.UseVisualStyleBackColor = true;
+            bot_buscar_cor.Image = (Image)resources.GetObject("bot_buscar_cor.Image");
+            bot_buscar_cor.Location = new Point(961, 21);
+            bot_buscar_cor.Name = "bot_buscar_cor";
+            bot_buscar_cor.Size = new Size(95, 40);
+            bot_buscar_cor.TabIndex = 16;
+            bot_buscar_cor.Text = "Buscar";
+            bot_buscar_cor.TextImageRelation = TextImageRelation.ImageBeforeText;
+            bot_buscar_cor.UseVisualStyleBackColor = true;
+            bot_buscar_cor.Click += bot_buscar_cor_Click;
             // 
             // label10
             // 
@@ -451,12 +472,12 @@
             label10.TabIndex = 15;
             label10.Text = "Buscar por:";
             // 
-            // textBox1
+            // txt_buscar_cor
             // 
-            textBox1.Location = new Point(6, 39);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(949, 22);
-            textBox1.TabIndex = 14;
+            txt_buscar_cor.Location = new Point(6, 39);
+            txt_buscar_cor.Name = "txt_buscar_cor";
+            txt_buscar_cor.Size = new Size(949, 22);
+            txt_buscar_cor.TabIndex = 14;
             // 
             // tabPage5
             // 
@@ -464,7 +485,7 @@
             tabPage5.Location = new Point(4, 23);
             tabPage5.Name = "tabPage5";
             tabPage5.Padding = new Padding(3);
-            tabPage5.Size = new Size(1239, 661);
+            tabPage5.Size = new Size(1239, 666);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Export Excel";
             tabPage5.UseVisualStyleBackColor = true;
@@ -681,10 +702,42 @@
             tabPage6.Location = new Point(4, 23);
             tabPage6.Name = "tabPage6";
             tabPage6.Padding = new Padding(3);
-            tabPage6.Size = new Size(1239, 661);
+            tabPage6.Size = new Size(1239, 666);
             tabPage6.TabIndex = 5;
             tabPage6.Text = "Notificaciones";
             tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // panel_loading
+            // 
+            panel_loading.BackColor = SystemColors.Window;
+            panel_loading.Controls.Add(text_loadingindicator);
+            panel_loading.Controls.Add(pictureBox2);
+            panel_loading.Location = new Point(532, 363);
+            panel_loading.Name = "panel_loading";
+            panel_loading.Size = new Size(200, 87);
+            panel_loading.TabIndex = 23;
+            panel_loading.Visible = false;
+            // 
+            // text_loadingindicator
+            // 
+            text_loadingindicator.AutoSize = true;
+            text_loadingindicator.Font = new Font("Russo One", 11.9999981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            text_loadingindicator.Location = new Point(90, 37);
+            text_loadingindicator.Name = "text_loadingindicator";
+            text_loadingindicator.Size = new Size(96, 19);
+            text_loadingindicator.TabIndex = 1;
+            text_loadingindicator.Text = "Loading...";
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.BackColor = SystemColors.Control;
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(13, 12);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(64, 64);
+            pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
+            pictureBox2.TabIndex = 0;
+            pictureBox2.TabStop = false;
             // 
             // panel1
             // 
@@ -772,6 +825,7 @@
             AutoScaleDimensions = new SizeF(7F, 14F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1271, 834);
+            Controls.Add(panel_loading);
             Controls.Add(toolStrip1);
             Controls.Add(panel1);
             Controls.Add(RollosCortados);
@@ -796,6 +850,9 @@
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            panel_loading.ResumeLayout(false);
+            panel_loading.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -853,18 +910,22 @@
         private ToolStripButton Bot_Txt;
         private Button btn_limpiar_filtros;
         private ToolStripButton Bot_Excel;
-        private Button button1;
-        private Button button2;
+        private Button bto_limpiar_cor;
         private Label label10;
-        private TextBox textBox1;
+        private TextBox txt_buscar_cor;
         private GroupBox groupBox4;
-        private RadioButton radioButton1;
-        private RadioButton radioButton2;
-        private RadioButton radioButton3;
-        private RadioButton radioButton4;
+        private RadioButton rad_rollid_cor;
+        private RadioButton rad_ubic_cor;
+        private RadioButton rad_productid_cor;
+        private RadioButton rad_productname_cor;
         private DataGridView GridRollosCortados;
         private Label COUNTER_ROLLOS;
-        private RadioButton radioButton6;
-        private RadioButton radioButton5;
+        private RadioButton rad_codeperson_cor;
+        private RadioButton rad_codeunique_cor;
+        private Button bot_buscar_cor;
+        private RadioButton rad_ordencorte_cor;
+        private Panel panel_loading;
+        private PictureBox pictureBox2;
+        private Label text_loadingindicator;
     }
 }

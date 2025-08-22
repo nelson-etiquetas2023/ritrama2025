@@ -7,7 +7,6 @@ using Ritrama2025.Services.ProduccionService;
 using System.Data;
 using System.Diagnostics;
 
-
 namespace Ritrama2025.Forms
 {
     public partial class Frm_Inventarios : Form
@@ -26,6 +25,7 @@ namespace Ritrama2025.Forms
             ProduccionService = produccionService;
             ExportDataService = exportDataService;
             InitializeComponent();
+            panel_loading.BackColor = Color.FromArgb(160, Color.LightGray);
         }
 
         private void Frm_Inventarios_Load(object sender, EventArgs e)
@@ -34,6 +34,14 @@ namespace Ritrama2025.Forms
             BindingMasterGrid();
             DefColumnsGridRollosCortados();
         }
+        private void Toggleloading(bool isLoading) 
+        {
+            panel_loading.Visible = isLoading;
+            panel_loading.BringToFront();
+            bot_buscar_cor.Enabled = !isLoading;
+            //UseWaitCursor = isLoading;
+        }
+
         private List<ProductMAP> CreateListaMasterRolls()
         {
             List<ProductMAP> lista = [];
@@ -61,7 +69,7 @@ namespace Ritrama2025.Forms
             }
             return lista;
         }
-        private void DefColumnsGridRollosCortados() 
+        private void DefColumnsGridRollosCortados()
         {
             GridRollosCortados.AutoGenerateColumns = false;
             CommonService.ADD_COLUMN_GRID("product_id", 60, "Prod. Id", "product_id", GridRollosCortados);
@@ -79,8 +87,6 @@ namespace Ritrama2025.Forms
             CommonService.ADD_COLUMN_GRID("fecha", 80, "Creacion", "fecha", GridRollosCortados);
             CommonService.ADD_COLUMN_GRID("despacho", 80, "Doc. Despacho", "despacho", GridRollosCortados);
             CommonService.ADD_COLUMN_GRID("fecha_des", 80, "Fecha Despacho", "fecha_des", GridRollosCortados);
-
-
         }
         private void BindingMasterGrid()
         {
@@ -104,18 +110,47 @@ namespace Ritrama2025.Forms
             string activeTabtext = RollosCortados.SelectedTab!.Text;
             if (activeTabtext == "Master")
             {
-                DtMaster = await Task.Run(() => InventarioService.LoadMasterInventario());
-                Dv = DtMaster!.DefaultView;
-                ContarRegistros();
-                GridMaster.DataSource = Dv;
+                Toggleloading(true);
+                try
+                {
+                   
+                    DtMaster = await Task.Run(() => InventarioService.LoadMasterInventario());
+                    Dv = DtMaster!.DefaultView;
+                    GridMaster.DataSource = Dv;
+                    ContarRegistros();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                finally 
+                {
+                    Toggleloading(false);
+                }
+
+
+
+                
             }
             if (activeTabtext == "Rollos Cortados")
             {
-                DtRollosCortados = await Task.Run(() => InventarioService.LoadRolloCortadoInventaerio());
-                DvRollos = DtRollosCortados!.DefaultView;
-                ContarRegistrosRollos();
-                GridRollosCortados.DataSource = DvRollos;
-
+                try
+                {
+                    Toggleloading(true);
+                    DtRollosCortados = await Task.Run(() => InventarioService.LoadRolloCortadoInventaerio());
+                    DvRollos = DtRollosCortados!.DefaultView;
+                    ContarRegistrosRollos();
+                    GridRollosCortados.DataSource = DvRollos;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                finally 
+                {
+                    Toggleloading(false);
+                }
             }
             if (activeTabtext == "Hojas")
             {
@@ -126,7 +161,7 @@ namespace Ritrama2025.Forms
         {
             COUNT_ROWS.Text = Dv.Count.ToString() + " Registros Encontrados." ?? "0 Registros Encontrados";
         }
-        private void ContarRegistrosRollos() 
+        private void ContarRegistrosRollos()
         {
             COUNTER_ROLLOS.Text = DvRollos.Count.ToString() + " Registros Encontrados." ?? "0 Registros Encontrados";
         }
@@ -328,6 +363,59 @@ namespace Ritrama2025.Forms
         private void TabPage1_Click(object sender, EventArgs e)
         {
 
+        }
+
+
+        private void Rollos_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_buscar_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bot_buscar_cor_Click(object sender, EventArgs e)
+        {
+            if (rad_rollid_cor.Checked)
+            {
+                DvRollos.RowFilter = "roll_id like '%" + txt_buscar_cor.Text + "%'";
+            }
+            if (rad_productid_cor.Checked) 
+            {
+                DvRollos.RowFilter = "product_id like '%" + txt_buscar_cor.Text + "%'";
+            }
+            if (rad_productname_cor.Checked) 
+            {
+                DvRollos.RowFilter = "product_name like '%" + txt_buscar_cor.Text + "%'";
+            }
+            if (rad_ubic_cor.Checked) 
+            {
+                DvRollos.RowFilter = "ubic like '%" + txt_buscar_cor.Text + "%'";
+            }
+            if (rad_codeunique_cor.Checked) 
+            {
+                DvRollos.RowFilter = "unique_code like '%" + txt_buscar_cor.Text + "%'";
+            }
+            if (rad_codeperson_cor.Checked) 
+            {
+                DvRollos.RowFilter = "code_person like '%" + txt_buscar_cor.Text + "%'";
+            }
+            if (rad_ordencorte_cor.Checked) 
+            {
+                DvRollos.RowFilter = "CONVERT(numero, 'System.String') LIKE '%" + txt_buscar_cor.Text + "%'";
+            }
+
+            ContarRegistrosRollos();
+
+        }
+
+        private void bto_limpiar_cor_Click(object sender, EventArgs e)
+        {
+            txt_buscar_cor.Text = string.Empty;
+            GridRollosCortados.DataSource = "";
+            ContarRegistrosRollos();
         }
     }
     public class ColumnaType
