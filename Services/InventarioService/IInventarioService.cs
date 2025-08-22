@@ -9,5 +9,6 @@ namespace Ritrama2025.Services.InventarioService
         bool ValidProductid(string id);
         bool InsertProduct(Product producto);
         Task<DataTable?> LoadMasterInventario();
+        Task<DataTable?> LoadRolloCortadoInventaerio();
     }
 }

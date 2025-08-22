@@ -16,7 +16,10 @@ namespace Ritrama2025.Forms
         IProduccionService ProduccionService { get; set; }
         IExportDataService ExportDataService { get; set; }
         private DataTable? DtMaster { get; set; }
+        private DataTable? DtRollosCortados { get; set; }
         private DataView Dv { get; set; } = new();
+        private DataView DvRollos { get; set; } = new();
+
         public Frm_Inventarios(IInventarioService inventarioService, IProduccionService produccionService, IExportDataService exportDataService)
         {
             InventarioService = inventarioService;
@@ -29,6 +32,7 @@ namespace Ritrama2025.Forms
         {
             DefColumnsSheetExcel();
             BindingMasterGrid();
+            DefColumnsGridRollosCortados();
         }
         private List<ProductMAP> CreateListaMasterRolls()
         {
@@ -57,6 +61,27 @@ namespace Ritrama2025.Forms
             }
             return lista;
         }
+        private void DefColumnsGridRollosCortados() 
+        {
+            GridRollosCortados.AutoGenerateColumns = false;
+            CommonService.ADD_COLUMN_GRID("product_id", 60, "Prod. Id", "product_id", GridRollosCortados);
+            CommonService.ADD_COLUMN_GRID("product_name", 250, "Product Name", "product_name", GridRollosCortados);
+            CommonService.ADD_COLUMN_GRID("unique_code", 60, "Unique Code", "unique_code", GridRollosCortados);
+            CommonService.ADD_COLUMN_GRID("width", 60, "Width [Inch.]", "width", GridRollosCortados);
+            CommonService.ADD_COLUMN_GRID("lenght", 60, "Lenght [Pies]", "large", GridRollosCortados);
+            CommonService.ADD_COLUMN_GRID("msi", 60, "Msi", "msi", GridRollosCortados);
+            CommonService.ADD_COLUMN_GRID("splice", 60, "Splice", "splice", GridRollosCortados);
+            CommonService.ADD_COLUMN_GRID("roll_id", 80, "Roll-Id", "roll_id", GridRollosCortados);
+            CommonService.ADD_COLUMN_GRID("code_person", 60, "Code Person.", "code_person", GridRollosCortados);
+            CommonService.ADD_COLUMN_GRID("numero", 60, "Orden Corte", "numero", GridRollosCortados);
+            CommonService.ADD_COLUMN_GRID("status", 60, "Status", "status", GridRollosCortados);
+            CommonService.ADD_COLUMN_GRID("ubic", 80, "Ubicacion", "ubic", GridRollosCortados);
+            CommonService.ADD_COLUMN_GRID("fecha", 80, "Creacion", "fecha", GridRollosCortados);
+            CommonService.ADD_COLUMN_GRID("despacho", 80, "Doc. Despacho", "despacho", GridRollosCortados);
+            CommonService.ADD_COLUMN_GRID("fecha_des", 80, "Fecha Despacho", "fecha_des", GridRollosCortados);
+
+
+        }
         private void BindingMasterGrid()
         {
             GridMaster.AutoGenerateColumns = false;
@@ -76,7 +101,7 @@ namespace Ritrama2025.Forms
         }
         private async void Btn_reload_Click(object sender, EventArgs e)
         {
-            string activeTabtext = tabControl1.SelectedTab!.Text;
+            string activeTabtext = RollosCortados.SelectedTab!.Text;
             if (activeTabtext == "Master")
             {
                 DtMaster = await Task.Run(() => InventarioService.LoadMasterInventario());
@@ -84,9 +109,13 @@ namespace Ritrama2025.Forms
                 ContarRegistros();
                 GridMaster.DataSource = Dv;
             }
-            if (activeTabtext == "Graphics")
+            if (activeTabtext == "Rollos Cortados")
             {
-                MessageBox.Show("Inventario de Graphics");
+                DtRollosCortados = await Task.Run(() => InventarioService.LoadRolloCortadoInventaerio());
+                DvRollos = DtRollosCortados!.DefaultView;
+                ContarRegistrosRollos();
+                GridRollosCortados.DataSource = DvRollos;
+
             }
             if (activeTabtext == "Hojas")
             {
@@ -96,6 +125,10 @@ namespace Ritrama2025.Forms
         private void ContarRegistros()
         {
             COUNT_ROWS.Text = Dv.Count.ToString() + " Registros Encontrados." ?? "0 Registros Encontrados";
+        }
+        private void ContarRegistrosRollos() 
+        {
+            COUNTER_ROLLOS.Text = DvRollos.Count.ToString() + " Registros Encontrados." ?? "0 Registros Encontrados";
         }
         private void DefColumnsSheetExcel()
         {
@@ -189,7 +222,7 @@ namespace Ritrama2025.Forms
 
         private void Bot_Excel_Click(object sender, EventArgs e)
         {
-            if (GridMaster.Rows.Count == 0) 
+            if (GridMaster.Rows.Count == 0)
             {
                 MessageBox.Show("Cargue los datos prtimero...");
                 return;
@@ -201,14 +234,12 @@ namespace Ritrama2025.Forms
 
         private void Bot_Txt_Click(object sender, EventArgs e)
         {
-            DataRow[] listaMasters = Dv.ToTable().AsEnumerable()
-                .Where(r => r.RowState != DataRowState.Deleted)
-                .ToArray();
+            DataRow[] listaMasters = [.. Dv.ToTable().AsEnumerable().Where(r => r.RowState != DataRowState.Deleted)];
 
             ExportFileTextFormat(listaMasters);
         }
 
-        private static bool ExportFileTextFormat(DataRow[] listaMasters) 
+        private static bool ExportFileTextFormat(DataRow[] listaMasters)
         {
             try
             {
@@ -256,6 +287,47 @@ namespace Ritrama2025.Forms
                 MessageBox.Show("Error al crear el inventario de masters...: " + ex.Message);
                 return false;
             }
+        }
+
+        private void GridMaster_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (this.GridMaster.Columns[e.ColumnIndex].Name == "estado")
+            {
+                try
+                {
+                    string estado = Convert.ToString(e.Value)!;
+                    if (estado == "Agotado")
+                    {
+                        e.CellStyle.BackColor = Color.Red;
+                        e.CellStyle.ForeColor = Color.White;
+                    }
+                    if (estado == "Completo")
+                    {
+                        e.CellStyle.BackColor = Color.Green;
+                        e.CellStyle.ForeColor = Color.White;
+                    }
+                    if (estado == "Parcialmente Utilizado")
+                    {
+                        e.CellStyle.BackColor = Color.LightBlue;
+                        e.CellStyle.ForeColor = Color.White;
+                    }
+                }
+                catch (Exception)
+                {
+                    e.CellStyle.BackColor = Color.White;
+                    throw;
+                }
+            }
+        }
+
+        private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TabPage1_Click(object sender, EventArgs e)
+        {
+
         }
     }
     public class ColumnaType

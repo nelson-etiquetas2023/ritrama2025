@@ -1,8 +1,6 @@
-﻿
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Ritrama2025.Models;
-using Ritrama2025.Reports;
 using System.Data;
 
 namespace Ritrama2025.Services.InventarioService
@@ -21,6 +19,28 @@ namespace Ritrama2025.Services.InventarioService
             {
                 var ambiente = Config["Ambiente"] ?? R.ENVIRONMET.DESARROLLO;
                 StringConnex = Config.GetSection("ConnectionStringsEnvironment")[ambiente]!;
+            }
+        }
+
+        public async Task<DataTable?> LoadRolloCortadoInventaerio()
+        {
+            try
+            {
+                var parameters = new { NombreTabla = "rolls_details", Sql = R.QUERY.PRODUCTION.SQL_QUERY_LOAD_INVENTARIO_ROLLO_CORTADO };
+                DataTable? dt = await CargarTablaAsync(parameters.Sql,false, null,parameters.NombreTabla,true);
+                if (dt == null)
+                {
+                    throw new InvalidOperationException("La tabla de rollo cortado no se pudo cargar correctamente.");
+                }
+                else
+                {
+                    return dt;
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("error al cargar los rollos cortados [error code: ] " + ex.Message);
+                return null;
             }
         }
 

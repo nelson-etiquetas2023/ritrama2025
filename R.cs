@@ -11,6 +11,7 @@ namespace Ritrama2025
         {
             public class PRODUCTION
             {
+                public static string SQL_QUERY_LOAD_INVENTARIO_ROLLO_CORTADO = "SELECT product_id,product_name,roll_number,unique_code,width,large,msi,splice,numero,roll_id,code_person,status,disponible,ubic,fecha FROM rolls_details";
                 internal static string SQL_QUERY_SELECT_LOAD_OC_HEADER = "SELECT numero,fecha,fecha_produccion,a.product_id,b.product_Name,rollid_1,width_1,lenght_1,rollid_2,width_2,lenght_2,util1_real_width,util1_real_lenght,util2_real_width,util2_real_lenght,rest1_width,rest1_lenght,rest2_width,rest2_lenght,a.operador_id,c.nombre,a.customer_id,d.customer_name,tot_inch_ancho,lenght_entrada,resta_entrada,total_salida,plus1_pies,plus2_pies,longitud_cortar,cortes_ancho,cortes_largo,cant_rollos,cant_rollos2,step,sellOrder,desperdicio FROM orden_corte a LEFT JOIN producto b ON a.product_id = b.product_id LEFT JOIN operadores c ON a.operador_id = c.operador_id LEFT JOIN customer d ON a.customer_id = d.customer_id";
                 internal static string SQL_QUERY_SELECT_LOAD_OC_CORTES = "select num,width,lenght,msi,orden,code_person from cortes";
                 internal static string SQL_QUERY_SELECT_LOAD_OC_ROLLO_CORTADO = "SELECT numero,product_id,product_name,roll_number,unique_code,splice,width,large,msi,roll_id,code_person,status,disponible,width_c,lenght_c,ubic,ratio,fecha,rollid_oculto FROM rolls_details";

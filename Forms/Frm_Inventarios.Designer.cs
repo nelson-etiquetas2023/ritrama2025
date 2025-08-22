@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Inventarios));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            tabControl1 = new TabControl();
+            RollosCortados = new TabControl();
             tabPage1 = new TabPage();
             btn_limpiar_filtros = new Button();
             COUNT_ROWS = new Label();
@@ -46,7 +46,20 @@
             txt_buscar = new TextBox();
             tabPage2 = new TabPage();
             tabPage3 = new TabPage();
-            tabPage4 = new TabPage();
+            Rollos = new TabPage();
+            COUNTER_ROLLOS = new Label();
+            groupBox4 = new GroupBox();
+            radioButton6 = new RadioButton();
+            radioButton5 = new RadioButton();
+            radioButton1 = new RadioButton();
+            radioButton2 = new RadioButton();
+            radioButton3 = new RadioButton();
+            radioButton4 = new RadioButton();
+            GridRollosCortados = new DataGridView();
+            button1 = new Button();
+            button2 = new Button();
+            label10 = new Label();
+            textBox1 = new TextBox();
             tabPage5 = new TabPage();
             groupBox1 = new GroupBox();
             label9 = new Label();
@@ -76,10 +89,13 @@
             Bot_Reports = new ToolStripButton();
             Bot_Excel = new ToolStripButton();
             Bot_Txt = new ToolStripButton();
-            tabControl1.SuspendLayout();
+            RollosCortados.SuspendLayout();
             tabPage1.SuspendLayout();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)GridMaster).BeginInit();
+            Rollos.SuspendLayout();
+            groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)GridRollosCortados).BeginInit();
             tabPage5.SuspendLayout();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -88,20 +104,21 @@
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
-            // tabControl1
+            // RollosCortados
             // 
-            tabControl1.Controls.Add(tabPage1);
-            tabControl1.Controls.Add(tabPage2);
-            tabControl1.Controls.Add(tabPage3);
-            tabControl1.Controls.Add(tabPage4);
-            tabControl1.Controls.Add(tabPage5);
-            tabControl1.Controls.Add(tabPage6);
-            tabControl1.Font = new Font("Roboto", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tabControl1.Location = new Point(12, 134);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1247, 688);
-            tabControl1.TabIndex = 0;
+            RollosCortados.Controls.Add(tabPage1);
+            RollosCortados.Controls.Add(tabPage2);
+            RollosCortados.Controls.Add(tabPage3);
+            RollosCortados.Controls.Add(Rollos);
+            RollosCortados.Controls.Add(tabPage5);
+            RollosCortados.Controls.Add(tabPage6);
+            RollosCortados.Font = new Font("Roboto", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            RollosCortados.Location = new Point(12, 134);
+            RollosCortados.Name = "RollosCortados";
+            RollosCortados.SelectedIndex = 0;
+            RollosCortados.Size = new Size(1247, 688);
+            RollosCortados.TabIndex = 0;
+            RollosCortados.SelectedIndexChanged += TabControl1_SelectedIndexChanged;
             // 
             // tabPage1
             // 
@@ -120,6 +137,7 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Master";
             tabPage1.UseVisualStyleBackColor = true;
+            tabPage1.Click += TabPage1_Click;
             // 
             // btn_limpiar_filtros
             // 
@@ -233,6 +251,7 @@
             GridMaster.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             GridMaster.Size = new Size(1226, 410);
             GridMaster.TabIndex = 3;
+            GridMaster.CellFormatting += GridMaster_CellFormatting;
             // 
             // btn_buscar
             // 
@@ -282,15 +301,162 @@
             tabPage3.Text = "Hojas";
             tabPage3.UseVisualStyleBackColor = true;
             // 
-            // tabPage4
+            // Rollos
             // 
-            tabPage4.Location = new Point(4, 23);
-            tabPage4.Name = "tabPage4";
-            tabPage4.Padding = new Padding(3);
-            tabPage4.Size = new Size(1239, 661);
-            tabPage4.TabIndex = 3;
-            tabPage4.Text = "Rollos Cortados";
-            tabPage4.UseVisualStyleBackColor = true;
+            Rollos.Controls.Add(COUNTER_ROLLOS);
+            Rollos.Controls.Add(groupBox4);
+            Rollos.Controls.Add(GridRollosCortados);
+            Rollos.Controls.Add(button1);
+            Rollos.Controls.Add(button2);
+            Rollos.Controls.Add(label10);
+            Rollos.Controls.Add(textBox1);
+            Rollos.Location = new Point(4, 23);
+            Rollos.Name = "Rollos";
+            Rollos.Padding = new Padding(3);
+            Rollos.Size = new Size(1239, 661);
+            Rollos.TabIndex = 3;
+            Rollos.Text = "Rollos Cortados";
+            Rollos.UseVisualStyleBackColor = true;
+            // 
+            // COUNTER_ROLLOS
+            // 
+            COUNTER_ROLLOS.AutoSize = true;
+            COUNTER_ROLLOS.Font = new Font("Roboto Medium", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            COUNTER_ROLLOS.Location = new Point(973, 481);
+            COUNTER_ROLLOS.Name = "COUNTER_ROLLOS";
+            COUNTER_ROLLOS.Size = new Size(184, 19);
+            COUNTER_ROLLOS.TabIndex = 22;
+            COUNTER_ROLLOS.Text = "0 Registros Encontrados";
+            // 
+            // groupBox4
+            // 
+            groupBox4.Controls.Add(radioButton6);
+            groupBox4.Controls.Add(radioButton5);
+            groupBox4.Controls.Add(radioButton1);
+            groupBox4.Controls.Add(radioButton2);
+            groupBox4.Controls.Add(radioButton3);
+            groupBox4.Controls.Add(radioButton4);
+            groupBox4.Location = new Point(6, 466);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new Size(245, 174);
+            groupBox4.TabIndex = 21;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "Filtrar Por: ";
+            // 
+            // radioButton6
+            // 
+            radioButton6.AutoSize = true;
+            radioButton6.Location = new Point(6, 121);
+            radioButton6.Name = "radioButton6";
+            radioButton6.Size = new Size(167, 18);
+            radioButton6.TabIndex = 9;
+            radioButton6.Text = "Por Codigo Personalizado";
+            radioButton6.UseVisualStyleBackColor = true;
+            // 
+            // radioButton5
+            // 
+            radioButton5.AutoSize = true;
+            radioButton5.Location = new Point(6, 103);
+            radioButton5.Name = "radioButton5";
+            radioButton5.Size = new Size(120, 18);
+            radioButton5.TabIndex = 8;
+            radioButton5.Text = "Por Codigo Unico";
+            radioButton5.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            radioButton1.AutoSize = true;
+            radioButton1.Checked = true;
+            radioButton1.Location = new Point(6, 28);
+            radioButton1.Name = "radioButton1";
+            radioButton1.Size = new Size(58, 18);
+            radioButton1.TabIndex = 7;
+            radioButton1.TabStop = true;
+            radioButton1.Text = "Roll-Id";
+            radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            radioButton2.AutoSize = true;
+            radioButton2.Location = new Point(6, 84);
+            radioButton2.Name = "radioButton2";
+            radioButton2.Size = new Size(101, 18);
+            radioButton2.TabIndex = 7;
+            radioButton2.Text = "Por Ubicación";
+            radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            radioButton3.AutoSize = true;
+            radioButton3.Location = new Point(6, 47);
+            radioButton3.Name = "radioButton3";
+            radioButton3.Size = new Size(81, 18);
+            radioButton3.TabIndex = 5;
+            radioButton3.Text = "Product Id";
+            radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            radioButton4.AutoSize = true;
+            radioButton4.Location = new Point(6, 65);
+            radioButton4.Name = "radioButton4";
+            radioButton4.Size = new Size(141, 18);
+            radioButton4.TabIndex = 6;
+            radioButton4.Text = "Nombre del Producto";
+            radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // GridRollosCortados
+            // 
+            GridRollosCortados.AllowUserToAddRows = false;
+            GridRollosCortados.AllowUserToDeleteRows = false;
+            GridRollosCortados.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            GridRollosCortados.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            GridRollosCortados.Location = new Point(6, 67);
+            GridRollosCortados.MultiSelect = false;
+            GridRollosCortados.Name = "GridRollosCortados";
+            GridRollosCortados.ReadOnly = true;
+            GridRollosCortados.RowHeadersWidth = 34;
+            GridRollosCortados.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            GridRollosCortados.Size = new Size(1227, 393);
+            GridRollosCortados.TabIndex = 18;
+            // 
+            // button1
+            // 
+            button1.Image = (Image)resources.GetObject("button1.Image");
+            button1.Location = new Point(1062, 21);
+            button1.Name = "button1";
+            button1.Size = new Size(95, 40);
+            button1.TabIndex = 17;
+            button1.Text = "Limpiar";
+            button1.TextImageRelation = TextImageRelation.ImageBeforeText;
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Image = (Image)resources.GetObject("button2.Image");
+            button2.Location = new Point(961, 21);
+            button2.Name = "button2";
+            button2.Size = new Size(95, 40);
+            button2.TabIndex = 16;
+            button2.Text = "Buscar";
+            button2.TextImageRelation = TextImageRelation.ImageBeforeText;
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(6, 23);
+            label10.Name = "label10";
+            label10.Size = new Size(68, 14);
+            label10.TabIndex = 15;
+            label10.Text = "Buscar por:";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(6, 39);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(949, 22);
+            textBox1.TabIndex = 14;
             // 
             // tabPage5
             // 
@@ -608,18 +774,23 @@
             ClientSize = new Size(1271, 834);
             Controls.Add(toolStrip1);
             Controls.Add(panel1);
-            Controls.Add(tabControl1);
+            Controls.Add(RollosCortados);
             Font = new Font("Roboto", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Frm_Inventarios";
             Text = "Control de Inventarios:";
             Load += Frm_Inventarios_Load;
-            tabControl1.ResumeLayout(false);
+            RollosCortados.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)GridMaster).EndInit();
+            Rollos.ResumeLayout(false);
+            Rollos.PerformLayout();
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)GridRollosCortados).EndInit();
             tabPage5.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
@@ -636,11 +807,11 @@
 
         #endregion
 
-        private TabControl tabControl1;
+        private TabControl RollosCortados;
         private TabPage tabPage1;
         private TabPage tabPage2;
         private TabPage tabPage3;
-        private TabPage tabPage4;
+        private TabPage Rollos;
         private Panel panel1;
         private Label label1;
         private GroupBox groupBox1;
@@ -682,5 +853,18 @@
         private ToolStripButton Bot_Txt;
         private Button btn_limpiar_filtros;
         private ToolStripButton Bot_Excel;
+        private Button button1;
+        private Button button2;
+        private Label label10;
+        private TextBox textBox1;
+        private GroupBox groupBox4;
+        private RadioButton radioButton1;
+        private RadioButton radioButton2;
+        private RadioButton radioButton3;
+        private RadioButton radioButton4;
+        private DataGridView GridRollosCortados;
+        private Label COUNTER_ROLLOS;
+        private RadioButton radioButton6;
+        private RadioButton radioButton5;
     }
 }

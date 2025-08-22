@@ -136,7 +136,7 @@ namespace Ritrama2025
         [Category("Version App.")]
         [DisplayName("Numero Compilacion:")]
         [Description("Datos principalaes de compilacion de la aplicacion de escritorio")]
-        public string Version { get; set; } = "1.8";
+        public string Version { get; set; } = "1.9";
         [Category("Version App.")]
         [DisplayName("Fecha Compilación")]
         [Description("Fecha y Compilacion de la aplicación.")]
