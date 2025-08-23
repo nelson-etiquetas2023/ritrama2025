@@ -8,6 +8,9 @@
         public void ReporteCondece_sinPrecio(string conduce, Form form, string ReportName,string TitleReport);
         public void Reporte_PackingList(string conduce,Form form);
         public void Reporte_DetallePaleta(string conduce,Form form);
+        public void Reporte_InventarioRollosCortados(Form form,string Report_Title, string Report_Name);
+        public void Reporte_InventarioMaster(Form form);
+
 
     }
 }

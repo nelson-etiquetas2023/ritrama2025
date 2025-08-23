@@ -5,6 +5,7 @@ using Ritrama2025.Forms.Otros;
 using System.Data;
 using System.Drawing.Printing;
 
+
 namespace Ritrama2025.Services.ReportsService.ReportsService
 {
     public class ReportsService : IReportsService
@@ -22,6 +23,69 @@ namespace Ritrama2025.Services.ReportsService.ReportsService
                 StringConnex = Config.GetSection(R.ENVIRONMET.NAME_KEY_CONNECTION)[ambiente]!;
             }
         }
+
+        public void Reporte_InventarioRollosCortados(Form form, string Report_Title,string Report_Name)
+        {
+            DataTable dt = new();
+            try
+            {
+                using SqlConnection conn = new(StringConnex);
+                SqlCommand comando = new()
+                {
+                    Connection = conn,
+                    CommandType = CommandType.Text,
+                    CommandText = R.QUERY.PRODUCTION.SQL_QUERY_LOAD_INVENTARIO_ROLLO_CORTADO
+                };
+                conn.Open();
+                comando.ExecuteNonQuery();
+                SqlDataAdapter da = new(comando);
+                da.Fill(dt);
+                conn.Dispose();
+                comando.Dispose();
+                //Creacion del reporte.
+                try
+                {
+                    ReportsViewer report = new()
+                    {
+                        Text = Report_Title,
+                        Width = 900,
+                        Height = 800,
+                        MdiParent = form.MdiParent,
+                        StartPosition = FormStartPosition.CenterScreen
+
+                    };
+                    report.reportViewer1.ProcessingMode = ProcessingMode.Local;
+                    report.reportViewer1.LocalReport.ReportPath = GetPathApplication(Report_Name, R.PATH_REPORTS.REPORTS_INVENTARIOS);
+                    //configuracion de la pagina.
+                    PageSettings pageSettings = new()
+                    {
+                        PaperSize = new PaperSize("Carta", 850, 1100), //A4-carta.
+                        Landscape = false,
+                        Margins = new Margins(0, 0, 0, 0),
+                    };
+                    report.reportViewer1.SetPageSettings(pageSettings);
+                    //parametros del reporte.
+
+                    //Configura el origen de los datos.
+                    ReportDataSource rds = new("DsInventarios", dt);
+                    report.reportViewer1.LocalReport.DataSources.Clear();
+                    report.reportViewer1.LocalReport.DataSources.Add(rds);
+                    report.reportViewer1.RefreshReport();
+                    report.Show();
+                }
+                catch (ReportViewerException ex)
+                {
+                    MessageBox.Show("Error al crear el report view del reporte. codigo error: " + ex.Message);
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Error al cargar el reporte. codigo error: " + ex.Message);
+
+            }
+        }
+
+
 
         public void Reporte_Orden_MatPrima(string Orden,Form Form,string ReportName,string TitleReport) 
         {
@@ -67,7 +131,7 @@ namespace Ritrama2025.Services.ReportsService.ReportsService
                     //};
                     //report.reportViewer1.SetPageSettings(pageSettings);
                     //parametros del reporte.
-                    ReportParameter param = new ReportParameter("Orden_MatPrima", Orden);
+                    ReportParameter param = new("Orden_MatPrima", Orden);
 
                     //Configura el origen de los datos.
 
@@ -90,7 +154,6 @@ namespace Ritrama2025.Services.ReportsService.ReportsService
                 MessageBox.Show("Error al generar el reporte de la orden de corte...codigo error: " + ex.Message);
             }
         }
-
         public void Reporte_Orden_Corte(string numeroOC,Form form,string ReportName,string TitleReport) 
         {
             DataTable dt = new();
@@ -151,7 +214,7 @@ namespace Ritrama2025.Services.ReportsService.ReportsService
                     };
                     report.reportViewer1.SetPageSettings(pageSettings);
                     //parametros del reporte.
-                    ReportParameter param = new ReportParameter("numero_oc", numeroOC);
+                    ReportParameter param = new("numero_oc", numeroOC);
                     //Configura el origen de los datos.
                     ReportDataSource rds = new("DsOC", dt);
                     ReportDataSource rdsCortes = new("DsCortes", dtcortes);
@@ -330,6 +393,13 @@ namespace Ritrama2025.Services.ReportsService.ReportsService
             }
             string ReportPath = Path.Combine(ReportsFolder, ReportName);
             return ReportPath;
+        }
+
+        
+
+        public void Reporte_InventarioMaster(Form form)
+        {
+            throw new NotImplementedException();
         }
     }
 }

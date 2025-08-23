@@ -56,6 +56,8 @@ namespace Ritrama2025
         {
             public const string REPORTS_DESPACHO = @"Reports";
             public const string REPORTS_PRODUCTION = @"Reports\Production\";
+            public const string REPORTS_INVENTARIOS = @"Reports\Inventario\";
+
         }
         public class REPORT_NAME
         {

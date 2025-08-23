@@ -14,6 +14,7 @@
     <None Remove="Images\ANULADO_DOCUMENTO.png" />
     <None Remove="Images\CLOSE_DOCUMENT.png" />
     <None Remove="Images\OPEN_DOCUMENT.png" />
+    <None Remove="Reports\Inventario\Report_Inventarios_RollosCortados.rdlc" />
     <None Remove="Reports\Production\DsProduccion.xsd" />
     <None Remove="Reports\Production\ReporteOC.rdlc" />
     <None Remove="Reports\RptConduceConPrecio.rdlc" />
@@ -27,6 +28,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Images\OPEN_DOCUMENT.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Inventario\Report_Inventarios_RollosCortados.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Production\DsProduccion.xsd">
@@ -73,6 +77,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>DsConduce.xsd</DependentUpon>
     </Compile>
+    <Compile Update="Reports\Inventario\DsInventarios.Designer.cs">
+      <DependentUpon>DsInventarios.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Reports\Production\DsProduccion.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -95,6 +104,11 @@
     <None Update="Reports\DsConduce.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>DsConduce.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Reports\Inventario\DsInventarios.xsd">
+      <SubType>Designer</SubType>
+      <LastGenOutput>DsInventarios.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
     </None>
     <None Update="Reports\Picking-List.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

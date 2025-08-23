@@ -888,7 +888,7 @@
             Bot_Reports.Name = "Bot_Reports";
             Bot_Reports.Size = new Size(100, 30);
             Bot_Reports.Text = "Reportes";
-            Bot_Reports.Click += ToolStripButton1_Click;
+            Bot_Reports.Click += Bot_Reports_Click;
             // 
             // Bot_Excel
             // 

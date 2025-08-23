@@ -5,6 +5,8 @@ using Ritrama2025.Services.CommonService;
 using Ritrama2025.Services.ExportData;
 using Ritrama2025.Services.InventarioService;
 using Ritrama2025.Services.ProduccionService;
+using Ritrama2025.Services.ReportsService;
+using Ritrama2025.Services.ReportsService.ReportsService;
 using System.Data;
 using System.Diagnostics;
 
@@ -15,16 +17,18 @@ namespace Ritrama2025.Forms
         IInventarioService InventarioService { get; set; }
         IProduccionService ProduccionService { get; set; }
         IExportDataService ExportDataService { get; set; }
+        IReportsService ReportService { get; set; }
         private DataTable? DtMaster { get; set; }
         private DataTable? DtRollosCortados { get; set; }
         private DataView Dv { get; set; } = new();
         private DataView DvRollos { get; set; } = new();
 
-        public Frm_Inventarios(IInventarioService inventarioService, IProduccionService produccionService, IExportDataService exportDataService)
+        public Frm_Inventarios(IInventarioService inventarioService, IProduccionService produccionService, IExportDataService exportDataService, IReportsService reportService)
         {
             InventarioService = inventarioService;
             ProduccionService = produccionService;
             ExportDataService = exportDataService;
+            ReportService = reportService;
             InitializeComponent();
             panel_loading.BackColor = Color.FromArgb(160, Color.LightGray);
             TabPages_Inventario.DrawMode = TabDrawMode.OwnerDrawFixed;
@@ -83,10 +87,10 @@ namespace Ritrama2025.Forms
             //UseWaitCursor = isLoading;
         }
 
-        private List<Roll_Details> CreateListaRollosCortados() 
+        private List<Roll_Details> CreateListaRollosCortados()
         {
             List<Roll_Details> lista = [];
-            for (int i = 0; i <= GridRollosCortados.Rows.Count - 1; i++) 
+            for (int i = 0; i <= GridRollosCortados.Rows.Count - 1; i++)
             {
                 Roll_Details rollo = new()
                 {
@@ -97,11 +101,11 @@ namespace Ritrama2025.Forms
                     Width = Convert.ToDecimal(GridRollosCortados.Rows[i].Cells["width"].Value),
                     Large = Convert.ToDecimal(GridRollosCortados.Rows[i].Cells["lenght"].Value),
                     Msi = Convert.ToDecimal(GridRollosCortados.Rows[i].Cells["msi"].Value),
-                    Roll_id= GridRollosCortados.Rows[i].Cells["roll_id"].Value?.ToString() ?? string.Empty,
+                    Roll_id = GridRollosCortados.Rows[i].Cells["roll_id"].Value?.ToString() ?? string.Empty,
                     Numero_Orden = GridRollosCortados.Rows[i].Cells["numero"].Value?.ToString() ?? string.Empty,
                     Splice = Convert.ToInt16(GridRollosCortados.Rows[i].Cells["splice"].Value),
                     Status = GridRollosCortados.Rows[i].Cells["status"].Value?.ToString() ?? string.Empty,
-                    Ubic = GridRollosCortados.Rows[i].Cells["ubic"].Value?.ToString() ?? string.Empty,  
+                    Ubic = GridRollosCortados.Rows[i].Cells["ubic"].Value?.ToString() ?? string.Empty,
                     Code_Person = GridRollosCortados.Rows[i].Cells["code_person"].Value?.ToString() ?? string.Empty,
                     Fecha = Convert.ToDateTime(GridRollosCortados.Rows[i].Cells["fecha"].Value),
                     despacho = GridRollosCortados.Rows[i].Cells["despacho"].Value?.ToString() ?? string.Empty,
@@ -281,10 +285,7 @@ namespace Ritrama2025.Forms
             };
             importData.ShowDialog();
         }
-        private void ToolStripButton1_Click(object sender, EventArgs e)
-        {
 
-        }
         private void Btn_buscar_Click(object sender, EventArgs e)
         {
             if (rad_rollid.Checked)
@@ -327,7 +328,7 @@ namespace Ritrama2025.Forms
 
         private async void Bot_Excel_Click(object sender, EventArgs e)
         {
-          
+
             string activeTabtext = TabPages_Inventario.SelectedTab!.Text;
 
             if (activeTabtext == "Master")
@@ -339,10 +340,10 @@ namespace Ritrama2025.Forms
                 }
                 Toggleloading(true);
                 List<ProductMAP> listaMasterRolls = CreateListaMasterRolls();
-                await Task.Run(() => 
+                await Task.Run(() =>
                 {
                     ExportDataService.ExportToExcel<ProductMAP>(listaMasterRolls, "InventarioMaster.xlsx");
-                });   
+                });
                 Toggleloading(false);
             }
 
@@ -355,7 +356,8 @@ namespace Ritrama2025.Forms
                 }
                 Toggleloading(true);
                 List<Roll_Details> listaRollosCortados = CreateListaRollosCortados();
-                await Task.Run(() => {
+                await Task.Run(() =>
+                {
                     ExportDataService.ExportToExcel<Roll_Details>(listaRollosCortados, "Inventario_RollosCortados.xlsx");
                 });
                 Toggleloading(false);
@@ -364,7 +366,7 @@ namespace Ritrama2025.Forms
 
         private void Bot_Txt_Click(object sender, EventArgs e)
         {
-        
+
             string activeTabtext = TabPages_Inventario.SelectedTab!.Text;
 
             if (activeTabtext == "Master")
@@ -601,6 +603,19 @@ namespace Ritrama2025.Forms
         private void ToolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+
+        private void Bot_Reports_Click(object sender, EventArgs e)
+        {
+            string activeTabtext = TabPages_Inventario.SelectedTab!.Text;
+            if (activeTabtext == "Master")
+            {
+             
+            }
+            if (activeTabtext == "Rollos Cortados")
+            {
+                ReportService.Reporte_InventarioRollosCortados(this, "Inventario de Rollos Cortados", "Report_Inventarios_RollosCortados.rdlc"); 
+            }
         }
     }
     public class ColumnaType
