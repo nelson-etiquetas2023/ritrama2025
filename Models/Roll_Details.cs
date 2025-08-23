@@ -3,6 +3,7 @@ namespace Ritrama2025.Models
 {
     public class Roll_Details
     {
+        public int ItemNo { get; set; }
         public DateTime Fecha { get; set; }
 
         public string Numero_Orden { get; set; } = null!;
@@ -41,8 +42,12 @@ namespace Ritrama2025.Models
 
         public string Ubic { get; set; } = null!;
 
-        public string Rollid_oculto { get; set; } = null!;
+        public string? Rollid_oculto { get; set; } = null!;
 
-        public string No_paleta { get; set; } = null!;
+        public string? No_paleta { get; set; } = null!;
+        public string? despacho { get; set; } = null!;
+        public DateTime? fecha_despacho { get; set; } = DateTime.MinValue;
+
+
     }
 }

@@ -28,10 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Inventarios));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            RollosCortados = new TabControl();
+            TabPages_Inventario = new TabControl();
             tabPage1 = new TabPage();
+            pictureBox3 = new PictureBox();
+            label11 = new Label();
             btn_limpiar_filtros = new Button();
             COUNT_ROWS = new Label();
             btn_DetailsConsumos = new Button();
@@ -46,7 +49,9 @@
             txt_buscar = new TextBox();
             tabPage2 = new TabPage();
             tabPage3 = new TabPage();
-            Rollos = new TabPage();
+            Page_RolloCortado = new TabPage();
+            pictureBox4 = new PictureBox();
+            label12 = new Label();
             COUNTER_ROLLOS = new Label();
             groupBox4 = new GroupBox();
             rad_ordencorte_cor = new RadioButton();
@@ -82,10 +87,12 @@
             label2 = new Label();
             txt_file_name = new TextBox();
             tabPage6 = new TabPage();
+            imageList1 = new ImageList(components);
             panel_loading = new Panel();
             text_loadingindicator = new Label();
             pictureBox2 = new PictureBox();
             panel1 = new Panel();
+            pictureBox5 = new PictureBox();
             pictureBox1 = new PictureBox();
             label1 = new Label();
             toolStrip1 = new ToolStrip();
@@ -93,11 +100,13 @@
             Bot_Reports = new ToolStripButton();
             Bot_Excel = new ToolStripButton();
             Bot_Txt = new ToolStripButton();
-            RollosCortados.SuspendLayout();
+            TabPages_Inventario.SuspendLayout();
             tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)GridMaster).BeginInit();
-            Rollos.SuspendLayout();
+            Page_RolloCortado.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)GridRollosCortados).BeginInit();
             tabPage5.SuspendLayout();
@@ -106,28 +115,32 @@
             panel_loading.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
-            // RollosCortados
+            // TabPages_Inventario
             // 
-            RollosCortados.Controls.Add(tabPage1);
-            RollosCortados.Controls.Add(tabPage2);
-            RollosCortados.Controls.Add(tabPage3);
-            RollosCortados.Controls.Add(Rollos);
-            RollosCortados.Controls.Add(tabPage5);
-            RollosCortados.Controls.Add(tabPage6);
-            RollosCortados.Font = new Font("Roboto", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            RollosCortados.Location = new Point(12, 129);
-            RollosCortados.Name = "RollosCortados";
-            RollosCortados.SelectedIndex = 0;
-            RollosCortados.Size = new Size(1247, 693);
-            RollosCortados.TabIndex = 0;
-            RollosCortados.SelectedIndexChanged += TabControl1_SelectedIndexChanged;
+            TabPages_Inventario.Controls.Add(tabPage1);
+            TabPages_Inventario.Controls.Add(tabPage2);
+            TabPages_Inventario.Controls.Add(tabPage3);
+            TabPages_Inventario.Controls.Add(Page_RolloCortado);
+            TabPages_Inventario.Controls.Add(tabPage5);
+            TabPages_Inventario.Controls.Add(tabPage6);
+            TabPages_Inventario.Font = new Font("Roboto", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TabPages_Inventario.ImageList = imageList1;
+            TabPages_Inventario.Location = new Point(12, 129);
+            TabPages_Inventario.Name = "TabPages_Inventario";
+            TabPages_Inventario.SelectedIndex = 0;
+            TabPages_Inventario.Size = new Size(1247, 693);
+            TabPages_Inventario.TabIndex = 0;
+            TabPages_Inventario.SelectedIndexChanged += TabControl1_SelectedIndexChanged;
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(pictureBox3);
+            tabPage1.Controls.Add(label11);
             tabPage1.Controls.Add(btn_limpiar_filtros);
             tabPage1.Controls.Add(COUNT_ROWS);
             tabPage1.Controls.Add(btn_DetailsConsumos);
@@ -136,14 +149,35 @@
             tabPage1.Controls.Add(btn_buscar);
             tabPage1.Controls.Add(label8);
             tabPage1.Controls.Add(txt_buscar);
-            tabPage1.Location = new Point(4, 23);
+            tabPage1.ImageIndex = 0;
+            tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1239, 666);
+            tabPage1.Size = new Size(1239, 665);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Master";
             tabPage1.UseVisualStyleBackColor = true;
             tabPage1.Click += TabPage1_Click;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(983, 498);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(37, 34);
+            pictureBox3.TabIndex = 15;
+            pictureBox3.TabStop = false;
+            pictureBox3.Click += PictureBox3_Click;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Roboto Condensed", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label11.Location = new Point(223, 8);
+            label11.Name = "label11";
+            label11.Size = new Size(305, 25);
+            label11.TabIndex = 14;
+            label11.Text = "LISTADO INVENTARIO DE MASTER";
             // 
             // btn_limpiar_filtros
             // 
@@ -161,7 +195,7 @@
             // 
             COUNT_ROWS.AutoSize = true;
             COUNT_ROWS.Font = new Font("Roboto Medium", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            COUNT_ROWS.Location = new Point(1016, 496);
+            COUNT_ROWS.Location = new Point(1026, 511);
             COUNT_ROWS.Name = "COUNT_ROWS";
             COUNT_ROWS.Size = new Size(184, 19);
             COUNT_ROWS.TabIndex = 12;
@@ -198,7 +232,7 @@
             rad_rollid.Checked = true;
             rad_rollid.Location = new Point(6, 28);
             rad_rollid.Name = "rad_rollid";
-            rad_rollid.Size = new Size(58, 18);
+            rad_rollid.Size = new Size(61, 19);
             rad_rollid.TabIndex = 7;
             rad_rollid.TabStop = true;
             rad_rollid.Text = "Roll-Id";
@@ -209,7 +243,7 @@
             rad_ubication.AutoSize = true;
             rad_ubication.Location = new Point(6, 84);
             rad_ubication.Name = "rad_ubication";
-            rad_ubication.Size = new Size(101, 18);
+            rad_ubication.Size = new Size(103, 19);
             rad_ubication.TabIndex = 7;
             rad_ubication.Text = "Por Ubicación";
             rad_ubication.UseVisualStyleBackColor = true;
@@ -219,7 +253,7 @@
             rad_productid.AutoSize = true;
             rad_productid.Location = new Point(6, 47);
             rad_productid.Name = "rad_productid";
-            rad_productid.Size = new Size(81, 18);
+            rad_productid.Size = new Size(83, 19);
             rad_productid.TabIndex = 5;
             rad_productid.Text = "Product Id";
             rad_productid.UseVisualStyleBackColor = true;
@@ -229,7 +263,7 @@
             rad_product_name.AutoSize = true;
             rad_product_name.Location = new Point(6, 65);
             rad_product_name.Name = "rad_product_name";
-            rad_product_name.Size = new Size(141, 18);
+            rad_product_name.Size = new Size(144, 19);
             rad_product_name.TabIndex = 6;
             rad_product_name.Text = "Nombre del Producto";
             rad_product_name.UseVisualStyleBackColor = true;
@@ -276,7 +310,7 @@
             label8.AutoSize = true;
             label8.Location = new Point(7, 21);
             label8.Name = "label8";
-            label8.Size = new Size(68, 14);
+            label8.Size = new Size(71, 15);
             label8.TabIndex = 1;
             label8.Text = "Buscar por:";
             // 
@@ -284,57 +318,81 @@
             // 
             txt_buscar.Location = new Point(7, 37);
             txt_buscar.Name = "txt_buscar";
-            txt_buscar.Size = new Size(608, 22);
+            txt_buscar.Size = new Size(608, 23);
             txt_buscar.TabIndex = 0;
-            txt_buscar.TextChanged += txt_buscar_TextChanged;
+            txt_buscar.TextChanged += Txt_buscar_TextChanged;
             // 
             // tabPage2
             // 
-            tabPage2.Location = new Point(4, 23);
+            tabPage2.ImageIndex = 1;
+            tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1239, 666);
+            tabPage2.Size = new Size(1239, 665);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Graphics";
             tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
-            tabPage3.Location = new Point(4, 23);
+            tabPage3.ImageIndex = 3;
+            tabPage3.Location = new Point(4, 24);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(1239, 666);
+            tabPage3.Size = new Size(1239, 665);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Hojas";
             tabPage3.UseVisualStyleBackColor = true;
             // 
-            // Rollos
+            // Page_RolloCortado
             // 
-            Rollos.Controls.Add(COUNTER_ROLLOS);
-            Rollos.Controls.Add(groupBox4);
-            Rollos.Controls.Add(GridRollosCortados);
-            Rollos.Controls.Add(bto_limpiar_cor);
-            Rollos.Controls.Add(bot_buscar_cor);
-            Rollos.Controls.Add(label10);
-            Rollos.Controls.Add(txt_buscar_cor);
-            Rollos.Location = new Point(4, 23);
-            Rollos.Name = "Rollos";
-            Rollos.Padding = new Padding(3);
-            Rollos.Size = new Size(1239, 666);
-            Rollos.TabIndex = 3;
-            Rollos.Text = "Rollos Cortados";
-            Rollos.UseVisualStyleBackColor = true;
-            Rollos.Click += Rollos_Click;
+            Page_RolloCortado.Controls.Add(pictureBox4);
+            Page_RolloCortado.Controls.Add(label12);
+            Page_RolloCortado.Controls.Add(COUNTER_ROLLOS);
+            Page_RolloCortado.Controls.Add(groupBox4);
+            Page_RolloCortado.Controls.Add(GridRollosCortados);
+            Page_RolloCortado.Controls.Add(bto_limpiar_cor);
+            Page_RolloCortado.Controls.Add(bot_buscar_cor);
+            Page_RolloCortado.Controls.Add(label10);
+            Page_RolloCortado.Controls.Add(txt_buscar_cor);
+            Page_RolloCortado.ImageIndex = 2;
+            Page_RolloCortado.Location = new Point(4, 24);
+            Page_RolloCortado.Name = "Page_RolloCortado";
+            Page_RolloCortado.Padding = new Padding(3);
+            Page_RolloCortado.Size = new Size(1239, 665);
+            Page_RolloCortado.TabIndex = 3;
+            Page_RolloCortado.Text = "Rollos Cortados";
+            Page_RolloCortado.UseVisualStyleBackColor = true;
+            Page_RolloCortado.Click += Rollos_Click;
+            // 
+            // pictureBox4
+            // 
+            pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
+            pictureBox4.Location = new Point(980, 469);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(37, 34);
+            pictureBox4.TabIndex = 24;
+            pictureBox4.TabStop = false;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Roboto Condensed", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label12.Location = new Point(341, 11);
+            label12.Name = "label12";
+            label12.Size = new Size(427, 25);
+            label12.TabIndex = 23;
+            label12.Text = "LISTADO DE INVENTARIO DE ROLLOS CORTADOS";
             // 
             // COUNTER_ROLLOS
             // 
             COUNTER_ROLLOS.AutoSize = true;
             COUNTER_ROLLOS.Font = new Font("Roboto Medium", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            COUNTER_ROLLOS.Location = new Point(973, 481);
+            COUNTER_ROLLOS.Location = new Point(1021, 484);
             COUNTER_ROLLOS.Name = "COUNTER_ROLLOS";
-            COUNTER_ROLLOS.Size = new Size(184, 19);
+            COUNTER_ROLLOS.Size = new Size(211, 19);
             COUNTER_ROLLOS.TabIndex = 22;
-            COUNTER_ROLLOS.Text = "0 Registros Encontrados";
+            COUNTER_ROLLOS.Text = "0000 Registros Encontrados";
             // 
             // groupBox4
             // 
@@ -357,7 +415,7 @@
             rad_ordencorte_cor.AutoSize = true;
             rad_ordencorte_cor.Location = new Point(6, 138);
             rad_ordencorte_cor.Name = "rad_ordencorte_cor";
-            rad_ordencorte_cor.Size = new Size(89, 18);
+            rad_ordencorte_cor.Size = new Size(92, 19);
             rad_ordencorte_cor.TabIndex = 10;
             rad_ordencorte_cor.Text = "Orden Corte";
             rad_ordencorte_cor.UseVisualStyleBackColor = true;
@@ -367,7 +425,7 @@
             rad_codeperson_cor.AutoSize = true;
             rad_codeperson_cor.Location = new Point(6, 121);
             rad_codeperson_cor.Name = "rad_codeperson_cor";
-            rad_codeperson_cor.Size = new Size(167, 18);
+            rad_codeperson_cor.Size = new Size(169, 19);
             rad_codeperson_cor.TabIndex = 9;
             rad_codeperson_cor.Text = "Por Codigo Personalizado";
             rad_codeperson_cor.UseVisualStyleBackColor = true;
@@ -377,7 +435,7 @@
             rad_codeunique_cor.AutoSize = true;
             rad_codeunique_cor.Location = new Point(6, 103);
             rad_codeunique_cor.Name = "rad_codeunique_cor";
-            rad_codeunique_cor.Size = new Size(120, 18);
+            rad_codeunique_cor.Size = new Size(121, 19);
             rad_codeunique_cor.TabIndex = 8;
             rad_codeunique_cor.Text = "Por Codigo Unico";
             rad_codeunique_cor.UseVisualStyleBackColor = true;
@@ -388,7 +446,7 @@
             rad_rollid_cor.Checked = true;
             rad_rollid_cor.Location = new Point(6, 28);
             rad_rollid_cor.Name = "rad_rollid_cor";
-            rad_rollid_cor.Size = new Size(58, 18);
+            rad_rollid_cor.Size = new Size(61, 19);
             rad_rollid_cor.TabIndex = 7;
             rad_rollid_cor.TabStop = true;
             rad_rollid_cor.Text = "Roll-Id";
@@ -399,7 +457,7 @@
             rad_ubic_cor.AutoSize = true;
             rad_ubic_cor.Location = new Point(6, 84);
             rad_ubic_cor.Name = "rad_ubic_cor";
-            rad_ubic_cor.Size = new Size(101, 18);
+            rad_ubic_cor.Size = new Size(103, 19);
             rad_ubic_cor.TabIndex = 7;
             rad_ubic_cor.Text = "Por Ubicación";
             rad_ubic_cor.UseVisualStyleBackColor = true;
@@ -409,7 +467,7 @@
             rad_productid_cor.AutoSize = true;
             rad_productid_cor.Location = new Point(6, 47);
             rad_productid_cor.Name = "rad_productid_cor";
-            rad_productid_cor.Size = new Size(81, 18);
+            rad_productid_cor.Size = new Size(83, 19);
             rad_productid_cor.TabIndex = 5;
             rad_productid_cor.Text = "Product Id";
             rad_productid_cor.UseVisualStyleBackColor = true;
@@ -419,7 +477,7 @@
             rad_productname_cor.AutoSize = true;
             rad_productname_cor.Location = new Point(6, 65);
             rad_productname_cor.Name = "rad_productname_cor";
-            rad_productname_cor.Size = new Size(141, 18);
+            rad_productname_cor.Size = new Size(144, 19);
             rad_productname_cor.TabIndex = 6;
             rad_productname_cor.Text = "Nombre del Producto";
             rad_productname_cor.UseVisualStyleBackColor = true;
@@ -449,7 +507,7 @@
             bto_limpiar_cor.Text = "Limpiar";
             bto_limpiar_cor.TextImageRelation = TextImageRelation.ImageBeforeText;
             bto_limpiar_cor.UseVisualStyleBackColor = true;
-            bto_limpiar_cor.Click += bto_limpiar_cor_Click;
+            bto_limpiar_cor.Click += Bto_limpiar_cor_Click;
             // 
             // bot_buscar_cor
             // 
@@ -461,14 +519,14 @@
             bot_buscar_cor.Text = "Buscar";
             bot_buscar_cor.TextImageRelation = TextImageRelation.ImageBeforeText;
             bot_buscar_cor.UseVisualStyleBackColor = true;
-            bot_buscar_cor.Click += bot_buscar_cor_Click;
+            bot_buscar_cor.Click += Bot_buscar_cor_Click;
             // 
             // label10
             // 
             label10.AutoSize = true;
             label10.Location = new Point(6, 23);
             label10.Name = "label10";
-            label10.Size = new Size(68, 14);
+            label10.Size = new Size(71, 15);
             label10.TabIndex = 15;
             label10.Text = "Buscar por:";
             // 
@@ -476,16 +534,17 @@
             // 
             txt_buscar_cor.Location = new Point(6, 39);
             txt_buscar_cor.Name = "txt_buscar_cor";
-            txt_buscar_cor.Size = new Size(949, 22);
+            txt_buscar_cor.Size = new Size(949, 23);
             txt_buscar_cor.TabIndex = 14;
             // 
             // tabPage5
             // 
             tabPage5.Controls.Add(groupBox1);
-            tabPage5.Location = new Point(4, 23);
+            tabPage5.ImageIndex = 5;
+            tabPage5.Location = new Point(4, 24);
             tabPage5.Name = "tabPage5";
             tabPage5.Padding = new Padding(3);
-            tabPage5.Size = new Size(1239, 666);
+            tabPage5.Size = new Size(1239, 665);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Export Excel";
             tabPage5.UseVisualStyleBackColor = true;
@@ -529,7 +588,7 @@
             ListColumns.Items.AddRange(new object[] { "1.- Product Id., Columna1" });
             ListColumns.Location = new Point(529, 124);
             ListColumns.Name = "ListColumns";
-            ListColumns.Size = new Size(368, 74);
+            ListColumns.Size = new Size(368, 64);
             ListColumns.TabIndex = 12;
             // 
             // chk_checkFileCorrect
@@ -538,7 +597,7 @@
             chk_checkFileCorrect.Enabled = false;
             chk_checkFileCorrect.Location = new Point(11, 181);
             chk_checkFileCorrect.Name = "chk_checkFileCorrect";
-            chk_checkFileCorrect.Size = new Size(203, 18);
+            chk_checkFileCorrect.Size = new Size(210, 19);
             chk_checkFileCorrect.TabIndex = 11;
             chk_checkFileCorrect.Text = "Localizacion Correcta de Archivo";
             chk_checkFileCorrect.UseVisualStyleBackColor = true;
@@ -558,7 +617,7 @@
             label6.AutoSize = true;
             label6.Location = new Point(529, 84);
             label6.Name = "label6";
-            label6.Size = new Size(86, 14);
+            label6.Size = new Size(90, 15);
             label6.TabIndex = 9;
             label6.Text = "Advertencias : ";
             // 
@@ -567,7 +626,7 @@
             label5.AutoSize = true;
             label5.Location = new Point(529, 63);
             label5.Name = "label5";
-            label5.Size = new Size(153, 14);
+            label5.Size = new Size(158, 15);
             label5.TabIndex = 8;
             label5.Text = "Productos no registrados : ";
             // 
@@ -576,7 +635,7 @@
             label4.AutoSize = true;
             label4.Location = new Point(529, 41);
             label4.Name = "label4";
-            label4.Size = new Size(129, 14);
+            label4.Size = new Size(135, 15);
             label4.TabIndex = 7;
             label4.Text = "Numero de Registros : ";
             // 
@@ -598,7 +657,7 @@
             rad_rollos.AutoSize = true;
             rad_rollos.Location = new Point(25, 72);
             rad_rollos.Name = "rad_rollos";
-            rad_rollos.Size = new Size(99, 18);
+            rad_rollos.Size = new Size(100, 19);
             rad_rollos.TabIndex = 3;
             rad_rollos.TabStop = true;
             rad_rollos.Text = "Rollo Cortado";
@@ -609,7 +668,7 @@
             rad_hojas.AutoSize = true;
             rad_hojas.Location = new Point(25, 55);
             rad_hojas.Name = "rad_hojas";
-            rad_hojas.Size = new Size(57, 18);
+            rad_hojas.Size = new Size(58, 19);
             rad_hojas.TabIndex = 2;
             rad_hojas.TabStop = true;
             rad_hojas.Text = "Hojas";
@@ -620,7 +679,7 @@
             rad_graphics.AutoSize = true;
             rad_graphics.Location = new Point(25, 37);
             rad_graphics.Name = "rad_graphics";
-            rad_graphics.Size = new Size(73, 18);
+            rad_graphics.Size = new Size(76, 19);
             rad_graphics.TabIndex = 1;
             rad_graphics.TabStop = true;
             rad_graphics.Text = "Graphics";
@@ -631,7 +690,7 @@
             rad_master.AutoSize = true;
             rad_master.Location = new Point(25, 20);
             rad_master.Name = "rad_master";
-            rad_master.Size = new Size(62, 18);
+            rad_master.Size = new Size(65, 19);
             rad_master.TabIndex = 0;
             rad_master.TabStop = true;
             rad_master.Text = "Master";
@@ -676,7 +735,7 @@
             txt_file_path.Location = new Point(6, 81);
             txt_file_path.Name = "txt_file_path";
             txt_file_path.ReadOnly = true;
-            txt_file_path.Size = new Size(496, 22);
+            txt_file_path.Size = new Size(496, 23);
             txt_file_path.TabIndex = 2;
             // 
             // label2
@@ -694,18 +753,36 @@
             txt_file_name.Location = new Point(6, 38);
             txt_file_name.Name = "txt_file_name";
             txt_file_name.ReadOnly = true;
-            txt_file_name.Size = new Size(496, 22);
+            txt_file_name.Size = new Size(496, 23);
             txt_file_name.TabIndex = 0;
             // 
             // tabPage6
             // 
-            tabPage6.Location = new Point(4, 23);
+            tabPage6.ImageIndex = 4;
+            tabPage6.Location = new Point(4, 24);
             tabPage6.Name = "tabPage6";
             tabPage6.Padding = new Padding(3);
-            tabPage6.Size = new Size(1239, 666);
+            tabPage6.Size = new Size(1239, 665);
             tabPage6.TabIndex = 5;
             tabPage6.Text = "Notificaciones";
             tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // imageList1
+            // 
+            imageList1.ColorDepth = ColorDepth.Depth32Bit;
+            imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
+            imageList1.TransparentColor = Color.Transparent;
+            imageList1.Images.SetKeyName(0, "product16.ico");
+            imageList1.Images.SetKeyName(1, "check_file_bw_16.png");
+            imageList1.Images.SetKeyName(2, "FilterDocument.ico");
+            imageList1.Images.SetKeyName(3, "insert_rows.ico");
+            imageList1.Images.SetKeyName(4, "package_search.ico");
+            imageList1.Images.SetKeyName(5, "microsoft_excel_2019_16.png");
+            imageList1.Images.SetKeyName(6, "unpacking.ico");
+            imageList1.Images.SetKeyName(7, "user_rights.ico");
+            imageList1.Images.SetKeyName(8, "Remove_16.png");
+            imageList1.Images.SetKeyName(9, "ordenDocument_16.png");
+            imageList1.Images.SetKeyName(10, "CloseDoc.ico");
             // 
             // panel_loading
             // 
@@ -738,10 +815,12 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBox2.TabIndex = 0;
             pictureBox2.TabStop = false;
+            pictureBox2.WaitOnLoad = true;
             // 
             // panel1
             // 
             panel1.BackColor = SystemColors.ScrollBar;
+            panel1.Controls.Add(pictureBox5);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
@@ -749,6 +828,15 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1271, 93);
             panel1.TabIndex = 1;
+            // 
+            // pictureBox5
+            // 
+            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
+            pictureBox5.Location = new Point(12, 24);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(245, 50);
+            pictureBox5.TabIndex = 2;
+            pictureBox5.TabStop = false;
             // 
             // pictureBox1
             // 
@@ -772,6 +860,7 @@
             // toolStrip1
             // 
             toolStrip1.BackColor = SystemColors.ActiveCaption;
+            toolStrip1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             toolStrip1.Items.AddRange(new ToolStripItem[] { Btn_reload, Bot_Reports, Bot_Excel, Bot_Txt });
             toolStrip1.Location = new Point(0, 93);
             toolStrip1.Name = "toolStrip1";
@@ -779,6 +868,7 @@
             toolStrip1.Size = new Size(1271, 33);
             toolStrip1.TabIndex = 2;
             toolStrip1.Text = "toolStrip1";
+            toolStrip1.ItemClicked += ToolStrip1_ItemClicked;
             // 
             // Btn_reload
             // 
@@ -786,7 +876,7 @@
             Btn_reload.Image = (Image)resources.GetObject("Btn_reload.Image");
             Btn_reload.ImageTransparentColor = Color.Magenta;
             Btn_reload.Name = "Btn_reload";
-            Btn_reload.Size = new Size(73, 30);
+            Btn_reload.Size = new Size(100, 30);
             Btn_reload.Text = "Cargar";
             Btn_reload.Click += Btn_reload_Click;
             // 
@@ -796,7 +886,7 @@
             Bot_Reports.Image = (Image)resources.GetObject("Bot_Reports.Image");
             Bot_Reports.ImageTransparentColor = Color.Magenta;
             Bot_Reports.Name = "Bot_Reports";
-            Bot_Reports.Size = new Size(73, 30);
+            Bot_Reports.Size = new Size(100, 30);
             Bot_Reports.Text = "Reportes";
             Bot_Reports.Click += ToolStripButton1_Click;
             // 
@@ -806,7 +896,7 @@
             Bot_Excel.Image = (Image)resources.GetObject("Bot_Excel.Image");
             Bot_Excel.ImageTransparentColor = Color.Magenta;
             Bot_Excel.Name = "Bot_Excel";
-            Bot_Excel.Size = new Size(73, 30);
+            Bot_Excel.Size = new Size(100, 30);
             Bot_Excel.Text = "Excel";
             Bot_Excel.Click += Bot_Excel_Click;
             // 
@@ -816,7 +906,7 @@
             Bot_Txt.Image = (Image)resources.GetObject("Bot_Txt.Image");
             Bot_Txt.ImageTransparentColor = Color.Magenta;
             Bot_Txt.Name = "Bot_Txt";
-            Bot_Txt.Size = new Size(73, 30);
+            Bot_Txt.Size = new Size(100, 30);
             Bot_Txt.Text = "Texto";
             Bot_Txt.Click += Bot_Txt_Click;
             // 
@@ -828,20 +918,22 @@
             Controls.Add(panel_loading);
             Controls.Add(toolStrip1);
             Controls.Add(panel1);
-            Controls.Add(RollosCortados);
+            Controls.Add(TabPages_Inventario);
             Font = new Font("Roboto", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Frm_Inventarios";
             Text = "Control de Inventarios:";
             Load += Frm_Inventarios_Load;
-            RollosCortados.ResumeLayout(false);
+            TabPages_Inventario.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)GridMaster).EndInit();
-            Rollos.ResumeLayout(false);
-            Rollos.PerformLayout();
+            Page_RolloCortado.ResumeLayout(false);
+            Page_RolloCortado.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             groupBox4.ResumeLayout(false);
             groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)GridRollosCortados).EndInit();
@@ -855,6 +947,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
@@ -864,11 +957,11 @@
 
         #endregion
 
-        private TabControl RollosCortados;
+        private TabControl TabPages_Inventario;
         private TabPage tabPage1;
         private TabPage tabPage2;
         private TabPage tabPage3;
-        private TabPage Rollos;
+        private TabPage Page_RolloCortado;
         private Panel panel1;
         private Label label1;
         private GroupBox groupBox1;
@@ -927,5 +1020,11 @@
         private Panel panel_loading;
         private PictureBox pictureBox2;
         private Label text_loadingindicator;
+        private Label label11;
+        private Label label12;
+        private PictureBox pictureBox3;
+        private PictureBox pictureBox4;
+        private PictureBox pictureBox5;
+        private ImageList imageList1;
     }
 }
