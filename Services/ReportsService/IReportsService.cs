@@ -1,4 +1,6 @@
-﻿namespace Ritrama2025.Services.ReportsService.ReportsService
+﻿using Ritrama2025.Forms.Otros;
+
+namespace Ritrama2025.Services.ReportsService.ReportsService
 {
     public interface IReportsService
     {
@@ -9,8 +11,6 @@
         public void Reporte_PackingList(string conduce,Form form);
         public void Reporte_DetallePaleta(string conduce,Form form);
         public void Reporte_InventarioRollosCortados(Form form,string Report_Title, string Report_Name);
-        public void Reporte_InventarioMaster(Form form);
-
-
+        public void Reporte_InventarioMaster(Form form,string Report_Title, string Report_Name);
     }
 }

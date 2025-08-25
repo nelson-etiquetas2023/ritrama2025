@@ -15,6 +15,7 @@
     <None Remove="Images\CLOSE_DOCUMENT.png" />
     <None Remove="Images\OPEN_DOCUMENT.png" />
     <None Remove="Reports\Inventario\Report_Inventarios_RollosCortados.rdlc" />
+    <None Remove="Reports\Inventario\Report_Inventario_Master.rdlc" />
     <None Remove="Reports\Production\DsProduccion.xsd" />
     <None Remove="Reports\Production\ReporteOC.rdlc" />
     <None Remove="Reports\RptConduceConPrecio.rdlc" />
@@ -31,6 +32,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Inventario\Report_Inventarios_RollosCortados.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Inventario\Report_Inventario_Master.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Production\DsProduccion.xsd">

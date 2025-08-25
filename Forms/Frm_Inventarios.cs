@@ -608,14 +608,35 @@ namespace Ritrama2025.Forms
         private void Bot_Reports_Click(object sender, EventArgs e)
         {
             string activeTabtext = TabPages_Inventario.SelectedTab!.Text;
+         
             if (activeTabtext == "Master")
             {
-             
+                if (GridMaster.Rows.Count == 0)
+                {
+                    MessageBox.Show("Cargue los datos primero...");
+                    return;
+                }
+
+                try
+                {
+                     ReportService.Reporte_InventarioMaster(this, "Inventario de Master", "Report_Inventario_Master.rdlc");  
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}");
+                }
             }
+
             if (activeTabtext == "Rollos Cortados")
             {
-                ReportService.Reporte_InventarioRollosCortados(this, "Inventario de Rollos Cortados", "Report_Inventarios_RollosCortados.rdlc"); 
+                if (GridRollosCortados.Rows.Count == 0)
+                {
+                    MessageBox.Show("Cargue los datos primero...");
+                    return;
+                }
+                ReportService.Reporte_InventarioRollosCortados(this, "Inventario de Rollos Cortados", "Report_Inventarios_RollosCortados.rdlc");
             }
+
         }
     }
     public class ColumnaType

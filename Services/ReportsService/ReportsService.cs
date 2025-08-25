@@ -5,7 +5,6 @@ using Ritrama2025.Forms.Otros;
 using System.Data;
 using System.Drawing.Printing;
 
-
 namespace Ritrama2025.Services.ReportsService.ReportsService
 {
     public class ReportsService : IReportsService
@@ -24,7 +23,68 @@ namespace Ritrama2025.Services.ReportsService.ReportsService
             }
         }
 
-        public void Reporte_InventarioRollosCortados(Form form, string Report_Title,string Report_Name)
+        public void Reporte_InventarioMaster(Form form, string Report_Title, string Report_Name)
+        {
+            DataTable dt = new();
+            try
+            {
+                using SqlConnection conn = new(StringConnex);
+                SqlCommand comando = new()
+                {
+                    Connection = conn,
+                    CommandType = CommandType.Text,
+                    CommandText = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_ROLL_ID
+                };
+                conn.Open();
+                comando.ExecuteNonQuery();
+                SqlDataAdapter da = new(comando);
+                da.Fill(dt);
+                conn.Dispose();
+                comando.Dispose();
+                //Creacion del reporte.
+                try
+                {
+                    ReportsViewer report = new()
+                    {
+                        Text = Report_Title,
+                        Width = 1000,
+                        Height = 800,
+                        MdiParent = form.MdiParent,
+                        StartPosition = FormStartPosition.CenterScreen
+
+                    };
+                    report.reportViewer1.ProcessingMode = ProcessingMode.Local;
+                    report.reportViewer1.LocalReport.ReportPath = GetPathApplication(Report_Name, R.PATH_REPORTS.REPORTS_INVENTARIOS);
+                    //configuracion de la pagina.
+                    PageSettings pageSettings = new()
+                    {
+                        PaperSize = new PaperSize("Carta", 850, 1100), //A4-carta.
+                        Landscape = false,
+                        Margins = new Margins(0, 0, 0, 0),
+                    };
+                    report.reportViewer1.SetPageSettings(pageSettings);
+                    //parametros del reporte.
+
+                    //Configura el origen de los datos.
+                    ReportDataSource rds = new("DsInventarios", dt);
+                    report.reportViewer1.LocalReport.DataSources.Clear();
+                    report.reportViewer1.LocalReport.DataSources.Add(rds);
+                    report.reportViewer1.RefreshReport();
+                    report.Show();
+
+                }
+                catch (ReportViewerException ex)
+                {
+                    MessageBox.Show("Error al crear el report view del reporte. codigo error: " + ex.Message);
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Error al cargar el reporte. codigo error: " + ex.Message);
+            }
+        }
+
+        public void Reporte_InventarioRollosCortados(Form form, string Report_Title, string Report_Name)
         {
             DataTable dt = new();
             try
@@ -85,9 +145,7 @@ namespace Ritrama2025.Services.ReportsService.ReportsService
             }
         }
 
-
-
-        public void Reporte_Orden_MatPrima(string Orden,Form Form,string ReportName,string TitleReport) 
+        public void Reporte_Orden_MatPrima(string Orden, Form Form, string ReportName, string TitleReport)
         {
             DataTable dt = new();
             try
@@ -154,7 +212,7 @@ namespace Ritrama2025.Services.ReportsService.ReportsService
                 MessageBox.Show("Error al generar el reporte de la orden de corte...codigo error: " + ex.Message);
             }
         }
-        public void Reporte_Orden_Corte(string numeroOC,Form form,string ReportName,string TitleReport) 
+        public void Reporte_Orden_Corte(string numeroOC, Form form, string ReportName, string TitleReport)
         {
             DataTable dt = new();
             DataTable dtcortes = new();
@@ -201,16 +259,16 @@ namespace Ritrama2025.Services.ReportsService.ReportsService
                         Height = 800,
                         MdiParent = form.MdiParent,
                         StartPosition = FormStartPosition.CenterScreen
-                        
+
                     };
                     report.reportViewer1.ProcessingMode = ProcessingMode.Local;
-                    report.reportViewer1.LocalReport.ReportPath = GetPathApplication(ReportName,R.PATH_REPORTS.REPORTS_DESPACHO);
+                    report.reportViewer1.LocalReport.ReportPath = GetPathApplication(ReportName, R.PATH_REPORTS.REPORTS_DESPACHO);
                     //configuracion de la pagina.
                     PageSettings pageSettings = new()
                     {
                         PaperSize = new PaperSize("Carta", 850, 1100), //A4-carta.
                         Landscape = false,
-                        Margins = new Margins(0,0,0,0),
+                        Margins = new Margins(0, 0, 0, 0),
                     };
                     report.reportViewer1.SetPageSettings(pageSettings);
                     //parametros del reporte.
@@ -227,7 +285,7 @@ namespace Ritrama2025.Services.ReportsService.ReportsService
                 }
                 catch (ReportViewerException ex)
                 {
-                    MessageBox.Show("Error al cargar el reporte. codigo error: " + ex.Message);   
+                    MessageBox.Show("Error al cargar el reporte. codigo error: " + ex.Message);
                 }
             }
             catch (Exception ex)
@@ -235,7 +293,7 @@ namespace Ritrama2025.Services.ReportsService.ReportsService
                 MessageBox.Show("Error al generar el reporte de la orden de corte...codigo error: " + ex.Message);
             }
         }
-        public void ReporteConduce_conPrecio(string conduce, Form form,string ReportName,string TitleReport)
+        public void ReporteConduce_conPrecio(string conduce, Form form, string ReportName, string TitleReport)
         {
             DataSet ds = new();
             using (SqlConnection conn = new(StringConnex))
@@ -265,10 +323,10 @@ namespace Ritrama2025.Services.ReportsService.ReportsService
                 Width = 900,
                 Height = 780,
                 MdiParent = form.MdiParent,
-                
+
             };
             reports.reportViewer1.ProcessingMode = ProcessingMode.Local;
-            reports.reportViewer1.LocalReport.ReportPath = GetPathApplication(ReportName,R.PATH_REPORTS.REPORTS_DESPACHO);
+            reports.reportViewer1.LocalReport.ReportPath = GetPathApplication(ReportName, R.PATH_REPORTS.REPORTS_DESPACHO);
             reports.StartPosition = FormStartPosition.CenterParent;
             //creo un objeto del tipo PageSettings para configurar la pagina a imprimir.
             PageSettings pageSettings = new()
@@ -336,7 +394,7 @@ namespace Ritrama2025.Services.ReportsService.ReportsService
             reports.reportViewer1.RefreshReport();
             reports.Show();
         }
-        public void Reporte_DetallePaleta(string conduce,Form form)
+        public void Reporte_DetallePaleta(string conduce, Form form)
         {
             // Conexion a la base de datos.
             DataSet ds = new();
@@ -344,7 +402,7 @@ namespace Ritrama2025.Services.ReportsService.ReportsService
             SqlCommand comando = new()
             {
                 Connection = conn,
-                CommandText = "SELECT a.numero,a.number_palet,a.medida,a.contenido,a.kilo_neto,a.kilo_bruto,"+          "b.customer_id,c.Customer_Name,b.fecha FROM Paleta AS a LEFT OUTER JOIN despacho AS b " +
+                CommandText = "SELECT a.numero,a.number_palet,a.medida,a.contenido,a.kilo_neto,a.kilo_bruto," + "b.customer_id,c.Customer_Name,b.fecha FROM Paleta AS a LEFT OUTER JOIN despacho AS b " +
                   "ON a.numero = b.numero LEFT OUTER JOIN Customer AS c ON b.customer_id = c.Customer_ID " +
                   "WHERE(a.numero = @p1)",
                 CommandType = CommandType.Text
@@ -383,23 +441,16 @@ namespace Ritrama2025.Services.ReportsService.ReportsService
             reports.reportViewer1.RefreshReport();
             reports.Show();
         }
-        private static string GetPathApplication(string ReportName,string folderNameReport) 
+        private static string GetPathApplication(string ReportName, string folderNameReport)
         {
             string AppDirectory = AppDomain.CurrentDomain.BaseDirectory;
             string ReportsFolder = Path.Combine(AppDirectory, folderNameReport);
-            if (!Directory.Exists(ReportsFolder)) 
+            if (!Directory.Exists(ReportsFolder))
             {
                 Directory.CreateDirectory(ReportsFolder);
             }
             string ReportPath = Path.Combine(ReportsFolder, ReportName);
             return ReportPath;
         }
-
-        
-
-        public void Reporte_InventarioMaster(Form form)
-        {
-            throw new NotImplementedException();
-        }
-    }
+    }    
 }
