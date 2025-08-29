@@ -187,7 +187,6 @@ namespace Ritrama2025.Forms
                 Toggleloading(true);
                 try
                 {
-
                     DtMaster = await Task.Run(() => InventarioService.LoadMasterInventario());
                     Dv = DtMaster!.DefaultView;
                     GridMaster.DataSource = Dv;

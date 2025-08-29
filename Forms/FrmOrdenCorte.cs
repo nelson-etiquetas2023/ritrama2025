@@ -524,6 +524,7 @@ namespace Ritrama2025.Forms
                     renglon += 1;
                 }
             }
+            BsDetails.Sort = "roll_number";
             if (grid_items.Rows.Count > 0)
             {
                 grid_items.Focus();
@@ -722,7 +723,7 @@ namespace Ritrama2025.Forms
                 operador_id = Guid.Parse(txt_operador_id.Text),
                 Nombre_operador = txt_operador_name.Text,
                 Customer_Id = Guid.Parse(txt_cust_id.Text),
-                Customer_Name = txt_cust_name.Text,
+                Customer_Name = txt_cust_name.Text ?? string.Empty,
                 Longitud_Cortar = Convert.ToDouble(txt_long_cortar.Text),
                 Cortes_Largo = Convert.ToInt32(txt_vueltas1.Value),
                 Cortes_Largo2 = Convert.ToInt32(txt_vueltas2.Value),
@@ -752,9 +753,8 @@ namespace Ritrama2025.Forms
                 Real_usado_r2 = 0,
                 Restante_rollid1 = txt_matrest1_lenght.Text,
                 Restante_rollid2 = txt_matrest2_lenght.Text,
-                SellOrder = txt_sellOrder.Text,
+                SellOrder = txt_sellOrder.Text == string.Empty ? "0" : txt_sellOrder.Text,
                 Desperdicio = chk_desperdicio1.Checked
-
             };
 
 
@@ -843,7 +843,7 @@ namespace Ritrama2025.Forms
         private void Bot_guardar_Click(object sender, EventArgs e)
         {
             //1.- Validar los datos del formulario.
-            Validar();
+            if(!Validar()) return;
 
             //2.- Crear los objetos (clases) de la Orden de Corte.
             CrearObjetoOrden();
@@ -889,10 +889,13 @@ namespace Ritrama2025.Forms
         }
 
 
-        private void Validar() 
+        private bool Validar() 
         {
-            if (!ValidDefintionsCortes()) return;
-            if (!ValidarDocumento()) return;
+            if (!ValidDefintionsCortes() || !ValidarDocumento()) 
+                return false;
+
+            return true;
+
         }
 
         private void CrearObjetoOrden() 
@@ -906,7 +909,7 @@ namespace Ritrama2025.Forms
 
         private bool ValidarDocumento() 
         {
-            bool validateDoc = false;
+            bool validateDoc;
             if (txt_rollid_1.Text == "")
             {
                 MessageBox.Show("debe seleccionar el roll-id del master a montar...");
@@ -919,9 +922,9 @@ namespace Ritrama2025.Forms
                 validateDoc = false;
                 return validateDoc; 
             }
-            if (txt_cust_id.Text == "")
+            if (txt_cust_id.Text == "" && txt_cust_name.Text == "")
             {
-                MessageBox.Show("debe introducir el nombre del cliente...");
+                MessageBox.Show("debe introducir los datos del cliente...");
                 validateDoc = false;
                 return validateDoc;
             }
@@ -1163,7 +1166,7 @@ namespace Ritrama2025.Forms
             // Obtener todas las filas hijas relacionadas
             DataRow[] filasHijas = rowMaestro.Row.GetChildRows(R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS);
             int numero_unico = Service.BuscarUniqueCodeConsec();
-            //acvtualiza la ui del datagrid items rollos cortados
+            //actualiza la ui del datagrid items rollos cortados
             List<RolloCortado> rolls = [];
             foreach (DataRow item in filasHijas)
             {
@@ -1186,7 +1189,7 @@ namespace Ritrama2025.Forms
             //actualiza la ui del indicator
             UpdateStepIndicator();
             //se crea el txt de los rollos cortados.
-            ExportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(), chk_generartxt_rc.Checked);
+            ExportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(), chk_generartxt_rc.Checked,       Convert.ToDateTime(txt_fecha_produccion.Text).ToShortDateString()  , Convert.ToDateTime(txt_fecha_emision.Text).ToShortDateString(),false);
 
             MessageBox.Show("Se ha Etiquetado la Orden de Corte...");
         }
@@ -1205,7 +1208,7 @@ namespace Ritrama2025.Forms
         private void Btn_generar_txt_Click(object sender, EventArgs e)
         {
 
-            ExportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(), chk_generartxt_rc.Checked);
+            ExportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(), chk_generartxt_rc.Checked,   Convert.ToDateTime(txt_fecha_produccion.Text).ToShortDateString(), Convert.ToDateTime(txt_fecha_produccion.Text).ToShortDateString(),true);
         }
 
         private void Bot_exportar_Click(object sender, EventArgs e)

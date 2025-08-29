@@ -113,7 +113,7 @@ namespace Ritrama2025.Services.ExportData
             }
             return true;
         }
-        public bool ExportTxtFormatRollosCortados(DataRow[] rollos,bool solorc)
+        public bool ExportTxtFormatRollosCortados(DataRow[] rollos,bool solorc,string? fecha_produccion, string? fecha_ingreso,bool openNotePad)
         {
             try
             {
@@ -144,20 +144,33 @@ namespace Ritrama2025.Services.ExportData
                             string rollid = item["roll_id"].ToString()!.Trim();
                             string codeperson = item["code_person"].ToString()!.Trim();
                             string status = item["status"].ToString()!.Trim();
-                            string linea = $"{item["roll_number"]},{productid},{item["product_name"]},{uniquecode},{width},{lenght},{msi},{splice},{rollid},{codeperson},{status}";
+                            string fecha = DateTime.Today.ToShortDateString();
+                            string orden = item["numero"].ToString()!;
+                            string fecha_pro = fecha_produccion!;
+                            string fecha_ing = fecha_ingreso!;
+
+                            string linea = $"{item["roll_number"]},{productid},{item["product_name"]},{uniquecode},{width},{lenght},{msi},{splice},{rollid},{codeperson},{status},{fecha},{orden},{fecha_pro},{fecha_ing}";
+
                             sr.WriteLine(linea);
                         }
                         
                     }
                 }
-                //abri el archivo con el programa predeterminado.
-                var psi = new ProcessStartInfo
+
+                if (openNotePad) 
                 {
-                    FileName = ArchivoPath,
-                    UseShellExecute = true
-                };
-                Process.Start(psi);
+                    //abri el archivo con el programa predeterminado.
+                    var psi = new ProcessStartInfo
+                    {
+                        FileName = ArchivoPath,
+                        UseShellExecute = true
+                    };
+                    Process.Start(psi);
+                }
+
+                
                 return true;
+
             }
             catch (Exception ex)
             {
