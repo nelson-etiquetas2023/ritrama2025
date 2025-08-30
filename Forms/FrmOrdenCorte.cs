@@ -853,7 +853,10 @@ namespace Ritrama2025.Forms
         
             //4.- Actualizar la UI.
             RefrescarUI();
-            
+
+            //Crear el txt de rollos cortados
+            ExportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(), chk_generartxt_rc.Checked, Convert.ToDateTime(txt_fecha_produccion.Text).ToShortDateString(), Convert.ToDateTime(txt_fecha_produccion.Text).ToShortDateString(), false);
+
             EditMode = 0;
         }
 
@@ -1296,6 +1299,9 @@ namespace Ritrama2025.Forms
             FilaActual = (DataRowView)BsMaster.Current!;
             FilaActual["step"] = step;
             BsMaster.EndEdit();
+
+            //crear el txt de rollos cortados
+            ExportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(), chk_generartxt_rc.Checked, Convert.ToDateTime(txt_fecha_produccion.Text).ToShortDateString(), Convert.ToDateTime(txt_fecha_produccion.Text).ToShortDateString(), true);
         }
 
         private void Btn_buscar_orden_Click(object sender, EventArgs e)
@@ -1402,6 +1408,8 @@ namespace Ritrama2025.Forms
                 row["code_person"] = txt_code_person.Text.ToString();
             }
             Service.OrdenUpdateCodePerson(txt_numeroOC.Text, txt_code_person.Text);
+            //Generar el txt de los rollos cortados.
+            ExportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(), chk_generartxt_rc.Checked, Convert.ToDateTime(txt_fecha_produccion.Text).ToShortDateString(), Convert.ToDateTime(txt_fecha_produccion.Text).ToShortDateString(), false);
         }
 
         private void Bot_buscar_Click(object sender, EventArgs e)

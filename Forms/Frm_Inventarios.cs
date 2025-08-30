@@ -107,9 +107,9 @@ namespace Ritrama2025.Forms
                     Status = GridRollosCortados.Rows[i].Cells["status"].Value?.ToString() ?? string.Empty,
                     Ubic = GridRollosCortados.Rows[i].Cells["ubic"].Value?.ToString() ?? string.Empty,
                     Code_Person = GridRollosCortados.Rows[i].Cells["code_person"].Value?.ToString() ?? string.Empty,
-                    Fecha = Convert.ToDateTime(GridRollosCortados.Rows[i].Cells["fecha"].Value),
-                    despacho = GridRollosCortados.Rows[i].Cells["despacho"].Value?.ToString() ?? string.Empty,
-                    //fecha_despacho = GridRollosCortados.Rows[i].Cells["fecha_despacho"].Value  is not DBNull ? DateTime.MinValue : Convert.ToDateTime(GridRollosCortados.Rows[i].Cells["fecha_despacho"].Value)
+                    //Fecha = Convert.ToDateTime(GridRollosCortados.Rows[i].Cells["fecha"].Value),
+                    //despacho = GridRollosCortados.Rows[i].Cells["despacho"].Value?.ToString() ?? string.Empty,
+                    
                 };
                 lista.Add(rollo);
             }
