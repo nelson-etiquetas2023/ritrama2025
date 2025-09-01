@@ -41,8 +41,45 @@ namespace Ritrama2025.Services.DespachoService.DespachoService
                 var ambiente = Config["Ambiente"] ?? R.ENVIRONMET.DESARROLLO;
                 StringConnex = Config.GetSection(R.ENVIRONMET.NAME_KEY_CONNECTION)[ambiente]!;
             }
+        }
 
-           
+        public void UpDateInventoryRC(List<RolloCortado> items,string orden,DateTime fecha)
+        {
+            try
+            {
+                foreach (var item in items) 
+                {
+                    using SqlConnection conn = new(StringConnex);
+                    SqlCommand comando = new()
+                    {
+                        Connection = conn,
+                        CommandType = CommandType.Text,
+                        CommandText = "update rolls_details set disponible=0,despacho=@p2,fecha_despacho=@p3 where unique_code=@p1"
+                    };
+                    conn.Open();
+                    SqlParameter p1 = new("@p1", item.UniqueCode);
+                    SqlParameter p2 = new("@p2", orden);
+                    SqlParameter p3 = new("@p3", fecha);
+                    
+
+
+                    comando.Parameters.Add(p1);
+                    comando.Parameters.Add(p2);
+                    comando.Parameters.Add(p3);
+
+
+                    comando.ExecuteNonQuery();
+                    conn.Close();
+                    conn.Dispose();
+                    comando.Dispose();
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message, "Error al actualizar los Invenatrios...");
+                ErrorMsg = ex.Message;
+
+            }
         }
 
         public void AddPaletDetailsDespacho(List<Paleta> paleta)
@@ -500,5 +537,7 @@ namespace Ritrama2025.Services.DespachoService.DespachoService
             }
             return ratio;
         }
+
+       
     }
 }

@@ -489,6 +489,7 @@ namespace Ritrama2025.Forms
 
         private void Bot_grabar_Click(object sender, EventArgs e)
         {
+            //validaciones.
             if (txt_custid.Text == string.Empty)
             {
                 MessageBox.Show("Debe introducir los datos del cliente...");
@@ -524,7 +525,11 @@ namespace Ritrama2025.Forms
                 MessageBox.Show("Debe agregar los renglones de los rollos costados...");
                 return;
             }
-            //validar los kilos de  la paleta.
+            
+
+
+
+
             foreach (DataGridViewRow Fila in grid_detalle_paletas.Rows)
             {
                 foreach (DataGridViewCell Celda in Fila.Cells)
@@ -549,10 +554,10 @@ namespace Ritrama2025.Forms
             }
 
 
-
+            //Encabezado de despacho.
             Despacho DocumentDespacho = new()
             {
-                //Encabezado de despacho.
+              
                 Numero = txt_numero.Text,
                 Fecha_despacho = Convert.ToDateTime(txt_fecha_despacho.Text),
                 Customer_Id = txt_custid.Text,
@@ -649,10 +654,19 @@ namespace Ritrama2025.Forms
                 };
                 DocumentDespacho.Detalle_Paleta.Add(palet);
             }
+            
+            
             Service.AddDocumentDespacho(DocumentDespacho);
             Service.AddPickingListDespacho(DocumentDespacho.Detalle_RC);
             Service.AddItemsDespacho(DocumentDespacho.Items_Despacho);
             Service.AddPaletDetailsDespacho(DocumentDespacho.Detalle_Paleta);
+
+            //Actualizacion de Inventarios.
+            Service.UpDateInventoryRC(DocumentDespacho.Detalle_RC, txt_numero.Text,Convert.ToDateTime(txt_fecha_despacho.Text));
+
+
+
+
             //cerrar el formulario a solo lectura.
             txt_persondelivery.ReadOnly = true;
             txt_fecha_despacho.Enabled = false;

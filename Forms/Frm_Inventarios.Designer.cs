@@ -486,6 +486,8 @@
             // 
             GridRollosCortados.AllowUserToAddRows = false;
             GridRollosCortados.AllowUserToDeleteRows = false;
+            GridRollosCortados.AllowUserToResizeColumns = false;
+            GridRollosCortados.AllowUserToResizeRows = false;
             GridRollosCortados.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             GridRollosCortados.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             GridRollosCortados.Location = new Point(6, 67);
@@ -493,9 +495,11 @@
             GridRollosCortados.Name = "GridRollosCortados";
             GridRollosCortados.ReadOnly = true;
             GridRollosCortados.RowHeadersWidth = 34;
-            GridRollosCortados.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            GridRollosCortados.SelectionMode = DataGridViewSelectionMode.CellSelect;
             GridRollosCortados.Size = new Size(1227, 393);
             GridRollosCortados.TabIndex = 18;
+            GridRollosCortados.CellContentClick += GridRollosCortados_CellContentClick;
+            GridRollosCortados.CellFormatting += GridRollosCortados_CellFormatting;
             // 
             // bto_limpiar_cor
             // 

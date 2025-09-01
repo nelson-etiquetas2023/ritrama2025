@@ -1,11 +1,11 @@
-﻿using DocumentFormat.OpenXml.Bibliography;
+﻿using System.Drawing;
+using DocumentFormat.OpenXml.Wordprocessing;
 using Ritrama2025.Forms.Otros;
 using Ritrama2025.Models;
 using Ritrama2025.Services.CommonService;
 using Ritrama2025.Services.ExportData;
 using Ritrama2025.Services.InventarioService;
 using Ritrama2025.Services.ProduccionService;
-using Ritrama2025.Services.ReportsService;
 using Ritrama2025.Services.ReportsService.ReportsService;
 using System.Data;
 using System.Diagnostics;
@@ -30,7 +30,7 @@ namespace Ritrama2025.Forms
             ExportDataService = exportDataService;
             ReportService = reportService;
             InitializeComponent();
-            panel_loading.BackColor = Color.FromArgb(160, Color.LightGray);
+            panel_loading.BackColor = System.Drawing.Color.FromArgb(160, System.Drawing.Color.LightGray);
             TabPages_Inventario.DrawMode = TabDrawMode.OwnerDrawFixed;
             TabPages_Inventario.DrawItem += TabControl1_DrawItem!;
             TabPages_Inventario.SizeMode = TabSizeMode.Fixed;
@@ -52,7 +52,7 @@ namespace Ritrama2025.Forms
             bool isSelected = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
 
             // Fuente: negrita si está seleccionada, normal si no
-            Font? font = isSelected ? new Font(e.Font!, FontStyle.Bold) : e.Font;
+            System.Drawing.Font? font = isSelected ? new System.Drawing.Font(e.Font!, FontStyle.Bold) : e.Font;
 
             // Fondo
             e.Graphics.FillRectangle(SystemBrushes.Control, tabRect);
@@ -73,7 +73,7 @@ namespace Ritrama2025.Forms
                 page.Text,
                 font,
                 new Point(tabRect.Left + iconOffset + 5, tabRect.Top + 5),
-                isSelected ? Color.Black : Color.Gray
+                isSelected ? System.Drawing.Color.Black : System.Drawing.Color.Gray
             );
         }
 
@@ -107,9 +107,6 @@ namespace Ritrama2025.Forms
                     Status = GridRollosCortados.Rows[i].Cells["status"].Value?.ToString() ?? string.Empty,
                     Ubic = GridRollosCortados.Rows[i].Cells["ubic"].Value?.ToString() ?? string.Empty,
                     Code_Person = GridRollosCortados.Rows[i].Cells["code_person"].Value?.ToString() ?? string.Empty,
-                    //Fecha = Convert.ToDateTime(GridRollosCortados.Rows[i].Cells["fecha"].Value),
-                    //despacho = GridRollosCortados.Rows[i].Cells["despacho"].Value?.ToString() ?? string.Empty,
-                    
                 };
                 lista.Add(rollo);
             }
@@ -161,6 +158,17 @@ namespace Ritrama2025.Forms
             CommonService.ADD_COLUMN_GRID("fecha", 80, "Creacion", "fecha", GridRollosCortados);
             CommonService.ADD_COLUMN_GRID("despacho", 80, "Doc. Despacho", "despacho", GridRollosCortados);
             CommonService.ADD_COLUMN_GRID("fecha_despacho", 80, "Fecha Despacho", "fecha_desPACHO", GridRollosCortados);
+            CommonService.ADD_COLUMN_GRID("disponible", 80, "Disponible", "disponible", GridRollosCortados);
+            //agregar la columna de images para el disponible del producto.
+            DataGridViewImageColumn colEstado = new()
+            {
+                Name = "colEstado",
+                HeaderText = "...",
+                ImageLayout = DataGridViewImageCellLayout.Zoom,
+                DisplayIndex = 0,
+                Width = 16
+            };
+            GridRollosCortados.Columns.Add(colEstado);
         }
         private void BindingMasterGrid()
         {
@@ -509,23 +517,23 @@ namespace Ritrama2025.Forms
                     string estado = Convert.ToString(e.Value)!;
                     if (estado == "Agotado")
                     {
-                        e.CellStyle.BackColor = Color.Red;
-                        e.CellStyle.ForeColor = Color.White;
+                        e.CellStyle.BackColor = System.Drawing.Color.Red;
+                        e.CellStyle.ForeColor = System.Drawing.Color.White;
                     }
                     if (estado == "Completo")
                     {
-                        e.CellStyle.BackColor = Color.Green;
-                        e.CellStyle.ForeColor = Color.White;
+                        e.CellStyle.BackColor = System.Drawing.Color.Green;
+                        e.CellStyle.ForeColor = System.Drawing.Color.White;
                     }
                     if (estado == "Parcialmente Utilizado")
                     {
-                        e.CellStyle.BackColor = Color.LightBlue;
-                        e.CellStyle.ForeColor = Color.White;
+                        e.CellStyle.BackColor = System.Drawing.Color.LightBlue;
+                        e.CellStyle.ForeColor = System.Drawing.Color.White;
                     }
                 }
                 catch (Exception)
                 {
-                    e.CellStyle.BackColor = Color.White;
+                    e.CellStyle.BackColor = System.Drawing.Color.White;
                     throw;
                 }
             }
@@ -607,7 +615,7 @@ namespace Ritrama2025.Forms
         private void Bot_Reports_Click(object sender, EventArgs e)
         {
             string activeTabtext = TabPages_Inventario.SelectedTab!.Text;
-         
+
             if (activeTabtext == "Master")
             {
                 if (GridMaster.Rows.Count == 0)
@@ -618,7 +626,7 @@ namespace Ritrama2025.Forms
 
                 try
                 {
-                     ReportService.Reporte_InventarioMaster(this, "Inventario de Master", "Report_Inventario_Master.rdlc");  
+                    ReportService.Reporte_InventarioMaster(this, "Inventario de Master", "Report_Inventario_Master.rdlc");
                 }
                 catch (Exception ex)
                 {
@@ -635,6 +643,32 @@ namespace Ritrama2025.Forms
                 }
                 ReportService.Reporte_InventarioRollosCortados(this, "Inventario de Rollos Cortados", "Report_Inventarios_RollosCortados.rdlc");
             }
+
+        }
+
+        private void GridRollosCortados_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (GridRollosCortados.Columns[e.ColumnIndex].Name == "colEstado")
+            {
+                //obtener el valor de la columna disponible.
+                bool dispo = Convert.ToBoolean(GridRollosCortados.Rows[e.RowIndex].Cells["disponible"].Value);
+                
+                if (dispo)
+                {
+                    e.Value = Properties.Resources.products_dispo;
+                }
+                else
+                {
+                    var row = GridRollosCortados.Rows[e.RowIndex];
+                    row.DefaultCellStyle.BackColor = System.Drawing.Color.LightCoral;
+                    row.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
+                    e.Value = Properties.Resources.products_nodispo;
+                }
+            }
+        }
+
+        private void GridRollosCortados_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }
