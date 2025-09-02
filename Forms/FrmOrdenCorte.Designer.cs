@@ -164,6 +164,8 @@
             chk_generartxt_rc = new CheckBox();
             label35 = new Label();
             txt_sellOrder = new TextBox();
+            label_ModoEdition = new Label();
+            ICON_EDITMODE = new PictureBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             toolStrip1.SuspendLayout();
@@ -178,6 +180,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txt_vueltas1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txt_vueltas2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ICON_EDITMODE).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -335,6 +338,7 @@
             opt_modif_orden.Name = "opt_modif_orden";
             opt_modif_orden.Size = new Size(242, 22);
             opt_modif_orden.Text = "Modificar Orden";
+            opt_modif_orden.Click += opt_modif_orden_Click;
             // 
             // bot_guardar
             // 
@@ -824,7 +828,7 @@
             // 
             // txt_product_id
             // 
-            txt_product_id.Font = new Font("Noto Sans", 9.75F);
+            txt_product_id.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold);
             txt_product_id.Location = new Point(14, 363);
             txt_product_id.Name = "txt_product_id";
             txt_product_id.ReadOnly = true;
@@ -833,7 +837,7 @@
             // 
             // txt_product_name
             // 
-            txt_product_name.Font = new Font("Noto Sans", 9.75F);
+            txt_product_name.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold);
             txt_product_name.Location = new Point(184, 363);
             txt_product_name.Name = "txt_product_name";
             txt_product_name.ReadOnly = true;
@@ -1543,11 +1547,35 @@
             txt_sellOrder.Size = new Size(377, 25);
             txt_sellOrder.TabIndex = 121;
             // 
+            // label_ModoEdition
+            // 
+            label_ModoEdition.AutoSize = true;
+            label_ModoEdition.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold);
+            label_ModoEdition.Location = new Point(468, 502);
+            label_ModoEdition.Name = "label_ModoEdition";
+            label_ModoEdition.Size = new Size(175, 18);
+            label_ModoEdition.TabIndex = 123;
+            label_ModoEdition.Text = "Esta en Modo de Edición...";
+            label_ModoEdition.Visible = false;
+            // 
+            // ICON_EDITMODE
+            // 
+            ICON_EDITMODE.Image = (Image)resources.GetObject("ICON_EDITMODE.Image");
+            ICON_EDITMODE.Location = new Point(444, 500);
+            ICON_EDITMODE.Name = "ICON_EDITMODE";
+            ICON_EDITMODE.Size = new Size(24, 24);
+            ICON_EDITMODE.SizeMode = PictureBoxSizeMode.AutoSize;
+            ICON_EDITMODE.TabIndex = 124;
+            ICON_EDITMODE.TabStop = false;
+            ICON_EDITMODE.Visible = false;
+            // 
             // FrmOrdenCorte
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1263, 843);
+            Controls.Add(ICON_EDITMODE);
+            Controls.Add(label_ModoEdition);
             Controls.Add(label35);
             Controls.Add(txt_sellOrder);
             Controls.Add(chk_generartxt_rc);
@@ -1678,6 +1706,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)txt_vueltas1).EndInit();
             ((System.ComponentModel.ISupportInitialize)txt_vueltas2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ICON_EDITMODE).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1818,5 +1847,7 @@
         private Label label35;
         private TextBox txt_sellOrder;
         private ToolStripButton bot_buscarOrders;
+        private Label label_ModoEdition;
+        private PictureBox ICON_EDITMODE;
     }
 }
