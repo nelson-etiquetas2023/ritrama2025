@@ -19,7 +19,7 @@ namespace Ritrama2025
 
         private void Main_Load(object sender, EventArgs e)
         {
-            CREATE_PROPERTY_GRID();
+            //CREATE_PROPERTY_GRID();
         }
         private void CREATE_PROPERTY_GRID()
         {
@@ -29,7 +29,8 @@ namespace Ritrama2025
                 Size = new Size(300, 600),
                 Dock = DockStyle.Fill
             };
-            this.splitContainer1.Panel2.Controls.Add(propertyGrid);
+            //this.splitContainer1.Panel2.Controls.Add(propertyGrid);
+            this.splitContainer1.Panel2.Width = 10;
         }
 
         private void Bot_despacho_Click(object sender, EventArgs e)
@@ -60,6 +61,11 @@ namespace Ritrama2025
         private void bot_inventario_Click(object sender, EventArgs e)
         {
             splitContainer1.Panel1.Controls.Add(FormManager.ShowForm<Frm_Inventarios>(this));
+        }
+
+        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 

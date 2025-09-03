@@ -9,6 +9,7 @@ namespace Ritrama2025.Helpers
         public static T ShowForm<T>(Form mdiParent) where T : Form
         {
             var type = typeof(T);
+            
 
             // verificar si ya existe y esta abierto
             if (_forms.TryGetValue(type, out var existingForm))
@@ -31,6 +32,7 @@ namespace Ritrama2025.Helpers
             form.StartPosition = FormStartPosition.Manual;
             form.Location = new Point(0, 0);
             form.WindowState = FormWindowState.Normal;
+          
             
 
             _forms[type] = form;

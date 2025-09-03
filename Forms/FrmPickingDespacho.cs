@@ -1,5 +1,4 @@
 ﻿using Ritrama2025.Models;
-using System.Transactions;
 using System.ComponentModel;
 using Ritrama2025.Services.CommonService;
 
@@ -18,24 +17,26 @@ namespace Ritrama2025.Forms
         readonly List<Recepcion> Lista_Graphics = [];
         readonly List<Recepcion> Lista_Master = [];
         public ICommonService Servicio = null!;
-        
+
 
         public FrmPickingDespacho(ICommonService servicio)
         {
             InitializeComponent();
-            Servicio = servicio;   
+            Servicio = servicio;
         }
 
 
         private void FrmPickingDespacho_Load(object sender, EventArgs e)
         {
-            //servicio = new CommonService();
+            EstilosGrid();
+            DefColumnsGroupItems();
+            grid_detallerc.DataSource = Lista_Rollos.ToList();
         }
 
         private void Button2_Click(object sender, EventArgs e)
         {
 
-            Lista_Rollos.RemoveAll(r => r.Cantidad >= 0);
+            //Lista_Rollos.RemoveAll(r => r.Cantidad >= 0);
             Lista_Graphics.RemoveAll(r => r.Palet_cant >= 0m);
             Lista_Hojas.RemoveAll(r => r.Palet_cant >= 0m);
             Lista_Master.RemoveAll(r => r.Palet_cant >= 0m);
@@ -66,45 +67,64 @@ namespace Ritrama2025.Forms
                     return await ExtraerDataAppMovil(openFileDialog.FileName);
                 });
 
-                Lista_Rollos = task.Result;
-                //aplicar estilos a los grid.
-                EstilosGrid();
-                var QueryItem = from p in Lista_Rollos
-                                orderby p.Product_Id descending
-                                orderby p.Width
-                                group p by new { p.Product_Id, p.Width, p.Length } into g
-                                select new ItemsDespacho
-                                {
-                                    Product_id = g.First().Product_Id,
-                                    Product_name = g.First().Product_Name,
-                                    Cantidad = g.Count(),
-                                    Width = g.First().Width,
-                                    Unidad ="ROLLO",
-                                    Lenght = g.First().Length,
-                                    Msi = g.First().Msi,
-                                    Code_Person = g.First().Code_Person
-                                };
+                foreach (var item in task.Result)
+                {
+                    if (!Lista_Rollos.Any(r => r.UniqueCode == item.UniqueCode))
+                    {
+                        Lista_Rollos.Add(item);
+                    }
+                }
 
+                grid_detallerc.DataSource = null;
+                grid_detallerc.DataSource = Lista_Rollos.ToList();
 
-                grid_renglones.AutoGenerateColumns = false;
-                AGREGAR_COLUMN_GRID("product_id", 60, "Product Id.", "product_id", grid_renglones);
-                AGREGAR_COLUMN_GRID("product_name", 180, "Nombre del Producto", "product_name", grid_renglones);
-                AGREGAR_COLUMN_GRID("unidad",70, "Unidad", "unidad", grid_renglones);
+                CountRowsGrid();
 
-                AGREGAR_COLUMN_GRID("cantidad", 80, "Cantidad", "cantidad", grid_renglones);
-                AGREGAR_COLUMN_GRID("width", 80, "Width", "width", grid_renglones);
-                AGREGAR_COLUMN_GRID("Lenght", 80, "Largo", "Lenght", grid_renglones);
-                AGREGAR_COLUMN_GRID("msi", 80, "Msi", "msi", grid_renglones);
-                AGREGAR_COLUMN_GRID("Code_Person", 80, "Msi", "Code_Person", grid_renglones);
-                grid_renglones.DataSource = QueryItem.ToList();
-                Lista_Items = [.. QueryItem];
+                grid_renglones.DataSource = QueryItemsGrouping();
+                Lista_Items = [.. QueryItemsGrouping()];
             }
+        }
+
+        private void DefColumnsGroupItems()
+        {
+            grid_renglones.AutoGenerateColumns = false;
+            AGREGAR_COLUMN_GRID("product_id", 60, "Product Id.", "product_id", grid_renglones);
+            AGREGAR_COLUMN_GRID("product_name", 180, "Nombre del Producto", "product_name", grid_renglones);
+            AGREGAR_COLUMN_GRID("unidad", 70, "Unidad", "unidad", grid_renglones);
+            AGREGAR_COLUMN_GRID("cantidad", 80, "Cantidad", "cantidad", grid_renglones);
+            AGREGAR_COLUMN_GRID("width", 80, "Width", "width", grid_renglones);
+            AGREGAR_COLUMN_GRID("Lenght", 80, "Largo", "Lenght", grid_renglones);
+            AGREGAR_COLUMN_GRID("msi", 80, "Msi", "msi", grid_renglones);
+            AGREGAR_COLUMN_GRID("Code_Person", 80, "Msi", "Code_Person", grid_renglones);
+
+        }
+
+        private IEnumerable<ItemsDespacho> QueryItemsGrouping()
+        {
+
+            var Query = from p in Lista_Rollos
+                        orderby p.Product_Id descending
+                        orderby p.Width
+                        group p by new { p.Product_Id, p.Width, p.Length } into g
+                        select new ItemsDespacho
+                        {
+                            Product_id = g.First().Product_Id,
+                            Product_name = g.First().Product_Name,
+                            Cantidad = g.Count(),
+                            Width = g.First().Width,
+                            Unidad = "ROLLO",
+                            Lenght = g.First().Length,
+                            Msi = g.First().Msi,
+                            Code_Person = g.First().Code_Person
+                        };
+            return Query.ToList();
         }
 
         private void EstilosGrid()
         {
             grid_detallerc.AutoGenerateColumns = false;
             //grid de rollo detalle rc
+            AGREGAR_COLUMN_GRID("it", 30, "it.", "", grid_detallerc);
             AGREGAR_COLUMN_GRID("UniqueCode", 65, "Codigo Unico", "UniqueCode", grid_detallerc);
             AGREGAR_COLUMN_GRID("product_id", 60, "Product Id.", "product_id", grid_detallerc);
             AGREGAR_COLUMN_GRID("product_name", 180, "Nombre del Producto", "product_name", grid_detallerc);
@@ -112,9 +132,11 @@ namespace Ritrama2025.Forms
             AGREGAR_COLUMN_GRID("width", 50, "Width", "width", grid_detallerc);
             AGREGAR_COLUMN_GRID("Length", 58, "Largo", "Length", grid_detallerc);
             AGREGAR_COLUMN_GRID("msi", 54, "Msi", "msi", grid_detallerc);
-            AGREGAR_COLUMN_GRID("Splice", 50, "Splice", "Splice", grid_detallerc);
+            AGREGAR_COLUMN_GRID("splice", 50, "Splice", "splice", grid_detallerc);
             AGREGAR_COLUMN_GRID("roll_id", 72, "Roll Id.", "roll_id", grid_detallerc);
-            AGREGAR_COLUMN_GRID("code_person", 74, "Codigo Perso.", "code_person", grid_detallerc);
+            AGREGAR_COLUMN_GRID("code_person", 100, "Codigo Perso.", "code_person", grid_detallerc);
+            AGREGAR_COLUMN_GRID("status", 100, "Estatus", "status", grid_detallerc);
+
 
             grid_detallerc.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             grid_detallerc.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -148,7 +170,7 @@ namespace Ritrama2025.Forms
                             string item = data[0];
                             RolloCortado rollo = new()
                             {
-                                UniqueCode = data[0], 
+                                UniqueCode = data[0],
                             };
                             rollos.Add(rollo);
                         }
@@ -185,6 +207,74 @@ namespace Ritrama2025.Forms
         private void BOT_DESPACHAR_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void Btn_buscar_Click(object sender, EventArgs e)
+        {
+            SearchCodeUnique();
+        }
+
+        private void SearchCodeUnique() 
+        {
+            //SI ESTA VACIO NO ENTRA
+            if (txt_codigo.Text == "") return;
+
+            //HACER LA BUSQUEDA DE RC
+            RolloCortado rollo = Servicio.SearchCodigoUnico(txt_codigo.Text);
+
+            //NO ENCONTRADO
+            if (rollo!.UniqueCode == null)
+            {
+                MessageBox.Show("el codigo no fue encontrado...");
+                return;
+            }
+
+            //SI EL ROLLO YA FUE DESPACHADO
+            if (rollo.Disponible == false)
+            {
+                MessageBox.Show("ROLLO FUE DESPACHADO...!");
+                return;
+            }
+
+            //SI YA EXISTE EN LA LISTA
+            if (Lista_Rollos.Any(r => r.UniqueCode == txt_codigo.Text))
+            {
+                MessageBox.Show("rollo ya esta en la lista...");
+                return;
+            }
+            //ACTUALIZAR LA UI.
+            Lista_Rollos.Add(rollo);
+            grid_detallerc.DataSource = null;
+            grid_detallerc.DataSource = Lista_Rollos.ToList();
+            CountRowsGrid();
+
+            //BALNQUEAR TEXTBOX DE BUSQUEDA.
+            txt_codigo.Text = "";
+
+            //Actualizar el grid de group
+            grid_renglones.DataSource = QueryItemsGrouping();
+            Lista_Items = [.. QueryItemsGrouping()];
+        }
+
+
+
+
+        private void CountRowsGrid()
+        {
+            //CALCULAR LOS NUMEROS DE FILAS
+            for (var i = 0; i < grid_detallerc.Rows.Count; i++)
+            {
+                grid_detallerc.Rows[i].Cells[0].Value = i + 1;
+            }
+
+        }
+
+        private void txt_codigo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) 
+            {
+                SearchCodeUnique();
+            }
         }
     }
 }

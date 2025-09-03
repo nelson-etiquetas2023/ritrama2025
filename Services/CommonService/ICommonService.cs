@@ -19,8 +19,8 @@ namespace Ritrama2025.Services.CommonService
         void SaveOperatorEntity(string Id, string Name);
         void DeleteOperatorEntity(string Id);
         void SaveCustomerEntity(string Id, string Name);
-
         bool DocumentCheckWriteOC(DocumentCheckOC doc);
         DocumentCheckOC DocumentCheckReadOC(string oc);
+        RolloCortado SearchCodigoUnico(string id);
     }
 }

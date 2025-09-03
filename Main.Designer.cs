@@ -273,6 +273,7 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.BackColor = SystemColors.ScrollBar;
+            splitContainer1.Panel2.Paint += splitContainer1_Panel2_Paint;
             splitContainer1.Size = new Size(1058, 924);
             splitContainer1.SplitterDistance = 854;
             splitContainer1.TabIndex = 2;
