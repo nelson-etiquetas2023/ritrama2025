@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-using DocumentFormat.OpenXml.Wordprocessing;
-using Ritrama2025.Forms.Otros;
+﻿using Ritrama2025.Forms.Otros;
 using Ritrama2025.Models;
 using Ritrama2025.Services.CommonService;
 using Ritrama2025.Services.ExportData;
@@ -178,9 +176,11 @@ namespace Ritrama2025.Forms
             CommonService.ADD_COLUMN_GRID("roll_id", 100, "Rollid", "roll_id", GridMaster);
             CommonService.ADD_COLUMN_GRID("width", 80, "Width", "width", GridMaster);
             CommonService.ADD_COLUMN_GRID("length", 80, "Length", "lenght", GridMaster);
+            CommonService.ADD_COLUMN_GRID("msi", 80, "Msi", "msi", GridMaster);
             CommonService.ADD_COLUMN_GRID("length_consumido", 80, "Consumido", "largo_consumido", GridMaster);
             CommonService.ADD_COLUMN_GRID("length_restante", 80, "Restante", "largo_restante", GridMaster);
             CommonService.ADD_COLUMN_GRID("estado", 80, "Estado", "estado", GridMaster);
+            CommonService.ADD_COLUMN_GRID("core", 80, "Core", "core", GridMaster);
             CommonService.ADD_COLUMN_GRID("fecha_pro", 80, "Produccion", "fecha_pro", GridMaster);
             CommonService.ADD_COLUMN_GRID("fecha", 80, "Recep.", "fecha_recep", GridMaster);
             CommonService.ADD_COLUMN_GRID("splice", 80, "Splice", "splice", GridMaster);
@@ -652,7 +652,7 @@ namespace Ritrama2025.Forms
             {
                 //obtener el valor de la columna disponible.
                 bool dispo = Convert.ToBoolean(GridRollosCortados.Rows[e.RowIndex].Cells["disponible"].Value);
-                
+
                 if (dispo)
                 {
                     e.Value = Properties.Resources.products_dispo;
@@ -670,6 +670,48 @@ namespace Ritrama2025.Forms
         private void GridRollosCortados_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void Bot_printLabel_Click(object sender, EventArgs e)
+        {
+            if (GridMaster.SelectedRows.Count > 0) 
+            {
+                DataGridViewRow row = GridMaster.SelectedRows[0];
+
+                var productid = row.Cells["product_id"].Value ?? string.Empty;
+                var productname = row.Cells["product_name"].Value ?? string.Empty;
+                var rollid = row.Cells["roll_id"].Value ?? 0;
+                var widthx = row.Cells["width"].Value ?? 0;
+                var length = row.Cells["length"].Value ?? 0;
+                var fecha = DateTime.Today.ToShortDateString();
+                var len_consumido = row.Cells["Length_Consumido"].Value ?? 0;
+                var len_restante = row.Cells["Length_Restante"].Value ?? 0;
+                var core = row.Cells["core"].Value ?? 0;
+                var msi = row.Cells["msi"].Value ?? 0;
+                var splice = row.Cells["splice"].Value ?? 0;
+                var state = row.Cells["estado"].Value ?? 0;
+                var fecha_producc = row.Cells["fecha_pro"].Value ?? 0;
+
+                ProductMAP master = new()
+                {
+                    Product_Id = productid.ToString()!,
+                    Product_Name = productname.ToString()!,
+                    Rollid = rollid.ToString()!,
+                    Width = Convert.ToDouble(widthx),
+                    Length = Convert.ToDouble(length),
+                    Length_Consumido = Convert.ToDouble(len_consumido),
+                    Length_Restante = Convert.ToDouble(len_restante),
+                    Core = Convert.ToInt16(core),
+                    Msi = msi is null ? 0 : Convert.ToDouble(msi),
+                    Splice = Convert.ToInt16(splice),
+                    Fecha_Impresion = fecha,
+                    Fecha_Fabricacion =  Convert.ToDateTime(fecha_producc),
+                    Estado = state.ToString()!
+
+                };
+
+                ExportDataService.ExportTxtFormatMasterRePrintLabel(master,false);
+            }
         }
     }
     public class ColumnaType

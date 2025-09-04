@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using Ritrama2025.Models;
 using System.Data;
 using System.Diagnostics;
 using System.Reflection;
@@ -113,6 +114,38 @@ namespace Ritrama2025.Services.ExportData
             }
             return true;
         }
+
+        public bool ExportTxtFormatMasterRePrintLabel(ProductMAP master,bool openNotePad)
+        {
+            string carpetaDestino = Path.Combine(Application.StartupPath, "Archivos");
+
+            if (!Directory.Exists(carpetaDestino)) 
+            {
+                Directory.CreateDirectory(carpetaDestino);
+            }
+
+            string LabelPath = Path.Combine(carpetaDestino, "FormatDataMaster.txt");
+
+            using (StreamWriter sr = new(LabelPath))
+            {
+                string linea = $"{master.Product_Id},{master.Product_Name},{master.Rollid},{master.Width},{master.Length},{master.Msi},{master.Length_Consumido},{master.Length_Restante},{master.Estado},{master.Core},{master.Splice},{master.Fecha_Impresion},{master.Fecha_Fabricacion}";
+                sr.WriteLine(linea);
+            }
+
+            if (openNotePad)
+            {
+                //abri el archivo con el programa predeterminado.
+                var psi = new ProcessStartInfo
+                {
+                    FileName = LabelPath,
+                    UseShellExecute = true
+                };
+                Process.Start(psi);
+            }
+
+            return true;
+        }
+
         public bool ExportTxtFormatRollosCortados(DataRow[] rollos,bool solorc,string? fecha_produccion, string? fecha_ingreso,bool openNotePad)
         {
             try
@@ -132,6 +165,7 @@ namespace Ritrama2025.Services.ExportData
                             string codeperson = item["unique_code"].ToString()!.Trim();
                             string linea = $"{item["unique_code"]}"; 
                             sr.WriteLine(linea);
+
                         }
                         else 
                         {

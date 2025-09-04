@@ -33,6 +33,7 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             TabPages_Inventario = new TabControl();
             tabPage1 = new TabPage();
+            bot_printLabel = new Button();
             pictureBox3 = new PictureBox();
             label11 = new Label();
             btn_limpiar_filtros = new Button();
@@ -139,6 +140,7 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(bot_printLabel);
             tabPage1.Controls.Add(pictureBox3);
             tabPage1.Controls.Add(label11);
             tabPage1.Controls.Add(btn_limpiar_filtros);
@@ -158,6 +160,19 @@
             tabPage1.Text = "Master";
             tabPage1.UseVisualStyleBackColor = true;
             tabPage1.Click += TabPage1_Click;
+            // 
+            // bot_printLabel
+            // 
+            bot_printLabel.Font = new Font("Roboto", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            bot_printLabel.Image = (Image)resources.GetObject("bot_printLabel.Image");
+            bot_printLabel.Location = new Point(1026, 8);
+            bot_printLabel.Name = "bot_printLabel";
+            bot_printLabel.Size = new Size(166, 56);
+            bot_printLabel.TabIndex = 16;
+            bot_printLabel.Text = "Imprimir Etiqueta";
+            bot_printLabel.TextImageRelation = TextImageRelation.ImageBeforeText;
+            bot_printLabel.UseVisualStyleBackColor = true;
+            bot_printLabel.Click += Bot_printLabel_Click;
             // 
             // pictureBox3
             // 
@@ -203,8 +218,9 @@
             // 
             // btn_DetailsConsumos
             // 
+            btn_DetailsConsumos.Font = new Font("Roboto", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_DetailsConsumos.Image = (Image)resources.GetObject("btn_DetailsConsumos.Image");
-            btn_DetailsConsumos.Location = new Point(1067, 8);
+            btn_DetailsConsumos.Location = new Point(854, 8);
             btn_DetailsConsumos.Name = "btn_DetailsConsumos";
             btn_DetailsConsumos.Size = new Size(166, 56);
             btn_DetailsConsumos.TabIndex = 11;
@@ -1030,5 +1046,6 @@
         private PictureBox pictureBox4;
         private PictureBox pictureBox5;
         private ImageList imageList1;
+        private Button bot_printLabel;
     }
 }
