@@ -33,6 +33,9 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             TabPages_Inventario = new TabControl();
             tabPage1 = new TabPage();
+            panel_loading = new Panel();
+            text_loadingindicator = new Label();
+            pictureBox2 = new PictureBox();
             bot_printLabel = new Button();
             pictureBox3 = new PictureBox();
             label11 = new Label();
@@ -89,9 +92,6 @@
             txt_file_name = new TextBox();
             tabPage6 = new TabPage();
             imageList1 = new ImageList(components);
-            panel_loading = new Panel();
-            text_loadingindicator = new Label();
-            pictureBox2 = new PictureBox();
             panel1 = new Panel();
             pictureBox5 = new PictureBox();
             pictureBox1 = new PictureBox();
@@ -103,6 +103,8 @@
             Bot_Txt = new ToolStripButton();
             TabPages_Inventario.SuspendLayout();
             tabPage1.SuspendLayout();
+            panel_loading.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)GridMaster).BeginInit();
@@ -113,8 +115,6 @@
             tabPage5.SuspendLayout();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
-            panel_loading.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -134,12 +134,13 @@
             TabPages_Inventario.Location = new Point(12, 129);
             TabPages_Inventario.Name = "TabPages_Inventario";
             TabPages_Inventario.SelectedIndex = 0;
-            TabPages_Inventario.Size = new Size(1247, 693);
+            TabPages_Inventario.Size = new Size(1018, 693);
             TabPages_Inventario.TabIndex = 0;
             TabPages_Inventario.SelectedIndexChanged += TabControl1_SelectedIndexChanged;
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(panel_loading);
             tabPage1.Controls.Add(bot_printLabel);
             tabPage1.Controls.Add(pictureBox3);
             tabPage1.Controls.Add(label11);
@@ -155,19 +156,52 @@
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1239, 665);
+            tabPage1.Size = new Size(1010, 665);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Master";
             tabPage1.UseVisualStyleBackColor = true;
             tabPage1.Click += TabPage1_Click;
             // 
+            // panel_loading
+            // 
+            panel_loading.BackColor = SystemColors.Window;
+            panel_loading.Controls.Add(text_loadingindicator);
+            panel_loading.Controls.Add(pictureBox2);
+            panel_loading.Location = new Point(399, 223);
+            panel_loading.Name = "panel_loading";
+            panel_loading.Size = new Size(200, 87);
+            panel_loading.TabIndex = 23;
+            panel_loading.Visible = false;
+            // 
+            // text_loadingindicator
+            // 
+            text_loadingindicator.AutoSize = true;
+            text_loadingindicator.Font = new Font("Russo One", 11.9999981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            text_loadingindicator.Location = new Point(90, 37);
+            text_loadingindicator.Name = "text_loadingindicator";
+            text_loadingindicator.Size = new Size(96, 19);
+            text_loadingindicator.TabIndex = 1;
+            text_loadingindicator.Text = "Loading...";
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.BackColor = SystemColors.Control;
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(13, 12);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(64, 64);
+            pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
+            pictureBox2.TabIndex = 0;
+            pictureBox2.TabStop = false;
+            pictureBox2.WaitOnLoad = true;
+            // 
             // bot_printLabel
             // 
             bot_printLabel.Font = new Font("Roboto", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             bot_printLabel.Image = (Image)resources.GetObject("bot_printLabel.Image");
-            bot_printLabel.Location = new Point(1026, 8);
+            bot_printLabel.Location = new Point(871, 6);
             bot_printLabel.Name = "bot_printLabel";
-            bot_printLabel.Size = new Size(166, 56);
+            bot_printLabel.Size = new Size(132, 56);
             bot_printLabel.TabIndex = 16;
             bot_printLabel.Text = "Imprimir Etiqueta";
             bot_printLabel.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -177,7 +211,7 @@
             // pictureBox3
             // 
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(983, 498);
+            pictureBox3.Location = new Point(711, 486);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(37, 34);
             pictureBox3.TabIndex = 15;
@@ -197,7 +231,7 @@
             // btn_limpiar_filtros
             // 
             btn_limpiar_filtros.Image = (Image)resources.GetObject("btn_limpiar_filtros.Image");
-            btn_limpiar_filtros.Location = new Point(722, 21);
+            btn_limpiar_filtros.Location = new Point(632, 20);
             btn_limpiar_filtros.Name = "btn_limpiar_filtros";
             btn_limpiar_filtros.Size = new Size(95, 40);
             btn_limpiar_filtros.TabIndex = 13;
@@ -210,7 +244,7 @@
             // 
             COUNT_ROWS.AutoSize = true;
             COUNT_ROWS.Font = new Font("Roboto Medium", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            COUNT_ROWS.Location = new Point(1026, 511);
+            COUNT_ROWS.Location = new Point(768, 501);
             COUNT_ROWS.Name = "COUNT_ROWS";
             COUNT_ROWS.Size = new Size(184, 19);
             COUNT_ROWS.TabIndex = 12;
@@ -220,9 +254,9 @@
             // 
             btn_DetailsConsumos.Font = new Font("Roboto", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_DetailsConsumos.Image = (Image)resources.GetObject("btn_DetailsConsumos.Image");
-            btn_DetailsConsumos.Location = new Point(854, 8);
+            btn_DetailsConsumos.Location = new Point(733, 4);
             btn_DetailsConsumos.Name = "btn_DetailsConsumos";
-            btn_DetailsConsumos.Size = new Size(166, 56);
+            btn_DetailsConsumos.Size = new Size(132, 56);
             btn_DetailsConsumos.TabIndex = 11;
             btn_DetailsConsumos.Text = "Detalle Cosumos";
             btn_DetailsConsumos.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -304,15 +338,15 @@
             GridMaster.Name = "GridMaster";
             GridMaster.ReadOnly = true;
             GridMaster.RowHeadersWidth = 33;
-            GridMaster.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            GridMaster.Size = new Size(1226, 410);
+            GridMaster.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            GridMaster.Size = new Size(996, 410);
             GridMaster.TabIndex = 3;
             GridMaster.CellFormatting += GridMaster_CellFormatting;
             // 
             // btn_buscar
             // 
             btn_buscar.Image = (Image)resources.GetObject("btn_buscar.Image");
-            btn_buscar.Location = new Point(621, 21);
+            btn_buscar.Location = new Point(531, 20);
             btn_buscar.Name = "btn_buscar";
             btn_buscar.Size = new Size(95, 40);
             btn_buscar.TabIndex = 2;
@@ -334,7 +368,7 @@
             // 
             txt_buscar.Location = new Point(7, 37);
             txt_buscar.Name = "txt_buscar";
-            txt_buscar.Size = new Size(608, 23);
+            txt_buscar.Size = new Size(521, 23);
             txt_buscar.TabIndex = 0;
             txt_buscar.TextChanged += Txt_buscar_TextChanged;
             // 
@@ -344,7 +378,7 @@
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1239, 665);
+            tabPage2.Size = new Size(1010, 665);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Graphics";
             tabPage2.UseVisualStyleBackColor = true;
@@ -355,7 +389,7 @@
             tabPage3.Location = new Point(4, 24);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(1239, 665);
+            tabPage3.Size = new Size(1010, 665);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Hojas";
             tabPage3.UseVisualStyleBackColor = true;
@@ -375,7 +409,7 @@
             Page_RolloCortado.Location = new Point(4, 24);
             Page_RolloCortado.Name = "Page_RolloCortado";
             Page_RolloCortado.Padding = new Padding(3);
-            Page_RolloCortado.Size = new Size(1239, 665);
+            Page_RolloCortado.Size = new Size(1010, 665);
             Page_RolloCortado.TabIndex = 3;
             Page_RolloCortado.Text = "Rollos Cortados";
             Page_RolloCortado.UseVisualStyleBackColor = true;
@@ -384,7 +418,7 @@
             // pictureBox4
             // 
             pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
-            pictureBox4.Location = new Point(980, 469);
+            pictureBox4.Location = new Point(745, 466);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(37, 34);
             pictureBox4.TabIndex = 24;
@@ -394,7 +428,7 @@
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Roboto Condensed", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label12.Location = new Point(341, 11);
+            label12.Location = new Point(240, 11);
             label12.Name = "label12";
             label12.Size = new Size(427, 25);
             label12.TabIndex = 23;
@@ -404,7 +438,7 @@
             // 
             COUNTER_ROLLOS.AutoSize = true;
             COUNTER_ROLLOS.Font = new Font("Roboto Medium", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            COUNTER_ROLLOS.Location = new Point(1021, 484);
+            COUNTER_ROLLOS.Location = new Point(788, 481);
             COUNTER_ROLLOS.Name = "COUNTER_ROLLOS";
             COUNTER_ROLLOS.Size = new Size(211, 19);
             COUNTER_ROLLOS.TabIndex = 22;
@@ -512,9 +546,8 @@
             GridRollosCortados.ReadOnly = true;
             GridRollosCortados.RowHeadersWidth = 34;
             GridRollosCortados.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            GridRollosCortados.Size = new Size(1227, 393);
+            GridRollosCortados.Size = new Size(996, 393);
             GridRollosCortados.TabIndex = 18;
-            GridRollosCortados.CellContentClick += GridRollosCortados_CellContentClick;
             GridRollosCortados.CellFormatting += GridRollosCortados_CellFormatting;
             // 
             // bto_limpiar_cor
@@ -532,9 +565,9 @@
             // bot_buscar_cor
             // 
             bot_buscar_cor.Image = (Image)resources.GetObject("bot_buscar_cor.Image");
-            bot_buscar_cor.Location = new Point(961, 21);
+            bot_buscar_cor.Location = new Point(774, 21);
             bot_buscar_cor.Name = "bot_buscar_cor";
-            bot_buscar_cor.Size = new Size(95, 40);
+            bot_buscar_cor.Size = new Size(75, 40);
             bot_buscar_cor.TabIndex = 16;
             bot_buscar_cor.Text = "Buscar";
             bot_buscar_cor.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -554,7 +587,7 @@
             // 
             txt_buscar_cor.Location = new Point(6, 39);
             txt_buscar_cor.Name = "txt_buscar_cor";
-            txt_buscar_cor.Size = new Size(949, 23);
+            txt_buscar_cor.Size = new Size(762, 23);
             txt_buscar_cor.TabIndex = 14;
             // 
             // tabPage5
@@ -564,9 +597,9 @@
             tabPage5.Location = new Point(4, 24);
             tabPage5.Name = "tabPage5";
             tabPage5.Padding = new Padding(3);
-            tabPage5.Size = new Size(1239, 665);
+            tabPage5.Size = new Size(1010, 665);
             tabPage5.TabIndex = 4;
-            tabPage5.Text = "Export Excel";
+            tabPage5.Text = "Cargar Inventario";
             tabPage5.UseVisualStyleBackColor = true;
             // 
             // groupBox1
@@ -782,7 +815,7 @@
             tabPage6.Location = new Point(4, 24);
             tabPage6.Name = "tabPage6";
             tabPage6.Padding = new Padding(3);
-            tabPage6.Size = new Size(1239, 665);
+            tabPage6.Size = new Size(1010, 665);
             tabPage6.TabIndex = 5;
             tabPage6.Text = "Notificaciones";
             tabPage6.UseVisualStyleBackColor = true;
@@ -804,39 +837,6 @@
             imageList1.Images.SetKeyName(9, "ordenDocument_16.png");
             imageList1.Images.SetKeyName(10, "CloseDoc.ico");
             // 
-            // panel_loading
-            // 
-            panel_loading.BackColor = SystemColors.Window;
-            panel_loading.Controls.Add(text_loadingindicator);
-            panel_loading.Controls.Add(pictureBox2);
-            panel_loading.Location = new Point(532, 363);
-            panel_loading.Name = "panel_loading";
-            panel_loading.Size = new Size(200, 87);
-            panel_loading.TabIndex = 23;
-            panel_loading.Visible = false;
-            // 
-            // text_loadingindicator
-            // 
-            text_loadingindicator.AutoSize = true;
-            text_loadingindicator.Font = new Font("Russo One", 11.9999981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            text_loadingindicator.Location = new Point(90, 37);
-            text_loadingindicator.Name = "text_loadingindicator";
-            text_loadingindicator.Size = new Size(96, 19);
-            text_loadingindicator.TabIndex = 1;
-            text_loadingindicator.Text = "Loading...";
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.BackColor = SystemColors.Control;
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(13, 12);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(64, 64);
-            pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
-            pictureBox2.TabIndex = 0;
-            pictureBox2.TabStop = false;
-            pictureBox2.WaitOnLoad = true;
-            // 
             // panel1
             // 
             panel1.BackColor = SystemColors.ScrollBar;
@@ -846,7 +846,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1271, 93);
+            panel1.Size = new Size(1030, 93);
             panel1.TabIndex = 1;
             // 
             // pictureBox5
@@ -885,7 +885,7 @@
             toolStrip1.Location = new Point(0, 93);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.RenderMode = ToolStripRenderMode.Professional;
-            toolStrip1.Size = new Size(1271, 33);
+            toolStrip1.Size = new Size(1030, 33);
             toolStrip1.TabIndex = 2;
             toolStrip1.Text = "toolStrip1";
             toolStrip1.ItemClicked += ToolStrip1_ItemClicked;
@@ -934,8 +934,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 14F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1271, 834);
-            Controls.Add(panel_loading);
+            ClientSize = new Size(1030, 834);
             Controls.Add(toolStrip1);
             Controls.Add(panel1);
             Controls.Add(TabPages_Inventario);
@@ -947,6 +946,9 @@
             TabPages_Inventario.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
+            panel_loading.ResumeLayout(false);
+            panel_loading.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
@@ -962,9 +964,6 @@
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
-            panel_loading.ResumeLayout(false);
-            panel_loading.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();

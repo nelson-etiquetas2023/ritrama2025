@@ -395,6 +395,7 @@
             btn_cancel.Text = "Cancelar";
             btn_cancel.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_cancel.UseVisualStyleBackColor = true;
+            btn_cancel.Click += Btn_cancel_Click;
             // 
             // FrmProductsInsert
             // 

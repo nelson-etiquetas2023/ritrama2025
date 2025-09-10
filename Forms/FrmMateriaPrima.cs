@@ -3,6 +3,7 @@ using Ritrama2025.Forms.Buscadores;
 using Ritrama2025.Forms.Otros;
 using Ritrama2025.Forms.Seleccion;
 using Ritrama2025.Models;
+using Ritrama2025.Services.CommonData;
 using Ritrama2025.Services.ExportData;
 using Ritrama2025.Services.MateriaPrima;
 using Ritrama2025.Services.ReportsService.ReportsService;
@@ -17,7 +18,8 @@ namespace Ritrama2025.Forms
     {
         public readonly IServiceMateriaPrima Services;
         public readonly IExportDataService ExportDataService;
-        public readonly IReportsService ReportService; 
+        public readonly IReportsService ReportService;
+        public readonly IServiceCommonData ServiceCommonData;
 
         public DataSet Ds = new();
         readonly BindingSource Bs = [];
@@ -26,12 +28,13 @@ namespace Ritrama2025.Forms
         private DataRowView ChildsRows = null!;
         string EditMode = "READ";
 
-        public FrmMateriaPrima(IServiceMateriaPrima Services, IExportDataService exportDataService,IReportsService reportService)
+        public FrmMateriaPrima(IServiceMateriaPrima Services, IExportDataService exportDataService,IReportsService reportService, IServiceCommonData serviceCommonData)
         {
             InitializeComponent();
             this.Services = Services;
             this.ExportDataService = exportDataService;
             this.ReportService = reportService;
+            this.ServiceCommonData = serviceCommonData;
         }
 
         private void FrmMateriaPrima_Load(object sender, EventArgs e)
@@ -260,37 +263,56 @@ namespace Ritrama2025.Forms
 
         private void Btn_addRows_Click(object sender, EventArgs e)
         {
-            FrmProductsInsert frmInsertRows = new()
+        
+            FrmProductsInsert frmInsertRows = new(ServiceCommonData)
             {
                 DtItems = Ds.Tables["DtProducts"]!,
                 Titulo = "Producto"
             };
             frmInsertRows.ShowDialog();
-            //Insertar el row en el GridItems.
-            if (frmInsertRows.Producto != null)
+
+            string rollid_form = frmInsertRows.Producto.Rollid;
+            bool IsNotcreate = false;
+
+            foreach (DataGridViewRow row in GridItems.Rows) 
             {
-                ChildsRows = (DataRowView)BsDetalle.AddNew()!;
-                ChildsRows.BeginEdit();
-                ChildsRows["numero"] = txt_numeroOrden.Text;
-                ChildsRows["product_id"] = frmInsertRows.Producto.Product_Id;
-                ChildsRows["product_name"] = frmInsertRows.Producto.Product_Name;
-                ChildsRows["type"] = frmInsertRows.Producto.Product_Type;
-                ChildsRows["width"] = frmInsertRows.Producto.Width;
-                ChildsRows["length"] = frmInsertRows.Producto.Length;
-                ChildsRows["msi"] = frmInsertRows.Producto.Msi;
-                ChildsRows["rollid"] = frmInsertRows.Producto.Rollid;
-                ChildsRows["splice"] = frmInsertRows.Producto.Splice;
-                ChildsRows["core"] = frmInsertRows.Producto.Core;
-                ChildsRows["ubicacion"] = frmInsertRows.Producto.Ubic;
-                ChildsRows["cant_pedido"] = frmInsertRows.Producto.Cant;
-                ChildsRows["cant_real"] = 0;
+                var rollid_grid = row.Cells["rollid"].Value?.ToString();
 
+                if (rollid_grid == rollid_form)
+                {
+                    IsNotcreate = true;
+                    break;
+                }
+            }
 
-
-                ChildsRows.Row.SetParentRow(((DataRowView)Bs.Current!).Row, Ds.Relations["FK_MASTER_DETAILS"]);
-                ChildsRows.EndEdit();
-                ContarFilas();
-
+            if (IsNotcreate)
+            {
+                MessageBox.Show("El roll-id ya esta en la lista, no se va ha crear...");
+            }
+            else 
+            {
+                //Insertar el row en el GridItems.
+                if (frmInsertRows.Producto != null)
+                {
+                    ChildsRows = (DataRowView)BsDetalle.AddNew()!;
+                    ChildsRows.BeginEdit();
+                    ChildsRows["numero"] = txt_numeroOrden.Text;
+                    ChildsRows["product_id"] = frmInsertRows.Producto.Product_Id;
+                    ChildsRows["product_name"] = frmInsertRows.Producto.Product_Name;
+                    ChildsRows["type"] = frmInsertRows.Producto.Product_Type;
+                    ChildsRows["width"] = frmInsertRows.Producto.Width;
+                    ChildsRows["length"] = frmInsertRows.Producto.Length;
+                    ChildsRows["msi"] = frmInsertRows.Producto.Msi;
+                    ChildsRows["rollid"] = frmInsertRows.Producto.Rollid;
+                    ChildsRows["splice"] = frmInsertRows.Producto.Splice;
+                    ChildsRows["core"] = frmInsertRows.Producto.Core;
+                    ChildsRows["ubicacion"] = frmInsertRows.Producto.Ubic;
+                    ChildsRows["cant_pedido"] = frmInsertRows.Producto.Cant;
+                    ChildsRows["cant_real"] = 0;
+                    ChildsRows.Row.SetParentRow(((DataRowView)Bs.Current!).Row, Ds.Relations["FK_MASTER_DETAILS"]);
+                    ChildsRows.EndEdit();
+                    ContarFilas();
+                }
             }
         }
 
@@ -302,6 +324,13 @@ namespace Ritrama2025.Forms
 
         private void Btn_save_Click(object sender, EventArgs e)
         {
+            //validar los roll-id
+            foreach (DataGridViewRow row in GridItems.Rows)
+            {
+                var rollid_grid = row.Cells["rollid"].Value?.ToString();
+                if (!ServiceCommonData.VerificarRollIdNoRepeat(rollid_grid!)) return;
+            }
+
             if (txt_OrdenCompra.Text == "")
             {
                 MessageBox.Show("Introduzca un valor para la orden de compra...");
@@ -342,13 +371,16 @@ namespace Ritrama2025.Forms
                 MessageBox.Show("Debe registras algunos productos para poder grabar la orden...");
                 return;
             }
+            
+
+
             if (EditMode == "ADDNEW")
             {
                 SAVE_NEW();
             }
             else if (EditMode == "UPDATE")
             {
-                SAVE_UPDATE();
+                //SAVE_UPDATE();
             }
         }
 
@@ -376,11 +408,7 @@ namespace Ritrama2025.Forms
             btn_ExportDoc.Enabled = true;
             RefreshDocument();
         }
-        private void SAVE_UPDATE()
-        {
-
-        }
-
+   
         private OrdenMP CREATE_ORDEN_OBJECT()
         {
             //Header.
@@ -421,6 +449,7 @@ namespace Ritrama2025.Forms
                 var Ubicacion = Item.Cells["ubicacion"].Value!.ToString()!;
                 var Cantidad_Pedido = Convert.ToInt32(Item.Cells["cant_pedido"].Value);
                 var Cantidad_Real = Convert.ToInt32(Item.Cells["cant_real"].Value);
+
                 Orden.Items.Add(new OrdenDetailsMP
                 {
                     Numero = txt_numeroOrden.Text,
@@ -435,14 +464,15 @@ namespace Ritrama2025.Forms
                     Core = Core,
                     Ubicacion = Ubicacion,
                     Cantidad_Pedido = Cantidad_Pedido,
-                    Cantidad_Real = Cantidad_Real
+                    Cantidad_Real = Cantidad_Real,
+                    Estado ="Completo"
                 });
             }
 
             return Orden;
         }
 
-        private void btn_cancel_Click(object sender, EventArgs e)
+        private void Btn_cancel_Click(object sender, EventArgs e)
         {
             DataRowView FilaActual;
             FilaActual = (DataRowView)Bs.Current!;
@@ -470,7 +500,7 @@ namespace Ritrama2025.Forms
             RefreshDocument();
         }
 
-        private void btn_template_Click(object sender, EventArgs e)
+        private void Btn_template_Click(object sender, EventArgs e)
         {
             using var workbook = new XLWorkbook();
             var worksheet = workbook.Worksheets.Add("TemplateMateriaPrima");
@@ -507,7 +537,7 @@ namespace Ritrama2025.Forms
             }
         }
 
-        private void btn_LoadRows_Click(object sender, EventArgs e)
+        private void Btn_LoadRows_Click(object sender, EventArgs e)
         {
             string filePath = Path.Combine(Environment.CurrentDirectory, "Template.xlsx");
             using var workbook = new XLWorkbook(filePath);
@@ -542,9 +572,22 @@ namespace Ritrama2025.Forms
                 GridItems.CurrentCell = GridItems.Rows[0].Cells[0]; // Mueve el foco
                 ContarFilas();
             }
+
+        
         }
 
-        private void btn_OrdenBuscar_Click(object sender, EventArgs e)
+        private void ValidarRollIdNoRepetidos() 
+        {
+            //verificar los rollid.
+           
+        }
+
+
+
+
+
+
+        private void Btn_OrdenBuscar_Click(object sender, EventArgs e)
         {
             Frm_oneparameter frmbuscar = new()
             {
@@ -569,7 +612,7 @@ namespace Ritrama2025.Forms
 
         }
 
-        private void btn_CloseDoc_Click(object sender, EventArgs e)
+        private void Btn_CloseDoc_Click(object sender, EventArgs e)
         {
             CerrarDocumentoOrder();
         }
@@ -609,12 +652,12 @@ namespace Ritrama2025.Forms
             }
         }
 
-        private void toolStripButton3_Click(object sender, EventArgs e)
+        private void ToolStripButton3_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void btn_AnularDoc_Click(object sender, EventArgs e)
+        private void Btn_AnularDoc_Click(object sender, EventArgs e)
         {
             if (chk_anulado.Checked)
             {
@@ -644,34 +687,36 @@ namespace Ritrama2025.Forms
             }
 
         }
-        private void chk_anulado_Click(object sender, EventArgs e)
+        private void Chk_anulado_Click(object sender, EventArgs e)
         {
             // Cancelar cambio manualmente
             chk_anulado.Checked = !chk_anulado.Checked;
         }
 
-        private void chk_anulado_KeyDown(object sender, KeyEventArgs e)
+        private void Chk_anulado_KeyDown(object sender, KeyEventArgs e)
         {
             // Prevenir cambio con teclado
             e.Handled = true;
         }
 
-        private void chk_DocumentClose_Click(object sender, EventArgs e)
+        private void Chk_DocumentClose_Click(object sender, EventArgs e)
         {
             // Cancelar cambio manualmente
             chk_DocumentClose.Checked = !chk_DocumentClose.Checked;
         }
 
-        private void chk_DocumentClose_KeyDown(object sender, KeyEventArgs e)
+        private void Chk_DocumentClose_KeyDown(object sender, KeyEventArgs e)
         {
             // Prevenir cambio con teclado
             e.Handled = true;
         }
 
-        private void btn_SearchDoc_Click(object sender, EventArgs e)
+        private void Btn_SearchDoc_Click(object sender, EventArgs e)
         {
-            FrmBuscador_OrdenesMP frm_busqueda = new();
-            frm_busqueda.DtItems = Ds.Tables["Dtmateria"]!;
+            FrmBuscador_OrdenesMP frm_busqueda = new()
+            {
+                DtItems = Ds.Tables["Dtmateria"]!
+            };
             frm_busqueda.ShowDialog();
             if (frm_busqueda.Orden != null)
             {
@@ -689,7 +734,7 @@ namespace Ritrama2025.Forms
             }
         }
 
-        private void btn_deleteRows_Click(object sender, EventArgs e)
+        private void Btn_deleteRows_Click(object sender, EventArgs e)
         {
             if (GridItems.CurrentRow == null)
             {
@@ -698,7 +743,8 @@ namespace Ritrama2025.Forms
                 return;
             }
             var row = (DataRowView)GridItems.CurrentRow.DataBoundItem!;
-            if (MessageBox.Show($"Eliminar el producto con Id = {row["product_id"]}?", "Confirmar Borrado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+
+            if (MessageBox.Show($"Eliminar el producto con Id = {row["product_id"]} - Y roll-id ={row["rollid"]}", "Confirmar Borrado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
 
             row.Delete();
             Bs.EndEdit();
@@ -706,7 +752,7 @@ namespace Ritrama2025.Forms
 
         }
 
-        private void btn_ExportDoc_Click(object sender, EventArgs e)
+        private void Btn_ExportDoc_Click(object sender, EventArgs e)
         {
             List<OrdenDetailsMP> Ordenes = CREATE_LIST_PRODUCTS();
             ExportDataService.ExportToExcel<OrdenDetailsMP>(Ordenes, "ordenes_mp.xlsx");
@@ -737,7 +783,7 @@ namespace Ritrama2025.Forms
             return Ordenes;
         }
 
-        private void btn_printDoc_Click(object sender, EventArgs e)
+        private void Btn_printDoc_Click(object sender, EventArgs e)
         {
             ReportService.Reporte_Orden_MatPrima(txt_numeroOrden.Text,this,"RptImportFormat.rdlc","ORDEN DE RECEPCION DE MATERIA PRIMA");
         }

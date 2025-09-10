@@ -1,6 +1,7 @@
 ﻿using Ritrama2025.Models;
-using System.Data;
+using Ritrama2025.Services.CommonData;
 using System.ComponentModel;
+using System.Data;
 
 namespace Ritrama2025.Forms.Seleccion
 {
@@ -15,9 +16,14 @@ namespace Ritrama2025.Forms.Seleccion
         public ProductMAP Producto { get; set; } = new ProductMAP();
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string TypeProduct { get; set; } = "";
-        public FrmProductsInsert()
+        
+        readonly IServiceCommonData ServiceData;
+
+        public FrmProductsInsert(IServiceCommonData serviceData)
         {
             InitializeComponent();
+            
+            this.ServiceData = serviceData;
         }
 
         private void Btn_buscar_Click(object sender, EventArgs e)
@@ -75,7 +81,7 @@ namespace Ritrama2025.Forms.Seleccion
             txt_splice.Text = "0";
             txt_core.Text = "0";
             txt_ubic.Text = "SU";
-            txt_rollid.Text = "0";  
+            txt_rollid.Text = "0";
         }
         private void CALCULAR_MSI()
         {
@@ -100,6 +106,34 @@ namespace Ritrama2025.Forms.Seleccion
 
         private void Btn_guardar_Click(object sender, EventArgs e)
         {
+            if (txt_productid.Text == "")
+            {
+                MessageBox.Show("Introduzca el codigo de producto...");
+                return;
+            }
+            if (txt_width.Text == "0" && txt_width.Text == "")
+            {
+                MessageBox.Show("Introduzca el ancho del producto");
+                return;
+            }
+            if (txt_lenght.Text == "0")
+            {
+                MessageBox.Show("Introduzca el largo del producto");
+                return;
+            }
+            if (txt_rollid.Text == "0")
+            {
+                MessageBox.Show("Introduzca el rollid del producto");
+                return;
+            }
+
+            //verificar que l roll-id no exista.
+            if (!ServiceData.VerificarRollIdNoRepeat(txt_rollid.Text)) return;
+
+
+
+
+            //genero el producto.
             Producto = new ProductMAP
             {
                 Product_Id = txt_productid.Text,
@@ -114,6 +148,11 @@ namespace Ritrama2025.Forms.Seleccion
                 Cant = Convert.ToInt32(txt_cant.Text),
                 Ubic = txt_ubic.Text,
             };
+            this.Close();
+        }
+
+        private void Btn_cancel_Click(object sender, EventArgs e)
+        {
             this.Close();
         }
     }

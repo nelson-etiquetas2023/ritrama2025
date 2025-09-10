@@ -316,7 +316,7 @@ namespace Ritrama2025.Forms
             FrmSeleccion SelVendors = new()
             {
                 DtItems = Ds.Tables["DtVendors"]!,
-                Titulo = "vendedores",
+                Titulo = "Vendedores",
             };
             SelVendors.ShowDialog();
             txt_vend_id.Text = SelVendors.Id;
@@ -493,6 +493,21 @@ namespace Ritrama2025.Forms
             if (txt_custid.Text == string.Empty)
             {
                 MessageBox.Show("Debe introducir los datos del cliente...");
+                return;
+            }
+            if (txt_camion_id.Text == string.Empty)
+            {
+                MessageBox.Show("Debe introducir los datos del camion...");
+                return;
+            }
+            if (txt_transport_id.Text == string.Empty)
+            {
+                MessageBox.Show("Debe introducir los datos del transporte...");
+                return;
+            }
+            if (txt_chofer_id.Text == string.Empty)
+            {
+                MessageBox.Show("Debe introducir los datos del chofer...");
                 return;
             }
             if (txt_vend_id.Text == string.Empty)

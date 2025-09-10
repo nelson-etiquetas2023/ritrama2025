@@ -78,7 +78,6 @@
             pictureBox6 = new PictureBox();
             label13 = new Label();
             chk_anulado = new CheckBox();
-            btn_AppMovil = new Button();
             GridItems = new DataGridView();
             txt_person_id = new TextBox();
             txt_embarque = new TextBox();
@@ -100,7 +99,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { btn_primero, btn_anterior, btn_siguiente, btn_ultimo, btn_create, btn_cancel, btn_save, btn_CloseDoc, btn_AnularDoc, btn_SearchDoc, btn_printDoc, btn_ExportDoc });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(1156, 44);
+            toolStrip1.Size = new Size(999, 44);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -168,7 +167,7 @@
             btn_cancel.Name = "btn_cancel";
             btn_cancel.Size = new Size(75, 40);
             btn_cancel.Text = "Cancelar";
-            btn_cancel.Click += btn_cancel_Click;
+            btn_cancel.Click += Btn_cancel_Click;
             // 
             // btn_save
             // 
@@ -191,7 +190,7 @@
             btn_CloseDoc.Name = "btn_CloseDoc";
             btn_CloseDoc.Size = new Size(75, 40);
             btn_CloseDoc.Text = "Close";
-            btn_CloseDoc.Click += btn_CloseDoc_Click;
+            btn_CloseDoc.Click += Btn_CloseDoc_Click;
             // 
             // btn_AnularDoc
             // 
@@ -201,7 +200,7 @@
             btn_AnularDoc.Name = "btn_AnularDoc";
             btn_AnularDoc.Size = new Size(67, 41);
             btn_AnularDoc.Text = "Anular";
-            btn_AnularDoc.Click += btn_AnularDoc_Click;
+            btn_AnularDoc.Click += Btn_AnularDoc_Click;
             // 
             // btn_SearchDoc
             // 
@@ -211,7 +210,7 @@
             btn_SearchDoc.Name = "btn_SearchDoc";
             btn_SearchDoc.Size = new Size(68, 41);
             btn_SearchDoc.Text = "Buscar";
-            btn_SearchDoc.Click += btn_SearchDoc_Click;
+            btn_SearchDoc.Click += Btn_SearchDoc_Click;
             // 
             // btn_printDoc
             // 
@@ -221,7 +220,7 @@
             btn_printDoc.Name = "btn_printDoc";
             btn_printDoc.Size = new Size(80, 41);
             btn_printDoc.Text = "Imprimir";
-            btn_printDoc.Click += btn_printDoc_Click;
+            btn_printDoc.Click += Btn_printDoc_Click;
             // 
             // btn_ExportDoc
             // 
@@ -231,7 +230,7 @@
             btn_ExportDoc.Name = "btn_ExportDoc";
             btn_ExportDoc.Size = new Size(80, 41);
             btn_ExportDoc.Text = "Exportar";
-            btn_ExportDoc.Click += btn_ExportDoc_Click;
+            btn_ExportDoc.Click += Btn_ExportDoc_Click;
             // 
             // label1
             // 
@@ -296,16 +295,16 @@
             txt_nombre_prov.Margin = new Padding(3, 4, 3, 4);
             txt_nombre_prov.Name = "txt_nombre_prov";
             txt_nombre_prov.ReadOnly = true;
-            txt_nombre_prov.Size = new Size(363, 25);
+            txt_nombre_prov.Size = new Size(291, 25);
             txt_nombre_prov.TabIndex = 7;
             // 
             // btn_ProvBuscar
             // 
             btn_ProvBuscar.Enabled = false;
-            btn_ProvBuscar.Location = new Point(975, 148);
+            btn_ProvBuscar.Location = new Point(902, 148);
             btn_ProvBuscar.Margin = new Padding(3, 4, 3, 4);
             btn_ProvBuscar.Name = "btn_ProvBuscar";
-            btn_ProvBuscar.Size = new Size(53, 28);
+            btn_ProvBuscar.Size = new Size(43, 28);
             btn_ProvBuscar.TabIndex = 7;
             btn_ProvBuscar.Text = "...";
             btn_ProvBuscar.UseVisualStyleBackColor = true;
@@ -318,7 +317,7 @@
             txt_transport_name.Margin = new Padding(3, 4, 3, 4);
             txt_transport_name.Name = "txt_transport_name";
             txt_transport_name.ReadOnly = true;
-            txt_transport_name.Size = new Size(363, 25);
+            txt_transport_name.Size = new Size(291, 25);
             txt_transport_name.TabIndex = 11;
             // 
             // txt_transport_id
@@ -343,10 +342,10 @@
             // btn_TransportBuscar
             // 
             btn_TransportBuscar.Enabled = false;
-            btn_TransportBuscar.Location = new Point(975, 203);
+            btn_TransportBuscar.Location = new Point(902, 203);
             btn_TransportBuscar.Margin = new Padding(3, 4, 3, 4);
             btn_TransportBuscar.Name = "btn_TransportBuscar";
-            btn_TransportBuscar.Size = new Size(53, 28);
+            btn_TransportBuscar.Size = new Size(43, 28);
             btn_TransportBuscar.TabIndex = 8;
             btn_TransportBuscar.Text = "...";
             btn_TransportBuscar.UseVisualStyleBackColor = true;
@@ -445,7 +444,7 @@
             // txt_total_cantidad
             // 
             txt_total_cantidad.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_total_cantidad.Location = new Point(862, 597);
+            txt_total_cantidad.Location = new Point(779, 577);
             txt_total_cantidad.Margin = new Padding(3, 4, 3, 4);
             txt_total_cantidad.Name = "txt_total_cantidad";
             txt_total_cantidad.ReadOnly = true;
@@ -455,7 +454,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(750, 600);
+            label9.Location = new Point(667, 580);
             label9.Name = "label9";
             label9.Size = new Size(105, 18);
             label9.TabIndex = 24;
@@ -465,12 +464,11 @@
             // 
             btn_addRows.Enabled = false;
             btn_addRows.Image = (Image)resources.GetObject("btn_addRows.Image");
-            btn_addRows.Location = new Point(1034, 310);
+            btn_addRows.Location = new Point(951, 310);
             btn_addRows.Margin = new Padding(3, 4, 3, 4);
             btn_addRows.Name = "btn_addRows";
-            btn_addRows.Size = new Size(107, 41);
+            btn_addRows.Size = new Size(39, 41);
             btn_addRows.TabIndex = 11;
-            btn_addRows.Text = "Agregar";
             btn_addRows.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_addRows.UseVisualStyleBackColor = true;
             btn_addRows.Click += Btn_addRows_Click;
@@ -479,15 +477,14 @@
             // 
             btn_deleteRows.Enabled = false;
             btn_deleteRows.Image = (Image)resources.GetObject("btn_deleteRows.Image");
-            btn_deleteRows.Location = new Point(1034, 359);
+            btn_deleteRows.Location = new Point(951, 359);
             btn_deleteRows.Margin = new Padding(3, 4, 3, 4);
             btn_deleteRows.Name = "btn_deleteRows";
-            btn_deleteRows.Size = new Size(107, 41);
+            btn_deleteRows.Size = new Size(39, 41);
             btn_deleteRows.TabIndex = 12;
-            btn_deleteRows.Text = "Borrar";
             btn_deleteRows.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_deleteRows.UseVisualStyleBackColor = true;
-            btn_deleteRows.Click += btn_deleteRows_Click;
+            btn_deleteRows.Click += Btn_deleteRows_Click;
             // 
             // txt_lote
             // 
@@ -546,7 +543,7 @@
             btn_OrdenBuscar.TabIndex = 34;
             btn_OrdenBuscar.Text = "...";
             btn_OrdenBuscar.UseVisualStyleBackColor = true;
-            btn_OrdenBuscar.Click += btn_OrdenBuscar_Click;
+            btn_OrdenBuscar.Click += Btn_OrdenBuscar_Click;
             // 
             // panel1
             // 
@@ -558,14 +555,14 @@
             panel1.Location = new Point(0, 44);
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1156, 82);
+            panel1.Size = new Size(999, 82);
             panel1.TabIndex = 36;
             // 
             // label_counter_rows
             // 
             label_counter_rows.AutoSize = true;
             label_counter_rows.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label_counter_rows.Location = new Point(975, 26);
+            label_counter_rows.Location = new Point(772, 26);
             label_counter_rows.Name = "label_counter_rows";
             label_counter_rows.Size = new Size(99, 25);
             label_counter_rows.TabIndex = 97;
@@ -574,7 +571,7 @@
             // pictureBox6
             // 
             pictureBox6.Image = (Image)resources.GetObject("pictureBox6.Image");
-            pictureBox6.Location = new Point(323, 19);
+            pictureBox6.Location = new Point(196, 13);
             pictureBox6.Margin = new Padding(3, 4, 3, 4);
             pictureBox6.Name = "pictureBox6";
             pictureBox6.Size = new Size(65, 56);
@@ -586,7 +583,7 @@
             label13.AutoSize = true;
             label13.BackColor = SystemColors.ControlLightLight;
             label13.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label13.Location = new Point(394, 26);
+            label13.Location = new Point(267, 20);
             label13.Name = "label13";
             label13.Size = new Size(383, 32);
             label13.TabIndex = 0;
@@ -595,26 +592,15 @@
             // chk_anulado
             // 
             chk_anulado.AutoSize = true;
-            chk_anulado.Location = new Point(862, 630);
+            chk_anulado.Location = new Point(779, 610);
             chk_anulado.Margin = new Padding(3, 4, 3, 4);
             chk_anulado.Name = "chk_anulado";
             chk_anulado.Size = new Size(151, 22);
             chk_anulado.TabIndex = 37;
             chk_anulado.Text = "Documento Anulado";
             chk_anulado.UseVisualStyleBackColor = true;
-            chk_anulado.Click += chk_anulado_Click;
-            chk_anulado.KeyDown += chk_anulado_KeyDown;
-            // 
-            // btn_AppMovil
-            // 
-            btn_AppMovil.Enabled = false;
-            btn_AppMovil.Location = new Point(1029, 148);
-            btn_AppMovil.Margin = new Padding(3, 4, 3, 4);
-            btn_AppMovil.Name = "btn_AppMovil";
-            btn_AppMovil.Size = new Size(107, 28);
-            btn_AppMovil.TabIndex = 40;
-            btn_AppMovil.Text = "App Movil";
-            btn_AppMovil.UseVisualStyleBackColor = true;
+            chk_anulado.Click += Chk_anulado_Click;
+            chk_anulado.KeyDown += Chk_anulado_KeyDown;
             // 
             // GridItems
             // 
@@ -624,7 +610,7 @@
             GridItems.Location = new Point(14, 310);
             GridItems.Name = "GridItems";
             GridItems.ReadOnly = true;
-            GridItems.Size = new Size(1014, 260);
+            GridItems.Size = new Size(931, 260);
             GridItems.TabIndex = 10;
             // 
             // txt_person_id
@@ -650,7 +636,7 @@
             // 
             label16.AutoSize = true;
             label16.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label16.Location = new Point(877, 256);
+            label16.Location = new Point(779, 709);
             label16.Name = "label16";
             label16.Size = new Size(101, 18);
             label16.TabIndex = 43;
@@ -660,34 +646,32 @@
             // 
             btn_template.Enabled = false;
             btn_template.Image = (Image)resources.GetObject("btn_template.Image");
-            btn_template.Location = new Point(1037, 439);
+            btn_template.Location = new Point(954, 439);
             btn_template.Margin = new Padding(3, 4, 3, 4);
             btn_template.Name = "btn_template";
-            btn_template.Size = new Size(107, 41);
+            btn_template.Size = new Size(39, 41);
             btn_template.TabIndex = 44;
-            btn_template.Text = "Plantilla";
             btn_template.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_template.UseVisualStyleBackColor = true;
-            btn_template.Click += btn_template_Click;
+            btn_template.Click += Btn_template_Click;
             // 
             // btn_LoadRows
             // 
             btn_LoadRows.Enabled = false;
             btn_LoadRows.Image = (Image)resources.GetObject("btn_LoadRows.Image");
-            btn_LoadRows.Location = new Point(1037, 488);
+            btn_LoadRows.Location = new Point(954, 488);
             btn_LoadRows.Margin = new Padding(3, 4, 3, 4);
             btn_LoadRows.Name = "btn_LoadRows";
-            btn_LoadRows.Size = new Size(107, 41);
+            btn_LoadRows.Size = new Size(39, 41);
             btn_LoadRows.TabIndex = 45;
-            btn_LoadRows.Text = "Cargar";
             btn_LoadRows.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_LoadRows.UseVisualStyleBackColor = true;
-            btn_LoadRows.Click += btn_LoadRows_Click;
+            btn_LoadRows.Click += Btn_LoadRows_Click;
             // 
             // Pic_Document
             // 
             Pic_Document.Image = (Image)resources.GetObject("Pic_Document.Image");
-            Pic_Document.Location = new Point(1049, 203);
+            Pic_Document.Location = new Point(880, 649);
             Pic_Document.Name = "Pic_Document";
             Pic_Document.Size = new Size(50, 50);
             Pic_Document.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -697,20 +681,20 @@
             // chk_DocumentClose
             // 
             chk_DocumentClose.AutoSize = true;
-            chk_DocumentClose.Location = new Point(878, 280);
+            chk_DocumentClose.Location = new Point(780, 733);
             chk_DocumentClose.Name = "chk_DocumentClose";
             chk_DocumentClose.Size = new Size(149, 22);
             chk_DocumentClose.TabIndex = 47;
             chk_DocumentClose.Text = "Documento Cerrado";
             chk_DocumentClose.UseVisualStyleBackColor = true;
-            chk_DocumentClose.Click += chk_DocumentClose_Click;
-            chk_DocumentClose.KeyDown += chk_DocumentClose_KeyDown;
+            chk_DocumentClose.Click += Chk_DocumentClose_Click;
+            chk_DocumentClose.KeyDown += Chk_DocumentClose_KeyDown;
             // 
             // FrmMateriaPrima
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1156, 787);
+            ClientSize = new Size(999, 787);
             Controls.Add(chk_DocumentClose);
             Controls.Add(Pic_Document);
             Controls.Add(btn_LoadRows);
@@ -719,7 +703,6 @@
             Controls.Add(txt_embarque);
             Controls.Add(txt_person_id);
             Controls.Add(GridItems);
-            Controls.Add(btn_AppMovil);
             Controls.Add(chk_anulado);
             Controls.Add(panel1);
             Controls.Add(btn_OrdenBuscar);
@@ -814,7 +797,6 @@
         private Label label13;
         private Label label_counter_rows;
         private CheckBox chk_anulado;
-        private Button btn_AppMovil;
         private ToolStripButton btn_ultimo;
         private ToolStripButton btn_create;
         private ToolStripButton btn_cancel;

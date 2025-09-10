@@ -375,7 +375,7 @@ namespace Ritrama2025.Services.ReportsService.ReportsService
                 Height = 780,
                 MdiParent = form.MdiParent,
             };
-            string ReportName = "Conduce_sinprecio.rdlc";
+            string ReportName = "picking-list.rdlc";
             reports.reportViewer1.ProcessingMode = ProcessingMode.Local;
             reports.reportViewer1.LocalReport.ReportPath = GetPathApplication(ReportName, R.PATH_REPORTS.REPORTS_DESPACHO);
             //creo un objeto del tipo PageSettings para configurar la pagina a imprimir.

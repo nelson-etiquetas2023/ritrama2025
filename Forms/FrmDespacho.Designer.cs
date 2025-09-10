@@ -138,7 +138,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { bot_primero, bot_anterior, bot_siguiente, bot_ultimo, bot_nuevo, bot_grabar, bot_cancelar, bot_buscar, btn_reports, btn_exports, btn_close_document, btn_label_print, bot_anular });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(1238, 33);
+            toolStrip1.Size = new Size(998, 33);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "Grabar";
             // 
@@ -327,7 +327,7 @@
             btn_label_print.Image = (Image)resources.GetObject("btn_label_print.Image");
             btn_label_print.ImageTransparentColor = Color.Magenta;
             btn_label_print.Name = "btn_label_print";
-            btn_label_print.Size = new Size(87, 30);
+            btn_label_print.Size = new Size(87, 23);
             btn_label_print.Text = "Etiquetas";
             // 
             // bot_anular
@@ -336,7 +336,7 @@
             bot_anular.Image = (Image)resources.GetObject("bot_anular.Image");
             bot_anular.ImageTransparentColor = Color.Magenta;
             bot_anular.Name = "bot_anular";
-            bot_anular.Size = new Size(71, 30);
+            bot_anular.Size = new Size(71, 23);
             bot_anular.Text = "Anular";
             // 
             // label1
@@ -362,7 +362,7 @@
             // btn_buscar_customer
             // 
             btn_buscar_customer.Enabled = false;
-            btn_buscar_customer.Location = new Point(1082, 59);
+            btn_buscar_customer.Location = new Point(950, 56);
             btn_buscar_customer.Margin = new Padding(3, 4, 3, 4);
             btn_buscar_customer.Name = "btn_buscar_customer";
             btn_buscar_customer.Size = new Size(45, 29);
@@ -373,8 +373,9 @@
             // 
             // txt_custid
             // 
+            txt_custid.Enabled = false;
             txt_custid.Font = new Font("Segoe UI", 10.18868F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txt_custid.Location = new Point(593, 59);
+            txt_custid.Location = new Point(507, 59);
             txt_custid.Margin = new Padding(3, 4, 3, 4);
             txt_custid.Name = "txt_custid";
             txt_custid.ReadOnly = true;
@@ -383,19 +384,20 @@
             // 
             // txt_custname
             // 
+            txt_custname.Enabled = false;
             txt_custname.Font = new Font("Segoe UI", 10.18868F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txt_custname.Location = new Point(659, 59);
+            txt_custname.Location = new Point(573, 59);
             txt_custname.Margin = new Padding(3, 4, 3, 4);
             txt_custname.Name = "txt_custname";
             txt_custname.ReadOnly = true;
-            txt_custname.Size = new Size(415, 26);
+            txt_custname.Size = new Size(371, 26);
             txt_custname.TabIndex = 5;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 8.830189F, FontStyle.Bold);
-            label2.Location = new Point(591, 39);
+            label2.Location = new Point(505, 39);
             label2.Name = "label2";
             label2.Size = new Size(51, 15);
             label2.TabIndex = 6;
@@ -405,7 +407,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 8.830189F, FontStyle.Bold);
-            label3.Location = new Point(659, 39);
+            label3.Location = new Point(573, 39);
             label3.Name = "label3";
             label3.Size = new Size(100, 15);
             label3.TabIndex = 7;
@@ -462,6 +464,7 @@
             // 
             // txt_transport_id
             // 
+            txt_transport_id.Enabled = false;
             txt_transport_id.Font = new Font("Segoe UI", 10.18868F);
             txt_transport_id.Location = new Point(100, 173);
             txt_transport_id.Margin = new Padding(3, 4, 3, 4);
@@ -496,6 +499,7 @@
             // 
             // txt_chofer_id
             // 
+            txt_chofer_id.Enabled = false;
             txt_chofer_id.Font = new Font("Segoe UI", 10.18868F);
             txt_chofer_id.Location = new Point(100, 209);
             txt_chofer_id.Margin = new Padding(3, 4, 3, 4);
@@ -528,6 +532,7 @@
             // 
             // txt_camion_id
             // 
+            txt_camion_id.Enabled = false;
             txt_camion_id.Font = new Font("Segoe UI", 10.18868F);
             txt_camion_id.Location = new Point(100, 245);
             txt_camion_id.Margin = new Padding(3, 4, 3, 4);
@@ -548,6 +553,7 @@
             // 
             // txt_vend_id
             // 
+            txt_vend_id.Enabled = false;
             txt_vend_id.Font = new Font("Segoe UI", 10.18868F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txt_vend_id.Location = new Point(418, 119);
             txt_vend_id.Margin = new Padding(3, 4, 3, 4);
@@ -568,12 +574,13 @@
             // 
             // txt_vendorname
             // 
+            txt_vendorname.Enabled = false;
             txt_vendorname.Font = new Font("Segoe UI", 10.18868F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txt_vendorname.Location = new Point(418, 176);
             txt_vendorname.Margin = new Padding(3, 4, 3, 4);
             txt_vendorname.Name = "txt_vendorname";
             txt_vendorname.ReadOnly = true;
-            txt_vendorname.Size = new Size(285, 26);
+            txt_vendorname.Size = new Size(252, 26);
             txt_vendorname.TabIndex = 24;
             // 
             // label10
@@ -602,7 +609,7 @@
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 8.830189F, FontStyle.Bold);
-            label11.Location = new Point(723, 112);
+            label11.Location = new Point(664, 147);
             label11.Name = "label11";
             label11.Size = new Size(103, 15);
             label11.TabIndex = 26;
@@ -611,18 +618,18 @@
             // txt_orden_trabajo
             // 
             txt_orden_trabajo.Font = new Font("Segoe UI", 10.18868F);
-            txt_orden_trabajo.Location = new Point(859, 144);
+            txt_orden_trabajo.Location = new Point(776, 180);
             txt_orden_trabajo.Margin = new Padding(3, 4, 3, 4);
             txt_orden_trabajo.Name = "txt_orden_trabajo";
             txt_orden_trabajo.ReadOnly = true;
-            txt_orden_trabajo.Size = new Size(268, 26);
+            txt_orden_trabajo.Size = new Size(168, 26);
             txt_orden_trabajo.TabIndex = 29;
             // 
             // label12
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 8.830189F, FontStyle.Bold);
-            label12.Location = new Point(746, 149);
+            label12.Location = new Point(687, 184);
             label12.Name = "label12";
             label12.Size = new Size(88, 15);
             label12.TabIndex = 28;
@@ -631,18 +638,18 @@
             // txt_orden_compra
             // 
             txt_orden_compra.Font = new Font("Segoe UI", 10.18868F);
-            txt_orden_compra.Location = new Point(859, 179);
+            txt_orden_compra.Location = new Point(776, 215);
             txt_orden_compra.Margin = new Padding(3, 4, 3, 4);
             txt_orden_compra.Name = "txt_orden_compra";
             txt_orden_compra.ReadOnly = true;
-            txt_orden_compra.Size = new Size(268, 26);
+            txt_orden_compra.Size = new Size(168, 26);
             txt_orden_compra.TabIndex = 31;
             // 
             // label13
             // 
             label13.AutoSize = true;
             label13.Font = new Font("Segoe UI", 8.830189F, FontStyle.Bold);
-            label13.Location = new Point(744, 183);
+            label13.Location = new Point(685, 218);
             label13.Name = "label13";
             label13.Size = new Size(91, 15);
             label13.TabIndex = 30;
@@ -652,7 +659,7 @@
             // 
             label14.AutoSize = true;
             label14.Font = new Font("Segoe UI", 8.830189F, FontStyle.Bold);
-            label14.Location = new Point(743, 219);
+            label14.Location = new Point(684, 254);
             label14.Name = "label14";
             label14.Size = new Size(86, 15);
             label14.TabIndex = 32;
@@ -666,7 +673,7 @@
             bot_picking.Location = new Point(418, 229);
             bot_picking.Margin = new Padding(3, 4, 3, 4);
             bot_picking.Name = "bot_picking";
-            bot_picking.Size = new Size(286, 45);
+            bot_picking.Size = new Size(252, 45);
             bot_picking.TabIndex = 34;
             bot_picking.Text = "Picking";
             bot_picking.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -678,11 +685,11 @@
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Font = new Font("Segoe UI", 10.18868F);
-            tabControl1.Location = new Point(5, 279);
+            tabControl1.Location = new Point(12, 284);
             tabControl1.Margin = new Padding(3, 4, 3, 4);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1233, 338);
+            tabControl1.Size = new Size(983, 338);
             tabControl1.TabIndex = 35;
             // 
             // tabPage1
@@ -692,7 +699,7 @@
             tabPage1.Margin = new Padding(3, 4, 3, 4);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3, 4, 3, 4);
-            tabPage1.Size = new Size(1225, 306);
+            tabPage1.Size = new Size(975, 306);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Renglones";
             tabPage1.UseVisualStyleBackColor = true;
@@ -708,7 +715,7 @@
             grid_items.Name = "grid_items";
             grid_items.ReadOnly = true;
             grid_items.RowHeadersWidth = 38;
-            grid_items.Size = new Size(1210, 288);
+            grid_items.Size = new Size(1019, 288);
             grid_items.TabIndex = 0;
             grid_items.CellEndEdit += Grid_items_CellEndEdit;
             // 
@@ -719,7 +726,7 @@
             tabPage2.Margin = new Padding(3, 4, 3, 4);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3, 4, 3, 4);
-            tabPage2.Size = new Size(1225, 306);
+            tabPage2.Size = new Size(975, 306);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Rollos Cortados";
             tabPage2.UseVisualStyleBackColor = true;
@@ -747,7 +754,7 @@
             grid_detalle_paletas.Name = "grid_detalle_paletas";
             grid_detalle_paletas.ReadOnly = true;
             grid_detalle_paletas.RowHeadersWidth = 45;
-            grid_detalle_paletas.Size = new Size(612, 152);
+            grid_detalle_paletas.Size = new Size(538, 152);
             grid_detalle_paletas.TabIndex = 36;
             grid_detalle_paletas.CellClick += Grid_detalle_paletas_CellClick;
             grid_detalle_paletas.CellEndEdit += Grid_detalle_paletas_CellEndEdit;
@@ -768,7 +775,7 @@
             bot_add_palet.Enabled = false;
             bot_add_palet.Image = (Image)resources.GetObject("bot_add_palet.Image");
             bot_add_palet.ImageAlign = ContentAlignment.MiddleLeft;
-            bot_add_palet.Location = new Point(623, 685);
+            bot_add_palet.Location = new Point(552, 711);
             bot_add_palet.Margin = new Padding(3, 4, 3, 4);
             bot_add_palet.Name = "bot_add_palet";
             bot_add_palet.Size = new Size(98, 46);
@@ -782,7 +789,7 @@
             // 
             bot_delete_palet.Enabled = false;
             bot_delete_palet.Image = Properties.Resources.multiply_32px;
-            bot_delete_palet.Location = new Point(623, 739);
+            bot_delete_palet.Location = new Point(552, 765);
             bot_delete_palet.Margin = new Padding(3, 4, 3, 4);
             bot_delete_palet.Name = "bot_delete_palet";
             bot_delete_palet.Size = new Size(98, 46);
@@ -795,7 +802,7 @@
             // 
             label16.AutoSize = true;
             label16.Font = new Font("Segoe UI", 8.830189F, FontStyle.Bold);
-            label16.Location = new Point(623, 661);
+            label16.Location = new Point(552, 687);
             label16.Name = "label16";
             label16.Size = new Size(59, 15);
             label16.TabIndex = 41;
@@ -804,38 +811,38 @@
             // txt_subtotal
             // 
             txt_subtotal.Font = new Font("Segoe UI", 10.18868F, FontStyle.Bold);
-            txt_subtotal.Location = new Point(894, 658);
+            txt_subtotal.Location = new Point(774, 658);
             txt_subtotal.Margin = new Padding(3, 4, 3, 4);
             txt_subtotal.Name = "txt_subtotal";
             txt_subtotal.ReadOnly = true;
-            txt_subtotal.Size = new Size(321, 26);
+            txt_subtotal.Size = new Size(217, 26);
             txt_subtotal.TabIndex = 43;
             // 
             // txt_itbis
             // 
             txt_itbis.Font = new Font("Segoe UI", 10.18868F, FontStyle.Bold);
-            txt_itbis.Location = new Point(894, 694);
+            txt_itbis.Location = new Point(774, 694);
             txt_itbis.Margin = new Padding(3, 4, 3, 4);
             txt_itbis.Name = "txt_itbis";
             txt_itbis.ReadOnly = true;
-            txt_itbis.Size = new Size(321, 26);
+            txt_itbis.Size = new Size(217, 26);
             txt_itbis.TabIndex = 44;
             // 
             // txt_totalmonto
             // 
             txt_totalmonto.Font = new Font("Segoe UI", 10.18868F, FontStyle.Bold);
-            txt_totalmonto.Location = new Point(894, 731);
+            txt_totalmonto.Location = new Point(774, 731);
             txt_totalmonto.Margin = new Padding(3, 4, 3, 4);
             txt_totalmonto.Name = "txt_totalmonto";
             txt_totalmonto.ReadOnly = true;
-            txt_totalmonto.Size = new Size(321, 26);
+            txt_totalmonto.Size = new Size(217, 26);
             txt_totalmonto.TabIndex = 45;
             // 
             // label17
             // 
             label17.AutoSize = true;
             label17.Font = new Font("Segoe UI", 8.830189F, FontStyle.Bold);
-            label17.Location = new Point(800, 661);
+            label17.Location = new Point(680, 661);
             label17.Name = "label17";
             label17.Size = new Size(78, 15);
             label17.TabIndex = 46;
@@ -843,7 +850,7 @@
             // 
             // txt_porc_itbis
             // 
-            txt_porc_itbis.Location = new Point(840, 694);
+            txt_porc_itbis.Location = new Point(720, 694);
             txt_porc_itbis.Margin = new Padding(3, 4, 3, 4);
             txt_porc_itbis.Name = "txt_porc_itbis";
             txt_porc_itbis.ReadOnly = true;
@@ -854,7 +861,7 @@
             // 
             label18.AutoSize = true;
             label18.Font = new Font("Segoe UI", 8.830189F, FontStyle.Bold);
-            label18.Location = new Point(787, 700);
+            label18.Location = new Point(667, 700);
             label18.Name = "label18";
             label18.Size = new Size(40, 15);
             label18.TabIndex = 48;
@@ -864,7 +871,7 @@
             // 
             label19.AutoSize = true;
             label19.Font = new Font("Segoe UI", 8.830189F, FontStyle.Bold);
-            label19.Location = new Point(830, 734);
+            label19.Location = new Point(710, 734);
             label19.Name = "label19";
             label19.Size = new Size(49, 15);
             label19.TabIndex = 49;
@@ -874,7 +881,7 @@
             // 
             chk_impuesto.AutoSize = true;
             chk_impuesto.Enabled = false;
-            chk_impuesto.Location = new Point(629, 813);
+            chk_impuesto.Location = new Point(8, 879);
             chk_impuesto.Margin = new Padding(3, 4, 3, 4);
             chk_impuesto.Name = "chk_impuesto";
             chk_impuesto.Size = new Size(108, 23);
@@ -884,7 +891,7 @@
             // 
             // txt_palet_kilo_neto
             // 
-            txt_palet_kilo_neto.Location = new Point(481, 842);
+            txt_palet_kilo_neto.Location = new Point(409, 845);
             txt_palet_kilo_neto.Margin = new Padding(3, 4, 3, 4);
             txt_palet_kilo_neto.Name = "txt_palet_kilo_neto";
             txt_palet_kilo_neto.ReadOnly = true;
@@ -893,7 +900,7 @@
             // 
             // txt_palet_kilo_bruto
             // 
-            txt_palet_kilo_bruto.Location = new Point(552, 842);
+            txt_palet_kilo_bruto.Location = new Point(480, 845);
             txt_palet_kilo_bruto.Margin = new Padding(3, 4, 3, 4);
             txt_palet_kilo_bruto.Name = "txt_palet_kilo_bruto";
             txt_palet_kilo_bruto.ReadOnly = true;
@@ -903,7 +910,7 @@
             // txt_cant_total
             // 
             txt_cant_total.Font = new Font("Segoe UI", 10.18868F, FontStyle.Bold);
-            txt_cant_total.Location = new Point(369, 616);
+            txt_cant_total.Location = new Point(369, 623);
             txt_cant_total.Margin = new Padding(3, 4, 3, 4);
             txt_cant_total.Name = "txt_cant_total";
             txt_cant_total.ReadOnly = true;
@@ -913,7 +920,7 @@
             // txt_msi_total
             // 
             txt_msi_total.Font = new Font("Segoe UI", 10.18868F, FontStyle.Bold);
-            txt_msi_total.Location = new Point(592, 616);
+            txt_msi_total.Location = new Point(592, 623);
             txt_msi_total.Margin = new Padding(3, 4, 3, 4);
             txt_msi_total.Name = "txt_msi_total";
             txt_msi_total.ReadOnly = true;
@@ -923,7 +930,7 @@
             // txt_pie_total
             // 
             txt_pie_total.Font = new Font("Segoe UI", 10.18868F, FontStyle.Bold);
-            txt_pie_total.Location = new Point(767, 616);
+            txt_pie_total.Location = new Point(767, 623);
             txt_pie_total.Margin = new Padding(3, 4, 3, 4);
             txt_pie_total.Name = "txt_pie_total";
             txt_pie_total.ReadOnly = true;
@@ -933,18 +940,18 @@
             // txt_kilos_total
             // 
             txt_kilos_total.Font = new Font("Segoe UI", 10.18868F, FontStyle.Bold);
-            txt_kilos_total.Location = new Point(950, 616);
+            txt_kilos_total.Location = new Point(917, 623);
             txt_kilos_total.Margin = new Padding(3, 4, 3, 4);
             txt_kilos_total.Name = "txt_kilos_total";
             txt_kilos_total.ReadOnly = true;
-            txt_kilos_total.Size = new Size(92, 26);
+            txt_kilos_total.Size = new Size(74, 26);
             txt_kilos_total.TabIndex = 56;
             // 
             // label20
             // 
             label20.AutoSize = true;
             label20.Font = new Font("Segoe UI", 8.830189F, FontStyle.Bold);
-            label20.Location = new Point(294, 619);
+            label20.Location = new Point(294, 626);
             label20.Name = "label20";
             label20.Size = new Size(47, 15);
             label20.TabIndex = 57;
@@ -954,7 +961,7 @@
             // 
             label21.AutoSize = true;
             label21.Font = new Font("Segoe UI", 8.830189F, FontStyle.Bold);
-            label21.Location = new Point(522, 619);
+            label21.Location = new Point(522, 626);
             label21.Name = "label21";
             label21.Size = new Size(41, 15);
             label21.TabIndex = 58;
@@ -964,7 +971,7 @@
             // 
             label22.AutoSize = true;
             label22.Font = new Font("Segoe UI", 8.830189F, FontStyle.Bold);
-            label22.Location = new Point(697, 619);
+            label22.Location = new Point(697, 626);
             label22.Name = "label22";
             label22.Size = new Size(39, 15);
             label22.TabIndex = 59;
@@ -974,7 +981,7 @@
             // 
             label23.AutoSize = true;
             label23.Font = new Font("Segoe UI", 8.830189F, FontStyle.Bold);
-            label23.Location = new Point(880, 619);
+            label23.Location = new Point(863, 629);
             label23.Name = "label23";
             label23.Size = new Size(48, 15);
             label23.TabIndex = 60;
@@ -984,7 +991,7 @@
             // 
             label24.AutoSize = true;
             label24.Font = new Font("Segoe UI", 8.830189F, FontStyle.Bold);
-            label24.Location = new Point(481, 875);
+            label24.Location = new Point(409, 878);
             label24.Name = "label24";
             label24.Size = new Size(50, 15);
             label24.TabIndex = 61;
@@ -994,7 +1001,7 @@
             // 
             label25.AutoSize = true;
             label25.Font = new Font("Segoe UI", 8.830189F, FontStyle.Bold);
-            label25.Location = new Point(552, 875);
+            label25.Location = new Point(480, 878);
             label25.Name = "label25";
             label25.Size = new Size(54, 15);
             label25.TabIndex = 62;
@@ -1003,7 +1010,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.LOGO;
-            pictureBox1.Location = new Point(894, 771);
+            pictureBox1.Location = new Point(670, 765);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(321, 132);
             pictureBox1.TabIndex = 63;
@@ -1011,6 +1018,7 @@
             // 
             // txt_chofer_name
             // 
+            txt_chofer_name.Enabled = false;
             txt_chofer_name.Font = new Font("Segoe UI", 10.18868F);
             txt_chofer_name.Location = new Point(144, 209);
             txt_chofer_name.Margin = new Padding(3, 4, 3, 4);
@@ -1021,6 +1029,7 @@
             // 
             // txt_transport_name
             // 
+            txt_transport_name.Enabled = false;
             txt_transport_name.Font = new Font("Segoe UI", 10.18868F);
             txt_transport_name.Location = new Point(144, 174);
             txt_transport_name.Margin = new Padding(3, 4, 3, 4);
@@ -1031,6 +1040,7 @@
             // 
             // txt_camion_name
             // 
+            txt_camion_name.Enabled = false;
             txt_camion_name.Font = new Font("Segoe UI", 10.18868F);
             txt_camion_name.Location = new Point(144, 245);
             txt_camion_name.Margin = new Padding(3, 4, 3, 4);
@@ -1044,9 +1054,9 @@
             cbo_embalaje.Enabled = false;
             cbo_embalaje.FormattingEnabled = true;
             cbo_embalaje.Items.AddRange(new object[] { "Wrapping", "Tarima", "Palet", "Tarima + Palet" });
-            cbo_embalaje.Location = new Point(859, 106);
+            cbo_embalaje.Location = new Point(776, 142);
             cbo_embalaje.Name = "cbo_embalaje";
-            cbo_embalaje.Size = new Size(268, 27);
+            cbo_embalaje.Size = new Size(168, 27);
             cbo_embalaje.TabIndex = 67;
             // 
             // cbo_tipoVenta
@@ -1054,15 +1064,15 @@
             cbo_tipoVenta.Enabled = false;
             cbo_tipoVenta.FormattingEnabled = true;
             cbo_tipoVenta.Items.AddRange(new object[] { "Venta Local", "Traspaso", "Importación", "Otros" });
-            cbo_tipoVenta.Location = new Point(859, 212);
+            cbo_tipoVenta.Location = new Point(776, 248);
             cbo_tipoVenta.Name = "cbo_tipoVenta";
-            cbo_tipoVenta.Size = new Size(268, 27);
+            cbo_tipoVenta.Size = new Size(168, 27);
             cbo_tipoVenta.TabIndex = 68;
             // 
             // button1
             // 
             button1.Enabled = false;
-            button1.Location = new Point(1133, 104);
+            button1.Location = new Point(944, 140);
             button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
             button1.Size = new Size(45, 29);
@@ -1073,7 +1083,7 @@
             // button2
             // 
             button2.Enabled = false;
-            button2.Location = new Point(1133, 211);
+            button2.Location = new Point(944, 248);
             button2.Margin = new Padding(3, 4, 3, 4);
             button2.Name = "button2";
             button2.Size = new Size(45, 29);
@@ -1085,7 +1095,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1238, 915);
+            ClientSize = new Size(998, 915);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(cbo_tipoVenta);

@@ -368,6 +368,31 @@ public class CommonService : ICommonService
             MessageBox.Show("Error al eliminar la entidad de operadores: " + ErrorMsg);
         }
     }
+
+
+    public void SaveVendedorEntity(string Id, string Name) 
+    {
+        using SqlConnection conn = new(StringConnex);
+        SqlCommand comando = new()
+        {
+            Connection = conn,
+            CommandType = CommandType.Text,
+            CommandText = "INSERT INTO vendedor (vendor_id, vendor_name, correo, phone, anulado) VALUES (@p1, @p2,'nt','nt',0)"
+        };
+        comando.Parameters.Add(new SqlParameter("@p1", SqlDbType.NVarChar) { Value = Id });
+        comando.Parameters.Add(new SqlParameter("@p2", SqlDbType.NVarChar) { Value = Name });
+        try
+        {
+            conn.Open();
+            comando.ExecuteNonQuery();
+        }
+        catch (SqlException ex)
+        {
+            ErrorMsg = ex.Message;
+            MessageBox.Show("Error al guardar la entidad de vendedores: " + ErrorMsg);
+        }
+    }
+
     public void SaveCustomerEntity(string Id, string Name)
     {
         using SqlConnection conn = new(StringConnex);
@@ -429,7 +454,6 @@ public class CommonService : ICommonService
         };
         grid.Columns.Add(col);
     }
-
     public RolloCortado SearchCodigoUnico(string id)
     {
         var rollo = new RolloCortado();
@@ -474,4 +498,6 @@ public class CommonService : ICommonService
         }
         return rollo;
     }
+
+    
 }

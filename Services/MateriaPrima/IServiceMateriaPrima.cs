@@ -24,5 +24,6 @@ namespace Ritrama2025.Services.MateriaPrima
         bool CloseOrder(string orden);
         bool UpDateLogsNotes(string orden, string logText);
         bool AnularOrden(string orden);
+        bool VerificarRollIdNoReoeat(string rollid);
     }
 }

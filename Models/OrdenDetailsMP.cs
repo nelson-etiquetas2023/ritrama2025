@@ -16,5 +16,6 @@ namespace Ritrama2025.Models
         public string Ubicacion { get; set; } = string.Empty;
         public double Cantidad_Pedido { get; set; }
         public double Cantidad_Real { get; set; }
+        public string Estado { get; set; } = "";
     }
 }

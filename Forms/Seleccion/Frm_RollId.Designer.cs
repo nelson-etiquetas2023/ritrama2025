@@ -56,16 +56,16 @@
             // 
             txt_buscar.Location = new Point(4, 172);
             txt_buscar.Name = "txt_buscar";
-            txt_buscar.Size = new Size(897, 23);
+            txt_buscar.Size = new Size(550, 23);
             txt_buscar.TabIndex = 0;
             // 
             // btn_buscar
             // 
             btn_buscar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn_buscar.Image = Properties.Resources.search_16px;
-            btn_buscar.Location = new Point(907, 130);
+            btn_buscar.Image = (Image)resources.GetObject("btn_buscar.Image");
+            btn_buscar.Location = new Point(560, 147);
             btn_buscar.Name = "btn_buscar";
-            btn_buscar.Size = new Size(105, 65);
+            btn_buscar.Size = new Size(105, 48);
             btn_buscar.TabIndex = 1;
             btn_buscar.Text = "Buscar";
             btn_buscar.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -85,7 +85,7 @@
             GridItems.ReadOnly = true;
             GridItems.RowHeadersWidth = 33;
             GridItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            GridItems.Size = new Size(1008, 382);
+            GridItems.Size = new Size(907, 382);
             GridItems.TabIndex = 2;
             GridItems.CellMouseDoubleClick += GridItems_CellMouseDoubleClick;
             // 
@@ -131,9 +131,9 @@
             groupBox1.Controls.Add(rad_productname);
             groupBox1.Controls.Add(rad_productid);
             groupBox1.Controls.Add(rad_rollid);
-            groupBox1.Location = new Point(812, 586);
+            groupBox1.Location = new Point(743, 586);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(200, 102);
+            groupBox1.Size = new Size(168, 102);
             groupBox1.TabIndex = 6;
             groupBox1.TabStop = false;
             groupBox1.Text = "Filtros de Busqueda";
@@ -163,10 +163,12 @@
             // rad_rollid
             // 
             rad_rollid.AutoSize = true;
+            rad_rollid.Checked = true;
             rad_rollid.Location = new Point(42, 33);
             rad_rollid.Name = "rad_rollid";
             rad_rollid.Size = new Size(61, 19);
             rad_rollid.TabIndex = 0;
+            rad_rollid.TabStop = true;
             rad_rollid.Text = "Roll Id.";
             rad_rollid.UseVisualStyleBackColor = true;
             // 
@@ -177,7 +179,7 @@
             panel1.Controls.Add(label2);
             panel1.Location = new Point(4, 8);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1180, 100);
+            panel1.Size = new Size(907, 100);
             panel1.TabIndex = 7;
             // 
             // pictureBox1
@@ -204,7 +206,7 @@
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.Location = new Point(4, 119);
             label1.Name = "label1";
-            label1.Size = new Size(897, 50);
+            label1.Size = new Size(897, 25);
             label1.TabIndex = 8;
             label1.Text = "Introduzca la palabra clave para buscar la informacion en la lista de los master, tenga en cuenta la seleccion de los filtros en la parte de abajo del formulario";
             // 
@@ -212,9 +214,9 @@
             // 
             btn_reload.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_reload.Image = (Image)resources.GetObject("btn_reload.Image");
-            btn_reload.Location = new Point(1018, 130);
+            btn_reload.Location = new Point(671, 147);
             btn_reload.Name = "btn_reload";
-            btn_reload.Size = new Size(166, 67);
+            btn_reload.Size = new Size(118, 48);
             btn_reload.TabIndex = 9;
             btn_reload.Text = "Recargar Data";
             btn_reload.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -224,9 +226,9 @@
             // btn_DetailsConsumos
             // 
             btn_DetailsConsumos.Image = (Image)resources.GetObject("btn_DetailsConsumos.Image");
-            btn_DetailsConsumos.Location = new Point(1018, 203);
+            btn_DetailsConsumos.Location = new Point(795, 147);
             btn_DetailsConsumos.Name = "btn_DetailsConsumos";
-            btn_DetailsConsumos.Size = new Size(166, 67);
+            btn_DetailsConsumos.Size = new Size(116, 48);
             btn_DetailsConsumos.TabIndex = 10;
             btn_DetailsConsumos.Text = "Detalle Cosumos";
             btn_DetailsConsumos.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -237,7 +239,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1196, 703);
+            ClientSize = new Size(922, 703);
             Controls.Add(btn_DetailsConsumos);
             Controls.Add(btn_reload);
             Controls.Add(label1);

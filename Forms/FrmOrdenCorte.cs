@@ -136,21 +136,21 @@ public partial class FrmOrdenCorte : Form
         BsDetails.DataMember = R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS;
 
         grid_items.AutoGenerateColumns = false;
-        ADD_COLUMN_GRID("roll_number", 25, "#", "roll_number", grid_items);
-        ADD_COLUMN_GRID("product_id", 60, "Product Id", "product_id", grid_items);
-        ADD_COLUMN_GRID("product_name", 250, "Product Name", "product_name", grid_items);
-        ADD_COLUMN_GRID("unique_code", 70, "Unique Code", "unique_code", grid_items);
-        ADD_COLUMN_GRID("width", 70, "Width [Inch]", "width", grid_items);
+        ADD_COLUMN_GRID("roll_number", 23, "#", "roll_number", grid_items);
+        ADD_COLUMN_GRID("product_id", 50, "Product Id", "product_id", grid_items);
+        ADD_COLUMN_GRID("product_name", 210, "Product Name", "product_name", grid_items);
+        ADD_COLUMN_GRID("unique_code", 65, "Unique Code", "unique_code", grid_items);
+        ADD_COLUMN_GRID("width", 65, "Width [Inch]", "width", grid_items);
         ADD_COLUMN_GRID("large", 75, "Length [Pies]", "large", grid_items);
-        ADD_COLUMN_GRID("msi", 70, "MSI", "msi", grid_items);
-        ADD_COLUMN_GRID("splice", 45, "Splice", "splice", grid_items);
-        ADD_COLUMN_GRID("roll_id", 85, "Roll Id.", "roll_id", grid_items);
-        ADD_COLUMN_GRID("code_person", 70, "Code Person.", "code_person", grid_items);
+        ADD_COLUMN_GRID("msi", 60, "MSI", "msi", grid_items);
+        ADD_COLUMN_GRID("splice", 40, "Splice", "splice", grid_items);
+        ADD_COLUMN_GRID("roll_id", 70, "Roll Id.", "roll_id", grid_items);
+        ADD_COLUMN_GRID("code_person", 60, "Code Person.", "code_person", grid_items);
         DataGridViewComboBoxColumn estado = new()
         {
             HeaderText = "Status",
             DropDownWidth = 200,
-            Width = 125,
+            Width = 110,
             FlatStyle = FlatStyle.Flat,
             Name = "status",
             DisplayMember = "status",
@@ -171,11 +171,10 @@ public partial class FrmOrdenCorte : Form
         BsCortes.DataSource = BsMaster;
         BsCortes.DataMember = "FK_ENCABEZADO_CORTES";
         grid_cortes.AutoGenerateColumns = false;
-        ADD_COLUMN_GRID("it", 25, "It.", "num", grid_cortes);
-        ADD_COLUMN_GRID("width", 75, "Width [INCH]", "width", grid_cortes);
-        ADD_COLUMN_GRID("lenght", 75, "Lenght [PIES]", "lenght", grid_cortes);
-        ADD_COLUMN_GRID("msi", 75, "Msi", "msi", grid_cortes);
-        ADD_COLUMN_GRID("code_person", 85, "Code Person", "code_person", grid_cortes);
+        ADD_COLUMN_GRID("it", 30, "It.", "num", grid_cortes);
+        ADD_COLUMN_GRID("width", 80, "Width [INCH]", "width", grid_cortes);
+        ADD_COLUMN_GRID("lenght", 80, "Lenght [PIES]", "lenght", grid_cortes);
+        ADD_COLUMN_GRID("msi", 80, "Msi", "msi", grid_cortes);
         grid_cortes.DataSource = BsCortes;
     }
 
@@ -301,7 +300,6 @@ public partial class FrmOrdenCorte : Form
         chk_desperdicio1.Enabled = true;
         btn_buscar_orden.Enabled = false;
         btn_generar_txt.Enabled = false;
-        btn_datosDocAprob.Enabled = false;
         UpdateStepIndicator();
         EditMode = 1;
     }
@@ -314,7 +312,6 @@ public partial class FrmOrdenCorte : Form
         bot_anterior.Enabled = false;
         bot_accion.Enabled = false;
         bot_imprimir.Enabled = false;
-        bot_etiquetar.Enabled = false;
         bot_exportar.Enabled = false;
         bot_editOrden.Enabled = false;
         bot_guardar.Enabled = true;
@@ -336,7 +333,6 @@ public partial class FrmOrdenCorte : Form
             txt_real1.Text = frmrollid.MasterRoll.Length.ToString("N2");
             txt_product_id.Text = frmrollid.MasterRoll.Product_Id;
             txt_product_name.Text = frmrollid.MasterRoll.Product_Name;
-            checkList_pasos_orden.SetItemChecked(0, true);
             TipoMovimiento = frmrollid.MasterRoll.tipo_mov;
         }
     }
@@ -714,18 +710,7 @@ public partial class FrmOrdenCorte : Form
         // Actualizar el DataGridView
         BsDetails.EndEdit();
     }
-
-    private void Grid_cortes_Leave(object sender, EventArgs e)
-    {
-        if (grid_cortes.Rows.Count > 0)
-        {
-            checkList_pasos_orden.SetItemChecked(1, true);
-        }
-        else
-        {
-            checkList_pasos_orden.SetItemChecked(1, false);
-        }
-    }
+       
     private void CREATE_HEADER_ORDEN()
     {
         Orden = new()
@@ -794,8 +779,8 @@ public partial class FrmOrdenCorte : Form
         Cortes = [];
         for (int i = 0; i <= grid_cortes.Rows.Count - 1; i++)
         {
-            var codePersonValue = grid_cortes.Rows[i].Cells["code_person"].Value;
-            string codePerson = codePersonValue?.ToString() ?? string.Empty; // Ensure no null reference
+            //var codePersonValue = grid_cortes.Rows[i].Cells["code_person"].Value;
+            //string codePerson = codePersonValue?.ToString() ?? string.Empty; // Ensure no null reference
 
             Corte corte = new()
             {
@@ -803,8 +788,7 @@ public partial class FrmOrdenCorte : Form
                 Width = Convert.ToDouble(grid_cortes.Rows[i].Cells["width"].Value),
                 Length = Convert.ToDouble(grid_cortes.Rows[i].Cells["lenght"].Value),
                 Msi = Convert.ToDouble(grid_cortes.Rows[i].Cells["msi"].Value),
-                Orden = Convert.ToInt32(txt_numeroOC.Text),
-                CodePerson = codePerson // Safely assign the value
+                Orden = Convert.ToInt32(txt_numeroOC.Text)
             };
             Cortes.Add(corte);
         }
@@ -896,7 +880,7 @@ public partial class FrmOrdenCorte : Form
         var items = rowMaestro.Row.GetChildRows(R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS);
 
         // Solución: Convertir cada DataRow modificado en un objeto RolloCortado
-        List<RolloCortado> Lista = items
+        List<RolloCortado> Lista = [.. items
             .Where(h => h.RowState == DataRowState.Modified)
             .Select(h => new RolloCortado
             {
@@ -905,8 +889,7 @@ public partial class FrmOrdenCorte : Form
                 UniqueCode = h["unique_code"]?.ToString() ?? string.Empty,
                 Status = h["status"]?.ToString() ?? string.Empty,
                 Code_Person = h["code_person"]?.ToString() ?? string.Empty
-            })
-            .ToList();
+            })];
 
         //actualiza la base de datos.
         Service.Update_Items_Orden_Corte(Lista);
@@ -921,7 +904,6 @@ public partial class FrmOrdenCorte : Form
         bot_editOrden.Enabled = true;
         bot_imprimir.Enabled = true;
         bot_exportar.Enabled = true;
-        bot_etiquetar.Enabled = true;
         btn_buscar_orden.Enabled = true;
         bot_buscarOrders.Enabled = true;
         bot_cancelar.Enabled = false;
@@ -1076,7 +1058,6 @@ public partial class FrmOrdenCorte : Form
         bot_anterior.Enabled = true;
         bot_accion.Enabled = true;
         bot_imprimir.Enabled = true;
-        bot_etiquetar.Enabled = true;
         bot_exportar.Enabled = true;
         bot_editOrden.Enabled = true;
         bot_buscarOrders.Enabled = true;
@@ -1092,8 +1073,7 @@ public partial class FrmOrdenCorte : Form
         btn_delete_row_corte.Enabled = false;
         btn_buscar_orden.Enabled = true;
         btn_generar_txt.Enabled = true;
-        btn_datosDocAprob.Enabled = true;
-
+       
         //controles del formulario.
         txt_fecha_emision.Enabled = false;
         txt_fecha_produccion.Enabled = false;
@@ -1540,7 +1520,7 @@ public partial class FrmOrdenCorte : Form
             DtItems = Ds.Tables["DtMaster"]!
         };
         fbuscador.ShowDialog();
-        if (fbuscador.Orden != null)
+        if (fbuscador.Orden != null && fbuscador.Orden != "")
         {
             int busqueda = BsMaster.Find("numero", fbuscador.Orden);
             if (busqueda > 0)
@@ -1550,7 +1530,7 @@ public partial class FrmOrdenCorte : Form
         }
     }
 
-    private void opt_modif_orden_Click(object sender, EventArgs e)
+    private void Opt_modif_orden_Click(object sender, EventArgs e)
     {
         //configurar la barra de herramientas
         bot_guardar.Enabled = true;
@@ -1562,7 +1542,6 @@ public partial class FrmOrdenCorte : Form
         bot_editOrden.Enabled = false;
         bot_imprimir.Enabled = false;
         bot_exportar.Enabled = false;
-        bot_etiquetar.Enabled = false;
         btn_buscar_orden.Enabled = false;
         bot_buscarOrders.Enabled = false;
         bot_cancelar.Enabled = true;

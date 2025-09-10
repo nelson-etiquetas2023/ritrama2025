@@ -26,12 +26,13 @@ namespace Ritrama2025.Forms.Otros
             entidades = new()
                 {
                     { "Transporte", ("transport_id", "transport_name", servicioStatic.SaveTransportEntity) },
-                    { "Chofer", ("chofer_id", "chofer_name", servicioStatic.SaveChoferEntity) },
-                    { "Camion", ("placas_id", "camion_name", servicioStatic.SaveCamionEntity) },
+                    { "chofer", ("chofer_id", "chofer_name", servicioStatic.SaveChoferEntity) },
+                    { "camion", ("placas_id", "camion_name", servicioStatic.SaveCamionEntity) },
                     { "Persona", ("person_id", "person_name", servicioStatic.SavePersonEntity) },
                     { "Proveedor", ("proveedor_id", "proveedor_name", servicioStatic.SaveProvaiderEntity) },
                     { "operadores", ("operador_id", "nombre", servicioStatic.SaveOperatorEntity) },
-                    { "clientes", ("customer_id", "customer_name", servicioStatic.SaveCustomerEntity) }
+                    { "clientes", ("customer_id", "customer_name", servicioStatic.SaveCustomerEntity) },
+                    { "Vendedores", ("vendor_id", "vendor_name", servicioStatic.SaveVendedorEntity) }
                 };
         }
 

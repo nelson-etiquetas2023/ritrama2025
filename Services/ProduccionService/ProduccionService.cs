@@ -255,7 +255,7 @@ public class ProduccionService : IProduccionService
                 SqlCommand comando = new()
                 {
                     Connection = conn,
-                    CommandText = "INSERT INTO cortes (num,width,lenght,msi,orden,code_person) VALUES(@p1,@p2,@p3,@p4,@p5,@p6)",
+                    CommandText = "INSERT INTO cortes (num,width,lenght,msi,orden) VALUES(@p1,@p2,@p3,@p4,@p5)",
                     CommandType = CommandType.Text
                 };
                 comando.Parameters.AddWithValue("@p1", corte.Numero);
@@ -263,7 +263,7 @@ public class ProduccionService : IProduccionService
                 comando.Parameters.AddWithValue("@p3", corte.Length);
                 comando.Parameters.AddWithValue("@p4", corte.Msi);
                 comando.Parameters.AddWithValue("@p5", corte.Orden);
-                comando.Parameters.AddWithValue("@p6", corte.CodePerson);
+                //comando.Parameters.AddWithValue("@p6", corte.CodePerson);
                 comando.ExecuteNonQuery();
             }
         }

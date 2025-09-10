@@ -12,7 +12,7 @@ namespace Ritrama2025.Forms.Seleccion
         private static readonly Dictionary<string, (String IdCol, string DesCol, string TypeCol)> Columnas = new() 
         {
             ["clientes"] = ("customer_id", "customer_name",""),
-            ["vendedores"] = ("vendor_id", "vendor_name",""),
+            ["Vendedores"] = ("vendor_id", "vendor_name",""),
             ["Transporte"] = ("transport_id", "transport_name",""),
             ["chofer"] = ("chofer_id", "chofer_name",""),
             ["camion"] = ("placas_id", "camion_name",""),
@@ -131,7 +131,7 @@ namespace Ritrama2025.Forms.Seleccion
 
         private void Btn_add_new_Click(object sender, EventArgs e)
         {
-            if (Titulo is "Transporte" or "chofer" or "camion" or "Proveedor" or "Persona" or "Producto" or "operadores" or "clientes" ) 
+            if (Titulo is "Transporte" or "chofer" or "camion" or "Proveedor" or "Persona" or "Producto" or "operadores" or "clientes" or "Vendedores" ) 
             {
                 var fromNew = new Frm_AddNew()
                 {
