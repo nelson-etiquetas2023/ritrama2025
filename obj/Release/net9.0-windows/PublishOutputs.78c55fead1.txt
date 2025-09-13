@@ -2,11 +2,13 @@ C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Images\ADD_DOCUME
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Images\CLOSE_DOCUMENT.png
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Images\OPEN_DOCUMENT.png
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Images\ANULADO_DOCUMENTO.png
-C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Reports\Production\DsProduccion.xsd
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Reports\Inventario\Report_Inventarios_RollosCortados.rdlc
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Reports\Inventario\Report_Inventario_Master.rdlc
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Reports\Production\ReporteOC.rdlc
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Reports\RptImportFormat.rdlc
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Reports\RptConduceConPrecio.rdlc
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Reports\RptOC.rdlc
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Reports\Production\DsProduccion.xsd
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\appsettings.json
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Paquetes\TSCLIB.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Reports\Picking-List.rdlc

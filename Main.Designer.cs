@@ -86,7 +86,7 @@
             // 
             // panel_foto
             // 
-            panel_foto.BackColor = Color.DeepSkyBlue;
+            panel_foto.BackColor = Color.RoyalBlue;
             panel_foto.Controls.Add(lbl_user_name);
             panel_foto.Controls.Add(pictureBox1);
             panel_foto.Dock = DockStyle.Bottom;

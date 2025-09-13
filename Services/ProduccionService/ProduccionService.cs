@@ -720,4 +720,33 @@ public class ProduccionService : IProduccionService
             MessageBox.Show("Error al mopdificar los renglones de la orden de corte...error code: " + ex);
         }
     }
+
+    public void Update_Header_Documnet_OC(Orden orden)
+    {
+        try
+        {
+            using SqlConnection conn = new(StringConnex);
+
+            conn.Open();
+
+            using SqlCommand comando = new()
+            {
+                Connection = conn,
+                CommandText = "UPDATE orden_corte SET fecha = @p2, fecha_produccion = @p3 WHERE numero = @p1",
+                CommandType = CommandType.Text
+            };
+
+            comando.Parameters.AddWithValue("@p1", orden.Numero);
+            comando.Parameters.AddWithValue("@p2", orden.Fecha);
+            comando.Parameters.AddWithValue("@p3", orden.Fecha_produccion);
+
+            comando.ExecuteNonQuery();
+
+            conn.Close();
+        }
+        catch (SqlException ex)
+        {
+            MessageBox.Show("Error al mopdificar los renglones de la orden de corte...error code: " + ex);
+        }
+    }
 }
