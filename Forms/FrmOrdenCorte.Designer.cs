@@ -1125,7 +1125,7 @@
             btn_generar_rollos.Enabled = false;
             btn_generar_rollos.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_generar_rollos.Image = (Image)resources.GetObject("btn_generar_rollos.Image");
-            btn_generar_rollos.Location = new Point(646, 343);
+            btn_generar_rollos.Location = new Point(645, 336);
             btn_generar_rollos.Margin = new Padding(3, 2, 3, 2);
             btn_generar_rollos.Name = "btn_generar_rollos";
             btn_generar_rollos.Size = new Size(300, 59);

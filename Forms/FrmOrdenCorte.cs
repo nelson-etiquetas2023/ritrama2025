@@ -50,6 +50,7 @@ public partial class FrmOrdenCorte : Form
 
     private void Dtrollos_RowDeleted(object sender, DataRowChangeEventArgs e)
     {
+        if(EditMode == 2) return;
         if (e.Row.RowState == DataRowState.Deleted)
         {
             e.Row.RejectChanges();
@@ -58,6 +59,7 @@ public partial class FrmOrdenCorte : Form
 
     private void BsMaster_PositionChanged(object? sender, EventArgs e)
     {
+        if (EditMode == 2) return;
         if (BsMaster.Current is DataRowView drv)
         {
             var row = drv.Row;
@@ -71,11 +73,23 @@ public partial class FrmOrdenCorte : Form
 
     private async void FrmOrdenCorte_Load(object sender, EventArgs e)
     {
-        Ds = await Service.LoadDataOC();
-        Ds.RejectChanges();
-        Ds.AcceptChanges();
+        Ds = await Task.Run(() => Service.LoadDataOC());
+
+        this.Invoke(() =>
+        {
+            BsMaster.DataSource = Ds;
+            BsMaster.DataMember = "DtMaster";
+            BsDetails.DataSource = BsMaster;
+            BsDetails.DataMember = R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS;
+            BsDetails.ResetBindings(false);
+        });
+        
+        //Ds.AcceptChanges();
         Ds.Tables["Dtrollos"]!.RowDeleted += Dtrollos_RowDeleted;
         //Enlace a datos Encabezado de la Orden Corte.
+
+
+
         HeaderBinding();
         BindingRollos();
         BindingCortes();
@@ -85,8 +99,7 @@ public partial class FrmOrdenCorte : Form
 
     private void HeaderBinding()
     {
-        BsMaster.DataSource = Ds;
-        BsMaster.DataMember = "DtMaster";
+        
 
         txt_numeroOC.DataBindings.Add("Text", BsMaster, "numero");
         txt_fecha_emision.DataBindings.Add("Text", BsMaster, "fecha");
@@ -139,8 +152,7 @@ public partial class FrmOrdenCorte : Form
     private void BindingRollos()
     {
         //Enlace a datos de Grid-Rollos Cortados.
-        BsDetails.DataSource = BsMaster;
-        BsDetails.DataMember = R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS;
+        
 
         grid_items.AutoGenerateColumns = false;
         grid_items.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -503,7 +515,7 @@ public partial class FrmOrdenCorte : Form
     {
         //Actualiza lo real consumido del RollId 1
         //txt_real1_width.Text = txt_ancho_corte.Text;
-        txt_real1_length.Text = txt_largo_corte.Text;
+        //txt_real1_length.Text = txt_largo_corte.Text;
 
 
 
@@ -729,6 +741,7 @@ public partial class FrmOrdenCorte : Form
         double num = Convert.ToDouble(txt_long_cortar.Text) *
             Convert.ToDouble(txt_vueltas1.Value);
         txt_largo_corte.Text = num.ToString();
+        txt_real1_length.Text = num.ToString();
     }
 
     private void Txt_vueltas1_ValueChanged_1(object sender, EventArgs e)
@@ -755,22 +768,54 @@ public partial class FrmOrdenCorte : Form
     }
     private void BorrarRollosCortadosHijos()
     {
+
+
+
+
         if (BsMaster.Current == null) return;
 
-        // Obtener la fila maestra actual como DataRowView
-        DataRowView rowMaestro = (DataRowView)BsMaster.Current;
-
-        // Obtener todas las filas hijas relacionadas
-        DataRow[] filasHijas = rowMaestro.Row.GetChildRows(R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS);
-
-        // Eliminar cada fila hija
-        foreach (DataRow filaHija in filasHijas)
+        if (EditMode == 2) 
         {
-            filaHija.Delete();
+            ParentRow = (DataRowView)BsMaster.Current;
+        }
+            
+
+        BsMaster.EndEdit();
+        BsDetails.EndEdit();
+
+        Ds.EnforceConstraints = false;
+
+        // Obtener la fila maestra actual
+        var rowMaestro = (DataRowView)BsMaster.Current;
+        var filaMaestra = rowMaestro.Row;
+
+        // Obtener las filas hijas actuales (excluye eliminadas)
+        var filasHijas = filaMaestra.GetChildRows("FK_MASTER_DETAILS", DataRowVersion.Current);
+
+        foreach (var filaHija in filasHijas)
+        {
+            if (filaHija.RowState != DataRowState.Deleted && filaHija.RowState != DataRowState.Detached)
+            {
+                filaHija.Delete(); // Marca como Deleted
+            }
         }
 
-        // Actualizar el DataGridView
-        BsDetails.EndEdit();
+        // Reposicionar el maestro para forzar refresco del detalle
+        int idOrden = (int)filaMaestra["numero", DataRowVersion.Current];
+        int index = BsMaster.Find("numero", idOrden);
+        if (index >= 0)
+            BsMaster.Position = index;
+
+        BsDetails.ResetBindings(false);
+        Ds.EnforceConstraints = true;
+
+        Console.WriteLine($"🧹 Ítems eliminados para orden {idOrden} y UI actualizada.");
+
+
+
+
+
+
     }
 
     private void CREATE_HEADER_ORDEN()
@@ -937,7 +982,17 @@ public partial class FrmOrdenCorte : Form
         {
             Numero = Convert.ToInt16(txt_numeroOC.Text),
             Fecha = Convert.ToDateTime(txt_fecha_emision.Text),
-            Fecha_produccion = Convert.ToDateTime(txt_fecha_produccion.Text)
+            Fecha_produccion = Convert.ToDateTime(txt_fecha_produccion.Text),
+            Width_1 = Convert.ToDecimal(txt_width1.Text),
+            Lenght_1 = Convert.ToDecimal(txt_length1.Text),
+            Util1_Real_Width = Convert.ToDouble(txt_real1_width.Text),
+            Util1_real_Lenght = Convert.ToDouble(txt_real1_length.Text),
+            Rest1_width = Convert.ToDouble(txt_matrest1_width.Text),
+            Rest2_lenght = Convert.ToDouble(txt_matrest1_lenght.Text),
+            Product_id = txt_product_id.Text.ToString(),
+            Desperdicio = chk_desperdicio1.Checked,
+            operador_id = Guid.Parse(txt_operador_id.Text),
+            Customer_Id = Guid.Parse(txt_cust_id.Text),
         };
 
         //Cambios en los rollos
@@ -1672,11 +1727,31 @@ public partial class FrmOrdenCorte : Form
         //cambiar fecha.
         txt_fecha_emision.Enabled = true;
         txt_fecha_produccion.Enabled = true;
+        //desperdicio
+        chk_desperdicio1.Enabled = true;
+        //grid de cortes
+        grid_cortes.ReadOnly = false;
 
-
+        //ICONO DE EDICION
         label_ModoEdition.Visible = true;
         ICON_EDITMODE.Visible = true;
 
+        //operador
+        btn_buscar_operador.Enabled = true;
+
+        //cliente
+        btn_buscar_customer.Enabled = true;
+        txt_sellOrder.ReadOnly = false;
+
+        //botones de corte.
+        btn_add_row_corte.Enabled = true;
+        btn_delete_row_corte.Enabled = true;
+
+        //longitud a cortar  
+        txt_long_cortar.ReadOnly = false;
+        txt_vueltas1.Enabled = true;
+
+        btn_generar_rollos.Enabled = true;
         EditMode = 2;
 
     }

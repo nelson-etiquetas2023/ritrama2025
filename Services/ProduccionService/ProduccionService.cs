@@ -76,19 +76,20 @@ public class ProduccionService : IProduccionService
         try
         {
             //limpiar el dataset para segundas cargas.
-            if (Ds.Tables.Count > 0)
-            {
-                Ds.Relations.Clear();     // Elimina todas las relaciones (DataRelation)
-                foreach (DataTable table in Ds.Tables)
-                {
-                    table.Constraints.Clear(); // Elimina las restricciones (PrimaryKey, ForeignKey, Unique, etc.)
-                }
-                Ds.Tables.Clear();
-                Ds.AcceptChanges();
-            }
+            //if (Ds.Tables.Count > 0)
+            //{
+            //    Ds.Relations.Clear();     // Elimina todas las relaciones (DataRelation)
+            //    foreach (DataTable table in Ds.Tables)
+            //    {
+            //        table.Constraints.Clear(); // Elimina las restricciones (PrimaryKey, ForeignKey, Unique, etc.)
+            //    }
+            //    Ds.Tables.Clear();
+            //    Ds.AcceptChanges();
+            //}
 
-
-          
+            Ds.Relations.Clear();
+            Ds.Clear(); 
+            Ds.AcceptChanges();
             var tablas = new[]
             {
                 new { Nombre = "DtMaster", Sql = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_OC_HEADER },
@@ -122,7 +123,7 @@ public class ProduccionService : IProduccionService
             // Relación entre master y Rollos.
             var relacion = new DataRelation(R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS,
                             Ds.Tables["DtMaster"]!.Columns["numero"]!,
-                            Ds.Tables["DtRollos"]!.Columns["numero"]!);
+                            Ds.Tables["DtRollos"]!.Columns["numero"]!,false);
 
             if (!Ds.Relations.Contains(R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS))
                 Ds.Relations.Add(relacion);
@@ -130,8 +131,6 @@ public class ProduccionService : IProduccionService
             var hijos = Ds.Tables["Dtrollos"]!.AsEnumerable();
             var padres = Ds.Tables["Dtmaster"]!.AsEnumerable();
             
-
-
             var hijosHuerfanos = hijos
                .Where(h => !padres.Any(p => p.Field<int>("numero") == h.Field<int>("numero")))
                .ToList();
@@ -141,8 +140,8 @@ public class ProduccionService : IProduccionService
                 MessageBox.Show($"⚠️ Hay {hijosHuerfanos.Count} registros huérfanos en la tabla DetalleOrden.");
             }
 
-            relacion.ChildKeyConstraint!.DeleteRule = Rule.None;
-            relacion.ChildKeyConstraint!.UpdateRule = Rule.None;
+            //relacion.ChildKeyConstraint!.DeleteRule = Rule.None;
+            //relacion.ChildKeyConstraint!.UpdateRule = Rule.None;
 
             DataColumn? ParentCol0 = Ds.Tables["DtMaster"]?.Columns["numero"];
             DataColumn? ChildCol0 = Ds.Tables["DtCortes"]?.Columns["orden"];
@@ -726,21 +725,31 @@ public class ProduccionService : IProduccionService
         try
         {
             using SqlConnection conn = new(StringConnex);
-
             conn.Open();
-
+            //GUARDAR EL ENCABEZADO DE LA ORDEN.
             using SqlCommand comando = new()
             {
                 Connection = conn,
-                CommandText = "UPDATE orden_corte SET fecha = @p2, fecha_produccion = @p3 WHERE numero = @p1",
+                CommandText = "UPDATE orden_corte SET fecha=@p2,fecha_produccion=@p3,width_1=@p4,lenght_1=@p5,util1_real_width=@p6,util1_real_lenght=@p7,rest1_width=@p8,rest1_lenght=@p9,product_id=@p10,desperdicio=@p11,operador_id=@p12,customer_id=@p13 WHERE numero=@p1",
                 CommandType = CommandType.Text
             };
-
             comando.Parameters.AddWithValue("@p1", orden.Numero);
             comando.Parameters.AddWithValue("@p2", orden.Fecha);
             comando.Parameters.AddWithValue("@p3", orden.Fecha_produccion);
-
+            comando.Parameters.AddWithValue("@p4", orden.Width_1);
+            comando.Parameters.AddWithValue("@p5", orden.Lenght_1);
+            comando.Parameters.AddWithValue("@p6", orden.Util1_Real_Width);
+            comando.Parameters.AddWithValue("@p7", orden.Util1_real_Lenght);
+            comando.Parameters.AddWithValue("@p8", orden.Rest1_width);
+            comando.Parameters.AddWithValue("@p9", orden.Rest2_lenght);
+            comando.Parameters.AddWithValue("@p10", orden.Product_id);
+            comando.Parameters.AddWithValue("@p11", orden.Desperdicio);
+            comando.Parameters.AddWithValue("@p12", orden.operador_id);
+            comando.Parameters.AddWithValue("@p13", orden.Customer_Id);
             comando.ExecuteNonQuery();
+            //GUARDAR LOS CORTES
+
+
 
             conn.Close();
         }
