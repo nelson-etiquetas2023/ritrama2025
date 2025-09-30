@@ -43,7 +43,7 @@ namespace Ritrama2025
                 service.AddScoped<IExportDataService, ExportDataService>();
                 service.AddScoped<IProductsService, ProductsService>();
                 service.AddScoped<IInventarioService, InventarioService>();
-                    service.AddSingleton<FormManager>();
+                service.AddSingleton<FormManager>();
                 //injecccion de dependencias de los formularios.
                 service.AddSingleton<Main>();
                 service.AddTransient<FrmMateriaPrima>();
@@ -52,7 +52,6 @@ namespace Ritrama2025
                 service.AddTransient<FrmOrdenCorte>();
                 service.AddTransient<FrmProductos>();
                 service.AddTransient<Frm_Inventarios>();
-
                 }).Build();
 
             ServiceLocator.Init(host.Services);

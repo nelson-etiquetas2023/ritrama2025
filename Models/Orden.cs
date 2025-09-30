@@ -3,7 +3,7 @@ namespace Ritrama2025.Models
 {
     public class Orden
     {
-        public List<Roll_Details> rollos = null!;
+        public List<RolloCortado>? rollos;
         public List<Corte>? Cortes;
         public int Numero { get; set; }
         public DateTime Fecha { get; set; }
@@ -51,7 +51,7 @@ namespace Ritrama2025.Models
         public double Real_usado_r1 { get; set; }
         public double Real_usado_r2 { get; set; }
         public bool Rollo_unificado { get; set; }
-        public Guid operador_id { get; set; }
+        public Guid Operador_id { get; set; }
         public string Nombre_operador { get; set; } = null!;
         public string Rollid_oculto { get; set; } = null!;
         public string Restante_rollid1 { get; set; } = null!;
@@ -65,6 +65,7 @@ namespace Ritrama2025.Models
         public string Note { get; set; } = null!;
         public string SellOrder { get; set; } = null!;
         public bool Desperdicio { get; set; }
+        public string Master_Tipo { get; set; } = null!;
     }
 }
 

@@ -190,3 +190,4 @@ C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.Buscado
 C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.Otros.Frm_DetailsConsumos.resources
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\Reports\Inventario\Report_Inventarios_RollosCortados.rdlc
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\Reports\Inventario\Report_Inventario_Master.rdlc
+C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.Otros.Frm_ImportacionExcel.resources

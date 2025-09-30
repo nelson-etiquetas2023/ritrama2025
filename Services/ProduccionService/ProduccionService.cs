@@ -75,20 +75,13 @@ public class ProduccionService : IProduccionService
     {
         try
         {
-            //limpiar el dataset para segundas cargas.
-            //if (Ds.Tables.Count > 0)
-            //{
-            //    Ds.Relations.Clear();     // Elimina todas las relaciones (DataRelation)
-            //    foreach (DataTable table in Ds.Tables)
-            //    {
-            //        table.Constraints.Clear(); // Elimina las restricciones (PrimaryKey, ForeignKey, Unique, etc.)
-            //    }
-            //    Ds.Tables.Clear();
-            //    Ds.AcceptChanges();
-            //}
-
+            Ds.RejectChanges();
             Ds.Relations.Clear();
-            Ds.Clear(); 
+            foreach (DataTable table in Ds.Tables)
+            {
+                table.Clear(); // Elimina todas las filas
+            }
+            Ds.Tables.Clear();
             Ds.AcceptChanges();
             var tablas = new[]
             {
@@ -128,28 +121,11 @@ public class ProduccionService : IProduccionService
             if (!Ds.Relations.Contains(R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS))
                 Ds.Relations.Add(relacion);
 
-            var hijos = Ds.Tables["Dtrollos"]!.AsEnumerable();
-            var padres = Ds.Tables["Dtmaster"]!.AsEnumerable();
-            
-            var hijosHuerfanos = hijos
-               .Where(h => !padres.Any(p => p.Field<int>("numero") == h.Field<int>("numero")))
-               .ToList();
-
-            if (hijosHuerfanos.Count != 0)
-            {
-                MessageBox.Show($"⚠️ Hay {hijosHuerfanos.Count} registros huérfanos en la tabla DetalleOrden.");
-            }
-
-            //relacion.ChildKeyConstraint!.DeleteRule = Rule.None;
-            //relacion.ChildKeyConstraint!.UpdateRule = Rule.None;
-
             DataColumn? ParentCol0 = Ds.Tables["DtMaster"]?.Columns["numero"];
             DataColumn? ChildCol0 = Ds.Tables["DtCortes"]?.Columns["orden"];
 
             DataRelation Despacho_Cortes = new("FK_ENCABEZADO_CORTES", ParentCol0!, ChildCol0!, false);
             Ds.Relations.Add(Despacho_Cortes);
-
-            Ds.AcceptChanges();
             return true;
         }
         catch (ConstraintException ex)
@@ -171,7 +147,7 @@ public class ProduccionService : IProduccionService
             SqlCommand comando = new()
             {
                 Connection = conn,
-                CommandText = "INSERT INTO orden_corte (numero,fecha,fecha_produccion,product_id,rollid_1,width_1,lenght_1,rollid_2,width_2,lenght_2,anulada,procesado,CloseDocument,tot_inch_ancho,longitud_cortar,cortes_ancho,cortes_largo,cant_rollos,decartable1_pies,lenght_master_real,util1_real_width,util1_real_lenght,descartable2_pies" + ",util2_real_width,util2_real_lenght,lenght_master_real2,rest1_width,rest1_lenght,rest2_width,rest2_lenght,cant_rollos2,cortes_largo2,step,lastupdate,fecha_autorize,toautorize,notes,tipo_mov1,tipo_mov2,plus1_pies,plus2_pies,rollo_unificado,length_entrada,real_usado_r1,real_usado_r2,restante_rollid1,restante_rollid2,resta_entrada,total_salida,lenght_entrada,customer_id,operador_id,SellOrder,desperdicio) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27,@p28,@p29,@p30,@p31,@p32,@p33,@p34,@p35,@p36,@p37,@p38,@p39,@p40,@p41,@p44,@p45,@p46,@p47,@p48,@p49,@p50,@p51,@p52,@customer_id,@operador_id,@SellOrder,@desper)",
+                CommandText = "INSERT INTO orden_corte (numero,fecha,fecha_produccion,product_id,rollid_1,width_1,lenght_1,rollid_2,width_2,lenght_2,anulada,procesado,CloseDocument,tot_inch_ancho,longitud_cortar,cortes_ancho,cortes_largo,cant_rollos,decartable1_pies,lenght_master_real,util1_real_width,util1_real_lenght,descartable2_pies" + ",util2_real_width,util2_real_lenght,lenght_master_real2,rest1_width,rest1_lenght,rest2_width,rest2_lenght,cant_rollos2,cortes_largo2,step,lastupdate,fecha_autorize,toautorize,notes,tipo_mov1,tipo_mov2,plus1_pies,plus2_pies,rollo_unificado,length_entrada,real_usado_r1,real_usado_r2,restante_rollid1,restante_rollid2,resta_entrada,total_salida,lenght_entrada,customer_id,operador_id,SellOrder,desperdicio,master_tipo) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27,@p28,@p29,@p30,@p31,@p32,@p33,@p34,@p35,@p36,@p37,@p38,@p39,@p40,@p41,@p44,@p45,@p46,@p47,@p48,@p49,@p50,@p51,@p52,@customer_id,@operador_id,@SellOrder,@desper,@MasterTipo)",
                 CommandType = CommandType.Text
             };
             conn.Open();
@@ -227,13 +203,14 @@ public class ProduccionService : IProduccionService
             comando.Parameters.AddWithValue("@p52", 0);
             comando.Parameters.AddWithValue("@sellOrder",OrdenCorte.SellOrder);
             comando.Parameters.AddWithValue("@desper", OrdenCorte.Desperdicio);
+            comando.Parameters.AddWithValue("@MasterTipo", OrdenCorte.Master_Tipo);
             comando.Parameters.Add(new SqlParameter("@customer_id", SqlDbType.UniqueIdentifier)
             {
                 Value = OrdenCorte.Customer_Id
             });
             comando.Parameters.Add(new SqlParameter("@operador_id", SqlDbType.UniqueIdentifier)
             {
-                Value = OrdenCorte.operador_id
+                Value = OrdenCorte.Operador_id
             });
 
             comando.ExecuteNonQuery();
@@ -284,7 +261,7 @@ public class ProduccionService : IProduccionService
                 SqlCommand comando = new()
                 {
                     Connection = conn,
-                    CommandText = "INSERT INTO rolls_details (product_id,product_name,roll_number,unique_code,splice,width,large,msi,roll_id,code_person,status,disponible,ubic,numero) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14)",
+                    CommandText = "INSERT INTO rolls_details (product_id,product_name,roll_number,unique_code,splice,width,large,msi,roll_id,code_person,status,disponible,ubic,numero) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,1,@p13,@p14)",
                     CommandType = CommandType.Text
                 };
                 comando.Parameters.AddWithValue("@p1", roll.Product_Id);
@@ -298,12 +275,13 @@ public class ProduccionService : IProduccionService
                 comando.Parameters.AddWithValue("@p9", roll.Roll_Id);
                 comando.Parameters.AddWithValue("@p10", roll.Code_Person);
                 comando.Parameters.AddWithValue("@p11", roll.Status);
-                comando.Parameters.AddWithValue("@p12", true);
+                //comando.Parameters.AddWithValue("@p12", true);
                 comando.Parameters.AddWithValue("@p13", roll.Ubicacion);
                 comando.Parameters.AddWithValue("@p14", roll.Numero);
+                
+
                 comando.ExecuteNonQuery();
             }
-            MessageBox.Show("La Orden de Corte se guardo correctamente...");
         }
         catch (SqlException ex)
         {
@@ -563,7 +541,7 @@ public class ProduccionService : IProduccionService
             SqlParameter p1 = new("@orden", orden.Numero);
             SqlParameter p2 = new("@fecha", orden.Fecha);
             SqlParameter p3 = new("@fecha_pro", orden.Fecha_produccion);
-            SqlParameter p4 = new("@oper", orden.operador_id);
+            SqlParameter p4 = new("@oper", orden.Operador_id);
             SqlParameter p5 = new("@sellOrder", orden.SellOrder);
             SqlParameter p6 = new("@desper", orden.Desperdicio);
             SqlParameter p7 = new("@CustId", orden.Customer_Id);
@@ -730,7 +708,7 @@ public class ProduccionService : IProduccionService
             using SqlCommand comando = new()
             {
                 Connection = conn,
-                CommandText = "UPDATE orden_corte SET fecha=@p2,fecha_produccion=@p3,width_1=@p4,lenght_1=@p5,util1_real_width=@p6,util1_real_lenght=@p7,rest1_width=@p8,rest1_lenght=@p9,product_id=@p10,desperdicio=@p11,operador_id=@p12,customer_id=@p13 WHERE numero=@p1",
+                CommandText = "UPDATE orden_corte SET fecha=@p2,fecha_produccion=@p3,width_1=@p4,lenght_1=@p5,util1_real_width=@p6,util1_real_lenght=@p7,rest1_width=@p8,rest1_lenght=@p9,product_id=@p10,desperdicio=@p11,operador_id=@p12,customer_id=@p13,cortes_largo=@p14,longitud_cortar=@p15,cortes_ancho=@p16,cant_rollos=@p17,sellOrder=@p18,rollid_1=@p19 WHERE numero=@p1",
                 CommandType = CommandType.Text
             };
             comando.Parameters.AddWithValue("@p1", orden.Numero);
@@ -744,10 +722,80 @@ public class ProduccionService : IProduccionService
             comando.Parameters.AddWithValue("@p9", orden.Rest2_lenght);
             comando.Parameters.AddWithValue("@p10", orden.Product_id);
             comando.Parameters.AddWithValue("@p11", orden.Desperdicio);
-            comando.Parameters.AddWithValue("@p12", orden.operador_id);
+            comando.Parameters.AddWithValue("@p12", orden.Operador_id);
             comando.Parameters.AddWithValue("@p13", orden.Customer_Id);
+            comando.Parameters.AddWithValue("@p14", orden.Cortes_Largo);
+            comando.Parameters.AddWithValue("@p15", orden.Longitud_Cortar);
+            comando.Parameters.AddWithValue("@p16", orden.Cortes_Ancho);
+            comando.Parameters.AddWithValue("@p17", orden.Cantidad_Rollos);
+            comando.Parameters.AddWithValue("@p18", orden.SellOrder);
+            comando.Parameters.AddWithValue("@p19", orden.Rollid_1);
+
+
             comando.ExecuteNonQuery();
-            //GUARDAR LOS CORTES
+            //BORRAR LOS CORTES ANTERIORES
+            using SqlCommand comando_borrar_cortes = new()
+            {
+                Connection = conn,
+                CommandText = "DELETE FROM cortes WHERE orden=@p1",
+                CommandType = CommandType.Text
+            };
+            comando_borrar_cortes.Parameters.AddWithValue("@p1", orden.Numero);
+            comando_borrar_cortes.ExecuteNonQuery();
+
+            //GUARDAR LOS NUEVOS CORTES.
+            foreach (var corte in orden.Cortes!)
+            {
+                using SqlCommand comando_insert_cortes = new()
+                {
+                    Connection = conn,
+                    CommandText = "INSERT INTO cortes (num,width,lenght,msi,orden) VALUES(@p1,@p2,@p3,@p4,@p5)",
+                    CommandType = CommandType.Text
+                };
+                comando_insert_cortes.Parameters.AddWithValue("@p1", corte.Numero);
+                comando_insert_cortes.Parameters.AddWithValue("@p2", corte.Width);
+                comando_insert_cortes.Parameters.AddWithValue("@p3", corte.Length);
+                comando_insert_cortes.Parameters.AddWithValue("@p4", corte.Msi);
+                comando_insert_cortes.Parameters.AddWithValue("@p5", corte.Orden);
+                comando_insert_cortes.ExecuteNonQuery();
+            }
+            //BORRAR LOS ROLLOS CORTADOS ANTERIORES.
+            using SqlCommand comando_borrar_rollos = new()
+            {
+                Connection = conn,
+                CommandText = "DELETE FROM rolls_details WHERE numero=@p1",
+                CommandType = CommandType.Text
+            };
+            comando_borrar_rollos.Parameters.AddWithValue("@p1", orden.Numero);
+            comando_borrar_rollos.ExecuteNonQuery();
+
+            //INGRESAR LOS NUEVOS ROLLOS CORTADOS
+            foreach (var item in orden.rollos!)
+            {
+                using SqlCommand comando_rolls = new()
+                {
+                    Connection = conn,
+                    CommandText = "INSERT INTO rolls_details (numero,roll_number,product_id,product_name,roll_id,width,large,msi,unique_code,splice,code_person,status,ubic,ratio,rollid_oculto,despacho,fecha,fecha_despacho) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,'nt',0,'','',GETDATE(),GETDATE())",
+                    CommandType = CommandType.Text
+                };
+                comando_rolls.Parameters.AddWithValue("@p1", item.Numero);
+                comando_rolls.Parameters.AddWithValue("@p2", item.RollNumber);
+                comando_rolls.Parameters.AddWithValue("@p3", item.Product_Id);
+                comando_rolls.Parameters.AddWithValue("@p4", item.Product_Name);
+                comando_rolls.Parameters.AddWithValue("@p5", item.Roll_Id);
+                comando_rolls.Parameters.AddWithValue("@p6", item.Width);
+                comando_rolls.Parameters.AddWithValue("@p7", item.Length);
+                comando_rolls.Parameters.AddWithValue("@p8", item.Msi);
+                comando_rolls.Parameters.AddWithValue("@p9", item.UniqueCode);
+                comando_rolls.Parameters.AddWithValue("@p10", item.Splice);
+                comando_rolls.Parameters.AddWithValue("@p11", item.Code_Person);
+                comando_rolls.Parameters.AddWithValue("@p12", item.Status);
+                comando_rolls.ExecuteNonQuery();
+
+            }
+
+
+
 
 
 
@@ -755,7 +803,7 @@ public class ProduccionService : IProduccionService
         }
         catch (SqlException ex)
         {
-            MessageBox.Show("Error al mopdificar los renglones de la orden de corte...error code: " + ex);
+            MessageBox.Show("Error al modificar la orden de corte...error code: " + ex);
         }
     }
 }

@@ -230,6 +230,8 @@
             txt_width.Name = "txt_width";
             txt_width.Size = new Size(215, 25);
             txt_width.TabIndex = 44;
+            txt_width.Enter += Txt_width_Enter;
+            txt_width.KeyPress += Txt_width_KeyPress;
             txt_width.KeyUp += Txt_width_KeyUp;
             // 
             // label3
@@ -249,6 +251,8 @@
             txt_lenght.Name = "txt_lenght";
             txt_lenght.Size = new Size(215, 25);
             txt_lenght.TabIndex = 46;
+            txt_lenght.Enter += Txt_lenght_Enter;
+            txt_lenght.KeyPress += Txt_lenght_KeyPress;
             txt_lenght.KeyUp += Txt_lenght_KeyUp;
             // 
             // txt_msi
@@ -256,6 +260,7 @@
             txt_msi.Location = new Point(129, 284);
             txt_msi.Margin = new Padding(3, 4, 3, 4);
             txt_msi.Name = "txt_msi";
+            txt_msi.ReadOnly = true;
             txt_msi.Size = new Size(215, 25);
             txt_msi.TabIndex = 47;
             // 
@@ -286,6 +291,8 @@
             txt_core.Name = "txt_core";
             txt_core.Size = new Size(215, 25);
             txt_core.TabIndex = 50;
+            txt_core.Enter += Txt_core_Enter;
+            txt_core.KeyPress += Txt_core_KeyPress;
             // 
             // txt_splice
             // 
@@ -294,6 +301,8 @@
             txt_splice.Name = "txt_splice";
             txt_splice.Size = new Size(215, 25);
             txt_splice.TabIndex = 51;
+            txt_splice.Enter += Txt_splice_Enter;
+            txt_splice.KeyPress += Txt_splice_KeyPress;
             // 
             // label6
             // 
@@ -332,6 +341,7 @@
             txt_rollid.Name = "txt_rollid";
             txt_rollid.Size = new Size(215, 25);
             txt_rollid.TabIndex = 54;
+            txt_rollid.Enter += Txt_rollid_Enter;
             // 
             // label9
             // 
@@ -350,6 +360,7 @@
             txt_ubic.Name = "txt_ubic";
             txt_ubic.Size = new Size(215, 25);
             txt_ubic.TabIndex = 56;
+            txt_ubic.Enter += Txt_ubic_Enter;
             // 
             // label10
             // 
@@ -368,6 +379,8 @@
             txt_cant.Name = "txt_cant";
             txt_cant.Size = new Size(215, 25);
             txt_cant.TabIndex = 58;
+            txt_cant.Enter += Txt_cant_Enter;
+            txt_cant.KeyPress += Txt_cant_KeyPress;
             // 
             // btn_guardar
             // 

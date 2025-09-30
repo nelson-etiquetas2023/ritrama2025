@@ -16,13 +16,13 @@ namespace Ritrama2025.Forms.Seleccion
         public ProductMAP Producto { get; set; } = new ProductMAP();
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string TypeProduct { get; set; } = "";
-        
+
         readonly IServiceCommonData ServiceData;
 
         public FrmProductsInsert(IServiceCommonData serviceData)
         {
             InitializeComponent();
-            
+
             this.ServiceData = serviceData;
         }
 
@@ -154,6 +154,116 @@ namespace Ritrama2025.Forms.Seleccion
         private void Btn_cancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void Txt_width_KeyPress(object sender, KeyPressEventArgs e)
+        { // Permitir tecla de retroceso (Backspace)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Txt_lenght_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Txt_core_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Txt_splice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Txt_cant_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Txt_width_Enter(object sender, EventArgs e)
+        {
+            var txt = (TextBox)sender;
+
+            if (string.IsNullOrWhiteSpace(txt.Text))
+                txt.Text = "0";
+
+            txt.BeginInvoke(new Action(() => txt.SelectAll()));
+        }
+
+        private void Txt_lenght_Enter(object sender, EventArgs e)
+        {
+            var txt = (TextBox)sender;
+
+            if (string.IsNullOrWhiteSpace(txt.Text))
+                txt.Text = "0";
+
+            txt.BeginInvoke(new Action(() => txt.SelectAll()));
+        }
+
+        private void Txt_core_Enter(object sender, EventArgs e)
+        {
+            var txt = (TextBox)sender;
+
+            if (string.IsNullOrWhiteSpace(txt.Text))
+                txt.Text = "0";
+
+            txt.BeginInvoke(new Action(() => txt.SelectAll()));
+        }
+
+        private void Txt_splice_Enter(object sender, EventArgs e)
+        {
+            var txt = (TextBox)sender;
+
+            if (string.IsNullOrWhiteSpace(txt.Text))
+                txt.Text = "0";
+
+            txt.BeginInvoke(new Action(() => txt.SelectAll()));
+        }
+
+        private void Txt_rollid_Enter(object sender, EventArgs e)
+        {
+            var txt = (TextBox)sender;
+
+            if (string.IsNullOrWhiteSpace(txt.Text))
+                txt.Text = "0";
+
+            txt.BeginInvoke(new Action(() => txt.SelectAll()));
+        }
+
+        private void Txt_ubic_Enter(object sender, EventArgs e)
+        {
+            var txt = (TextBox)sender;
+
+            if (string.IsNullOrWhiteSpace(txt.Text))
+                txt.Text = "0";
+
+            txt.BeginInvoke(new Action(() => txt.SelectAll()));
+        }
+
+        private void Txt_cant_Enter(object sender, EventArgs e)
+        {
+            var txt = (TextBox)sender;
+
+            if (string.IsNullOrWhiteSpace(txt.Text))
+                txt.Text = "0";
+
+            txt.BeginInvoke(new Action(() => txt.SelectAll()));
         }
     }
 }

@@ -160,6 +160,11 @@
             label35 = new Label();
             txt_sellOrder = new TextBox();
             txt_real1_width = new TextBox();
+            panel_loading = new Panel();
+            text_loadingindicator = new Label();
+            pictureBox7 = new PictureBox();
+            txt_tipo_master = new TextBox();
+            label33 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ICON_EDITMODE).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
@@ -175,6 +180,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txt_vueltas1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txt_vueltas2).BeginInit();
+            panel_loading.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -314,7 +321,6 @@
             bot_accion.Name = "bot_accion";
             bot_accion.Size = new Size(120, 30);
             bot_accion.Text = "Acciones";
-            bot_accion.Click += Bot_accion_Click;
             // 
             // opt_create_document
             // 
@@ -580,7 +586,7 @@
             txt_plus1.Margin = new Padding(3, 2, 3, 2);
             txt_plus1.Name = "txt_plus1";
             txt_plus1.ReadOnly = true;
-            txt_plus1.Size = new Size(38, 25);
+            txt_plus1.Size = new Size(22, 25);
             txt_plus1.TabIndex = 16;
             txt_plus1.TextChanged += Txt_plus1_TextChanged;
             txt_plus1.KeyUp += Txt_plus1_KeyUp;
@@ -598,11 +604,11 @@
             // txt_menos1
             // 
             txt_menos1.Font = new Font("Segoe UI", 9.75F);
-            txt_menos1.Location = new Point(460, 187);
+            txt_menos1.Location = new Point(443, 188);
             txt_menos1.Margin = new Padding(3, 2, 3, 2);
             txt_menos1.Name = "txt_menos1";
             txt_menos1.ReadOnly = true;
-            txt_menos1.Size = new Size(38, 25);
+            txt_menos1.Size = new Size(24, 25);
             txt_menos1.TabIndex = 18;
             txt_menos1.TextChanged += Txt_menos1_TextChanged;
             txt_menos1.KeyUp += Txt_menos1_KeyUp;
@@ -611,7 +617,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 9.75F);
-            label9.Location = new Point(459, 169);
+            label9.Location = new Point(443, 169);
             label9.Name = "label9";
             label9.Size = new Size(13, 17);
             label9.TabIndex = 17;
@@ -620,7 +626,7 @@
             // txt_real1
             // 
             txt_real1.Font = new Font("Segoe UI", 9.75F);
-            txt_real1.Location = new Point(504, 187);
+            txt_real1.Location = new Point(473, 188);
             txt_real1.Margin = new Padding(3, 2, 3, 2);
             txt_real1.Name = "txt_real1";
             txt_real1.ReadOnly = true;
@@ -631,7 +637,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 9.75F);
-            label10.Location = new Point(504, 169);
+            label10.Location = new Point(473, 169);
             label10.Name = "label10";
             label10.Size = new Size(72, 17);
             label10.TabIndex = 19;
@@ -641,7 +647,7 @@
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 9.75F);
-            label11.Location = new Point(71, 221);
+            label11.Location = new Point(60, 220);
             label11.Name = "label11";
             label11.Size = new Size(91, 17);
             label11.TabIndex = 21;
@@ -681,7 +687,7 @@
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 9.75F);
-            label12.Location = new Point(52, 248);
+            label12.Location = new Point(38, 245);
             label12.Name = "label12";
             label12.Size = new Size(113, 17);
             label12.TabIndex = 26;
@@ -811,7 +817,7 @@
             // 
             label17.AutoSize = true;
             label17.Font = new Font("Segoe UI", 9.75F);
-            label17.Location = new Point(52, 360);
+            label17.Location = new Point(44, 360);
             label17.Name = "label17";
             label17.Size = new Size(113, 17);
             label17.TabIndex = 44;
@@ -923,6 +929,7 @@
             // 
             // txt_operador_id
             // 
+            txt_operador_id.Enabled = false;
             txt_operador_id.Font = new Font("Noto Sans", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txt_operador_id.Location = new Point(14, 464);
             txt_operador_id.Margin = new Padding(3, 2, 3, 2);
@@ -983,6 +990,7 @@
             // 
             // txt_cust_id
             // 
+            txt_cust_id.Enabled = false;
             txt_cust_id.Font = new Font("Noto Sans", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txt_cust_id.Location = new Point(646, 406);
             txt_cust_id.Margin = new Padding(3, 2, 3, 2);
@@ -1118,14 +1126,15 @@
             grid_cortes.Size = new Size(300, 170);
             grid_cortes.TabIndex = 66;
             grid_cortes.CellEndEdit += Grid_cortes_CellEndEdit;
-            grid_cortes.EditingControlShowing += grid_cortes_EditingControlShowing;
+            grid_cortes.DataError += Grid_cortes_DataError;
+            grid_cortes.EditingControlShowing += Grid_cortes_EditingControlShowing;
             // 
             // btn_generar_rollos
             // 
             btn_generar_rollos.Enabled = false;
             btn_generar_rollos.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_generar_rollos.Image = (Image)resources.GetObject("btn_generar_rollos.Image");
-            btn_generar_rollos.Location = new Point(645, 336);
+            btn_generar_rollos.Location = new Point(645, 343);
             btn_generar_rollos.Margin = new Padding(3, 2, 3, 2);
             btn_generar_rollos.Name = "btn_generar_rollos";
             btn_generar_rollos.Size = new Size(300, 59);
@@ -1176,7 +1185,9 @@
             txt_long_cortar.Size = new Size(120, 25);
             txt_long_cortar.TabIndex = 71;
             txt_long_cortar.TextChanged += Txt_long_cortar_TextChanged;
-            txt_long_cortar.KeyPress += txt_long_cortar_KeyPress;
+            txt_long_cortar.Enter += Txt_long_cortar_Enter;
+            txt_long_cortar.KeyDown += Txt_long_cortar_KeyDown;
+            txt_long_cortar.KeyPress += Txt_long_cortar_KeyPress;
             txt_long_cortar.KeyUp += Txt_long_cortar_KeyUp;
             // 
             // label29
@@ -1456,6 +1467,7 @@
             txt_vueltas1.Size = new Size(120, 25);
             txt_vueltas1.TabIndex = 104;
             txt_vueltas1.ValueChanged += Txt_vueltas1_ValueChanged_1;
+            txt_vueltas1.Enter += Txt_vueltas1_Enter;
             txt_vueltas1.KeyUp += Txt_vueltas1_KeyUp_1;
             // 
             // txt_vueltas2
@@ -1614,11 +1626,67 @@
             txt_real1_width.Size = new Size(88, 25);
             txt_real1_width.TabIndex = 123;
             // 
+            // panel_loading
+            // 
+            panel_loading.BackColor = SystemColors.Window;
+            panel_loading.Controls.Add(text_loadingindicator);
+            panel_loading.Controls.Add(pictureBox7);
+            panel_loading.Location = new Point(399, 312);
+            panel_loading.Name = "panel_loading";
+            panel_loading.Size = new Size(200, 87);
+            panel_loading.TabIndex = 124;
+            panel_loading.Visible = false;
+            // 
+            // text_loadingindicator
+            // 
+            text_loadingindicator.AutoSize = true;
+            text_loadingindicator.Font = new Font("Russo One", 11.9999981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            text_loadingindicator.Location = new Point(90, 37);
+            text_loadingindicator.Name = "text_loadingindicator";
+            text_loadingindicator.Size = new Size(96, 19);
+            text_loadingindicator.TabIndex = 1;
+            text_loadingindicator.Text = "Loading...";
+            // 
+            // pictureBox7
+            // 
+            pictureBox7.BackColor = SystemColors.Control;
+            pictureBox7.Image = (Image)resources.GetObject("pictureBox7.Image");
+            pictureBox7.Location = new Point(13, 12);
+            pictureBox7.Name = "pictureBox7";
+            pictureBox7.Size = new Size(64, 64);
+            pictureBox7.SizeMode = PictureBoxSizeMode.AutoSize;
+            pictureBox7.TabIndex = 0;
+            pictureBox7.TabStop = false;
+            pictureBox7.WaitOnLoad = true;
+            // 
+            // txt_tipo_master
+            // 
+            txt_tipo_master.Font = new Font("Segoe UI", 9.75F);
+            txt_tipo_master.Location = new Point(553, 188);
+            txt_tipo_master.Margin = new Padding(3, 2, 3, 2);
+            txt_tipo_master.Name = "txt_tipo_master";
+            txt_tipo_master.ReadOnly = true;
+            txt_tipo_master.Size = new Size(77, 25);
+            txt_tipo_master.TabIndex = 125;
+            // 
+            // label33
+            // 
+            label33.AutoSize = true;
+            label33.Font = new Font("Segoe UI", 9.75F);
+            label33.Location = new Point(554, 167);
+            label33.Name = "label33";
+            label33.Size = new Size(82, 17);
+            label33.TabIndex = 126;
+            label33.Text = "Tipo Master:";
+            // 
             // FrmOrdenCorte
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1141, 844);
+            Controls.Add(label33);
+            Controls.Add(txt_tipo_master);
+            Controls.Add(panel_loading);
             Controls.Add(txt_real1_width);
             Controls.Add(label35);
             Controls.Add(txt_sellOrder);
@@ -1727,7 +1795,7 @@
             Font = new Font("Segoe UI", 9.75F);
             Margin = new Padding(3, 2, 3, 2);
             Name = "FrmOrdenCorte";
-            Text = " ";
+            Text = "             ";
             Load += FrmOrdenCorte_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -1747,6 +1815,9 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)txt_vueltas1).EndInit();
             ((System.ComponentModel.ISupportInitialize)txt_vueltas2).EndInit();
+            panel_loading.ResumeLayout(false);
+            panel_loading.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1884,5 +1955,10 @@
         private Label label_ModoEdition;
         private PictureBox ICON_EDITMODE;
         private TextBox txt_real1_width;
+        private Panel panel_loading;
+        private Label text_loadingindicator;
+        private PictureBox pictureBox7;
+        private TextBox txt_tipo_master;
+        private Label label33;
     }
 }

@@ -1,7 +1,7 @@
-﻿using System.ComponentModel;
-using ClosedXML.Excel;
+﻿using ClosedXML.Excel;
 using Ritrama2025.Models;
 using Ritrama2025.Services.InventarioService;
+using System.ComponentModel;
 
 namespace Ritrama2025.Forms.Otros
 {
@@ -11,8 +11,9 @@ namespace Ritrama2025.Forms.Otros
         public string FileName { get; set; } = null!;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string PathFileName { get; set; } = null!;
+
         private IInventarioService InventarioService { get; set; }
-        List<ProductMAP> lista = new();
+        readonly List<ProductMAP> lista = [];
 
         public Frm_Imports(IInventarioService inventarioService)
         {
@@ -59,7 +60,7 @@ namespace Ritrama2025.Forms.Otros
             grid.Columns.Add(col);
         }
 
-        private void btn_load_data_Click(object sender, EventArgs e)
+        private void Btn_load_data_Click(object sender, EventArgs e)
         {
             LoadData();
         }
@@ -68,7 +69,7 @@ namespace Ritrama2025.Forms.Otros
         private void LoadData() 
         {
             string filePath = PathFileName;
-            string fileName = FileName;
+            //string fileName = FileName;
             //leer la hoja de excel.
             try
             {
@@ -106,7 +107,7 @@ namespace Ritrama2025.Forms.Otros
             txt_number_rows.Text = Grid_Items.Rows.Count.ToString();
         }
 
-        private void btn_saveDatabase_Click(object sender, EventArgs e)
+        private void Btn_saveDatabase_Click(object sender, EventArgs e)
         {
             //Guardar en Base de Datos.
             InventarioService.SaveMasterInitialDB(lista);

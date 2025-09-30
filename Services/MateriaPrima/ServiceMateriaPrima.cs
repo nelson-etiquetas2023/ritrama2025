@@ -1,6 +1,4 @@
-﻿using DocumentFormat.OpenXml.Wordprocessing;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Ritrama2025.Models;
 using Ritrama2025.Services.CommonData;
@@ -208,7 +206,7 @@ public class ServiceMateriaPrima : IServiceMateriaPrima
                 {
                     Connection = conn,
                     Transaction = transaction,
-                    CommandText = "INSERT INTO ItemsMateria (numero,product_id,type,cant_pedido,cant_real,width,length,msi,rollid,splice,ubicacion,core,largo_restante,estado) VALUES (@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@restante,@estado)"
+                    CommandText = "INSERT INTO ItemsMateria (numero,product_id,cant_pedido,cant_real,width,length,msi,rollid,splice,ubicacion,core,largo_restante,estado,empalme,num_paleta,fecha_produccion,fecha_llegada,factura) VALUES (@p1,@p2,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@restante,@estado,@num_empalme,@num_paleta,@fecpro,@fecIngr,@fac)"
                 };
                 comandoItems.Parameters.AddWithValue("@p1", orden.Numero);
                 comandoItems.Parameters.AddWithValue("@p2", item.Product_Id);
@@ -224,6 +222,21 @@ public class ServiceMateriaPrima : IServiceMateriaPrima
                 comandoItems.Parameters.AddWithValue("@p12", item.Core);
                 comandoItems.Parameters.AddWithValue("@restante", item.Length);
                 comandoItems.Parameters.AddWithValue("@estado", item.Estado);
+
+                comandoItems.Parameters.AddWithValue("@num_empalme", item.Num_empalme);
+                comandoItems.Parameters.AddWithValue("@num_paleta", item.Num_Paleta);
+                comandoItems.Parameters.AddWithValue("@fecpro", item.Fecha_produccion);
+                comandoItems.Parameters.AddWithValue("@fecIngr", item.Fecha_Ingreso);
+                comandoItems.Parameters.AddWithValue("@fac", item.Factura);
+
+
+
+
+
+
+
+
+
 
 
                 comandoItems.ExecuteNonQuery();

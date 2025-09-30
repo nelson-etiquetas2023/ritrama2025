@@ -1,16 +1,17 @@
 ﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Spreadsheet;
 using Ritrama2025.Forms.Buscadores;
 using Ritrama2025.Forms.Otros;
 using Ritrama2025.Forms.Seleccion;
 using Ritrama2025.Models;
 using Ritrama2025.Services.CommonData;
 using Ritrama2025.Services.ExportData;
+using Ritrama2025.Services.InventarioService;
 using Ritrama2025.Services.MateriaPrima;
 using Ritrama2025.Services.ReportsService.ReportsService;
+using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
-
-
 
 namespace Ritrama2025.Forms
 {
@@ -20,6 +21,7 @@ namespace Ritrama2025.Forms
         public readonly IExportDataService ExportDataService;
         public readonly IReportsService ReportService;
         public readonly IServiceCommonData ServiceCommonData;
+        IInventarioService InventarioService { get; set; }
 
         public DataSet Ds = new();
         readonly BindingSource Bs = [];
@@ -27,14 +29,21 @@ namespace Ritrama2025.Forms
         private DataRowView ParentRow = null!;
         private DataRowView ChildsRows = null!;
         string EditMode = "READ";
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string PathFileName { get; set; } = null!;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string FileName { get; set; } = null!;
 
-        public FrmMateriaPrima(IServiceMateriaPrima Services, IExportDataService exportDataService,IReportsService reportService, IServiceCommonData serviceCommonData)
+        public List<TemplateMasterExcel> ListExcel = [];      
+
+        public FrmMateriaPrima(IInventarioService inventarioService,IServiceMateriaPrima Services, IExportDataService exportDataService,IReportsService reportService, IServiceCommonData serviceCommonData)
         {
             InitializeComponent();
             this.Services = Services;
             this.ExportDataService = exportDataService;
             this.ReportService = reportService;
             this.ServiceCommonData = serviceCommonData;
+            this.InventarioService = inventarioService;
         }
 
         private void FrmMateriaPrima_Load(object sender, EventArgs e)
@@ -79,16 +88,16 @@ namespace Ritrama2025.Forms
             GridItems.AutoGenerateColumns = false;
             ADD_COLUMN_GRID("product_id", 70, "Product Id.", "product_id", GridItems);
             ADD_COLUMN_GRID("product_name", 200, "Product Name.", "product_name", GridItems);
-            ADD_COLUMN_GRID("product_type", 70, "Tipo", "type", GridItems);
+            ADD_COLUMN_GRID("rollid", 70, "Roll-Id.", "rollid", GridItems);
             ADD_COLUMN_GRID("width", 75, "Width [Inch.]", "width", GridItems);
             ADD_COLUMN_GRID("length", 75, "Length [Pies]", "length", GridItems);
-            ADD_COLUMN_GRID("msi", 60, "Msi", "msi", GridItems);
-            ADD_COLUMN_GRID("rollid", 70, "Roll-Id.", "rollid", GridItems);
-            ADD_COLUMN_GRID("splice", 65, "Splice", "splice", GridItems);
-            ADD_COLUMN_GRID("core", 65, "Core", "core", GridItems);
+            ADD_COLUMN_GRID("num_empalme", 75, "# Empalme", "empalme", GridItems);
+            ADD_COLUMN_GRID("fecha_produccion", 85, "Fecha Produccion", "fecha_produccion", GridItems);
+            ADD_COLUMN_GRID("factura", 85, "Factura", "factura", GridItems);
             ADD_COLUMN_GRID("ubicacion", 70, "Ubica.", "ubicacion", GridItems);
-            ADD_COLUMN_GRID("cant_pedido", 65, "Cantidad Pedido", "cant_pedido", GridItems);
-            ADD_COLUMN_GRID("cant_real", 65, "Cantidad Real", "cant_real", GridItems);
+            ADD_COLUMN_GRID("num_paleta", 70, "Palet #", "num_paleta", GridItems);
+            ADD_COLUMN_GRID("fecha_llegada", 70, "Fecha LLegada", "fecha_llegada", GridItems);
+
             GridItems.DataSource = BsDetalle;
 
         }
@@ -212,7 +221,7 @@ namespace Ritrama2025.Forms
             btn_primero.Enabled = false;
             btn_ultimo.Enabled = false;
             btn_create.Enabled = false;
-            txt_notas.BackColor = Color.White;
+            txt_notas.BackColor = System.Drawing.Color.White;
             txt_notas.ReadOnly = false;
             btn_LoadRows.Enabled = true;
             btn_template.Enabled = true;
@@ -309,6 +318,11 @@ namespace Ritrama2025.Forms
                     ChildsRows["ubicacion"] = frmInsertRows.Producto.Ubic;
                     ChildsRows["cant_pedido"] = frmInsertRows.Producto.Cant;
                     ChildsRows["cant_real"] = 0;
+                    ChildsRows["empalme"] = 0;
+                    ChildsRows["num_paleta"] = 0;
+                    ChildsRows["fecha_produccion"] = DateTime.Now;
+                    ChildsRows["fecha_llegada"] = DateTime.Now;
+                    ChildsRows["factura"] = "0";
                     ChildsRows.Row.SetParentRow(((DataRowView)Bs.Current!).Row, Ds.Relations["FK_MASTER_DETAILS"]);
                     ChildsRows.EndEdit();
                     ContarFilas();
@@ -439,32 +453,49 @@ namespace Ritrama2025.Forms
 
                 var ProductId = Item.Cells["product_id"].Value;
                 var ProductName = Item.Cells["product_name"].Value;
-                var Product_Type = Item.Cells["product_type"].Value;
+               //var Product_Type = Item.Cells["product_type"].Value;
                 var WidthMaster = Convert.ToDouble(Item.Cells["width"].Value);
                 var LengthMaster = Convert.ToDouble(Item.Cells["length"].Value);
-                var MsiMaster = Convert.ToDouble(Item.Cells["msi"].Value);
+                //var MsiMaster = Convert.ToDouble(Item.Cells["msi"].Value);
                 var RollId = Item.Cells["rollid"].Value!.ToString()!;
-                var Splice = Convert.ToInt16(Item.Cells["splice"].Value);
-                var Core = Convert.ToDouble(Item.Cells["core"].Value);
+                //var Splice = Convert.ToInt16(Item.Cells["splice"].Value);
+                //var Core = Convert.ToDouble(Item.Cells["core"].Value);
                 var Ubicacion = Item.Cells["ubicacion"].Value!.ToString()!;
-                var Cantidad_Pedido = Convert.ToInt32(Item.Cells["cant_pedido"].Value);
-                var Cantidad_Real = Convert.ToInt32(Item.Cells["cant_real"].Value);
+                //var Cantidad_Pedido = Convert.ToInt32(Item.Cells["cant_pedido"].Value);
+                //var Cantidad_Real = Convert.ToInt32(Item.Cells["cant_real"].Value);
+
+                var num_empalme = Convert.ToInt32(Item.Cells["num_empalme"].Value);
+                var num_paleta = Convert.ToString(Item.Cells["num_paleta"].Value);
+
+                var factura = Convert.ToString(Item.Cells["factura"].Value);
+
+                var fecha_produccion = Convert.ToDateTime(Item.Cells["fecha_produccion"].Value);
+                var fecha_llegada = Convert.ToDateTime(Item.Cells["fecha_llegada"].Value);
+
+                
 
                 Orden.Items.Add(new OrdenDetailsMP
                 {
                     Numero = txt_numeroOrden.Text,
                     Product_Id = ProductId!.ToString()!,
                     Product_Name = ProductName!.ToString()!,
-                    Product_Type = Product_Type!.ToString()!,
                     Width = WidthMaster,
                     Length = LengthMaster,
-                    Msi = MsiMaster,
                     RollId = RollId,
-                    Splice = Splice,
-                    Core = Core,
+                    //Splice = Splice,
+                    //Core = Core,
                     Ubicacion = Ubicacion,
-                    Cantidad_Pedido = Cantidad_Pedido,
-                    Cantidad_Real = Cantidad_Real,
+                    //Cantidad_Pedido = Cantidad_Pedido,
+                    //Cantidad_Real = Cantidad_Real,
+                    
+                    Num_empalme = num_empalme!,
+                    Num_Paleta = num_paleta!,
+                    Factura = factura!,
+                    Fecha_produccion = fecha_produccion!,
+                    Fecha_Ingreso = fecha_llegada!,
+
+
+
                     Estado ="Completo"
                 });
             }
@@ -474,10 +505,32 @@ namespace Ritrama2025.Forms
 
         private void Btn_cancel_Click(object sender, EventArgs e)
         {
-            DataRowView FilaActual;
-            FilaActual = (DataRowView)Bs.Current!;
-            FilaActual.Row.Delete();
-            Bs.EndEdit();
+            if (Bs.Current is DataRowView drvMaster) 
+            {
+                DataRow rowMaster = drvMaster.Row;
+                DataRow[] items = rowMaster.GetChildRows("FK_MASTER_DETAILS");
+
+                //borrar el detalle del documento.
+                foreach (var item in items)
+                {
+                    item.Delete();
+                }
+
+                rowMaster.Delete();
+                Bs.EndEdit();
+                Bs.ResetBindings(false);    
+                Bs.Position = Bs.Count;
+
+            }
+
+          
+
+
+
+
+
+
+
             Bs.Position = Bs.Count;
             // Cerrar el formulario.
             btn_primero.Enabled = true;
@@ -505,30 +558,76 @@ namespace Ritrama2025.Forms
             using var workbook = new XLWorkbook();
             var worksheet = workbook.Worksheets.Add("TemplateMateriaPrima");
             string filePath = Path.Combine(Environment.CurrentDirectory, "Template");
-            var col1 = worksheet.Column(1);
-            col1.Style.NumberFormat.Format = "@";
-            col1.Width = 20; // Ajustar el ancho de la columna
-            var col2 = worksheet.Column(2);
-            col2.Width = 20; // Ajustar el ancho de la columna
+            
+           
             worksheet.Cell(1, 1).Value = "Product. Id.";
-            worksheet.Cell(1, 2).Value = "Product Name";
-            worksheet.Cell(1, 3).Value = "Tipo";
+            worksheet.Cell(1, 2).Value = "Nombre del Producto";
+            worksheet.Cell(1, 3).Value = "Roll-Id";
             worksheet.Column(3).Width = 20;
             worksheet.Cell(1, 4).Value = "Width";
             worksheet.Cell(1, 5).Value = "Length";
-            worksheet.Cell(1, 6).Value = "Msi";
-            worksheet.Cell(1, 7).Value = "Core";
-            worksheet.Cell(1, 8).Value = "Slipce";
-            worksheet.Cell(1, 9).Value = "Roll-Id";
-            worksheet.Columns().AdjustToContents();
-            workbook.SaveAs(filePath + ".xlsx");
-            var psi = new ProcessStartInfo
-            {
-                FileName = filePath + ".xlsx",      // Abre con la app por defecto (.xlsx → Excel)
-                UseShellExecute = true     // Necesario en .NET Core/5+ para usar la asociación de ficheros
-            };
+            worksheet.Cell(1, 6).Value = "# Empalme";
+            worksheet.Cell(1, 7).Value = "Fecha Produccion";
+            worksheet.Cell(1, 8).Value = "Factura";
+            worksheet.Cell(1, 9).Value = "Ubicacion";
+            worksheet.Cell(1, 10).Value = "Palet #";
+            worksheet.Cell(1, 11).Value = "Fecha de Llegada";
+            var col1 = worksheet.Column(1);
+            col1.Style.NumberFormat.Format = "@";
+            col1.Width = 15; // Ajustar el ancho de la columna
+            
+            var col2 = worksheet.Column(2);
+            col2.Width = 50; // Ajustar el ancho de la columna
+
+            
+            var col3 = worksheet.Column(3);
+            col3.Width = 15; // Ajustar el ancho de la columna
+            worksheet.Column("C").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            worksheet.Column("D").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            worksheet.Column("E").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            worksheet.Column("F").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            worksheet.Column("G").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            worksheet.Column("H").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            worksheet.Column("I").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            worksheet.Column("J").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            worksheet.Column("K").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+            var col4 = worksheet.Column(4);
+            col4.Width = 15; // Ajustar el ancho de la columna
+
+            var col5 = worksheet.Column(5);
+            col5.Width = 15; // Ajustar el ancho de la columna
+
+            var col6 = worksheet.Column(6);
+            col6.Width = 15; // Ajustar el ancho de la columna
+
+            var col7 = worksheet.Column(7);
+            col7.Width = 25; // Ajustar el ancho de la columna
+
+            var col8 = worksheet.Column(8);
+            col8.Width = 12; // Ajustar el ancho de la columna
+
+            var col9 = worksheet.Column(9);
+            col9.Width = 12; // Ajustar el ancho de la columna
+
+            var col10 = worksheet.Column(10);
+            col10.Width = 12; // Ajustar el ancho de la columna
+
+            var col11 = worksheet.Column(11);
+            col11.Width = 25; // Ajustar el ancho de la columna
+
+            var headerRow = worksheet.Row(1);
+            headerRow.Style.Font.Bold = true;
+            headerRow.Style.Fill.BackgroundColor = XLColor.LightGray;
+
             try
             {
+                workbook.SaveAs(filePath + ".xlsx");
+                var psi = new ProcessStartInfo
+                {
+                    FileName = filePath + ".xlsx",      // Abre con la app por defecto (.xlsx → Excel)
+                    UseShellExecute = true     // Necesario en .NET Core/5+ para usar la asociación de ficheros
+                };
                 Process.Start(psi);
             }
             catch (Exception ex)
@@ -539,32 +638,32 @@ namespace Ritrama2025.Forms
 
         private void Btn_LoadRows_Click(object sender, EventArgs e)
         {
-            string filePath = Path.Combine(Environment.CurrentDirectory, "Template.xlsx");
-            using var workbook = new XLWorkbook(filePath);
-            var worksheet = workbook.Worksheet(1);
-            //Empiezo en la fila 2 por los encabezados.
-            var filas = worksheet.Rows().Skip(1);
-            foreach (var fila in filas)
+
+            Frm_ImportacionExcel frmImport = new();
+            frmImport.ShowDialog();
+
+            ListExcel = frmImport.lista;
+
+            foreach (var item in ListExcel)
             {
-                if (fila.Cell(1).Value.ToString() == string.Empty) continue; //Si la celda esta vacia, no la agrego.
                 ChildsRows = (DataRowView)BsDetalle.AddNew()!;
                 ChildsRows.BeginEdit();
                 ChildsRows["numero"] = txt_numeroOrden.Text;
-                ChildsRows["product_id"] = fila.Cell(1).Value.ToString()!;
-                ChildsRows["product_name"] = fila.Cell(2).Value.ToString()!;
-                ChildsRows["type"] = fila.Cell(3).Value.ToString()!;
-                ChildsRows["width"] = fila.Cell(4).GetValue<double>();
-                ChildsRows["length"] = fila.Cell(5).GetValue<double>();
-                ChildsRows["msi"] = fila.Cell(6).GetValue<double>();
-                ChildsRows["core"] = fila.Cell(7).GetValue<double>();
-                ChildsRows["splice"] = fila.Cell(8).GetValue<int>();
-                ChildsRows["rollid"] = fila.Cell(9).Value.ToString()!;
-                ChildsRows["ubicacion"] = "SU";
-                ChildsRows["cant_pedido"] = 1;
-                ChildsRows["cant_real"] = 0;
+                ChildsRows["product_id"] = item.product_id;
+                ChildsRows["product_name"] = item.product_name;
+                ChildsRows["rollid"] = item.rollid;
+                ChildsRows["width"] = item.width;
+                ChildsRows["length"] = item.length;
+                ChildsRows["empalme"] = item.num_empalme;
+                ChildsRows["fecha_produccion"] = item.fecha_produccion;
+                ChildsRows["factura"] = item.factura;
+                ChildsRows["ubicacion"] = item.ubicacion;
+                ChildsRows["num_paleta"] = item.palet_num;
+                ChildsRows["fecha_llegada"] = item.fecha_llegada;
                 ChildsRows.Row.SetParentRow(((DataRowView)Bs.Current!).Row, Ds.Relations["FK_MASTER_DETAILS"]);
                 ChildsRows.EndEdit();
             }
+
             if (GridItems.Rows.Count > 0)
             {
                 GridItems.ClearSelection(); // Limpia selección previa
@@ -573,19 +672,8 @@ namespace Ritrama2025.Forms
                 ContarFilas();
             }
 
-        
+
         }
-
-        private void ValidarRollIdNoRepetidos() 
-        {
-            //verificar los rollid.
-           
-        }
-
-
-
-
-
 
         private void Btn_OrdenBuscar_Click(object sender, EventArgs e)
         {

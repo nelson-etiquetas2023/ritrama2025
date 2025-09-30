@@ -50,7 +50,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.RoyalBlue;
+            panel1.BackColor = Color.Gray;
             panel1.Controls.Add(OPC_MENU_LABELS);
             panel1.Controls.Add(panel_foto);
             panel1.Controls.Add(button4);
@@ -100,6 +100,7 @@
             lbl_user_name.BackColor = Color.RoyalBlue;
             lbl_user_name.Dock = DockStyle.Top;
             lbl_user_name.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_user_name.ForeColor = Color.Cornsilk;
             lbl_user_name.Location = new Point(0, 0);
             lbl_user_name.Name = "lbl_user_name";
             lbl_user_name.Size = new Size(144, 18);
@@ -109,7 +110,7 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.BackColor = Color.RoyalBlue;
+            pictureBox1.BackColor = Color.Gray;
             pictureBox1.Dock = DockStyle.Fill;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(0, 0);
@@ -229,6 +230,7 @@
             // 
             // bot_despacho
             // 
+            bot_despacho.BackColor = Color.Gray;
             bot_despacho.Dock = DockStyle.Top;
             bot_despacho.FlatAppearance.BorderSize = 0;
             bot_despacho.FlatStyle = FlatStyle.Flat;
@@ -240,11 +242,12 @@
             bot_despacho.TabIndex = 2;
             bot_despacho.Text = "Despacho";
             bot_despacho.TextImageRelation = TextImageRelation.ImageBeforeText;
-            bot_despacho.UseVisualStyleBackColor = true;
+            bot_despacho.UseVisualStyleBackColor = false;
             bot_despacho.Click += Bot_despacho_Click;
             // 
             // bot_ordencorte
             // 
+            bot_ordencorte.BackColor = Color.Gray;
             bot_ordencorte.Dock = DockStyle.Top;
             bot_ordencorte.FlatAppearance.BorderSize = 0;
             bot_ordencorte.FlatStyle = FlatStyle.Flat;
@@ -258,7 +261,7 @@
             bot_ordencorte.Text = "Orden Corte";
             bot_ordencorte.TextAlign = ContentAlignment.MiddleLeft;
             bot_ordencorte.TextImageRelation = TextImageRelation.ImageBeforeText;
-            bot_ordencorte.UseVisualStyleBackColor = true;
+            bot_ordencorte.UseVisualStyleBackColor = false;
             bot_ordencorte.Click += Bot_ordencorte_Click;
             // 
             // Main

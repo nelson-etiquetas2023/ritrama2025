@@ -170,6 +170,7 @@ C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Otros.Frm
 C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Otros.Frm_AprobarOC.resources
 C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Otros.Frm_descriptionPalet.resources
 C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Otros.Frm_DetailsConsumos.resources
+C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Otros.Frm_ImportacionExcel.resources
 C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Otros.Frm_Imports.resources
 C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Otros.Frm_oneparameter.resources
 C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Otros.ReportsViewer.resources

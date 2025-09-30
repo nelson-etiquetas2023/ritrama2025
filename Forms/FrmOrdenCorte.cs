@@ -10,6 +10,7 @@ using Ritrama2025.Services.ReportsService.ReportsService;
 using System.Configuration;
 using System.Data;
 
+
 namespace Ritrama2025.Forms;
 
 public partial class FrmOrdenCorte : Form
@@ -30,6 +31,7 @@ public partial class FrmOrdenCorte : Form
     readonly string operadorName = "NO-ASIGNADO";
     private string TipoMovimiento = "";
     int EditMode = 0;
+    string Rollid_master = string.Empty;
     Orden Orden { get; set; } = null!;
     List<Corte> Cortes { get; set; } = [];
     List<RolloCortado> Detalle { get; set; } = [];
@@ -42,33 +44,7 @@ public partial class FrmOrdenCorte : Form
         ExportDataService = exportService;
         ReportService = reportService;
         CommonService = commonService;
-        BsMaster.PositionChanged += BsMaster_PositionChanged;
-
-        this.AutoScaleMode = AutoScaleMode.Dpi;
-
-    }
-
-    private void Dtrollos_RowDeleted(object sender, DataRowChangeEventArgs e)
-    {
-        if(EditMode == 2) return;
-        if (e.Row.RowState == DataRowState.Deleted)
-        {
-            e.Row.RejectChanges();
-        }
-    }
-
-    private void BsMaster_PositionChanged(object? sender, EventArgs e)
-    {
-        if (EditMode == 2) return;
-        if (BsMaster.Current is DataRowView drv)
-        {
-            var row = drv.Row;
-            if (row.RowState == DataRowState.Deleted)
-            {
-                row.RejectChanges();
-                Ds.AcceptChanges();
-            }
-        }
+        //this.AutoScaleMode = AutoScaleMode.Dpi;
     }
 
     private async void FrmOrdenCorte_Load(object sender, EventArgs e)
@@ -81,14 +57,16 @@ public partial class FrmOrdenCorte : Form
             BsMaster.DataMember = "DtMaster";
             BsDetails.DataSource = BsMaster;
             BsDetails.DataMember = R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS;
-            BsDetails.ResetBindings(false);
+            Ds.Tables["DtMaster"]!.AcceptChanges();
+            Ds.Tables["DtCortes"]!.AcceptChanges();
+            Ds.Tables["DtRollos"]!.AcceptChanges();
+            Ds.Tables["DtOperator"]!.AcceptChanges();
+            Ds.Tables["DtCustomer"]!.AcceptChanges();
+           
         });
-        
-        //Ds.AcceptChanges();
-        Ds.Tables["Dtrollos"]!.RowDeleted += Dtrollos_RowDeleted;
+
+
         //Enlace a datos Encabezado de la Orden Corte.
-
-
 
         HeaderBinding();
         BindingRollos();
@@ -99,8 +77,6 @@ public partial class FrmOrdenCorte : Form
 
     private void HeaderBinding()
     {
-        
-
         txt_numeroOC.DataBindings.Add("Text", BsMaster, "numero");
         txt_fecha_emision.DataBindings.Add("Text", BsMaster, "fecha");
         txt_fecha_produccion.DataBindings.Add("Text", BsMaster, "fecha_produccion");
@@ -111,6 +87,7 @@ public partial class FrmOrdenCorte : Form
 
         txt_real1_width.DataBindings.Add("Text", BsMaster, "util1_real_width");
         txt_real1_length.DataBindings.Add("Text", BsMaster, "util1_real_lenght");
+        txt_tipo_master.DataBindings.Add("Text", BsMaster, "master_tipo");
 
         txt_real2_width.DataBindings.Add("Text", BsMaster, "util2_real_width");
         txt_real2_length.DataBindings.Add("Text", BsMaster, "util2_real_lenght");
@@ -123,9 +100,9 @@ public partial class FrmOrdenCorte : Form
         txt_matrest2_lenght.DataBindings.Add("Text", BsMaster, "rest2_lenght");
         txt_product_id.DataBindings.Add("Text", BsMaster, "product_id");
         txt_product_name.DataBindings.Add("Text", BsMaster, "product_Name");
-        txt_operador_id.DataBindings.Add("Text", BsMaster, "operador_id");
+        txt_operador_id.DataBindings.Add("Text", BsMaster, "operador_id", true, DataSourceUpdateMode.OnPropertyChanged);
         txt_operador_name.DataBindings.Add("Text", BsMaster, "nombre");
-        txt_cust_id.DataBindings.Add("Text", BsMaster, "customer_id");
+        txt_cust_id.DataBindings.Add("Text", BsMaster, "customer_id", true, DataSourceUpdateMode.OnPropertyChanged);
         txt_cust_name.DataBindings.Add("Text", BsMaster, "customer_name");
         txt_resta_corte.DataBindings.Add("Text", BsMaster, "resta_entrada");
         txt_largo_corte.DataBindings.Add("Text", BsMaster, "lenght_entrada");
@@ -152,8 +129,6 @@ public partial class FrmOrdenCorte : Form
     private void BindingRollos()
     {
         //Enlace a datos de Grid-Rollos Cortados.
-        
-
         grid_items.AutoGenerateColumns = false;
         grid_items.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         ADD_COLUMN_GRID("roll_number", 23, "#", "roll_number", grid_items);
@@ -199,7 +174,7 @@ public partial class FrmOrdenCorte : Form
         ADD_COLUMN_GRID("lenght", 80, "Lenght [PIES]", "lenght", grid_cortes);
         ADD_COLUMN_GRID("msi", 80, "Msi", "msi", grid_cortes);
         grid_cortes.Columns[1].DefaultCellStyle.Format = "N3";
-        grid_cortes.Columns[2].DefaultCellStyle.Format = "N3"; 
+        grid_cortes.Columns[2].DefaultCellStyle.Format = "N3";
         grid_cortes.Columns[3].DefaultCellStyle.Format = "N3";
         grid_cortes.DataSource = BsCortes;
     }
@@ -245,7 +220,7 @@ public partial class FrmOrdenCorte : Form
     }
     private void Opt_create_document_Click(object sender, EventArgs e)
     {
-        txt_ancho_corte.Text = "0";
+
 
         //1.- Inicialiozar el Documento de Orden de Corte.
         ParentRow = (DataRowView)BsMaster.AddNew()!;
@@ -272,12 +247,15 @@ public partial class FrmOrdenCorte : Form
         ParentRow["cortes_largo"] = "0";
         ParentRow["cant_rollos"] = "0";
         ParentRow["cant_rollos2"] = "0";
+
         txt_menos1.Text = "0";
         txt_real1.Text = "0";
         txt_real2.Text = "0";
         txt_plus1.Text = "0";
         txt_menos2.Text = "0";
         txt_rollos_cortar2.Text = "0";
+        txt_ancho_corte.Text = "0";
+
         ParentRow.EndEdit();
         //Crear la Dimension de los Cortes.
         for (int i = 0; i < 5; i++)
@@ -355,6 +333,7 @@ public partial class FrmOrdenCorte : Form
         frmrollid.ShowDialog();
         if (frmrollid.MasterRoll != null)
         {
+            Rollid_master = frmrollid.MasterRoll.Roll_Id;
             txt_rollid_1.Text = Convert.ToString(frmrollid.MasterRoll.Roll_Id);
             txt_width1.Text = frmrollid.MasterRoll.Width.ToString("N2");
             txt_length1.Text = frmrollid.MasterRoll.Length.ToString("N2");
@@ -362,8 +341,21 @@ public partial class FrmOrdenCorte : Form
             txt_product_id.Text = frmrollid.MasterRoll.Product_Id;
             txt_product_name.Text = frmrollid.MasterRoll.Product_Name;
             TipoMovimiento = frmrollid.MasterRoll.tipo_mov;
+            txt_tipo_master.Text = frmrollid.MasterRoll.tipo_mov;
+
             CALCULATE_TOTAL_WIDTH_CORTES();
             CALCULATE_MATERIAL_RESTANTE();
+
+            this.Validate();
+
+            txt_rollid_1.Focus();
+            txt_rollid_1.Select();
+
+            BsMaster.EndEdit();
+            Ds.Tables["DtMaster"]!.AcceptChanges();
+            BsMaster.ResetBindings(false);
+
+
         }
     }
 
@@ -477,28 +469,31 @@ public partial class FrmOrdenCorte : Form
         CALCULATE_MATERIAL_RESTANTE();
         CALCULATE_DATA_CORTES();
         CALCULAR_TOTAL_ROLLOS_CORTAR();
+        grid_cortes.Focus();
+        grid_cortes.CurrentCell = grid_cortes.Rows[^1].Cells[1];
     }
 
     private void CALCULATE_DATA_CORTES()
     {
+        if (EditMode == 0) return;
+
+        double long_cortar = txt_long_cortar.Text == string.Empty ? 0 : Convert.ToDouble(txt_long_cortar.Text);
+
+        if (long_cortar <= 0) return;
+
         for (int i = 0; i <= grid_cortes.Rows.Count - 1; i++)
         {
-            grid_cortes.Rows[i].Cells["lenght"].Value = txt_long_cortar.Text;
+            //llenar el grid de coryes
+            grid_cortes.Rows[i].Cells["lenght"].Value = long_cortar;
             grid_cortes.Rows[i].Cells["msi"].Value = Convert.ToDouble(grid_cortes.Rows[i].Cells["width"].Value) * Convert.ToDouble(grid_cortes.Rows[i].Cells["lenght"].Value) * R.CONSTANTES.FACTOR_CALCULO_MSI;
-            txt_cortes_ancho.Text = grid_cortes.Rows.Count.ToString();
-            CalcularConsumosLenght();
-        }
-        if (grid_items.Rows.Count > 0)
-        {
-            BorrarRollosCortadosHijos();
-        }
-        ACTUALIZAR_ROLLID_1();
-    }
 
-    private void Txt_long_cortar_KeyUp(object sender, KeyEventArgs e)
-    {
-        CALCULATE_DATA_CORTES();
-        CALCULAR_TOTAL_ROLLOS_CORTAR();
+            //ASIGNAR CORTES A LO ANCHO.
+            txt_cortes_ancho.Text = grid_cortes.Rows.Count.ToString();
+
+            CalcularLONGITUDACORTAR();
+        }
+
+        ACTUALIZAR_ROLLID_1();
     }
 
     private void Txt_vueltas1_KeyUp(object sender, KeyEventArgs e)
@@ -508,16 +503,11 @@ public partial class FrmOrdenCorte : Form
             double num = Convert.ToDouble(txt_cortes_ancho.Text) * Convert.ToDouble(txt_vueltas1.Text);
             txt_rollos_cortar1.Text = num.ToString();
         }
-        CalcularConsumosLenght();
+        CalcularLONGITUDACORTAR();
     }
 
     private void ACTUALIZAR_ROLLID_1()
     {
-        //Actualiza lo real consumido del RollId 1
-        //txt_real1_width.Text = txt_ancho_corte.Text;
-        //txt_real1_length.Text = txt_largo_corte.Text;
-
-
 
         txt_matrest1_width.Text = txt_width1.Text;
         if (txt_real1_length.Text == "")
@@ -566,6 +556,10 @@ public partial class FrmOrdenCorte : Form
             BorrarRollosCortadosHijos();
         }
         //CALCULO DE ROLLOS CORTADOS.
+        if (EditMode == 2)
+        {
+            ParentRow = (DataRowView)BsMaster.Current!;
+        }
         int vueltas = Convert.ToInt32(txt_vueltas1.Text);
         int numcortes = (grid_cortes.Rows.Count);
         int renglon = 1;
@@ -591,7 +585,7 @@ public partial class FrmOrdenCorte : Form
                 renglon += 1;
             }
         }
-        BsDetails.Sort = "roll_number";
+        //BsDetails.Sort = "roll_number";
         if (grid_items.Rows.Count > 0)
         {
             grid_items.Focus();
@@ -619,6 +613,7 @@ public partial class FrmOrdenCorte : Form
             MessageBox.Show("debe definir los cortes primero...");
             return;
         }
+
         GENERAR_ROLLOS_CORTADOS();
 
         grid_items.ReadOnly = false;
@@ -645,10 +640,10 @@ public partial class FrmOrdenCorte : Form
 
     private void Grid_cortes_CellEndEdit(object sender, DataGridViewCellEventArgs e)
     {
-        //CALCULAR LA SUMATORIA DE WIDTH DE LOS CORTES 
-        CALCULATE_TOTAL_WIDTH_CORTES();
         //calcular los cortes a lo ancho
         txt_cortes_ancho.Text = grid_cortes.Rows.Count.ToString();
+        //CALCULAR LA SUMATORIA DE WIDTH DE LOS CORTES 
+        CALCULATE_TOTAL_WIDTH_CORTES();
         //ACTUALIZAR ROLLID_1
         ACTUALIZAR_ROLLID_1();
         CALCULATE_MATERIAL_RESTANTE();
@@ -660,18 +655,15 @@ public partial class FrmOrdenCorte : Form
     private void Txt_vueltas1_TextChanged(object sender, EventArgs e)
     {
 
-        if (string.IsNullOrWhiteSpace(txt_vueltas1.Text))
-        {
-            txt_vueltas1.Text = "0";
-        }
+        //if (string.IsNullOrWhiteSpace(txt_vueltas1.Text))
+        //{
+        //    txt_vueltas1.Text = "0";
+        //}
     }
 
     private void Txt_long_cortar_TextChanged(object sender, EventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(txt_long_cortar.Text))
-        {
-            txt_long_cortar.Text = "0";
-        }
+
     }
 
     private void Txt_plus1_TextChanged(object sender, EventArgs e)
@@ -709,45 +701,48 @@ public partial class FrmOrdenCorte : Form
 
     private void Txt_vueltas1_ValueChanged(object sender, EventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(txt_vueltas1.Text))
-        {
-            txt_vueltas1.Text = "0";
-        }
+        //if (string.IsNullOrWhiteSpace(txt_vueltas1.Text))
+        //{
+        //    txt_vueltas1.Text = "0";
+        //}
 
-        if (grid_items.Rows.Count > 0)
-        {
-            BorrarRollosCortadosHijos();
-        }
+        //if (grid_items.Rows.Count > 0)
+        //{
+        //    BorrarRollosCortadosHijos();
+        //}
 
 
     }
 
     private void Txt_vueltas1_KeyUp_1(object sender, KeyEventArgs e)
     {
-        if (string.IsNullOrEmpty(txt_vueltas1.Text))
-        {
-            txt_vueltas1.Value = 0;
-        }
-        CalcularConsumosLenght();
-        CALCULAR_TOTAL_ROLLOS_CORTAR();
-        if (grid_items.Rows.Count > 0)
-        {
-            BorrarRollosCortadosHijos();
-        }
-        ACTUALIZAR_ROLLID_1();
+        //if (string.IsNullOrEmpty(txt_vueltas1.Text))
+        //{
+        //    txt_vueltas1.Value = 0;
+        //}
+        //CalcularConsumosLenght();
+        //CALCULAR_TOTAL_ROLLOS_CORTAR();
+        //if (grid_items.Rows.Count > 0)
+        //{
+        //    BorrarRollosCortadosHijos();
+        //}
+        //ACTUALIZAR_ROLLID_1();
     }
-    private void CalcularConsumosLenght()
+    private void CalcularLONGITUDACORTAR()
     {
+        if (txt_long_cortar.Text == string.Empty) return;
+
         double num = Convert.ToDouble(txt_long_cortar.Text) *
             Convert.ToDouble(txt_vueltas1.Value);
+
         txt_largo_corte.Text = num.ToString();
         txt_real1_length.Text = num.ToString();
     }
 
     private void Txt_vueltas1_ValueChanged_1(object sender, EventArgs e)
     {
-
-        CalcularConsumosLenght();
+        if (EditMode == 0) return;
+        CalcularLONGITUDACORTAR();
         CALCULAR_TOTAL_ROLLOS_CORTAR();
         if (grid_items.Rows.Count > 0)
         {
@@ -769,28 +764,19 @@ public partial class FrmOrdenCorte : Form
     private void BorrarRollosCortadosHijos()
     {
 
-
-
-
+        if (EditMode == 0) return;
         if (BsMaster.Current == null) return;
 
-        if (EditMode == 2) 
-        {
-            ParentRow = (DataRowView)BsMaster.Current;
-        }
-            
-
-        BsMaster.EndEdit();
-        BsDetails.EndEdit();
 
         Ds.EnforceConstraints = false;
+        BsMaster.EndEdit();
 
         // Obtener la fila maestra actual
         var rowMaestro = (DataRowView)BsMaster.Current;
         var filaMaestra = rowMaestro.Row;
 
         // Obtener las filas hijas actuales (excluye eliminadas)
-        var filasHijas = filaMaestra.GetChildRows("FK_MASTER_DETAILS", DataRowVersion.Current);
+        var filasHijas = filaMaestra.GetChildRows("FK_MASTER_DETAILS", DataRowVersion.Original);
 
         foreach (var filaHija in filasHijas)
         {
@@ -800,17 +786,13 @@ public partial class FrmOrdenCorte : Form
             }
         }
 
-        // Reposicionar el maestro para forzar refresco del detalle
-        int idOrden = (int)filaMaestra["numero", DataRowVersion.Current];
-        int index = BsMaster.Find("numero", idOrden);
-        if (index >= 0)
-            BsMaster.Position = index;
-
+        Ds.Tables["DtMaster"]!.AcceptChanges();
+        Ds.Tables["DtRollos"]!.AcceptChanges();
+        Ds.Tables["DtCortes"]!.AcceptChanges();
+        BsMaster.ResetBindings(false);
         BsDetails.ResetBindings(false);
-        Ds.EnforceConstraints = true;
-
-        Console.WriteLine($"🧹 Ítems eliminados para orden {idOrden} y UI actualizada.");
-
+        BsCortes.ResetBindings(false);
+        Ds.EnforceConstraints = false;
 
 
 
@@ -841,7 +823,7 @@ public partial class FrmOrdenCorte : Form
             Rest2_lenght = Convert.ToDouble(txt_matrest2_lenght.Text),
             Product_id = txt_product_id.Text,
             Product_name = txt_product_name.Text,
-            operador_id = Guid.Parse(txt_operador_id.Text),
+            Operador_id = Guid.Parse(txt_operador_id.Text),
             Nombre_operador = txt_operador_name.Text,
             Customer_Id = Guid.Parse(txt_cust_id.Text),
             Customer_Name = txt_cust_name.Text ?? string.Empty,
@@ -875,7 +857,8 @@ public partial class FrmOrdenCorte : Form
             Restante_rollid1 = txt_matrest1_lenght.Text,
             Restante_rollid2 = txt_matrest2_lenght.Text,
             SellOrder = txt_sellOrder.Text == string.Empty ? "0" : txt_sellOrder.Text,
-            Desperdicio = chk_desperdicio1.Checked
+            Desperdicio = chk_desperdicio1.Checked,
+            Master_Tipo = TipoMovimiento
         };
 
 
@@ -939,6 +922,7 @@ public partial class FrmOrdenCorte : Form
                 Code_Person = codePersonValue?.ToString() ?? string.Empty,
                 Ubicacion = ".",
                 Status = statusRollo?.ToString() ?? string.Empty,
+                Disponible = true
             };
             Detalle.Add(rollo);
 
@@ -961,71 +945,49 @@ public partial class FrmOrdenCorte : Form
     }
 
 
-    private void Bot_guardar_Click(object sender, EventArgs e)
+    private async void Bot_guardar_Click(object sender, EventArgs e)
     {
         if (EditMode == 1)
         {
-            GuardarOrderNew();
+            Toggleloading(true);
+            await Task.Run(() => GuardarOrderNew());
+            Toggleloading(false);
+            this.Invoke(() =>
+            {
+                CloseUIFormAddNewMode();
+            });
         }
         if (EditMode == 2)
         {
-            GuardarOrderUpdate();
-        }
+            //
+            if (grid_items.Rows.Count <= 0)
+            {
+                MessageBox.Show("No hay rollos cortados para guardar...");
+                return;
+            }
 
+            Toggleloading(true);
+            await Task.Run(() => GuardarOrderUpdate());
+            Toggleloading(false);
+            this.Invoke(() =>
+            {
+                CloseUIFormUpdateMode();
+            });
+        }
+    }
+    private void CloseUIFormAddNewMode()
+    {
+        //4.- Actualizar la UI.
+        RefrescarUI();
+
+        //Crear el txt de rollos cortados
+        ExportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(), chk_generartxt_rc.Checked, Convert.ToDateTime(txt_fecha_produccion.Text).ToShortDateString(), Convert.ToDateTime(txt_fecha_produccion.Text).ToShortDateString(), false);
+
+        EditMode = 0;
     }
 
-    private void GuardarOrderUpdate()
+    private void CloseUIFormUpdateMode()
     {
-        //Modificaciones en el header de la OC.
-
-        Orden orden = new()
-        {
-            Numero = Convert.ToInt16(txt_numeroOC.Text),
-            Fecha = Convert.ToDateTime(txt_fecha_emision.Text),
-            Fecha_produccion = Convert.ToDateTime(txt_fecha_produccion.Text),
-            Width_1 = Convert.ToDecimal(txt_width1.Text),
-            Lenght_1 = Convert.ToDecimal(txt_length1.Text),
-            Util1_Real_Width = Convert.ToDouble(txt_real1_width.Text),
-            Util1_real_Lenght = Convert.ToDouble(txt_real1_length.Text),
-            Rest1_width = Convert.ToDouble(txt_matrest1_width.Text),
-            Rest2_lenght = Convert.ToDouble(txt_matrest1_lenght.Text),
-            Product_id = txt_product_id.Text.ToString(),
-            Desperdicio = chk_desperdicio1.Checked,
-            operador_id = Guid.Parse(txt_operador_id.Text),
-            Customer_Id = Guid.Parse(txt_cust_id.Text),
-        };
-
-        //Cambios en los rollos
-        DataRowView rowMaestro = (DataRowView)BsMaster.Current!;
-
-        if (rowMaestro == null)
-        {
-            MessageBox.Show("Error al modifcar la orden de corte");
-            return;
-        }
-
-        var items = rowMaestro.Row.GetChildRows(R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS);
-
-        // Solución: Convertir cada DataRow modificado en un objeto RolloCortado
-        List<RolloCortado> Lista = [.. items
-            .Where(h => h.RowState == DataRowState.Modified)
-            .Select(h => new RolloCortado
-            {
-                Numero = txt_numeroOC.Text?.ToString() ?? string.Empty,
-                Splice = h["splice"] != null ? Convert.ToInt32(h["splice"]) : 0,
-                UniqueCode = h["unique_code"]?.ToString() ?? string.Empty,
-                Status = h["status"]?.ToString() ?? string.Empty,
-                Code_Person = h["code_person"]?.ToString() ?? string.Empty
-            })];
-
-
-
-        //actualiza el encabezado de la OC.
-        Service.Update_Header_Documnet_OC(orden);
-
-        //actualiza la base de datos los items rollos.
-        Service.Update_Items_Orden_Corte(Lista);
-
         //configurar la barra de herramientas
         bot_guardar.Enabled = false;
         bot_primero.Enabled = true;
@@ -1043,7 +1005,19 @@ public partial class FrmOrdenCorte : Form
         txt_fecha_emision.Enabled = false;
         txt_fecha_produccion.Enabled = false;
 
+
+        btn_buscar_rollid1.Enabled = false;
+        chk_desperdicio1.Enabled = false;
+        btn_buscar_operador.Enabled = false;
+        txt_sellOrder.ReadOnly = true;
+        btn_generar_rollos.Enabled = false;
+        txt_long_cortar.ReadOnly = true;
+        txt_vueltas1.Enabled = false;
         grid_items.ReadOnly = true;
+
+        btn_add_row_corte.Enabled = false;
+        btn_delete_row_corte.Enabled = false;
+        btn_buscar_customer.Enabled = false;
 
         label_ModoEdition.Visible = false;
         ICON_EDITMODE.Visible = false;
@@ -1053,9 +1027,6 @@ public partial class FrmOrdenCorte : Form
             row.DefaultCellStyle.BackColor = Color.White;
         }
 
-        //Modo Solo-Lectura.
-        EditMode = 0;
-
         //actualizo la ui 
         BsDetails.EndEdit();
         BsMaster.EndEdit();
@@ -1063,6 +1034,63 @@ public partial class FrmOrdenCorte : Form
 
         //generar el txt para 
         ExportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(), false, Convert.ToDateTime(txt_fecha_produccion.Text).ToShortDateString(), Convert.ToDateTime(txt_fecha_emision.Text).ToShortDateString(), false);
+
+        //Modo Solo-Lectura.
+        EditMode = 0;
+
+    }
+    private void Toggleloading(bool isLoading)
+    {
+        panel_loading.Visible = isLoading;
+        panel_loading.BringToFront();
+    }
+
+
+    private async Task GuardarOrderUpdate()
+    {
+
+        if (txt_operador_id.Text == "" && txt_cust_id.Text == "")
+        {
+            MessageBox.Show("debe introducir los datos del operador y cliente...");
+            return;
+        }
+        //Modificaciones en el header de la OC.
+
+        Orden orden = new()
+        {
+            Numero = Convert.ToInt16(txt_numeroOC.Text),
+            Fecha = Convert.ToDateTime(txt_fecha_emision.Text),
+            Fecha_produccion = Convert.ToDateTime(txt_fecha_produccion.Text),
+            Rollid_1 = txt_rollid_1.Text,
+            Width_1 = Convert.ToDecimal(txt_width1.Text),
+            Lenght_1 = Convert.ToDecimal(txt_length1.Text),
+            Util1_Real_Width = Convert.ToDouble(txt_real1_width.Text),
+            Util1_real_Lenght = Convert.ToDouble(txt_real1_length.Text),
+            Rest1_width = Convert.ToDouble(txt_matrest1_width.Text),
+            Rest2_lenght = Convert.ToDouble(txt_matrest1_lenght.Text),
+            Product_id = txt_product_id.Text.ToString(),
+            Product_name = txt_product_name.Text.ToString(),
+            Desperdicio = chk_desperdicio1.Checked,
+            Operador_id = new Guid(txt_operador_id.Text),
+            Customer_Id = new Guid(txt_cust_id.Text),
+            Longitud_Cortar = Convert.ToDouble(txt_long_cortar.Text),
+            Cortes_Largo = Convert.ToInt32(txt_vueltas1.Value),
+            Cortes_Ancho = Convert.ToInt32(txt_cortes_ancho.Text),
+            Cantidad_Rollos = Convert.ToInt32(txt_rollos_cortar1.Text),
+            SellOrder = txt_sellOrder.Text == string.Empty ? "0" : txt_sellOrder.Text,
+        };
+        CREATE_CORTES();
+        orden.Cortes = Cortes;
+        CREATE_DETALLE_ORDEN();
+        orden.rollos = Detalle;
+
+        //actualiza el encabezado de la OC.
+        await Task.Run(() => Service.Update_Header_Documnet_OC(orden));
+
+        //actualiza la base de datos los items rollos.
+        //Service.Update_Items_Orden_Corte(Lista);
+
+
     }
 
     private void GuardarOrderNew()
@@ -1076,13 +1104,7 @@ public partial class FrmOrdenCorte : Form
         // 3.- Guardar el documento en la Base de Datos.
         SaveDocument();
 
-        //4.- Actualizar la UI.
-        RefrescarUI();
 
-        //Crear el txt de rollos cortados
-        ExportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(), chk_generartxt_rc.Checked, Convert.ToDateTime(txt_fecha_produccion.Text).ToShortDateString(), Convert.ToDateTime(txt_fecha_produccion.Text).ToShortDateString(), false);
-
-        EditMode = 0;
     }
 
 
@@ -1095,11 +1117,7 @@ public partial class FrmOrdenCorte : Form
             //Actualizar el consecutivo de la Orden de Corte den la Base de Datos.
             string UpdateConsecBd = (Convert.ToInt32(txt_numeroOC.Text) + 1).ToString();
             Service.UpdateConsecOC(UpdateConsecBd);
-            ACTUALIZAR_INVENTARIOS_MASTER();
-        }
-        else if (EditMode == 2)
-        {
-            GuardarOrderUpdateMode();
+
         }
     }
 
@@ -1237,16 +1255,25 @@ public partial class FrmOrdenCorte : Form
         //manejom de desperdicio.
         if (chk_desperdicio1.Checked)
         {
+
             double consumo_desper = txt_matrest1_lenght.Text == "" ? 0 : Convert.ToDouble(txt_matrest1_lenght.Text);
+
+            if (consumo_desper <= 0) return;
+
             var d = new { rollid = txt_rollid_1.Text, orden = txt_numeroOC.Text, consumo = consumo_desper, fecha = DateTime.Now, desperdicio = true };
+
             await Service.UpdateDetailsConsumosMasterIniciales(d.rollid, d.orden, d.consumo, d.fecha, d.desperdicio);
         }
 
-        // actualiza el campo largo_consumido en orden_corte.
+        // 3.- actualiza el campo largo_consumido en orden_corte.
         double consumoParcial = txt_real1_length.Text == "" ? 0 : Convert.ToDouble(txt_real1_length.Text);
         string rollid = txt_rollid_1.Text;
-        string nameTable = TipoMovimiento == "Inic." ? "MasterInic" : "ItemsMateria";
-        string ssql = TipoMovimiento == "Inic." ? R.QUERY.PRODUCTION.SQL_QUERY_ACTUALIZAR_INVENTARIO_INICIALES :
+
+        string tipo_m = txt_tipo_master.Text.ToString().ToUpper().Trim();
+
+        string nameTable = tipo_m == "INIC." ? "MasterInic" : "ItemsMateria";
+
+        string ssql = tipo_m == "INIC." ? R.QUERY.PRODUCTION.SQL_QUERY_ACTUALIZAR_INVENTARIO_INICIALES :
             R.QUERY.PRODUCTION.SQL_QUERY_ACTUALIZAR_INVENTARIO_MATERIA;
 
         var objeto = new { consumo = consumoParcial, roll_id = rollid, nametable = nameTable, sql = ssql };
@@ -1503,18 +1530,27 @@ public partial class FrmOrdenCorte : Form
         form.ShowDialog();
     }
 
-    private void Opt_cerrar_orden_Click(object sender, EventArgs e)
+    private async void Opt_cerrar_orden_Click(object sender, EventArgs e)
     {
         DialogResult resultado = MessageBox.Show("¿Realmente desea Cerrar la Orden de Corte", "Advertencia...", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
         if (resultado == DialogResult.Yes)
         {
+            Toggleloading(true);
             //se actualiza en la Base de Datos.
             Service.UpdateStatusDocumentOC(5, txt_numeroOC.Text);
             //actualiza la ui del textbox de step-indicator.
             UpdateUIStepIndicator(5);
             //actualizar el control de Step Indicator.
             UpdateStepIndicator();
+            //actualizar los inventarios del master.
+
+            await Task.Run(() =>
+            {
+                ACTUALIZAR_INVENTARIOS_MASTER();
+            });
+            Toggleloading(false);
+
         }
     }
     private void UpdateUIStepIndicator(int step)
@@ -1556,11 +1592,6 @@ public partial class FrmOrdenCorte : Form
     private void Bot_imprimir_Click(object sender, EventArgs e)
     {
         ReportService.Reporte_Orden_Corte(txt_numeroOC.Text, this, R.REPORT_NAME.REPORT_OC, R.REPORT_TITLE.REPORT_OC);
-    }
-
-    private void Bot_accion_Click(object sender, EventArgs e)
-    {
-
     }
 
     private void Bot_cancelar_Click(object sender, EventArgs e)
@@ -1614,7 +1645,8 @@ public partial class FrmOrdenCorte : Form
         btn_buscar_rollid1.Enabled = false;
         btn_buscar_rollid2.Enabled = false;
         btn_generar_rollos.Enabled = false;
-
+        btn_buscar_orden.Enabled = true;
+        EditMode = 0;
     }
 
     private void Btn_add_row_corte_Click(object sender, EventArgs e)
@@ -1626,6 +1658,10 @@ public partial class FrmOrdenCorte : Form
         RollosCortados["msi"] = 0;
         RollosCortados["code_person"] = "S/N";
         RollosCortados.BeginEdit();
+
+        grid_cortes.Focus();
+        grid_cortes.CurrentCell = grid_cortes.Rows[^1].Cells[1];
+
 
     }
     private bool ValidDefintionsCortes()
@@ -1690,6 +1726,12 @@ public partial class FrmOrdenCorte : Form
 
     private void Opt_modif_orden_Click(object sender, EventArgs e)
     {
+        if (Convert.ToInt16(txt_step.Text) != 2)
+        {
+            MessageBox.Show("Solo se puede modificar la orden en estado de PRODUCCION...", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
         //configurar la barra de herramientas
         bot_guardar.Enabled = true;
         bot_primero.Enabled = false;
@@ -1730,7 +1772,12 @@ public partial class FrmOrdenCorte : Form
         //desperdicio
         chk_desperdicio1.Enabled = true;
         //grid de cortes
+
         grid_cortes.ReadOnly = false;
+        grid_cortes.Columns[0].ReadOnly = true;
+        grid_cortes.Columns[2].ReadOnly = true;
+        grid_cortes.Columns[3].ReadOnly = true;
+
 
         //ICONO DE EDICION
         label_ModoEdition.Visible = true;
@@ -1752,11 +1799,21 @@ public partial class FrmOrdenCorte : Form
         txt_vueltas1.Enabled = true;
 
         btn_generar_rollos.Enabled = true;
+
+        Ds.Tables["DtMaster"]!.AcceptChanges();
+        Ds.Tables["DtCortes"]!.AcceptChanges();
+        Ds.Tables["DtRollos"]!.AcceptChanges();
+        Ds.Tables["DtCustomer"]!.AcceptChanges();
+        Ds.Tables["DtOperator"]!.AcceptChanges();
+        BsMaster.ResetBindings(false);
+        BsDetails.ResetBindings(false);
+        BsCortes.ResetBindings(false);
+
         EditMode = 2;
 
     }
 
-    private void txt_long_cortar_KeyPress(object sender, KeyPressEventArgs e)
+    private void Txt_long_cortar_KeyPress(object sender, KeyPressEventArgs e)
     {
         if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
         {
@@ -1764,17 +1821,17 @@ public partial class FrmOrdenCorte : Form
         }
     }
 
-    private void grid_cortes_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+    private void Grid_cortes_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
     {
-        if (grid_cortes.CurrentCell!.ColumnIndex == 1)  
-        {
-            if (e.Control is TextBox tb)
-            {
-                // Remover eventos previos para evitar duplicados
-                tb.KeyPress -= SoloNumeros_KeyPress!;
-                tb.KeyPress += SoloNumeros_KeyPress!;
-            }
-        }
+        //if (grid_cortes.CurrentCell!.ColumnIndex == 1)
+        //{
+        //    if (e.Control is TextBox tb)
+        //    {
+        //        // Remover eventos previos para evitar duplicados
+        //        tb.KeyPress -= SoloNumeros_KeyPress!;
+        //        tb.KeyPress += SoloNumeros_KeyPress!;
+        //    }
+        //}
     }
     private void SoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
     {
@@ -1782,6 +1839,74 @@ public partial class FrmOrdenCorte : Form
         if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
         {
             e.Handled = true;
+        }
+    }
+
+    private void Grid_cortes_DataError(object sender, DataGridViewDataErrorEventArgs e)
+    {
+        var grid = (DataGridView)sender;
+
+        // Mostrar contexto del error
+        MessageBox.Show($"Error en celda [{e.RowIndex}, {e.ColumnIndex}]: {e.Context}",
+                        "Error de datos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+        // Si es una excepción de restricción (por ejemplo, clave duplicada o nulo no permitido)
+        if (e.Exception is ConstraintException)
+        {
+            grid.Rows[e.RowIndex].ErrorText = "Error de restricción en los datos.";
+            grid.Rows[e.RowIndex].Cells[e.ColumnIndex].ErrorText = "Dato inválido.";
+            e.ThrowException = false; // Evita que se propague la excepción
+        }
+
+        // Puedes cancelar el error si no quieres que se propague
+        e.Cancel = true;
+
+    }
+
+    private void Txt_long_cortar_Enter(object sender, EventArgs e)
+    {
+        var txt = (TextBox)sender;
+
+        if (string.IsNullOrWhiteSpace(txt.Text))
+            txt.Text = "0";
+
+        txt.BeginInvoke(new Action(() => txt.SelectAll()));
+    }
+
+    private void Txt_vueltas1_Enter(object sender, EventArgs e)
+    {
+        var numeric = (NumericUpDown)sender;
+
+        if (string.IsNullOrWhiteSpace(numeric.Text))
+            numeric.Text = "0";
+
+        numeric.BeginInvoke(new Action(() =>
+        {
+            numeric.Select(0, numeric.Text.Length);
+        }));
+
+    }
+
+    private void Txt_long_cortar_KeyDown(object sender, KeyEventArgs e)
+    {
+
+    }
+
+    private void Txt_long_cortar_KeyUp(object sender, KeyEventArgs e)
+    {
+        if (EditMode == 0) return;
+
+        double longitud_cortar = txt_long_cortar.Text != "" ? Convert.ToDouble(txt_long_cortar.Text) : 0;
+
+        if (longitud_cortar > 0)
+        {
+            CALCULATE_DATA_CORTES();
+            CALCULAR_TOTAL_ROLLOS_CORTAR();
+            if (grid_items.Rows.Count > 0)
+            {
+                BorrarRollosCortadosHijos();
+            }
+
         }
     }
 }

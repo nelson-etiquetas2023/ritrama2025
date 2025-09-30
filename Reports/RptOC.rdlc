@@ -1215,7 +1215,7 @@
                                   <Value>=Fields!width.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
-                                    <Format>0.00000;(0.00000)</Format>
+                                    <Format>0.000;(0.000)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1250,7 +1250,7 @@
                                   <Value>=Fields!large.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
-                                    <Format>0.00000;(0.00000)</Format>
+                                    <Format>0.000;(0.000)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1285,7 +1285,7 @@
                                   <Value>=Fields!msi.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
-                                    <Format>0.00000;(0.00000)</Format>
+                                    <Format>0.000;(0.000)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2210,7 +2210,7 @@
                         <Value>=First(Fields!master_width.Value,"DsOC")</Value>
                         <Style>
                           <FontSize>8pt</FontSize>
-                          <Format>0.00000;(0.00000)</Format>
+                          <Format>0.000;(0.000)</Format>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -2246,7 +2246,7 @@
                         <Value>=First(Fields!master_width_real.Value,"DsOC")</Value>
                         <Style>
                           <FontSize>8pt</FontSize>
-                          <Format>0.00000;(0.00000)</Format>
+                          <Format>0.000;(0.000)</Format>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -2282,7 +2282,7 @@
                         <Value>=First(Fields!master_width_restante.Value,"DsOC")</Value>
                         <Style>
                           <FontSize>8pt</FontSize>
-                          <Format>0.00000;(0.00000)</Format>
+                          <Format>0.000;(0.000)</Format>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -2318,7 +2318,7 @@
                         <Value>=First(Fields!master_length.Value,"DsOC")</Value>
                         <Style>
                           <FontSize>8pt</FontSize>
-                          <Format>0.00000;(0.00000)</Format>
+                          <Format>0.000;(0.000)</Format>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -2354,7 +2354,7 @@
                         <Value>=First(Fields!master_length_real.Value,"DsOC")</Value>
                         <Style>
                           <FontSize>8pt</FontSize>
-                          <Format>0.00000;(0.00000)</Format>
+                          <Format>0.000;(0.000)</Format>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -2390,7 +2390,7 @@
                         <Value>=First(Fields!master_length_restabnte.Value,"DsOC")</Value>
                         <Style>
                           <FontSize>8pt</FontSize>
-                          <Format>0.00000;(0.00000)</Format>
+                          <Format>0.000;(0.000)</Format>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -2722,7 +2722,7 @@
                                   <Value>=Fields!width.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
-                                    <Format>0.00000;(0.00000)</Format>
+                                    <Format>0.000;(0.000)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2757,7 +2757,7 @@
                                   <Value>=Fields!lenght.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
-                                    <Format>0.00000;(0.00000)</Format>
+                                    <Format>0.000;(0.000)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2792,7 +2792,7 @@
                                   <Value>=Fields!msi.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
-                                    <Format>0.00000;(0.00000)</Format>
+                                    <Format>0.000;(0.000)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2813,6 +2813,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>

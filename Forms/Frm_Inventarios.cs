@@ -83,7 +83,6 @@ public partial class Frm_Inventarios : Form
         panel_loading.Visible = isLoading;
         panel_loading.BringToFront();
         bot_buscar_cor.Enabled = !isLoading;
-        //UseWaitCursor = isLoading;
     }
 
     private List<Roll_Details> CreateListaRollosCortados()
@@ -191,14 +190,14 @@ public partial class Frm_Inventarios : Form
 
         DataGridViewCheckBoxColumn colSelPrint = new()
         {
-            HeaderText="Sel.",
+            HeaderText = "Sel.",
             ReadOnly = false,
             DisplayIndex = 0,
             Width = 30,
-            Name= "colSelPrint"
+            Name = "colSelPrint"
         };
         GridMaster.Columns.Add(colSelPrint);
-        
+
 
     }
     private async void Btn_reload_Click(object sender, EventArgs e)
@@ -233,16 +232,23 @@ public partial class Frm_Inventarios : Form
         }
         if (activeTabtext == "Rollos Cortados")
         {
+            Toggleloading(true);
+            Application.DoEvents();
+            await Task.Delay(500);
+
             try
             {
-                Toggleloading(true);
+
                 DtRollosCortados = await Task.Run(() => InventarioService.LoadRolloCortadoInventaerio());
                 DvRollos = DtRollosCortados!.DefaultView;
-                ContarRegistrosRollos();
                 GridRollosCortados.DataSource = DvRollos;
+                ContarRegistrosRollos();
+
+
             }
             catch (Exception)
             {
+
                 throw;
             }
             finally
@@ -252,7 +258,10 @@ public partial class Frm_Inventarios : Form
         }
         if (activeTabtext == "Hojas")
         {
-            MessageBox.Show("Inventario de Hojas");
+            Toggleloading(true);
+            Application.DoEvents();
+            await Task.Delay(500);
+            Toggleloading(false);
         }
     }
     private void ContarRegistros()
@@ -666,7 +675,7 @@ public partial class Frm_Inventarios : Form
     private void GridRollosCortados_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
     {
         //obtener el valor de la columna disponible.
-        
+
         if (GridRollosCortados.Columns[e.ColumnIndex].Name == "colEstado")
         {
             //obtener el valor de la columna disponible.
@@ -675,16 +684,16 @@ public partial class Frm_Inventarios : Form
             if (dispo)
             {
                 var row = GridRollosCortados.Rows[e.RowIndex];
-                row.DefaultCellStyle.BackColor = System.Drawing.Color.White;
-                row.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+                //row.DefaultCellStyle.BackColor = System.Drawing.Color.White;
+                //row.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
                 e.Value = Properties.Resources.products_dispo;
 
             }
             else
             {
                 var row = GridRollosCortados.Rows[e.RowIndex];
-                row.DefaultCellStyle.BackColor = System.Drawing.Color.LightCoral;
-                row.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
+                //row.DefaultCellStyle.BackColor = System.Drawing.Color.LightCoral;
+                //row.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
                 e.Value = Properties.Resources.products_nodispo;
             }
         }
@@ -693,7 +702,7 @@ public partial class Frm_Inventarios : Form
 
     private void Bot_printLabel_Click(object sender, EventArgs e)
     {
-        if (GridMaster.SelectedRows.Count > 0) 
+        if (GridMaster.SelectedRows.Count > 0)
         {
             DataGridViewRow row = GridMaster.SelectedRows[0];
 
@@ -724,13 +733,23 @@ public partial class Frm_Inventarios : Form
                 Msi = msi is null ? 0 : Convert.ToDouble(msi),
                 Splice = Convert.ToInt16(splice),
                 Fecha_Impresion = fecha,
-                Fecha_Fabricacion =  Convert.ToDateTime(fecha_producc),
+                Fecha_Fabricacion = Convert.ToDateTime(fecha_producc),
                 Estado = state.ToString()!
 
             };
 
-            ExportDataService.ExportTxtFormatMasterRePrintLabel(master,false);
+            ExportDataService.ExportTxtFormatMasterRePrintLabel(master, false);
         }
+    }
+
+    private void GridRollosCortados_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    {
+
+    }
+
+    private void GridMaster_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    {
+
     }
 }
 public class ColumnaType

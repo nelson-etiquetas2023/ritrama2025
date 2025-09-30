@@ -33,9 +33,6 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             TabPages_Inventario = new TabControl();
             tabPage1 = new TabPage();
-            panel_loading = new Panel();
-            text_loadingindicator = new Label();
-            pictureBox2 = new PictureBox();
             bot_printLabel = new Button();
             pictureBox3 = new PictureBox();
             label11 = new Label();
@@ -101,10 +98,11 @@
             Bot_Reports = new ToolStripButton();
             Bot_Excel = new ToolStripButton();
             Bot_Txt = new ToolStripButton();
+            panel_loading = new Panel();
+            text_loadingindicator = new Label();
+            pictureBox2 = new PictureBox();
             TabPages_Inventario.SuspendLayout();
             tabPage1.SuspendLayout();
-            panel_loading.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)GridMaster).BeginInit();
@@ -119,6 +117,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             toolStrip1.SuspendLayout();
+            panel_loading.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // TabPages_Inventario
@@ -140,7 +140,6 @@
             // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(panel_loading);
             tabPage1.Controls.Add(bot_printLabel);
             tabPage1.Controls.Add(pictureBox3);
             tabPage1.Controls.Add(label11);
@@ -161,39 +160,6 @@
             tabPage1.Text = "Master";
             tabPage1.UseVisualStyleBackColor = true;
             tabPage1.Click += TabPage1_Click;
-            // 
-            // panel_loading
-            // 
-            panel_loading.BackColor = SystemColors.Window;
-            panel_loading.Controls.Add(text_loadingindicator);
-            panel_loading.Controls.Add(pictureBox2);
-            panel_loading.Location = new Point(399, 223);
-            panel_loading.Name = "panel_loading";
-            panel_loading.Size = new Size(200, 87);
-            panel_loading.TabIndex = 23;
-            panel_loading.Visible = false;
-            // 
-            // text_loadingindicator
-            // 
-            text_loadingindicator.AutoSize = true;
-            text_loadingindicator.Font = new Font("Russo One", 11.9999981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            text_loadingindicator.Location = new Point(90, 37);
-            text_loadingindicator.Name = "text_loadingindicator";
-            text_loadingindicator.Size = new Size(96, 19);
-            text_loadingindicator.TabIndex = 1;
-            text_loadingindicator.Text = "Loading...";
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.BackColor = SystemColors.Control;
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(13, 12);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(64, 64);
-            pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
-            pictureBox2.TabIndex = 0;
-            pictureBox2.TabStop = false;
-            pictureBox2.WaitOnLoad = true;
             // 
             // bot_printLabel
             // 
@@ -221,10 +187,10 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Font = new Font("Roboto Condensed", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label11.Location = new Point(223, 8);
+            label11.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label11.Location = new Point(94, 4);
             label11.Name = "label11";
-            label11.Size = new Size(305, 25);
+            label11.Size = new Size(357, 30);
             label11.TabIndex = 14;
             label11.Text = "LISTADO INVENTARIO DE MASTER";
             // 
@@ -341,6 +307,7 @@
             GridMaster.SelectionMode = DataGridViewSelectionMode.CellSelect;
             GridMaster.Size = new Size(996, 410);
             GridMaster.TabIndex = 3;
+            GridMaster.CellContentClick += GridMaster_CellContentClick;
             GridMaster.CellFormatting += GridMaster_CellFormatting;
             // 
             // btn_buscar
@@ -427,10 +394,10 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Font = new Font("Roboto Condensed", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label12.Location = new Point(240, 11);
+            label12.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label12.Location = new Point(92, 6);
             label12.Name = "label12";
-            label12.Size = new Size(427, 25);
+            label12.Size = new Size(502, 30);
             label12.TabIndex = 23;
             label12.Text = "LISTADO DE INVENTARIO DE ROLLOS CORTADOS";
             // 
@@ -548,6 +515,7 @@
             GridRollosCortados.SelectionMode = DataGridViewSelectionMode.CellSelect;
             GridRollosCortados.Size = new Size(996, 393);
             GridRollosCortados.TabIndex = 18;
+            GridRollosCortados.CellContentClick += GridRollosCortados_CellContentClick;
             GridRollosCortados.CellFormatting += GridRollosCortados_CellFormatting;
             // 
             // bto_limpiar_cor
@@ -861,7 +829,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(381, 27);
+            pictureBox1.Location = new Point(279, 24);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(50, 47);
             pictureBox1.TabIndex = 1;
@@ -871,7 +839,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(437, 24);
+            label1.Location = new Point(335, 21);
             label1.Name = "label1";
             label1.Size = new Size(411, 50);
             label1.TabIndex = 0;
@@ -930,11 +898,45 @@
             Bot_Txt.Text = "Texto";
             Bot_Txt.Click += Bot_Txt_Click;
             // 
+            // panel_loading
+            // 
+            panel_loading.BackColor = SystemColors.Window;
+            panel_loading.Controls.Add(text_loadingindicator);
+            panel_loading.Controls.Add(pictureBox2);
+            panel_loading.Location = new Point(415, 374);
+            panel_loading.Name = "panel_loading";
+            panel_loading.Size = new Size(200, 87);
+            panel_loading.TabIndex = 25;
+            panel_loading.Visible = false;
+            // 
+            // text_loadingindicator
+            // 
+            text_loadingindicator.AutoSize = true;
+            text_loadingindicator.Font = new Font("Russo One", 11.9999981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            text_loadingindicator.Location = new Point(90, 37);
+            text_loadingindicator.Name = "text_loadingindicator";
+            text_loadingindicator.Size = new Size(96, 19);
+            text_loadingindicator.TabIndex = 1;
+            text_loadingindicator.Text = "Loading...";
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.BackColor = SystemColors.Control;
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(13, 12);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(64, 64);
+            pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
+            pictureBox2.TabIndex = 0;
+            pictureBox2.TabStop = false;
+            pictureBox2.WaitOnLoad = true;
+            // 
             // Frm_Inventarios
             // 
             AutoScaleDimensions = new SizeF(7F, 14F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1030, 834);
+            Controls.Add(panel_loading);
             Controls.Add(toolStrip1);
             Controls.Add(panel1);
             Controls.Add(TabPages_Inventario);
@@ -946,9 +948,6 @@
             TabPages_Inventario.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
-            panel_loading.ResumeLayout(false);
-            panel_loading.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
@@ -970,6 +969,9 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
+            panel_loading.ResumeLayout(false);
+            panel_loading.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1036,9 +1038,6 @@
         private RadioButton rad_codeunique_cor;
         private Button bot_buscar_cor;
         private RadioButton rad_ordencorte_cor;
-        private Panel panel_loading;
-        private PictureBox pictureBox2;
-        private Label text_loadingindicator;
         private Label label11;
         private Label label12;
         private PictureBox pictureBox3;
@@ -1046,5 +1045,8 @@
         private PictureBox pictureBox5;
         private ImageList imageList1;
         private Button bot_printLabel;
+        private Panel panel_loading;
+        private Label text_loadingindicator;
+        private PictureBox pictureBox2;
     }
 }

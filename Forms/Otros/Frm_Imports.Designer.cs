@@ -230,7 +230,7 @@
             btn_load_data.Text = "Cargar Datos";
             btn_load_data.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_load_data.UseVisualStyleBackColor = true;
-            btn_load_data.Click += btn_load_data_Click;
+            btn_load_data.Click += Btn_load_data_Click;
             // 
             // chk_valid_products
             // 
@@ -306,7 +306,7 @@
             btn_saveDatabase.Text = "Guardar BD";
             btn_saveDatabase.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_saveDatabase.UseVisualStyleBackColor = true;
-            btn_saveDatabase.Click += btn_saveDatabase_Click;
+            btn_saveDatabase.Click += Btn_saveDatabase_Click;
             // 
             // checkBox1
             // 
