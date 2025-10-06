@@ -181,8 +181,8 @@ public partial class Frm_Inventarios : Form
         CommonService.ADD_COLUMN_GRID("estado", 80, "Estado", "estado", GridMaster);
         CommonService.ADD_COLUMN_GRID("msi", 80, "Msi", "msi", GridMaster);
         CommonService.ADD_COLUMN_GRID("core", 80, "Core", "core", GridMaster);
-        CommonService.ADD_COLUMN_GRID("fecha_pro", 80, "Produccion", "fecha_pro", GridMaster);
-        CommonService.ADD_COLUMN_GRID("fecha", 80, "Recep.", "fecha_recep", GridMaster);
+        CommonService.ADD_COLUMN_GRID("fecha_pro", 100, "Produccion", "fecha_pro", GridMaster);
+        CommonService.ADD_COLUMN_GRID("fecha_reg", 100, "Llegada", "fecha_reg", GridMaster);
         CommonService.ADD_COLUMN_GRID("splice", 80, "Splice", "splice", GridMaster);
         CommonService.ADD_COLUMN_GRID("ubic", 80, "Ubic. ", "ubicacion", GridMaster);
         CommonService.ADD_COLUMN_GRID("tipo_mov", 80, "Tipo", "tipo_mov", GridMaster);

@@ -49,6 +49,7 @@
             btn_PreviewLabels = new Button();
             cbo_printer = new ComboBox();
             btn_ServicePrintThermal = new Button();
+            btn_raw_printer = new Button();
             ((System.ComponentModel.ISupportInitialize)numero_copias).BeginInit();
             groupBox1.SuspendLayout();
             grp_marca_printer.SuspendLayout();
@@ -263,11 +264,25 @@
             btn_ServicePrintThermal.UseVisualStyleBackColor = true;
             btn_ServicePrintThermal.Click += Btn_ServicePrintThermal_Click;
             // 
+            // btn_raw_printer
+            // 
+            btn_raw_printer.Font = new Font("Noto Sans", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_raw_printer.Image = Properties.Resources.print_48px1;
+            btn_raw_printer.Location = new Point(12, 228);
+            btn_raw_printer.Name = "btn_raw_printer";
+            btn_raw_printer.Size = new Size(302, 66);
+            btn_raw_printer.TabIndex = 19;
+            btn_raw_printer.Text = "Enviar ZPL Raw a Controlador";
+            btn_raw_printer.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_raw_printer.UseVisualStyleBackColor = true;
+            btn_raw_printer.Click += btn_raw_printer_Click;
+            // 
             // FrmCodeBarLabel
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 525);
+            Controls.Add(btn_raw_printer);
             Controls.Add(btn_ServicePrintThermal);
             Controls.Add(cbo_printer);
             Controls.Add(btn_PreviewLabels);
@@ -317,5 +332,6 @@
         private Button btn_PreviewLabels;
         private ComboBox cbo_printer;
         private Button btn_ServicePrintThermal;
+        private Button btn_raw_printer;
     }
 }

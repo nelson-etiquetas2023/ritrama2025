@@ -94,6 +94,10 @@ namespace Ritrama2025.Forms.Otros
                         Ubic = item.Cell(9).Value.ToString(),
                         Paleta = item.Cell(11).Value.ToString(),
                         Recepcion = item.Cell(8).Value.ToString(),
+                        Fecha_Fabricacion = item.Cell(7).GetDateTime(),
+                        Fecha_Llegada = item.Cell(11).GetDateTime(),
+
+
                     };
                     lista.Add(producto);
                 }

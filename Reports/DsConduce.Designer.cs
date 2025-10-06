@@ -3013,6 +3013,8 @@ namespace Ritrama2025.Reports {
             
             private global::System.Data.DataColumn columnstep;
             
+            private global::System.Data.DataColumn columnubicacion;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public orden_corteDataTable() {
@@ -3266,6 +3268,14 @@ namespace Ritrama2025.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ubicacionColumn {
+                get {
+                    return this.columnubicacion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -3328,7 +3338,8 @@ namespace Ritrama2025.Reports {
                         decimal master_length_real, 
                         decimal master_width_restante, 
                         decimal master_length_restabnte, 
-                        int step) {
+                        int step, 
+                        string ubicacion) {
                 orden_corteRow roworden_corteRow = ((orden_corteRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         numero,
@@ -3357,7 +3368,8 @@ namespace Ritrama2025.Reports {
                         master_length_real,
                         master_width_restante,
                         master_length_restabnte,
-                        step};
+                        step,
+                        ubicacion};
                 roworden_corteRow.ItemArray = columnValuesArray;
                 this.Rows.Add(roworden_corteRow);
                 return roworden_corteRow;
@@ -3414,6 +3426,7 @@ namespace Ritrama2025.Reports {
                 this.columnmaster_width_restante = base.Columns["master_width_restante"];
                 this.columnmaster_length_restabnte = base.Columns["master_length_restabnte"];
                 this.columnstep = base.Columns["step"];
+                this.columnubicacion = base.Columns["ubicacion"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3473,6 +3486,8 @@ namespace Ritrama2025.Reports {
                 base.Columns.Add(this.columnmaster_length_restabnte);
                 this.columnstep = new global::System.Data.DataColumn("step", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnstep);
+                this.columnubicacion = new global::System.Data.DataColumn("ubicacion", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnubicacion);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnnumero}, true));
                 this.columnnumero.AllowDBNull = false;
@@ -6710,6 +6725,22 @@ namespace Ritrama2025.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string ubicacion {
+                get {
+                    try {
+                        return ((string)(this[this.tableorden_corte.ubicacionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'ubicacion\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.ubicacionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Isfecha_produccionNull() {
                 return this.IsNull(this.tableorden_corte.fecha_produccionColumn);
             }
@@ -7006,6 +7037,18 @@ namespace Ritrama2025.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetstepNull() {
                 this[this.tableorden_corte.stepColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsubicacionNull() {
+                return this.IsNull(this.tableorden_corte.ubicacionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetubicacionNull() {
+                this[this.tableorden_corte.ubicacionColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -8379,7 +8422,7 @@ WHERE (a.numero = @Orden_MatPrima)";
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = @"SELECT a.numero, a.fecha, a.fecha_produccion, a.product_id, c.Product_Name AS producto, b.unique_code, b.roll_number, b.splice, b.width, b.large, b.msi, b.roll_id, b.code_person, b.status, d.nombre AS operador, 
     e.Customer_Name, a.width_1 AS master_width, a.lenght_1 AS master_length, a.longitud_cortar AS master_corte_largo, a.cortes_ancho AS master_cortes_ancho, a.cortes_largo AS master_vueltas, 
-    a.cant_rollos AS master_cant_rollos,util1_real_width as master_width_real, util1_real_lenght as master_length_real,rest1_width as master_width_restante,rest1_lenght as master_length_restabnte,step
+    a.cant_rollos AS master_cant_rollos, a.util1_real_width AS master_width_real, a.util1_real_lenght AS master_length_real, a.rest1_width AS master_width_restante, a.rest1_lenght AS master_length_restabnte, a.step
 FROM orden_corte AS a LEFT OUTER JOIN
     rolls_details AS b ON a.numero = b.numero LEFT OUTER JOIN
     producto AS c ON a.product_id = c.Product_ID LEFT OUTER JOIN

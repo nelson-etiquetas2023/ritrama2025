@@ -77,8 +77,7 @@
             GridItems.AllowUserToAddRows = false;
             GridItems.AllowUserToDeleteRows = false;
             GridItems.AllowUserToResizeRows = false;
-            GridItems.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            GridItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            GridItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             GridItems.Location = new Point(4, 201);
             GridItems.MultiSelect = false;
             GridItems.Name = "GridItems";

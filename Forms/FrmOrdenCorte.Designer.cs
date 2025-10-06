@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmOrdenCorte));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             panel1 = new Panel();
             ICON_EDITMODE = new PictureBox();
             pictureBox6 = new PictureBox();
@@ -125,7 +125,6 @@
             label30 = new Label();
             txt_cortes_ancho = new TextBox();
             label31 = new Label();
-            txt_rollos_cortar2 = new TextBox();
             txt_rollos_cortar1 = new TextBox();
             label32 = new Label();
             tabPage1 = new TabPage();
@@ -165,6 +164,9 @@
             pictureBox7 = new PictureBox();
             txt_tipo_master = new TextBox();
             label33 = new Label();
+            label34 = new Label();
+            txt_ubic = new TextBox();
+            btn_LabelCodeBar = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ICON_EDITMODE).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
@@ -196,7 +198,7 @@
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1141, 59);
+            panel1.Size = new Size(1051, 59);
             panel1.TabIndex = 0;
             // 
             // ICON_EDITMODE
@@ -261,7 +263,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { bot_primero, bot_anterior, bot_siguiente, bot_ultimo, bot_accion, bot_guardar, bot_cancelar, bot_editOrden, bot_imprimir, bot_exportar, bot_buscarOrders });
             toolStrip1.Location = new Point(0, 59);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(1141, 40);
+            toolStrip1.Size = new Size(1051, 40);
             toolStrip1.TabIndex = 1;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -272,8 +274,8 @@
             bot_primero.Image = Properties.Resources.double_left_48px;
             bot_primero.ImageTransparentColor = Color.Magenta;
             bot_primero.Name = "bot_primero";
-            bot_primero.Size = new Size(100, 30);
-            bot_primero.Text = "Primero";
+            bot_primero.Size = new Size(80, 30);
+            bot_primero.Text = "Prim";
             bot_primero.Click += Bot_primero_Click;
             // 
             // bot_anterior
@@ -283,8 +285,8 @@
             bot_anterior.Image = (Image)resources.GetObject("bot_anterior.Image");
             bot_anterior.ImageTransparentColor = Color.Magenta;
             bot_anterior.Name = "bot_anterior";
-            bot_anterior.Size = new Size(100, 30);
-            bot_anterior.Text = "Anterior";
+            bot_anterior.Size = new Size(80, 30);
+            bot_anterior.Text = "Ant";
             bot_anterior.Click += Bot_anterior_Click;
             // 
             // bot_siguiente
@@ -294,8 +296,8 @@
             bot_siguiente.Image = (Image)resources.GetObject("bot_siguiente.Image");
             bot_siguiente.ImageTransparentColor = Color.Magenta;
             bot_siguiente.Name = "bot_siguiente";
-            bot_siguiente.Size = new Size(100, 30);
-            bot_siguiente.Text = "Siguiente";
+            bot_siguiente.Size = new Size(80, 30);
+            bot_siguiente.Text = "Sig";
             bot_siguiente.TextImageRelation = TextImageRelation.TextBeforeImage;
             bot_siguiente.Click += Bot_siguiente_Click;
             // 
@@ -306,8 +308,8 @@
             bot_ultimo.Image = (Image)resources.GetObject("bot_ultimo.Image");
             bot_ultimo.ImageTransparentColor = Color.Magenta;
             bot_ultimo.Name = "bot_ultimo";
-            bot_ultimo.Size = new Size(100, 30);
-            bot_ultimo.Text = "Ultimo";
+            bot_ultimo.Size = new Size(80, 30);
+            bot_ultimo.Text = "Ult";
             bot_ultimo.TextImageRelation = TextImageRelation.TextBeforeImage;
             bot_ultimo.Click += Bot_ultimo_Click;
             // 
@@ -962,7 +964,7 @@
             // 
             label23.AutoSize = true;
             label23.Font = new Font("Segoe UI", 9.75F);
-            label23.Location = new Point(531, 441);
+            label23.Location = new Point(492, 443);
             label23.Name = "label23";
             label23.Size = new Size(103, 17);
             label23.TabIndex = 56;
@@ -971,7 +973,7 @@
             // txt_cust_name
             // 
             txt_cust_name.Font = new Font("Noto Sans", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txt_cust_name.Location = new Point(646, 435);
+            txt_cust_name.Location = new Point(607, 437);
             txt_cust_name.Margin = new Padding(3, 2, 3, 2);
             txt_cust_name.Name = "txt_cust_name";
             txt_cust_name.ReadOnly = true;
@@ -982,7 +984,7 @@
             // 
             label24.AutoSize = true;
             label24.Font = new Font("Segoe UI", 9.75F);
-            label24.Location = new Point(572, 411);
+            label24.Location = new Point(533, 413);
             label24.Name = "label24";
             label24.Size = new Size(54, 17);
             label24.TabIndex = 54;
@@ -992,7 +994,7 @@
             // 
             txt_cust_id.Enabled = false;
             txt_cust_id.Font = new Font("Noto Sans", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txt_cust_id.Location = new Point(646, 406);
+            txt_cust_id.Location = new Point(607, 408);
             txt_cust_id.Margin = new Padding(3, 2, 3, 2);
             txt_cust_id.Name = "txt_cust_id";
             txt_cust_id.ReadOnly = true;
@@ -1003,7 +1005,7 @@
             // 
             label25.AutoSize = true;
             label25.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-            label25.Location = new Point(717, 102);
+            label25.Location = new Point(681, 102);
             label25.Name = "label25";
             label25.Size = new Size(187, 17);
             label25.TabIndex = 57;
@@ -1013,7 +1015,7 @@
             // 
             txt_ancho_corte.Enabled = false;
             txt_ancho_corte.Font = new Font("Segoe UI", 9.75F);
-            txt_ancho_corte.Location = new Point(714, 138);
+            txt_ancho_corte.Location = new Point(678, 138);
             txt_ancho_corte.Margin = new Padding(3, 2, 3, 2);
             txt_ancho_corte.Name = "txt_ancho_corte";
             txt_ancho_corte.ReadOnly = true;
@@ -1024,7 +1026,7 @@
             // 
             label26.AutoSize = true;
             label26.Font = new Font("Segoe UI", 9.75F);
-            label26.Location = new Point(714, 122);
+            label26.Location = new Point(678, 122);
             label26.Name = "label26";
             label26.Size = new Size(56, 17);
             label26.TabIndex = 58;
@@ -1034,7 +1036,7 @@
             // 
             txt_largo_corte.Enabled = false;
             txt_largo_corte.Font = new Font("Segoe UI", 9.75F);
-            txt_largo_corte.Location = new Point(773, 138);
+            txt_largo_corte.Location = new Point(737, 138);
             txt_largo_corte.Margin = new Padding(3, 2, 3, 2);
             txt_largo_corte.Name = "txt_largo_corte";
             txt_largo_corte.ReadOnly = true;
@@ -1045,7 +1047,7 @@
             // 
             label27.AutoSize = true;
             label27.Font = new Font("Segoe UI", 9.75F);
-            label27.Location = new Point(773, 122);
+            label27.Location = new Point(737, 122);
             label27.Name = "label27";
             label27.Size = new Size(52, 17);
             label27.TabIndex = 60;
@@ -1055,7 +1057,7 @@
             // 
             txt_resta_corte.Enabled = false;
             txt_resta_corte.Font = new Font("Segoe UI", 9.75F);
-            txt_resta_corte.Location = new Point(832, 138);
+            txt_resta_corte.Location = new Point(796, 138);
             txt_resta_corte.Margin = new Padding(3, 2, 3, 2);
             txt_resta_corte.Name = "txt_resta_corte";
             txt_resta_corte.ReadOnly = true;
@@ -1066,7 +1068,7 @@
             // 
             label28.AutoSize = true;
             label28.Font = new Font("Segoe UI", 9.75F);
-            label28.Location = new Point(832, 122);
+            label28.Location = new Point(796, 122);
             label28.Name = "label28";
             label28.Size = new Size(47, 17);
             label28.TabIndex = 62;
@@ -1076,7 +1078,7 @@
             // 
             btn_buscar_customer.Enabled = false;
             btn_buscar_customer.Font = new Font("Noto Sans", 9.75F);
-            btn_buscar_customer.Location = new Point(913, 434);
+            btn_buscar_customer.Location = new Point(874, 436);
             btn_buscar_customer.Margin = new Padding(3, 2, 3, 2);
             btn_buscar_customer.Name = "btn_buscar_customer";
             btn_buscar_customer.Size = new Size(38, 26);
@@ -1109,15 +1111,15 @@
             grid_cortes.BorderStyle = BorderStyle.None;
             grid_cortes.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
             grid_cortes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            grid_cortes.DefaultCellStyle = dataGridViewCellStyle1;
-            grid_cortes.Location = new Point(646, 169);
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Window;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            grid_cortes.DefaultCellStyle = dataGridViewCellStyle3;
+            grid_cortes.Location = new Point(607, 167);
             grid_cortes.Margin = new Padding(3, 2, 3, 2);
             grid_cortes.Name = "grid_cortes";
             grid_cortes.ReadOnly = true;
@@ -1134,7 +1136,7 @@
             btn_generar_rollos.Enabled = false;
             btn_generar_rollos.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_generar_rollos.Image = (Image)resources.GetObject("btn_generar_rollos.Image");
-            btn_generar_rollos.Location = new Point(645, 343);
+            btn_generar_rollos.Location = new Point(607, 343);
             btn_generar_rollos.Margin = new Padding(3, 2, 3, 2);
             btn_generar_rollos.Name = "btn_generar_rollos";
             btn_generar_rollos.Size = new Size(300, 59);
@@ -1150,7 +1152,7 @@
             btn_add_row_corte.Enabled = false;
             btn_add_row_corte.Font = new Font("Noto Sans", 9.75F);
             btn_add_row_corte.Image = (Image)resources.GetObject("btn_add_row_corte.Image");
-            btn_add_row_corte.Location = new Point(952, 167);
+            btn_add_row_corte.Location = new Point(919, 162);
             btn_add_row_corte.Margin = new Padding(3, 2, 3, 2);
             btn_add_row_corte.Name = "btn_add_row_corte";
             btn_add_row_corte.Size = new Size(123, 43);
@@ -1165,7 +1167,7 @@
             btn_delete_row_corte.Enabled = false;
             btn_delete_row_corte.Font = new Font("Noto Sans", 9.75F);
             btn_delete_row_corte.Image = (Image)resources.GetObject("btn_delete_row_corte.Image");
-            btn_delete_row_corte.Location = new Point(952, 211);
+            btn_delete_row_corte.Location = new Point(919, 206);
             btn_delete_row_corte.Margin = new Padding(3, 2, 3, 2);
             btn_delete_row_corte.Name = "btn_delete_row_corte";
             btn_delete_row_corte.Size = new Size(123, 43);
@@ -1178,7 +1180,7 @@
             // txt_long_cortar
             // 
             txt_long_cortar.Font = new Font("Noto Sans", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txt_long_cortar.Location = new Point(952, 291);
+            txt_long_cortar.Location = new Point(919, 286);
             txt_long_cortar.Margin = new Padding(3, 2, 3, 2);
             txt_long_cortar.Name = "txt_long_cortar";
             txt_long_cortar.ReadOnly = true;
@@ -1194,7 +1196,7 @@
             // 
             label29.AutoSize = true;
             label29.Font = new Font("Segoe UI", 9.75F);
-            label29.Location = new Point(952, 258);
+            label29.Location = new Point(919, 253);
             label29.Name = "label29";
             label29.Size = new Size(118, 17);
             label29.TabIndex = 70;
@@ -1204,7 +1206,7 @@
             // 
             label30.AutoSize = true;
             label30.Font = new Font("Segoe UI", 9.75F);
-            label30.Location = new Point(952, 323);
+            label30.Location = new Point(919, 318);
             label30.Name = "label30";
             label30.Size = new Size(57, 17);
             label30.TabIndex = 72;
@@ -1214,7 +1216,7 @@
             // 
             txt_cortes_ancho.Enabled = false;
             txt_cortes_ancho.Font = new Font("Noto Sans", 9.75F);
-            txt_cortes_ancho.Location = new Point(952, 436);
+            txt_cortes_ancho.Location = new Point(919, 431);
             txt_cortes_ancho.Margin = new Padding(3, 2, 3, 2);
             txt_cortes_ancho.Name = "txt_cortes_ancho";
             txt_cortes_ancho.ReadOnly = true;
@@ -1225,28 +1227,17 @@
             // 
             label31.AutoSize = true;
             label31.Font = new Font("Segoe UI", 9.75F);
-            label31.Location = new Point(952, 416);
+            label31.Location = new Point(919, 411);
             label31.Name = "label31";
             label31.Size = new Size(119, 17);
             label31.TabIndex = 75;
             label31.Text = "Cortes a lo Ancho :";
             // 
-            // txt_rollos_cortar2
-            // 
-            txt_rollos_cortar2.Enabled = false;
-            txt_rollos_cortar2.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold);
-            txt_rollos_cortar2.Location = new Point(952, 535);
-            txt_rollos_cortar2.Margin = new Padding(3, 2, 3, 2);
-            txt_rollos_cortar2.Name = "txt_rollos_cortar2";
-            txt_rollos_cortar2.ReadOnly = true;
-            txt_rollos_cortar2.Size = new Size(115, 25);
-            txt_rollos_cortar2.TabIndex = 79;
-            // 
             // txt_rollos_cortar1
             // 
             txt_rollos_cortar1.Enabled = false;
             txt_rollos_cortar1.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold);
-            txt_rollos_cortar1.Location = new Point(951, 495);
+            txt_rollos_cortar1.Location = new Point(919, 477);
             txt_rollos_cortar1.Margin = new Padding(3, 2, 3, 2);
             txt_rollos_cortar1.Name = "txt_rollos_cortar1";
             txt_rollos_cortar1.ReadOnly = true;
@@ -1257,7 +1248,7 @@
             // 
             label32.AutoSize = true;
             label32.Font = new Font("Segoe UI", 9.75F);
-            label32.Location = new Point(949, 475);
+            label32.Location = new Point(916, 458);
             label32.Name = "label32";
             label32.Size = new Size(135, 17);
             label32.TabIndex = 77;
@@ -1271,7 +1262,7 @@
             tabPage1.Margin = new Padding(3, 2, 3, 2);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3, 2, 3, 2);
-            tabPage1.Size = new Size(926, 215);
+            tabPage1.Size = new Size(1020, 215);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Rollos Cortados";
             tabPage1.UseVisualStyleBackColor = true;
@@ -1290,7 +1281,7 @@
             grid_items.ReadOnly = true;
             grid_items.RowHeadersWidth = 34;
             grid_items.ScrollBars = ScrollBars.Vertical;
-            grid_items.Size = new Size(919, 201);
+            grid_items.Size = new Size(1007, 201);
             grid_items.TabIndex = 0;
             // 
             // txt_step
@@ -1312,7 +1303,7 @@
             tabControl1.Margin = new Padding(3, 2, 3, 2);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(934, 245);
+            tabControl1.Size = new Size(1028, 245);
             tabControl1.TabIndex = 81;
             // 
             // chk_document_anul
@@ -1342,7 +1333,7 @@
             // btn_vueltas
             // 
             btn_vueltas.Image = (Image)resources.GetObject("btn_vueltas.Image");
-            btn_vueltas.Location = new Point(604, 762);
+            btn_vueltas.Location = new Point(603, 759);
             btn_vueltas.Margin = new Padding(3, 2, 3, 2);
             btn_vueltas.Name = "btn_vueltas";
             btn_vueltas.Size = new Size(100, 54);
@@ -1371,7 +1362,7 @@
             // btn_code_person
             // 
             btn_code_person.Image = (Image)resources.GetObject("btn_code_person.Image");
-            btn_code_person.Location = new Point(841, 784);
+            btn_code_person.Location = new Point(842, 787);
             btn_code_person.Margin = new Padding(3, 2, 3, 2);
             btn_code_person.Name = "btn_code_person";
             btn_code_person.Size = new Size(38, 28);
@@ -1452,7 +1443,7 @@
             // 
             label37.AutoSize = true;
             label37.Font = new Font("Segoe UI", 9.75F);
-            label37.Location = new Point(952, 273);
+            label37.Location = new Point(919, 268);
             label37.Name = "label37";
             label37.Size = new Size(40, 17);
             label37.TabIndex = 103;
@@ -1462,7 +1453,7 @@
             // 
             txt_vueltas1.Enabled = false;
             txt_vueltas1.Font = new Font("Noto Sans", 9.75F);
-            txt_vueltas1.Location = new Point(955, 343);
+            txt_vueltas1.Location = new Point(922, 338);
             txt_vueltas1.Name = "txt_vueltas1";
             txt_vueltas1.Size = new Size(120, 25);
             txt_vueltas1.TabIndex = 104;
@@ -1474,7 +1465,7 @@
             // 
             txt_vueltas2.Enabled = false;
             txt_vueltas2.Font = new Font("Noto Sans", 9.75F);
-            txt_vueltas2.Location = new Point(955, 374);
+            txt_vueltas2.Location = new Point(922, 369);
             txt_vueltas2.Name = "txt_vueltas2";
             txt_vueltas2.Size = new Size(121, 25);
             txt_vueltas2.TabIndex = 108;
@@ -1601,7 +1592,7 @@
             // 
             label35.AutoSize = true;
             label35.Font = new Font("Segoe UI", 9.75F);
-            label35.Location = new Point(562, 468);
+            label35.Location = new Point(523, 470);
             label35.Name = "label35";
             label35.Size = new Size(68, 17);
             label35.TabIndex = 122;
@@ -1610,7 +1601,7 @@
             // txt_sellOrder
             // 
             txt_sellOrder.Font = new Font("Noto Sans", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txt_sellOrder.Location = new Point(646, 464);
+            txt_sellOrder.Location = new Point(607, 466);
             txt_sellOrder.Margin = new Padding(3, 2, 3, 2);
             txt_sellOrder.Name = "txt_sellOrder";
             txt_sellOrder.ReadOnly = true;
@@ -1662,7 +1653,7 @@
             // txt_tipo_master
             // 
             txt_tipo_master.Font = new Font("Segoe UI", 9.75F);
-            txt_tipo_master.Location = new Point(553, 188);
+            txt_tipo_master.Location = new Point(510, 245);
             txt_tipo_master.Margin = new Padding(3, 2, 3, 2);
             txt_tipo_master.Name = "txt_tipo_master";
             txt_tipo_master.ReadOnly = true;
@@ -1673,17 +1664,52 @@
             // 
             label33.AutoSize = true;
             label33.Font = new Font("Segoe UI", 9.75F);
-            label33.Location = new Point(554, 167);
+            label33.Location = new Point(511, 224);
             label33.Name = "label33";
             label33.Size = new Size(82, 17);
             label33.TabIndex = 126;
             label33.Text = "Tipo Master:";
             // 
+            // label34
+            // 
+            label34.AutoSize = true;
+            label34.Font = new Font("Segoe UI", 9.75F);
+            label34.Location = new Point(718, 471);
+            label34.Name = "label34";
+            label34.Size = new Size(72, 17);
+            label34.TabIndex = 128;
+            label34.Text = "Ubicacion :";
+            // 
+            // txt_ubic
+            // 
+            txt_ubic.Font = new Font("Noto Sans", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txt_ubic.Location = new Point(802, 467);
+            txt_ubic.Margin = new Padding(3, 2, 3, 2);
+            txt_ubic.Name = "txt_ubic";
+            txt_ubic.ReadOnly = true;
+            txt_ubic.Size = new Size(110, 25);
+            txt_ubic.TabIndex = 127;
+            // 
+            // btn_LabelCodeBar
+            // 
+            btn_LabelCodeBar.Image = (Image)resources.GetObject("btn_LabelCodeBar.Image");
+            btn_LabelCodeBar.Location = new Point(886, 753);
+            btn_LabelCodeBar.Name = "btn_LabelCodeBar";
+            btn_LabelCodeBar.Size = new Size(149, 60);
+            btn_LabelCodeBar.TabIndex = 129;
+            btn_LabelCodeBar.Text = "Etiquetas";
+            btn_LabelCodeBar.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_LabelCodeBar.UseVisualStyleBackColor = true;
+            btn_LabelCodeBar.Click += btn_LabelCodeBar_Click;
+            // 
             // FrmOrdenCorte
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1141, 844);
+            ClientSize = new Size(1051, 844);
+            Controls.Add(btn_LabelCodeBar);
+            Controls.Add(label34);
+            Controls.Add(txt_ubic);
             Controls.Add(label33);
             Controls.Add(txt_tipo_master);
             Controls.Add(panel_loading);
@@ -1716,7 +1742,6 @@
             Controls.Add(chk_orden_rebobinado);
             Controls.Add(chk_document_anul);
             Controls.Add(tabControl1);
-            Controls.Add(txt_rollos_cortar2);
             Controls.Add(txt_rollos_cortar1);
             Controls.Add(label32);
             Controls.Add(txt_cortes_ancho);
@@ -1899,7 +1924,6 @@
         private Label label30;
         private TextBox txt_cortes_ancho;
         private Label label31;
-        private TextBox txt_rollos_cortar2;
         private TextBox txt_rollos_cortar1;
         private Label label32;
         private TabPage tabPage1;
@@ -1960,5 +1984,8 @@
         private PictureBox pictureBox7;
         private TextBox txt_tipo_master;
         private Label label33;
+        private Label label34;
+        private TextBox txt_ubic;
+        private Button btn_LabelCodeBar;
     }
 }

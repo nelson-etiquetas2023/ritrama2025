@@ -66,6 +66,7 @@ namespace Ritrama2025.Models
         public string SellOrder { get; set; } = null!;
         public bool Desperdicio { get; set; }
         public string Master_Tipo { get; set; } = null!;
+        public string Ubicacion { get; set; } = null!;
     }
 }
 

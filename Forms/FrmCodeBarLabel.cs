@@ -2,6 +2,7 @@
 using System.IO.Pipes;
 using System.Text;
 using System.Text.RegularExpressions;
+using Ritrama2025.LabelSdk;
 
 namespace Ritrama2025.Forms
 {
@@ -25,7 +26,7 @@ namespace Ritrama2025.Forms
         {
             if (rad_zebra.Checked)
             {
-                DiscoveryPrinterZebra();
+                //DiscoveryPrinterZebra();
             }
             if (rad_TSC.Checked)
             {
@@ -42,25 +43,7 @@ namespace Ritrama2025.Forms
             if (cbo_printer.Items.Count > 0)
                 cbo_printer.SelectedIndex = 0;
         }
-        private void DiscoveryPrinterZebra()
-        {
-            //try
-            //{
-            //    textBox1.Clear();
-            //    foreach (DiscoveredPrinterDriver printer in UsbDiscoverer.GetZebraDriverPrinters())
-            //    {
-            //        textBox1.Text += $"{printer.PrinterName}";
-            //    }
-            //    foreach (DiscoveredUsbPrinter usbPrinter in UsbDiscoverer.GetZebraUsbPrinters(new ZebraPrinterFilter()))
-            //    {
-            //        textBox2.Text += usbPrinter.ToString();
-            //    }
-            //}
-            //catch (ConnectionException ex)
-            //{
-            //    MessageBox.Show($"Errror discovering local printers: {ex.Message}");
-            //}
-        }
+      
         private void Button1_Click(object sender, EventArgs e)
         {
             if (rad_zebra.Checked)
@@ -79,8 +62,8 @@ namespace Ritrama2025.Forms
             if (cbo_printer.SelectedItem!.ToString() == string.Empty) MessageBox.Show("Seleccione una impresora TSC");
 
             //byte[] LabelTSPL = Encoding.UTF8.GetBytes("SIZE 50 mm,30 mm\r\nGAP 2 mm,0\r\nCLS\r\n" +
-                                                     // "TEXT 10,10,\"FONT001\",0,1,1,\"Hola Mundo\"\r\n" +
-                                                      //"PRINT 1\r\n");
+            // "TEXT 10,10,\"FONT001\",0,1,1,\"Hola Mundo\"\r\n" +
+            //"PRINT 1\r\n");
 
 
 
@@ -107,37 +90,7 @@ namespace Ritrama2025.Forms
 
         private void SendZplOverUsb(string usbDriverName, string zplData)
         {
-            //Connection thePrinterConn = null!;
-            //try
-            //{
-            //    thePrinterConn = ConnectionBuilder.Build($"USB:{usbDriverName}");
-            //    thePrinterConn.Open();
-
-            //    string zplFinal;
-
-            //    if (zplData.Contains("^PQ"))
-            //    {
-            //        zplFinal = PqRegex().Replace(zplData, "^PQ" + numero_copias.Value);
-            //    }
-            //    else
-            //    {
-            //        int idx = zplData.IndexOf("^XZ", StringComparison.OrdinalIgnoreCase);
-            //        if (idx >= 0)
-            //            zplFinal = zplData.Insert(idx, "^PQ" + numero_copias.Value);
-            //        else
-            //            zplFinal = zplData + "^PQ" + numero_copias.Value;
-            //    }
-
-            //    thePrinterConn.Write(Encoding.UTF8.GetBytes(zplFinal));
-            //}
-            //catch (ConnectionException ex)
-            //{
-            //    MessageBox.Show($"Error connecting to printer: {ex.Message}");
-            //}
-            //finally
-            //{
-            //    thePrinterConn?.Close();
-            //}
+            
         }
 
 
@@ -270,6 +223,108 @@ namespace Ritrama2025.Forms
             {
                 MessageBox.Show("Error al enviar JSON: " + ex.Message);
             }
+        }
+
+        private void btn_raw_printer_Click(object sender, EventArgs e)
+        {
+            string template = @"^XA^POR
+            ^FO700,100^A0R,60,60^FDFEDRIGONNI^FS
+
+            ^FO750,650^A0R,30,20^FDPRODUCT ID^FS
+            ^FO750,1000^A0R,30,20^FDROLL ID^FS
+
+            ^FO700,650^A0R,50,50^FD{product_id}^FS
+            ^FO700,1000^A0R,40,40^FD{rollid}^FS
+
+            ^FO680,50^GB1,1200,3,1^FS
+            ^FO680,500^GB200,3,1^FS
+            ^FO680,950^GB200,3,1^FS
+
+
+
+            ^FO635,50^A0R,30,20^FDPRODUCTO^FS
+            ^FO635,1000^A0R,30,20^FDFECHA^FS
+
+
+            ^FO580,50^A0R,50,60^FD{product_name}^FS
+            ^FO580,1000^A0R,40,40^FD{fecha}^FS
+  
+            ^FO550,50^GB1,1200,3,1^FS
+            ^FO550,950^GB130,3,1^FS
+            
+            ^FO510,50^A0R,30,20^FDWIDTH (Inch):^FS
+            ^FO510,350^A0R,30,20^FDLENGTH (Pies):^FS
+            ^FO510,650^A0R,30,20^FDMSI:^FS
+            ^FO510,1000^A0R,30,20^FDSPLICE:^FS
+
+
+            ^FO440,50^A0R,60,60^FD{width}^FS
+            ^FO440,350^A0R,60,60^FD{lenght}^FS
+            ^FO440,650^A0R,60,60^FD{msi}^FS
+            ^FO440,1000^A0R,60,60^FD{splice}^FS
+
+            ^FO420,50^GB1,1200,3,1^FS
+            ^FO420,300^GB130,3,1^FS
+            ^FO420,600^GB130,3,1^FS
+            ^FO420,950^GB130,3,1^FS
+
+
+            ^FO380,50^A0R,30,20^FDSTATUS:^FS
+            ^FO380,280^A0R,30,20^FDCUSTOMER ID:^FS
+            ^FO380,650^A0R,30,20^FDORDEN CORTE:^FS
+            ^FO380,1000^A0R,30,20^FDROLL NUMBER:^FS
+
+
+            
+
+            
+            ^FO300,50^A0R,60,60^FD{status}^FS
+            ^FO300,280^A0R,60,60^FD{customer_id}^FS
+            ^FO300,650^A0R,60,60^FD{orden}^FS
+            ^FO300,1000^A0R,60,60^FD{roll_number}^FS
+
+            ^FO280,50^GB1,1200,3,1^FS            
+            ^FO280,250^GB140,3,1^FS
+            ^FO280,600^GB140,3,1^FS
+            ^FO280,950^GB140,3,1^FS
+            
+            ^FO200,50^A0R,30,20^FDPRODUCT ID:^FS
+            ^FO200,610^A0R,30,20^FDUNIQUE CODE:^FS
+            
+            ^BY4,4,100
+
+            ^FO80,200^BCR,150,Y,N,N
+            ^FD{product_id}^FS
+            ^FO80,760^BCR,150,Y,N,N
+            ^FD{unique_code}^FS
+            ^FO50,600^GB235,3,1^FS^XZ
+            ";
+
+
+
+
+
+            var values = new Dictionary<string, string>
+            {
+                { "product_id", "8051" },
+                { "product_name", "Coated 80 DGT AP903 WG56" },
+                { "rollid", "104170003" },
+                { "fecha", "01/10/2025" },
+                { "width", "10.0" },
+                { "lenght", "2,000.00"  },
+                { "msi", "240.00"  },
+                { "splice", "0"  },
+                { "status", "Ok."  },
+                { "customer_id", "WT-00010" },
+                { "orden", "9318" },
+                { "roll_number", "1" },
+                { "unique_code", "RC35137" },
+                { "Codigo", "8051" }
+            };
+
+            bool ok = ZebraTemplateEngine.Print("ZDesigner ZT410-203dpi ZPL", template,values, StandardLabelSizes.Size_4x6_203dpi);
+            MessageBox.Show(ok ? "Impreso correctamente" : "Error al imprimir");
+
         }
     }
     public class Etiqueta

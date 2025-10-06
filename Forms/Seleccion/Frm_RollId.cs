@@ -49,7 +49,7 @@ namespace Ritrama2025.Forms.Seleccion
             AGREGAR_COLUMN_GRID("largo_restante", 70, "Largo Restante", "largo_restante");
             AGREGAR_COLUMN_GRID("estado", 70, "Estado", "estado");
             AGREGAR_COLUMN_GRID("fecha_pro", 67, "Fecha produccion", "fecha_pro");
-            AGREGAR_COLUMN_GRID("fecha_doc", 67, "Fecha Recepcion", "fecha_recep");
+            AGREGAR_COLUMN_GRID("fecha_reg", 67, "Llegada", "fecha_reg");
             AGREGAR_COLUMN_GRID("splice", 50, "Splice", "splice");
             AGREGAR_COLUMN_GRID("ubicacion", 60, "Ubicacion", "ubicacion");
             AGREGAR_COLUMN_GRID("tipo_mov", 40, "Tipo", "tipo_mov");

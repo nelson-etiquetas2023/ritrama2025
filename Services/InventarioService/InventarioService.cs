@@ -100,8 +100,8 @@ namespace Ritrama2025.Services.InventarioService
                     comando.Parameters.AddWithValue("@resma", false);
                     comando.Parameters.AddWithValue("@graphics", false);
                     comando.Parameters.AddWithValue("@embarque", item.Recepcion);
-                    comando.Parameters.AddWithValue("@fecha_pro", DateTime.Today);
-                    comando.Parameters.AddWithValue("@fecha_reg", DateTime.Today);
+                    comando.Parameters.AddWithValue("@fecha_pro", item.Fecha_Fabricacion);
+                    comando.Parameters.AddWithValue("@fecha_reg", item.Fecha_Llegada);
                     comando.Parameters.AddWithValue("@wid_c", 0);
                     comando.Parameters.AddWithValue("@len_c", 0);
                     comando.Parameters.AddWithValue("@palet", item.Paleta);

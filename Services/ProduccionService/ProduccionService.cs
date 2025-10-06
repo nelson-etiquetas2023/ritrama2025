@@ -147,7 +147,7 @@ public class ProduccionService : IProduccionService
             SqlCommand comando = new()
             {
                 Connection = conn,
-                CommandText = "INSERT INTO orden_corte (numero,fecha,fecha_produccion,product_id,rollid_1,width_1,lenght_1,rollid_2,width_2,lenght_2,anulada,procesado,CloseDocument,tot_inch_ancho,longitud_cortar,cortes_ancho,cortes_largo,cant_rollos,decartable1_pies,lenght_master_real,util1_real_width,util1_real_lenght,descartable2_pies" + ",util2_real_width,util2_real_lenght,lenght_master_real2,rest1_width,rest1_lenght,rest2_width,rest2_lenght,cant_rollos2,cortes_largo2,step,lastupdate,fecha_autorize,toautorize,notes,tipo_mov1,tipo_mov2,plus1_pies,plus2_pies,rollo_unificado,length_entrada,real_usado_r1,real_usado_r2,restante_rollid1,restante_rollid2,resta_entrada,total_salida,lenght_entrada,customer_id,operador_id,SellOrder,desperdicio,master_tipo) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27,@p28,@p29,@p30,@p31,@p32,@p33,@p34,@p35,@p36,@p37,@p38,@p39,@p40,@p41,@p44,@p45,@p46,@p47,@p48,@p49,@p50,@p51,@p52,@customer_id,@operador_id,@SellOrder,@desper,@MasterTipo)",
+                CommandText = "INSERT INTO orden_corte (numero,fecha,fecha_produccion,product_id,rollid_1,width_1,lenght_1,rollid_2,width_2,lenght_2,anulada,procesado,CloseDocument,tot_inch_ancho,longitud_cortar,cortes_ancho,cortes_largo,cant_rollos,decartable1_pies,lenght_master_real,util1_real_width,util1_real_lenght,descartable2_pies" + ",util2_real_width,util2_real_lenght,lenght_master_real2,rest1_width,rest1_lenght,rest2_width,rest2_lenght,cant_rollos2,cortes_largo2,step,lastupdate,fecha_autorize,toautorize,notes,tipo_mov1,tipo_mov2,plus1_pies,plus2_pies,rollo_unificado,length_entrada,real_usado_r1,real_usado_r2,restante_rollid1,restante_rollid2,resta_entrada,total_salida,lenght_entrada,customer_id,operador_id,SellOrder,desperdicio,master_tipo,ubicacion) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27,@p28,@p29,@p30,@p31,@p32,@p33,@p34,@p35,@p36,@p37,@p38,@p39,@p40,@p41,@p44,@p45,@p46,@p47,@p48,@p49,@p50,@p51,@p52,@customer_id,@operador_id,@SellOrder,@desper,@MasterTipo,@ubic)",
                 CommandType = CommandType.Text
             };
             conn.Open();
@@ -204,6 +204,7 @@ public class ProduccionService : IProduccionService
             comando.Parameters.AddWithValue("@sellOrder",OrdenCorte.SellOrder);
             comando.Parameters.AddWithValue("@desper", OrdenCorte.Desperdicio);
             comando.Parameters.AddWithValue("@MasterTipo", OrdenCorte.Master_Tipo);
+            comando.Parameters.AddWithValue("@ubic", OrdenCorte.Ubicacion);
             comando.Parameters.Add(new SqlParameter("@customer_id", SqlDbType.UniqueIdentifier)
             {
                 Value = OrdenCorte.Customer_Id
@@ -261,7 +262,7 @@ public class ProduccionService : IProduccionService
                 SqlCommand comando = new()
                 {
                     Connection = conn,
-                    CommandText = "INSERT INTO rolls_details (product_id,product_name,roll_number,unique_code,splice,width,large,msi,roll_id,code_person,status,disponible,ubic,numero) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,1,@p13,@p14)",
+                    CommandText = "INSERT INTO rolls_details (product_id,product_name,roll_number,unique_code,splice,width,large,msi,roll_id,code_person,status,disponible,ubic,numero) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,0,@p13,@p14)",
                     CommandType = CommandType.Text
                 };
                 comando.Parameters.AddWithValue("@p1", roll.Product_Id);
@@ -708,7 +709,7 @@ public class ProduccionService : IProduccionService
             using SqlCommand comando = new()
             {
                 Connection = conn,
-                CommandText = "UPDATE orden_corte SET fecha=@p2,fecha_produccion=@p3,width_1=@p4,lenght_1=@p5,util1_real_width=@p6,util1_real_lenght=@p7,rest1_width=@p8,rest1_lenght=@p9,product_id=@p10,desperdicio=@p11,operador_id=@p12,customer_id=@p13,cortes_largo=@p14,longitud_cortar=@p15,cortes_ancho=@p16,cant_rollos=@p17,sellOrder=@p18,rollid_1=@p19 WHERE numero=@p1",
+                CommandText = "UPDATE orden_corte SET fecha=@p2,fecha_produccion=@p3,width_1=@p4,lenght_1=@p5,util1_real_width=@p6,util1_real_lenght=@p7,rest1_width=@p8,rest1_lenght=@p9,product_id=@p10,desperdicio=@p11,operador_id=@p12,customer_id=@p13,cortes_largo=@p14,longitud_cortar=@p15,cortes_ancho=@p16,cant_rollos=@p17,sellOrder=@p18,rollid_1=@p19,ubicacion=@p20 WHERE numero=@p1",
                 CommandType = CommandType.Text
             };
             comando.Parameters.AddWithValue("@p1", orden.Numero);
@@ -730,6 +731,7 @@ public class ProduccionService : IProduccionService
             comando.Parameters.AddWithValue("@p17", orden.Cantidad_Rollos);
             comando.Parameters.AddWithValue("@p18", orden.SellOrder);
             comando.Parameters.AddWithValue("@p19", orden.Rollid_1);
+            comando.Parameters.AddWithValue("@p20", orden.Ubicacion);
 
 
             comando.ExecuteNonQuery();
@@ -800,6 +802,27 @@ public class ProduccionService : IProduccionService
 
 
             conn.Close();
+        }
+        catch (SqlException ex)
+        {
+            MessageBox.Show("Error al modificar la orden de corte...error code: " + ex);
+        }
+    }
+
+    public void RollosCortadosDispobnibles(string oc)
+    {
+        try
+        {
+            using SqlConnection conn = new(StringConnex);
+            conn.Open();
+            using SqlCommand comando = new()
+            {
+                Connection = conn,
+                CommandText = "UPDATE rolls_details SET disponible=1 WHERE numero=@p1",
+                CommandType = CommandType.Text
+            };
+            comando.Parameters.AddWithValue("@p1", oc);
+            comando.ExecuteNonQuery();
         }
         catch (SqlException ex)
         {

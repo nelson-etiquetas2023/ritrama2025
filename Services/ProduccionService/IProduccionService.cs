@@ -25,5 +25,8 @@ namespace Ritrama2025.Services.ProduccionService
         public Task<DataTable?> LoadDataDetailsConsumosMasterInic(string rollid);
         public void Update_Items_Orden_Corte(List<RolloCortado> rollos);
         public void Update_Header_Documnet_OC(Orden orden);
+
+        public void RollosCortadosDispobnibles(string oc);
+
     }
 }
