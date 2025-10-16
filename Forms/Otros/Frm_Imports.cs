@@ -2,6 +2,11 @@
 using Ritrama2025.Models;
 using Ritrama2025.Services.InventarioService;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Globalization;
+using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 namespace Ritrama2025.Forms.Otros
 {
@@ -14,6 +19,8 @@ namespace Ritrama2025.Forms.Otros
 
         private IInventarioService InventarioService { get; set; }
         readonly List<ProductMAP> lista = [];
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public StringBuilder ErrorsImporExcel { get; set; } = new();
 
         public Frm_Imports(IInventarioService inventarioService)
         {
@@ -39,13 +46,12 @@ namespace Ritrama2025.Forms.Otros
             ADD_COLUMN_GRID("width", 70, "Width [Inch.]", "Width", Grid_Items);
             ADD_COLUMN_GRID("lenght", 70, "Length [Pies.]", "length", Grid_Items);
             ADD_COLUMN_GRID("splice", 70, "Splice", "splice", Grid_Items);
+            ADD_COLUMN_GRID("fecha_fabricacion", 70, "Fecha Produccion", "fecha_produccion", Grid_Items);
+            ADD_COLUMN_GRID("recep", 70, "Recepcion", "factura", Grid_Items);
             ADD_COLUMN_GRID("ubic", 70, "Ubicacion", "ubic", Grid_Items);
-            ADD_COLUMN_GRID("paleta", 70, "Paleta", "paleta", Grid_Items);
-            ADD_COLUMN_GRID("recep", 70, "Recepcion", "recepcion", Grid_Items);
-            ADD_COLUMN_GRID("fecha_fabricacion", 70, "Fecha Fabricacion", "fecha_fabricacion", Grid_Items);
             ADD_COLUMN_GRID("fecha_llegada", 70, "Fecha Llegada", "fecha_llegada", Grid_Items);
-
-
+            ADD_COLUMN_GRID("paleta", 70, "Paleta", "paleta", Grid_Items);
+      
         }
 
         private static void ADD_COLUMN_GRID(string name, int size, string title, string field_bd, DataGridView grid)
@@ -62,12 +68,14 @@ namespace Ritrama2025.Forms.Otros
 
         private void Btn_load_data_Click(object sender, EventArgs e)
         {
+            Grid_Items.DataSource = "";
             LoadData();
         }
 
 
         private void LoadData() 
         {
+            lista.Clear();
             string filePath = PathFileName;
             //string fileName = FileName;
             //leer la hoja de excel.
@@ -78,6 +86,8 @@ namespace Ritrama2025.Forms.Otros
                 //Empiezo en la fila 2 por los encabezados.
                 var filas = worksheet.Rows().Skip(1);
                 // recorro filas donde esta la data de la hoja.
+                //crear el validador de excel.
+                var validator = new ExcelValidator();
 
                 int itemno = 1;
                 foreach (var item in filas)
@@ -88,31 +98,47 @@ namespace Ritrama2025.Forms.Otros
                         Product_Id = item.Cell(1).Value.ToString(),
                         Product_Name = item.Cell(2).Value.ToString(),
                         Rollid = item.Cell(3).Value.ToString(),
-                        Width = item.Cell(4).GetDouble(),
-                        Length = item.Cell(5).GetDouble(),
-                        Splice = (int)item.Cell(6).Value,
+                        Width = validator.TryGetDouble(item.Cell(4), worksheet),
+                        Length = validator.TryGetDouble(item.Cell(5), worksheet),
+                        Splice = validator.TryGetInt(item.Cell(6), worksheet),
+                        Fecha_Produccion = validator.TryGetDateTime(item.Cell(7), worksheet),
+                        Factura = item.Cell(8).Value.ToString(),
                         Ubic = item.Cell(9).Value.ToString(),
+                        Fecha_Llegada = validator.TryGetDateTime(item.Cell(10), worksheet),
                         Paleta = item.Cell(11).Value.ToString(),
-                        Recepcion = item.Cell(8).Value.ToString(),
-                        Fecha_Fabricacion = item.Cell(7).GetDateTime(),
-                        Fecha_Llegada = item.Cell(11).GetDateTime(),
-
-
                     };
                     lista.Add(producto);
+                    txt_log_notifications.Text = validator.Errores.ToString();
                 }
                 Grid_Items.DataSource = lista;
+                int numeroDeLineas = (validator.Errores.ToString().Split(Environment.NewLine).Length) - 1;
+
+                txt_errors.Text = numeroDeLineas.ToString();
             }
             catch (System.IO.IOException ex)
             {
                 MessageBox.Show("Error al tratar de abrir la hoja de excel, si esta abierta por favor cierrela y vuelva a intentarlo...[error code:] " + ex.Message);
-                throw;
             }
             txt_number_rows.Text = Grid_Items.Rows.Count.ToString();
         }
 
+       
+
+      
+
+
         private void Btn_saveDatabase_Click(object sender, EventArgs e)
         {
+            int errors = int.Parse(txt_errors.Text);
+
+            if (errors > 0) 
+            {
+                MessageBox.Show("No se pueden Guardar los datos mientra la hoja de excel tenga errores en los datos...");
+                return;
+
+            }
+
+
             //Guardar en Base de Datos.
             InventarioService.SaveMasterInitialDB(lista);
             //Registrar Productos no registrados.
@@ -142,6 +168,61 @@ namespace Ritrama2025.Forms.Otros
                     }
                 }
                 MessageBox.Show("Se actualizó los productos no registrados... ");
+            }
+        }
+
+        public class ExcelValidator
+        {
+            public StringBuilder Errores { get; private set; } = new();
+
+            public double TryGetDouble(IXLCell cell, IXLWorksheet hoja)
+            {
+                string valor = cell.GetString().Trim();
+                string celdaRef = cell.Address.ToString()!;
+                int fila = cell.Address.RowNumber;
+                int columna = cell.Address.ColumnNumber;
+                string nombreColumnma = hoja.Cell(1, columna).GetString().Trim();
+
+                if (double.TryParse(valor, NumberStyles.Any, CultureInfo.InvariantCulture, out var resultado))
+                    return resultado;
+
+                Errores.AppendLine($"Error en la columna: {nombreColumnma}, un valor tipo DOUBLE -> Celda: {celdaRef}, (Fila {fila}, Columna {columna}): '{valor}' no es un numero decimal -> valor por defecto 0.0");
+
+                return 0.0;
+            }
+
+            public int TryGetInt(IXLCell cell, IXLWorksheet hoja)
+            {
+                string valor = cell.GetString().Trim();
+                string celdaRef = cell.Address.ToString()!;
+                int fila = cell.Address.RowNumber;
+                int columna = cell.Address.ColumnNumber;
+                string nombreColumnma = hoja.Cell(1, columna).GetString().Trim();
+
+                if (int.TryParse(valor, out var resultado))
+                    return resultado;
+
+                Errores.AppendLine($"Error en la columna: {nombreColumnma}, un valor tipo INT -> Celda: {celdaRef}, (Fila {fila}, Columna {columna}): '{valor}' no es un numero entero -> valor por defecto 0");
+
+                return 0;
+
+            }
+
+            public DateTime TryGetDateTime(IXLCell cell, IXLWorksheet hoja)
+            {
+                string valor = cell.GetString().Trim();
+                string celdaRef = cell.Address.ToString()!;
+                int fila = cell.Address.RowNumber;
+                int columna = cell.Address.ColumnNumber;
+                string nombreColumnma = hoja.Cell(1, columna).GetString().Trim();
+
+                if (DateTime.TryParse(valor, out var resultado))
+                    return resultado;
+
+
+                Errores.AppendLine($"Error en la columna: {nombreColumnma}, un valor tipo DATETIME -> Celda: {celdaRef}, (Fila {fila}, Columna {columna}): '{valor}' no es una fecha valida -> valor por defecto DateTime.MinValue");
+
+                return DateTime.MinValue;
             }
         }
     }

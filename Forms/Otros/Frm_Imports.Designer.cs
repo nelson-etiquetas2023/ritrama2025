@@ -36,7 +36,7 @@
             txt_buscar = new TextBox();
             btn_search = new Button();
             Grid_Items = new DataGridView();
-            richTextBox1 = new RichTextBox();
+            txt_log_notifications = new RichTextBox();
             label2 = new Label();
             groupBox1 = new GroupBox();
             rad_rollid = new RadioButton();
@@ -58,6 +58,8 @@
             checkBox2 = new CheckBox();
             checkBox3 = new CheckBox();
             chk_product_NoFound = new CheckBox();
+            NUMBERS_NOTIFICATIONS = new Label();
+            txt_errors = new TextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Grid_Items).BeginInit();
@@ -138,14 +140,14 @@
             Grid_Items.Size = new Size(811, 288);
             Grid_Items.TabIndex = 4;
             // 
-            // richTextBox1
+            // txt_log_notifications
             // 
-            richTextBox1.Enabled = false;
-            richTextBox1.Location = new Point(12, 604);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(811, 96);
-            richTextBox1.TabIndex = 5;
-            richTextBox1.Text = "";
+            txt_log_notifications.Enabled = false;
+            txt_log_notifications.Location = new Point(12, 604);
+            txt_log_notifications.Name = "txt_log_notifications";
+            txt_log_notifications.Size = new Size(811, 217);
+            txt_log_notifications.TabIndex = 5;
+            txt_log_notifications.Text = "";
             // 
             // label2
             // 
@@ -359,11 +361,33 @@
             chk_product_NoFound.Text = "Guardar Productos No Encontrados";
             chk_product_NoFound.UseVisualStyleBackColor = true;
             // 
+            // NUMBERS_NOTIFICATIONS
+            // 
+            NUMBERS_NOTIFICATIONS.AutoSize = true;
+            NUMBERS_NOTIFICATIONS.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            NUMBERS_NOTIFICATIONS.Location = new Point(828, 604);
+            NUMBERS_NOTIFICATIONS.Name = "NUMBERS_NOTIFICATIONS";
+            NUMBERS_NOTIFICATIONS.Size = new Size(53, 15);
+            NUMBERS_NOTIFICATIONS.TabIndex = 24;
+            NUMBERS_NOTIFICATIONS.Text = "Errores :";
+            // 
+            // txt_errors
+            // 
+            txt_errors.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            txt_errors.Location = new Point(828, 622);
+            txt_errors.Name = "txt_errors";
+            txt_errors.ReadOnly = true;
+            txt_errors.Size = new Size(145, 23);
+            txt_errors.TabIndex = 25;
+            txt_errors.Text = "0";
+            // 
             // Frm_Imports
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(985, 712);
+            ClientSize = new Size(985, 833);
+            Controls.Add(txt_errors);
+            Controls.Add(NUMBERS_NOTIFICATIONS);
             Controls.Add(chk_product_NoFound);
             Controls.Add(checkBox3);
             Controls.Add(checkBox2);
@@ -382,7 +406,7 @@
             Controls.Add(label3);
             Controls.Add(groupBox1);
             Controls.Add(label2);
-            Controls.Add(richTextBox1);
+            Controls.Add(txt_log_notifications);
             Controls.Add(Grid_Items);
             Controls.Add(btn_search);
             Controls.Add(txt_buscar);
@@ -411,7 +435,7 @@
         private TextBox txt_buscar;
         private Button btn_search;
         private DataGridView Grid_Items;
-        private RichTextBox richTextBox1;
+        private RichTextBox txt_log_notifications;
         private Label label2;
         private Label label5;
         private GroupBox groupBox1;
@@ -435,5 +459,7 @@
         private CheckBox checkBox2;
         private CheckBox checkBox3;
         private CheckBox chk_product_NoFound;
+        private Label NUMBERS_NOTIFICATIONS;
+        private TextBox txt_errors;
     }
 }

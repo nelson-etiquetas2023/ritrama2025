@@ -168,11 +168,13 @@ C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.FrmProduc
 C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Frm_Inventarios.resources
 C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Otros.Frm_AddNew.resources
 C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Otros.Frm_AprobarOC.resources
+C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Otros.frm_ConfigVueltas.resources
 C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Otros.Frm_descriptionPalet.resources
 C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Otros.Frm_DetailsConsumos.resources
 C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Otros.Frm_ImportacionExcel.resources
 C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Otros.Frm_Imports.resources
 C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Otros.Frm_oneparameter.resources
+C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Otros.PrintLabelsRolls.resources
 C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Otros.ReportsViewer.resources
 C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Seleccion.FrmProductsInsert.resources
 C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Seleccion.FrmSeleccion.resources
@@ -191,4 +193,3 @@ C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\refint\Ritrama2025.dll
 C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.pdb
 C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.genruntimeconfig.cache
 C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\ref\Ritrama2025.dll
-C:\Programacion\Ritrama2025\obj\Debug\net9.0-windows\Ritrama2025.Forms.Otros.PrintLabelsRolls.resources

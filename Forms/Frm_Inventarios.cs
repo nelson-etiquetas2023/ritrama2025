@@ -1,5 +1,5 @@
-﻿using DocumentFormat.OpenXml.Spreadsheet;
-using Ritrama2025.Forms.Otros;
+﻿using Ritrama2025.Forms.Otros;
+using Ritrama2025.LabelSdk;
 using Ritrama2025.Models;
 using Ritrama2025.Services.CommonService;
 using Ritrama2025.Services.ExportData;
@@ -8,6 +8,7 @@ using Ritrama2025.Services.ProduccionService;
 using Ritrama2025.Services.ReportsService.ReportsService;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing.Printing;
 
 namespace Ritrama2025.Forms;
 
@@ -21,6 +22,7 @@ public partial class Frm_Inventarios : Form
     private DataTable? DtRollosCortados { get; set; }
     private DataView Dv { get; set; } = new();
     private DataView DvRollos { get; set; } = new();
+    List<int> IndexSelects { get; set; } = new();
 
     public Frm_Inventarios(IInventarioService inventarioService, IProduccionService produccionService, IExportDataService exportDataService, IReportsService reportService)
     {
@@ -41,12 +43,21 @@ public partial class Frm_Inventarios : Form
         DefColumnsSheetExcel();
         BindingMasterGrid();
         DefColumnsGridRollosCortados();
+
+        ComboPrinters.Items.Clear();
+        foreach (string impresora in PrinterSettings.InstalledPrinters)
+        {
+            ComboPrinters.Items.Add(impresora);
+        }
+
+
+
     }
     private void TabControl1_DrawItem(object sender, DrawItemEventArgs e)
     {
         TabPage page = TabPages_Inventario.TabPages[e.Index];
         Rectangle tabRect = e.Bounds;
-
+        
         // Determinar si la pestaña está seleccionada
         bool isSelected = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
 
@@ -702,44 +713,132 @@ public partial class Frm_Inventarios : Form
 
     private void Bot_printLabel_Click(object sender, EventArgs e)
     {
-        if (GridMaster.SelectedRows.Count > 0)
+        if (ComboPrinters.SelectedItem == null)
         {
-            DataGridViewRow row = GridMaster.SelectedRows[0];
-
-            var productid = row.Cells["product_id"].Value ?? string.Empty;
-            var productname = row.Cells["product_name"].Value ?? string.Empty;
-            var rollid = row.Cells["roll_id"].Value ?? 0;
-            var widthx = row.Cells["width"].Value ?? 0;
-            var length = row.Cells["length"].Value ?? 0;
-            var fecha = DateTime.Today.ToShortDateString();
-            var len_consumido = row.Cells["Length_Consumido"].Value ?? 0;
-            var len_restante = row.Cells["Length_Restante"].Value ?? 0;
-            var core = row.Cells["core"].Value ?? 0;
-            var msi = row.Cells["msi"].Value ?? 0;
-            var splice = row.Cells["splice"].Value ?? 0;
-            var state = row.Cells["estado"].Value ?? 0;
-            var fecha_producc = row.Cells["fecha_pro"].Value ?? 0;
-
-            ProductMAP master = new()
-            {
-                Product_Id = productid.ToString()!,
-                Product_Name = productname.ToString()!,
-                Rollid = rollid.ToString()!,
-                Width = Convert.ToDouble(widthx),
-                Length = Convert.ToDouble(length),
-                Length_Consumido = Convert.ToDouble(len_consumido),
-                Length_Restante = Convert.ToDouble(len_restante),
-                Core = Convert.ToInt16(core),
-                Msi = msi is null ? 0 : Convert.ToDouble(msi),
-                Splice = Convert.ToInt16(splice),
-                Fecha_Impresion = fecha,
-                Fecha_Fabricacion = Convert.ToDateTime(fecha_producc),
-                Estado = state.ToString()!
-
-            };
-
-            ExportDataService.ExportTxtFormatMasterRePrintLabel(master, false);
+            MessageBox.Show("seleccione una impresora primero...");
+            return;
         }
+
+
+        foreach (DataGridViewRow fila in GridMaster.Rows)
+        {
+            bool RowSelect = Convert.ToBoolean(fila.Cells["colSelPrint"].Value);
+            int FilaIndex = fila.Index;
+
+            if (RowSelect)
+            {
+                string template = @"^XA^POR
+                ^FO700,100^A0R,60,60^FDFEDRIGONNI^FS
+                ^FO680,150^A0R,30,30^FDMateria Prima Master^FS
+
+                ^FO750,650^A0R,30,20^FDPRODUCT ID^FS
+                ^FO750,1000^A0R,30,20^FDROLL ID^FS
+
+                ^FO700,650^A0R,50,50^FD{product_id}^FS
+                ^FO700,1000^A0R,40,40^FD{rollid}^FS
+
+                ^FO680,50^GB1,1200,3,1^FS
+                ^FO680,500^GB200,3,1^FS
+                ^FO680,950^GB200,3,1^FS
+
+                ^FO635,50^A0R,30,20^FDPRODUCTO^FS
+                ^FO635,1000^A0R,30,20^FDFECHA^FS
+
+                ^FO580,50^A0R,50,60^FD{product_name}^FS
+                ^FO580,1000^A0R,40,40^FD{fecha}^FS
+  
+                ^FO550,50^GB1,1200,3,1^FS
+                ^FO550,950^GB130,3,1^FS
+            
+                ^FO510,50^A0R,30,20^FDWIDTH (Inch):^FS
+                ^FO510,350^A0R,30,20^FDLENGTH-RESTANTE (Pies):^FS
+                ^FO510,650^A0R,30,20^FDMSI:^FS
+                ^FO510,1000^A0R,30,20^FDSPLICE:^FS
+
+                ^FO440,50^A0R,60,60^FD{width}^FS
+                ^FO440,320^A0R,60,60^FD{lenght}^FS
+                ^FO440,650^A0R,60,60^FD{msi}^FS
+                ^FO440,1000^A0R,60,60^FD{splice}^FS
+
+                ^FO420,50^GB1,1200,3,1^FS
+                ^FO420,300^GB130,3,1^FS
+                ^FO420,600^GB130,3,1^FS
+                ^FO420,950^GB130,3,1^FS
+
+                ^FO380,50^A0R,30,20^FDLENGTH-ORIGINAL:^FS
+                ^FO380,280^A0R,30,20^FD^FS
+                ^FO380,650^A0R,30,20^FD^FS
+                ^FO380,1000^A0R,30,20^FD^FS
+
+                ^FO300,50^A0R,60,60^FD{lenght_original}^FS
+                ^FO300,280^A0R,60,60^FD{customer_id}^FS
+                ^FO300,650^A0R,60,60^FD{orden}^FS
+                ^FO300,1000^A0R,60,60^FD{roll_number}^FS
+
+                ^FO280,50^GB1,1200,3,1^FS            
+                ^FO280,600^GB140,3,1^FS
+                ^FO280,950^GB140,3,1^FS
+            
+                ^FO200,50^A0R,30,20^FDPRODUCT ID:^FS
+                ^FO200,570^A0R,30,20^FDROLL-ID:^FS
+            
+                ^BY4,4,100
+
+                ^FO80,200^BCR,150,Y,N,N
+                ^FD{product_id}^FS
+                ^FO80,690^BCR,150,Y,N,N
+                ^FD{rollid}^FS
+                ^FO50,540^GB235,3,1^FS^XZ";
+
+                string product_id = fila.Cells["product_id"].Value?.ToString()!;
+                string productName = fila.Cells["product_name"].Value?.ToString()!.Substring(0, 28)!;
+                string rollid = fila.Cells["roll_id"].Value?.ToString()!;
+                string width = fila.Cells["width"].Value?.ToString()!;
+                string length = fila.Cells["length_restante"].Value?.ToString()!;
+                string length_original = fila.Cells["length"].Value?.ToString()!;
+
+                string msi = fila.Cells["msi"].Value?.ToString()!;
+                string splice = fila.Cells["splice"].Value?.ToString()!;
+                string status = "";
+                string code_person = "";
+                string roll_number = "";
+                string unique_code = "";
+
+                DateTime Fechapro = DateTime.Now;
+
+                var values = new Dictionary<string, string>
+                {
+                    { "product_id", product_id },
+                    { "product_name", productName },
+                    { "rollid", rollid },
+                    { "fecha", Fechapro.ToShortDateString() },
+                    { "width", width },
+                    { "lenght", length  },
+                    { "lenght_original", length_original },
+                    { "msi", msi },
+                    { "splice", splice  },
+                    { "status", status  },
+                    { "customer_id", code_person },
+                    { "orden", ""},
+                    { "roll_number", roll_number },
+                    { "unique_code", unique_code },
+                    { "Codigo", product_id }
+                };
+
+                string? printerSelection = ComboPrinters.SelectedItem?.ToString();
+
+                bool ok = ZebraTemplateEngine.Print(printerSelection!, template, values, StandardLabelSizes.Size_4x6_203dpi);
+
+            }
+
+
+
+        }
+
+
+
+
+
     }
 
     private void GridRollosCortados_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -748,6 +847,36 @@ public partial class Frm_Inventarios : Form
     }
 
     private void GridMaster_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    {
+
+    }
+
+    private void btn_delete_master_Click(object sender, EventArgs e)
+    {
+        foreach (DataGridViewRow fila in GridMaster.Rows)
+        {
+            bool RowSelect = Convert.ToBoolean(fila.Cells["colSelPrint"].Value);
+            bool estadoCompleto = fila.Cells["estado"].Value?.ToString()!.ToUpper() == "COMPLETO" ? true : false;
+
+            if (RowSelect)
+            {
+                if (estadoCompleto)
+                {
+                    string rollid = fila.Cells["roll_id"].Value?.ToString()!;
+                    InventarioService.BorrarMasterDB(rollid);
+                }
+                else
+                {
+                    MessageBox.Show("Solo se pueden eliminar los master que esten en estado COMPLETO...");
+                }
+
+            }
+        }
+
+        MessageBox.Show("Proceso terminado...");
+    }
+
+    private void label13_Click(object sender, EventArgs e)
     {
 
     }
@@ -767,6 +896,13 @@ public class ColumnaType
             return $"{Description}{TipoValor}{Index}";
         }
     }
+    public void LoadPrinters()
+    {
+        
+
+        
+    }
+
 }
 
 

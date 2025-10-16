@@ -804,7 +804,7 @@ SELECT num, width, lenght, msi, orden, code_person FROM Cortes WHERE (num = @num
               <xs:element name="master_width_restante" msprop:Generator_ColumnPropNameInTable="master_width_restanteColumn" msprop:Generator_ColumnPropNameInRow="master_width_restante" msprop:Generator_UserColumnName="master_width_restante" msprop:Generator_ColumnVarNameInTable="columnmaster_width_restante" type="xs:decimal" minOccurs="0" />
               <xs:element name="master_length_restabnte" msprop:Generator_ColumnPropNameInTable="master_length_restabnteColumn" msprop:Generator_ColumnPropNameInRow="master_length_restabnte" msprop:Generator_UserColumnName="master_length_restabnte" msprop:Generator_ColumnVarNameInTable="columnmaster_length_restabnte" type="xs:decimal" minOccurs="0" />
               <xs:element name="step" msprop:Generator_ColumnPropNameInTable="stepColumn" msprop:Generator_ColumnPropNameInRow="step" msprop:Generator_UserColumnName="step" msprop:Generator_ColumnVarNameInTable="columnstep" type="xs:int" minOccurs="0" />
-              <xs:element name="ubicacion" msprop:Generator_ColumnPropNameInRow="ubicacion" msprop:Generator_ColumnPropNameInTable="ubicacionColumn" msprop:Generator_ColumnVarNameInTable="columnubicacion" msprop:Generator_UserColumnName="ubicacion" type="xs:string" minOccurs="0" />
+              <xs:element name="ubicacion" msprop:Generator_ColumnPropNameInTable="ubicacionColumn" msprop:Generator_ColumnPropNameInRow="ubicacion" msprop:Generator_UserColumnName="ubicacion" msprop:Generator_ColumnVarNameInTable="columnubicacion" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

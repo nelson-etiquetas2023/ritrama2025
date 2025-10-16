@@ -30,9 +30,10 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Inventarios));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             TabPages_Inventario = new TabControl();
             tabPage1 = new TabPage();
+            btn_delete_master = new Button();
             bot_printLabel = new Button();
             pictureBox3 = new PictureBox();
             label11 = new Label();
@@ -90,6 +91,8 @@
             tabPage6 = new TabPage();
             imageList1 = new ImageList(components);
             panel1 = new Panel();
+            label13 = new Label();
+            ComboPrinters = new ComboBox();
             pictureBox5 = new PictureBox();
             pictureBox1 = new PictureBox();
             label1 = new Label();
@@ -140,6 +143,7 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(btn_delete_master);
             tabPage1.Controls.Add(bot_printLabel);
             tabPage1.Controls.Add(pictureBox3);
             tabPage1.Controls.Add(label11);
@@ -161,13 +165,26 @@
             tabPage1.UseVisualStyleBackColor = true;
             tabPage1.Click += TabPage1_Click;
             // 
+            // btn_delete_master
+            // 
+            btn_delete_master.Font = new Font("Roboto", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_delete_master.Image = (Image)resources.GetObject("btn_delete_master.Image");
+            btn_delete_master.Location = new Point(880, 8);
+            btn_delete_master.Name = "btn_delete_master";
+            btn_delete_master.Size = new Size(120, 56);
+            btn_delete_master.TabIndex = 17;
+            btn_delete_master.Text = "Eliminar Master";
+            btn_delete_master.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_delete_master.UseVisualStyleBackColor = true;
+            btn_delete_master.Click += btn_delete_master_Click;
+            // 
             // bot_printLabel
             // 
             bot_printLabel.Font = new Font("Roboto", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             bot_printLabel.Image = (Image)resources.GetObject("bot_printLabel.Image");
-            bot_printLabel.Location = new Point(871, 6);
+            bot_printLabel.Location = new Point(754, 6);
             bot_printLabel.Name = "bot_printLabel";
-            bot_printLabel.Size = new Size(132, 56);
+            bot_printLabel.Size = new Size(120, 56);
             bot_printLabel.TabIndex = 16;
             bot_printLabel.Text = "Imprimir Etiqueta";
             bot_printLabel.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -188,7 +205,7 @@
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label11.Location = new Point(94, 4);
+            label11.Location = new Point(94, 3);
             label11.Name = "label11";
             label11.Size = new Size(357, 30);
             label11.TabIndex = 14;
@@ -197,9 +214,9 @@
             // btn_limpiar_filtros
             // 
             btn_limpiar_filtros.Image = (Image)resources.GetObject("btn_limpiar_filtros.Image");
-            btn_limpiar_filtros.Location = new Point(632, 20);
+            btn_limpiar_filtros.Location = new Point(539, 8);
             btn_limpiar_filtros.Name = "btn_limpiar_filtros";
-            btn_limpiar_filtros.Size = new Size(95, 40);
+            btn_limpiar_filtros.Size = new Size(83, 53);
             btn_limpiar_filtros.TabIndex = 13;
             btn_limpiar_filtros.Text = "Limpiar";
             btn_limpiar_filtros.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -220,9 +237,9 @@
             // 
             btn_DetailsConsumos.Font = new Font("Roboto", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_DetailsConsumos.Image = (Image)resources.GetObject("btn_DetailsConsumos.Image");
-            btn_DetailsConsumos.Location = new Point(733, 4);
+            btn_DetailsConsumos.Location = new Point(628, 6);
             btn_DetailsConsumos.Name = "btn_DetailsConsumos";
-            btn_DetailsConsumos.Size = new Size(132, 56);
+            btn_DetailsConsumos.Size = new Size(120, 56);
             btn_DetailsConsumos.TabIndex = 11;
             btn_DetailsConsumos.Text = "Detalle Cosumos";
             btn_DetailsConsumos.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -291,14 +308,14 @@
             GridMaster.AllowUserToResizeRows = false;
             GridMaster.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             GridMaster.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Cascadia Code", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            GridMaster.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Cascadia Code", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            GridMaster.DefaultCellStyle = dataGridViewCellStyle2;
             GridMaster.Location = new Point(7, 70);
             GridMaster.MultiSelect = false;
             GridMaster.Name = "GridMaster";
@@ -313,9 +330,9 @@
             // btn_buscar
             // 
             btn_buscar.Image = (Image)resources.GetObject("btn_buscar.Image");
-            btn_buscar.Location = new Point(531, 20);
+            btn_buscar.Location = new Point(457, 8);
             btn_buscar.Name = "btn_buscar";
-            btn_buscar.Size = new Size(95, 40);
+            btn_buscar.Size = new Size(76, 53);
             btn_buscar.TabIndex = 2;
             btn_buscar.Text = "Buscar";
             btn_buscar.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -335,7 +352,7 @@
             // 
             txt_buscar.Location = new Point(7, 37);
             txt_buscar.Name = "txt_buscar";
-            txt_buscar.Size = new Size(521, 23);
+            txt_buscar.Size = new Size(444, 23);
             txt_buscar.TabIndex = 0;
             txt_buscar.TextChanged += Txt_buscar_TextChanged;
             // 
@@ -808,6 +825,8 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.ScrollBar;
+            panel1.Controls.Add(label13);
+            panel1.Controls.Add(ComboPrinters);
             panel1.Controls.Add(pictureBox5);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(label1);
@@ -816,6 +835,24 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1030, 93);
             panel1.TabIndex = 1;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Roboto Medium", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label13.Location = new Point(780, 30);
+            label13.Name = "label13";
+            label13.Size = new Size(201, 19);
+            label13.TabIndex = 27;
+            label13.Text = "Seleccione la Imporesora :";
+            // 
+            // ComboPrinters
+            // 
+            ComboPrinters.FormattingEnabled = true;
+            ComboPrinters.Location = new Point(780, 52);
+            ComboPrinters.Name = "ComboPrinters";
+            ComboPrinters.Size = new Size(246, 22);
+            ComboPrinters.TabIndex = 26;
             // 
             // pictureBox5
             // 
@@ -1048,5 +1085,8 @@
         private Panel panel_loading;
         private Label text_loadingindicator;
         private PictureBox pictureBox2;
+        private Button btn_delete_master;
+        private ComboBox ComboPrinters;
+        private Label label13;
     }
 }

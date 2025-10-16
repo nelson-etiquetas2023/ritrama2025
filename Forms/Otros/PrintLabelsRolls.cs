@@ -1,6 +1,7 @@
 ﻿using Ritrama2025.LabelSdk;
 using Ritrama2025.Models;
 using System.ComponentModel;
+using System.Drawing.Printing;
 
 namespace Ritrama2025.Forms.Otros
 {
@@ -22,11 +23,26 @@ namespace Ritrama2025.Forms.Otros
             txt_numero_etiq.Text = Rollos.Count().ToString();
             txt_desde.Text = "1";
             txt_hasta.Text = Rollos.Count().ToString();
+            LoadPrinters();
+        }
 
+        private void LoadPrinters() 
+        {
+            CboSelectPrinters.Items.Clear();
+            foreach (string impresora in PrinterSettings.InstalledPrinters) 
+            {
+                CboSelectPrinters.Items.Add(impresora);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (CboSelectPrinters.SelectedItem == null) 
+            {
+                MessageBox.Show("seleccione una impresora primero...");
+                return;
+            }
+            
             int label_init = Convert.ToInt32(txt_desde.Text);
             int label_end = Convert.ToInt32(txt_hasta.Text);
 
@@ -59,7 +75,7 @@ namespace Ritrama2025.Forms.Otros
                 ^FO510,1000^A0R,30,20^FDSPLICE:^FS
 
                 ^FO440,50^A0R,60,60^FD{width}^FS
-                ^FO440,350^A0R,60,60^FD{lenght}^FS
+                ^FO440,320^A0R,60,60^FD{lenght}^FS
                 ^FO440,650^A0R,60,60^FD{msi}^FS
                 ^FO440,1000^A0R,60,60^FD{splice}^FS
 
@@ -90,12 +106,12 @@ namespace Ritrama2025.Forms.Otros
 
                 ^FO80,200^BCR,150,Y,N,N
                 ^FD{product_id}^FS
-                ^FO80,760^BCR,150,Y,N,N
+                ^FO80,750^BCR,150,Y,N,N
                 ^FD{unique_code}^FS
                 ^FO50,600^GB235,3,1^FS^XZ";
 
                 string product_id = Rollos[i - 1].Product_Id.Trim();
-                string productName = Rollos[i - 1].Product_Name;
+                string productName = Rollos[i - 1].Product_Name.Substring(0,30);
                 string rollid = Rollos[i - 1].Roll_Id;
                 string width = Rollos[i - 1].Width.ToString("F3") ;
                 string length = Rollos[i - 1].Length.ToString("F3");
@@ -124,7 +140,9 @@ namespace Ritrama2025.Forms.Otros
                     { "Codigo", product_id }
                 };
 
-                bool ok = ZebraTemplateEngine.Print("ZDesigner ZT410-203dpi ZPL", template, values, StandardLabelSizes.Size_4x6_203dpi);
+                string? printerSelection = CboSelectPrinters.SelectedItem?.ToString();
+
+                bool ok = ZebraTemplateEngine.Print(printerSelection!, template, values, StandardLabelSizes.Size_4x6_203dpi);
             }
             
         }

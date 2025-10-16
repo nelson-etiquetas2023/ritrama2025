@@ -28,6 +28,100 @@ public class ProduccionService : IProduccionService
         }
     }
 
+
+
+    public List<ConfigVueltas> GetConfigVueltas(string oc)
+    {
+        List<ConfigVueltas> lista = [];
+
+        try
+        {
+            using SqlConnection conn = new(StringConnex);
+            conn.Open();
+
+            using SqlCommand comando = new()
+            {
+                Connection = conn,
+                CommandText = "SELECT orden,num_vuelta,longitud_cortar FROM vueltas WHERE orden=@p1",
+                CommandType = CommandType.Text
+            };
+            comando.Parameters.AddWithValue("@p1", oc);
+
+
+            using SqlDataReader reader = comando.ExecuteReader();
+
+            while (reader.Read())
+            {
+                ConfigVueltas item = new()
+                {
+                    OrdenCorte = reader.GetString(reader.GetOrdinal("orden")),
+                    Vuelta_numero = reader.GetInt32(reader.GetOrdinal("num_vuelta")),
+                    Longitud_Cortar = Convert.ToDouble(reader["longitud_cortar"])
+                };
+                lista.Add(item);
+            }  
+        }
+        catch (SqlException ex)
+        {
+            MessageBox.Show("error al cargar las configuracion de las vueltas..." + ex.Message);
+        }
+        return lista;
+    }
+
+    public void UpdateConfigVueltas(List<ConfigVueltas> lista)
+    {
+        try
+        {
+            // borrar la lista anterior
+            string OC = lista[0].OrdenCorte;
+            SqlConnection conn = new(StringConnex);
+            conn.Open();
+
+            SqlCommand comando = new()
+            {
+                Connection = conn,
+                CommandText = "DELETE FROM vueltas WHERE orden=@p1",
+                CommandType = CommandType.Text
+            };
+            comando.Parameters.AddWithValue("@p1", OC);
+            comando.ExecuteNonQuery();
+            //guardar la nueva lista
+            GuardarConfigVueltas(lista);
+        }
+        catch (SqlException ex)
+        {
+            MessageBox.Show("error al actualizar las configuracion de las vueltas..." + ex.Message);
+        }
+    }
+
+
+    public void GuardarConfigVueltas(List<ConfigVueltas> lista)
+    {
+        try
+        {
+            SqlConnection conn = new(StringConnex);
+            conn.Open();
+            foreach (var item in lista) 
+            {
+                SqlCommand comando = new()
+                {
+                    Connection = conn,
+                    CommandText = "INSERT INTO vueltas (orden,num_vuelta,longitud_cortar) VALUES(@p1,@p2,@p3)",
+                    CommandType = CommandType.Text
+                };
+                comando.Parameters.AddWithValue("@p1", item.OrdenCorte);
+                comando.Parameters.AddWithValue("@p2", item.Vuelta_numero);
+                comando.Parameters.AddWithValue("@p3", item.Longitud_Cortar);
+                comando.ExecuteNonQuery();
+            }
+        }
+        catch (SqlException ex)
+        {
+            MessageBox.Show("error al guardar las configuracion de las vueltas..." + ex.Message);
+
+        }
+    }
+
     private async Task<DataTable?> CargarTablaAsync(
         string sqlQuery,
         bool loadDataset = false,
@@ -262,7 +356,7 @@ public class ProduccionService : IProduccionService
                 SqlCommand comando = new()
                 {
                     Connection = conn,
-                    CommandText = "INSERT INTO rolls_details (product_id,product_name,roll_number,unique_code,splice,width,large,msi,roll_id,code_person,status,disponible,ubic,numero) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,0,@p13,@p14)",
+                    CommandText = "INSERT INTO rolls_details (product_id,product_name,roll_number,unique_code,splice,width,large,msi,roll_id,code_person,status,disponible,ubic,numero,vuelta) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,0,@p13,@p14,@p15)",
                     CommandType = CommandType.Text
                 };
                 comando.Parameters.AddWithValue("@p1", roll.Product_Id);
@@ -279,8 +373,7 @@ public class ProduccionService : IProduccionService
                 //comando.Parameters.AddWithValue("@p12", true);
                 comando.Parameters.AddWithValue("@p13", roll.Ubicacion);
                 comando.Parameters.AddWithValue("@p14", roll.Numero);
-                
-
+                comando.Parameters.AddWithValue("@p15", roll.vuelta);
                 comando.ExecuteNonQuery();
             }
         }
@@ -709,7 +802,7 @@ public class ProduccionService : IProduccionService
             using SqlCommand comando = new()
             {
                 Connection = conn,
-                CommandText = "UPDATE orden_corte SET fecha=@p2,fecha_produccion=@p3,width_1=@p4,lenght_1=@p5,util1_real_width=@p6,util1_real_lenght=@p7,rest1_width=@p8,rest1_lenght=@p9,product_id=@p10,desperdicio=@p11,operador_id=@p12,customer_id=@p13,cortes_largo=@p14,longitud_cortar=@p15,cortes_ancho=@p16,cant_rollos=@p17,sellOrder=@p18,rollid_1=@p19,ubicacion=@p20 WHERE numero=@p1",
+                CommandText = "UPDATE orden_corte SET fecha=@p2,fecha_produccion=@p3,width_1=@p4,lenght_1=@p5,util1_real_width=@p6,util1_real_lenght=@p7,rest1_width=@p8,rest1_lenght=@p9,product_id=@p10,desperdicio=@p11,operador_id=@p12,customer_id=@p13,cortes_largo=@p14,longitud_cortar=@p15,cortes_ancho=@p16,cant_rollos=@p17,sellOrder=@p18,rollid_1=@p19,ubicacion=@p20,ConfigVueltas=@p21 WHERE numero=@p1",
                 CommandType = CommandType.Text
             };
             comando.Parameters.AddWithValue("@p1", orden.Numero);
@@ -732,8 +825,7 @@ public class ProduccionService : IProduccionService
             comando.Parameters.AddWithValue("@p18", orden.SellOrder);
             comando.Parameters.AddWithValue("@p19", orden.Rollid_1);
             comando.Parameters.AddWithValue("@p20", orden.Ubicacion);
-
-
+            comando.Parameters.AddWithValue("@p21", orden.ConfigVueltas);
             comando.ExecuteNonQuery();
             //BORRAR LOS CORTES ANTERIORES
             using SqlCommand comando_borrar_cortes = new()
@@ -777,7 +869,7 @@ public class ProduccionService : IProduccionService
                 using SqlCommand comando_rolls = new()
                 {
                     Connection = conn,
-                    CommandText = "INSERT INTO rolls_details (numero,roll_number,product_id,product_name,roll_id,width,large,msi,unique_code,splice,code_person,status,ubic,ratio,rollid_oculto,despacho,fecha,fecha_despacho) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,'nt',0,'','',GETDATE(),GETDATE())",
+                    CommandText = "INSERT INTO rolls_details (numero,roll_number,product_id,product_name,roll_id,width,large,msi,unique_code,splice,code_person,status,ubic,ratio,rollid_oculto,despacho,fecha,fecha_despacho,vuelta) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,'nt',0,'','',GETDATE(),GETDATE(),@p13)",
                     CommandType = CommandType.Text
                 };
                 comando_rolls.Parameters.AddWithValue("@p1", item.Numero);
@@ -792,6 +884,7 @@ public class ProduccionService : IProduccionService
                 comando_rolls.Parameters.AddWithValue("@p10", item.Splice);
                 comando_rolls.Parameters.AddWithValue("@p11", item.Code_Person);
                 comando_rolls.Parameters.AddWithValue("@p12", item.Status);
+                comando_rolls.Parameters.AddWithValue("@p13", item.vuelta);
                 comando_rolls.ExecuteNonQuery();
 
             }
@@ -829,4 +922,6 @@ public class ProduccionService : IProduccionService
             MessageBox.Show("Error al modificar la orden de corte...error code: " + ex);
         }
     }
+
+    
 }

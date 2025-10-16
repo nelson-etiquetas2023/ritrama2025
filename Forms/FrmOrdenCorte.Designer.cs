@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmOrdenCorte));
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             panel1 = new Panel();
             ICON_EDITMODE = new PictureBox();
             pictureBox6 = new PictureBox();
@@ -167,6 +167,7 @@
             label34 = new Label();
             txt_ubic = new TextBox();
             btn_LabelCodeBar = new Button();
+            chk_ConfigVueltas = new CheckBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ICON_EDITMODE).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
@@ -1111,14 +1112,14 @@
             grid_cortes.BorderStyle = BorderStyle.None;
             grid_cortes.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
             grid_cortes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.Window;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            grid_cortes.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            grid_cortes.DefaultCellStyle = dataGridViewCellStyle1;
             grid_cortes.Location = new Point(607, 167);
             grid_cortes.Margin = new Padding(3, 2, 3, 2);
             grid_cortes.Name = "grid_cortes";
@@ -1129,7 +1130,6 @@
             grid_cortes.TabIndex = 66;
             grid_cortes.CellEndEdit += Grid_cortes_CellEndEdit;
             grid_cortes.DataError += Grid_cortes_DataError;
-            grid_cortes.EditingControlShowing += Grid_cortes_EditingControlShowing;
             // 
             // btn_generar_rollos
             // 
@@ -1186,9 +1186,7 @@
             txt_long_cortar.ReadOnly = true;
             txt_long_cortar.Size = new Size(120, 25);
             txt_long_cortar.TabIndex = 71;
-            txt_long_cortar.TextChanged += Txt_long_cortar_TextChanged;
             txt_long_cortar.Enter += Txt_long_cortar_Enter;
-            txt_long_cortar.KeyDown += Txt_long_cortar_KeyDown;
             txt_long_cortar.KeyPress += Txt_long_cortar_KeyPress;
             txt_long_cortar.KeyUp += Txt_long_cortar_KeyUp;
             // 
@@ -1332,15 +1330,17 @@
             // 
             // btn_vueltas
             // 
+            btn_vueltas.Enabled = false;
             btn_vueltas.Image = (Image)resources.GetObject("btn_vueltas.Image");
-            btn_vueltas.Location = new Point(603, 759);
+            btn_vueltas.Location = new Point(565, 759);
             btn_vueltas.Margin = new Padding(3, 2, 3, 2);
             btn_vueltas.Name = "btn_vueltas";
-            btn_vueltas.Size = new Size(100, 54);
+            btn_vueltas.Size = new Size(138, 54);
             btn_vueltas.TabIndex = 91;
             btn_vueltas.Text = "Vueltas";
             btn_vueltas.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_vueltas.UseVisualStyleBackColor = true;
+            btn_vueltas.Click += Btn_vueltas_Click;
             // 
             // txt_code_person
             // 
@@ -1386,7 +1386,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(213, 759);
+            pictureBox1.Location = new Point(170, 759);
             pictureBox1.Margin = new Padding(3, 2, 3, 2);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(40, 45);
@@ -1398,7 +1398,7 @@
             // 
             pictureBox2.Enabled = false;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(259, 759);
+            pictureBox2.Location = new Point(216, 759);
             pictureBox2.Margin = new Padding(3, 2, 3, 2);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(40, 45);
@@ -1409,7 +1409,7 @@
             // pictureBox3
             // 
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(305, 759);
+            pictureBox3.Location = new Point(262, 759);
             pictureBox3.Margin = new Padding(3, 2, 3, 2);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(40, 45);
@@ -1420,7 +1420,7 @@
             // pictureBox4
             // 
             pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
-            pictureBox4.Location = new Point(351, 759);
+            pictureBox4.Location = new Point(308, 759);
             pictureBox4.Margin = new Padding(3, 2, 3, 2);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(40, 45);
@@ -1431,7 +1431,7 @@
             // pictureBox5
             // 
             pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(397, 759);
+            pictureBox5.Location = new Point(354, 759);
             pictureBox5.Margin = new Padding(3, 2, 3, 2);
             pictureBox5.Name = "pictureBox5";
             pictureBox5.Size = new Size(40, 45);
@@ -1459,7 +1459,6 @@
             txt_vueltas1.TabIndex = 104;
             txt_vueltas1.ValueChanged += Txt_vueltas1_ValueChanged_1;
             txt_vueltas1.Enter += Txt_vueltas1_Enter;
-            txt_vueltas1.KeyUp += Txt_vueltas1_KeyUp_1;
             // 
             // txt_vueltas2
             // 
@@ -1474,7 +1473,7 @@
             // 
             labelstep1.AutoSize = true;
             labelstep1.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelstep1.Location = new Point(210, 803);
+            labelstep1.Location = new Point(167, 803);
             labelstep1.Name = "labelstep1";
             labelstep1.Size = new Size(53, 18);
             labelstep1.TabIndex = 110;
@@ -1485,7 +1484,7 @@
             // 
             labelstep2.AutoSize = true;
             labelstep2.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelstep2.Location = new Point(247, 803);
+            labelstep2.Location = new Point(204, 803);
             labelstep2.Name = "labelstep2";
             labelstep2.Size = new Size(82, 18);
             labelstep2.TabIndex = 111;
@@ -1496,7 +1495,7 @@
             // 
             labelstep3.AutoSize = true;
             labelstep3.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelstep3.Location = new Point(292, 803);
+            labelstep3.Location = new Point(249, 803);
             labelstep3.Name = "labelstep3";
             labelstep3.Size = new Size(81, 18);
             labelstep3.TabIndex = 112;
@@ -1506,10 +1505,10 @@
             // btn_generar_txt
             // 
             btn_generar_txt.Image = Properties.Resources.search_property_24px;
-            btn_generar_txt.Location = new Point(454, 759);
+            btn_generar_txt.Location = new Point(414, 759);
             btn_generar_txt.Margin = new Padding(3, 2, 3, 2);
             btn_generar_txt.Name = "btn_generar_txt";
-            btn_generar_txt.Size = new Size(145, 36);
+            btn_generar_txt.Size = new Size(145, 54);
             btn_generar_txt.TabIndex = 113;
             btn_generar_txt.Text = "GENERAR TXT";
             btn_generar_txt.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -1520,7 +1519,7 @@
             // 
             labelstep4.AutoSize = true;
             labelstep4.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelstep4.Location = new Point(342, 803);
+            labelstep4.Location = new Point(299, 803);
             labelstep4.Name = "labelstep4";
             labelstep4.Size = new Size(70, 18);
             labelstep4.TabIndex = 114;
@@ -1531,7 +1530,7 @@
             // 
             labelstep5.AutoSize = true;
             labelstep5.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelstep5.Location = new Point(392, 803);
+            labelstep5.Location = new Point(349, 803);
             labelstep5.Name = "labelstep5";
             labelstep5.Size = new Size(59, 18);
             labelstep5.TabIndex = 115;
@@ -1580,7 +1579,7 @@
             // 
             chk_generartxt_rc.AutoSize = true;
             chk_generartxt_rc.Font = new Font("Raleway", 8.25F);
-            chk_generartxt_rc.Location = new Point(454, 797);
+            chk_generartxt_rc.Location = new Point(415, 817);
             chk_generartxt_rc.Margin = new Padding(3, 2, 3, 2);
             chk_generartxt_rc.Name = "chk_generartxt_rc";
             chk_generartxt_rc.Size = new Size(108, 20);
@@ -1700,13 +1699,27 @@
             btn_LabelCodeBar.Text = "Etiquetas";
             btn_LabelCodeBar.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_LabelCodeBar.UseVisualStyleBackColor = true;
-            btn_LabelCodeBar.Click += btn_LabelCodeBar_Click;
+            btn_LabelCodeBar.Click += Btn_LabelCodeBar_Click;
+            // 
+            // chk_ConfigVueltas
+            // 
+            chk_ConfigVueltas.AutoSize = true;
+            chk_ConfigVueltas.Enabled = false;
+            chk_ConfigVueltas.Font = new Font("Raleway", 8.25F);
+            chk_ConfigVueltas.Location = new Point(565, 817);
+            chk_ConfigVueltas.Margin = new Padding(3, 2, 3, 2);
+            chk_ConfigVueltas.Name = "chk_ConfigVueltas";
+            chk_ConfigVueltas.Size = new Size(122, 20);
+            chk_ConfigVueltas.TabIndex = 130;
+            chk_ConfigVueltas.Text = "Configurar Vueltas";
+            chk_ConfigVueltas.UseVisualStyleBackColor = true;
             // 
             // FrmOrdenCorte
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1051, 844);
+            Controls.Add(chk_ConfigVueltas);
             Controls.Add(btn_LabelCodeBar);
             Controls.Add(label34);
             Controls.Add(txt_ubic);
@@ -1987,5 +2000,6 @@
         private Label label34;
         private TextBox txt_ubic;
         private Button btn_LabelCodeBar;
+        private CheckBox chk_ConfigVueltas;
     }
 }

@@ -25,6 +25,6 @@ namespace Ritrama2025.Models
         public bool Disponible { get; set; }
         public string Numero { get; set; } = null!;
         public string tipo_mov { get; set; } = null!;
-
+        public int vuelta { get; set; }
     }
 }

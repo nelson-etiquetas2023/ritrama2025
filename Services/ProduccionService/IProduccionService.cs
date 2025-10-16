@@ -1,5 +1,4 @@
 ﻿using Ritrama2025.Models;
-using Ritrama2025.Reports.DsConduceTableAdapters;
 using System.Data;
 
 namespace Ritrama2025.Services.ProduccionService
@@ -25,8 +24,10 @@ namespace Ritrama2025.Services.ProduccionService
         public Task<DataTable?> LoadDataDetailsConsumosMasterInic(string rollid);
         public void Update_Items_Orden_Corte(List<RolloCortado> rollos);
         public void Update_Header_Documnet_OC(Orden orden);
-
         public void RollosCortadosDispobnibles(string oc);
+        public void GuardarConfigVueltas(List<ConfigVueltas> lista);
+        public void UpdateConfigVueltas(List<ConfigVueltas> lista);
+        public List<ConfigVueltas> GetConfigVueltas(string oc);
 
     }
 }

@@ -38,12 +38,14 @@
             label4 = new Label();
             txt_numero_etiq = new TextBox();
             label5 = new Label();
+            label6 = new Label();
+            CboSelectPrinters = new ComboBox();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(107, 291);
+            button1.Location = new Point(100, 364);
             button1.Name = "button1";
             button1.Size = new Size(150, 23);
             button1.TabIndex = 0;
@@ -53,14 +55,14 @@
             // 
             // txt_hasta
             // 
-            txt_hasta.Location = new Point(72, 213);
+            txt_hasta.Location = new Point(71, 292);
             txt_hasta.Name = "txt_hasta";
             txt_hasta.Size = new Size(59, 23);
             txt_hasta.TabIndex = 1;
             // 
             // txt_desde
             // 
-            txt_desde.Location = new Point(72, 184);
+            txt_desde.Location = new Point(71, 263);
             txt_desde.Name = "txt_desde";
             txt_desde.Size = new Size(59, 23);
             txt_desde.TabIndex = 2;
@@ -68,7 +70,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(13, 184);
+            label1.Location = new Point(12, 263);
             label1.Name = "label1";
             label1.Size = new Size(42, 15);
             label1.TabIndex = 3;
@@ -77,7 +79,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(13, 216);
+            label2.Location = new Point(12, 295);
             label2.Name = "label2";
             label2.Size = new Size(40, 15);
             label2.TabIndex = 4;
@@ -87,7 +89,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label3.Location = new Point(13, 149);
+            label3.Location = new Point(12, 228);
             label3.Name = "label3";
             label3.Size = new Size(117, 15);
             label3.TabIndex = 5;
@@ -117,9 +119,9 @@
             // 
             // txt_numero_etiq
             // 
-            txt_numero_etiq.Location = new Point(163, 106);
+            txt_numero_etiq.Location = new Point(100, 106);
             txt_numero_etiq.Name = "txt_numero_etiq";
-            txt_numero_etiq.Size = new Size(59, 23);
+            txt_numero_etiq.Size = new Size(89, 23);
             txt_numero_etiq.TabIndex = 7;
             // 
             // label5
@@ -127,15 +129,34 @@
             label5.AutoSize = true;
             label5.Location = new Point(12, 109);
             label5.Name = "label5";
-            label5.Size = new Size(145, 15);
+            label5.Size = new Size(85, 15);
             label5.TabIndex = 8;
-            label5.Text = "Numero Total de Etiqteas :";
+            label5.Text = "Total Etiqueas :";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(12, 138);
+            label6.Name = "label6";
+            label6.Size = new Size(66, 15);
+            label6.TabIndex = 9;
+            label6.Text = "Impresora :";
+            // 
+            // CboSelectPrinters
+            // 
+            CboSelectPrinters.FormattingEnabled = true;
+            CboSelectPrinters.Location = new Point(100, 135);
+            CboSelectPrinters.Name = "CboSelectPrinters";
+            CboSelectPrinters.Size = new Size(246, 23);
+            CboSelectPrinters.TabIndex = 10;
             // 
             // PrintLabelsRolls
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(355, 326);
+            ClientSize = new Size(355, 399);
+            Controls.Add(CboSelectPrinters);
+            Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(txt_numero_etiq);
             Controls.Add(panel1);
@@ -167,5 +188,7 @@
         private Label label4;
         private TextBox txt_numero_etiq;
         private Label label5;
+        private Label label6;
+        private ComboBox CboSelectPrinters;
     }
 }

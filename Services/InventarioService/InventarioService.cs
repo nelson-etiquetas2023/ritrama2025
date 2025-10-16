@@ -22,6 +22,48 @@ namespace Ritrama2025.Services.InventarioService
             }
         }
 
+        public bool BorrarMasterDB(string rollid)
+        {
+            try
+            {
+                using SqlConnection conn = new(StringConnex);
+                conn.Open();
+
+                using var transaction = conn.BeginTransaction();
+                //en los iniciales
+                using SqlCommand comando1 = new()
+                {
+                    Connection = conn,
+                    Transaction = transaction,
+                    CommandType = CommandType.Text,
+                    CommandText = "delete from masterInic where roll_id=@rollid"
+                };
+                comando1.Parameters.AddWithValue("@rollid", rollid);
+                comando1.ExecuteNonQuery();
+
+                //en importacion
+                using SqlCommand comando2 = new()
+                {
+                    Connection = conn,
+                    Transaction = transaction,
+                    CommandType = CommandType.Text,
+                    CommandText = "delete from ItemsMateria where rollid=@rollid"
+                };
+                comando2.Parameters.AddWithValue("@rollid", rollid);
+                comando2.ExecuteNonQuery();
+
+                transaction.Commit();
+
+                
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al eliminar master del inventario. Error code: " + ex.Message);
+                return false;
+            }
+        }
+
         public async Task<DataTable?> LoadRolloCortadoInventaerio()
         {
             try
@@ -99,8 +141,8 @@ namespace Ritrama2025.Services.InventarioService
                     comando.Parameters.AddWithValue("@master", true);
                     comando.Parameters.AddWithValue("@resma", false);
                     comando.Parameters.AddWithValue("@graphics", false);
-                    comando.Parameters.AddWithValue("@embarque", item.Recepcion);
-                    comando.Parameters.AddWithValue("@fecha_pro", item.Fecha_Fabricacion);
+                    comando.Parameters.AddWithValue("@embarque", item.Factura);
+                    comando.Parameters.AddWithValue("@fecha_pro", item.Fecha_Produccion);
                     comando.Parameters.AddWithValue("@fecha_reg", item.Fecha_Llegada);
                     comando.Parameters.AddWithValue("@wid_c", 0);
                     comando.Parameters.AddWithValue("@len_c", 0);
@@ -228,5 +270,7 @@ namespace Ritrama2025.Services.InventarioService
             return null;
 
         }
+
+        
     }
 }
