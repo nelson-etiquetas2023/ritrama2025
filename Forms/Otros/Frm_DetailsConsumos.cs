@@ -42,7 +42,7 @@ namespace Ritrama2025.Forms.Otros
             {
                 Grid_Items.Rows[i - 1].Cells["item"].Value = i.ToString();
                 total_consumo += Convert.ToDouble(Grid_Items.Rows[i - 1].Cells["consumo"].Value);
-                rollos += Convert.ToInt32(Grid_Items.Rows[i - 1].Cells["cant_rollos"].Value);
+                //rollos += Convert.ToInt32(Grid_Items.Rows[i - 1].Cells["cant_rollos"].Value);
 
             }
             txt_total.Text = total_consumo.ToString("N2");

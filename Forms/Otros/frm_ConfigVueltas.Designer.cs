@@ -32,6 +32,8 @@
             btn_saveChanges = new Button();
             txt_Total_Utilizado = new TextBox();
             label1 = new Label();
+            txt_vueltas_splice = new TextBox();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)Grid_ConfigVueltas).BeginInit();
             SuspendLayout();
             // 
@@ -43,6 +45,7 @@
             Grid_ConfigVueltas.Size = new Size(245, 276);
             Grid_ConfigVueltas.TabIndex = 0;
             Grid_ConfigVueltas.CellEndEdit += Grid_ConfigVueltas_CellEndEdit;
+            Grid_ConfigVueltas.CellValueChanged += Grid_ConfigVueltas_CellValueChanged;
             // 
             // btn_saveChanges
             // 
@@ -71,11 +74,30 @@
             label1.TabIndex = 3;
             label1.Text = "Total Consumido :";
             // 
+            // txt_vueltas_splice
+            // 
+            txt_vueltas_splice.Location = new Point(127, 323);
+            txt_vueltas_splice.Name = "txt_vueltas_splice";
+            txt_vueltas_splice.ReadOnly = true;
+            txt_vueltas_splice.Size = new Size(130, 23);
+            txt_vueltas_splice.TabIndex = 4;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(12, 326);
+            label2.Name = "label2";
+            label2.Size = new Size(44, 15);
+            label2.TabIndex = 5;
+            label2.Text = "Splice :";
+            // 
             // frm_ConfigVueltas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(281, 445);
+            Controls.Add(label2);
+            Controls.Add(txt_vueltas_splice);
             Controls.Add(label1);
             Controls.Add(txt_Total_Utilizado);
             Controls.Add(btn_saveChanges);
@@ -95,5 +117,7 @@
         private Button btn_saveChanges;
         private TextBox txt_Total_Utilizado;
         private Label label1;
+        private TextBox txt_vueltas_splice;
+        private Label label2;
     }
 }

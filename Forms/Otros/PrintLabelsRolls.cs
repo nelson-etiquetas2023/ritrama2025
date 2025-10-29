@@ -49,22 +49,22 @@ namespace Ritrama2025.Forms.Otros
             for (int i = label_init; i<=label_end; i++) 
             {
                 string template = @"^XA^POR
-                ^FO700,100^A0R,60,60^FDFEDRIGONNI^FS
-                ^FO750,650^A0R,30,20^FDPRODUCT ID^FS
-                ^FO750,1000^A0R,30,20^FDROLL ID^FS
+                ^FO700,70^A0R,60,60^FDFEDRIGONI^FS
+                ^FO750,470^A0R,30,20^FDPRODUCT ID:^FS
+                ^FO750,750^A0R,30,20^FDROLL ID:^FS
 
-                ^FO700,650^A0R,50,50^FD{product_id}^FS
-                ^FO700,1000^A0R,40,40^FD{rollid}^FS
+                ^FO670,450^A0R,70,70^FD{product_id}^FS
+                ^FO670,750^A0R,70,70^FD{rollid}^FS
 
                 ^FO680,50^GB1,1200,3,1^FS
-                ^FO680,500^GB200,3,1^FS
-                ^FO680,950^GB200,3,1^FS
+                ^FO680,400^GB200,3,1^FS
+                ^FO680,700^GB200,3,1^FS
 
                 ^FO635,50^A0R,30,20^FDPRODUCTO^FS
                 ^FO635,1000^A0R,30,20^FDFECHA^FS
 
                 ^FO580,50^A0R,50,60^FD{product_name}^FS
-                ^FO580,1000^A0R,40,40^FD{fecha}^FS
+                ^FO580,1000^A0R,50,50^FD{fecha}^FS
   
                 ^FO550,50^GB1,1200,3,1^FS
                 ^FO550,950^GB130,3,1^FS
@@ -90,41 +90,48 @@ namespace Ritrama2025.Forms.Otros
                 ^FO380,1000^A0R,30,20^FDROLL NUMBER:^FS
 
                 ^FO300,50^A0R,60,60^FD{status}^FS
-                ^FO300,280^A0R,60,60^FD{customer_id}^FS
-                ^FO300,650^A0R,60,60^FD{orden}^FS
+                ^FO300,350^A0R,60,60^FD{customer_id}^FS
+                ^FO300,720^A0R,60,60^FD{orden}^FS
                 ^FO300,1000^A0R,60,60^FD{roll_number}^FS
 
                 ^FO280,50^GB1,1200,3,1^FS            
                 ^FO280,250^GB140,3,1^FS
                 ^FO280,600^GB140,3,1^FS
                 ^FO280,950^GB140,3,1^FS
-            
-                ^FO200,50^A0R,30,20^FDPRODUCT ID:^FS
-                ^FO200,610^A0R,30,20^FDUNIQUE CODE:^FS
-            
-                ^BY4,4,100
 
-                ^FO80,200^BCR,150,Y,N,N
+                ^FO250,210^A0R,25,25^FDPRODUCT ID:^FS
+                ^FO250,900^A0R,25,25^FDUNIQUE CODE:^FS
+
+                ^FO50,600^GB235,3,1^FS
+                                    
+                ^FO50,120     
+                ^BY4,3,80
+                ^BCR,150,Y,N,N
                 ^FD{product_id}^FS
-                ^FO80,750^BCR,150,Y,N,N
+ 
+
+                ^FO50,750
+                ^BY4,3,80                
+                ^BCR,150,Y,N,N
                 ^FD{unique_code}^FS
-                ^FO50,600^GB235,3,1^FS^XZ";
+
+                ^XZ";
 
                 string product_id = Rollos[i - 1].Product_Id.Trim();
-                string productName = Rollos[i - 1].Product_Name.Substring(0,30);
+                string productName = Rollos[i - 1].Product_Name.Length > 31 ? Rollos[i - 1].Product_Name.Substring(0, 30) : Rollos[i - 1].Product_Name.ToString();
                 string rollid = Rollos[i - 1].Roll_Id;
                 string width = Rollos[i - 1].Width.ToString("F3") ;
-                string length = Rollos[i - 1].Length.ToString("F3");
-                string msi = Rollos[i - 1].Msi.ToString("F3");
+                string length = Rollos[i - 1].Length.ToString("F0");
+                string msi = Rollos[i - 1].Msi.ToString("F0");
                 string splice = Rollos[i - 1].Splice.ToString();
-                string status = Rollos[i - 1].Status.ToString().Substring(0, 4);
+                string status = Rollos[i - 1].Status.Length > 3 ? Rollos[i - 1].Status.ToString().Substring(0, 2) : status = Rollos[i - 1].Status.ToString();
                 string code_person = Rollos[i - 1].Code_Person.ToString();
                 string roll_number = Rollos[i - 1].RollNumber.ToString();
                 string unique_code = Rollos[i - 1].UniqueCode.ToString().Trim();
 
                 var values = new Dictionary<string, string>
                 {
-                    { "product_id", product_id },
+                    { "product_id", "0" + product_id },
                     { "product_name", productName },
                     { "rollid", rollid },
                     { "fecha", Fechapro.ToString() },

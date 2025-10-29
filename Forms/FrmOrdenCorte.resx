@@ -222,27 +222,13 @@
         ZRR+/htlv35Isi+eci2YUHuY/5TbxntYhbyNaCgoVs7Kf2lB8A7vTARckR2xBQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="bot_editOrden.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="ComboReports.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFOSURBVEhL7ZQxS8RAEIVziJX4C1SwsLOyFPwNhgghyeVI
-        ETWd5lptrWy0E+RKbUTRyp8igp1gayda6vfCLOoVkkvSeQ+G2Xm783ZmssSbIoqi5X6/X2C7WhvdDdI0
-        LX3f/8B/yrTmom3bbgcEDyWaJMl1lmULVL9EfI+9t+7Eicdx/BCG4YzR4hfFa2RGTQ4njj2aP4Huac+6
-        ELejeGKQWIlT4YUqZ31k8agoiln8DXGzEY2LG93jG5yKx1xHe7ZXHyQdW/IZYTUOB1UO/2T7Q6Prg6Q/
-        xW0sU/FvdCFeKnnstVSwp3lp+wdG10ee5/NBELzx9G47FxdI3JIAF2wYVaH1WBwQGSHw+rP6zsQFKn+W
-        mNa6hHjdieObjcWBP+OqCd1hV+pEsb4JvrRjzYHovgRlVP6CP8c2B4PBnB1pB4RWEBzSyRrhr7f/n+F5
-        Xx1A6k2x89mlAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="bot_imprimir.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAElSURBVGhD7ZZBagJBEEXnDDlD0EVykLjyLiJkFQi4yWnE
-        Q3gLQbMwkBtkmfwPXTAM7cyUXfRk4D94oD1U/f6MCxshhJgl7/A3WO6shgpknKxASXDUHjcqkFCBe1GB
-        hAqM4QGu4Rv8SB6hBfOznXu9tYdZzGR2ES/wG1pIbZm9gnfxDH9gbnFNeYcn6OYAbckZ7uBrJZl1gZa/
-        h26+oC1Y8KAyS2j5Vx54sWFKWOKUfORBBbp3cNEd3kL7vuFBBbp3cNEd5hv4hPxtzvINTEHRHYqGgyi6
-        Q9FwEEV36Btu/4eJMvdfqP3cTd+wCmScrEAueCxDe+wZddM3rAKJagX6jCowpJvckpwqMNJQ2sFRBUr2
-        uFGBxL8oEKUKeJh9ASGEiKBp/gA36galTl8AjwAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACRSURBVDhPY/j27dt/SjDYACcnJ7IwigEf3n8kCZNswPNb
+        J/+f6DYF0yA+yQac6Db5f6hWCmwIiE+mC0wIu2DS2Vf/F1x6DefjwlgNyNr34r/0wkdgTMgQDAOQNRNj
+        CIoBOg0rMTTDMLIhIHbriZeYBmDTiIxBGkEYxge5liQDsGGQqykyAISpZwAlmIEywMAAAAc1/Jwvt6sN
+        AAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="bot_exportar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

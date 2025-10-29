@@ -50,8 +50,9 @@
             opt_modif_orden = new ToolStripMenuItem();
             bot_guardar = new ToolStripButton();
             bot_cancelar = new ToolStripButton();
-            bot_editOrden = new ToolStripButton();
-            bot_imprimir = new ToolStripButton();
+            ComboReports = new ToolStripDropDownButton();
+            ordenCorteToolStripMenuItem = new ToolStripMenuItem();
+            reporteDeDesperdiciosToolStripMenuItem = new ToolStripMenuItem();
             bot_exportar = new ToolStripButton();
             bot_buscarOrders = new ToolStripButton();
             label2 = new Label();
@@ -261,7 +262,7 @@
             toolStrip1.AutoSize = false;
             toolStrip1.BackColor = SystemColors.ActiveBorder;
             toolStrip1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { bot_primero, bot_anterior, bot_siguiente, bot_ultimo, bot_accion, bot_guardar, bot_cancelar, bot_editOrden, bot_imprimir, bot_exportar, bot_buscarOrders });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { bot_primero, bot_anterior, bot_siguiente, bot_ultimo, bot_accion, bot_guardar, bot_cancelar, ComboReports, bot_exportar, bot_buscarOrders });
             toolStrip1.Location = new Point(0, 59);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1051, 40);
@@ -403,27 +404,26 @@
             bot_cancelar.Text = "Cancel";
             bot_cancelar.Click += Bot_cancelar_Click;
             // 
-            // bot_editOrden
+            // ComboReports
             // 
-            bot_editOrden.AutoSize = false;
-            bot_editOrden.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            bot_editOrden.Image = (Image)resources.GetObject("bot_editOrden.Image");
-            bot_editOrden.ImageTransparentColor = Color.Magenta;
-            bot_editOrden.Name = "bot_editOrden";
-            bot_editOrden.Size = new Size(100, 30);
-            bot_editOrden.Text = "Editar";
-            bot_editOrden.Click += Bot_buscar_Click;
+            ComboReports.DropDownItems.AddRange(new ToolStripItem[] { ordenCorteToolStripMenuItem, reporteDeDesperdiciosToolStripMenuItem });
+            ComboReports.Image = (Image)resources.GetObject("ComboReports.Image");
+            ComboReports.ImageTransparentColor = Color.Magenta;
+            ComboReports.Name = "ComboReports";
+            ComboReports.Size = new Size(101, 37);
+            ComboReports.Text = "Reportes";
             // 
-            // bot_imprimir
+            // ordenCorteToolStripMenuItem
             // 
-            bot_imprimir.AutoSize = false;
-            bot_imprimir.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            bot_imprimir.Image = (Image)resources.GetObject("bot_imprimir.Image");
-            bot_imprimir.ImageTransparentColor = Color.Magenta;
-            bot_imprimir.Name = "bot_imprimir";
-            bot_imprimir.Size = new Size(100, 30);
-            bot_imprimir.Text = "Imprimir";
-            bot_imprimir.Click += Bot_imprimir_Click;
+            ordenCorteToolStripMenuItem.Name = "ordenCorteToolStripMenuItem";
+            ordenCorteToolStripMenuItem.Size = new Size(249, 26);
+            ordenCorteToolStripMenuItem.Text = "Orden Corte";
+            // 
+            // reporteDeDesperdiciosToolStripMenuItem
+            // 
+            reporteDeDesperdiciosToolStripMenuItem.Name = "reporteDeDesperdiciosToolStripMenuItem";
+            reporteDeDesperdiciosToolStripMenuItem.Size = new Size(249, 26);
+            reporteDeDesperdiciosToolStripMenuItem.Text = "Reporte de Desperdicios";
             // 
             // bot_exportar
             // 
@@ -1281,6 +1281,7 @@
             grid_items.ScrollBars = ScrollBars.Vertical;
             grid_items.Size = new Size(1007, 201);
             grid_items.TabIndex = 0;
+            grid_items.DataError += Grid_items_DataError;
             // 
             // txt_step
             // 
@@ -1953,9 +1954,7 @@
         private ToolStripButton bot_anterior;
         private ToolStripButton bot_siguiente;
         private ToolStripButton bot_ultimo;
-        private ToolStripButton bot_editOrden;
         private ToolStripButton bot_cancelar;
-        private ToolStripButton bot_imprimir;
         private ToolStripButton bot_exportar;
         private ToolStripDropDownButton bot_accion;
         private ToolStripMenuItem opt_create_document;
@@ -2001,5 +2000,8 @@
         private TextBox txt_ubic;
         private Button btn_LabelCodeBar;
         private CheckBox chk_ConfigVueltas;
+        private ToolStripDropDownButton ComboReports;
+        private ToolStripMenuItem ordenCorteToolStripMenuItem;
+        private ToolStripMenuItem reporteDeDesperdiciosToolStripMenuItem;
     }
 }

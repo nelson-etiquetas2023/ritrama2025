@@ -1,4 +1,5 @@
-﻿using Ritrama2025.Forms.Otros;
+﻿using DocumentFormat.OpenXml.Drawing;
+using Ritrama2025.Forms.Otros;
 using Ritrama2025.LabelSdk;
 using Ritrama2025.Models;
 using Ritrama2025.Services.CommonService;
@@ -7,6 +8,7 @@ using Ritrama2025.Services.InventarioService;
 using Ritrama2025.Services.ProduccionService;
 using Ritrama2025.Services.ReportsService.ReportsService;
 using System.Data;
+using System.IO;
 using System.Diagnostics;
 using System.Drawing.Printing;
 
@@ -56,7 +58,7 @@ public partial class Frm_Inventarios : Form
     private void TabControl1_DrawItem(object sender, DrawItemEventArgs e)
     {
         TabPage page = TabPages_Inventario.TabPages[e.Index];
-        Rectangle tabRect = e.Bounds;
+        System.Drawing.Rectangle tabRect = e.Bounds;
         
         // Determinar si la pestaña está seleccionada
         bool isSelected = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
@@ -82,7 +84,7 @@ public partial class Frm_Inventarios : Form
             e.Graphics,
             page.Text,
             font,
-            new Point(tabRect.Left + iconOffset + 5, tabRect.Top + 5),
+            new System.Drawing.Point(tabRect.Left + iconOffset + 5, tabRect.Top + 5),
             isSelected ? System.Drawing.Color.Black : System.Drawing.Color.Gray
         );
     }
@@ -315,7 +317,7 @@ public partial class Frm_Inventarios : Form
         dialog.ShowDialog();
 
         string filePath = dialog.FileName;
-        string fileName = Path.GetFileName(filePath);
+        string fileName = System.IO.Path.GetFileName(filePath);
 
         txt_file_name.Text = fileName;
         txt_file_path.Text = filePath;
@@ -449,12 +451,12 @@ public partial class Frm_Inventarios : Form
     {
         try
         {
-            var folderPath = Path.Combine(Application.StartupPath, "Archivos");
+            var folderPath = System.IO.Path.Combine(Application.StartupPath, "Archivos");
             if (!Directory.Exists(folderPath))
             {
                 Directory.CreateDirectory(folderPath);
             }
-            var filePath = Path.Combine(folderPath, "IRolloCortado.txt");
+            var filePath = System.IO.Path.Combine(folderPath, "IRolloCortado.txt");
             using (StreamWriter sr = new(filePath))
             {
                 foreach (DataRow item in listaCortados)
@@ -499,12 +501,12 @@ public partial class Frm_Inventarios : Form
     {
         try
         {
-            var folderPath = Path.Combine(Application.StartupPath, "Archivos");
+            var folderPath = System.IO.Path.Combine(Application.StartupPath, "Archivos");
             if (!Directory.Exists(folderPath))
             {
                 Directory.CreateDirectory(folderPath);
             }
-            var filePath = Path.Combine(folderPath, "Imaster.txt");
+            var filePath = System.IO.Path.Combine(folderPath, "Imaster.txt");
             using (StreamWriter sr = new(filePath))
             {
                 foreach (DataRow item in listaMasters)
@@ -728,7 +730,7 @@ public partial class Frm_Inventarios : Form
             if (RowSelect)
             {
                 string template = @"^XA^POR
-                ^FO700,100^A0R,60,60^FDFEDRIGONNI^FS
+                ^FO700,100^A0R,60,60^FDFEDRIGONI^FS
                 ^FO680,150^A0R,30,30^FDMateria Prima Master^FS
 
                 ^FO750,650^A0R,30,20^FDPRODUCT ID^FS
@@ -756,7 +758,7 @@ public partial class Frm_Inventarios : Form
                 ^FO510,1000^A0R,30,20^FDSPLICE:^FS
 
                 ^FO440,50^A0R,60,60^FD{width}^FS
-                ^FO440,320^A0R,60,60^FD{lenght}^FS
+                ^FO440,400^A0R,60,60^FD{lenght}^FS
                 ^FO440,650^A0R,60,60^FD{msi}^FS
                 ^FO440,1000^A0R,60,60^FD{splice}^FS
 
@@ -770,7 +772,7 @@ public partial class Frm_Inventarios : Form
                 ^FO380,650^A0R,30,20^FD^FS
                 ^FO380,1000^A0R,30,20^FD^FS
 
-                ^FO300,50^A0R,60,60^FD{lenght_original}^FS
+                ^FO300,100^A0R,60,60^FD{lenght_original}^FS
                 ^FO300,280^A0R,60,60^FD{customer_id}^FS
                 ^FO300,650^A0R,60,60^FD{orden}^FS
                 ^FO300,1000^A0R,60,60^FD{roll_number}^FS
@@ -779,25 +781,44 @@ public partial class Frm_Inventarios : Form
                 ^FO280,600^GB140,3,1^FS
                 ^FO280,950^GB140,3,1^FS
             
-                ^FO200,50^A0R,30,20^FDPRODUCT ID:^FS
-                ^FO200,570^A0R,30,20^FDROLL-ID:^FS
+                ^FO250,210^A0R,25,25^FDPRODUCT ID:^FS
+                ^FO250,750^A0R,25,25^FDROLL-ID:^FS
             
-                ^BY4,4,100
-
-                ^FO80,200^BCR,150,Y,N,N
+               
+                ^FO50,120     
+                ^BY4,3,80
+                ^BCR,150,Y,N,N
                 ^FD{product_id}^FS
-                ^FO80,690^BCR,150,Y,N,N
+
+                ^FO50,600
+                ^BY4,3,80                
+                ^BCR,150,Y,N,N
                 ^FD{rollid}^FS
+
                 ^FO50,540^GB235,3,1^FS^XZ";
 
                 string product_id = fila.Cells["product_id"].Value?.ToString()!;
-                string productName = fila.Cells["product_name"].Value?.ToString()!.Substring(0, 28)!;
-                string rollid = fila.Cells["roll_id"].Value?.ToString()!;
-                string width = fila.Cells["width"].Value?.ToString()!;
-                string length = fila.Cells["length_restante"].Value?.ToString()!;
-                string length_original = fila.Cells["length"].Value?.ToString()!;
 
-                string msi = fila.Cells["msi"].Value?.ToString()!;
+                string productName = fila.Cells["product_name"].Value!.ToString()!.Length > 28 ? fila.Cells["product_name"].Value!.ToString()!.Substring(0,28) : fila.Cells["product_name"].Value!.ToString()!;
+
+
+                string rollid = fila.Cells["roll_id"].Value!.ToString()!;
+
+                double width_d = Math.Round(Convert.ToDouble(fila.Cells["width"].Value),2,MidpointRounding.AwayFromZero);
+
+                double length_d = Math.Round(Convert.ToDouble(fila.Cells["length_restante"].Value), 2, MidpointRounding.AwayFromZero);
+
+                double msi_d = Math.Round(Convert.ToDouble(fila.Cells["msi"].Value), 2, MidpointRounding.AwayFromZero);
+
+                double length_original_d = Math.Round(Convert.ToDouble(fila.Cells["length"].Value), 2, MidpointRounding.AwayFromZero);
+
+                string width = width_d.ToString("F3");
+                string length = length_d.ToString("F0");
+
+                string length_original = length_original_d.ToString("F0");
+
+                string msi = msi_d.ToString("F0");
+
                 string splice = fila.Cells["splice"].Value?.ToString()!;
                 string status = "";
                 string code_person = "";

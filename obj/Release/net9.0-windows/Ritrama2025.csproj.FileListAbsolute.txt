@@ -192,3 +192,4 @@ C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\Reports\Inventario\Report
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\Reports\Inventario\Report_Inventario_Master.rdlc
 C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.Otros.Frm_ImportacionExcel.resources
 C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.Otros.PrintLabelsRolls.resources
+C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.Otros.frm_ConfigVueltas.resources

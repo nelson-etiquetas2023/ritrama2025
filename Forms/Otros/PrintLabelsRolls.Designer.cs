@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintLabelsRolls));
             button1 = new Button();
             txt_hasta = new TextBox();
             txt_desde = new TextBox();
@@ -45,24 +46,27 @@
             // 
             // button1
             // 
-            button1.Location = new Point(100, 364);
+            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.Image = (Image)resources.GetObject("button1.Image");
+            button1.Location = new Point(100, 321);
             button1.Name = "button1";
-            button1.Size = new Size(150, 23);
+            button1.Size = new Size(150, 66);
             button1.TabIndex = 0;
             button1.Text = "Print Label";
+            button1.TextImageRelation = TextImageRelation.ImageBeforeText;
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
             // txt_hasta
             // 
-            txt_hasta.Location = new Point(71, 292);
+            txt_hasta.Location = new Point(71, 278);
             txt_hasta.Name = "txt_hasta";
             txt_hasta.Size = new Size(59, 23);
             txt_hasta.TabIndex = 1;
             // 
             // txt_desde
             // 
-            txt_desde.Location = new Point(71, 263);
+            txt_desde.Location = new Point(71, 249);
             txt_desde.Name = "txt_desde";
             txt_desde.Size = new Size(59, 23);
             txt_desde.TabIndex = 2;
@@ -70,7 +74,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 263);
+            label1.Location = new Point(12, 249);
             label1.Name = "label1";
             label1.Size = new Size(42, 15);
             label1.TabIndex = 3;
@@ -79,7 +83,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 295);
+            label2.Location = new Point(12, 281);
             label2.Name = "label2";
             label2.Size = new Size(40, 15);
             label2.TabIndex = 4;
@@ -89,7 +93,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label3.Location = new Point(12, 228);
+            label3.Location = new Point(12, 214);
             label3.Name = "label3";
             label3.Size = new Size(117, 15);
             label3.TabIndex = 5;

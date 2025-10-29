@@ -323,6 +323,16 @@ namespace Ritrama2025.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap print_webpage_16 {
+            get {
+                object obj = ResourceManager.GetObject("print_webpage_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap procurement_48px {
             get {
                 object obj = ResourceManager.GetObject("procurement_48px", resourceCulture);

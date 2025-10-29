@@ -38,7 +38,7 @@ public partial class FrmOrdenCorte : Form
     bool RecalcGridCortes = false;
 
 
-   
+
     public FrmOrdenCorte(IProduccionService service, IExportDataService exportService, IReportsService reportService, ICommonService commonService)
     {
         InitializeComponent();
@@ -51,7 +51,7 @@ public partial class FrmOrdenCorte : Form
 
 
 
-   
+
 
     private async void FrmOrdenCorte_Load(object sender, EventArgs e)
     {
@@ -75,6 +75,9 @@ public partial class FrmOrdenCorte : Form
         HeaderBinding();
         BindingRollos();
         BindingCortes();
+
+        BsMaster.MoveLast();
+
         UpdateStepIndicator();
         ContadorRegistros();
 
@@ -83,7 +86,7 @@ public partial class FrmOrdenCorte : Form
 
         // Por la forma correcta de suscribirse al evento PositionChanged:
         BsMaster.PositionChanged += BsMaster_PositionChanged;
-      
+
     }
 
 
@@ -133,7 +136,7 @@ public partial class FrmOrdenCorte : Form
         txt_sellOrder.DataBindings.Add("Text", BsMaster, "sellOrder");
         txt_ubic.DataBindings.Add("Text", BsMaster, "Ubicacion");
         chk_desperdicio1.DataBindings.Add("Checked", BsMaster, "desperdicio", true);
-        
+
         //check desperdicios.
         chk_desperdicio1.DataBindings["Checked"]!.Format += (s, e) =>
         {
@@ -185,7 +188,7 @@ public partial class FrmOrdenCorte : Form
         };
 
         //Agregar las opciones.
-        estado.Items.AddRange("Ok-Correcto", "Mal Estado", "Reservado", "Observacion");
+        estado.Items.AddRange("Ok.", "Mal Estado", "Reservado", "Observacion");
         grid_items.Columns.Add(estado);
         BsDetails.Sort = "roll_number";
         grid_items.Columns[4].DefaultCellStyle.Format = "N3";
@@ -351,7 +354,7 @@ public partial class FrmOrdenCorte : Form
                 RollosCortados["msi"] = grid_cortes.Rows[j].Cells["msi"].Value;
                 RollosCortados["splice"] = 0;
                 RollosCortados["roll_id"] = txt_rollid_1.Text;
-                RollosCortados["code_person"] = "n/t";
+                RollosCortados["code_person"] = "N/A";
                 RollosCortados["vuelta"] = numvuelta;
                 RollosCortados["status"] = "";
 
@@ -554,8 +557,6 @@ public partial class FrmOrdenCorte : Form
         bot_anterior.Enabled = true;
         bot_ultimo.Enabled = true;
         bot_accion.Enabled = true;
-        bot_editOrden.Enabled = true;
-        bot_imprimir.Enabled = true;
         bot_exportar.Enabled = true;
         btn_buscar_orden.Enabled = true;
         bot_buscarOrders.Enabled = true;
@@ -824,7 +825,7 @@ public partial class FrmOrdenCorte : Form
                 Ubicacion = ".",
                 Status = statusRollo?.ToString() ?? string.Empty,
                 Disponible = false,
-                vuelta = vuelta != null ? Convert.ToInt32(vuelta) : 0,
+                vuelta = Convert.ToInt32(vuelta)
             };
             Detalle.Add(rollo);
         }
@@ -872,7 +873,7 @@ public partial class FrmOrdenCorte : Form
             Master_lenght2_Real = Convert.ToDouble(txt_real2.Text == "" ? 0 : txt_real2.Text),
             LastUpdate = DateTime.Now,
             FechaAutorize = DateTime.Now,
-            Step = 1,
+            Step = 2,
             ToAutorize = "",
             Note = "",
             Plus1_pies = Convert.ToDecimal(txt_plus1.Text),
@@ -1030,7 +1031,7 @@ public partial class FrmOrdenCorte : Form
         ParentRow["cortes_largo"] = "0";
         ParentRow["cant_rollos"] = "0";
         ParentRow["cant_rollos2"] = "0";
-     
+
 
 
         txt_menos1.Text = "0";
@@ -1089,7 +1090,7 @@ public partial class FrmOrdenCorte : Form
         btn_add_row_corte.Enabled = true;
         btn_delete_row_corte.Enabled = true;
         txt_vueltas1.Enabled = true;
-        txt_step.Text = "1";
+        txt_step.Text = "2";
         chk_desperdicio1.Enabled = true;
         btn_buscar_orden.Enabled = false;
         btn_generar_txt.Enabled = false;
@@ -1111,8 +1112,6 @@ public partial class FrmOrdenCorte : Form
         bot_anterior.Enabled = false;
         bot_ultimo.Enabled = false;
         bot_accion.Enabled = false;
-        bot_editOrden.Enabled = false;
-        bot_imprimir.Enabled = false;
         bot_exportar.Enabled = false;
         btn_buscar_orden.Enabled = false;
         bot_buscarOrders.Enabled = false;
@@ -1221,10 +1220,8 @@ public partial class FrmOrdenCorte : Form
         bot_anterior.Enabled = true;
         bot_guardar.Enabled = false;
         bot_cancelar.Enabled = false;
-        bot_imprimir.Enabled = true;
         bot_exportar.Enabled = true;
         bot_accion.Enabled = true;
-        bot_editOrden.Enabled = true;
         //cerrar el formulario
         txt_long_cortar.ReadOnly = true;
         txt_vueltas1.ReadOnly = true;
@@ -1662,7 +1659,7 @@ public partial class FrmOrdenCorte : Form
     }
     private void Bot_imprimir_Click(object sender, EventArgs e)
     {
-        ReportService.Reporte_Orden_Corte(txt_numeroOC.Text, this, R.REPORT_NAME.REPORT_OC, R.REPORT_TITLE.REPORT_OC);
+       
     }
     private void Btn_buscar_orden_Click(object sender, EventArgs e)
     {
@@ -1717,9 +1714,7 @@ public partial class FrmOrdenCorte : Form
         bot_ultimo.Enabled = true;
         bot_anterior.Enabled = true;
         bot_accion.Enabled = true;
-        bot_imprimir.Enabled = true;
         bot_exportar.Enabled = true;
-        bot_editOrden.Enabled = true;
         bot_buscarOrders.Enabled = true;
         bot_guardar.Enabled = false;
         bot_cancelar.Enabled = false;
@@ -1758,9 +1753,7 @@ public partial class FrmOrdenCorte : Form
         bot_ultimo.Enabled = false;
         bot_anterior.Enabled = false;
         bot_accion.Enabled = false;
-        bot_imprimir.Enabled = false;
         bot_exportar.Enabled = false;
-        bot_editOrden.Enabled = false;
         bot_guardar.Enabled = true;
         bot_cancelar.Enabled = true;
         bot_buscarOrders.Enabled = false;
@@ -1904,16 +1897,16 @@ public partial class FrmOrdenCorte : Form
             Longitud_a_Cortar = Convert.ToDouble(txt_long_cortar.Text),
             OC = txt_numeroOC.Text,
             StatusConfigVueltas = chk_ConfigVueltas.Checked,
-            EditMode = this.EditMode
+            EditMode = this.EditMode,
         };
 
         frmConfigVueltas.ShowDialog();
 
         //guardar en la base de datos la configuracion de vueltas.
-        if (frmConfigVueltas.SaveChenged) 
+        if (frmConfigVueltas.SaveChenged)
         {
             //actualizar la ui del grid de vueltas.
-            ActualizarUIConfigVueltas(frmConfigVueltas.Vueltas);
+            ActualizarUIConfigVueltas(frmConfigVueltas.Vueltas, frmConfigVueltas.Splice, frmConfigVueltas.VueltasModificadas);
 
             double total_length = frmConfigVueltas.Total_Length_utilizado;
 
@@ -1935,29 +1928,29 @@ public partial class FrmOrdenCorte : Form
             }
         }
     }
-    private void ActualizarUIConfigVueltas(List<ConfigVueltas> ConfigVueltas)
+    private void ActualizarUIConfigVueltas(List<ConfigVueltas> ConfigVueltas, int splice, int[] VueltasModif)
     {
-        foreach (var item in ConfigVueltas)
+
+        foreach (DataRowView row in BsDetails)
         {
-            int vuelta = item.Vuelta_numero;
-            double lenght = item.Longitud_Cortar;
+            int vueltamod = Convert.ToInt32(row["vuelta"]);
 
-            foreach (DataRowView row in BsDetails)
+            if (VueltasModif.Contains(vueltamod))
             {
-                if (Convert.ToInt32(row["vuelta"]) == vuelta)
-                {
-                    row["large"] = lenght;
-                }
-
+                row["large"] = ConfigVueltas.FirstOrDefault(v => v.Vuelta_numero == vueltamod)!.Longitud_Cortar;
+                row["splice"] = splice;
             }
+
         }
+        BsDetails.ResetBindings(false);
+
     }
 
 
     // Modifica la firma del método para que el parámetro sender sea nullable, coincidiendo con el delegado EventHandler.
     private void BsMaster_PositionChanged(object? sender, EventArgs args)
     {
-        
+
 
         DataRowView FilaActual = (DataRowView)BsMaster.Current!;
 
@@ -1974,6 +1967,14 @@ public partial class FrmOrdenCorte : Form
         else
         {
             btn_vueltas.Enabled = false;
+        }
+    }
+
+    private void Grid_items_DataError(object sender, DataGridViewDataErrorEventArgs e)
+    {
+        if (e.Exception != null && e.Context == DataGridViewDataErrorContexts.Commit) 
+        {
+            e.ThrowException = false;
         }
     }
 }

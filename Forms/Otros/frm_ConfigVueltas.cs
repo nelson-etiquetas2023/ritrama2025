@@ -13,7 +13,7 @@ namespace Ritrama2025.Forms.Otros
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string OC { get; set; } = "";
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        IProduccionService  ProduccionService { get; set; }
+        IProduccionService ProduccionService { get; set; }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double Total_Length_utilizado { get; set; } = 0;
 
@@ -25,6 +25,11 @@ namespace Ritrama2025.Forms.Otros
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool SaveChenged { get; set; } = false;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int Splice { get; set; } = 0;
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int[] VueltasModificadas { get; set; } = [];
         public frm_ConfigVueltas(IProduccionService produccionService)
         {
             InitializeComponent();
@@ -33,7 +38,8 @@ namespace Ritrama2025.Forms.Otros
 
         private void Frm_ConfigVueltas_Load(object sender, EventArgs e)
         {
-            if (EditMode == 0) 
+            Vueltas.Clear();
+            if (EditMode == 0)
             {
                 btn_saveChanges.Enabled = false;
                 Grid_ConfigVueltas.ReadOnly = true;
@@ -42,10 +48,11 @@ namespace Ritrama2025.Forms.Otros
             if (StatusConfigVueltas)
             {
                 //buscar ConfigVueltas en la BD.
-                 Vueltas =  ProduccionService.GetConfigVueltas(OC);
+                Vueltas = ProduccionService.GetConfigVueltas(OC);
                 Total_Length_utilizado = Vueltas.Sum(v => v.Longitud_Cortar);
+
             }
-            else 
+            else
             {
                 //Armar la ConfigVueltas desde cero de la forma predeterminada. 
                 Total_Length_utilizado = Numero_Vueltas * Longitud_a_Cortar;
@@ -58,9 +65,11 @@ namespace Ritrama2025.Forms.Otros
             Grid_ConfigVueltas.DataSource = Vueltas;
             Grid_ConfigVueltas.Columns[0].Visible = false;
             txt_Total_Utilizado.Text = Total_Length_utilizado.ToString("N2");
+            txt_vueltas_splice.ReadOnly = false;
+            txt_vueltas_splice.Text = "0";
 
         }
-       
+
         private void Grid_ConfigVueltas_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             double total_Utilizado = 0;
@@ -88,7 +97,24 @@ namespace Ritrama2025.Forms.Otros
             Total_Length_utilizado = Convert.ToDouble(txt_Total_Utilizado.Text);
 
             this.SaveChenged = true;
-            this.Close();  
+            this.Splice = txt_vueltas_splice.Text != null ? Convert.ToInt32(txt_vueltas_splice.Text) : 0;
+            this.Close();
+        }
+
+        private void Grid_ConfigVueltas_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+
+            if (e.ColumnIndex == 2) 
+            {
+                var celda = Grid_ConfigVueltas.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+                //guardar la celda modificada en el HashSet
+                VueltasModificadas = VueltasModificadas.Append(e.RowIndex+1).ToArray();
+
+                //feedback visual
+                celda.Style.BackColor = Color.Red;
+            }
         }
     }
 }
