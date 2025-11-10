@@ -146,7 +146,6 @@
             rad_rolloCortado.Name = "rad_rolloCortado";
             rad_rolloCortado.Size = new Size(165, 20);
             rad_rolloCortado.TabIndex = 5;
-            rad_rolloCortado.TabStop = true;
             rad_rolloCortado.Text = "Todos Rollo Cortados";
             rad_rolloCortado.UseVisualStyleBackColor = true;
             rad_rolloCortado.CheckedChanged += rad_rolloCortado_CheckedChanged;
@@ -158,7 +157,6 @@
             rad_hojas.Name = "rad_hojas";
             rad_hojas.Size = new Size(130, 20);
             rad_hojas.TabIndex = 4;
-            rad_hojas.TabStop = true;
             rad_hojas.Text = "Todos las Hojas";
             rad_hojas.UseVisualStyleBackColor = true;
             rad_hojas.CheckedChanged += rad_hojas_CheckedChanged;
@@ -170,7 +168,6 @@
             rad_graphics.Name = "rad_graphics";
             rad_graphics.Size = new Size(151, 20);
             rad_graphics.TabIndex = 3;
-            rad_graphics.TabStop = true;
             rad_graphics.Text = "Todos los Graphics";
             rad_graphics.UseVisualStyleBackColor = true;
             rad_graphics.CheckedChanged += rad_graphics_CheckedChanged;
@@ -182,7 +179,6 @@
             rad_master.Name = "rad_master";
             rad_master.Size = new Size(137, 20);
             rad_master.TabIndex = 2;
-            rad_master.TabStop = true;
             rad_master.Text = "Todos los Master";
             rad_master.UseVisualStyleBackColor = true;
             rad_master.CheckedChanged += rad_master_CheckedChanged;
@@ -194,13 +190,13 @@
             rad_productName.Name = "rad_productName";
             rad_productName.Size = new Size(158, 20);
             rad_productName.TabIndex = 1;
-            rad_productName.TabStop = true;
             rad_productName.Text = "Nombre del Producto";
             rad_productName.UseVisualStyleBackColor = true;
             // 
             // rad_productid
             // 
             rad_productid.AutoSize = true;
+            rad_productid.Checked = true;
             rad_productid.Location = new Point(6, 32);
             rad_productid.Name = "rad_productid";
             rad_productid.Size = new Size(102, 20);

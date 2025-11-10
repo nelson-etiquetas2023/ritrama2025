@@ -108,7 +108,7 @@ namespace Ritrama2025.Services.ProductsService
             
             try
             {
-                string sqlQuery = "UPDATE dbo.producto SET Product_Name = @name,Product_Descrip = @descrip,Product_Ref = @reference,codebar=@barra,precio=@precio,ratio=@ratio,@master=masterRoll,@graphics=graphics,@hoja=resmas,@rollo=rollo_cortado WHERE product_id = @id";
+                string sqlQuery = "UPDATE dbo.producto SET Product_Name = @name,Product_Descrip = @descrip,Product_Ref = @reference,codebar=@barra,precio=@precio,ratio=@ratio,@master=masterRolls,@graphics=graphics,@hoja=resmas,@rollo=rollo_cortado WHERE product_id = @id";
 
                 var parametros = new List<SqlParameter>
                 {

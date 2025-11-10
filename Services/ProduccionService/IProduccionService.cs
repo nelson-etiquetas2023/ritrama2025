@@ -5,6 +5,7 @@ namespace Ritrama2025.Services.ProduccionService
 {
     public interface IProduccionService
     {
+        Task<DataTable> LoadDataRollID();
         Task<DataSet> LoadDataOC();
         void GuardarEncabezadoOrdenCorte(Orden OrdenCorte);
         void GuardarCortes(List<Corte> cortes);

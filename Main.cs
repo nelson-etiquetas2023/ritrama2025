@@ -1,23 +1,43 @@
-﻿using Ritrama2025.Forms;
+﻿using Microsoft.Extensions.Configuration;
+using Ritrama2025.Forms;
 using Ritrama2025.Helpers;
-using System.ComponentModel;
-
 
 namespace Ritrama2025
 {
     public partial class Main : Form
     {
-        private readonly FormManager _formManager;
+       private IConfiguration Config { get; set; } = null!;
+       private readonly FormManager _formManager;
+       private string MODE = "";
 
-        public Main(FormManager formManager)
+        public Main(FormManager formManager, IConfiguration config)
         {
             InitializeComponent();
             _formManager = formManager;
+            Config = config;
+           
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
-         
+            if (Config != null)
+            {
+                MODE = Config["Ambiente"] ?? R.ENVIRONMET.DESARROLLO;
+            }
+            if (MODE == "Desarrollo") 
+            {
+                panel2.BackColor = Color.Orange;
+            }
+            if (MODE == "Produccion")
+            {
+                panel2.BackColor = Color.LightGreen;
+            }
+            if (MODE == "Testing")
+            {
+                panel2.BackColor = Color.OrangeRed;
+            }
+            LAB_MODE_RUN.Text = MODE;
+
         }
         private void Bot_despacho_Click(object sender, EventArgs e)
         {
@@ -48,5 +68,10 @@ namespace Ritrama2025
         {
             FormManager.ShowForm<Frm_Inventarios>(this);
         }
-    }   
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
 }

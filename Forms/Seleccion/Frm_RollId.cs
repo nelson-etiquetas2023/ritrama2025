@@ -11,13 +11,13 @@ namespace Ritrama2025.Forms.Seleccion
     {
         DataView Dv = new();
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public DataTable DtRollid { get; set; } = null!;
+        public DataTable DtRollid { get; set; } = new();
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public RolloCortado MasterRoll { get; set; } = null!;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Tipo_mov { get; set; } = "";
 
-        private IProduccionService ProduccionService  { get; set; }
+        private IProduccionService ProduccionService { get; set; }
         public Frm_RollId(IProduccionService produccionService)
         {
             InitializeComponent();
@@ -26,6 +26,7 @@ namespace Ritrama2025.Forms.Seleccion
 
         private void Frm_RollId_Load(object sender, EventArgs e)
         {
+            DtRollid = ProduccionService.LoadDataRollID().Result;
             Dv = DtRollid.DefaultView;
             GridItems.AutoGenerateColumns = false;
             StyleGridColumns();
@@ -44,9 +45,9 @@ namespace Ritrama2025.Forms.Seleccion
             AGREGAR_COLUMN_GRID("product_id", 60, "Product Id", "part_number");
             AGREGAR_COLUMN_GRID("product_name", 240, "Nombre del Producto", "product_name");
             AGREGAR_COLUMN_GRID("Ancho", 65, "Width", "width");
-            AGREGAR_COLUMN_GRID("lenght", 65, "Largo Original", "lenght");
-            AGREGAR_COLUMN_GRID("lenght_consumido", 70, "Largo Consumido", "largo_consumido");
-            AGREGAR_COLUMN_GRID("largo_restante", 70, "Largo Restante", "largo_restante");
+            AGREGAR_COLUMN_GRID("lenght", 80, "Largo Original", "lenght");
+            AGREGAR_COLUMN_GRID("lenght_consumido", 80, "Consumido", "largo_consumido");
+            AGREGAR_COLUMN_GRID("largo_restante", 80, "Restante", "largo_restante");
             AGREGAR_COLUMN_GRID("estado", 70, "Estado", "estado");
             AGREGAR_COLUMN_GRID("fecha_pro", 67, "Fecha produccion", "fecha_pro");
             AGREGAR_COLUMN_GRID("fecha_reg", 67, "Llegada", "fecha_reg");
@@ -140,7 +141,7 @@ namespace Ritrama2025.Forms.Seleccion
 
         private void Btn_DetailsConsumos_Click(object sender, EventArgs e)
         {
-            Frm_DetailsConsumos frmDetails = new(ProduccionService) 
+            Frm_DetailsConsumos frmDetails = new(ProduccionService)
             {
                 Rollid = GridItems.CurrentRow?.Cells["rollid"].Value?.ToString() ?? string.Empty,
                 Productid = GridItems.CurrentRow?.Cells["product_id"].Value?.ToString() ?? string.Empty,
@@ -150,6 +151,37 @@ namespace Ritrama2025.Forms.Seleccion
 
             };
             frmDetails.ShowDialog();
+        }
+
+        private void GridItems_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (this.GridItems.Columns[e.ColumnIndex].Name == "estado")
+            {
+                try
+                {
+                    string estado = Convert.ToString(e.Value)!;
+                    if (estado == "Agotado")
+                    {
+                        e.CellStyle.BackColor = System.Drawing.Color.Red;
+                        e.CellStyle.ForeColor = System.Drawing.Color.White;
+                    }
+                    if (estado == "Completo")
+                    {
+                        e.CellStyle.BackColor = System.Drawing.Color.Green;
+                        e.CellStyle.ForeColor = System.Drawing.Color.White;
+                    }
+                    if (estado == "Parcialmente Consumido")
+                    {
+                        e.CellStyle.BackColor = System.Drawing.Color.Orange;
+                        e.CellStyle.ForeColor = System.Drawing.Color.White;
+                    }
+                }
+                catch (Exception)
+                {
+                    e.CellStyle.BackColor = System.Drawing.Color.White;
+                    throw;
+                }
+            }
         }
     }
 }

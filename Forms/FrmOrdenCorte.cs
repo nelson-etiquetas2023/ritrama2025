@@ -9,7 +9,6 @@ using Ritrama2025.Services.ProduccionService;
 using Ritrama2025.Services.ReportsService.ReportsService;
 using System.Configuration;
 using System.Data;
-using System.Windows.Forms;
 
 namespace Ritrama2025.Forms;
 
@@ -37,8 +36,6 @@ public partial class FrmOrdenCorte : Form
 
     bool RecalcGridCortes = false;
 
-
-
     public FrmOrdenCorte(IProduccionService service, IExportDataService exportService, IReportsService reportService, ICommonService commonService)
     {
         InitializeComponent();
@@ -46,15 +43,13 @@ public partial class FrmOrdenCorte : Form
         ExportDataService = exportService;
         ReportService = reportService;
         CommonService = commonService;
-        this.AutoScaleMode = AutoScaleMode.Font;
     }
-
-
-
-
 
     private async void FrmOrdenCorte_Load(object sender, EventArgs e)
     {
+        this.StartPosition = FormStartPosition.Manual;
+        this.Location = new Point(155, 45);
+
         Ds = await Task.Run(() => Service.LoadDataOC());
 
         this.Invoke(() =>
@@ -81,17 +76,10 @@ public partial class FrmOrdenCorte : Form
         UpdateStepIndicator();
         ContadorRegistros();
 
-        // Reemplaza la línea incorrecta en el método FrmOrdenCorte_Load:
-        // BsMaster.PositionChanged += BsMaster_PositionChanged(object sender, EventArgs e);
-
         // Por la forma correcta de suscribirse al evento PositionChanged:
         BsMaster.PositionChanged += BsMaster_PositionChanged;
 
     }
-
-
-
-
 
     #region ENLACE A DATOS
     private void HeaderBinding()
@@ -136,13 +124,28 @@ public partial class FrmOrdenCorte : Form
         txt_sellOrder.DataBindings.Add("Text", BsMaster, "sellOrder");
         txt_ubic.DataBindings.Add("Text", BsMaster, "Ubicacion");
         chk_desperdicio1.DataBindings.Add("Checked", BsMaster, "desperdicio", true);
+        chk_two_master.DataBindings.Add("Checked", BsMaster, "TwoMasters");
 
+        txt_long_cortar2.DataBindings.Add("Text", BsMaster, "longitud_cortar2");
+        txt_vueltas2.DataBindings.Add("Text", BsMaster, "vueltas2");
+        txt_cantidad_rollos2.DataBindings.Add("Text", BsMaster, "cantidad_rollos2");
+        
         //check desperdicios.
         chk_desperdicio1.DataBindings["Checked"]!.Format += (s, e) =>
         {
             if (e.Value == DBNull.Value || e.Value == null) e.Value = false;
         };
         chk_desperdicio1.DataBindings["Checked"]!.Parse += (s, e) =>
+        {
+            if (e.Value == DBNull.Value || e.Value == null) e.Value = false;
+        };
+
+        //check two-master.
+        chk_two_master.DataBindings["Checked"]!.Format += (s, e) =>
+        {
+            if (e.Value == DBNull.Value || e.Value == null) e.Value = false;
+        };
+        chk_two_master.DataBindings["Checked"]!.Parse += (s, e) =>
         {
             if (e.Value == DBNull.Value || e.Value == null) e.Value = false;
         };
@@ -225,6 +228,9 @@ public partial class FrmOrdenCorte : Form
     #endregion
 
     #region CALCULAR ORDEN-CORTE
+
+
+
     private void Btn_buscar_rollid1_Click(object sender, EventArgs e)
     {
         Frm_RollId frmrollid = new(Service)
@@ -290,7 +296,11 @@ public partial class FrmOrdenCorte : Form
             //ASIGNAR CORTES A LO ANCHO.
             txt_cortes_ancho.Text = grid_cortes.Rows.Count.ToString();
 
-            CalcularLONGITUDACORTAR();
+            if (chk_two_master.Checked)
+            {
+                double MatRes2 = Convert.ToDouble(txt_length2.Text) - Convert.ToDouble(txt_real2_length.Text);
+                txt_matrest2_lenght.Text = MatRes2.ToString("N2");
+            }
         }
 
         ACTUALIZAR_ROLLID_1();
@@ -313,6 +323,10 @@ public partial class FrmOrdenCorte : Form
         //Actualiza el material restante del RollId 1
         double num2 = Convert.ToDouble(txt_length1.Text) - Convert.ToDouble(txt_real1_length.Text);
         txt_matrest1_lenght.Text = num2.ToString("N2");
+
+
+
+
     }
     private void Txt_vueltas1_KeyUp(object sender, KeyEventArgs e)
     {
@@ -335,6 +349,8 @@ public partial class FrmOrdenCorte : Form
         {
             ParentRow = (DataRowView)BsMaster.Current!;
         }
+
+        //ROLLOS DE MASTER1
         int vueltas = Convert.ToInt32(txt_vueltas1.Text);
         int numcortes = (grid_cortes.Rows.Count);
         int renglon = 1;
@@ -357,12 +373,48 @@ public partial class FrmOrdenCorte : Form
                 RollosCortados["code_person"] = "N/A";
                 RollosCortados["vuelta"] = numvuelta;
                 RollosCortados["status"] = "";
-
                 RollosCortados.Row.SetParentRow(ParentRow.Row);
                 RollosCortados.EndEdit();
                 renglon += 1;
             }
         }
+        //CALCULO DE LOS ROLLOS SI TIENE USO DE SEGUNDO MASTER
+        if (chk_two_master.Checked) 
+        {
+            int vueltas2 = Convert.ToInt32(txt_vueltas2.Text);
+            int numcortes2 = (grid_cortes.Rows.Count);
+            int renglon2 = renglon;
+            for (int i = 1; i <= vueltas2; i++)
+            {
+                int numvuelta2 = i;
+                for (int j = 0; j <= numcortes2 - 1; j++)
+                {
+                    RollosCortados = (DataRowView)BsDetails.AddNew()!;
+                    RollosCortados.BeginEdit();
+                    RollosCortados["roll_number"] = renglon2;
+                    RollosCortados["product_id"] = txt_product_id.Text;
+                    RollosCortados["product_name"] = txt_product_name.Text;
+                    RollosCortados["unique_code"] = "0";
+                    RollosCortados["Width"] = grid_cortes.Rows[j].Cells["width"].Value;
+                    RollosCortados["large"] = txt_long_cortar2.Text;
+                    RollosCortados["msi"] = Convert.ToDouble(grid_cortes.Rows[j].Cells["width"].Value) * Convert.ToDouble(txt_long_cortar2.Text) * R.CONSTANTES.FACTOR_CALCULO_MSI;
+                    RollosCortados["splice"] = 0;
+                    RollosCortados["roll_id"] = txt_rollid_2.Text;
+                    RollosCortados["code_person"] = "N/A";
+                    RollosCortados["vuelta"] = numvuelta2;
+                    RollosCortados["status"] = "";
+                    RollosCortados.Row.SetParentRow(ParentRow.Row);
+                    RollosCortados.EndEdit();
+                    renglon2 += 1;
+                }
+            }
+        }
+
+
+
+
+
+
         //BsDetails.Sort = "roll_number";
         if (grid_items.Rows.Count > 0)
         {
@@ -410,6 +462,11 @@ public partial class FrmOrdenCorte : Form
             num += (Convert.ToDouble(grid_cortes.Rows[i].Cells["width"].Value));
             txt_ancho_corte.Text = num.ToString();
             txt_real1_width.Text = num.ToString();
+            // si estoy en modo two-master
+            if (chk_two_master.Checked)
+            {
+                txt_real2_width.Text = num.ToString();
+            }
         }
     }
     private void Grid_cortes_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -417,11 +474,14 @@ public partial class FrmOrdenCorte : Form
 
         txt_cortes_ancho.Text = grid_cortes.Rows.Count.ToString();
 
+        //calcular el msi por corte.
+        grid_cortes.Rows[e.RowIndex].Cells["msi"].Value = Convert.ToDouble(grid_cortes.Rows[e.RowIndex].Cells["width"].Value) * Convert.ToDouble(grid_cortes.Rows[e.RowIndex].Cells["lenght"].Value) * R.CONSTANTES.FACTOR_CALCULO_MSI;
+
         CALCULATE_TOTAL_WIDTH_CORTES();
         ACTUALIZAR_ROLLID_1();
         CALCULATE_MATERIAL_RESTANTE();
         CALCULAR_TOTAL_ROLLOS_CORTAR();
-        GENERAR_ROLLOS_CORTADOS();
+        //GENERAR_ROLLOS_CORTADOS();
     }
     private void ReCalcularDocumento(int fil)
     {
@@ -461,20 +521,54 @@ public partial class FrmOrdenCorte : Form
             Convert.ToDouble(txt_vueltas1.Value);
 
         txt_largo_corte.Text = num.ToString();
+
         txt_real1_length.Text = num.ToString();
+
+        //si esta en modo two-master.
+        if (chk_two_master.Checked)
+        {
+            if (txt_long_cortar2.Text == string.Empty) txt_long_cortar2.Text = "0";
+            if (txt_vueltas2.Text == string.Empty) txt_vueltas2.Value = 0;
+
+            double ConsumoRealM2 = Convert.ToDouble(txt_long_cortar2.Text) *
+            Convert.ToDouble(txt_vueltas2.Value);
+
+            txt_real2_length.Text = ConsumoRealM2.ToString();
+
+        }
     }
     private void Txt_vueltas1_ValueChanged_1(object sender, EventArgs e)
     {
+
+        CalcularConsumosMaster1();
+    }
+
+    private void CalcularConsumosMaster1() 
+    {
         if (EditMode == 0) return;
+
         CalcularLONGITUDACORTAR();
         CALCULAR_TOTAL_ROLLOS_CORTAR();
+
         if (grid_items.Rows.Count > 0)
         {
             BorrarRollosCortadosHijos();
         }
+
         ACTUALIZAR_ROLLID_1();
+    }
+    private void CALCULAR_TOTAL_ROLLOS_CORTAR2() 
+    {
+        if (txt_cortes_ancho.Text == "")
+        {
+            txt_cortes_ancho.Text = "0";
+        }
+        //Multiplicacion de las vueltas x los cortes son los rollos totales a producir.
+        int num = Convert.ToInt32(txt_vueltas2.Value) * Convert.ToInt32(txt_cortes_ancho.Text);
+        txt_cantidad_rollos2.Text = num.ToString();
 
     }
+
     private void CALCULAR_TOTAL_ROLLOS_CORTAR()
     {
         if (txt_cortes_ancho.Text == "")
@@ -518,20 +612,9 @@ public partial class FrmOrdenCorte : Form
     }
     private void Txt_long_cortar_KeyUp(object sender, KeyEventArgs e)
     {
-        if (EditMode == 0) return;
-
-        double longitud_cortar = txt_long_cortar.Text != "" ? Convert.ToDouble(txt_long_cortar.Text) : 0;
-
-        if (longitud_cortar > 0)
-        {
-            CALCULATE_DATA_CORTES();
-            CALCULAR_TOTAL_ROLLOS_CORTAR();
-            if (grid_items.Rows.Count > 0)
-            {
-                BorrarRollosCortadosHijos();
-            }
-
-        }
+        CalcularConsumosMaster1();
+        CALCULATE_DATA_CORTES();
+        
     }
 
 
@@ -880,7 +963,7 @@ public partial class FrmOrdenCorte : Form
             Plus2_pies = Convert.ToDecimal(txt_plus2.Text),
             Tipo_Mov1 = "",
             Tipo_Mov2 = "",
-            Rollo_unificado = chk_unificar_rollos.Checked,
+            Rollo_unificado = chk_two_master.Checked,
             Lenght_entrada = 0,
             Real_usado_r1 = 0,
             Real_usado_r2 = 0,
@@ -890,6 +973,10 @@ public partial class FrmOrdenCorte : Form
             Desperdicio = chk_desperdicio1.Checked,
             Master_Tipo = TipoMovimiento,
             Ubicacion = txt_ubic.Text == string.Empty ? "n/t" : txt_ubic.Text,
+            TwoMasters = chk_two_master.Checked,
+            Longitud_Cortar2 = Convert.ToDouble(txt_long_cortar2.Text == "" ? 0 : txt_long_cortar2.Text),
+            Vueltas2 = Convert.ToInt32(txt_vueltas2.Value),
+            Cantidad_rollos2 = Convert.ToInt32(txt_cantidad_rollos2.Text == "" ? 0 : txt_cantidad_rollos2.Text),
         };
     }
     private void GuardarOrdeAddMode()
@@ -1032,6 +1119,7 @@ public partial class FrmOrdenCorte : Form
         ParentRow["cant_rollos"] = "0";
         ParentRow["cant_rollos2"] = "0";
 
+        ParentRow["TwoMasters"] = false;
 
 
         txt_menos1.Text = "0";
@@ -1094,6 +1182,7 @@ public partial class FrmOrdenCorte : Form
         chk_desperdicio1.Enabled = true;
         btn_buscar_orden.Enabled = false;
         btn_generar_txt.Enabled = false;
+        chk_two_master.Enabled = true;
         UpdateStepIndicator();
         EditMode = 1;
     }
@@ -1276,8 +1365,8 @@ public partial class FrmOrdenCorte : Form
         FilaActual["step"] = step;
         BsMaster.EndEdit();
 
-        //crear el txt de rollos cortados
-        ExportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(), chk_generartxt_rc.Checked, Convert.ToDateTime(txt_fecha_produccion.Text).ToShortDateString(), Convert.ToDateTime(txt_fecha_produccion.Text).ToShortDateString(), true);
+        ////crear el txt de rollos cortados
+        //ExportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(), chk_generartxt_rc.Checked, Convert.ToDateTime(txt_fecha_produccion.Text).ToShortDateString(), Convert.ToDateTime(txt_fecha_produccion.Text).ToShortDateString(), true);
     }
 
     private void Btn_datosDocAprob_Click(object sender, EventArgs e)
@@ -1316,6 +1405,7 @@ public partial class FrmOrdenCorte : Form
             });
             Toggleloading(false);
 
+            MessageBox.Show("Se ha cerrado la Orden de Corte Correctamente...", "Advertencia", MessageBoxButtons.OK);
         }
     }
     private void Opt_send_production_Click(object sender, EventArgs e)
@@ -1659,7 +1749,7 @@ public partial class FrmOrdenCorte : Form
     }
     private void Bot_imprimir_Click(object sender, EventArgs e)
     {
-       
+
     }
     private void Btn_buscar_orden_Click(object sender, EventArgs e)
     {
@@ -1856,30 +1946,30 @@ public partial class FrmOrdenCorte : Form
         }
 
         //actualiza el registro de la tabla de consumos parciales master [recarga los iniciales] EN LA UI.
-        var fila = Ds.Tables["DtRollid"]!.AsEnumerable()
-                            .FirstOrDefault(row => row.Field<string>("Roll_Id") == p.rollid);
+        //var fila = Ds.Tables["DtRollid"]!.AsEnumerable()
+        //                    .FirstOrDefault(row => row.Field<string>("Roll_Id") == p.rollid);
 
-        if (fila != null)
-        {
-            decimal cantidadActual = fila.Field<decimal>("largo_consumido");
-            decimal length_original = fila.Field<decimal>("lenght");
-            decimal cond = txt_real1_length.Text == "" ? 0 : Convert.ToDecimal(txt_real1_length.Text);
+        //if (fila != null)
+        //{
+        //    decimal cantidadActual = fila.Field<decimal>("largo_consumido");
+        //    decimal length_original = fila.Field<decimal>("lenght");
+        //    decimal cond = txt_real1_length.Text == "" ? 0 : Convert.ToDecimal(txt_real1_length.Text);
 
-            if (chk_desperdicio1.Checked)
-            {
-                decimal consumo_desperdicio = txt_matrest1_lenght.Text == "" ? 0 : Convert.ToDecimal(txt_matrest1_lenght.Text);
-                cond += consumo_desperdicio;
-            }
-            fila.SetField("largo_consumido", cantidadActual + cond);
-            fila.SetField("largo_restante", length_original - (cantidadActual + cond));
-            decimal restante = fila.Field<decimal>("largo_restante");
-            decimal consumos = (cantidadActual + cond);
+        //    if (chk_desperdicio1.Checked)
+        //    {
+        //        decimal consumo_desperdicio = txt_matrest1_lenght.Text == "" ? 0 : Convert.ToDecimal(txt_matrest1_lenght.Text);
+        //        cond += consumo_desperdicio;
+        //    }
+        //    fila.SetField("largo_consumido", cantidadActual + cond);
+        //    fila.SetField("largo_restante", length_original - (cantidadActual + cond));
+        //    decimal restante = fila.Field<decimal>("largo_restante");
+        //    decimal consumos = (cantidadActual + cond);
 
-            string estado = restante == 0 ? "Agotado" :
-                consumos == 0 ? "Completo" :
-                "Parcialmente Utilizado";
-            fila.SetField("estado", estado);
-        }
+        //    string estado = restante == 0 ? "Agotado" :
+        //        consumos == 0 ? "Completo" :
+        //        "Parcialmente Utilizado";
+        //    fila.SetField("estado", estado);
+        //}
 
         //colocar en disponible los rollos cortados.
         Service.RollosCortadosDispobnibles(txt_numeroOC.Text);
@@ -1891,13 +1981,14 @@ public partial class FrmOrdenCorte : Form
     private void Btn_vueltas_Click(object sender, EventArgs e)
     {
 
-        frm_ConfigVueltas frmConfigVueltas = new(Service)
+        Frm_ConfigVueltas frmConfigVueltas = new(Service)
         {
             Numero_Vueltas = Convert.ToInt32(txt_vueltas1.Value),
             Longitud_a_Cortar = Convert.ToDouble(txt_long_cortar.Text),
             OC = txt_numeroOC.Text,
             StatusConfigVueltas = chk_ConfigVueltas.Checked,
             EditMode = this.EditMode,
+            NumeroCortes = Convert.ToInt32(txt_cortes_ancho.Text.Trim())
         };
 
         frmConfigVueltas.ShowDialog();
@@ -1906,7 +1997,7 @@ public partial class FrmOrdenCorte : Form
         if (frmConfigVueltas.SaveChenged)
         {
             //actualizar la ui del grid de vueltas.
-            ActualizarUIConfigVueltas(frmConfigVueltas.Vueltas, frmConfigVueltas.Splice, frmConfigVueltas.VueltasModificadas);
+            ActualizarUIConfigVueltas(frmConfigVueltas.Vueltas, frmConfigVueltas.VueltasModificadas);
 
             double total_length = frmConfigVueltas.Total_Length_utilizado;
 
@@ -1928,7 +2019,12 @@ public partial class FrmOrdenCorte : Form
             }
         }
     }
-    private void ActualizarUIConfigVueltas(List<ConfigVueltas> ConfigVueltas, int splice, int[] VueltasModif)
+
+
+
+
+
+    private void ActualizarUIConfigVueltas(List<ConfigVueltas> ConfigVueltas, List<int> VueltasModif)
     {
 
         foreach (DataRowView row in BsDetails)
@@ -1938,7 +2034,7 @@ public partial class FrmOrdenCorte : Form
             if (VueltasModif.Contains(vueltamod))
             {
                 row["large"] = ConfigVueltas.FirstOrDefault(v => v.Vuelta_numero == vueltamod)!.Longitud_Cortar;
-                row["splice"] = splice;
+                row["splice"] = ConfigVueltas.FirstOrDefault(v => v.Vuelta_numero == vueltamod)!.Splice;
             }
 
         }
@@ -1972,9 +2068,93 @@ public partial class FrmOrdenCorte : Form
 
     private void Grid_items_DataError(object sender, DataGridViewDataErrorEventArgs e)
     {
-        if (e.Exception != null && e.Context == DataGridViewDataErrorContexts.Commit) 
+        if (e.Exception != null && e.Context == DataGridViewDataErrorContexts.Commit)
         {
             e.ThrowException = false;
         }
+    }
+
+    private void OrdenCorteToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        ReportService.Reporte_Orden_Corte(txt_numeroOC.Text, this, "RptOC.rdlc", "Reporte de Orden de Corte.");
+    }
+
+    private void Chk_two_rollid_CheckedChanged(object sender, EventArgs e)
+    {
+        if (EditMode == 0) return;
+
+        if (chk_two_master.Checked)
+        {
+            WorkflowMastersTwoRollid();
+        }
+    }
+    public void WorkflowMastersTwoRollid()
+    {
+        
+        btn_buscar_rollid2.Enabled = true;
+        txt_long_cortar2.ReadOnly = false;
+        txt_vueltas2.ReadOnly = false;
+        txt_real2_width.Enabled = true;
+        txt_real2_length.Enabled = true;
+        txt_matrest2_width.Enabled = true;
+        txt_matrest2_lenght.Enabled = true;
+    }
+    private void btn_buscar_rollid2_Click(object sender, EventArgs e)
+    {
+        Frm_RollId frmrollid = new(Service);
+        frmrollid.ShowDialog();
+
+        if (frmrollid.MasterRoll != null)
+        {
+            //Rollid_master = frmrollid.MasterRoll.Roll_Id;
+            txt_rollid_2.Text = Convert.ToString(frmrollid.MasterRoll.Roll_Id);
+            txt_width2.Text = frmrollid.MasterRoll.Width.ToString("N2");
+            txt_length2.Text = frmrollid.MasterRoll.Length.ToString("N2");
+            //txt_real1.Text = frmrollid.MasterRoll.Length.ToString("N2");
+            //txt_product_id.Text = frmrollid.MasterRoll.Product_Id;
+            //txt_product_name.Text = frmrollid.MasterRoll.Product_Name;
+            //TipoMovimiento = frmrollid.MasterRoll.tipo_mov;
+            //txt_tipo_master.Text = frmrollid.MasterRoll.tipo_mov;
+
+            //CALCULATE_TOTAL_WIDTH_CORTES();
+            //CALCULATE_MATERIAL_RESTANTE();
+
+            //this.Validate();
+
+            //txt_rollid_1.Focus();
+            //txt_rollid_1.Select();
+
+            //BsMaster.EndEdit();
+            //Ds.Tables["DtMaster"]!.AcceptChanges();
+            //BsMaster.ResetBindings(false);
+
+
+        }
+
+
+
+    }
+
+    private void txt_vueltas2_ValueChanged(object sender, EventArgs e)
+    {
+        if (EditMode == 0) return;
+        CalcularMateriaRestanteMaster2();
+    }
+    private void CalcularMateriaRestanteMaster2()
+    {
+        if (chk_two_master.Checked)
+        {
+            CalcularLONGITUDACORTAR();
+            double MatRes2 = Convert.ToDouble(txt_length2.Text) - Convert.ToDouble(txt_real2_length.Text);
+            txt_matrest2_lenght.Text = MatRes2.ToString("N2");
+            txt_matrest2_width.Text = txt_ancho_corte.Text;
+            CALCULAR_TOTAL_ROLLOS_CORTAR2();
+        }
+    }
+
+    private void txt_long_cortar2_KeyUp(object sender, KeyEventArgs e)
+    {
+        if (EditMode == 0) return;
+        CalcularMateriaRestanteMaster2();
     }
 }

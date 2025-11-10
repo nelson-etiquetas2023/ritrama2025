@@ -2,10 +2,11 @@
 <xs:schema id="DsConduce" targetNamespace="http://tempuri.org/DsConduce.xsd" xmlns:mstns="http://tempuri.org/DsConduce.xsd" xmlns="http://tempuri.org/DsConduce.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
   <xs:annotation>
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
-      <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="2" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
           <Connection ConnectionStringObject="Data Source=DATABASE-CENTER\RITRAMASRV01;Initial Catalog=RITRAMA2;User ID=Npino;Password=123;Encrypt=False;TrustServerCertificate=True" IsAppSettingsProperty="false" Modifier="Assembly" Name="database-center\ritramasrv01.RITRAMA2.dbo" ParameterPrefix="@" Provider="Microsoft.Data.SqlClient" />
           <Connection ConnectionStringObject="Data Source=DATABASE-CENTER\SERVER2017;Initial Catalog=RITRAMASQL2017;User ID=Npino;Password=123;Encrypt=False" IsAppSettingsProperty="false" Modifier="Assembly" Name="RITRAMASQL2017ConnectionString" ParameterPrefix="@" Provider="System.Data.SqlClient" />
+          <Connection ConnectionStringObject="Data Source=DATABASE-CENTER\SERVER2017;Initial Catalog=RITRAMASQL2017;Persist Security Info=True;User ID=Npino;Password=123;Encrypt=False;TrustServerCertificate=True" IsAppSettingsProperty="false" Modifier="Assembly" Name="ritrama2025" ParameterPrefix="@" Provider="Microsoft.Data.SqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DespachoTableAdapter" GeneratorDataComponentClassName="DespachoTableAdapter" Name="Despacho" UserDataComponentName="DespachoTableAdapter">
@@ -197,20 +198,21 @@ WHERE (a.numero = @Orden_MatPrima)</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="orden_corteTableAdapter" GeneratorDataComponentClassName="orden_corteTableAdapter" Name="orden_corte" UserDataComponentName="orden_corteTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="database-center\ritramasrv01.RITRAMA2.dbo" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="ritrama2025" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT a.numero, a.fecha, a.fecha_produccion, a.product_id, c.Product_Name AS producto, b.unique_code, b.roll_number, b.splice, b.width, b.large, b.msi, b.roll_id, b.code_person, b.status, d.nombre AS operador, 
     e.Customer_Name, a.width_1 AS master_width, a.lenght_1 AS master_length, a.longitud_cortar AS master_corte_largo, a.cortes_ancho AS master_cortes_ancho, a.cortes_largo AS master_vueltas, 
-    a.cant_rollos AS master_cant_rollos, a.util1_real_width AS master_width_real, a.util1_real_lenght AS master_length_real, a.rest1_width AS master_width_restante, a.rest1_lenght AS master_length_restabnte, a.step
+    a.cant_rollos AS master_cant_rollos, a.util1_real_width AS master_width_real, a.util1_real_lenght AS master_length_real, a.rest1_width AS master_width_restante, a.rest1_lenght AS master_length_restabnte, a.step, 
+    a.rollid_2, a.width_2, a.lenght_2, a.sellOrder, a.Ubicacion, a.TwoMasters, a.vueltas2, a.longitud_cortar2, a.cantidad_rollos2, a.util2_real_width, a.util2_real_lenght,rest2_width,rest2_lenght
 FROM orden_corte AS a LEFT OUTER JOIN
     rolls_details AS b ON a.numero = b.numero LEFT OUTER JOIN
     producto AS c ON a.product_id = c.Product_ID LEFT OUTER JOIN
     operadores AS d ON a.operador_id = d.operador_id LEFT OUTER JOIN
-    Customer AS e ON a.customer_id = e.customer_id
+    Customer AS e ON a.customer_id = e.Customer_Id
 WHERE (a.numero = @numero_oc)</CommandText>
                     <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="numero_oc" ColumnName="numero" DataSourceName="RITRAMA2.dbo.orden_corte" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@numero_oc" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="numero" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="numero_oc" ColumnName="numero" DataSourceName="RITRAMASQL2017.dbo.orden_corte" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@numero_oc" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="numero" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </SelectCommand>
@@ -244,6 +246,19 @@ WHERE (a.numero = @numero_oc)</CommandText>
               <Mapping SourceColumn="master_width_restante" DataSetColumn="master_width_restante" />
               <Mapping SourceColumn="master_length_restabnte" DataSetColumn="master_length_restabnte" />
               <Mapping SourceColumn="step" DataSetColumn="step" />
+              <Mapping SourceColumn="sellOrder" DataSetColumn="sellOrder" />
+              <Mapping SourceColumn="rollid_2" DataSetColumn="rollid_2" />
+              <Mapping SourceColumn="width_2" DataSetColumn="width_2" />
+              <Mapping SourceColumn="lenght_2" DataSetColumn="lenght_2" />
+              <Mapping SourceColumn="Ubicacion" DataSetColumn="Ubicacion" />
+              <Mapping SourceColumn="TwoMasters" DataSetColumn="TwoMasters" />
+              <Mapping SourceColumn="vueltas2" DataSetColumn="vueltas2" />
+              <Mapping SourceColumn="longitud_cortar2" DataSetColumn="longitud_cortar2" />
+              <Mapping SourceColumn="cantidad_rollos2" DataSetColumn="cantidad_rollos2" />
+              <Mapping SourceColumn="util2_real_width" DataSetColumn="util2_real_width" />
+              <Mapping SourceColumn="util2_real_lenght" DataSetColumn="util2_real_lenght" />
+              <Mapping SourceColumn="rest2_width" DataSetColumn="rest2_width" />
+              <Mapping SourceColumn="rest2_lenght" DataSetColumn="rest2_lenght" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -804,7 +819,37 @@ SELECT num, width, lenght, msi, orden, code_person FROM Cortes WHERE (num = @num
               <xs:element name="master_width_restante" msprop:Generator_ColumnPropNameInTable="master_width_restanteColumn" msprop:Generator_ColumnPropNameInRow="master_width_restante" msprop:Generator_UserColumnName="master_width_restante" msprop:Generator_ColumnVarNameInTable="columnmaster_width_restante" type="xs:decimal" minOccurs="0" />
               <xs:element name="master_length_restabnte" msprop:Generator_ColumnPropNameInTable="master_length_restabnteColumn" msprop:Generator_ColumnPropNameInRow="master_length_restabnte" msprop:Generator_UserColumnName="master_length_restabnte" msprop:Generator_ColumnVarNameInTable="columnmaster_length_restabnte" type="xs:decimal" minOccurs="0" />
               <xs:element name="step" msprop:Generator_ColumnPropNameInTable="stepColumn" msprop:Generator_ColumnPropNameInRow="step" msprop:Generator_UserColumnName="step" msprop:Generator_ColumnVarNameInTable="columnstep" type="xs:int" minOccurs="0" />
-              <xs:element name="ubicacion" msprop:Generator_ColumnPropNameInTable="ubicacionColumn" msprop:Generator_ColumnPropNameInRow="ubicacion" msprop:Generator_UserColumnName="ubicacion" msprop:Generator_ColumnVarNameInTable="columnubicacion" type="xs:string" minOccurs="0" />
+              <xs:element name="sellOrder" msprop:Generator_ColumnPropNameInTable="sellOrderColumn" msprop:Generator_ColumnPropNameInRow="sellOrder" msprop:Generator_UserColumnName="sellOrder" msprop:Generator_ColumnVarNameInTable="columnsellOrder" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="rollid_2" msprop:Generator_ColumnPropNameInRow="rollid_2" msprop:Generator_ColumnPropNameInTable="rollid_2Column" msprop:Generator_ColumnVarNameInTable="columnrollid_2" msprop:Generator_UserColumnName="rollid_2" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="width_2" msprop:Generator_ColumnPropNameInRow="width_2" msprop:Generator_ColumnPropNameInTable="width_2Column" msprop:Generator_ColumnVarNameInTable="columnwidth_2" msprop:Generator_UserColumnName="width_2" type="xs:decimal" minOccurs="0" />
+              <xs:element name="lenght_2" msprop:Generator_ColumnPropNameInRow="lenght_2" msprop:Generator_ColumnPropNameInTable="lenght_2Column" msprop:Generator_ColumnVarNameInTable="columnlenght_2" msprop:Generator_UserColumnName="lenght_2" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Ubicacion" msprop:Generator_ColumnPropNameInRow="Ubicacion" msprop:Generator_ColumnPropNameInTable="UbicacionColumn" msprop:Generator_ColumnVarNameInTable="columnUbicacion" msprop:Generator_UserColumnName="Ubicacion">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TwoMasters" msprop:Generator_ColumnPropNameInRow="TwoMasters" msprop:Generator_ColumnPropNameInTable="TwoMastersColumn" msprop:Generator_ColumnVarNameInTable="columnTwoMasters" msprop:Generator_UserColumnName="TwoMasters" type="xs:boolean" />
+              <xs:element name="vueltas2" msprop:Generator_ColumnPropNameInRow="vueltas2" msprop:Generator_ColumnPropNameInTable="vueltas2Column" msprop:Generator_ColumnVarNameInTable="columnvueltas2" msprop:Generator_UserColumnName="vueltas2" type="xs:int" />
+              <xs:element name="longitud_cortar2" msprop:Generator_ColumnPropNameInRow="longitud_cortar2" msprop:Generator_ColumnPropNameInTable="longitud_cortar2Column" msprop:Generator_ColumnVarNameInTable="columnlongitud_cortar2" msprop:Generator_UserColumnName="longitud_cortar2" type="xs:decimal" />
+              <xs:element name="cantidad_rollos2" msprop:Generator_ColumnPropNameInRow="cantidad_rollos2" msprop:Generator_ColumnPropNameInTable="cantidad_rollos2Column" msprop:Generator_ColumnVarNameInTable="columncantidad_rollos2" msprop:Generator_UserColumnName="cantidad_rollos2" type="xs:int" />
+              <xs:element name="util2_real_width" msprop:Generator_ColumnPropNameInRow="util2_real_width" msprop:Generator_ColumnPropNameInTable="util2_real_widthColumn" msprop:Generator_ColumnVarNameInTable="columnutil2_real_width" msprop:Generator_UserColumnName="util2_real_width" type="xs:decimal" minOccurs="0" />
+              <xs:element name="util2_real_lenght" msprop:Generator_ColumnPropNameInRow="util2_real_lenght" msprop:Generator_ColumnPropNameInTable="util2_real_lenghtColumn" msprop:Generator_ColumnVarNameInTable="columnutil2_real_lenght" msprop:Generator_UserColumnName="util2_real_lenght" type="xs:decimal" minOccurs="0" />
+              <xs:element name="rest2_width" msprop:Generator_ColumnPropNameInRow="rest2_width" msprop:Generator_ColumnPropNameInTable="rest2_widthColumn" msprop:Generator_ColumnVarNameInTable="columnrest2_width" msprop:Generator_UserColumnName="rest2_width" type="xs:decimal" minOccurs="0" />
+              <xs:element name="rest2_lenght" msprop:Generator_ColumnPropNameInRow="rest2_lenght" msprop:Generator_ColumnPropNameInTable="rest2_lenghtColumn" msprop:Generator_ColumnVarNameInTable="columnrest2_lenght" msprop:Generator_UserColumnName="rest2_lenght" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

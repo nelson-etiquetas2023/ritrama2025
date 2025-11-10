@@ -28,7 +28,7 @@ namespace Ritrama2025.Helpers
             }
             //crear una nueva instancia usando DI
             var form = ServiceLocator.Get<T>();
-            form.MdiParent = mdiParent;
+            //form.MdiParent = mdiParent;
             form.StartPosition = FormStartPosition.Manual;
             form.Location = new Point(0, 0);
             form.WindowState = FormWindowState.Normal;

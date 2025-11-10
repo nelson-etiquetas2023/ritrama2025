@@ -1,9 +1,7 @@
-﻿using DocumentFormat.OpenXml.Wordprocessing;
-using Ritrama2025.Models;
+﻿using Ritrama2025.Models;
 using Ritrama2025.Services.ProductsService;
 using System.Data;
 using Ritrama2025.Forms.Buscadores;
-using DocumentFormat.OpenXml.Office2013.Excel;
 
 namespace Ritrama2025.Forms
 {
@@ -24,6 +22,8 @@ namespace Ritrama2025.Forms
 
         private void FrmProductos_Load(object sender, EventArgs e)
         {
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(155, 45);
             GetProductsAsync();
             DataBindindControls();
             Refreshform();

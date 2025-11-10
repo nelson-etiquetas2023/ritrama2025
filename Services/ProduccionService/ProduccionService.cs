@@ -27,9 +27,6 @@ public class ProduccionService : IProduccionService
             StringConnex = Config.GetSection("ConnectionStringsEnvironment")[ambiente]!;
         }
     }
-
-
-
     public List<ConfigVueltas> GetConfigVueltas(string oc)
     {
         List<ConfigVueltas> lista = [];
@@ -42,7 +39,7 @@ public class ProduccionService : IProduccionService
             using SqlCommand comando = new()
             {
                 Connection = conn,
-                CommandText = "SELECT orden,num_vuelta,longitud_cortar FROM vueltas WHERE orden=@p1",
+                CommandText = "SELECT orden,num_vuelta,longitud_cortar,rollos,splice FROM vueltas WHERE orden=@p1",
                 CommandType = CommandType.Text
             };
             comando.Parameters.AddWithValue("@p1", oc);
@@ -56,7 +53,9 @@ public class ProduccionService : IProduccionService
                 {
                     OrdenCorte = reader.GetString(reader.GetOrdinal("orden")),
                     Vuelta_numero = reader.GetInt32(reader.GetOrdinal("num_vuelta")),
-                    Longitud_Cortar = Convert.ToDouble(reader["longitud_cortar"])
+                    Longitud_Cortar = Convert.ToDouble(reader["longitud_cortar"]),
+                    Rollos = reader.GetString(reader.GetOrdinal("rollos")),
+                    Splice = reader.GetInt32(reader.GetOrdinal("splice")),
                 };
                 lista.Add(item);
             }  
@@ -67,7 +66,6 @@ public class ProduccionService : IProduccionService
         }
         return lista;
     }
-
     public void UpdateConfigVueltas(List<ConfigVueltas> lista)
     {
         try
@@ -93,25 +91,36 @@ public class ProduccionService : IProduccionService
             MessageBox.Show("error al actualizar las configuracion de las vueltas..." + ex.Message);
         }
     }
-
-
     public void GuardarConfigVueltas(List<ConfigVueltas> lista)
     {
         try
         {
             SqlConnection conn = new(StringConnex);
             conn.Open();
+
+            SqlCommand ComandoClear = new()
+            {
+                Connection = conn,
+                CommandText = "DELETE FROM vueltas WHERE orden=@p1",
+                CommandType = CommandType.Text
+            };
+            ComandoClear.Parameters.AddWithValue("@p1", lista.FirstOrDefault()!.OrdenCorte!);
+            ComandoClear.ExecuteNonQuery();
+
+
             foreach (var item in lista) 
             {
                 SqlCommand comando = new()
                 {
                     Connection = conn,
-                    CommandText = "INSERT INTO vueltas (orden,num_vuelta,longitud_cortar) VALUES(@p1,@p2,@p3)",
+                    CommandText = "INSERT INTO vueltas (orden,num_vuelta,longitud_cortar,rollos,splice) VALUES(@p1,@p2,@p3,@p4,@p5)",
                     CommandType = CommandType.Text
                 };
                 comando.Parameters.AddWithValue("@p1", item.OrdenCorte);
                 comando.Parameters.AddWithValue("@p2", item.Vuelta_numero);
                 comando.Parameters.AddWithValue("@p3", item.Longitud_Cortar);
+                comando.Parameters.AddWithValue("@p4", item.Rollos);
+                comando.Parameters.AddWithValue("@p5", item.Splice);
                 comando.ExecuteNonQuery();
             }
         }
@@ -121,6 +130,17 @@ public class ProduccionService : IProduccionService
 
         }
     }
+
+
+    public async Task<DataTable> LoadDataRollID()
+    {
+        // Se elimina la declaración innecesaria de DtRolliod
+        // Se asegura que DtRollid no reciba una posible referencia nula
+        var dt = await CargarTablaAsync(R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_ROLL_ID, false, null, "DtRollid", true);
+        DtRollid = dt ?? new DataTable("DtRollid");
+        return DtRollid;
+    }
+                      
 
     private async Task<DataTable?> CargarTablaAsync(
         string sqlQuery,
@@ -184,7 +204,7 @@ public class ProduccionService : IProduccionService
                 new { Nombre = "DtOperator", Sql = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_OPERATOR },
                 new { Nombre = "DtCustomer", Sql = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_CUSTOMER },
                 new { Nombre = "DtCortes", Sql = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_OC_CORTES },
-                new { Nombre = "DtRollid", Sql = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_ROLL_ID },
+                //new { Nombre = "DtRollid", Sql = R.QUERY.PRODUCTION.SQL_QUERY_SELECT_LOAD_ROLL_ID },
 
             };
 
@@ -241,7 +261,7 @@ public class ProduccionService : IProduccionService
             SqlCommand comando = new()
             {
                 Connection = conn,
-                CommandText = "INSERT INTO orden_corte (numero,fecha,fecha_produccion,product_id,rollid_1,width_1,lenght_1,rollid_2,width_2,lenght_2,anulada,procesado,CloseDocument,tot_inch_ancho,longitud_cortar,cortes_ancho,cortes_largo,cant_rollos,decartable1_pies,lenght_master_real,util1_real_width,util1_real_lenght,descartable2_pies" + ",util2_real_width,util2_real_lenght,lenght_master_real2,rest1_width,rest1_lenght,rest2_width,rest2_lenght,cant_rollos2,cortes_largo2,step,lastupdate,fecha_autorize,toautorize,notes,tipo_mov1,tipo_mov2,plus1_pies,plus2_pies,rollo_unificado,length_entrada,real_usado_r1,real_usado_r2,restante_rollid1,restante_rollid2,resta_entrada,total_salida,lenght_entrada,customer_id,operador_id,SellOrder,desperdicio,master_tipo,ubicacion) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27,@p28,@p29,@p30,@p31,@p32,@p33,@p34,@p35,@p36,@p37,@p38,@p39,@p40,@p41,@p44,@p45,@p46,@p47,@p48,@p49,@p50,@p51,@p52,@customer_id,@operador_id,@SellOrder,@desper,@MasterTipo,@ubic)",
+                CommandText = "INSERT INTO orden_corte (numero,fecha,fecha_produccion,product_id,rollid_1,width_1,lenght_1,rollid_2,width_2,lenght_2,anulada,procesado,CloseDocument,tot_inch_ancho,longitud_cortar,cortes_ancho,cortes_largo,cant_rollos,decartable1_pies,lenght_master_real,util1_real_width,util1_real_lenght,descartable2_pies" + ",util2_real_width,util2_real_lenght,lenght_master_real2,rest1_width,rest1_lenght,rest2_width,rest2_lenght,cant_rollos2,cortes_largo2,step,lastupdate,fecha_autorize,toautorize,notes,tipo_mov1,tipo_mov2,plus1_pies,plus2_pies,rollo_unificado,length_entrada,real_usado_r1,real_usado_r2,restante_rollid1,restante_rollid2,resta_entrada,total_salida,lenght_entrada,customer_id,operador_id,SellOrder,desperdicio,master_tipo,ubicacion,TwoMasters,longitud_cortar2,vueltas2,cantidad_rollos2) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27,@p28,@p29,@p30,@p31,@p32,@p33,@p34,@p35,@p36,@p37,@p38,@p39,@p40,@p41,@p44,@p45,@p46,@p47,@p48,@p49,@p50,@p51,@p52,@customer_id,@operador_id,@SellOrder,@desper,@MasterTipo,@ubic,@twomasters,@longcortar2,@vueltas2,@cantrollos2)",
                 CommandType = CommandType.Text
             };
             conn.Open();
@@ -299,6 +319,10 @@ public class ProduccionService : IProduccionService
             comando.Parameters.AddWithValue("@desper", OrdenCorte.Desperdicio);
             comando.Parameters.AddWithValue("@MasterTipo", OrdenCorte.Master_Tipo);
             comando.Parameters.AddWithValue("@ubic", OrdenCorte.Ubicacion);
+            comando.Parameters.AddWithValue("@twomasters", OrdenCorte.TwoMasters);
+            comando.Parameters.AddWithValue("@longcortar2", OrdenCorte.Longitud_Cortar2);
+            comando.Parameters.AddWithValue("@vueltas2", OrdenCorte.Vueltas2);
+            comando.Parameters.AddWithValue("@cantrollos2", OrdenCorte.Cantidad_rollos2);
             comando.Parameters.Add(new SqlParameter("@customer_id", SqlDbType.UniqueIdentifier)
             {
                 Value = OrdenCorte.Customer_Id
@@ -733,7 +757,7 @@ public class ProduccionService : IProduccionService
     {
         try
         {
-            var tabla = new { nameTabla = "MasterDetailsInic", sql = R.QUERY.PRODUCTION.SQL_SELECT_QUERY_LOAD_DETAILS_MASTER_INICIALES };
+            var tabla = new { nameTabla = "orden_corte", sql = R.QUERY.PRODUCTION.SQL_SELECT_QUERY_LOAD_DETAILS_MASTER_INICIALES_START_TRANSACTIONS };
 
             SqlParameter[] parametros =
             [

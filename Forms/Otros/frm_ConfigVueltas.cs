@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace Ritrama2025.Forms.Otros
 {
-    public partial class frm_ConfigVueltas : Form
+    public partial class Frm_ConfigVueltas : Form
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Numero_Vueltas { get; set; }
@@ -29,8 +29,11 @@ namespace Ritrama2025.Forms.Otros
         public int Splice { get; set; } = 0;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public int[] VueltasModificadas { get; set; } = [];
-        public frm_ConfigVueltas(IProduccionService produccionService)
+        public List<int> VueltasModificadas { get; set; } = [];
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int NumeroCortes { get; set; } = 0;
+        public Frm_ConfigVueltas(IProduccionService produccionService)
         {
             InitializeComponent();
             ProduccionService = produccionService;
@@ -56,17 +59,29 @@ namespace Ritrama2025.Forms.Otros
             {
                 //Armar la ConfigVueltas desde cero de la forma predeterminada. 
                 Total_Length_utilizado = Numero_Vueltas * Longitud_a_Cortar;
-                for (int i = 1; i <= Numero_Vueltas; i++)
+                
+                for (int v = 1; v <= Numero_Vueltas; v++)
                 {
-                    Vueltas.Add(new ConfigVueltas { OrdenCorte = OC, Vuelta_numero = i, Longitud_Cortar = Longitud_a_Cortar });
+                    int inicio = (v - 1) * NumeroCortes + 1;
+                    int fin = v * NumeroCortes;
+
+                    Vueltas.Add(new ConfigVueltas { OrdenCorte = OC, Vuelta_numero = v, Longitud_Cortar = Longitud_a_Cortar, Rollos = $"{inicio}-{fin}"});
+
                 }
             }
-
             Grid_ConfigVueltas.DataSource = Vueltas;
             Grid_ConfigVueltas.Columns[0].Visible = false;
+            Grid_ConfigVueltas.Columns[1].HeaderText = "Vueltas";
+            Grid_ConfigVueltas.Columns[2].HeaderText = "No. Rollos";
+            Grid_ConfigVueltas.Columns[3].HeaderText = "Length";
+            Grid_ConfigVueltas.Columns[4].HeaderText = "Splice";
+            Grid_ConfigVueltas.Columns[1].ReadOnly = true;
+            Grid_ConfigVueltas.Columns[2].ReadOnly = true;
+            Grid_ConfigVueltas.Columns[1].Width = 60;
+            Grid_ConfigVueltas.Columns[2].Width = 60;
+            Grid_ConfigVueltas.Columns[3].Width = 70;
+            Grid_ConfigVueltas.Columns[4].Width = 70;
             txt_Total_Utilizado.Text = Total_Length_utilizado.ToString("N2");
-            txt_vueltas_splice.ReadOnly = false;
-            txt_vueltas_splice.Text = "0";
 
         }
 
@@ -97,7 +112,6 @@ namespace Ritrama2025.Forms.Otros
             Total_Length_utilizado = Convert.ToDouble(txt_Total_Utilizado.Text);
 
             this.SaveChenged = true;
-            this.Splice = txt_vueltas_splice.Text != null ? Convert.ToInt32(txt_vueltas_splice.Text) : 0;
             this.Close();
         }
 
@@ -105,15 +119,14 @@ namespace Ritrama2025.Forms.Otros
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
 
-            if (e.ColumnIndex == 2) 
+            DataGridViewRow filamodif = Grid_ConfigVueltas.Rows[e.RowIndex];
+            filamodif.DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+
+
+            int numVueltaMod = Convert.ToInt32(filamodif.Cells[1].Value);
+            if (!VueltasModificadas.Contains(numVueltaMod)) 
             {
-                var celda = Grid_ConfigVueltas.Rows[e.RowIndex].Cells[e.ColumnIndex];
-
-                //guardar la celda modificada en el HashSet
-                VueltasModificadas = VueltasModificadas.Append(e.RowIndex+1).ToArray();
-
-                //feedback visual
-                celda.Style.BackColor = Color.Red;
+                VueltasModificadas.Add(numVueltaMod);
             }
         }
     }

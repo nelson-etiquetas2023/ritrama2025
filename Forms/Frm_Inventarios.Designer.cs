@@ -176,7 +176,7 @@
             btn_delete_master.Text = "Eliminar Master";
             btn_delete_master.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_delete_master.UseVisualStyleBackColor = true;
-            btn_delete_master.Click += btn_delete_master_Click;
+            btn_delete_master.Click += Btn_delete_master_Click;
             // 
             // bot_printLabel
             // 

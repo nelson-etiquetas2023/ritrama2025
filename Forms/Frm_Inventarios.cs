@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Drawing;
-using Ritrama2025.Forms.Otros;
+﻿using Ritrama2025.Forms.Otros;
 using Ritrama2025.LabelSdk;
 using Ritrama2025.Models;
 using Ritrama2025.Services.CommonService;
@@ -24,7 +23,7 @@ public partial class Frm_Inventarios : Form
     private DataTable? DtRollosCortados { get; set; }
     private DataView Dv { get; set; } = new();
     private DataView DvRollos { get; set; } = new();
-    List<int> IndexSelects { get; set; } = new();
+    List<int> IndexSelects { get; set; } = [];
 
     public Frm_Inventarios(IInventarioService inventarioService, IProduccionService produccionService, IExportDataService exportDataService, IReportsService reportService)
     {
@@ -42,6 +41,8 @@ public partial class Frm_Inventarios : Form
 
     private void Frm_Inventarios_Load(object sender, EventArgs e)
     {
+        this.StartPosition = FormStartPosition.Manual;
+        this.Location = new System.Drawing.Point(155, 45);
         DefColumnsSheetExcel();
         BindingMasterGrid();
         DefColumnsGridRollosCortados();
@@ -872,12 +873,12 @@ public partial class Frm_Inventarios : Form
 
     }
 
-    private void btn_delete_master_Click(object sender, EventArgs e)
+    private void Btn_delete_master_Click(object sender, EventArgs e)
     {
         foreach (DataGridViewRow fila in GridMaster.Rows)
         {
             bool RowSelect = Convert.ToBoolean(fila.Cells["colSelPrint"].Value);
-            bool estadoCompleto = fila.Cells["estado"].Value?.ToString()!.ToUpper() == "COMPLETO" ? true : false;
+            bool estadoCompleto = fila.Cells["estado"].Value?.ToString()!.ToUpper() == "COMPLETO";
 
             if (RowSelect)
             {
@@ -897,7 +898,7 @@ public partial class Frm_Inventarios : Form
         MessageBox.Show("Proceso terminado...");
     }
 
-    private void label13_Click(object sender, EventArgs e)
+    private void Label13_Click(object sender, EventArgs e)
     {
 
     }

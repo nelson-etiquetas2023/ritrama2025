@@ -31,9 +31,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             panel1 = new Panel();
             OPC_MENU_LABELS = new Button();
-            panel_foto = new Panel();
-            lbl_user_name = new Label();
+            panel_DATA = new Panel();
+            panel2 = new Panel();
+            label4 = new Label();
+            LAB_MODE_RUN = new Label();
             pictureBox1 = new PictureBox();
+            panel_version_software = new Panel();
+            label3 = new Label();
+            label2 = new Label();
+            label1 = new Label();
+            lbl_user_name = new Label();
             button4 = new Button();
             button3 = new Button();
             button2 = new Button();
@@ -44,15 +51,17 @@
             bot_despacho = new Button();
             bot_ordencorte = new Button();
             panel1.SuspendLayout();
-            panel_foto.SuspendLayout();
+            panel_DATA.SuspendLayout();
+            panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panel_version_software.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.Gray;
             panel1.Controls.Add(OPC_MENU_LABELS);
-            panel1.Controls.Add(panel_foto);
+            panel1.Controls.Add(panel_DATA);
             panel1.Controls.Add(button4);
             panel1.Controls.Add(button3);
             panel1.Controls.Add(button2);
@@ -65,7 +74,7 @@
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(144, 924);
+            panel1.Size = new Size(144, 1057);
             panel1.TabIndex = 0;
             // 
             // OPC_MENU_LABELS
@@ -84,41 +93,111 @@
             OPC_MENU_LABELS.UseVisualStyleBackColor = true;
             OPC_MENU_LABELS.Click += OPC_MENU_LABELS_Click;
             // 
-            // panel_foto
+            // panel_DATA
             // 
-            panel_foto.BackColor = Color.RoyalBlue;
-            panel_foto.Controls.Add(lbl_user_name);
-            panel_foto.Controls.Add(pictureBox1);
-            panel_foto.Dock = DockStyle.Bottom;
-            panel_foto.Location = new Point(0, 720);
-            panel_foto.Name = "panel_foto";
-            panel_foto.Size = new Size(144, 204);
-            panel_foto.TabIndex = 10;
+            panel_DATA.BackColor = Color.DimGray;
+            panel_DATA.Controls.Add(panel2);
+            panel_DATA.Controls.Add(pictureBox1);
+            panel_DATA.Controls.Add(panel_version_software);
+            panel_DATA.Controls.Add(lbl_user_name);
+            panel_DATA.Location = new Point(0, 706);
+            panel_DATA.Name = "panel_DATA";
+            panel_DATA.Size = new Size(144, 328);
+            panel_DATA.TabIndex = 10;
             // 
-            // lbl_user_name
+            // panel2
             // 
-            lbl_user_name.BackColor = Color.RoyalBlue;
-            lbl_user_name.Dock = DockStyle.Top;
-            lbl_user_name.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbl_user_name.ForeColor = Color.Cornsilk;
-            lbl_user_name.Location = new Point(0, 0);
-            lbl_user_name.Name = "lbl_user_name";
-            lbl_user_name.Size = new Size(144, 18);
-            lbl_user_name.TabIndex = 11;
-            lbl_user_name.Text = "Usuario : Nelson Pino";
-            lbl_user_name.TextAlign = ContentAlignment.MiddleCenter;
+            panel2.Anchor = AnchorStyles.None;
+            panel2.BackColor = SystemColors.ActiveCaption;
+            panel2.Controls.Add(label4);
+            panel2.Controls.Add(LAB_MODE_RUN);
+            panel2.Location = new Point(0, 3);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(144, 79);
+            panel2.TabIndex = 1;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(5, 9);
+            label4.Name = "label4";
+            label4.Size = new Size(99, 15);
+            label4.TabIndex = 3;
+            label4.Text = "Modo Ejecucion :";
+            // 
+            // LAB_MODE_RUN
+            // 
+            LAB_MODE_RUN.AutoSize = true;
+            LAB_MODE_RUN.Font = new Font("Impact", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            LAB_MODE_RUN.Location = new Point(3, 37);
+            LAB_MODE_RUN.Name = "LAB_MODE_RUN";
+            LAB_MODE_RUN.Size = new Size(63, 26);
+            LAB_MODE_RUN.TabIndex = 11;
+            LAB_MODE_RUN.Text = "MODE.";
             // 
             // pictureBox1
             // 
             pictureBox1.BackColor = Color.Gray;
-            pictureBox1.Dock = DockStyle.Fill;
+            pictureBox1.Dock = DockStyle.Bottom;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Location = new Point(0, 81);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(144, 204);
+            pictureBox1.Size = new Size(144, 124);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
+            // 
+            // panel_version_software
+            // 
+            panel_version_software.BackColor = Color.SteelBlue;
+            panel_version_software.Controls.Add(label3);
+            panel_version_software.Controls.Add(label2);
+            panel_version_software.Controls.Add(label1);
+            panel_version_software.Dock = DockStyle.Bottom;
+            panel_version_software.Location = new Point(0, 205);
+            panel_version_software.Name = "panel_version_software";
+            panel_version_software.Size = new Size(144, 105);
+            panel_version_software.TabIndex = 1;
+            // 
+            // label3
+            // 
+            label3.Location = new Point(13, 58);
+            label3.Name = "label3";
+            label3.Size = new Size(97, 31);
+            label3.TabIndex = 2;
+            label3.Text = "Compilacion: 6-11-2025 11:19";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Bowlby One SC", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Location = new Point(3, 22);
+            label2.Name = "label2";
+            label2.Size = new Size(82, 38);
+            label2.TabIndex = 1;
+            label2.Text = "1.00";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(3, 7);
+            label1.Name = "label1";
+            label1.Size = new Size(97, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Version Software:";
+            // 
+            // lbl_user_name
+            // 
+            lbl_user_name.BackColor = Color.RoyalBlue;
+            lbl_user_name.Dock = DockStyle.Bottom;
+            lbl_user_name.Font = new Font("Noto Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_user_name.ForeColor = Color.Cornsilk;
+            lbl_user_name.Location = new Point(0, 310);
+            lbl_user_name.Name = "lbl_user_name";
+            lbl_user_name.Size = new Size(144, 18);
+            lbl_user_name.TabIndex = 11;
+            lbl_user_name.Text = "Usuario : Nelson Pino";
+            lbl_user_name.TextAlign = ContentAlignment.TopCenter;
             // 
             // button4
             // 
@@ -134,6 +213,7 @@
             button4.Text = "Reportes";
             button4.TextImageRelation = TextImageRelation.ImageBeforeText;
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // button3
             // 
@@ -268,21 +348,25 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.Window;
-            ClientSize = new Size(1279, 924);
+            AutoScroll = true;
+            BackColor = SystemColors.WindowFrame;
+            ClientSize = new Size(1279, 1057);
             Controls.Add(panel1);
             Font = new Font("Segoe UI", 8.830189F);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            IsMdiContainer = true;
             Name = "Main";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "SISTEMA DE PRODUCCION EMPRESA FEDRIGONI VERSION 2025 [CREADO POR ETIQUETAS.COM.DO - SANTO DOMINGO REPUBLICA DOMINICANA - SOPORTE TECNICO: 829-8805472]";
             WindowState = FormWindowState.Maximized;
             Load += Main_Load;
             panel1.ResumeLayout(false);
-            panel_foto.ResumeLayout(false);
+            panel_DATA.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            panel_version_software.ResumeLayout(false);
+            panel_version_software.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -298,9 +382,16 @@
         private Button button1;
         private Button button3;
         private Button button4;
-        private Panel panel_foto;
+        private Panel panel_DATA;
         private PictureBox pictureBox1;
         private Label lbl_user_name;
         private Button OPC_MENU_LABELS;
+        private Panel panel_version_software;
+        private Label label2;
+        private Label label1;
+        private Label label3;
+        private Panel panel2;
+        private Label LAB_MODE_RUN;
+        private Label label4;
     }
 }

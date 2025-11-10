@@ -555,6 +555,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
             Name = "FrmProductos";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Administrar Productos del Sistemas";
             FormClosing += FrmProductos_FormClosing;
             Load += FrmProductos_Load;

@@ -41,13 +41,14 @@ namespace Ritrama2025.Forms.Otros
             for (int i = 1; i < Grid_Items.Rows.Count + 1; i++)
             {
                 Grid_Items.Rows[i - 1].Cells["item"].Value = i.ToString();
-                total_consumo += Convert.ToDouble(Grid_Items.Rows[i - 1].Cells["consumo"].Value);
-                //rollos += Convert.ToInt32(Grid_Items.Rows[i - 1].Cells["cant_rollos"].Value);
+                total_consumo += Convert.ToDouble(Grid_Items.Rows[i - 1].Cells["consumo"].Value)+
+                    Convert.ToDouble(Grid_Items.Rows[i - 1].Cells["monto_des"].Value);
+                rollos += Convert.ToInt32(Grid_Items.Rows[i - 1].Cells["cant_rollos"].Value);
 
             }
             txt_total.Text = total_consumo.ToString("N2");
             txt_rollos_Producc.Text = rollos.ToString();
-            RowCounter.Text = "Numero de Filas: " + Grid_Items.Rows.Count.ToString();
+            RowCounter.Text = "Documentos Relacionados : " + Grid_Items.Rows.Count.ToString();
         }
 
         private async Task LoadData()
@@ -66,6 +67,7 @@ namespace Ritrama2025.Forms.Otros
             CommonService.ADD_COLUMN_GRID("cant_rollos", 60, "Cant. Rollos", "cant_rollos", Grid_Items);
             CommonService.ADD_COLUMN_GRID("customer_name", 130, "Cliente", "customer_name", Grid_Items);
             CommonService.ADD_COLUMN_GRID("fecha", 100, "Fecha Registro", "fecha_reg", Grid_Items);
+            CommonService.ADD_COLUMN_GRID("monto_des", 60, "Monto desperdicio", "monto_desperdicio", Grid_Items);
             var colCheck = new DataGridViewCheckBoxColumn
             {
                 Name = "chk_desper",

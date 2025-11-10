@@ -48,6 +48,8 @@ namespace Ritrama2025.Forms
 
         private void FrmMateriaPrima_Load(object sender, EventArgs e)
         {
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(155, 45);
             LoadDataAsync();
             BindDataSource();
             BindingControls();

@@ -77,6 +77,7 @@
             GridItems.AllowUserToAddRows = false;
             GridItems.AllowUserToDeleteRows = false;
             GridItems.AllowUserToResizeRows = false;
+            GridItems.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             GridItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             GridItems.Location = new Point(4, 201);
             GridItems.MultiSelect = false;
@@ -86,6 +87,7 @@
             GridItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             GridItems.Size = new Size(907, 382);
             GridItems.TabIndex = 2;
+            GridItems.CellFormatting += GridItems_CellFormatting;
             GridItems.CellMouseDoubleClick += GridItems_CellMouseDoubleClick;
             // 
             // CONTADOR_REGISTROS

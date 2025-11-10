@@ -129,6 +129,10 @@
           <DataField>ubicacion</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="SellOrder">
+          <DataField>SellOrder</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DsConduce</rd:DataSetName>
@@ -233,7 +237,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>fecha</rd:DefaultName>
-            <Top>4.90424cm</Top>
+            <Top>4.84074cm</Top>
             <Left>0.3937cm</Left>
             <Height>0.6cm</Height>
             <Width>8.71771cm</Width>
@@ -265,7 +269,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>fecha</rd:DefaultName>
-            <Top>5.50424cm</Top>
+            <Top>5.44074cm</Top>
             <Left>0.3937cm</Left>
             <Height>0.6cm</Height>
             <Width>8.71771cm</Width>
@@ -297,7 +301,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>product_id</rd:DefaultName>
-            <Top>6.10424cm</Top>
+            <Top>6.04074cm</Top>
             <Left>0.3937cm</Left>
             <Height>0.6cm</Height>
             <Width>8.71771cm</Width>
@@ -329,7 +333,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>producto</rd:DefaultName>
-            <Top>6.70424cm</Top>
+            <Top>6.64074cm</Top>
             <Left>0.3937cm</Left>
             <Height>0.6cm</Height>
             <Width>8.71771cm</Width>
@@ -361,7 +365,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>operador</rd:DefaultName>
-            <Top>7.33952cm</Top>
+            <Top>7.27602cm</Top>
             <Left>0.3937cm</Left>
             <Height>0.6cm</Height>
             <Width>8.71771cm</Width>
@@ -391,10 +395,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Customer_Name</rd:DefaultName>
-            <Top>7.93952cm</Top>
-            <Left>0.3937cm</Left>
+            <Top>7.87602cm</Top>
+            <Left>0.33213cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.69802cm</Width>
+            <Width>8.77928cm</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -3204,8 +3208,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox133</rd:DefaultName>
-            <Top>8.53952cm</Top>
-            <Left>0.3937cm</Left>
+            <Top>8.5113cm</Top>
+            <Left>0.41883cm</Left>
             <Height>0.6cm</Height>
             <Width>8.69258cm</Width>
             <ZIndex>39</ZIndex>
@@ -3263,6 +3267,38 @@
               </Border>
             </Style>
           </Line>
+          <Textbox Name="Textbox134">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>="Sell Order: " + First(Fields!SellOrder.Value, "DsOC")</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox133</rd:DefaultName>
+            <Top>8.99563cm</Top>
+            <Left>0.33213cm</Left>
+            <Height>0.6cm</Height>
+            <Width>8.77928cm</Width>
+            <ZIndex>42</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
         <Height>8.05005in</Height>
         <Style />

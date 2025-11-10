@@ -3013,7 +3013,31 @@ namespace Ritrama2025.Reports {
             
             private global::System.Data.DataColumn columnstep;
             
-            private global::System.Data.DataColumn columnubicacion;
+            private global::System.Data.DataColumn columnsellOrder;
+            
+            private global::System.Data.DataColumn columnrollid_2;
+            
+            private global::System.Data.DataColumn columnwidth_2;
+            
+            private global::System.Data.DataColumn columnlenght_2;
+            
+            private global::System.Data.DataColumn columnUbicacion;
+            
+            private global::System.Data.DataColumn columnTwoMasters;
+            
+            private global::System.Data.DataColumn columnvueltas2;
+            
+            private global::System.Data.DataColumn columnlongitud_cortar2;
+            
+            private global::System.Data.DataColumn columncantidad_rollos2;
+            
+            private global::System.Data.DataColumn columnutil2_real_width;
+            
+            private global::System.Data.DataColumn columnutil2_real_lenght;
+            
+            private global::System.Data.DataColumn columnrest2_width;
+            
+            private global::System.Data.DataColumn columnrest2_lenght;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -3268,9 +3292,105 @@ namespace Ritrama2025.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn ubicacionColumn {
+            public global::System.Data.DataColumn sellOrderColumn {
                 get {
-                    return this.columnubicacion;
+                    return this.columnsellOrder;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn rollid_2Column {
+                get {
+                    return this.columnrollid_2;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn width_2Column {
+                get {
+                    return this.columnwidth_2;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn lenght_2Column {
+                get {
+                    return this.columnlenght_2;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn UbicacionColumn {
+                get {
+                    return this.columnUbicacion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn TwoMastersColumn {
+                get {
+                    return this.columnTwoMasters;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn vueltas2Column {
+                get {
+                    return this.columnvueltas2;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn longitud_cortar2Column {
+                get {
+                    return this.columnlongitud_cortar2;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn cantidad_rollos2Column {
+                get {
+                    return this.columncantidad_rollos2;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn util2_real_widthColumn {
+                get {
+                    return this.columnutil2_real_width;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn util2_real_lenghtColumn {
+                get {
+                    return this.columnutil2_real_lenght;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn rest2_widthColumn {
+                get {
+                    return this.columnrest2_width;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn rest2_lenghtColumn {
+                get {
+                    return this.columnrest2_lenght;
                 }
             }
             
@@ -3339,7 +3459,19 @@ namespace Ritrama2025.Reports {
                         decimal master_width_restante, 
                         decimal master_length_restabnte, 
                         int step, 
-                        string ubicacion) {
+                        string sellOrder, 
+                        string rollid_2, 
+                        decimal width_2, 
+                        decimal lenght_2, 
+                        string Ubicacion, 
+                        bool TwoMasters, 
+                        int vueltas2, 
+                        decimal longitud_cortar2, 
+                        int cantidad_rollos2, 
+                        decimal util2_real_width, 
+                        decimal util2_real_lenght, 
+                        decimal rest2_width, 
+                        decimal rest2_lenght) {
                 orden_corteRow roworden_corteRow = ((orden_corteRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         numero,
@@ -3369,7 +3501,19 @@ namespace Ritrama2025.Reports {
                         master_width_restante,
                         master_length_restabnte,
                         step,
-                        ubicacion};
+                        sellOrder,
+                        rollid_2,
+                        width_2,
+                        lenght_2,
+                        Ubicacion,
+                        TwoMasters,
+                        vueltas2,
+                        longitud_cortar2,
+                        cantidad_rollos2,
+                        util2_real_width,
+                        util2_real_lenght,
+                        rest2_width,
+                        rest2_lenght};
                 roworden_corteRow.ItemArray = columnValuesArray;
                 this.Rows.Add(roworden_corteRow);
                 return roworden_corteRow;
@@ -3426,7 +3570,19 @@ namespace Ritrama2025.Reports {
                 this.columnmaster_width_restante = base.Columns["master_width_restante"];
                 this.columnmaster_length_restabnte = base.Columns["master_length_restabnte"];
                 this.columnstep = base.Columns["step"];
-                this.columnubicacion = base.Columns["ubicacion"];
+                this.columnsellOrder = base.Columns["sellOrder"];
+                this.columnrollid_2 = base.Columns["rollid_2"];
+                this.columnwidth_2 = base.Columns["width_2"];
+                this.columnlenght_2 = base.Columns["lenght_2"];
+                this.columnUbicacion = base.Columns["Ubicacion"];
+                this.columnTwoMasters = base.Columns["TwoMasters"];
+                this.columnvueltas2 = base.Columns["vueltas2"];
+                this.columnlongitud_cortar2 = base.Columns["longitud_cortar2"];
+                this.columncantidad_rollos2 = base.Columns["cantidad_rollos2"];
+                this.columnutil2_real_width = base.Columns["util2_real_width"];
+                this.columnutil2_real_lenght = base.Columns["util2_real_lenght"];
+                this.columnrest2_width = base.Columns["rest2_width"];
+                this.columnrest2_lenght = base.Columns["rest2_lenght"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3486,8 +3642,32 @@ namespace Ritrama2025.Reports {
                 base.Columns.Add(this.columnmaster_length_restabnte);
                 this.columnstep = new global::System.Data.DataColumn("step", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnstep);
-                this.columnubicacion = new global::System.Data.DataColumn("ubicacion", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnubicacion);
+                this.columnsellOrder = new global::System.Data.DataColumn("sellOrder", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsellOrder);
+                this.columnrollid_2 = new global::System.Data.DataColumn("rollid_2", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnrollid_2);
+                this.columnwidth_2 = new global::System.Data.DataColumn("width_2", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnwidth_2);
+                this.columnlenght_2 = new global::System.Data.DataColumn("lenght_2", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnlenght_2);
+                this.columnUbicacion = new global::System.Data.DataColumn("Ubicacion", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUbicacion);
+                this.columnTwoMasters = new global::System.Data.DataColumn("TwoMasters", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTwoMasters);
+                this.columnvueltas2 = new global::System.Data.DataColumn("vueltas2", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnvueltas2);
+                this.columnlongitud_cortar2 = new global::System.Data.DataColumn("longitud_cortar2", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnlongitud_cortar2);
+                this.columncantidad_rollos2 = new global::System.Data.DataColumn("cantidad_rollos2", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncantidad_rollos2);
+                this.columnutil2_real_width = new global::System.Data.DataColumn("util2_real_width", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnutil2_real_width);
+                this.columnutil2_real_lenght = new global::System.Data.DataColumn("util2_real_lenght", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnutil2_real_lenght);
+                this.columnrest2_width = new global::System.Data.DataColumn("rest2_width", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnrest2_width);
+                this.columnrest2_lenght = new global::System.Data.DataColumn("rest2_lenght", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnrest2_lenght);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnnumero}, true));
                 this.columnnumero.AllowDBNull = false;
@@ -3501,6 +3681,14 @@ namespace Ritrama2025.Reports {
                 this.columnoperador.MaxLength = 50;
                 this.columnCustomer_Name.MaxLength = 200;
                 this.columnproducto.MaxLength = 200;
+                this.columnsellOrder.MaxLength = 30;
+                this.columnrollid_2.MaxLength = 30;
+                this.columnUbicacion.AllowDBNull = false;
+                this.columnUbicacion.MaxLength = 25;
+                this.columnTwoMasters.AllowDBNull = false;
+                this.columnvueltas2.AllowDBNull = false;
+                this.columnlongitud_cortar2.AllowDBNull = false;
+                this.columncantidad_rollos2.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6725,17 +6913,184 @@ namespace Ritrama2025.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string ubicacion {
+            public string sellOrder {
                 get {
                     try {
-                        return ((string)(this[this.tableorden_corte.ubicacionColumn]));
+                        return ((string)(this[this.tableorden_corte.sellOrderColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'ubicacion\' de la tabla \'orden_corte\' es DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'sellOrder\' de la tabla \'orden_corte\' es DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableorden_corte.ubicacionColumn] = value;
+                    this[this.tableorden_corte.sellOrderColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string rollid_2 {
+                get {
+                    try {
+                        return ((string)(this[this.tableorden_corte.rollid_2Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'rollid_2\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.rollid_2Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal width_2 {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableorden_corte.width_2Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'width_2\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.width_2Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal lenght_2 {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableorden_corte.lenght_2Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'lenght_2\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.lenght_2Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Ubicacion {
+                get {
+                    return ((string)(this[this.tableorden_corte.UbicacionColumn]));
+                }
+                set {
+                    this[this.tableorden_corte.UbicacionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool TwoMasters {
+                get {
+                    return ((bool)(this[this.tableorden_corte.TwoMastersColumn]));
+                }
+                set {
+                    this[this.tableorden_corte.TwoMastersColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int vueltas2 {
+                get {
+                    return ((int)(this[this.tableorden_corte.vueltas2Column]));
+                }
+                set {
+                    this[this.tableorden_corte.vueltas2Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal longitud_cortar2 {
+                get {
+                    return ((decimal)(this[this.tableorden_corte.longitud_cortar2Column]));
+                }
+                set {
+                    this[this.tableorden_corte.longitud_cortar2Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int cantidad_rollos2 {
+                get {
+                    return ((int)(this[this.tableorden_corte.cantidad_rollos2Column]));
+                }
+                set {
+                    this[this.tableorden_corte.cantidad_rollos2Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal util2_real_width {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableorden_corte.util2_real_widthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'util2_real_width\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.util2_real_widthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal util2_real_lenght {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableorden_corte.util2_real_lenghtColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'util2_real_lenght\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.util2_real_lenghtColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal rest2_width {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableorden_corte.rest2_widthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'rest2_width\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.rest2_widthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal rest2_lenght {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableorden_corte.rest2_lenghtColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'rest2_lenght\' de la tabla \'orden_corte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableorden_corte.rest2_lenghtColumn] = value;
                 }
             }
             
@@ -7041,14 +7396,98 @@ namespace Ritrama2025.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsubicacionNull() {
-                return this.IsNull(this.tableorden_corte.ubicacionColumn);
+            public bool IssellOrderNull() {
+                return this.IsNull(this.tableorden_corte.sellOrderColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetubicacionNull() {
-                this[this.tableorden_corte.ubicacionColumn] = global::System.Convert.DBNull;
+            public void SetsellOrderNull() {
+                this[this.tableorden_corte.sellOrderColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isrollid_2Null() {
+                return this.IsNull(this.tableorden_corte.rollid_2Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setrollid_2Null() {
+                this[this.tableorden_corte.rollid_2Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Iswidth_2Null() {
+                return this.IsNull(this.tableorden_corte.width_2Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setwidth_2Null() {
+                this[this.tableorden_corte.width_2Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Islenght_2Null() {
+                return this.IsNull(this.tableorden_corte.lenght_2Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setlenght_2Null() {
+                this[this.tableorden_corte.lenght_2Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isutil2_real_widthNull() {
+                return this.IsNull(this.tableorden_corte.util2_real_widthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setutil2_real_widthNull() {
+                this[this.tableorden_corte.util2_real_widthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isutil2_real_lenghtNull() {
+                return this.IsNull(this.tableorden_corte.util2_real_lenghtColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setutil2_real_lenghtNull() {
+                this[this.tableorden_corte.util2_real_lenghtColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isrest2_widthNull() {
+                return this.IsNull(this.tableorden_corte.rest2_widthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setrest2_widthNull() {
+                this[this.tableorden_corte.rest2_widthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isrest2_lenghtNull() {
+                return this.IsNull(this.tableorden_corte.rest2_lenghtColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setrest2_lenghtNull() {
+                this[this.tableorden_corte.rest2_lenghtColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -8403,6 +8842,19 @@ WHERE (a.numero = @Orden_MatPrima)";
             tableMapping.ColumnMappings.Add("master_width_restante", "master_width_restante");
             tableMapping.ColumnMappings.Add("master_length_restabnte", "master_length_restabnte");
             tableMapping.ColumnMappings.Add("step", "step");
+            tableMapping.ColumnMappings.Add("sellOrder", "sellOrder");
+            tableMapping.ColumnMappings.Add("rollid_2", "rollid_2");
+            tableMapping.ColumnMappings.Add("width_2", "width_2");
+            tableMapping.ColumnMappings.Add("lenght_2", "lenght_2");
+            tableMapping.ColumnMappings.Add("Ubicacion", "Ubicacion");
+            tableMapping.ColumnMappings.Add("TwoMasters", "TwoMasters");
+            tableMapping.ColumnMappings.Add("vueltas2", "vueltas2");
+            tableMapping.ColumnMappings.Add("longitud_cortar2", "longitud_cortar2");
+            tableMapping.ColumnMappings.Add("cantidad_rollos2", "cantidad_rollos2");
+            tableMapping.ColumnMappings.Add("util2_real_width", "util2_real_width");
+            tableMapping.ColumnMappings.Add("util2_real_lenght", "util2_real_lenght");
+            tableMapping.ColumnMappings.Add("rest2_width", "rest2_width");
+            tableMapping.ColumnMappings.Add("rest2_lenght", "rest2_lenght");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -8410,8 +8862,9 @@ WHERE (a.numero = @Orden_MatPrima)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::Microsoft.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = "Data Source=DATABASE-CENTER\\RITRAMASRV01;Initial Catalog=RITRAMA2;User ID=Npino;P" +
-                "assword=123;Encrypt=False;TrustServerCertificate=True";
+            this._connection.ConnectionString = "Data Source=DATABASE-CENTER\\SERVER2017;Initial Catalog=RITRAMASQL2017;Persist Sec" +
+                "urity Info=True;User ID=Npino;Password=123;Encrypt=False;TrustServerCertificate=" +
+                "True";
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8422,12 +8875,13 @@ WHERE (a.numero = @Orden_MatPrima)";
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = @"SELECT a.numero, a.fecha, a.fecha_produccion, a.product_id, c.Product_Name AS producto, b.unique_code, b.roll_number, b.splice, b.width, b.large, b.msi, b.roll_id, b.code_person, b.status, d.nombre AS operador, 
     e.Customer_Name, a.width_1 AS master_width, a.lenght_1 AS master_length, a.longitud_cortar AS master_corte_largo, a.cortes_ancho AS master_cortes_ancho, a.cortes_largo AS master_vueltas, 
-    a.cant_rollos AS master_cant_rollos, a.util1_real_width AS master_width_real, a.util1_real_lenght AS master_length_real, a.rest1_width AS master_width_restante, a.rest1_lenght AS master_length_restabnte, a.step
+    a.cant_rollos AS master_cant_rollos, a.util1_real_width AS master_width_real, a.util1_real_lenght AS master_length_real, a.rest1_width AS master_width_restante, a.rest1_lenght AS master_length_restabnte, a.step, 
+    a.rollid_2, a.width_2, a.lenght_2, a.sellOrder, a.Ubicacion, a.TwoMasters, a.vueltas2, a.longitud_cortar2, a.cantidad_rollos2, a.util2_real_width, a.util2_real_lenght,rest2_width,rest2_lenght
 FROM orden_corte AS a LEFT OUTER JOIN
     rolls_details AS b ON a.numero = b.numero LEFT OUTER JOIN
     producto AS c ON a.product_id = c.Product_ID LEFT OUTER JOIN
     operadores AS d ON a.operador_id = d.operador_id LEFT OUTER JOIN
-    Customer AS e ON a.customer_id = e.customer_id
+    Customer AS e ON a.customer_id = e.Customer_Id
 WHERE (a.numero = @numero_oc)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             global::Microsoft.Data.SqlClient.SqlParameter param = new global::Microsoft.Data.SqlClient.SqlParameter();

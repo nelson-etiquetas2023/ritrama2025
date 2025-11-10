@@ -43,6 +43,8 @@ namespace Ritrama2025.Forms
 
         private void Despacho_Load(object sender, EventArgs e)
         {
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(155, 45);
             // 1.- Procedimiento para cargar los despachos.
             var task = Task.Run(async () =>
             {
