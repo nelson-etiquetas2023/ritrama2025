@@ -3,11 +3,10 @@ using Microsoft.Extensions.Configuration;
 using Ritrama2025.Models;
 using Ritrama2025.Services.CommonData;
 using System.Data;
-using System.Threading.Tasks;
 
 namespace Ritrama2025.Services.ProductsService
 {
-    
+
     public class ProductsService : IProductsService
     {
         public IConfiguration Configuration { get; set; } = null!;
@@ -21,7 +20,7 @@ namespace Ritrama2025.Services.ProductsService
         {
             CommondData = commonData;
             Configuration = configuration;
-            if(Configuration != null)
+            if (Configuration != null)
             {
                 var ambiente = Configuration["Ambiente"] ?? R.ENVIRONMET.DESARROLLO;
                 StringConnex = Configuration.GetSection(R.ENVIRONMET.NAME_KEY_CONNECTION)[ambiente]!;
@@ -88,15 +87,15 @@ namespace Ritrama2025.Services.ProductsService
                 SqlParameter p1 = new("@id", id);
                 comando.Parameters.Add(p1);
 
-                var result = (int) comando.ExecuteScalar();
+                var result = (int)comando.ExecuteScalar();
                 if (result > 0)
                 {
                     return true;
                 }
-                else 
+                else
                 {
                     return false;
-                } 
+                }
             }
             catch (Exception)
             {
@@ -105,7 +104,7 @@ namespace Ritrama2025.Services.ProductsService
         }
         public async Task<bool> Update(Product producto)
         {
-            
+
             try
             {
                 string sqlQuery = "UPDATE dbo.producto SET Product_Name = @name,Product_Descrip = @descrip,Product_Ref = @reference,codebar=@barra,precio=@precio,ratio=@ratio,@master=masterRolls,@graphics=graphics,@hoja=resmas,@rollo=rollo_cortado WHERE product_id = @id";
@@ -131,7 +130,7 @@ namespace Ritrama2025.Services.ProductsService
                     MessageBox.Show("Producto modificado satisfactoriamente...");
                     return true;
                 }
-                else 
+                else
                 {
                     return false;
                 }
@@ -148,8 +147,8 @@ namespace Ritrama2025.Services.ProductsService
         }
 
 
-       
 
-       
+
+
     }
 }

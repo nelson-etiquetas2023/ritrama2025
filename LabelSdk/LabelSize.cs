@@ -2,7 +2,7 @@
 {
     public record LabelSize(double WidthInches, double HeightInches, int dpi);
 
-    public static class  StandardLabelSizes
+    public static class StandardLabelSizes
     {
         public static LabelSize Size_2x1_203dpi => new LabelSize(2.0, 1.0, 203);
         public static LabelSize Size_3x2_203dpi => new LabelSize(3.0, 2.0, 203);

@@ -58,7 +58,7 @@ public class ProduccionService : IProduccionService
                     Splice = reader.GetInt32(reader.GetOrdinal("splice")),
                 };
                 lista.Add(item);
-            }  
+            }
         }
         catch (SqlException ex)
         {
@@ -108,7 +108,7 @@ public class ProduccionService : IProduccionService
             ComandoClear.ExecuteNonQuery();
 
 
-            foreach (var item in lista) 
+            foreach (var item in lista)
             {
                 SqlCommand comando = new()
                 {
@@ -140,13 +140,13 @@ public class ProduccionService : IProduccionService
         DtRollid = dt ?? new DataTable("DtRollid");
         return DtRollid;
     }
-                      
+
 
     private async Task<DataTable?> CargarTablaAsync(
         string sqlQuery,
         bool loadDataset = false,
         SqlParameter[]? parametros = null,
-        string? nombreTabla = null,         
+        string? nombreTabla = null,
         bool returnDataTable = false
         )
     {
@@ -173,11 +173,11 @@ public class ProduccionService : IProduccionService
             return null;
         }
 
-        if (returnDataTable) 
+        if (returnDataTable)
         {
-            using SqlDataAdapter adapter = new() { SelectCommand = comando };
             DataTable dt = new();
-            adapter.Fill(dt);
+            using var reader = await comando.ExecuteReaderAsync(CommandBehavior.SequentialAccess);
+            dt.Load(reader);
             return dt;
         }
 
@@ -209,7 +209,7 @@ public class ProduccionService : IProduccionService
             };
 
             foreach (var tabla in tablas)
-                await CargarTablaAsync(tabla.Sql,true,null,tabla.Nombre,false);
+                await CargarTablaAsync(tabla.Sql, true, null, tabla.Nombre, false);
 
             SetRelaionsTables();
 
@@ -219,7 +219,7 @@ public class ProduccionService : IProduccionService
             ErrorMsg = ex.Message;
             throw;
         }
-        
+
         return Ds;
     }
     public bool SetRelaionsTables()
@@ -230,7 +230,7 @@ public class ProduccionService : IProduccionService
             // Relación entre master y Rollos.
             var relacion = new DataRelation(R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS,
                             Ds.Tables["DtMaster"]!.Columns["numero"]!,
-                            Ds.Tables["DtRollos"]!.Columns["numero"]!,false);
+                            Ds.Tables["DtRollos"]!.Columns["numero"]!, false);
 
             if (!Ds.Relations.Contains(R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS))
                 Ds.Relations.Add(relacion);
@@ -261,7 +261,7 @@ public class ProduccionService : IProduccionService
             SqlCommand comando = new()
             {
                 Connection = conn,
-                CommandText = "INSERT INTO orden_corte (numero,fecha,fecha_produccion,product_id,rollid_1,width_1,lenght_1,rollid_2,width_2,lenght_2,anulada,procesado,CloseDocument,tot_inch_ancho,longitud_cortar,cortes_ancho,cortes_largo,cant_rollos,decartable1_pies,lenght_master_real,util1_real_width,util1_real_lenght,descartable2_pies" + ",util2_real_width,util2_real_lenght,lenght_master_real2,rest1_width,rest1_lenght,rest2_width,rest2_lenght,cant_rollos2,cortes_largo2,step,lastupdate,fecha_autorize,toautorize,notes,tipo_mov1,tipo_mov2,plus1_pies,plus2_pies,rollo_unificado,length_entrada,real_usado_r1,real_usado_r2,restante_rollid1,restante_rollid2,resta_entrada,total_salida,lenght_entrada,customer_id,operador_id,SellOrder,desperdicio,master_tipo,ubicacion,TwoMasters,longitud_cortar2,vueltas2,cantidad_rollos2) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27,@p28,@p29,@p30,@p31,@p32,@p33,@p34,@p35,@p36,@p37,@p38,@p39,@p40,@p41,@p44,@p45,@p46,@p47,@p48,@p49,@p50,@p51,@p52,@customer_id,@operador_id,@SellOrder,@desper,@MasterTipo,@ubic,@twomasters,@longcortar2,@vueltas2,@cantrollos2)",
+                CommandText = "INSERT INTO orden_corte (numero,fecha,fecha_produccion,product_id,rollid_1,width_1,lenght_1,rollid_2,width_2,lenght_2,anulada,procesado,CloseDocument,tot_inch_ancho,longitud_cortar,cortes_ancho,cortes_largo,cant_rollos,decartable1_pies,lenght_master_real,util1_real_width,util1_real_lenght,descartable2_pies" + ",util2_real_width,util2_real_lenght,lenght_master_real2,rest1_width,rest1_lenght,rest2_width,rest2_lenght,cant_rollos2,cortes_largo2,step,lastupdate,fecha_autorize,toautorize,notes,tipo_mov1,tipo_mov2,plus1_pies,plus2_pies,rollo_unificado,length_entrada,real_usado_r1,real_usado_r2,restante_rollid1,restante_rollid2,resta_entrada,total_salida,lenght_entrada,customer_id,operador_id,SellOrder,desperdicio,master_tipo,ubicacion,TwoMasters,longitud_cortar2,vueltas2,cantidad_rollos2,desperdicio2) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27,@p28,@p29,@p30,@p31,@p32,@p33,@p34,@p35,@p36,@p37,@p38,@p39,@p40,@p41,@p44,@p45,@p46,@p47,@p48,@p49,@p50,@p51,@p52,@customer_id,@operador_id,@SellOrder,@desper,@MasterTipo,@ubic,@twomasters,@longcortar2,@vueltas2,@cantrollos2,@desper2)",
                 CommandType = CommandType.Text
             };
             conn.Open();
@@ -315,8 +315,9 @@ public class ProduccionService : IProduccionService
             comando.Parameters.AddWithValue("@p50", 0);
             comando.Parameters.AddWithValue("@p51", 0);
             comando.Parameters.AddWithValue("@p52", 0);
-            comando.Parameters.AddWithValue("@sellOrder",OrdenCorte.SellOrder);
+            comando.Parameters.AddWithValue("@sellOrder", OrdenCorte.SellOrder);
             comando.Parameters.AddWithValue("@desper", OrdenCorte.Desperdicio);
+            comando.Parameters.AddWithValue("@desper2", OrdenCorte.Desperdicio2);
             comando.Parameters.AddWithValue("@MasterTipo", OrdenCorte.Master_Tipo);
             comando.Parameters.AddWithValue("@ubic", OrdenCorte.Ubicacion);
             comando.Parameters.AddWithValue("@twomasters", OrdenCorte.TwoMasters);
@@ -634,7 +635,7 @@ public class ProduccionService : IProduccionService
             comando.Parameters.Add(p2);
 
             comando.ExecuteNonQuery();
-            
+
             return true;
         }
         catch (SqlException ex)
@@ -671,7 +672,7 @@ public class ProduccionService : IProduccionService
             comando.Parameters.Add(p6);
             comando.Parameters.Add(p7);
             comando.ExecuteNonQuery();
-            MessageBox.Show("Se actualizo la orden de corte correctamente.");   
+            MessageBox.Show("Se actualizo la orden de corte correctamente.");
             return true;
         }
         catch (Exception ex)
@@ -688,7 +689,7 @@ public class ProduccionService : IProduccionService
             var rollIdProperty = tipo.GetProperty("roll_id")!.GetValue(objeto);
             var consumoParcialProperty = tipo.GetProperty("consumo")!.GetValue(objeto);
             var nameTableProperty = tipo.GetProperty("nametable")!.GetValue(objeto);
-            var sqlProperty = tipo.GetProperty("sql")!.GetValue(objeto)!.ToString();  
+            var sqlProperty = tipo.GetProperty("sql")!.GetValue(objeto)!.ToString();
 
             SqlParameter[] parametros =
             [
@@ -696,7 +697,7 @@ public class ProduccionService : IProduccionService
                 new SqlParameter("@rollid", rollIdProperty)
             ];
 
-            await CargarTablaAsync(sqlProperty!,false,parametros, nameTableProperty!.ToString(), false);
+            await CargarTablaAsync(sqlProperty!, false, parametros, nameTableProperty!.ToString(), false);
 
             return true;
         }
@@ -729,14 +730,14 @@ public class ProduccionService : IProduccionService
             return null;
         }
     }
-    public async Task<bool> UpdateDetailsConsumosMasterIniciales(string rollid, string orden, double length_consumo, DateTime fecha_reg,bool desperdicio)
+    public async Task<bool> UpdateDetailsConsumosMasterIniciales(string rollid, string orden, double length_consumo, DateTime fecha_reg, bool desperdicio)
     {
         try
         {
-            var tabla = new { nameTabla = "MasterDetailsInic", sql = R.QUERY.PRODUCTION.UPDATE_QUERY_ACTUALIZAR_INVENTARIO_DETAILS_INICIALES};
+            var tabla = new { nameTabla = "MasterDetailsInic", sql = R.QUERY.PRODUCTION.UPDATE_QUERY_ACTUALIZAR_INVENTARIO_DETAILS_INICIALES };
 
             SqlParameter[] parameros =
-            [ 
+            [
                 new SqlParameter("@rollid", rollid),
                 new SqlParameter("@orden", orden),
                 new SqlParameter("@consumo", length_consumo),
@@ -744,7 +745,7 @@ public class ProduccionService : IProduccionService
                 new SqlParameter("@desperdicio", desperdicio)
             ];
 
-            await CargarTablaAsync(tabla.sql,false,parameros,tabla.nameTabla,false);
+            await CargarTablaAsync(tabla.sql, false, parameros, tabla.nameTabla, false);
             return true;
         }
         catch (Exception ex)
@@ -787,9 +788,9 @@ public class ProduccionService : IProduccionService
         try
         {
             using SqlConnection conn = new(StringConnex);
-           
+
             conn.Open();
-            foreach (var item in rollos) 
+            foreach (var item in rollos)
             {
                 using SqlCommand comando = new()
                 {
@@ -802,9 +803,9 @@ public class ProduccionService : IProduccionService
                 comando.Parameters.AddWithValue("@p3", item.Splice);
                 comando.Parameters.AddWithValue("@p4", item.Status);
                 comando.Parameters.AddWithValue("@p5", item.Code_Person);
-                
+
                 comando.ExecuteNonQuery();
-                
+
             }
             conn.Close();
             MessageBox.Show("Se actualizaron los datos correctamente...");
@@ -947,5 +948,5 @@ public class ProduccionService : IProduccionService
         }
     }
 
-    
+
 }

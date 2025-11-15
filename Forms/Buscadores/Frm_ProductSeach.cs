@@ -1,5 +1,5 @@
-﻿using System.Data;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using System.Data;
 
 namespace Ritrama2025.Forms.Buscadores
 {

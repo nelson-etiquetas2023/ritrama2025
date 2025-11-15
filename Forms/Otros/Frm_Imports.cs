@@ -2,10 +2,8 @@
 using Ritrama2025.Models;
 using Ritrama2025.Services.InventarioService;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Text;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace Ritrama2025.Forms.Otros
@@ -51,7 +49,7 @@ namespace Ritrama2025.Forms.Otros
             ADD_COLUMN_GRID("ubic", 70, "Ubicacion", "ubic", Grid_Items);
             ADD_COLUMN_GRID("fecha_llegada", 70, "Fecha Llegada", "fecha_llegada", Grid_Items);
             ADD_COLUMN_GRID("paleta", 70, "Paleta", "paleta", Grid_Items);
-      
+
         }
 
         private static void ADD_COLUMN_GRID(string name, int size, string title, string field_bd, DataGridView grid)
@@ -73,7 +71,7 @@ namespace Ritrama2025.Forms.Otros
         }
 
 
-        private void LoadData() 
+        private void LoadData()
         {
             lista.Clear();
             string filePath = PathFileName;
@@ -122,16 +120,16 @@ namespace Ritrama2025.Forms.Otros
             txt_number_rows.Text = Grid_Items.Rows.Count.ToString();
         }
 
-       
 
-      
+
+
 
 
         private void Btn_saveDatabase_Click(object sender, EventArgs e)
         {
             int errors = int.Parse(txt_errors.Text);
 
-            if (errors > 0) 
+            if (errors > 0)
             {
                 MessageBox.Show("No se pueden Guardar los datos mientra la hoja de excel tenga errores en los datos...");
                 return;
@@ -144,7 +142,7 @@ namespace Ritrama2025.Forms.Otros
             //Registrar Productos no registrados.
             ProductsNotFoundDB();
         }
-        private void ProductsNotFoundDB() 
+        private void ProductsNotFoundDB()
         {
             if (chk_product_NoFound.Checked)
             {

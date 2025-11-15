@@ -193,3 +193,14 @@ C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\Reports\Inventario\Report
 C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.Otros.Frm_ImportacionExcel.resources
 C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.Otros.PrintLabelsRolls.resources
 C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.Otros.frm_ConfigVueltas.resources
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\System.Diagnostics.DiagnosticSource.dll
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\System.Diagnostics.EventLog.dll
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\System.IO.Pipelines.dll
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\System.Text.Encodings.Web.dll
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\System.Text.Json.dll
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\runtimes\win\lib\net9.0\System.Diagnostics.EventLog.Messages.dll
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\runtimes\win\lib\net9.0\System.Diagnostics.EventLog.dll
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\runtimes\win\lib\net9.0\System.Text.Encodings.Web.dll
+C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.ConfigPanel.resources
+C:\Programacion\Ritrama2025\obj\Release\net9.0-windows\Ritrama2025.Forms.UserControl1.resources

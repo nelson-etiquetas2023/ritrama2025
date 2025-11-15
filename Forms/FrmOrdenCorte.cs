@@ -43,44 +43,40 @@ public partial class FrmOrdenCorte : Form
         ExportDataService = exportService;
         ReportService = reportService;
         CommonService = commonService;
+
     }
 
     private async void FrmOrdenCorte_Load(object sender, EventArgs e)
     {
+
         this.StartPosition = FormStartPosition.Manual;
         this.Location = new Point(155, 45);
-
-        Ds = await Task.Run(() => Service.LoadDataOC());
-
-        this.Invoke(() =>
-        {
-            BsMaster.DataSource = Ds;
-            BsMaster.DataMember = "DtMaster";
-            BsDetails.DataSource = BsMaster;
-            BsDetails.DataMember = R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS;
-            Ds.Tables["DtMaster"]!.AcceptChanges();
-            Ds.Tables["DtCortes"]!.AcceptChanges();
-            Ds.Tables["DtRollos"]!.AcceptChanges();
-            Ds.Tables["DtOperator"]!.AcceptChanges();
-            Ds.Tables["DtCustomer"]!.AcceptChanges();
-
-        });
-
+        Toggleloading(true);
+        var datos = await Service.LoadDataOC();
+        Toggleloading(false);
+        Ds = datos;
+        BsMaster.DataSource = Ds;
+        BsMaster.DataMember = "DtMaster";
+        BsDetails.DataSource = BsMaster;
+        BsDetails.DataMember = R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS;
         //Enlace a datos Encabezado de la Orden Corte.
         HeaderBinding();
         BindingRollos();
         BindingCortes();
 
-        BsMaster.MoveLast();
+        Ds.Tables["DtMaster"]!.AcceptChanges();
+        Ds.Tables["DtCortes"]!.AcceptChanges();
+        Ds.Tables["DtRollos"]!.AcceptChanges();
+        Ds.Tables["DtOperator"]!.AcceptChanges();
+        Ds.Tables["DtCustomer"]!.AcceptChanges();
 
+        BsMaster.MoveLast();
         UpdateStepIndicator();
         ContadorRegistros();
 
         // Por la forma correcta de suscribirse al evento PositionChanged:
         BsMaster.PositionChanged += BsMaster_PositionChanged;
-
     }
-
     #region ENLACE A DATOS
     private void HeaderBinding()
     {
@@ -124,12 +120,15 @@ public partial class FrmOrdenCorte : Form
         txt_sellOrder.DataBindings.Add("Text", BsMaster, "sellOrder");
         txt_ubic.DataBindings.Add("Text", BsMaster, "Ubicacion");
         chk_desperdicio1.DataBindings.Add("Checked", BsMaster, "desperdicio", true);
+        chk_desperdicio2.DataBindings.Add("Checked", BsMaster, "desperdicio2", true);
+
+
         chk_two_master.DataBindings.Add("Checked", BsMaster, "TwoMasters");
 
         txt_long_cortar2.DataBindings.Add("Text", BsMaster, "longitud_cortar2");
         txt_vueltas2.DataBindings.Add("Text", BsMaster, "vueltas2");
         txt_cantidad_rollos2.DataBindings.Add("Text", BsMaster, "cantidad_rollos2");
-        
+
         //check desperdicios.
         chk_desperdicio1.DataBindings["Checked"]!.Format += (s, e) =>
         {
@@ -139,7 +138,15 @@ public partial class FrmOrdenCorte : Form
         {
             if (e.Value == DBNull.Value || e.Value == null) e.Value = false;
         };
-
+        //check desperdicios2.
+        chk_desperdicio2.DataBindings["Checked"]!.Format += (s, e) =>
+        {
+            if (e.Value == DBNull.Value || e.Value == null) e.Value = false;
+        };
+        chk_desperdicio2.DataBindings["Checked"]!.Parse += (s, e) =>
+        {
+            if (e.Value == DBNull.Value || e.Value == null) e.Value = false;
+        };
         //check two-master.
         chk_two_master.DataBindings["Checked"]!.Format += (s, e) =>
         {
@@ -233,10 +240,8 @@ public partial class FrmOrdenCorte : Form
 
     private void Btn_buscar_rollid1_Click(object sender, EventArgs e)
     {
-        Frm_RollId frmrollid = new(Service)
-        {
-            DtRollid = Ds.Tables["DtRollid"]!
-        };
+        using Frm_RollId frmrollid = new(Service);
+
         frmrollid.ShowDialog();
         if (frmrollid.MasterRoll != null)
         {
@@ -262,7 +267,7 @@ public partial class FrmOrdenCorte : Form
             Ds.Tables["DtMaster"]!.AcceptChanges();
             BsMaster.ResetBindings(false);
 
-
+            frmrollid.Dispose();
         }
     }
     private void CALCULATE_MATERIAL_RESTANTE()
@@ -379,7 +384,7 @@ public partial class FrmOrdenCorte : Form
             }
         }
         //CALCULO DE LOS ROLLOS SI TIENE USO DE SEGUNDO MASTER
-        if (chk_two_master.Checked) 
+        if (chk_two_master.Checked)
         {
             int vueltas2 = Convert.ToInt32(txt_vueltas2.Text);
             int numcortes2 = (grid_cortes.Rows.Count);
@@ -543,7 +548,7 @@ public partial class FrmOrdenCorte : Form
         CalcularConsumosMaster1();
     }
 
-    private void CalcularConsumosMaster1() 
+    private void CalcularConsumosMaster1()
     {
         if (EditMode == 0) return;
 
@@ -557,7 +562,7 @@ public partial class FrmOrdenCorte : Form
 
         ACTUALIZAR_ROLLID_1();
     }
-    private void CALCULAR_TOTAL_ROLLOS_CORTAR2() 
+    private void CALCULAR_TOTAL_ROLLOS_CORTAR2()
     {
         if (txt_cortes_ancho.Text == "")
         {
@@ -614,7 +619,7 @@ public partial class FrmOrdenCorte : Form
     {
         CalcularConsumosMaster1();
         CALCULATE_DATA_CORTES();
-        
+
     }
 
 
@@ -977,6 +982,7 @@ public partial class FrmOrdenCorte : Form
             Longitud_Cortar2 = Convert.ToDouble(txt_long_cortar2.Text == "" ? 0 : txt_long_cortar2.Text),
             Vueltas2 = Convert.ToInt32(txt_vueltas2.Value),
             Cantidad_rollos2 = Convert.ToInt32(txt_cantidad_rollos2.Text == "" ? 0 : txt_cantidad_rollos2.Text),
+            Desperdicio2 = chk_desperdicio2.Checked,
         };
     }
     private void GuardarOrdeAddMode()
@@ -2046,7 +2052,7 @@ public partial class FrmOrdenCorte : Form
     // Modifica la firma del método para que el parámetro sender sea nullable, coincidiendo con el delegado EventHandler.
     private void BsMaster_PositionChanged(object? sender, EventArgs args)
     {
-
+        if (BsMaster.Current == null) return;
 
         DataRowView FilaActual = (DataRowView)BsMaster.Current!;
 
@@ -2090,7 +2096,7 @@ public partial class FrmOrdenCorte : Form
     }
     public void WorkflowMastersTwoRollid()
     {
-        
+
         btn_buscar_rollid2.Enabled = true;
         txt_long_cortar2.ReadOnly = false;
         txt_vueltas2.ReadOnly = false;
@@ -2098,10 +2104,12 @@ public partial class FrmOrdenCorte : Form
         txt_real2_length.Enabled = true;
         txt_matrest2_width.Enabled = true;
         txt_matrest2_lenght.Enabled = true;
+        chk_desperdicio2.Enabled = true;
+
     }
     private void btn_buscar_rollid2_Click(object sender, EventArgs e)
     {
-        Frm_RollId frmrollid = new(Service);
+        using Frm_RollId frmrollid = new(Service);
         frmrollid.ShowDialog();
 
         if (frmrollid.MasterRoll != null)
@@ -2116,23 +2124,19 @@ public partial class FrmOrdenCorte : Form
             //TipoMovimiento = frmrollid.MasterRoll.tipo_mov;
             //txt_tipo_master.Text = frmrollid.MasterRoll.tipo_mov;
 
-            //CALCULATE_TOTAL_WIDTH_CORTES();
-            //CALCULATE_MATERIAL_RESTANTE();
+            CALCULATE_TOTAL_WIDTH_CORTES();
+            CALCULATE_MATERIAL_RESTANTE();
 
-            //this.Validate();
+            this.Validate();
 
             //txt_rollid_1.Focus();
             //txt_rollid_1.Select();
 
-            //BsMaster.EndEdit();
-            //Ds.Tables["DtMaster"]!.AcceptChanges();
-            //BsMaster.ResetBindings(false);
-
-
+            BsMaster.EndEdit();
+            Ds.Tables["DtMaster"]!.AcceptChanges();
+            BsMaster.ResetBindings(false);
+            frmrollid.Dispose();
         }
-
-
-
     }
 
     private void txt_vueltas2_ValueChanged(object sender, EventArgs e)
@@ -2156,5 +2160,29 @@ public partial class FrmOrdenCorte : Form
     {
         if (EditMode == 0) return;
         CalcularMateriaRestanteMaster2();
+    }
+
+    private void FrmOrdenCorte_FormClosed(object sender, FormClosedEventArgs e)
+    {
+        this.Dispose();
+        Ds.Dispose();
+    }
+
+    private void FrmOrdenCorte_SizeChanged(object sender, EventArgs e)
+    {
+        if (this.WindowState == FormWindowState.Maximized)
+        {
+            // Recorremos todos los formularios abiertos en la aplicación
+            foreach (Form frm in Application.OpenForms)
+            {
+                // Ignoramos el formulario principal
+                if (frm != this)
+                {
+                    frm.BringToFront();
+                    frm.Activate();
+                }
+            }
+        }
+
     }
 }

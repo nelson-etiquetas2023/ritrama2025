@@ -22,7 +22,7 @@ namespace Ritrama2025.Models
         public string Recepcion { get; set; } = null!;
         public DateTime Fecha_Fabricacion { get; set; }
         public DateTime Fecha_Llegada { get; set; }
-        public DateTime Fecha_Produccion{ get; set; }
+        public DateTime Fecha_Produccion { get; set; }
 
         public string Factura { get; set; } = null!;
 

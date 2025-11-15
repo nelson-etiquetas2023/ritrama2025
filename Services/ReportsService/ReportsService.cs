@@ -452,5 +452,5 @@ namespace Ritrama2025.Services.ReportsService.ReportsService
             string ReportPath = Path.Combine(ReportsFolder, ReportName);
             return ReportPath;
         }
-    }    
+    }
 }

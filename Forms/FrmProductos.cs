@@ -1,23 +1,26 @@
-﻿using Ritrama2025.Models;
+﻿using Ritrama2025.Forms.Buscadores;
+using Ritrama2025.Models;
+using Ritrama2025.Services.ExportData;
 using Ritrama2025.Services.ProductsService;
 using System.Data;
-using Ritrama2025.Forms.Buscadores;
 
 namespace Ritrama2025.Forms
 {
     public partial class FrmProductos : Form
     {
         IProductsService ProductsService;
+        IExportDataService ExportDataService;
         public DataSet Ds = new();
         BindingSource Bs = new();
         DataRowView Row = null!;
         int EditMode = 0;
         Product producto { get; set; } = null!;
 
-        public FrmProductos(IProductsService productsService)
+        public FrmProductos(IProductsService productsService, IExportDataService exportDataService)
         {
             InitializeComponent();
             ProductsService = productsService;
+            ExportDataService = exportDataService;
         }
 
         private void FrmProductos_Load(object sender, EventArgs e)
@@ -226,7 +229,7 @@ namespace Ritrama2025.Forms
             CloseFormUI();
             Bs.EndEdit();
             Refreshform();
-            btn_update.Enabled = true;  
+            btn_update.Enabled = true;
             EditMode = 0;
         }
         private void SaveUpdate()
@@ -372,6 +375,27 @@ namespace Ritrama2025.Forms
             btn_update.Enabled = false;
             txt_partid.ReadOnly = true;
             EditMode = 2;
+        }
+
+        private void bot_excel_Click(object sender, EventArgs e)
+        {
+            var lista = new List<Product>();
+            foreach (DataRow row in Ds.Tables["Dtproducts"]!.Rows)
+            {
+                var producto = new Product
+                {
+                    Product_id = row["product_id"].ToString()!,
+                    Product_Name = row["product_name"].ToString()!
+                };
+                lista.Add(producto);
+            }
+
+            ExportDataService.ExportToExcelProducts(lista, "products.xlsx");
+
+
+
+
+
         }
     }
 }

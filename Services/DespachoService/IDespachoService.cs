@@ -13,6 +13,6 @@ namespace Ritrama2025.Services.DespachoService.DespachoService
         void AddPickingListDespacho(List<RolloCortado> PickingList);
         void AddPaletDetailsDespacho(List<Paleta> paleta);
         public void AddItemsDespacho(List<ItemsDespacho> items);
-        public void UpDateInventoryRC(List<RolloCortado> items, string orden,DateTime fecha); 
+        public void UpDateInventoryRC(List<RolloCortado> items, string orden, DateTime fecha);
     }
 }

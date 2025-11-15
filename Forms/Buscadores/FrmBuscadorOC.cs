@@ -1,5 +1,4 @@
-﻿using Ritrama2025.Models;
-using Ritrama2025.Services.CommonService;
+﻿using Ritrama2025.Services.CommonService;
 using System.ComponentModel;
 using System.Data;
 
@@ -10,7 +9,7 @@ namespace Ritrama2025.Forms.Buscadores
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DataTable DtItems { get; set; } = null!;
- 
+
         DataView Dv { get; set; } = null!;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Orden { get; set; } = "";

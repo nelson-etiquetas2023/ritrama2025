@@ -3849,7 +3849,7 @@
     <value>Segoe UI, 9.75pt</value>
   </data>
   <data name="chk_desperdicio2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>434, 359</value>
+    <value>405, 359</value>
   </data>
   <data name="chk_desperdicio2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>

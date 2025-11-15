@@ -1,6 +1,6 @@
 ﻿using Ritrama2025.Models;
-using System.ComponentModel;
 using Ritrama2025.Services.CommonService;
+using System.ComponentModel;
 
 namespace Ritrama2025.Forms
 {
@@ -214,7 +214,7 @@ namespace Ritrama2025.Forms
             SearchCodeUnique();
         }
 
-        private void SearchCodeUnique() 
+        private void SearchCodeUnique()
         {
             //SI ESTA VACIO NO ENTRA
             if (txt_codigo.Text == "") return;
@@ -271,7 +271,7 @@ namespace Ritrama2025.Forms
 
         private void txt_codigo_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter) 
+            if (e.KeyCode == Keys.Enter)
             {
                 SearchCodeUnique();
             }

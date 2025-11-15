@@ -18,7 +18,7 @@ public class ServiceDataCommon : IServiceCommonData
         StringConnex = _config.GetSection("ConnectionStringsEnvironment")[ambiente]!;
     }
 
-    public ObjectQuery CreateObjectQuery(ObjectQuery objectquery,DataSet dataset)
+    public ObjectQuery CreateObjectQuery(ObjectQuery objectquery, DataSet dataset)
     {
         return new ObjectQuery()
         {
@@ -26,7 +26,7 @@ public class ServiceDataCommon : IServiceCommonData
             Message = objectquery.Message,
             Adapter = objectquery.Adapter,
             DataTableName = objectquery.DataTableName,
-            DataSet =  dataset
+            DataSet = dataset
         };
     }
 
@@ -134,9 +134,9 @@ public class ServiceDataCommon : IServiceCommonData
 
 
 }
-public static class DataAccess 
+public static class DataAccess
 {
-    public static async Task<bool> ExecuteQueryWrite(string connectionString, string sqlQuery, List<SqlParameter>? parameters, bool useTransaction) 
+    public static async Task<bool> ExecuteQueryWrite(string connectionString, string sqlQuery, List<SqlParameter>? parameters, bool useTransaction)
     {
         using var conn = new SqlConnection(connectionString);
         await conn.OpenAsync();
@@ -170,7 +170,7 @@ public static class DataAccess
         }
     }
 
-    public static async Task<DataTable> ExecuteQuery<T>(string connectionString,string sqlQuery,List<SqlParameter>? parameters, bool useTransaction)
+    public static async Task<DataTable> ExecuteQuery<T>(string connectionString, string sqlQuery, List<SqlParameter>? parameters, bool useTransaction)
     {
         //var result = new List<T>();
 
@@ -192,11 +192,11 @@ public static class DataAccess
             if (parameters != null) comando.Parameters.AddRange(parameters.ToArray());
 
             using var reader = await comando.ExecuteReaderAsync();
-            
+
             var table = new DataTable();
             table.Load(reader);
             table.TableName = "Dtproducts";
-                         
+
             transaction?.Commit();
             return table ?? new DataTable();
 

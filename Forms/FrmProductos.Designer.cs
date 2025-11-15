@@ -505,6 +505,7 @@
             bot_excel.Size = new Size(85, 30);
             bot_excel.Text = "Excel";
             bot_excel.ToolTipText = "Importar Data Excel";
+            bot_excel.Click += bot_excel_Click;
             // 
             // groupBox3
             // 

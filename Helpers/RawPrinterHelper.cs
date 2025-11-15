@@ -15,8 +15,8 @@ namespace Ritrama2025.Helpers
         [LibraryImport("winspool.drv", EntryPoint = "OpenPrinterA", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static partial bool OpenPrinter(
-            [MarshalAs(UnmanagedType.LPStr)] string szPrinter, 
-            out IntPtr hPrinter, 
+            [MarshalAs(UnmanagedType.LPStr)] string szPrinter,
+            out IntPtr hPrinter,
             IntPtr pd);
 
         [LibraryImport("winspool.drv", EntryPoint = "ClosePrinter", SetLastError = true)]

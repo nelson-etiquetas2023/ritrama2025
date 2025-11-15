@@ -54,7 +54,7 @@ namespace Ritrama2025.Services.InventarioService
 
                 transaction.Commit();
 
-                
+
                 return true;
             }
             catch (Exception ex)
@@ -69,7 +69,7 @@ namespace Ritrama2025.Services.InventarioService
             try
             {
                 var parameters = new { NombreTabla = "rolls_details", Sql = R.QUERY.PRODUCTION.SQL_QUERY_LOAD_INVENTARIO_ROLLO_CORTADO };
-                DataTable? dt = await CargarTablaAsync(parameters.Sql,false, null,parameters.NombreTabla,true);
+                DataTable? dt = await CargarTablaAsync(parameters.Sql, false, null, parameters.NombreTabla, true);
                 if (dt == null)
                 {
                     throw new InvalidOperationException("La tabla de rollo cortado no se pudo cargar correctamente.");
@@ -86,7 +86,7 @@ namespace Ritrama2025.Services.InventarioService
             }
         }
 
-        public async Task<DataTable?> LoadMasterInventario() 
+        public async Task<DataTable?> LoadMasterInventario()
         {
             try
             {
@@ -113,12 +113,12 @@ namespace Ritrama2025.Services.InventarioService
 
         public bool SaveMasterInitialDB(List<ProductMAP> lista)
         {
-			try
-			{
+            try
+            {
                 using SqlConnection conn = new(StringConnex);
                 conn.Open();
 
-                foreach (var item in lista) 
+                foreach (var item in lista)
                 {
                     using var transaction = conn.BeginTransaction();
                     using SqlCommand comando = new()
@@ -154,11 +154,11 @@ namespace Ritrama2025.Services.InventarioService
                 MessageBox.Show("Se ha guardaron los datos correctamente");
                 return true;
             }
-			catch (Exception ex)
-			{
+            catch (Exception ex)
+            {
                 MessageBox.Show("Error al guardar los datos en la base de datos. Error code: " + ex.Message);
                 return false;
-			}
+            }
         }
 
         public bool ValidProductid(string id)
@@ -224,16 +224,16 @@ namespace Ritrama2025.Services.InventarioService
             {
                 MessageBox.Show("Error al tratar de registrar los productos, en el modulo de inventario...");
                 return false;
-               
+
             }
         }
 
         private async Task<DataTable?> CargarTablaAsync(
             string sqlQuery,
-            bool loadDataset = false, 
-            SqlParameter[]? parametros = null, 
+            bool loadDataset = false,
+            SqlParameter[]? parametros = null,
             string? nombreTabla = null,
-            bool returnDataTable = false) 
+            bool returnDataTable = false)
         {
 
             using SqlConnection conn = new(StringConnex);
@@ -251,14 +251,14 @@ namespace Ritrama2025.Services.InventarioService
                 comando.Parameters.AddRange(parametros);
             }
 
-            if (loadDataset) 
+            if (loadDataset)
             {
-                using SqlDataAdapter adapter = new() { SelectCommand = comando};
+                using SqlDataAdapter adapter = new() { SelectCommand = comando };
                 adapter.Fill(Ds, nombreTabla!);
                 return null;
             }
 
-            if (returnDataTable) 
+            if (returnDataTable)
             {
                 using SqlDataAdapter adapter = new() { SelectCommand = comando };
                 DataTable dt = new();
@@ -271,6 +271,6 @@ namespace Ritrama2025.Services.InventarioService
 
         }
 
-        
+
     }
 }

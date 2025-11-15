@@ -9,17 +9,17 @@ namespace Ritrama2025.Forms.Seleccion
 {
     public partial class FrmSeleccion : Form
     {
-        private static readonly Dictionary<string, (String IdCol, string DesCol, string TypeCol)> Columnas = new() 
+        private static readonly Dictionary<string, (String IdCol, string DesCol, string TypeCol)> Columnas = new()
         {
-            ["clientes"] = ("customer_id", "customer_name",""),
-            ["Vendedores"] = ("vendor_id", "vendor_name",""),
-            ["Transporte"] = ("transport_id", "transport_name",""),
-            ["chofer"] = ("chofer_id", "chofer_name",""),
-            ["camion"] = ("placas_id", "camion_name",""),
-            ["operadores"] = ("operador_id", "nombre",""),
-            ["Proveedor"] = ("proveedor_id", "proveedor_name",""),
-            ["Persona"] = ("person_id", "person_name",""),
-            ["Producto"] = ("product_id","product_name","tipo")
+            ["clientes"] = ("customer_id", "customer_name", ""),
+            ["Vendedores"] = ("vendor_id", "vendor_name", ""),
+            ["Transporte"] = ("transport_id", "transport_name", ""),
+            ["chofer"] = ("chofer_id", "chofer_name", ""),
+            ["camion"] = ("placas_id", "camion_name", ""),
+            ["operadores"] = ("operador_id", "nombre", ""),
+            ["Proveedor"] = ("proveedor_id", "proveedor_name", ""),
+            ["Persona"] = ("person_id", "person_name", ""),
+            ["Producto"] = ("product_id", "product_name", "tipo")
         };
         readonly ICommonService service = ServiceLocator.Get<ICommonService>();
 
@@ -40,7 +40,7 @@ namespace Ritrama2025.Forms.Seleccion
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Titulo { get; set; } = null!;
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Tipo { get; set; } = null!;
 
         DataView Dv = new();
@@ -57,13 +57,13 @@ namespace Ritrama2025.Forms.Seleccion
             Numero_reg.Text = Convert.ToString(Dv.Count) + " Registro Encontrados";
             titleform.Text = Titulo;
             bot_buscar.Focus();
-            if (Columnas.TryGetValue(Titulo,out var cols)) 
+            if (Columnas.TryGetValue(Titulo, out var cols))
             {
                 colname1 = cols.IdCol;
                 colname2 = cols.DesCol;
-                if (Titulo == "Producto") 
+                if (Titulo == "Producto")
                 {
-                  colname3 = cols.TypeCol;
+                    colname3 = cols.TypeCol;
                 }
             }
             EstilosGrid();
@@ -98,7 +98,7 @@ namespace Ritrama2025.Forms.Seleccion
                 DataPropertyName = colname2
             };
             Grid_Items.Columns.Add(col2);
-            if (Titulo == "Producto") 
+            if (Titulo == "Producto")
             {
                 DataGridViewTextBoxColumn col3 = new()
                 {
@@ -124,14 +124,14 @@ namespace Ritrama2025.Forms.Seleccion
             }
             Id = Grid_Items.Rows[e.RowIndex].Cells[0].Value!.ToString()!;
             Description = Grid_Items.Rows[e.RowIndex].Cells[1].Value!.ToString()!;
-            if(Titulo == "Producto") Tipo = Grid_Items.Rows[e.RowIndex].Cells[2].Value!.ToString()!;
+            if (Titulo == "Producto") Tipo = Grid_Items.Rows[e.RowIndex].Cells[2].Value!.ToString()!;
 
             this.Close();
         }
 
         private void Btn_add_new_Click(object sender, EventArgs e)
         {
-            if (Titulo is "Transporte" or "chofer" or "camion" or "Proveedor" or "Persona" or "Producto" or "operadores" or "clientes" or "Vendedores" ) 
+            if (Titulo is "Transporte" or "chofer" or "camion" or "Proveedor" or "Persona" or "Producto" or "operadores" or "clientes" or "Vendedores")
             {
                 var fromNew = new Frm_AddNew()
                 {
@@ -147,22 +147,22 @@ namespace Ritrama2025.Forms.Seleccion
         private void Btn_delete_row_Click(object sender, EventArgs e)
         {
             //procedimiento para eliminar un registro seleccionado.
-            if (MessageBox.Show("Desea Eliminar este registro (S/N)","Confirmar",MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) 
+            if (MessageBox.Show("Desea Eliminar este registro (S/N)", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 //se actualiza la ui de la aplicación.
                 DataRowView row = Dv[Grid_Items.CurrentRow!.Index];
-                
-                if(Titulo == "Transporte")
+
+                if (Titulo == "Transporte")
                 {
                     string id = row["transport_id"].ToString()!;
                     service.DeleteTransportEntity(id);
                 }
-                if (Titulo == "Chofer") 
+                if (Titulo == "Chofer")
                 {
                     string id = row["chofer_id"].ToString()!;
                     service.DeleteChoferEntity(id);
                 }
-                if (Titulo == "Camion") 
+                if (Titulo == "Camion")
                 {
                     string id = row["placas_id"].ToString()!;
                     service.DeleteCamionEntity(id);
@@ -175,7 +175,7 @@ namespace Ritrama2025.Forms.Seleccion
                 if (Titulo == "operadores")
                 {
                     string id = row["operador_id"].ToString()!;
-                    service.DeleteOperatorEntity(id);   
+                    service.DeleteOperatorEntity(id);
                 }
                 //borro solo al final.
                 DtItems.Rows.Remove(row.Row);

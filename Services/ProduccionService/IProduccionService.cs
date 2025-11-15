@@ -21,7 +21,7 @@ namespace Ritrama2025.Services.ProduccionService
         public bool UpdateOrdenCorte(Orden orden);
         public Task<bool> UpdateInventaryMasterInitial(object objeto);
         public Task<DataTable?> LoadTableMasterInic();
-        public Task<bool> UpdateDetailsConsumosMasterIniciales(string rollid, string orden, double length_consumo, DateTime fecha_reg,bool desperdicio);
+        public Task<bool> UpdateDetailsConsumosMasterIniciales(string rollid, string orden, double length_consumo, DateTime fecha_reg, bool desperdicio);
         public Task<DataTable?> LoadDataDetailsConsumosMasterInic(string rollid);
         public void Update_Items_Orden_Corte(List<RolloCortado> rollos);
         public void Update_Header_Documnet_OC(Orden orden);

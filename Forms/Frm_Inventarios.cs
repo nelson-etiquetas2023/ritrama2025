@@ -7,7 +7,6 @@ using Ritrama2025.Services.InventarioService;
 using Ritrama2025.Services.ProduccionService;
 using Ritrama2025.Services.ReportsService.ReportsService;
 using System.Data;
-using System.IO;
 using System.Diagnostics;
 using System.Drawing.Printing;
 
@@ -60,7 +59,7 @@ public partial class Frm_Inventarios : Form
     {
         TabPage page = TabPages_Inventario.TabPages[e.Index];
         System.Drawing.Rectangle tabRect = e.Bounds;
-        
+
         // Determinar si la pestaña está seleccionada
         bool isSelected = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
 
@@ -142,11 +141,11 @@ public partial class Frm_Inventarios : Form
                 Length_Restante = Convert.ToDouble(GridMaster.Rows[i].Cells["length_restante"].Value),
                 Estado = GridMaster.Rows[i].Cells["estado"].Value?.ToString() ?? string.Empty,
                 //Msi = Convert.ToDouble(GridMaster.Rows[i].Cells["msi"].Value),
-                Ubic = GridMaster.Rows[i].Cells["ubic"].Value?.ToString() ?? string.Empty,
-                Cant = 1, // Assuming each row represents one roll
-                Recepcion = GridMaster.Rows[i].Cells["fecha"].Value?.ToString() ?? string.Empty,
-                Fecha_Fabricacion = Convert.ToDateTime(GridMaster.Rows[i].Cells["fecha_pro"].Value),
-                Fecha_Llegada = DateTime.Now, // Assuming current date for arrival
+                //Ubic = GridMaster.Rows[i].Cells["ubic"].Value?.ToString() ?? string.Empty,
+                //Cant = 1, // Assuming each row represents one roll
+                //Recepcion = GridMaster.Rows[i].Cells["fecha"].Value?.ToString() ?? string.Empty,
+                //Fecha_Fabricacion = Convert.ToDateTime(GridMaster.Rows[i].Cells["fecha_pro"].Value),
+                //Fecha_Llegada = DateTime.Now, // Assuming current date for arrival
             };
             lista.Add(master);
         }
@@ -351,6 +350,20 @@ public partial class Frm_Inventarios : Form
         {
             Dv.RowFilter = "ubicacion like '%" + txt_buscar.Text + "%'";
         }
+        if (rad_MasterCompleto.Checked)
+        {
+            Dv.RowFilter = "estado like '%" + "Completo" + "%'";
+        }
+        if (rad_MasterParcial.Checked)
+        {
+            Dv.RowFilter = "estado like '%" + "Parcialmente" + "%'";
+        }
+        if (rad_MasterConsumido.Checked)
+        {
+            Dv.RowFilter = "estado like '%" + "Agotado" + "%'";
+        }
+
+
         ContarRegistros();
     }
     private void Btn_limpiar_filtros_Click(object sender, EventArgs e)
@@ -520,14 +533,14 @@ public partial class Frm_Inventarios : Form
                     string length_Consumido = item["largo_consumido"].ToString()!.Trim();
                     string length_Restante = item["largo_restante"].ToString()!.Trim();
                     string estado = item["estado"].ToString()!.Trim();
-                    string fec_produc = item["fecha_pro"].ToString()!.Trim();
-                    string fec_ingreso = item["fecha_recep"].ToString()!.Trim();
-                    string splice = item["splice"].ToString()!.Trim();
-                    string ubic = item["ubicacion"].ToString()!.Trim();
-                    string tipo_mov = item["tipo_mov"].ToString()!.Trim();
+                    //string fec_produc = item["fecha_pro"].ToString()!.Trim();
+                    //string fec_ingreso = item["fecha_recep"].ToString()!.Trim();
+                    //string splice = item["splice"].ToString()!.Trim();
+                    //string ubic = item["ubicacion"].ToString()!.Trim();
+                    //string tipo_mov = item["tipo_mov"].ToString()!.Trim();
 
                     string linea = $"{product_id},{product_name},{rollid},{width},{lenght},{length_Consumido}," +
-                        $"{length_Restante},{estado},{fec_produc},{fec_ingreso},{splice},{ubic},{tipo_mov}";
+                        $"{length_Restante},{estado}";
 
                     sr.WriteLine(linea);
                 }
@@ -800,12 +813,12 @@ public partial class Frm_Inventarios : Form
 
                 string product_id = fila.Cells["product_id"].Value?.ToString()!;
 
-                string productName = fila.Cells["product_name"].Value!.ToString()!.Length > 28 ? fila.Cells["product_name"].Value!.ToString()!.Substring(0,28) : fila.Cells["product_name"].Value!.ToString()!;
+                string productName = fila.Cells["product_name"].Value!.ToString()!.Length > 28 ? fila.Cells["product_name"].Value!.ToString()![..28] : fila.Cells["product_name"].Value!.ToString()!;
 
 
                 string rollid = fila.Cells["roll_id"].Value!.ToString()!;
 
-                double width_d = Math.Round(Convert.ToDouble(fila.Cells["width"].Value),2,MidpointRounding.AwayFromZero);
+                double width_d = Math.Round(Convert.ToDouble(fila.Cells["width"].Value), 2, MidpointRounding.AwayFromZero);
 
                 double length_d = Math.Round(Convert.ToDouble(fila.Cells["length_restante"].Value), 2, MidpointRounding.AwayFromZero);
 
@@ -902,6 +915,21 @@ public partial class Frm_Inventarios : Form
     {
 
     }
+
+    private void Rad_MasterCompleto_CheckedChanged(object sender, EventArgs e)
+    {
+        rad_rollid.Checked = false;
+    }
+
+    private void Rad_MasterParcial_CheckedChanged(object sender, EventArgs e)
+    {
+        rad_rollid.Checked = false;
+    }
+
+    private void Rad_MasterConsumido_CheckedChanged(object sender, EventArgs e)
+    {
+        rad_rollid.Checked = false;
+    }
 }
 public class ColumnaType
 {
@@ -920,9 +948,9 @@ public class ColumnaType
     }
     public void LoadPrinters()
     {
-        
 
-        
+
+
     }
 
 }

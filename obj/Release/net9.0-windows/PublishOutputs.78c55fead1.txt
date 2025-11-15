@@ -78,13 +78,18 @@ C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Microsoft.ReportV
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\Microsoft.ReportViewer.WinForms.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\SixLabors.Fonts.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\System.ClientModel.dll
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\System.Diagnostics.DiagnosticSource.dll
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\System.Diagnostics.EventLog.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\System.IdentityModel.Tokens.Jwt.dll
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\System.IO.Pipelines.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\System.Memory.Data.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\System.ServiceModel.Http.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\System.ServiceModel.Duplex.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\System.ServiceModel.Primitives.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\System.ServiceModel.Security.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\System.ServiceModel.dll
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\System.Text.Encodings.Web.dll
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\System.Text.Json.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\cs\Microsoft.CodeAnalysis.resources.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\de\Microsoft.CodeAnalysis.resources.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\es\Microsoft.CodeAnalysis.resources.dll
@@ -155,3 +160,7 @@ C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\runtimes\win\lib\
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\runtimes\win\lib\net9.0\System.Diagnostics.EventLog.Messages.dll
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\runtimes\win\lib\net9.0\System.Diagnostics.EventLog.dll
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+C:\Programacion\Ritrama2025\bin\Release\net9.0-windows\publish\runtimes\win\lib\net9.0\System.Text.Encodings.Web.dll

@@ -1,8 +1,8 @@
 ﻿
 namespace Ritrama2025.Models
 {
-   public class ItemsDespacho
-   {
+    public class ItemsDespacho
+    {
         public string Numero { get; set; } = null!;
         public string Product_id { get; set; } = null!;
         public string Product_name { get; set; } = null!;

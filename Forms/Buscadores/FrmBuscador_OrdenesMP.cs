@@ -1,5 +1,5 @@
-﻿using System.Data;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using System.Data;
 
 namespace Ritrama2025.Forms.Buscadores
 {
@@ -118,7 +118,7 @@ namespace Ritrama2025.Forms.Buscadores
         }
         private void Grid_Items_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.RowIndex < 0) 
+            if (e.RowIndex < 0)
             {
                 return;
             }

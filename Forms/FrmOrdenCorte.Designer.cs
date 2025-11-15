@@ -1193,6 +1193,7 @@
             Controls.Add(toolStrip1);
             Controls.Add(panel1);
             Name = "FrmOrdenCorte";
+            FormClosed += FrmOrdenCorte_FormClosed;
             Load += FrmOrdenCorte_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

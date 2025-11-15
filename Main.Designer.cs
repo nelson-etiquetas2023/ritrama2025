@@ -165,7 +165,7 @@
             label3.Name = "label3";
             label3.Size = new Size(97, 31);
             label3.TabIndex = 2;
-            label3.Text = "Compilacion: 6-11-2025 11:19";
+            label3.Text = "Compilacion: 12-11-2025 10:42";
             // 
             // label2
             // 
@@ -173,9 +173,9 @@
             label2.Font = new Font("Bowlby One SC", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.Location = new Point(3, 22);
             label2.Name = "label2";
-            label2.Size = new Size(82, 38);
+            label2.Size = new Size(83, 38);
             label2.TabIndex = 1;
-            label2.Text = "1.00";
+            label2.Text = "1.01";
             // 
             // label1
             // 
@@ -213,7 +213,6 @@
             button4.Text = "Reportes";
             button4.TextImageRelation = TextImageRelation.ImageBeforeText;
             button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
             // 
             // button3
             // 

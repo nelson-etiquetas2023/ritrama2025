@@ -370,7 +370,7 @@ public class CommonService : ICommonService
     }
 
 
-    public void SaveVendedorEntity(string Id, string Name) 
+    public void SaveVendedorEntity(string Id, string Name)
     {
         using SqlConnection conn = new(StringConnex);
         SqlCommand comando = new()
@@ -472,7 +472,7 @@ public class CommonService : ICommonService
             //columna de disponible.
             comando.Parameters.AddWithValue("@p2", true);
             SqlDataReader reader = comando.ExecuteReader();
-            while (reader.Read()) 
+            while (reader.Read())
             {
                 rollo.Product_Id = reader.GetString(reader.GetOrdinal("product_id"));
                 rollo.Product_Name = reader.GetString(reader.GetOrdinal("product_name"));
@@ -482,7 +482,7 @@ public class CommonService : ICommonService
                 rollo.Width = reader.GetDecimal(reader.GetOrdinal("width"));
                 rollo.Length = reader.GetDecimal(reader.GetOrdinal("large"));
                 rollo.Msi = reader.GetDecimal(reader.GetOrdinal("msi"));
-                rollo.Ubicacion  = reader.GetString(reader.GetOrdinal("ubic"));
+                rollo.Ubicacion = reader.GetString(reader.GetOrdinal("ubic"));
                 rollo.RollNumber = reader.GetInt32(reader.GetOrdinal("roll_number"));
                 rollo.Numero = Convert.ToString(reader.GetInt32(reader.GetOrdinal("numero")));
                 rollo.Status = reader.GetString(reader.GetOrdinal("status"));
@@ -499,5 +499,5 @@ public class CommonService : ICommonService
         return rollo;
     }
 
-    
+
 }

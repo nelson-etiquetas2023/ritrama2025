@@ -6,36 +6,35 @@ namespace Ritrama2025.Helpers
     {
         private static readonly Dictionary<Type, Form> _forms = [];
 
-        public static T ShowForm<T>(Form mdiParent) where T : Form
+        public static T? ShowForm<T>(Form mdiParent) where T : Form
         {
             var type = typeof(T);
-            
+
 
             // verificar si ya existe y esta abierto
             if (_forms.TryGetValue(type, out var existingForm))
             {
-                if (existingForm.IsDisposed)
+                foreach (var xform in _forms.Values)
                 {
-                    _forms.Remove(type);
+                    xform.WindowState = FormWindowState.Normal; // evita que quede minimizado
+                    xform.Show();                               // asegura que esté visible
+                    xform.BringToFront();                       // lo trae al frente
                 }
-                else
-                {
-                    existingForm.BringToFront();
-                    if (existingForm.WindowState == FormWindowState.Minimized) existingForm.WindowState = FormWindowState.Normal;
-
-                    return (T)existingForm;
-                }
+                return null;
             }
             //crear una nueva instancia usando DI
-            var form = ServiceLocator.Get<T>();
-            //form.MdiParent = mdiParent;
-            form.StartPosition = FormStartPosition.Manual;
-            form.Location = new Point(0, 0);
-            form.WindowState = FormWindowState.Normal;
-          
             
-
+            var form = ServiceLocator.Get<T>();
+            
             _forms[type] = form;
+
+            foreach (var xform in _forms.Values)
+            {
+                xform.WindowState = FormWindowState.Normal; // evita que quede minimizado
+                xform.Show();                               // asegura que esté visible
+                xform.BringToFront();                       // lo trae al frente
+            }
+
 
             form.FormClosed += (s, e) =>
             {

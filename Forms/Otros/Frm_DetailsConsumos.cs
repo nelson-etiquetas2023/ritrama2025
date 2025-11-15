@@ -25,7 +25,7 @@ namespace Ritrama2025.Forms.Otros
             InitializeComponent();
             ProduccionService = produccionService;
         }
-        
+
         private async void Frm_DetailsConsumos_Load(object sender, EventArgs e)
         {
             LoadParameters();
@@ -41,7 +41,7 @@ namespace Ritrama2025.Forms.Otros
             for (int i = 1; i < Grid_Items.Rows.Count + 1; i++)
             {
                 Grid_Items.Rows[i - 1].Cells["item"].Value = i.ToString();
-                total_consumo += Convert.ToDouble(Grid_Items.Rows[i - 1].Cells["consumo"].Value)+
+                total_consumo += Convert.ToDouble(Grid_Items.Rows[i - 1].Cells["consumo"].Value) +
                     Convert.ToDouble(Grid_Items.Rows[i - 1].Cells["monto_des"].Value);
                 rollos += Convert.ToInt32(Grid_Items.Rows[i - 1].Cells["cant_rollos"].Value);
 
@@ -58,11 +58,11 @@ namespace Ritrama2025.Forms.Otros
             Grid_Items.DataSource = DtItems;
         }
 
-        private void ColumnDefinitionsGrid() 
+        private void ColumnDefinitionsGrid()
         {
             Grid_Items.AutoGenerateColumns = false;
             CommonService.ADD_COLUMN_GRID("item", 30, "It.", "", Grid_Items);
-            CommonService.ADD_COLUMN_GRID("orden",60,"Orden Corte","orden",Grid_Items);
+            CommonService.ADD_COLUMN_GRID("orden", 60, "Orden Corte", "orden", Grid_Items);
             CommonService.ADD_COLUMN_GRID("consumo", 60, "Consumo Length [Pies]", "consumo", Grid_Items);
             CommonService.ADD_COLUMN_GRID("cant_rollos", 60, "Cant. Rollos", "cant_rollos", Grid_Items);
             CommonService.ADD_COLUMN_GRID("customer_name", 130, "Cliente", "customer_name", Grid_Items);
@@ -78,7 +78,7 @@ namespace Ritrama2025.Forms.Otros
             colCheck.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             Grid_Items.Columns.Add(colCheck);
         }
-        private void LoadParameters() 
+        private void LoadParameters()
         {
             txt_rollid.Text = Rollid;
             txt_productid.Text = Productid;

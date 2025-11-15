@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.ComponentModel;
 
 namespace Ritrama2025.Forms.Otros
 {
@@ -28,7 +20,7 @@ namespace Ritrama2025.Forms.Otros
         {
             GuardarDatos();
         }
-        private void GuardarDatos() 
+        private void GuardarDatos()
         {
             this.Parameter = txt_buscar.Text;
             this.Close();
@@ -37,7 +29,7 @@ namespace Ritrama2025.Forms.Otros
 
         private void txt_buscar_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == 13) 
+            if (e.KeyChar == 13)
             {
                 GuardarDatos();
             }

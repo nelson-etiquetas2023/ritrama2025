@@ -1,5 +1,4 @@
 ﻿using ClosedXML.Excel;
-using DocumentFormat.OpenXml.Spreadsheet;
 using Ritrama2025.Forms.Buscadores;
 using Ritrama2025.Forms.Otros;
 using Ritrama2025.Forms.Seleccion;
@@ -34,9 +33,9 @@ namespace Ritrama2025.Forms
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string FileName { get; set; } = null!;
 
-        public List<TemplateMasterExcel> ListExcel = [];      
+        public List<TemplateMasterExcel> ListExcel = [];
 
-        public FrmMateriaPrima(IInventarioService inventarioService,IServiceMateriaPrima Services, IExportDataService exportDataService,IReportsService reportService, IServiceCommonData serviceCommonData)
+        public FrmMateriaPrima(IInventarioService inventarioService, IServiceMateriaPrima Services, IExportDataService exportDataService, IReportsService reportService, IServiceCommonData serviceCommonData)
         {
             InitializeComponent();
             this.Services = Services;
@@ -274,7 +273,7 @@ namespace Ritrama2025.Forms
 
         private void Btn_addRows_Click(object sender, EventArgs e)
         {
-        
+
             FrmProductsInsert frmInsertRows = new(ServiceCommonData)
             {
                 DtItems = Ds.Tables["DtProducts"]!,
@@ -285,7 +284,7 @@ namespace Ritrama2025.Forms
             string rollid_form = frmInsertRows.Producto.Rollid;
             bool IsNotcreate = false;
 
-            foreach (DataGridViewRow row in GridItems.Rows) 
+            foreach (DataGridViewRow row in GridItems.Rows)
             {
                 var rollid_grid = row.Cells["rollid"].Value?.ToString();
 
@@ -300,7 +299,7 @@ namespace Ritrama2025.Forms
             {
                 MessageBox.Show("El roll-id ya esta en la lista, no se va ha crear...");
             }
-            else 
+            else
             {
                 //Insertar el row en el GridItems.
                 if (frmInsertRows.Producto != null)
@@ -387,7 +386,7 @@ namespace Ritrama2025.Forms
                 MessageBox.Show("Debe registras algunos productos para poder grabar la orden...");
                 return;
             }
-            
+
 
 
             if (EditMode == "ADDNEW")
@@ -424,7 +423,7 @@ namespace Ritrama2025.Forms
             btn_ExportDoc.Enabled = true;
             RefreshDocument();
         }
-   
+
         private OrdenMP CREATE_ORDEN_OBJECT()
         {
             //Header.
@@ -455,7 +454,7 @@ namespace Ritrama2025.Forms
 
                 var ProductId = Item.Cells["product_id"].Value;
                 var ProductName = Item.Cells["product_name"].Value;
-               //var Product_Type = Item.Cells["product_type"].Value;
+                //var Product_Type = Item.Cells["product_type"].Value;
                 var WidthMaster = Convert.ToDouble(Item.Cells["width"].Value);
                 var LengthMaster = Convert.ToDouble(Item.Cells["length"].Value);
                 //var MsiMaster = Convert.ToDouble(Item.Cells["msi"].Value);
@@ -474,7 +473,7 @@ namespace Ritrama2025.Forms
                 var fecha_produccion = Convert.ToDateTime(Item.Cells["fecha_produccion"].Value);
                 var fecha_llegada = Convert.ToDateTime(Item.Cells["fecha_llegada"].Value);
 
-                
+
 
                 Orden.Items.Add(new OrdenDetailsMP
                 {
@@ -489,7 +488,7 @@ namespace Ritrama2025.Forms
                     Ubicacion = Ubicacion,
                     //Cantidad_Pedido = Cantidad_Pedido,
                     //Cantidad_Real = Cantidad_Real,
-                    
+
                     Num_empalme = num_empalme!,
                     Num_Paleta = num_paleta!,
                     Factura = factura!,
@@ -498,7 +497,7 @@ namespace Ritrama2025.Forms
 
 
 
-                    Estado ="Completo"
+                    Estado = "Completo"
                 });
             }
 
@@ -507,7 +506,7 @@ namespace Ritrama2025.Forms
 
         private void Btn_cancel_Click(object sender, EventArgs e)
         {
-            if (Bs.Current is DataRowView drvMaster) 
+            if (Bs.Current is DataRowView drvMaster)
             {
                 DataRow rowMaster = drvMaster.Row;
                 DataRow[] items = rowMaster.GetChildRows("FK_MASTER_DETAILS");
@@ -520,12 +519,12 @@ namespace Ritrama2025.Forms
 
                 rowMaster.Delete();
                 Bs.EndEdit();
-                Bs.ResetBindings(false);    
+                Bs.ResetBindings(false);
                 Bs.Position = Bs.Count;
 
             }
 
-          
+
 
 
 
@@ -560,8 +559,8 @@ namespace Ritrama2025.Forms
             using var workbook = new XLWorkbook();
             var worksheet = workbook.Worksheets.Add("TemplateMateriaPrima");
             string filePath = Path.Combine(Environment.CurrentDirectory, "Template");
-            
-           
+
+
             worksheet.Cell(1, 1).Value = "Product. Id.";
             worksheet.Cell(1, 2).Value = "Nombre del Producto";
             worksheet.Cell(1, 3).Value = "Roll-Id";
@@ -577,11 +576,11 @@ namespace Ritrama2025.Forms
             var col1 = worksheet.Column(1);
             col1.Style.NumberFormat.Format = "@";
             col1.Width = 15; // Ajustar el ancho de la columna
-            
+
             var col2 = worksheet.Column(2);
             col2.Width = 50; // Ajustar el ancho de la columna
 
-            
+
             var col3 = worksheet.Column(3);
             col3.Width = 15; // Ajustar el ancho de la columna
             worksheet.Column("C").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
@@ -875,7 +874,7 @@ namespace Ritrama2025.Forms
 
         private void Btn_printDoc_Click(object sender, EventArgs e)
         {
-            ReportService.Reporte_Orden_MatPrima(txt_numeroOrden.Text,this,"RptImportFormat.rdlc","ORDEN DE RECEPCION DE MATERIA PRIMA");
+            ReportService.Reporte_Orden_MatPrima(txt_numeroOrden.Text, this, "RptImportFormat.rdlc", "ORDEN DE RECEPCION DE MATERIA PRIMA");
         }
     }
 }

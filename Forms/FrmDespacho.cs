@@ -2,10 +2,10 @@
 using Ritrama2025.Forms.Otros;
 using Ritrama2025.Forms.Seleccion;
 using Ritrama2025.Models;
-using Ritrama2025.Services.DespachoService.DespachoService;
-using Ritrama2025.Services.ReportsService.ReportsService;
 using Ritrama2025.Services.CommonService;
+using Ritrama2025.Services.DespachoService.DespachoService;
 using Ritrama2025.Services.ExportData;
+using Ritrama2025.Services.ReportsService.ReportsService;
 using System.Data;
 
 
@@ -542,7 +542,7 @@ namespace Ritrama2025.Forms
                 MessageBox.Show("Debe agregar los renglones de los rollos costados...");
                 return;
             }
-            
+
 
 
 
@@ -574,7 +574,7 @@ namespace Ritrama2025.Forms
             //Encabezado de despacho.
             Despacho DocumentDespacho = new()
             {
-              
+
                 Numero = txt_numero.Text,
                 Fecha_despacho = Convert.ToDateTime(txt_fecha_despacho.Text),
                 Customer_Id = txt_custid.Text,
@@ -671,15 +671,15 @@ namespace Ritrama2025.Forms
                 };
                 DocumentDespacho.Detalle_Paleta.Add(palet);
             }
-            
-            
+
+
             Service.AddDocumentDespacho(DocumentDespacho);
             Service.AddPickingListDespacho(DocumentDespacho.Detalle_RC);
             Service.AddItemsDespacho(DocumentDespacho.Items_Despacho);
             Service.AddPaletDetailsDespacho(DocumentDespacho.Detalle_Paleta);
 
             //Actualizacion de Inventarios.
-            Service.UpDateInventoryRC(DocumentDespacho.Detalle_RC, txt_numero.Text,Convert.ToDateTime(txt_fecha_despacho.Text));
+            Service.UpDateInventoryRC(DocumentDespacho.Detalle_RC, txt_numero.Text, Convert.ToDateTime(txt_fecha_despacho.Text));
 
 
 

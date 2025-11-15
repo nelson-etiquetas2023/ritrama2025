@@ -125,13 +125,57 @@
           <DataField>step</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="ubicacion">
-          <DataField>ubicacion</DataField>
+        <Field Name="sellOrder">
+          <DataField>sellOrder</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="SellOrder">
-          <DataField>SellOrder</DataField>
+        <Field Name="rollid_2">
+          <DataField>rollid_2</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="width_2">
+          <DataField>width_2</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="lenght_2">
+          <DataField>lenght_2</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Ubicacion">
+          <DataField>Ubicacion</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TwoMasters">
+          <DataField>TwoMasters</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="vueltas2">
+          <DataField>vueltas2</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="longitud_cortar2">
+          <DataField>longitud_cortar2</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="cantidad_rollos2">
+          <DataField>cantidad_rollos2</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="util2_real_width">
+          <DataField>util2_real_width</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="util2_real_lenght">
+          <DataField>util2_real_lenght</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="rest2_width">
+          <DataField>rest2_width</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="rest2_lenght">
+          <DataField>rest2_lenght</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
@@ -209,7 +253,7 @@
             <Top>4.30424cm</Top>
             <Left>0.3937cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.71771cm</Width>
+            <Width>6.49521cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -237,10 +281,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>fecha</rd:DefaultName>
-            <Top>4.84074cm</Top>
+            <Top>4.77724cm</Top>
             <Left>0.3937cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.71771cm</Width>
+            <Width>6.49521cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -269,10 +313,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>fecha</rd:DefaultName>
-            <Top>5.44074cm</Top>
+            <Top>5.37724cm</Top>
             <Left>0.3937cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.71771cm</Width>
+            <Width>6.49521cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -301,10 +345,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>product_id</rd:DefaultName>
-            <Top>6.04074cm</Top>
+            <Top>5.97724cm</Top>
             <Left>0.3937cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.71771cm</Width>
+            <Width>6.49521cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -333,10 +377,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>producto</rd:DefaultName>
-            <Top>6.64074cm</Top>
-            <Left>0.3937cm</Left>
+            <Top>6.57724cm</Top>
+            <Left>0.53483cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.71771cm</Width>
+            <Width>6.49521cm</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -365,10 +409,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>operador</rd:DefaultName>
-            <Top>7.27602cm</Top>
-            <Left>0.3937cm</Left>
+            <Top>7.21252cm</Top>
+            <Left>0.41883cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.71771cm</Width>
+            <Width>6.49521cm</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -395,10 +439,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Customer_Name</rd:DefaultName>
-            <Top>7.87602cm</Top>
+            <Top>7.81252cm</Top>
             <Left>0.33213cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.77928cm</Width>
+            <Width>6.55678cm</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -428,9 +472,9 @@
             </Paragraphs>
             <rd:DefaultName>roll_id</rd:DefaultName>
             <Top>4.39403cm</Top>
-            <Left>12.04656cm</Left>
+            <Left>7.06531cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.29438cm</Width>
+            <Width>6.07188cm</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
@@ -460,9 +504,9 @@
             </Paragraphs>
             <rd:DefaultName>master_width</rd:DefaultName>
             <Top>4.99403cm</Top>
-            <Left>12.04656cm</Left>
+            <Left>7.06531cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.29438cm</Width>
+            <Width>6.07188cm</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>
@@ -493,9 +537,9 @@
             </Paragraphs>
             <rd:DefaultName>master_length</rd:DefaultName>
             <Top>5.59403cm</Top>
-            <Left>12.04657cm</Left>
+            <Left>7.06532cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.29438cm</Width>
+            <Width>6.07188cm</Width>
             <ZIndex>9</ZIndex>
             <Style>
               <Border>
@@ -525,9 +569,9 @@
             </Paragraphs>
             <rd:DefaultName>master_corte_largo</rd:DefaultName>
             <Top>6.79403cm</Top>
-            <Left>12.04655cm</Left>
+            <Left>7.0653cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.29438cm</Width>
+            <Width>6.07188cm</Width>
             <ZIndex>10</ZIndex>
             <Style>
               <Border>
@@ -557,9 +601,9 @@
             </Paragraphs>
             <rd:DefaultName>master_cortes_ancho</rd:DefaultName>
             <Top>6.19403cm</Top>
-            <Left>12.04657cm</Left>
+            <Left>7.06532cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.29438cm</Width>
+            <Width>6.07188cm</Width>
             <ZIndex>11</ZIndex>
             <Style>
               <Border>
@@ -589,9 +633,9 @@
             </Paragraphs>
             <rd:DefaultName>master_vueltas</rd:DefaultName>
             <Top>7.39403cm</Top>
-            <Left>12.04657cm</Left>
+            <Left>7.06532cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.29438cm</Width>
+            <Width>6.07188cm</Width>
             <ZIndex>12</ZIndex>
             <Style>
               <Border>
@@ -621,9 +665,9 @@
             </Paragraphs>
             <rd:DefaultName>master_cant_rollos</rd:DefaultName>
             <Top>7.99403cm</Top>
-            <Left>12.04655cm</Left>
+            <Left>7.0653cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.29438cm</Width>
+            <Width>6.07188cm</Width>
             <ZIndex>13</ZIndex>
             <Style>
               <Border>
@@ -1636,7 +1680,7 @@
             <Top>3.59841cm</Top>
             <Left>0.3937cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.71771cm</Width>
+            <Width>6.49521cm</Width>
             <ZIndex>19</ZIndex>
             <Style>
               <Border>
@@ -1656,7 +1700,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>DATOS DEL MASTER</Value>
+                    <Value>DATOS DEL MASTER 1</Value>
                     <Style>
                       <FontFamily>JetBrains Mono ExtraBold</FontFamily>
                       <FontSize>12pt</FontSize>
@@ -1670,9 +1714,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox52</rd:DefaultName>
             <Top>3.54681cm</Top>
-            <Left>12.04656cm</Left>
+            <Left>7.06532cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.29439cm</Width>
+            <Width>6.07189cm</Width>
             <ZIndex>20</ZIndex>
             <Style>
               <Border>
@@ -1929,7 +1973,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>CONSUMO DE MATERIA PRIMA</Value>
+                    <Value>CONSUMO DE MATERIA PRIMA 1</Value>
                     <Style>
                       <FontFamily>JetBrains Mono ExtraBold</FontFamily>
                       <FontSize>8pt</FontSize>
@@ -1979,9 +2023,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox52</rd:DefaultName>
             <Top>11.71313cm</Top>
-            <Left>7.17113cm</Left>
+            <Left>14.09167cm</Left>
             <Height>0.6cm</Height>
-            <Width>13.16982cm</Width>
+            <Width>6.24928cm</Width>
             <ZIndex>28</ZIndex>
             <Style>
               <Border>
@@ -2016,7 +2060,6 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox50</rd:DefaultName>
                 <Top>0.1067cm</Top>
-                <Left>0.31817cm</Left>
                 <Height>0.68547cm</Height>
                 <Width>1.94094cm</Width>
                 <Style>
@@ -2050,7 +2093,7 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox50</rd:DefaultName>
                 <Top>0.1067cm</Top>
-                <Left>2.43549cm</Left>
+                <Left>2.11732cm</Left>
                 <Height>0.68547cm</Height>
                 <Width>1.94094cm</Width>
                 <ZIndex>1</ZIndex>
@@ -2085,7 +2128,7 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox50</rd:DefaultName>
                 <Top>0.1067cm</Top>
-                <Left>4.55282cm</Left>
+                <Left>4.23465cm</Left>
                 <Height>0.68547cm</Height>
                 <Width>2.25844cm</Width>
                 <ZIndex>2</ZIndex>
@@ -2107,7 +2150,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>MASTER</Value>
+                        <Value>MASTER1</Value>
                         <Style>
                           <FontSize>8pt</FontSize>
                           <FontWeight>Bold</FontWeight>
@@ -2121,7 +2164,6 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox50</rd:DefaultName>
                 <Top>0.96856cm</Top>
-                <Left>0.31817cm</Left>
                 <Height>0.68547cm</Height>
                 <Width>1.94094cm</Width>
                 <ZIndex>3</ZIndex>
@@ -2157,7 +2199,6 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox50</rd:DefaultName>
                 <Top>1.83042cm</Top>
-                <Left>0.31817cm</Left>
                 <Height>0.68547cm</Height>
                 <Width>1.94094cm</Width>
                 <ZIndex>4</ZIndex>
@@ -2193,7 +2234,6 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox50</rd:DefaultName>
                 <Top>2.69228cm</Top>
-                <Left>0.31817cm</Left>
                 <Height>0.68547cm</Height>
                 <Width>1.94094cm</Width>
                 <ZIndex>5</ZIndex>
@@ -2229,7 +2269,7 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox50</rd:DefaultName>
                 <Top>0.96856cm</Top>
-                <Left>2.43549cm</Left>
+                <Left>2.11732cm</Left>
                 <Height>0.68547cm</Height>
                 <Width>1.94094cm</Width>
                 <ZIndex>6</ZIndex>
@@ -2265,7 +2305,7 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox50</rd:DefaultName>
                 <Top>1.83042cm</Top>
-                <Left>2.47078cm</Left>
+                <Left>2.15261cm</Left>
                 <Height>0.68547cm</Height>
                 <Width>1.94094cm</Width>
                 <ZIndex>7</ZIndex>
@@ -2301,7 +2341,7 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox50</rd:DefaultName>
                 <Top>2.657cm</Top>
-                <Left>2.4355cm</Left>
+                <Left>2.11733cm</Left>
                 <Height>0.68547cm</Height>
                 <Width>1.94094cm</Width>
                 <ZIndex>8</ZIndex>
@@ -2337,7 +2377,7 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox50</rd:DefaultName>
                 <Top>0.96856cm</Top>
-                <Left>4.55283cm</Left>
+                <Left>4.23466cm</Left>
                 <Height>0.68547cm</Height>
                 <Width>2.25844cm</Width>
                 <ZIndex>9</ZIndex>
@@ -2373,7 +2413,7 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox50</rd:DefaultName>
                 <Top>1.83042cm</Top>
-                <Left>4.55283cm</Left>
+                <Left>4.23466cm</Left>
                 <Height>0.68547cm</Height>
                 <Width>2.25844cm</Width>
                 <ZIndex>10</ZIndex>
@@ -2409,7 +2449,7 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox50</rd:DefaultName>
                 <Top>2.69228cm</Top>
-                <Left>4.55283cm</Left>
+                <Left>4.23466cm</Left>
                 <Height>0.68547cm</Height>
                 <Width>2.25844cm</Width>
                 <ZIndex>11</ZIndex>
@@ -2427,9 +2467,9 @@
             </ReportItems>
             <KeepTogether>true</KeepTogether>
             <Top>12.48952cm</Top>
-            <Left>0.07553cm</Left>
-            <Height>3.37775cm</Height>
-            <Width>6.91921cm</Width>
+            <Left>0.3937cm</Left>
+            <Height>3.43998cm</Height>
+            <Width>6.60104cm</Width>
             <ZIndex>29</ZIndex>
             <Style>
               <Border>
@@ -2479,19 +2519,16 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.08615cm</Width>
+                  <Width>0.66375cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.85271cm</Width>
+                  <Width>1.43031cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>2.0776cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>2.0776cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -2629,42 +2666,6 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox114</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>LightGrey</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox116">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Code Person</Value>
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox116</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -2823,47 +2824,12 @@
                         </Textbox>
                       </CellContents>
                     </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="code_person1">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!code_person.Value</Value>
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>code_person1</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
               </TablixRows>
             </TablixBody>
             <TablixColumnHierarchy>
               <TablixMembers>
-                <TablixMember />
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
@@ -2881,10 +2847,10 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DsCortes</DataSetName>
-            <Top>12.61216cm</Top>
-            <Left>7.17113cm</Left>
+            <Top>12.48952cm</Top>
+            <Left>14.09167cm</Left>
             <Height>1.2cm</Height>
-            <Width>10.43886cm</Width>
+            <Width>6.24926cm</Width>
             <ZIndex>31</ZIndex>
             <Style>
               <Border>
@@ -3208,43 +3174,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox133</rd:DefaultName>
-            <Top>8.5113cm</Top>
+            <Top>8.4478cm</Top>
             <Left>0.41883cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.69258cm</Width>
+            <Width>6.47008cm</Width>
             <ZIndex>39</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="ubicacion">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>="UBICACION: " &amp; First(Fields!ubicacion.Value, "DsOC")</Value>
-                    <Style>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>ubicacion</rd:DefaultName>
-            <Top>3.50003in</Top>
-            <Left>4.74274in</Left>
-            <Height>0.25in</Height>
-            <Width>3.2655in</Width>
-            <ZIndex>40</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3257,10 +3191,10 @@
           </Textbox>
           <Line Name="Line1">
             <Top>3.48614in</Top>
-            <Left>4.74274in</Left>
+            <Left>2.78162in</Left>
             <Height>0in</Height>
-            <Width>3.2655in</Width>
-            <ZIndex>41</ZIndex>
+            <Width>2.39051in</Width>
+            <ZIndex>40</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -3274,7 +3208,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>="Sell Order: " + First(Fields!SellOrder.Value, "DsOC")</Value>
+                    <Value>="Sell Order: " + First(Fields!sellOrder.Value, "DsOC")</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -3284,11 +3218,749 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox133</rd:DefaultName>
-            <Top>8.99563cm</Top>
+            <Top>8.93213cm</Top>
             <Left>0.33213cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.77928cm</Width>
+            <Width>6.55678cm</Width>
+            <ZIndex>41</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox62">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>CONSUMO DE MATERIA PRIMA 2</Value>
+                    <Style>
+                      <FontFamily>JetBrains Mono ExtraBold</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox52</rd:DefaultName>
+            <Top>11.74841cm</Top>
+            <Left>7.17113cm</Left>
+            <Height>0.6cm</Height>
+            <Width>6.57591cm</Width>
             <ZIndex>42</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>LightGrey</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Rectangle Name="Rectangle8">
+            <ReportItems>
+              <Textbox Name="Textbox80">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>Descripcion</Value>
+                        <Style>
+                          <FontSize>8pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox50</rd:DefaultName>
+                <Top>0.1067cm</Top>
+                <Height>0.68547cm</Height>
+                <Width>1.94094cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <BackgroundColor>LightGrey</BackgroundColor>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox81">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>Width</Value>
+                        <Style>
+                          <FontSize>8pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox50</rd:DefaultName>
+                <Top>0.1067cm</Top>
+                <Left>2.11732cm</Left>
+                <Height>0.68547cm</Height>
+                <Width>1.94094cm</Width>
+                <ZIndex>1</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <BackgroundColor>LightGrey</BackgroundColor>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox82">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>Lenght</Value>
+                        <Style>
+                          <FontSize>8pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox50</rd:DefaultName>
+                <Top>0.1067cm</Top>
+                <Left>4.23465cm</Left>
+                <Height>0.68547cm</Height>
+                <Width>2.25844cm</Width>
+                <ZIndex>2</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <BackgroundColor>LightGrey</BackgroundColor>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox83">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>MASTER2</Value>
+                        <Style>
+                          <FontSize>8pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox50</rd:DefaultName>
+                <Top>0.96856cm</Top>
+                <Height>0.68547cm</Height>
+                <Width>1.94094cm</Width>
+                <ZIndex>3</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <BackgroundColor>LightGrey</BackgroundColor>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox84">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>REAL UTI.</Value>
+                        <Style>
+                          <FontSize>8pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox50</rd:DefaultName>
+                <Top>1.83042cm</Top>
+                <Height>0.68547cm</Height>
+                <Width>1.94094cm</Width>
+                <ZIndex>4</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <BackgroundColor>LightGrey</BackgroundColor>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox85">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>RESTANTE</Value>
+                        <Style>
+                          <FontSize>8pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox50</rd:DefaultName>
+                <Top>2.69228cm</Top>
+                <Height>0.68547cm</Height>
+                <Width>1.94094cm</Width>
+                <ZIndex>5</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <BackgroundColor>LightGrey</BackgroundColor>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox86">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=First(Fields!width_2.Value, "DsOC")</Value>
+                        <Style>
+                          <FontSize>8pt</FontSize>
+                          <Format>0.000;(0.000)</Format>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox50</rd:DefaultName>
+                <Top>0.96856cm</Top>
+                <Left>2.11732cm</Left>
+                <Height>0.68547cm</Height>
+                <Width>1.94094cm</Width>
+                <ZIndex>6</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <BackgroundColor>LightGrey</BackgroundColor>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox92">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=First(Fields!util2_real_width.Value, "DsOC")</Value>
+                        <Style>
+                          <FontSize>8pt</FontSize>
+                          <Format>0.000;(0.000)</Format>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox50</rd:DefaultName>
+                <Top>1.83042cm</Top>
+                <Left>2.15261cm</Left>
+                <Height>0.68547cm</Height>
+                <Width>1.94094cm</Width>
+                <ZIndex>7</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <BackgroundColor>LightGrey</BackgroundColor>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox93">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=First(Fields!rest2_width.Value, "DsOC")</Value>
+                        <Style>
+                          <FontSize>8pt</FontSize>
+                          <Format>0.000;(0.000)</Format>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox50</rd:DefaultName>
+                <Top>2.657cm</Top>
+                <Left>2.11733cm</Left>
+                <Height>0.68547cm</Height>
+                <Width>1.94094cm</Width>
+                <ZIndex>8</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <BackgroundColor>LightGrey</BackgroundColor>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox87">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=First(Fields!lenght_2.Value, "DsOC")</Value>
+                        <Style>
+                          <FontSize>8pt</FontSize>
+                          <Format>0.000;(0.000)</Format>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox50</rd:DefaultName>
+                <Top>0.96856cm</Top>
+                <Left>4.23466cm</Left>
+                <Height>0.68547cm</Height>
+                <Width>2.25844cm</Width>
+                <ZIndex>9</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <BackgroundColor>LightGrey</BackgroundColor>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox94">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=First(Fields!util2_real_lenght.Value, "DsOC")</Value>
+                        <Style>
+                          <FontSize>8pt</FontSize>
+                          <Format>0.000;(0.000)</Format>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox50</rd:DefaultName>
+                <Top>1.83042cm</Top>
+                <Left>4.23466cm</Left>
+                <Height>0.68547cm</Height>
+                <Width>2.25844cm</Width>
+                <ZIndex>10</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <BackgroundColor>LightGrey</BackgroundColor>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox95">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=First(Fields!rest2_lenght.Value, "DsOC")</Value>
+                        <Style>
+                          <FontSize>8pt</FontSize>
+                          <Format>0.000;(0.000)</Format>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox50</rd:DefaultName>
+                <Top>2.69228cm</Top>
+                <Left>4.23466cm</Left>
+                <Height>0.68547cm</Height>
+                <Width>2.25844cm</Width>
+                <ZIndex>11</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <BackgroundColor>LightGrey</BackgroundColor>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+            </ReportItems>
+            <KeepTogether>true</KeepTogether>
+            <Top>12.51647cm</Top>
+            <Left>7.17113cm</Left>
+            <Height>3.43998cm</Height>
+            <Width>6.60104cm</Width>
+            <ZIndex>43</ZIndex>
+            <Style>
+              <Border>
+                <Color>LightGrey</Color>
+                <Style>Dotted</Style>
+                <Width>0.25pt</Width>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Textbox Name="Textbox63">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>DATOS DEL MASTER 2</Value>
+                    <Style>
+                      <FontFamily>JetBrains Mono ExtraBold</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox52</rd:DefaultName>
+            <Top>3.51154cm</Top>
+            <Left>13.3136cm</Left>
+            <Height>0.6cm</Height>
+            <Width>6.07189cm</Width>
+            <ZIndex>44</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>LightGrey</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox135">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>="Ubicación: " + First(Fields!Ubicacion.Value, "DsOC")</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox133</rd:DefaultName>
+            <Top>9.06618cm</Top>
+            <Left>6.88891cm</Left>
+            <Height>0.6cm</Height>
+            <Width>6.24827cm</Width>
+            <ZIndex>45</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="roll_id2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>="Roll-id: " &amp; First(Fields!rollid_2.Value, "DsOC")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>roll_id</rd:DefaultName>
+            <Top>4.39403cm</Top>
+            <Left>13.31361cm</Left>
+            <Height>0.6cm</Height>
+            <Width>6.07188cm</Width>
+            <ZIndex>46</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="master_width2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>="Width [Inch.] : " &amp; First(Fields!width_2.Value, "DsOC")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>master_width</rd:DefaultName>
+            <Top>4.99403cm</Top>
+            <Left>13.31361cm</Left>
+            <Height>0.6cm</Height>
+            <Width>6.07188cm</Width>
+            <ZIndex>47</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="master_length2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>="Lenght [Pies] :" &amp; First(Fields!lenght_2.Value, "DsOC")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>master_length</rd:DefaultName>
+            <Top>5.59403cm</Top>
+            <Left>13.31362cm</Left>
+            <Height>0.6cm</Height>
+            <Width>6.07188cm</Width>
+            <ZIndex>48</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="master_corte_largo2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>="Longitud a Cortar : " &amp; First(Fields!longitud_cortar2.Value, "DsOC")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>master_corte_largo</rd:DefaultName>
+            <Top>6.07602cm</Top>
+            <Left>13.31362cm</Left>
+            <Height>0.6cm</Height>
+            <Width>6.07188cm</Width>
+            <ZIndex>49</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="master_vueltas2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>="Numero de Vueltas :" &amp; First(Fields!vueltas2.Value, "DsOC")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>master_vueltas</rd:DefaultName>
+            <Top>6.67602cm</Top>
+            <Left>13.31364cm</Left>
+            <Height>0.6cm</Height>
+            <Width>6.07188cm</Width>
+            <ZIndex>50</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="master_cant_rollos2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>="Cantidad de Rollos: " &amp; First(Fields!cantidad_rollos2.Value, "DsOC")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>master_cant_rollos</rd:DefaultName>
+            <Top>7.27602cm</Top>
+            <Left>13.31362cm</Left>
+            <Height>0.6cm</Height>
+            <Width>6.07188cm</Width>
+            <ZIndex>51</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>

@@ -26,10 +26,10 @@ namespace Ritrama2025.Forms.Otros
             LoadPrinters();
         }
 
-        private void LoadPrinters() 
+        private void LoadPrinters()
         {
             CboSelectPrinters.Items.Clear();
-            foreach (string impresora in PrinterSettings.InstalledPrinters) 
+            foreach (string impresora in PrinterSettings.InstalledPrinters)
             {
                 CboSelectPrinters.Items.Add(impresora);
             }
@@ -37,16 +37,16 @@ namespace Ritrama2025.Forms.Otros
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (CboSelectPrinters.SelectedItem == null) 
+            if (CboSelectPrinters.SelectedItem == null)
             {
                 MessageBox.Show("seleccione una impresora primero...");
                 return;
             }
-            
+
             int label_init = Convert.ToInt32(txt_desde.Text);
             int label_end = Convert.ToInt32(txt_hasta.Text);
 
-            for (int i = label_init; i<=label_end; i++) 
+            for (int i = label_init; i <= label_end; i++)
             {
                 string template = @"^XA^POR
                 ^FO700,70^A0R,60,60^FDFEDRIGONI^FS
@@ -120,7 +120,7 @@ namespace Ritrama2025.Forms.Otros
                 string product_id = Rollos[i - 1].Product_Id.Trim();
                 string productName = Rollos[i - 1].Product_Name.Length > 31 ? Rollos[i - 1].Product_Name.Substring(0, 30) : Rollos[i - 1].Product_Name.ToString();
                 string rollid = Rollos[i - 1].Roll_Id;
-                string width = Rollos[i - 1].Width.ToString("F3") ;
+                string width = Rollos[i - 1].Width.ToString("F3");
                 string length = Rollos[i - 1].Length.ToString("F0");
                 string msi = Rollos[i - 1].Msi.ToString("F0");
                 string splice = Rollos[i - 1].Splice.ToString();
@@ -151,7 +151,7 @@ namespace Ritrama2025.Forms.Otros
 
                 bool ok = ZebraTemplateEngine.Print(printerSelection!, template, values, StandardLabelSizes.Size_4x6_203dpi);
             }
-            
+
         }
     }
 }

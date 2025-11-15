@@ -11,7 +11,7 @@ namespace Ritrama2025.Services.ServiceLocator
             Services = services ?? throw new ArgumentNullException(nameof(services), "Service provider cannot be null.");
         }
 
-      
+
         public static T Get<T>() where T : class
         {
             if (Services == null)

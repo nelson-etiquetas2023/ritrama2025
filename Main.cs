@@ -6,16 +6,16 @@ namespace Ritrama2025
 {
     public partial class Main : Form
     {
-       private IConfiguration Config { get; set; } = null!;
-       private readonly FormManager _formManager;
-       private string MODE = "";
+        private IConfiguration Config { get; set; } = null!;
+        private readonly FormManager _formManager;
+        private string MODE = "";
 
         public Main(FormManager formManager, IConfiguration config)
         {
             InitializeComponent();
             _formManager = formManager;
             Config = config;
-           
+
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -24,7 +24,7 @@ namespace Ritrama2025
             {
                 MODE = Config["Ambiente"] ?? R.ENVIRONMET.DESARROLLO;
             }
-            if (MODE == "Desarrollo") 
+            if (MODE == "Desarrollo")
             {
                 panel2.BackColor = Color.Orange;
             }
@@ -67,11 +67,6 @@ namespace Ritrama2025
         private void Bot_inventario_Click(object sender, EventArgs e)
         {
             FormManager.ShowForm<Frm_Inventarios>(this);
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

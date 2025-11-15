@@ -3,7 +3,7 @@
     public class Despacho
     {
         public string Numero { get; set; } = null!;
-        public  DateTime Fecha_despacho { get; set; }
+        public DateTime Fecha_despacho { get; set; }
         public string Customer_Id { get; set; } = null!;
         public string Customer_Name { get; set; } = null!;
 

@@ -13,7 +13,7 @@ namespace Ritrama2025.Services.DespachoService.DespachoService
         public IConfiguration Config { get; }
 
         private readonly List<Despacho> lista = [];
-        
+
         public DataTable DtMasterDespachos = new();
         public SqlDataAdapter DaMasterDespachos = new();
         public DataTable DtClientes = new();
@@ -35,19 +35,19 @@ namespace Ritrama2025.Services.DespachoService.DespachoService
 
         public DespachoService(IConfiguration Config)
         {
-            this.Config = Config ?? throw new ArgumentNullException(nameof(Config)); 
-            if (Config != null) 
+            this.Config = Config ?? throw new ArgumentNullException(nameof(Config));
+            if (Config != null)
             {
                 var ambiente = Config["Ambiente"] ?? R.ENVIRONMET.DESARROLLO;
                 StringConnex = Config.GetSection(R.ENVIRONMET.NAME_KEY_CONNECTION)[ambiente]!;
             }
         }
 
-        public void UpDateInventoryRC(List<RolloCortado> items,string orden,DateTime fecha)
+        public void UpDateInventoryRC(List<RolloCortado> items, string orden, DateTime fecha)
         {
             try
             {
-                foreach (var item in items) 
+                foreach (var item in items)
                 {
                     using SqlConnection conn = new(StringConnex);
                     SqlCommand comando = new()
@@ -60,7 +60,7 @@ namespace Ritrama2025.Services.DespachoService.DespachoService
                     SqlParameter p1 = new("@p1", item.UniqueCode);
                     SqlParameter p2 = new("@p2", orden);
                     SqlParameter p3 = new("@p3", fecha);
-                    
+
 
 
                     comando.Parameters.Add(p1);
@@ -86,7 +86,7 @@ namespace Ritrama2025.Services.DespachoService.DespachoService
         {
             try
             {
-                foreach (var item in paleta) 
+                foreach (var item in paleta)
                 {
                     using SqlConnection conn = new(StringConnex);
                     SqlCommand Comando = new()
@@ -120,11 +120,11 @@ namespace Ritrama2025.Services.DespachoService.DespachoService
                 ErrorMsg = ex.Message;
             }
         }
-        public void AddItemsDespacho(List<ItemsDespacho> items) 
+        public void AddItemsDespacho(List<ItemsDespacho> items)
         {
             try
             {
-                foreach (var item in items) 
+                foreach (var item in items)
                 {
                     using SqlConnection conn = new(StringConnex);
                     SqlCommand Comando = new()
@@ -181,7 +181,7 @@ namespace Ritrama2025.Services.DespachoService.DespachoService
         {
             try
             {
-                foreach (var item in rollos) 
+                foreach (var item in rollos)
                 {
                     using SqlConnection conn = new(StringConnex);
                     SqlCommand Comando = new()
@@ -264,7 +264,7 @@ namespace Ritrama2025.Services.DespachoService.DespachoService
                 SqlParameter p22 = new("@p22", document.Total_Kilos);
                 SqlParameter p23 = new("@p23", document.Porc_Itbis);
                 SqlParameter p24 = new("@p24", document.Total_kilos_netos_palet);
-                SqlParameter p25  = new("@p25", document.Total_kilos_brutos_palet);
+                SqlParameter p25 = new("@p25", document.Total_kilos_brutos_palet);
                 Comando.Parameters.Add(p1);
                 Comando.Parameters.Add(p2);
                 Comando.Parameters.Add(p3);
@@ -294,14 +294,14 @@ namespace Ritrama2025.Services.DespachoService.DespachoService
                 conn.Close();
                 conn.Dispose();
                 Comando.Dispose();
-             }
+            }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al grabar el encabezado del despacho...");
                 ErrorMsg = ex.Message;
             }
         }
-        public string GetNumberConsec() 
+        public string GetNumberConsec()
         {
             string consec = string.Empty;
             try
@@ -331,7 +331,7 @@ namespace Ritrama2025.Services.DespachoService.DespachoService
             try
             {
                 //limpiar el dataset cualdo se carga el form varias veces.
-                if (Ds.Tables.Count > 0) 
+                if (Ds.Tables.Count > 0)
                 {
                     DataTable tabla = Ds.Tables["DtMasterDespachos"]!;
 
@@ -347,7 +347,7 @@ namespace Ritrama2025.Services.DespachoService.DespachoService
                     Ds.Clear();
                     Ds.AcceptChanges();
                 }
-    
+
                 using SqlConnection conn = new(StringConnex);
                 //1.- Carga del Encabezado de Despacho
                 using SqlCommand ComandoMaster = new()
@@ -361,7 +361,7 @@ namespace Ritrama2025.Services.DespachoService.DespachoService
                 await readerMaster.CloseAsync();
                 DaMasterDespachos.SelectCommand = ComandoMaster;
                 DaMasterDespachos.Fill(Ds, "DtMasterDespachos");
-              
+
                 //2.- Carga de Clientes.
                 SqlCommand ComandoClientes = new()
                 {
@@ -369,7 +369,7 @@ namespace Ritrama2025.Services.DespachoService.DespachoService
                     CommandType = CommandType.Text,
                     CommandText = "SELECT customer_id,customer_name FROM customer"
                 };
-                SqlDataReader readerCliente = await  ComandoClientes.ExecuteReaderAsync();
+                SqlDataReader readerCliente = await ComandoClientes.ExecuteReaderAsync();
                 await readerCliente.CloseAsync();
                 DaClientes.SelectCommand = ComandoClientes;
                 DaClientes.Fill(Ds, "DtClientes");
@@ -463,7 +463,7 @@ namespace Ritrama2025.Services.DespachoService.DespachoService
             }
             return Ds;
         }
-        public bool RelationDataset() 
+        public bool RelationDataset()
         {
             try
             {
@@ -482,24 +482,24 @@ namespace Ritrama2025.Services.DespachoService.DespachoService
                 //Relacion entre master y Detalle RC
                 DataColumn ParentCol2 = Ds.Tables["DtMasterDespachos"]!.Columns["numero"]!;
                 DataColumn ChildCol2 = Ds.Tables["DtDetalleRC"]!.Columns["conduce"]!;
-                DataRelation Despacho_DetalleRC = new("FK_DESPACHOS_DETALLERC", ParentCol2, ChildCol2,false);
+                DataRelation Despacho_DetalleRC = new("FK_DESPACHOS_DETALLERC", ParentCol2, ChildCol2, false);
                 Ds.Relations.Add(Despacho_DetalleRC);
                 //Relacion entre master y Renglones de Despacho.
                 DataColumn ParentCol3 = Ds.Tables["DtMasterDespachos"]!.Columns["numero"]!;
                 DataColumn ChildCol3 = Ds.Tables["DtItems"]!.Columns["numero"]!;
                 DataRelation Despacho_Items = new("FK_DESPACHOS_ITEMS",
-                    ParentCol3, ChildCol3,false);
+                    ParentCol3, ChildCol3, false);
                 Ds.Relations.Add(Despacho_Items);
                 //Relacion entre master y detalle de palet.
                 DataColumn ParentCol4 = Ds.Tables["DtMasterDespachos"]!.Columns["numero"]!;
                 DataColumn ChildCol4 = Ds.Tables["DtPalet"]!.Columns["numero"]!;
                 DataRelation Despacho_Palet = new("FK_DESPACHOS_PALET",
-                   ParentCol4, ChildCol4,false);
+                   ParentCol4, ChildCol4, false);
                 Ds.Relations.Add(Despacho_Palet);
                 // Relacion entre Despachos y transportista
                 DataColumn ParentCol5 = Ds.Tables["DtTransport"]!.Columns["transport_id"]!;
                 DataColumn ChildCol5 = Ds.Tables["DtMasterDespachos"]!.Columns["transport_id"]!;
-                DataRelation Despacho_Transport = new("FK_DESPACHOS_TRANSPORT", ParentCol5, ChildCol5,false);
+                DataRelation Despacho_Transport = new("FK_DESPACHOS_TRANSPORT", ParentCol5, ChildCol5, false);
                 Ds.Relations.Add(Despacho_Transport);
                 Ds.Tables["DtMasterDespachos"]!.Columns.Add("transport_name", Type.GetType("System.String")!, "parent(FK_DESPACHOS_TRANSPORT).transport_name");
 
@@ -512,7 +512,7 @@ namespace Ritrama2025.Services.DespachoService.DespachoService
                 return false;
             }
 
-            
+
         }
         public decimal GetRatioProductById(string product_id)
         {
@@ -538,6 +538,6 @@ namespace Ritrama2025.Services.DespachoService.DespachoService
             return ratio;
         }
 
-       
+
     }
 }

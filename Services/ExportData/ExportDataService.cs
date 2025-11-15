@@ -8,6 +8,78 @@ namespace Ritrama2025.Services.ExportData
 {
     public class ExportDataService : IExportDataService
     {
+
+        public bool ExportToExcelProducts<T>(List<T> data, string FileName)
+        {
+            if (data == null || data.Count == 0)
+            {
+                throw new ArgumentException("La coleccion de datos no puede ser vacia para exportar a excel.", nameof(data));
+            }
+            using var workbook = new XLWorkbook();
+            var worksheet = workbook.Worksheets.Add(typeof(T).Name);
+            var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(p => p.CanRead)
+                .ToArray();
+
+            // 1. Escribir encabezados
+            for (int col = 0; col < properties.Length; col++)
+            {
+                worksheet.Cell(1, col + 1).Value = properties[col].Name;
+                // Opcional: dar formato de negrita
+                worksheet.Cell(1, col + 1).Style.Font.Bold = true;
+            }
+
+            // 2. Rellenar filas con los valores de cada entidad
+            int row = 2;
+            foreach (var item in data)
+            {
+                for (int col = 0; col < properties.Length; col++)
+                {
+                    var value = properties[col].GetValue(item);
+                    worksheet.Cell(row, col + 1).Value = XLCellValue.FromObject(value); // Conversión explícita
+                }
+                row++;
+            }
+
+            // 3. Autoajustar ancho de columnas
+            worksheet.Columns().AdjustToContents();
+
+            //Definir las columnas de forma personalizada para el inventario de master.
+            if (FileName == "Products.xlsx")
+            {
+                worksheet.Cell(1, 1).Value = "product id.";
+                worksheet.Cell(1, 2).Value = "Product Name";
+                worksheet.Cell(1, 3).Value = "prodcut type";
+            }
+
+            string filePath = Path.Combine(Environment.CurrentDirectory, FileName);
+
+            // 4. Guardar el archivo
+            try
+            {
+                workbook.SaveAs(filePath);
+            }
+            catch
+            {
+                MessageBox.Show("error al abrir la hoja de excel");
+            }
+            // 5) Lanzar Excel automáticamente
+            var psi = new ProcessStartInfo
+            {
+                FileName = filePath,      // Abre con la app por defecto (.xlsx → Excel)
+                UseShellExecute = true     // Necesario en .NET Core/5+ para usar la asociación de ficheros
+            };
+
+            try
+            {
+                Process.Start(psi);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"No se pudo abrir el archivo automáticamente: {ex.Message}");
+            }
+            return true;
+        }
         public bool ExportToExcel<T>(List<T> data, string FileName)
         {
             if (data == null || data.Count == 0)
@@ -24,9 +96,9 @@ namespace Ritrama2025.Services.ExportData
             // 1. Escribir encabezados
             for (int col = 0; col < properties.Length; col++)
             {
-               
+
                 worksheet.Cell(1, col + 1).Value = properties[col].Name;
-                
+
                 // Opcional: dar formato de negrita
                 worksheet.Cell(1, col + 1).Style.Font.Bold = true;
             }
@@ -61,7 +133,7 @@ namespace Ritrama2025.Services.ExportData
                 //worksheet.Cell(1, 17).Value = "Fecha Ingreso";
 
 
-                
+
                 worksheet.Column(5).AdjustToContents();
                 worksheet.Column(6).AdjustToContents();
 
@@ -90,12 +162,12 @@ namespace Ritrama2025.Services.ExportData
             {
                 workbook.SaveAs(filePath);
             }
-            catch 
+            catch
             {
                 MessageBox.Show("error al abrir la hoja de excel");
             }
 
-            
+
 
             // 5) Lanzar Excel automáticamente
             var psi = new ProcessStartInfo
@@ -115,11 +187,13 @@ namespace Ritrama2025.Services.ExportData
             return true;
         }
 
-        public bool ExportTxtFormatMasterRePrintLabel(ProductMAP master,bool openNotePad)
+
+
+        public bool ExportTxtFormatMasterRePrintLabel(ProductMAP master, bool openNotePad)
         {
             string carpetaDestino = Path.Combine(Application.StartupPath, "Archivos");
 
-            if (!Directory.Exists(carpetaDestino)) 
+            if (!Directory.Exists(carpetaDestino))
             {
                 Directory.CreateDirectory(carpetaDestino);
             }
@@ -146,7 +220,7 @@ namespace Ritrama2025.Services.ExportData
             return true;
         }
 
-        public bool ExportTxtFormatRollosCortados(DataRow[] rollos,bool solorc,string? fecha_produccion, string? fecha_ingreso,bool openNotePad)
+        public bool ExportTxtFormatRollosCortados(DataRow[] rollos, bool solorc, string? fecha_produccion, string? fecha_ingreso, bool openNotePad)
         {
             try
             {
@@ -163,11 +237,11 @@ namespace Ritrama2025.Services.ExportData
                         if (solorc)
                         {
                             string codeperson = item["unique_code"].ToString()!.Trim();
-                            string linea = $"{item["unique_code"]}"; 
+                            string linea = $"{item["unique_code"]}";
                             sr.WriteLine(linea);
 
                         }
-                        else 
+                        else
                         {
                             string productid = item["product_id"].ToString()!.Trim();
                             string uniquecode = item["unique_code"].ToString()!.Trim();
@@ -187,11 +261,11 @@ namespace Ritrama2025.Services.ExportData
 
                             sr.WriteLine(linea);
                         }
-                        
+
                     }
                 }
 
-                if (openNotePad) 
+                if (openNotePad)
                 {
                     //abri el archivo con el programa predeterminado.
                     var psi = new ProcessStartInfo
@@ -202,7 +276,7 @@ namespace Ritrama2025.Services.ExportData
                     Process.Start(psi);
                 }
 
-                
+
                 return true;
 
             }
@@ -210,7 +284,7 @@ namespace Ritrama2025.Services.ExportData
             {
                 MessageBox.Show("Error al crear el txt de rollos cortados...: " + ex.Message);
                 return false;
-            } 
+            }
         }
     }
 }

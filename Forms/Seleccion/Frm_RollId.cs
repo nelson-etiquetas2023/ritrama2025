@@ -1,8 +1,8 @@
-﻿using System.Data;
-using System.ComponentModel;
+﻿using Ritrama2025.Forms.Otros;
 using Ritrama2025.Models;
-using Ritrama2025.Forms.Otros;
 using Ritrama2025.Services.ProduccionService;
+using System.ComponentModel;
+using System.Data;
 
 
 namespace Ritrama2025.Forms.Seleccion
@@ -24,9 +24,10 @@ namespace Ritrama2025.Forms.Seleccion
             ProduccionService = produccionService;
         }
 
-        private void Frm_RollId_Load(object sender, EventArgs e)
+        private async void Frm_RollId_Load(object sender, EventArgs e)
         {
-            DtRollid = ProduccionService.LoadDataRollID().Result;
+            DtRollid = await ProduccionService.LoadDataRollID();
+
             Dv = DtRollid.DefaultView;
             GridItems.AutoGenerateColumns = false;
             StyleGridColumns();
@@ -182,6 +183,13 @@ namespace Ritrama2025.Forms.Seleccion
                     throw;
                 }
             }
+        }
+
+        private void Frm_RollId_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
+            DtRollid.Dispose();
+            Dv.Dispose();
         }
     }
 }

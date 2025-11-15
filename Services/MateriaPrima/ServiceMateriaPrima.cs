@@ -196,7 +196,7 @@ public class ServiceMateriaPrima : IServiceMateriaPrima
             comando.Parameters.AddWithValue("@p15", orden.Person_Id);
             comando.Parameters.AddWithValue("@p16", "open");
             comando.Parameters.AddWithValue("@p17", DateTime.Now);
-           
+
             comando.ExecuteNonQuery();
 
             //guardar el detalle de la orden.
@@ -401,7 +401,7 @@ public class ServiceMateriaPrima : IServiceMateriaPrima
                         return true;
                     }
                 }
-                else 
+                else
                 {
                     return true;
                 }
@@ -409,7 +409,7 @@ public class ServiceMateriaPrima : IServiceMateriaPrima
         }
         catch (Exception)
         {
-            return false; 
+            return false;
         }
     }
-}      
+}

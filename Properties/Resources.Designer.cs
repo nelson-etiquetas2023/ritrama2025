@@ -123,6 +123,16 @@ namespace Ritrama2025.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap calendar_15_32px {
+            get {
+                object obj = ResourceManager.GetObject("calendar_15_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap check_file_16 {
             get {
                 object obj = ResourceManager.GetObject("check_file_16", resourceCulture);
@@ -186,6 +196,16 @@ namespace Ritrama2025.Properties {
         internal static System.Drawing.Bitmap DATA_RESERVA48 {
             get {
                 object obj = ResourceManager.GetObject("DATA_RESERVA48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap despacho_48 {
+            get {
+                object obj = ResourceManager.GetObject("despacho_48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -361,6 +381,16 @@ namespace Ritrama2025.Properties {
         }
         
         /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap product_management_48px1 {
+            get {
+                object obj = ResourceManager.GetObject("product_management_48px1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Byte[].
         /// </summary>
         internal static byte[] products_dispo {
@@ -446,6 +476,16 @@ namespace Ritrama2025.Properties {
         internal static System.Drawing.Bitmap roll_id {
             get {
                 object obj = ResourceManager.GetObject("roll_id", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap roll_id1 {
+            get {
+                object obj = ResourceManager.GetObject("roll_id1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

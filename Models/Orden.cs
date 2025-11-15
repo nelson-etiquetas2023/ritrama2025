@@ -41,7 +41,7 @@ namespace Ritrama2025.Models
         public double Total_Inch_Ancho { get; set; }
         public double Longitud_Cortar { get; set; }
         public double Longitud_Cortar2 { get; set; }
-        public int Cortes_Ancho { get; set; } 
+        public int Cortes_Ancho { get; set; }
         public int Cortes_Largo { get; set; }
         public int Cortes_Largo2 { get; set; }
         public int Cantidad_Rollos { get; set; }
@@ -66,6 +66,7 @@ namespace Ritrama2025.Models
         public string Note { get; set; } = null!;
         public string SellOrder { get; set; } = null!;
         public bool Desperdicio { get; set; }
+        public bool Desperdicio2 { get; set; }
         public string Master_Tipo { get; set; } = null!;
         public string Ubicacion { get; set; } = null!;
         public bool ConfigVueltas { get; set; }

@@ -1,8 +1,8 @@
-﻿using System.Drawing.Printing;
+﻿using Ritrama2025.LabelSdk;
+using System.Drawing.Printing;
 using System.IO.Pipes;
 using System.Text;
 using System.Text.RegularExpressions;
-using Ritrama2025.LabelSdk;
 
 namespace Ritrama2025.Forms
 {
@@ -43,7 +43,7 @@ namespace Ritrama2025.Forms
             if (cbo_printer.Items.Count > 0)
                 cbo_printer.SelectedIndex = 0;
         }
-      
+
         private void Button1_Click(object sender, EventArgs e)
         {
             if (rad_zebra.Checked)
@@ -90,7 +90,7 @@ namespace Ritrama2025.Forms
 
         private void SendZplOverUsb(string usbDriverName, string zplData)
         {
-            
+
         }
 
 
@@ -322,7 +322,7 @@ namespace Ritrama2025.Forms
                 { "Codigo", "8051" }
             };
 
-            bool ok = ZebraTemplateEngine.Print("ZDesigner ZT410-203dpi ZPL", template,values, StandardLabelSizes.Size_4x6_203dpi);
+            bool ok = ZebraTemplateEngine.Print("ZDesigner ZT410-203dpi ZPL", template, values, StandardLabelSizes.Size_4x6_203dpi);
             MessageBox.Show(ok ? "Impreso correctamente" : "Error al imprimir");
 
         }

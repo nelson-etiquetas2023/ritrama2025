@@ -30,9 +30,13 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Inventarios));
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             TabPages_Inventario = new TabControl();
             tabPage1 = new TabPage();
+            groupBox6 = new GroupBox();
+            rad_MasterConsumido = new RadioButton();
+            rad_MasterParcial = new RadioButton();
+            rad_MasterCompleto = new RadioButton();
             btn_delete_master = new Button();
             bot_printLabel = new Button();
             pictureBox3 = new PictureBox();
@@ -106,6 +110,7 @@
             pictureBox2 = new PictureBox();
             TabPages_Inventario.SuspendLayout();
             tabPage1.SuspendLayout();
+            groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)GridMaster).BeginInit();
@@ -143,6 +148,7 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(groupBox6);
             tabPage1.Controls.Add(btn_delete_master);
             tabPage1.Controls.Add(bot_printLabel);
             tabPage1.Controls.Add(pictureBox3);
@@ -164,6 +170,52 @@
             tabPage1.Text = "Master";
             tabPage1.UseVisualStyleBackColor = true;
             tabPage1.Click += TabPage1_Click;
+            // 
+            // groupBox6
+            // 
+            groupBox6.Controls.Add(rad_MasterConsumido);
+            groupBox6.Controls.Add(rad_MasterParcial);
+            groupBox6.Controls.Add(rad_MasterCompleto);
+            groupBox6.Font = new Font("Roboto", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBox6.Location = new Point(180, 486);
+            groupBox6.Name = "groupBox6";
+            groupBox6.Size = new Size(167, 169);
+            groupBox6.TabIndex = 8;
+            groupBox6.TabStop = false;
+            groupBox6.Text = "Filtro según su Uso: ";
+            // 
+            // rad_MasterConsumido
+            // 
+            rad_MasterConsumido.AutoSize = true;
+            rad_MasterConsumido.Location = new Point(6, 60);
+            rad_MasterConsumido.Name = "rad_MasterConsumido";
+            rad_MasterConsumido.Size = new Size(90, 19);
+            rad_MasterConsumido.TabIndex = 8;
+            rad_MasterConsumido.Text = "Consumido";
+            rad_MasterConsumido.UseVisualStyleBackColor = true;
+            rad_MasterConsumido.CheckedChanged += Rad_MasterConsumido_CheckedChanged;
+            // 
+            // rad_MasterParcial
+            // 
+            rad_MasterParcial.AutoSize = true;
+            rad_MasterParcial.Location = new Point(6, 44);
+            rad_MasterParcial.Name = "rad_MasterParcial";
+            rad_MasterParcial.Size = new Size(127, 19);
+            rad_MasterParcial.TabIndex = 7;
+            rad_MasterParcial.Text = "Parcialmente Util.";
+            rad_MasterParcial.UseVisualStyleBackColor = true;
+            rad_MasterParcial.CheckedChanged += Rad_MasterParcial_CheckedChanged;
+            // 
+            // rad_MasterCompleto
+            // 
+            rad_MasterCompleto.AutoSize = true;
+            rad_MasterCompleto.Location = new Point(6, 28);
+            rad_MasterCompleto.Name = "rad_MasterCompleto";
+            rad_MasterCompleto.Size = new Size(80, 19);
+            rad_MasterCompleto.TabIndex = 6;
+            rad_MasterCompleto.Text = "Completo";
+            rad_MasterCompleto.UseVisualStyleBackColor = true;
+            rad_MasterCompleto.CheckedChanged += Rad_MasterCompleto_CheckedChanged;
             // 
             // btn_delete_master
             // 
@@ -194,7 +246,7 @@
             // pictureBox3
             // 
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(711, 486);
+            pictureBox3.Location = new Point(725, 486);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(37, 34);
             pictureBox3.TabIndex = 15;
@@ -252,9 +304,10 @@
             groupBox3.Controls.Add(rad_ubication);
             groupBox3.Controls.Add(rad_productid);
             groupBox3.Controls.Add(rad_product_name);
+            groupBox3.Font = new Font("Roboto", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox3.Location = new Point(7, 486);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(245, 169);
+            groupBox3.Size = new Size(167, 169);
             groupBox3.TabIndex = 7;
             groupBox3.TabStop = false;
             groupBox3.Text = "Filtrar Por: ";
@@ -265,7 +318,7 @@
             rad_rollid.Checked = true;
             rad_rollid.Location = new Point(6, 28);
             rad_rollid.Name = "rad_rollid";
-            rad_rollid.Size = new Size(61, 19);
+            rad_rollid.Size = new Size(62, 19);
             rad_rollid.TabIndex = 7;
             rad_rollid.TabStop = true;
             rad_rollid.Text = "Roll-Id";
@@ -276,7 +329,7 @@
             rad_ubication.AutoSize = true;
             rad_ubication.Location = new Point(6, 84);
             rad_ubication.Name = "rad_ubication";
-            rad_ubication.Size = new Size(103, 19);
+            rad_ubication.Size = new Size(105, 19);
             rad_ubication.TabIndex = 7;
             rad_ubication.Text = "Por Ubicación";
             rad_ubication.UseVisualStyleBackColor = true;
@@ -286,7 +339,7 @@
             rad_productid.AutoSize = true;
             rad_productid.Location = new Point(6, 47);
             rad_productid.Name = "rad_productid";
-            rad_productid.Size = new Size(83, 19);
+            rad_productid.Size = new Size(84, 19);
             rad_productid.TabIndex = 5;
             rad_productid.Text = "Product Id";
             rad_productid.UseVisualStyleBackColor = true;
@@ -296,7 +349,7 @@
             rad_product_name.AutoSize = true;
             rad_product_name.Location = new Point(6, 65);
             rad_product_name.Name = "rad_product_name";
-            rad_product_name.Size = new Size(144, 19);
+            rad_product_name.Size = new Size(146, 19);
             rad_product_name.TabIndex = 6;
             rad_product_name.Text = "Nombre del Producto";
             rad_product_name.UseVisualStyleBackColor = true;
@@ -308,14 +361,14 @@
             GridMaster.AllowUserToResizeRows = false;
             GridMaster.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             GridMaster.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Cascadia Code", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            GridMaster.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Cascadia Code", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            GridMaster.DefaultCellStyle = dataGridViewCellStyle1;
             GridMaster.Location = new Point(7, 70);
             GridMaster.MultiSelect = false;
             GridMaster.Name = "GridMaster";
@@ -985,6 +1038,8 @@
             TabPages_Inventario.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
+            groupBox6.ResumeLayout(false);
+            groupBox6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
@@ -1088,5 +1143,10 @@
         private Button btn_delete_master;
         private ComboBox ComboPrinters;
         private Label label13;
+        private GroupBox groupBox6;
+        private RadioButton radioButton6;
+        private RadioButton rad_MasterCompleto;
+        private RadioButton rad_MasterParcial;
+        private RadioButton rad_MasterConsumido;
     }
 }

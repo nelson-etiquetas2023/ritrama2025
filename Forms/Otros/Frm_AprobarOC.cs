@@ -1,5 +1,4 @@
 ﻿using Ritrama2025.Models;
-using Ritrama2025.Services;
 using Ritrama2025.Services.CommonService;
 using System.ComponentModel;
 
@@ -11,7 +10,7 @@ namespace Ritrama2025.Forms.Otros
         public string NumeroOC { get; set; } = null!;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string TypeAction { get; set; } = null!;
-        
+
         private ICommonService Servicio { get; set; }
         public Frm_AprobarOC(ICommonService service)
         {
@@ -24,7 +23,7 @@ namespace Ritrama2025.Forms.Otros
             {
                 label_datetime.Text = "Fecha y Hora de Aprobacion del Documento: " + DateTime.Now.ToString();
             }
-            else 
+            else
             {
                 txt_comentarios.ReadOnly = true;
                 txt_OrdenServicio.ReadOnly = true;
@@ -41,12 +40,12 @@ namespace Ritrama2025.Forms.Otros
                 label_datetime.Text = "Este Documento se Aprtobo: " + doc.FechaCheck.ToString();
             }
 
-            
+
         }
 
         private void Bot_documentCheck_Click(object sender, EventArgs e)
         {
-            if (txt_person.Text == string.Empty) 
+            if (txt_person.Text == string.Empty)
             {
                 MessageBox.Show("Debe introducir la persona que autizo la orden de corte.");
                 return;

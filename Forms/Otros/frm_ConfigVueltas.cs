@@ -59,13 +59,13 @@ namespace Ritrama2025.Forms.Otros
             {
                 //Armar la ConfigVueltas desde cero de la forma predeterminada. 
                 Total_Length_utilizado = Numero_Vueltas * Longitud_a_Cortar;
-                
+
                 for (int v = 1; v <= Numero_Vueltas; v++)
                 {
                     int inicio = (v - 1) * NumeroCortes + 1;
                     int fin = v * NumeroCortes;
 
-                    Vueltas.Add(new ConfigVueltas { OrdenCorte = OC, Vuelta_numero = v, Longitud_Cortar = Longitud_a_Cortar, Rollos = $"{inicio}-{fin}"});
+                    Vueltas.Add(new ConfigVueltas { OrdenCorte = OC, Vuelta_numero = v, Longitud_Cortar = Longitud_a_Cortar, Rollos = $"{inicio}-{fin}" });
 
                 }
             }
@@ -124,7 +124,7 @@ namespace Ritrama2025.Forms.Otros
 
 
             int numVueltaMod = Convert.ToInt32(filamodif.Cells[1].Value);
-            if (!VueltasModificadas.Contains(numVueltaMod)) 
+            if (!VueltasModificadas.Contains(numVueltaMod))
             {
                 VueltasModificadas.Add(numVueltaMod);
             }

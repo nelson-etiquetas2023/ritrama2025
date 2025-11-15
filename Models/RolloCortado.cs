@@ -1,12 +1,9 @@
-﻿
-using DocumentFormat.OpenXml.Wordprocessing;
-
-namespace Ritrama2025.Models
+﻿namespace Ritrama2025.Models
 {
     public class RolloCortado
     {
         public int RollNumber { get; set; }
-       
+
         public string Product_Id { get; set; } = null!;
         public string Product_Name { get; set; } = null!;
         public string UniqueCode { get; set; } = null!;

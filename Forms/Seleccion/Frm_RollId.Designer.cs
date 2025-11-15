@@ -259,6 +259,7 @@
             Name = "Frm_RollId";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Seleccion de Roll-Id";
+            FormClosed += Frm_RollId_FormClosed;
             Load += Frm_RollId_Load;
             ((System.ComponentModel.ISupportInitialize)GridItems).EndInit();
             groupBox1.ResumeLayout(false);
