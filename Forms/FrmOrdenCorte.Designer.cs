@@ -48,11 +48,14 @@
             opt_aprobar_orden = new ToolStripMenuItem();
             opt_cerrar_orden = new ToolStripMenuItem();
             opt_modif_orden = new ToolStripMenuItem();
+            anularOrden = new ToolStripMenuItem();
             bot_guardar = new ToolStripButton();
             bot_cancelar = new ToolStripButton();
+            bot_imprimir = new ToolStripButton();
             ComboReports = new ToolStripDropDownButton();
             ordenCorteToolStripMenuItem = new ToolStripMenuItem();
             reporteDeDesperdiciosToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
             bot_exportar = new ToolStripButton();
             bot_buscarOrders = new ToolStripButton();
             label2 = new Label();
@@ -173,6 +176,7 @@
             txt_cantidad_rollos2 = new TextBox();
             label38 = new Label();
             label39 = new Label();
+            Icon_Anulado = new PictureBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ICON_EDITMODE).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
@@ -190,6 +194,7 @@
             ((System.ComponentModel.ISupportInitialize)txt_vueltas2).BeginInit();
             panel_loading.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Icon_Anulado).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -224,6 +229,7 @@
             // registros
             // 
             resources.ApplyResources(registros, "registros");
+            registros.ForeColor = SystemColors.AppWorkspace;
             registros.Name = "registros";
             // 
             // label1
@@ -236,7 +242,7 @@
             // 
             resources.ApplyResources(toolStrip1, "toolStrip1");
             toolStrip1.BackColor = SystemColors.ActiveBorder;
-            toolStrip1.Items.AddRange(new ToolStripItem[] { bot_primero, bot_anterior, bot_siguiente, bot_ultimo, bot_accion, bot_guardar, bot_cancelar, ComboReports, bot_exportar, bot_buscarOrders });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { bot_primero, bot_anterior, bot_siguiente, bot_ultimo, bot_accion, bot_guardar, bot_cancelar, bot_imprimir, ComboReports, bot_exportar, bot_buscarOrders });
             toolStrip1.Name = "toolStrip1";
             // 
             // bot_primero
@@ -267,7 +273,7 @@
             // bot_accion
             // 
             resources.ApplyResources(bot_accion, "bot_accion");
-            bot_accion.DropDownItems.AddRange(new ToolStripItem[] { opt_create_document, opt_send_production, opt_etiquetar_orden, opt_aprobar_orden, opt_cerrar_orden, opt_modif_orden });
+            bot_accion.DropDownItems.AddRange(new ToolStripItem[] { opt_create_document, opt_send_production, opt_etiquetar_orden, opt_aprobar_orden, opt_cerrar_orden, opt_modif_orden, anularOrden });
             bot_accion.Name = "bot_accion";
             // 
             // opt_create_document
@@ -311,6 +317,12 @@
             opt_modif_orden.Name = "opt_modif_orden";
             opt_modif_orden.Click += Opt_modif_orden_Click;
             // 
+            // anularOrden
+            // 
+            anularOrden.Name = "anularOrden";
+            resources.ApplyResources(anularOrden, "anularOrden");
+            anularOrden.Click += AnularOrden_Click;
+            // 
             // bot_guardar
             // 
             resources.ApplyResources(bot_guardar, "bot_guardar");
@@ -323,9 +335,15 @@
             bot_cancelar.Name = "bot_cancelar";
             bot_cancelar.Click += Bot_cancelar_Click;
             // 
+            // bot_imprimir
+            // 
+            resources.ApplyResources(bot_imprimir, "bot_imprimir");
+            bot_imprimir.Name = "bot_imprimir";
+            bot_imprimir.Click += bot_imprimir_Click_1;
+            // 
             // ComboReports
             // 
-            ComboReports.DropDownItems.AddRange(new ToolStripItem[] { ordenCorteToolStripMenuItem, reporteDeDesperdiciosToolStripMenuItem });
+            ComboReports.DropDownItems.AddRange(new ToolStripItem[] { ordenCorteToolStripMenuItem, reporteDeDesperdiciosToolStripMenuItem, toolStripSeparator1 });
             resources.ApplyResources(ComboReports, "ComboReports");
             ComboReports.Name = "ComboReports";
             // 
@@ -339,6 +357,12 @@
             // 
             reporteDeDesperdiciosToolStripMenuItem.Name = "reporteDeDesperdiciosToolStripMenuItem";
             resources.ApplyResources(reporteDeDesperdiciosToolStripMenuItem, "reporteDeDesperdiciosToolStripMenuItem");
+            reporteDeDesperdiciosToolStripMenuItem.Click += reporteDeDesperdiciosToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(toolStripSeparator1, "toolStripSeparator1");
             // 
             // bot_exportar
             // 
@@ -511,7 +535,7 @@
             resources.ApplyResources(btn_buscar_rollid2, "btn_buscar_rollid2");
             btn_buscar_rollid2.Name = "btn_buscar_rollid2";
             btn_buscar_rollid2.UseVisualStyleBackColor = true;
-            btn_buscar_rollid2.Click += btn_buscar_rollid2_Click;
+            btn_buscar_rollid2.Click += Btn_buscar_rollid2_Click;
             // 
             // label13
             // 
@@ -918,7 +942,7 @@
             resources.ApplyResources(txt_vueltas2, "txt_vueltas2");
             txt_vueltas2.Name = "txt_vueltas2";
             txt_vueltas2.ReadOnly = true;
-            txt_vueltas2.ValueChanged += txt_vueltas2_ValueChanged;
+            txt_vueltas2.ValueChanged += Txt_vueltas2_ValueChanged;
             // 
             // labelstep1
             // 
@@ -1055,7 +1079,7 @@
             resources.ApplyResources(txt_long_cortar2, "txt_long_cortar2");
             txt_long_cortar2.Name = "txt_long_cortar2";
             txt_long_cortar2.ReadOnly = true;
-            txt_long_cortar2.KeyUp += txt_long_cortar2_KeyUp;
+            txt_long_cortar2.KeyUp += Txt_long_cortar2_KeyUp;
             // 
             // txt_cantidad_rollos2
             // 
@@ -1073,10 +1097,17 @@
             resources.ApplyResources(label39, "label39");
             label39.Name = "label39";
             // 
+            // Icon_Anulado
+            // 
+            resources.ApplyResources(Icon_Anulado, "Icon_Anulado");
+            Icon_Anulado.Name = "Icon_Anulado";
+            Icon_Anulado.TabStop = false;
+            // 
             // FrmOrdenCorte
             // 
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(Icon_Anulado);
             Controls.Add(label39);
             Controls.Add(label38);
             Controls.Add(txt_cantidad_rollos2);
@@ -1216,6 +1247,7 @@
             panel_loading.ResumeLayout(false);
             panel_loading.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Icon_Anulado).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1366,5 +1398,9 @@
         private TextBox txt_cantidad_rollos2;
         private Label label38;
         private Label label39;
+        private ToolStripMenuItem anularOrden;
+        private PictureBox Icon_Anulado;
+        private ToolStripButton bot_imprimir;
+        private ToolStripSeparator toolStripSeparator1;
     }
 }

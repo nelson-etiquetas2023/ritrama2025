@@ -6,7 +6,7 @@ namespace Ritrama2025.Helpers
     {
         private static readonly Dictionary<Type, Form> _forms = [];
 
-        public static T? ShowForm<T>(Form mdiParent) where T : Form
+        public static T? ShowForm<T>() where T : Form
         {
             var type = typeof(T);
 
@@ -23,9 +23,9 @@ namespace Ritrama2025.Helpers
                 return null;
             }
             //crear una nueva instancia usando DI
-            
+
             var form = ServiceLocator.Get<T>();
-            
+
             _forms[type] = form;
 
             foreach (var xform in _forms.Values)

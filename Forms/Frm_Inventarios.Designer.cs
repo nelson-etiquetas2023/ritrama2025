@@ -1144,7 +1144,6 @@
         private ComboBox ComboPrinters;
         private Label label13;
         private GroupBox groupBox6;
-        private RadioButton radioButton6;
         private RadioButton rad_MasterCompleto;
         private RadioButton rad_MasterParcial;
         private RadioButton rad_MasterConsumido;

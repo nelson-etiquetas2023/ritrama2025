@@ -41,32 +41,32 @@ namespace Ritrama2025
         }
         private void Bot_despacho_Click(object sender, EventArgs e)
         {
-            FormManager.ShowForm<FrmDespacho>(this);
+            FormManager.ShowForm<FrmDespacho>();
         }
 
         private void Bot_ordencorte_Click(object sender, EventArgs e)
         {
-            FormManager.ShowForm<FrmOrdenCorte>(this);
+            FormManager.ShowForm<FrmOrdenCorte>();
         }
 
         private void Bot_recepciones_Click(object sender, EventArgs e)
         {
-            FormManager.ShowForm<FrmMateriaPrima>(this);
+            FormManager.ShowForm<FrmMateriaPrima>();
         }
 
         private void OPC_MENU_LABELS_Click(object sender, EventArgs e)
         {
-            FormManager.ShowForm<FrmCodeBarLabel>(this);
+            FormManager.ShowForm<FrmCodeBarLabel>();
         }
 
         private void Bot_products_Click(object sender, EventArgs e)
         {
-            FormManager.ShowForm<FrmProductos>(this);
+            FormManager.ShowForm<FrmProductos>();
         }
 
         private void Bot_inventario_Click(object sender, EventArgs e)
         {
-            FormManager.ShowForm<Frm_Inventarios>(this);
+            FormManager.ShowForm<Frm_Inventarios>();
         }
     }
 }

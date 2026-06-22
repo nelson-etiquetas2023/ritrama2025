@@ -130,8 +130,6 @@ public class ProduccionService : IProduccionService
 
         }
     }
-
-
     public async Task<DataTable> LoadDataRollID()
     {
         // Se elimina la declaración innecesaria de DtRolliod
@@ -140,8 +138,6 @@ public class ProduccionService : IProduccionService
         DtRollid = dt ?? new DataTable("DtRollid");
         return DtRollid;
     }
-
-
     private async Task<DataTable?> CargarTablaAsync(
         string sqlQuery,
         bool loadDataset = false,
@@ -183,6 +179,30 @@ public class ProduccionService : IProduccionService
 
         await comando.ExecuteNonQueryAsync();
         return null;
+    }
+
+    public bool AnularOrdenCorte(string numeroc)
+    {
+        try
+        {
+            using SqlConnection conn = new(StringConnex);
+            conn.Open();
+            using SqlCommand comando = new()
+            {
+                Connection = conn,
+                CommandText = "update orden_corte set anulada=1 where numero=@oc",
+                CommandType = CommandType.Text
+            };
+            comando.Parameters.AddWithValue("@oc", numeroc);
+            comando.ExecuteNonQuery();
+            MessageBox.Show("se anulo la orden correctamente.");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("error al anular la orden de corte " + ex.Message);
+            return false;
+        }
     }
 
     public async Task<DataSet> LoadDataOC()
@@ -261,7 +281,7 @@ public class ProduccionService : IProduccionService
             SqlCommand comando = new()
             {
                 Connection = conn,
-                CommandText = "INSERT INTO orden_corte (numero,fecha,fecha_produccion,product_id,rollid_1,width_1,lenght_1,rollid_2,width_2,lenght_2,anulada,procesado,CloseDocument,tot_inch_ancho,longitud_cortar,cortes_ancho,cortes_largo,cant_rollos,decartable1_pies,lenght_master_real,util1_real_width,util1_real_lenght,descartable2_pies" + ",util2_real_width,util2_real_lenght,lenght_master_real2,rest1_width,rest1_lenght,rest2_width,rest2_lenght,cant_rollos2,cortes_largo2,step,lastupdate,fecha_autorize,toautorize,notes,tipo_mov1,tipo_mov2,plus1_pies,plus2_pies,rollo_unificado,length_entrada,real_usado_r1,real_usado_r2,restante_rollid1,restante_rollid2,resta_entrada,total_salida,lenght_entrada,customer_id,operador_id,SellOrder,desperdicio,master_tipo,ubicacion,TwoMasters,longitud_cortar2,vueltas2,cantidad_rollos2,desperdicio2) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27,@p28,@p29,@p30,@p31,@p32,@p33,@p34,@p35,@p36,@p37,@p38,@p39,@p40,@p41,@p44,@p45,@p46,@p47,@p48,@p49,@p50,@p51,@p52,@customer_id,@operador_id,@SellOrder,@desper,@MasterTipo,@ubic,@twomasters,@longcortar2,@vueltas2,@cantrollos2,@desper2)",
+                CommandText = "INSERT INTO orden_corte (numero,fecha,fecha_produccion,product_id,rollid_1,width_1,lenght_1,rollid_2,width_2,lenght_2,anulada,procesado,CloseDocument,tot_inch_ancho,longitud_cortar,cortes_ancho,cortes_largo,cant_rollos,decartable1_pies,lenght_master_real,util1_real_width,util1_real_lenght,descartable2_pies" + ",util2_real_width,util2_real_lenght,lenght_master_real2,rest1_width,rest1_lenght,rest2_width,rest2_lenght,cant_rollos2,cortes_largo2,step,lastupdate,fecha_autorize,toautorize,notes,tipo_mov1,tipo_mov2,plus1_pies,plus2_pies,rollo_unificado,length_entrada,real_usado_r1,real_usado_r2,restante_rollid1,restante_rollid2,resta_entrada,total_salida,lenght_entrada,customer_id,operador_id,SellOrder,desperdicio,master_tipo,ubicacion,TwoMasters,longitud_cortar2,vueltas2,cantidad_rollos2,desperdicio2,MachineName,DireccionIp) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27,@p28,@p29,@p30,@p31,@p32,@p33,@p34,@p35,@p36,@p37,@p38,@p39,@p40,@p41,@p44,@p45,@p46,@p47,@p48,@p49,@p50,@p51,@p52,@customer_id,@operador_id,@SellOrder,@desper,@MasterTipo,@ubic,@twomasters,@longcortar2,@vueltas2,@cantrollos2,@desper2,@Machine,@Ip)",
                 CommandType = CommandType.Text
             };
             conn.Open();
@@ -324,6 +344,10 @@ public class ProduccionService : IProduccionService
             comando.Parameters.AddWithValue("@longcortar2", OrdenCorte.Longitud_Cortar2);
             comando.Parameters.AddWithValue("@vueltas2", OrdenCorte.Vueltas2);
             comando.Parameters.AddWithValue("@cantrollos2", OrdenCorte.Cantidad_rollos2);
+            comando.Parameters.AddWithValue("@Machine", OrdenCorte.MachineName);
+            comando.Parameters.AddWithValue("@Ip", OrdenCorte.DireccionIp);
+
+
             comando.Parameters.Add(new SqlParameter("@customer_id", SqlDbType.UniqueIdentifier)
             {
                 Value = OrdenCorte.Customer_Id
@@ -381,7 +405,7 @@ public class ProduccionService : IProduccionService
                 SqlCommand comando = new()
                 {
                     Connection = conn,
-                    CommandText = "INSERT INTO rolls_details (product_id,product_name,roll_number,unique_code,splice,width,large,msi,roll_id,code_person,status,disponible,ubic,numero,vuelta) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,0,@p13,@p14,@p15)",
+                    CommandText = "INSERT INTO rolls_details (product_id,product_name,roll_number,unique_code,splice,width,large,msi,roll_id,code_person,status,disponible,ubic,numero,vuelta) VALUES(@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,1,@p13,@p14,@p15)",
                     CommandType = CommandType.Text
                 };
                 comando.Parameters.AddWithValue("@p1", roll.Product_Id);
@@ -782,7 +806,6 @@ public class ProduccionService : IProduccionService
             return null;
         }
     }
-
     public void Update_Items_Orden_Corte(List<RolloCortado> rollos)
     {
         try
@@ -816,7 +839,6 @@ public class ProduccionService : IProduccionService
             MessageBox.Show("Error al mopdificar los renglones de la orden de corte...error code: " + ex);
         }
     }
-
     public void Update_Header_Documnet_OC(Orden orden)
     {
         try
@@ -926,7 +948,6 @@ public class ProduccionService : IProduccionService
             MessageBox.Show("Error al modificar la orden de corte...error code: " + ex);
         }
     }
-
     public void RollosCortadosDispobnibles(string oc)
     {
         try

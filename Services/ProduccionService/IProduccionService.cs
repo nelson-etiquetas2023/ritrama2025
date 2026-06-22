@@ -29,6 +29,7 @@ namespace Ritrama2025.Services.ProduccionService
         public void GuardarConfigVueltas(List<ConfigVueltas> lista);
         public void UpdateConfigVueltas(List<ConfigVueltas> lista);
         public List<ConfigVueltas> GetConfigVueltas(string oc);
+        bool AnularOrdenCorte(string numero_oc);
 
     }
 }

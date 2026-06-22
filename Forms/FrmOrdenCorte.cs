@@ -9,6 +9,8 @@ using Ritrama2025.Services.ProduccionService;
 using Ritrama2025.Services.ReportsService.ReportsService;
 using System.Configuration;
 using System.Data;
+using System.Net;
+using System.Net.Sockets;
 
 namespace Ritrama2025.Forms;
 
@@ -128,6 +130,7 @@ public partial class FrmOrdenCorte : Form
         txt_long_cortar2.DataBindings.Add("Text", BsMaster, "longitud_cortar2");
         txt_vueltas2.DataBindings.Add("Text", BsMaster, "vueltas2");
         txt_cantidad_rollos2.DataBindings.Add("Text", BsMaster, "cantidad_rollos2");
+        chk_document_anul.DataBindings.Add("Checked", BsMaster, "anulada");
 
         //check desperdicios.
         chk_desperdicio1.DataBindings["Checked"]!.Format += (s, e) =>
@@ -149,6 +152,18 @@ public partial class FrmOrdenCorte : Form
         };
         //check two-master.
         chk_two_master.DataBindings["Checked"]!.Format += (s, e) =>
+        {
+            if (e.Value == DBNull.Value || e.Value == null) e.Value = false;
+        };
+        chk_two_master.DataBindings["Checked"]!.Parse += (s, e) =>
+        {
+            if (e.Value == DBNull.Value || e.Value == null) e.Value = false;
+        };
+        chk_document_anul.DataBindings["Checked"]!.Format += (s, e) =>
+        {
+            if (e.Value == DBNull.Value || e.Value == null) e.Value = false;
+        };
+        chk_document_anul.DataBindings["Checked"]!.Parse += (s, e) =>
         {
             if (e.Value == DBNull.Value || e.Value == null) e.Value = false;
         };
@@ -920,6 +935,15 @@ public partial class FrmOrdenCorte : Form
     }
     private void CREATE_HEADER_ORDEN()
     {
+        string hostName = Dns.GetHostName();
+
+        // Filtramos solo IPv4
+        string ip = Dns.GetHostAddresses(hostName)
+                       .FirstOrDefault(a => a.AddressFamily == AddressFamily.InterNetwork)?
+                       .ToString() ?? "N/A";
+
+
+
         Orden = new()
         {
             Numero = Convert.ToInt32(txt_numeroOC.Text),
@@ -983,6 +1007,8 @@ public partial class FrmOrdenCorte : Form
             Vueltas2 = Convert.ToInt32(txt_vueltas2.Value),
             Cantidad_rollos2 = Convert.ToInt32(txt_cantidad_rollos2.Text == "" ? 0 : txt_cantidad_rollos2.Text),
             Desperdicio2 = chk_desperdicio2.Checked,
+            MachineName = Environment.MachineName,
+            DireccionIp = ip
         };
     }
     private void GuardarOrdeAddMode()
@@ -1194,6 +1220,7 @@ public partial class FrmOrdenCorte : Form
     }
     private void Opt_modif_orden_Click(object sender, EventArgs e)
     {
+        if (CheckDocAnulado()) return;
         if (Convert.ToInt16(txt_step.Text) != 2)
         {
             MessageBox.Show("Solo se puede modificar la orden en estado de PRODUCCION...", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1392,6 +1419,7 @@ public partial class FrmOrdenCorte : Form
     }
     private async void Opt_cerrar_orden_Click(object sender, EventArgs e)
     {
+        if (CheckDocAnulado()) return;
         DialogResult resultado = MessageBox.Show("¿Realmente desea Cerrar la Orden de Corte", "Advertencia...", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
         if (resultado == DialogResult.Yes)
@@ -1420,12 +1448,27 @@ public partial class FrmOrdenCorte : Form
     }
 
 
+    private bool CheckDocAnulado()
+    {
+        if (chk_document_anul.Checked)
+        {
+            MessageBox.Show("El documento esta anulado, no se pueden realizar acciones sobre el...", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     private void Opt_etiquetar_orden_Click(object sender, EventArgs e)
     {
+        if (CheckDocAnulado()) return;
         EtiquetarOrdenCorte();
     }
     private void Opt_aprobar_orden_Click(object sender, EventArgs e)
     {
+        if (CheckDocAnulado()) return;
         //cargar el formulario de aprobacion
         Frm_AprobarOC form = new(CommonService)
         {
@@ -1456,22 +1499,21 @@ public partial class FrmOrdenCorte : Form
     }
     private void EtiquetarOrdenCorte()
     {
-        //se actualiza en la Base de Datos el step del documento
-        Service.UpdateStatusDocumentOC(3, txt_numeroOC.Text);
-        //actualiza la ui del textbox de step-indicator
-        DataRowView FilaActual;
-        FilaActual = (DataRowView)BsMaster.Current!;
-        FilaActual["step"] = 3;
-        BsMaster.EndEdit();
+        
+
         //se actualiza el unique code
         if (BsMaster.Current == null) return;
+
         // Obtener la fila maestra actual como DataRowView
         DataRowView rowMaestro = (DataRowView)BsMaster.Current;
-        // Obtener todas las filas hijas relacionadas
-        DataRow[] filasHijas = rowMaestro.Row.GetChildRows(R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS);
+        // Obtener todas las filas hijas relacionadas y me aseguro que este ordenado por roll
+        DataRow[] filasHijas = rowMaestro.Row.GetChildRows(R.PARAMETERS.NAME_RELATION_OC_MASTER_DETAILS).OrderBy(x => x["roll_number"]).ToArray();
+
         int numero_unico = Service.BuscarUniqueCodeConsec();
+
         //actualiza la ui del datagrid items rollos cortados
         List<RolloCortado> rolls = [];
+
         foreach (DataRow item in filasHijas)
         {
             RolloCortado rollo = new();
@@ -1485,6 +1527,15 @@ public partial class FrmOrdenCorte : Form
             rolls.Add(rollo);
         }
 
+        //se actualiza en la Base de Datos el step del documento
+        Service.UpdateStatusDocumentOC(3, txt_numeroOC.Text);
+
+        //actualiza la ui del textbox de step-indicator
+        DataRowView FilaActual;
+        FilaActual = (DataRowView)BsMaster.Current!;
+        FilaActual["step"] = 3;
+        BsMaster.EndEdit();
+
         //se actualizan los rollos cortados en la BD con los unique code nuevos
         Service.UpdateUniqueCodeRollosCortados(rolls);
 
@@ -1492,6 +1543,7 @@ public partial class FrmOrdenCorte : Form
         Service.UpdateUniqueCodeBD(numero_unico.ToString());
         //actualiza la ui del indicator
         UpdateStepIndicator();
+
         //se crea el txt de los rollos cortados.
         ExportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(), chk_generartxt_rc.Checked, Convert.ToDateTime(txt_fecha_produccion.Text).ToShortDateString(), Convert.ToDateTime(txt_fecha_emision.Text).ToShortDateString(), false);
 
@@ -1540,6 +1592,19 @@ public partial class FrmOrdenCorte : Form
             pictureBox5.Image = Properties.Resources.step5_active;
             UpdateOptionMenuAction(false, false, false, false, false);
         }
+
+
+        if (chk_document_anul.Checked)
+        {
+            Icon_Anulado.Visible = true;
+            anularOrden.Enabled = false;
+        }
+        else
+        {
+            Icon_Anulado.Visible = false;
+            anularOrden.Enabled = true;
+        }
+
     }
     private void InitStepIndicator()
     {
@@ -1709,7 +1774,7 @@ public partial class FrmOrdenCorte : Form
     }
     private void Btn_LabelCodeBar_Click(object sender, EventArgs e)
     {
-
+        if (CheckDocAnulado()) return;
         CREATE_DETALLE_ORDEN();
 
         string fecha_produccion = Convert.ToDateTime(txt_fecha_produccion.Text).ToShortDateString();
@@ -1768,7 +1833,7 @@ public partial class FrmOrdenCorte : Form
         frmBuscar.ShowDialog();
         if (frmBuscar.Parameter != null)
         {
-            int busqueda = BsMaster.Find("numero", frmBuscar.Parameter);
+            int busqueda = BsMaster.Find("numero", frmBuscar.Parameter.Trim());
             if (busqueda > 0)
             {
                 BsMaster.Position = busqueda;
@@ -1794,12 +1859,13 @@ public partial class FrmOrdenCorte : Form
     }
     private void Bot_exportar_Click(object sender, EventArgs e)
     {
+        if (CheckDocAnulado()) return;
         List<RolloCortado> rollosCortados = CREATE_ROLLOS_CORTADOS();
         ExportDataService.ExportToExcel<RolloCortado>(rollosCortados, "RollosCortados.xlsx");
     }
     private void Btn_generar_txt_Click(object sender, EventArgs e)
     {
-
+        if (CheckDocAnulado()) return;
         ExportDataService.ExportTxtFormatRollosCortados(BuscarItemsDetailsOrden(), chk_generartxt_rc.Checked, Convert.ToDateTime(txt_fecha_produccion.Text).ToShortDateString(), Convert.ToDateTime(txt_fecha_produccion.Text).ToShortDateString(), true);
     }
     private void CerrarForms()
@@ -2082,7 +2148,7 @@ public partial class FrmOrdenCorte : Form
 
     private void OrdenCorteToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        ReportService.Reporte_Orden_Corte(txt_numeroOC.Text, this, "RptOC.rdlc", "Reporte de Orden de Corte.");
+
     }
 
     private void Chk_two_rollid_CheckedChanged(object sender, EventArgs e)
@@ -2107,7 +2173,7 @@ public partial class FrmOrdenCorte : Form
         chk_desperdicio2.Enabled = true;
 
     }
-    private void btn_buscar_rollid2_Click(object sender, EventArgs e)
+    private void Btn_buscar_rollid2_Click(object sender, EventArgs e)
     {
         using Frm_RollId frmrollid = new(Service);
         frmrollid.ShowDialog();
@@ -2139,7 +2205,7 @@ public partial class FrmOrdenCorte : Form
         }
     }
 
-    private void txt_vueltas2_ValueChanged(object sender, EventArgs e)
+    private void Txt_vueltas2_ValueChanged(object sender, EventArgs e)
     {
         if (EditMode == 0) return;
         CalcularMateriaRestanteMaster2();
@@ -2156,7 +2222,7 @@ public partial class FrmOrdenCorte : Form
         }
     }
 
-    private void txt_long_cortar2_KeyUp(object sender, KeyEventArgs e)
+    private void Txt_long_cortar2_KeyUp(object sender, KeyEventArgs e)
     {
         if (EditMode == 0) return;
         CalcularMateriaRestanteMaster2();
@@ -2184,5 +2250,36 @@ public partial class FrmOrdenCorte : Form
             }
         }
 
+    }
+
+    private void AnularOrden_Click(object sender, EventArgs e)
+    {
+        DialogResult result = MessageBox.Show("Desea realmente anular este documento...(S/N)", "Configmacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+        if (result == DialogResult.Yes)
+        {
+            //
+            var current = (DataRowView)BsMaster.Current!;
+
+            if (current != null)
+            {
+                current["anulada"] = true;
+                BsMaster.ResetCurrentItem();
+            }
+
+            Service.AnularOrdenCorte(txt_numeroOC.Text.ToString());
+            Icon_Anulado.Visible = true;
+        }
+    }
+
+    private void reporteDeDesperdiciosToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void bot_imprimir_Click_1(object sender, EventArgs e)
+    {
+        if (CheckDocAnulado()) return;
+        ReportService.Reporte_Orden_Corte(txt_numeroOC.Text, this, "RptOC.rdlc", "Reporte de Orden de Corte.");
     }
 }

@@ -1,12 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Programacion\\Ritrama2025\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|c:\\programacion\\ritrama2025\\forms\\frm_inventarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E5D1E5BA-AD11-4A13-BD21-AD28FF5AA477}|Ritrama2025.csproj|solutionrelative:forms\\frm_inventarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -14,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,20 +17,11 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{3fd5e0cc-709a-4f8c-94c3-7f0f8dff5bb2}"
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Frm_Inventarios.cs",
-              "DocumentMoniker": "C:\\Programacion\\Ritrama2025\\Forms\\Frm_Inventarios.cs",
-              "RelativeDocumentMoniker": "Forms\\Frm_Inventarios.cs",
-              "ToolTip": "C:\\Programacion\\Ritrama2025\\Forms\\Frm_Inventarios.cs",
-              "RelativeToolTip": "Forms\\Frm_Inventarios.cs",
-              "ViewState": "AgIAAFkBAAAAAAAAAIA0wGQBAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-12T19:14:51.341Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             }
           ]
         },
@@ -45,7 +31,7 @@
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{c9c0ae26-aa77-11d2-b3f0-0000f87570ee}"
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             }
           ]
         },
@@ -55,11 +41,7 @@
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+              "Name": "ST:0:0:{c9c0ae26-aa77-11d2-b3f0-0000f87570ee}"
             }
           ]
         },
@@ -69,11 +51,11 @@
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
             }
           ]
         },

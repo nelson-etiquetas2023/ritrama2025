@@ -8876,13 +8876,14 @@ WHERE (a.numero = @Orden_MatPrima)";
             this._commandCollection[0].CommandText = @"SELECT a.numero, a.fecha, a.fecha_produccion, a.product_id, c.Product_Name AS producto, b.unique_code, b.roll_number, b.splice, b.width, b.large, b.msi, b.roll_id, b.code_person, b.status, d.nombre AS operador, 
     e.Customer_Name, a.width_1 AS master_width, a.lenght_1 AS master_length, a.longitud_cortar AS master_corte_largo, a.cortes_ancho AS master_cortes_ancho, a.cortes_largo AS master_vueltas, 
     a.cant_rollos AS master_cant_rollos, a.util1_real_width AS master_width_real, a.util1_real_lenght AS master_length_real, a.rest1_width AS master_width_restante, a.rest1_lenght AS master_length_restabnte, a.step, 
-    a.rollid_2, a.width_2, a.lenght_2, a.sellOrder, a.Ubicacion, a.TwoMasters, a.vueltas2, a.longitud_cortar2, a.cantidad_rollos2, a.util2_real_width, a.util2_real_lenght,rest2_width,rest2_lenght
+    a.rollid_2, a.width_2, a.lenght_2, a.sellOrder, a.Ubicacion, a.TwoMasters, a.vueltas2, a.longitud_cortar2, a.cantidad_rollos2, a.util2_real_width, a.util2_real_lenght, a.rest2_width, a.rest2_lenght
 FROM orden_corte AS a LEFT OUTER JOIN
     rolls_details AS b ON a.numero = b.numero LEFT OUTER JOIN
     producto AS c ON a.product_id = c.Product_ID LEFT OUTER JOIN
     operadores AS d ON a.operador_id = d.operador_id LEFT OUTER JOIN
     Customer AS e ON a.customer_id = e.Customer_Id
-WHERE (a.numero = @numero_oc)";
+WHERE (a.numero = @numero_oc)
+ORDER BY b.roll_number";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             global::Microsoft.Data.SqlClient.SqlParameter param = new global::Microsoft.Data.SqlClient.SqlParameter();
             param.ParameterName = "@numero_oc";

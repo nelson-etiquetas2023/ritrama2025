@@ -722,20 +722,15 @@ namespace Ritrama2025.Forms
         }
         private void Reporte_conduce_conprecio_Click(object sender, EventArgs e)
         {
-            if (this.Parent != null)
-            {
-                var TitleReport = "REPORTE DE CONDUCE CON PRECIO.";
-                ReportService.ReporteConduce_conPrecio(txt_numero.Text, this, "RptConduceConPrecio.rdlc", TitleReport);
-            }
+            var TitleReport = "REPORTE DE CONDUCE CON PRECIO.";
+            ReportService.ReporteConduce_conPrecio(txt_numero.Text, this, "RptConduceConPrecio.rdlc", TitleReport);
+
         }
 
         private void Reporte_conduce_sinprecio_Click(object sender, EventArgs e)
         {
-            if (this.Parent != null)
-            {
-                var TitleReport = "REPORTE DE CONDUCE SIN PRECIO.";
-                ReportService.ReporteCondece_sinPrecio(txt_numero.Text, this, "RptConduceSinPrecio.rdlc", TitleReport);
-            }
+            var TitleReport = "REPORTE DE CONDUCE SIN PRECIO.";
+            ReportService.ReporteCondece_sinPrecio(txt_numero.Text, this, "RptConduceSinPrecio.rdlc", TitleReport);
         }
 
         private void Reporte_picking_list_Click(object sender, EventArgs e)
@@ -924,6 +919,39 @@ namespace Ritrama2025.Forms
         private void bot_buscar_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void btn_buscar_orden_Click(object sender, EventArgs e)
+        {
+            Frm_oneparameter frmBuscar = new()
+            {
+                //MdiParent = (Form)this.Parent!,
+                StartPosition = StartPosition = FormStartPosition.Manual,
+                Location = new Point { X = Location.X + 300, Y = Location.Y + 150 }
+            };
+            frmBuscar.ShowDialog();
+            if (frmBuscar.Parameter != null)
+            {
+                Int32 parametro = Convert.ToInt32(frmBuscar.Parameter.Trim());
+                Bs.Sort = "numero";
+                Int32 index = Bs.Find("numero",parametro);
+               
+                if (index > 0)
+                {
+                    Bs.Position = index;
+                //    UpdateStepIndicator();
+                //    ContadorRegistros();
+                }
+                else
+                {
+                    MessageBox.Show("No se encontro el numero de despacho...", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
         }
     }
 }

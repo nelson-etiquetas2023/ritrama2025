@@ -73,6 +73,9 @@ namespace Ritrama2025.Models
         public bool TwoMasters { get; set; }
         public int Vueltas2 { get; set; }
         public int Cantidad_rollos2 { get; set; }
+        public string MachineName { get; set; } = null!;
+        public string DireccionIp { get; set; } = null!;
+
     }
 }
 

@@ -39,17 +39,18 @@
             reportViewer1.Location = new Point(0, 0);
             reportViewer1.Name = "ReportViewer";
             reportViewer1.ServerReport.BearerToken = null;
-            reportViewer1.Size = new Size(784, 559);
+            reportViewer1.Size = new Size(784, 493);
             reportViewer1.TabIndex = 0;
             // 
             // ReportsViewer
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(784, 559);
+            ClientSize = new Size(784, 493);
             Controls.Add(reportViewer1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ReportsViewer";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "ReportsViewer";
             Load += ReportsViewer_Load;
             ResumeLayout(false);

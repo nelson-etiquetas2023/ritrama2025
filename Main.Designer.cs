@@ -173,9 +173,9 @@
             label2.Font = new Font("Bowlby One SC", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.Location = new Point(3, 22);
             label2.Name = "label2";
-            label2.Size = new Size(83, 38);
+            label2.Size = new Size(82, 38);
             label2.TabIndex = 1;
-            label2.Text = "1.01";
+            label2.Text = "1.02";
             // 
             // label1
             // 

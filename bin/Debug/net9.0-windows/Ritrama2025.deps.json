@@ -223,7 +223,8 @@
           "Microsoft.Extensions.Caching.Memory": "9.0.4",
           "Microsoft.IdentityModel.JsonWebTokens": "7.7.1",
           "Microsoft.IdentityModel.Protocols.OpenIdConnect": "7.7.1",
-          "Microsoft.SqlServer.Server": "1.0.0"
+          "Microsoft.SqlServer.Server": "1.0.0",
+          "System.Text.Json": "10.0.0"
         },
         "runtime": {
           "lib/net9.0/Microsoft.Data.SqlClient.dll": {
@@ -707,7 +708,8 @@
       },
       "Microsoft.Identity.Client/4.73.1": {
         "dependencies": {
-          "Microsoft.IdentityModel.Abstractions": "7.7.1"
+          "Microsoft.IdentityModel.Abstractions": "7.7.1",
+          "System.Diagnostics.DiagnosticSource": "10.0.0"
         },
         "runtime": {
           "lib/net8.0/Microsoft.Identity.Client.dll": {
