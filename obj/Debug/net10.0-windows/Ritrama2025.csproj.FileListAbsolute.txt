@@ -19,14 +19,11 @@ C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Ritrama2025.deps.json
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Ritrama2025.runtimeconfig.json
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Ritrama2025.dll
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Ritrama2025.pdb
-C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Azure.Core.dll
-C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Azure.Identity.dll
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\ClosedXML.dll
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\ClosedXML.Parser.dll
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\DocumentFormat.OpenXml.dll
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\DocumentFormat.OpenXml.Framework.dll
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\ExcelNumberFormat.dll
-C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Microsoft.CodeAnalysis.dll
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Microsoft.CodeAnalysis.VisualBasic.dll
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Microsoft.Data.SqlClient.dll
@@ -60,8 +57,6 @@ C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Microsoft.Extensions.Objec
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Microsoft.Extensions.Options.dll
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Microsoft.Extensions.Options.ConfigurationExtensions.dll
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Microsoft.Extensions.Primitives.dll
-C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Microsoft.Identity.Client.dll
-C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Microsoft.Identity.Client.Extensions.Msal.dll
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Microsoft.IdentityModel.Abstractions.dll
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Microsoft.IdentityModel.JsonWebTokens.dll
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Microsoft.IdentityModel.Logging.dll
@@ -76,9 +71,7 @@ C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Microsoft.ReportViewer.Dat
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Microsoft.ReportViewer.ProcessingObjectModel.dll
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Microsoft.ReportViewer.WinForms.dll
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\SixLabors.Fonts.dll
-C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\System.ClientModel.dll
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\System.IdentityModel.Tokens.Jwt.dll
-C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\System.Memory.Data.dll
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\System.ServiceModel.Http.dll
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\System.ServiceModel.Duplex.dll
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\System.ServiceModel.Primitives.dll
@@ -212,3 +205,6 @@ C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\zh-Hans\Microsoft.ReportVi
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\zh-Hans\Microsoft.ReportViewer.WinForms.resources.dll
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\zh-Hant\Microsoft.ReportViewer.Common.resources.dll
 C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\zh-Hant\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Microsoft.Bcl.Cryptography.dll
+C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Microsoft.Data.SqlClient.Extensions.Abstractions.dll
+C:\Programacion\Ritrama2025\bin\Debug\net10.0-windows\Microsoft.Data.SqlClient.Internal.Logging.dll
