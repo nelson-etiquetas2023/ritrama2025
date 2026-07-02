@@ -296,9 +296,6 @@ public partial class Frm_Inventarios : Form
             new() { Description = "Length       ", Index = 4, TipoValor = "decimal " },
             new() { Description = "Msi          ", Index = 5, TipoValor = "decimal " }
         };
-        ListColumns.DataSource = columnas;
-        ListColumns.DisplayMember = "InfoParaDisplay";
-        ListColumns.ValueMember = "Index";
     }
     private void Btn_load_sheet_Click(object sender, EventArgs e)
     {

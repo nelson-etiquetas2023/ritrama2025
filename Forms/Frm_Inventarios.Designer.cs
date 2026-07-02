@@ -74,12 +74,22 @@
             txt_buscar_cor = new TextBox();
             tabPage5 = new TabPage();
             groupBox1 = new GroupBox();
+            label21 = new Label();
+            label20 = new Label();
+            label19 = new Label();
+            label18 = new Label();
+            label17 = new Label();
+            label16 = new Label();
+            label15 = new Label();
+            label14 = new Label();
             label9 = new Label();
-            ListColumns = new ListBox();
-            chk_checkFileCorrect = new CheckBox();
             label7 = new Label();
             label6 = new Label();
             label5 = new Label();
+            panel_loading = new Panel();
+            text_loadingindicator = new Label();
+            pictureBox2 = new PictureBox();
+            chk_checkFileCorrect = new CheckBox();
             label4 = new Label();
             groupBox2 = new GroupBox();
             rad_rollos = new RadioButton();
@@ -105,9 +115,6 @@
             Bot_Reports = new ToolStripButton();
             Bot_Excel = new ToolStripButton();
             Bot_Txt = new ToolStripButton();
-            panel_loading = new Panel();
-            text_loadingindicator = new Label();
-            pictureBox2 = new PictureBox();
             TabPages_Inventario.SuspendLayout();
             tabPage1.SuspendLayout();
             groupBox6.SuspendLayout();
@@ -120,13 +127,13 @@
             ((System.ComponentModel.ISupportInitialize)GridRollosCortados).BeginInit();
             tabPage5.SuspendLayout();
             groupBox1.SuspendLayout();
+            panel_loading.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             groupBox2.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             toolStrip1.SuspendLayout();
-            panel_loading.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // TabPages_Inventario
@@ -642,12 +649,20 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(label21);
+            groupBox1.Controls.Add(label20);
+            groupBox1.Controls.Add(label19);
+            groupBox1.Controls.Add(label18);
+            groupBox1.Controls.Add(label17);
+            groupBox1.Controls.Add(label16);
+            groupBox1.Controls.Add(label15);
+            groupBox1.Controls.Add(label14);
             groupBox1.Controls.Add(label9);
-            groupBox1.Controls.Add(ListColumns);
-            groupBox1.Controls.Add(chk_checkFileCorrect);
             groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(label5);
+            groupBox1.Controls.Add(panel_loading);
+            groupBox1.Controls.Add(chk_checkFileCorrect);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(groupBox2);
             groupBox1.Controls.Add(btn_import_excel);
@@ -658,29 +673,163 @@
             groupBox1.Controls.Add(txt_file_name);
             groupBox1.Location = new Point(12, 15);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(960, 269);
+            groupBox1.Size = new Size(960, 386);
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             groupBox1.Text = "Importar Data de Excel";
             // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Font = new Font("Eras Light ITC", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label21.Location = new Point(587, 249);
+            label21.Name = "label21";
+            label21.Size = new Size(164, 23);
+            label21.TabIndex = 37;
+            label21.Text = "11.- Numero Paleta";
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Font = new Font("Eras Light ITC", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label20.Location = new Point(587, 226);
+            label20.Name = "label20";
+            label20.Size = new Size(160, 23);
+            label20.TabIndex = 36;
+            label20.Text = "10.- Fecha Llegada";
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Font = new Font("Eras Light ITC", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label19.Location = new Point(597, 203);
+            label19.Name = "label19";
+            label19.Size = new Size(115, 23);
+            label19.TabIndex = 35;
+            label19.Text = "9.- Ubicación";
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Font = new Font("Eras Light ITC", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label18.Location = new Point(597, 180);
+            label18.Name = "label18";
+            label18.Size = new Size(92, 23);
+            label18.TabIndex = 34;
+            label18.Text = "8.- Factura";
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Font = new Font("Eras Light ITC", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label17.Location = new Point(597, 158);
+            label17.Name = "label17";
+            label17.Size = new Size(180, 23);
+            label17.TabIndex = 33;
+            label17.Text = "7.- Fecha Producción";
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Font = new Font("Eras Light ITC", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label16.Location = new Point(597, 135);
+            label16.Name = "label16";
+            label16.Size = new Size(80, 23);
+            label16.TabIndex = 32;
+            label16.Text = "6.- Splice";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new Font("Eras Light ITC", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label15.Location = new Point(597, 112);
+            label15.Name = "label15";
+            label15.Size = new Size(91, 23);
+            label15.TabIndex = 31;
+            label15.Text = "5.- Length";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Eras Light ITC", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label14.Location = new Point(597, 89);
+            label14.Name = "label14";
+            label14.Size = new Size(84, 23);
+            label14.TabIndex = 30;
+            label14.Text = "4.- Width";
+            // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label9.Location = new Point(675, 108);
+            label9.Font = new Font("Eras Light ITC", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label9.Location = new Point(597, 66);
             label9.Name = "label9";
-            label9.Size = new Size(165, 15);
-            label9.TabIndex = 13;
-            label9.Text = "Propiedades de la columnas: ";
+            label9.Size = new Size(87, 23);
+            label9.TabIndex = 29;
+            label9.Text = "3.- Roll-Id.";
             // 
-            // ListColumns
+            // label7
             // 
-            ListColumns.FormattingEnabled = true;
-            ListColumns.Items.AddRange(new object[] { "1.- Product Id., Columna1" });
-            ListColumns.Location = new Point(529, 124);
-            ListColumns.Name = "ListColumns";
-            ListColumns.Size = new Size(368, 64);
-            ListColumns.TabIndex = 12;
+            label7.AutoSize = true;
+            label7.Font = new Font("Eras Light ITC", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label7.Location = new Point(597, 43);
+            label7.Name = "label7";
+            label7.Size = new Size(207, 23);
+            label7.TabIndex = 28;
+            label7.Text = "2.- Nombre de Producto";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Eras Light ITC", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label6.Location = new Point(597, 20);
+            label6.Name = "label6";
+            label6.Size = new Size(199, 23);
+            label6.TabIndex = 27;
+            label6.Text = "1.- Codigo de Producto";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.Location = new Point(1608, 469);
+            label5.Name = "label5";
+            label5.Size = new Size(119, 15);
+            label5.TabIndex = 26;
+            label5.Text = "Ruta de Localizacion";
+            // 
+            // panel_loading
+            // 
+            panel_loading.BackColor = SystemColors.Window;
+            panel_loading.Controls.Add(text_loadingindicator);
+            panel_loading.Controls.Add(pictureBox2);
+            panel_loading.Location = new Point(372, 226);
+            panel_loading.Name = "panel_loading";
+            panel_loading.Size = new Size(200, 87);
+            panel_loading.TabIndex = 25;
+            panel_loading.Visible = false;
+            // 
+            // text_loadingindicator
+            // 
+            text_loadingindicator.AutoSize = true;
+            text_loadingindicator.Font = new Font("Russo One", 11.9999981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            text_loadingindicator.Location = new Point(90, 37);
+            text_loadingindicator.Name = "text_loadingindicator";
+            text_loadingindicator.Size = new Size(96, 19);
+            text_loadingindicator.TabIndex = 1;
+            text_loadingindicator.Text = "Loading...";
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.BackColor = SystemColors.Control;
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(13, 12);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(64, 64);
+            pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
+            pictureBox2.TabIndex = 0;
+            pictureBox2.TabStop = false;
+            pictureBox2.WaitOnLoad = true;
             // 
             // chk_checkFileCorrect
             // 
@@ -693,38 +842,10 @@
             chk_checkFileCorrect.Text = "Localizacion Correcta de Archivo";
             chk_checkFileCorrect.UseVisualStyleBackColor = true;
             // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label7.Location = new Point(675, 18);
-            label7.Name = "label7";
-            label7.Size = new Size(182, 21);
-            label7.TabIndex = 10;
-            label7.Text = "Resumen de Procesos :";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(529, 84);
-            label6.Name = "label6";
-            label6.Size = new Size(90, 15);
-            label6.TabIndex = 9;
-            label6.Text = "Advertencias : ";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(529, 63);
-            label5.Name = "label5";
-            label5.Size = new Size(158, 15);
-            label5.TabIndex = 8;
-            label5.Text = "Productos no registrados : ";
-            // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(529, 41);
+            label4.Location = new Point(966, 41);
             label4.Name = "label4";
             label4.Size = new Size(135, 15);
             label4.TabIndex = 7;
@@ -988,45 +1109,11 @@
             Bot_Txt.Text = "Texto";
             Bot_Txt.Click += Bot_Txt_Click;
             // 
-            // panel_loading
-            // 
-            panel_loading.BackColor = SystemColors.Window;
-            panel_loading.Controls.Add(text_loadingindicator);
-            panel_loading.Controls.Add(pictureBox2);
-            panel_loading.Location = new Point(415, 374);
-            panel_loading.Name = "panel_loading";
-            panel_loading.Size = new Size(200, 87);
-            panel_loading.TabIndex = 25;
-            panel_loading.Visible = false;
-            // 
-            // text_loadingindicator
-            // 
-            text_loadingindicator.AutoSize = true;
-            text_loadingindicator.Font = new Font("Russo One", 11.9999981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            text_loadingindicator.Location = new Point(90, 37);
-            text_loadingindicator.Name = "text_loadingindicator";
-            text_loadingindicator.Size = new Size(96, 19);
-            text_loadingindicator.TabIndex = 1;
-            text_loadingindicator.Text = "Loading...";
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.BackColor = SystemColors.Control;
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(13, 12);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(64, 64);
-            pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
-            pictureBox2.TabIndex = 0;
-            pictureBox2.TabStop = false;
-            pictureBox2.WaitOnLoad = true;
-            // 
             // Frm_Inventarios
             // 
             AutoScaleDimensions = new SizeF(7F, 14F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1030, 834);
-            Controls.Add(panel_loading);
             Controls.Add(toolStrip1);
             Controls.Add(panel1);
             Controls.Add(TabPages_Inventario);
@@ -1053,6 +1140,9 @@
             tabPage5.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            panel_loading.ResumeLayout(false);
+            panel_loading.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             panel1.ResumeLayout(false);
@@ -1061,9 +1151,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
-            panel_loading.ResumeLayout(false);
-            panel_loading.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1091,12 +1178,9 @@
         private RadioButton rad_hojas;
         private RadioButton rad_graphics;
         private RadioButton rad_master;
-        private Label label5;
         private Label label4;
         private TabPage tabPage6;
         private ToolStrip toolStrip1;
-        private Label label6;
-        private Label label7;
         private ToolStripButton Btn_reload;
         private GroupBox groupBox3;
         private RadioButton rad_product_name;
@@ -1106,8 +1190,6 @@
         private Label label8;
         private TextBox txt_buscar;
         private CheckBox chk_checkFileCorrect;
-        private ListBox ListColumns;
-        private Label label9;
         private RadioButton rad_rollid;
         private Button btn_DetailsConsumos;
         private RadioButton rad_ubication;
@@ -1147,5 +1229,17 @@
         private RadioButton rad_MasterCompleto;
         private RadioButton rad_MasterParcial;
         private RadioButton rad_MasterConsumido;
+        private Label label5;
+        private Label label9;
+        private Label label7;
+        private Label label6;
+        private Label label17;
+        private Label label16;
+        private Label label15;
+        private Label label14;
+        private Label label18;
+        private Label label19;
+        private Label label21;
+        private Label label20;
     }
 }

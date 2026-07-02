@@ -220,9 +220,9 @@ namespace Ritrama2025.Services.InventarioService
                 transaction.Commit();
                 return true;
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                MessageBox.Show("Error al tratar de registrar los productos, en el modulo de inventario...");
+                MessageBox.Show("Error al tratar de registrar los productos, en el modulo de inventario...[error code: ] " + ex);
                 return false;
 
             }

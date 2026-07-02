@@ -55,15 +55,18 @@
             btn_saveDatabase = new Button();
             checkBox1 = new CheckBox();
             button1 = new Button();
-            checkBox2 = new CheckBox();
-            checkBox3 = new CheckBox();
-            chk_product_NoFound = new CheckBox();
             NUMBERS_NOTIFICATIONS = new Label();
             txt_errors = new TextBox();
+            groupBox2 = new GroupBox();
+            groupBox3 = new GroupBox();
+            btn_accion = new Button();
+            chk_saveproductsnotfound = new CheckBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Grid_Items).BeginInit();
             groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -142,9 +145,11 @@
             // 
             // txt_log_notifications
             // 
-            txt_log_notifications.Enabled = false;
+            txt_log_notifications.BackColor = SystemColors.InactiveCaptionText;
+            txt_log_notifications.ForeColor = SystemColors.ActiveBorder;
             txt_log_notifications.Location = new Point(12, 604);
             txt_log_notifications.Name = "txt_log_notifications";
+            txt_log_notifications.ReadOnly = true;
             txt_log_notifications.Size = new Size(811, 217);
             txt_log_notifications.TabIndex = 5;
             txt_log_notifications.Text = "";
@@ -166,7 +171,7 @@
             groupBox1.Controls.Add(rad_productid);
             groupBox1.Location = new Point(12, 441);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(200, 100);
+            groupBox1.Size = new Size(129, 100);
             groupBox1.TabIndex = 7;
             groupBox1.TabStop = false;
             groupBox1.Text = "Filtrar por: ";
@@ -207,7 +212,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(218, 454);
+            label3.Location = new Point(160, 454);
             label3.Name = "label3";
             label3.Size = new Size(99, 15);
             label3.TabIndex = 8;
@@ -216,7 +221,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(236, 483);
+            label4.Location = new Point(178, 483);
             label4.Name = "label4";
             label4.Size = new Size(81, 15);
             label4.TabIndex = 9;
@@ -237,7 +242,7 @@
             // chk_valid_products
             // 
             chk_valid_products.AutoSize = true;
-            chk_valid_products.Location = new Point(652, 441);
+            chk_valid_products.Location = new Point(6, 36);
             chk_valid_products.Name = "chk_valid_products";
             chk_valid_products.Size = new Size(171, 19);
             chk_valid_products.TabIndex = 11;
@@ -247,7 +252,7 @@
             // txt_number_rows
             // 
             txt_number_rows.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_number_rows.Location = new Point(323, 451);
+            txt_number_rows.Location = new Point(265, 451);
             txt_number_rows.Name = "txt_number_rows";
             txt_number_rows.ReadOnly = true;
             txt_number_rows.Size = new Size(255, 23);
@@ -256,7 +261,7 @@
             // txt_warning
             // 
             txt_warning.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_warning.Location = new Point(323, 480);
+            txt_warning.Location = new Point(265, 480);
             txt_warning.Name = "txt_warning";
             txt_warning.ReadOnly = true;
             txt_warning.Size = new Size(255, 23);
@@ -265,7 +270,7 @@
             // txt_fileName
             // 
             txt_fileName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_fileName.Location = new Point(323, 509);
+            txt_fileName.Location = new Point(265, 509);
             txt_fileName.Name = "txt_fileName";
             txt_fileName.ReadOnly = true;
             txt_fileName.Size = new Size(255, 23);
@@ -274,7 +279,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(216, 512);
+            label6.Location = new Point(158, 512);
             label6.Name = "label6";
             label6.Size = new Size(101, 15);
             label6.TabIndex = 14;
@@ -283,7 +288,7 @@
             // txt_filePath
             // 
             txt_filePath.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_filePath.Location = new Point(323, 538);
+            txt_filePath.Location = new Point(265, 538);
             txt_filePath.Name = "txt_filePath";
             txt_filePath.ReadOnly = true;
             txt_filePath.Size = new Size(255, 23);
@@ -292,7 +297,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(280, 541);
+            label7.Location = new Point(222, 541);
             label7.Name = "label7";
             label7.Size = new Size(37, 15);
             label7.TabIndex = 16;
@@ -313,11 +318,11 @@
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(652, 491);
+            checkBox1.Location = new Point(6, 60);
             checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(123, 19);
+            checkBox1.Size = new Size(161, 19);
             checkBox1.TabIndex = 19;
-            checkBox1.Text = "Repeticion Roll-Id ";
+            checkBox1.Text = "Validar Repeticion Roll-Id ";
             checkBox1.UseVisualStyleBackColor = true;
             // 
             // button1
@@ -330,36 +335,6 @@
             button1.Text = "Reporte Data";
             button1.TextImageRelation = TextImageRelation.ImageBeforeText;
             button1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            checkBox2.AutoSize = true;
-            checkBox2.Location = new Point(652, 516);
-            checkBox2.Name = "checkBox2";
-            checkBox2.Size = new Size(178, 19);
-            checkBox2.TabIndex = 21;
-            checkBox2.Text = "Validar Columnas Numericas";
-            checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // checkBox3
-            // 
-            checkBox3.AutoSize = true;
-            checkBox3.Location = new Point(652, 541);
-            checkBox3.Name = "checkBox3";
-            checkBox3.Size = new Size(152, 19);
-            checkBox3.TabIndex = 22;
-            checkBox3.Text = "Validar Columnas Fecha";
-            checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // chk_product_NoFound
-            // 
-            chk_product_NoFound.AutoSize = true;
-            chk_product_NoFound.Location = new Point(652, 466);
-            chk_product_NoFound.Name = "chk_product_NoFound";
-            chk_product_NoFound.Size = new Size(213, 19);
-            chk_product_NoFound.TabIndex = 23;
-            chk_product_NoFound.Text = "Guardar Productos No Encontrados";
-            chk_product_NoFound.UseVisualStyleBackColor = true;
             // 
             // NUMBERS_NOTIFICATIONS
             // 
@@ -374,25 +349,70 @@
             // txt_errors
             // 
             txt_errors.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            txt_errors.Location = new Point(828, 622);
+            txt_errors.Location = new Point(828, 623);
             txt_errors.Name = "txt_errors";
             txt_errors.ReadOnly = true;
             txt_errors.Size = new Size(145, 23);
             txt_errors.TabIndex = 25;
             txt_errors.Text = "0";
             // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(chk_valid_products);
+            groupBox2.Controls.Add(checkBox1);
+            groupBox2.Location = new Point(535, 448);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(200, 150);
+            groupBox2.TabIndex = 26;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Validaciones";
+            // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(btn_accion);
+            groupBox3.Controls.Add(chk_saveproductsnotfound);
+            groupBox3.Location = new Point(741, 448);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(200, 150);
+            groupBox3.TabIndex = 27;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Acciones";
+            // 
+            // btn_accion
+            // 
+            btn_accion.Enabled = false;
+            btn_accion.FlatStyle = FlatStyle.Flat;
+            btn_accion.Image = Properties.Resources.DATA_RESERVA48;
+            btn_accion.Location = new Point(23, 69);
+            btn_accion.Name = "btn_accion";
+            btn_accion.Size = new Size(145, 62);
+            btn_accion.TabIndex = 28;
+            btn_accion.Text = "Ejecutar";
+            btn_accion.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_accion.UseVisualStyleBackColor = true;
+            btn_accion.Click += btn_accion_Click;
+            // 
+            // chk_saveproductsnotfound
+            // 
+            chk_saveproductsnotfound.AutoSize = true;
+            chk_saveproductsnotfound.Enabled = false;
+            chk_saveproductsnotfound.Location = new Point(6, 36);
+            chk_saveproductsnotfound.Name = "chk_saveproductsnotfound";
+            chk_saveproductsnotfound.Size = new Size(179, 19);
+            chk_saveproductsnotfound.TabIndex = 11;
+            chk_saveproductsnotfound.Text = "Crear Productos si no Existen";
+            chk_saveproductsnotfound.UseVisualStyleBackColor = true;
+            // 
             // Frm_Imports
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(985, 833);
+            Controls.Add(groupBox3);
+            Controls.Add(groupBox2);
             Controls.Add(txt_errors);
             Controls.Add(NUMBERS_NOTIFICATIONS);
-            Controls.Add(chk_product_NoFound);
-            Controls.Add(checkBox3);
-            Controls.Add(checkBox2);
             Controls.Add(button1);
-            Controls.Add(checkBox1);
             Controls.Add(btn_saveDatabase);
             Controls.Add(txt_filePath);
             Controls.Add(label7);
@@ -400,7 +420,6 @@
             Controls.Add(label6);
             Controls.Add(txt_warning);
             Controls.Add(txt_number_rows);
-            Controls.Add(chk_valid_products);
             Controls.Add(btn_load_data);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -416,7 +435,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Frm_Imports";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Modulo de Importacion de Datos";
+            Text = " ";
             Load += Frm_Imports_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -424,6 +443,10 @@
             ((System.ComponentModel.ISupportInitialize)Grid_Items).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -456,10 +479,11 @@
         private Button btn_saveDatabase;
         private CheckBox checkBox1;
         private Button button1;
-        private CheckBox checkBox2;
-        private CheckBox checkBox3;
-        private CheckBox chk_product_NoFound;
         private Label NUMBERS_NOTIFICATIONS;
         private TextBox txt_errors;
+        private GroupBox groupBox2;
+        private GroupBox groupBox3;
+        private CheckBox chk_saveproductsnotfound;
+        private Button btn_accion;
     }
 }
